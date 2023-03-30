@@ -9,14 +9,19 @@ import Swinject
 
 class Container {
     static let shared = Container()
-    private let container = Swinject.Container()
+
+    private let container: Swinject.Container
 
     private init() {
-        registerDependencies()
+        container = Swinject.Container()
+        setup()
     }
 
-    private func registerDependencies() {
-//        container.register(AuthenticationServiceProtocol.self) { _ in AuthenticationService() }
+    private func setup() {
+        container.register(AuthenticationServiceProtocol.self) { _ in AuthenticationService() }
+        container.register(SignInViewModel.self) { r in
+            SignInViewModel(authenticationService: r.resolve(AuthenticationServiceProtocol.self)!)
+        }
     }
 
     func resolve<Service>(_ serviceType: Service.Type) -> Service? {

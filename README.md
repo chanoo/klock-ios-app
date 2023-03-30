@@ -2,23 +2,27 @@
 클라크 iOS 앱
 
 ```bash
-MyApp
-├── MyApp
+KlockApp
+├── KlockApp
 │   ├── AppDelegate.swift
-│   ├── SceneDelegate.swift
-│   ├── ContentView.swift
 │   ├── DI
 │   │   └── Container.swift
 │   ├── Models
-│   │   └── User.swift
+│   │   └── Account.swift
 │   ├── Services
 │   │   └── AuthenticationService.swift
 │   ├── Protocols
 │   │   └── AuthenticationServiceProtocol.swift
 │   ├── ViewModels
 │   │   └── SignInViewModel.swift
-│   └── Views
-│       └── SignInView.swift
-├── MyAppTests
-└── MyAppUITests
+│   ├── Views
+│   │   └── SignInView.swift
+│   ├── Utils
+│   │   ├── Validators
+│   │   │   └── EmailValidator.swift
+│   │   └── Constants
+│   │       └── RegexConstants.swift
+│   └── Resources
+├── KlockAppTests
+└── KlockAppUITests
 ```

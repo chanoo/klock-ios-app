@@ -9,18 +9,45 @@ import Foundation
 import Alamofire
 import Combine
 
-class AuthenticationService {
+class AuthenticationService: AuthenticationServiceProtocol {
+    
     private let baseURL = "https://api.klock.app/api/auth"
 
-    func signIn(email: String, password: String) -> AnyPublisher<User, Error> {
+    // 로그인 함수
+    func signIn(email: String, password: String) -> AnyPublisher<Account, AFError> {
         let url = "\(baseURL)/signin"
         let parameters: [String: Any] = ["email": email, "password": password]
 
-        return Alamofire.request(url, method: .post, parameters: parameters)
+        return AF.request(url, method: .post, parameters: parameters)
             .validate()
-            .publishDecodable(type: User.self)
+            .publishDecodable(type: Account.self)
             .value()
+            .mapError { $0 }
+            .eraseToAnyPublisher()
     }
 
-    // 회원 가입 함수를 여기에 작성하세요.
+    func signInWithFacebook(accessToken: String) -> AnyPublisher<Account, AFError> {
+        let url = "\(baseURL)/signin-with-facebook"
+        let parameters: [String: Any] = ["accessToken": accessToken]
+
+        return AF.request(url, method: .post, parameters: parameters)
+            .validate()
+            .publishDecodable(type: Account.self)
+            .value()
+            .mapError { $0 }
+            .eraseToAnyPublisher()
+    }
+    
+    func signInWithApple(accessToken: String) -> AnyPublisher<Account, AFError> {
+        let url = "\(baseURL)/signin-with-apple"
+        let parameters: [String: Any] = ["accessToken": accessToken]
+
+        return AF.request(url, method: .post, parameters: parameters)
+            .validate()
+            .publishDecodable(type: Account.self)
+            .value()
+            .mapError { $0 }
+            .eraseToAnyPublisher()
+    }
+
 }
