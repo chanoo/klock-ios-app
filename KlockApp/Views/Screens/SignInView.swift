@@ -7,16 +7,10 @@ struct SignInView: View {
     var body: some View {
         ScrollView {
             VStack {
-                TextField("이메일 주소", text: $viewModel.email)
-                    .padding()
-                    .background(Color.gray.opacity(0.2))
-                    .cornerRadius(5)
+                FancyTextField(placeholder: "이메일 주소", text: $viewModel.email, keyboardType: .emailAddress)
                     .padding(.top, 200)
 
-                SecureField("비밀번호", text: $viewModel.password)
-                    .padding()
-                    .background(Color.gray.opacity(0.2))
-                    .cornerRadius(5)
+                FancyTextField(placeholder: "비밀번호", text: $viewModel.password, isSecureField: true)
                     .padding(.bottom, 20)
                 
                 if let errorMessage = viewModel.errorMessage {
@@ -25,16 +19,10 @@ struct SignInView: View {
                         .padding(.bottom, 20)
                 }
 
-                Button(action: {
+                FancyButton(title: "로그인", action: {
                     viewModel.signInButtonTapped.send()
-                }) {
-                    Text("로그인")
-                        .foregroundColor(.white)
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(Color.blue)
-                        .cornerRadius(5)
-                }
+                }, backgroundColor: .blue, foregroundColor: .white)
+                .padding(.bottom, 20)
                 
                 // Divider
                 RoundedRectangle(cornerRadius: 0)
@@ -44,29 +32,14 @@ struct SignInView: View {
                     .padding(.vertical, 30)
                 
                 HStack {
-                    Button(action: {
+                    FancyButton(title: "페이스북으로 로그인", action: {
                         viewModel.signInWithFacebookTapped.send()
-                    }) {
-                        Text("페이스북으로 로그인")
-                            .foregroundColor(.white)
-                            .padding()
-                            .frame(maxWidth: .infinity)
-                            .background(Color.blue)
-                            .cornerRadius(5)
-                    }
+                    }, backgroundColor: .blue, foregroundColor: .white)
 
-                    Button(action: {
+                    FancyButton(title: "애플로 로그인", action: {
                         viewModel.signInWithAppleTapped.send()
-                    }) {
-                        Text("애플로 로그인")
-                            .foregroundColor(.white)
-                            .padding()
-                            .frame(maxWidth: .infinity)
-                            .background(Color.black)
-                            .cornerRadius(5)
-                    }
+                    }, backgroundColor: .black, foregroundColor: .white)
                 }
-
 
             }
             .padding()

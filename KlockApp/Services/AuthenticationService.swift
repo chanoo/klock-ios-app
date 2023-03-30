@@ -18,7 +18,7 @@ class AuthenticationService: AuthenticationServiceProtocol {
         let url = "\(baseURL)/signin"
         let parameters: [String: Any] = ["email": email, "password": password]
 
-        return AF.request(url, method: .post, parameters: parameters)
+        return AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default)
             .validate()
             .publishDecodable(type: Account.self)
             .value()
@@ -30,7 +30,7 @@ class AuthenticationService: AuthenticationServiceProtocol {
         let url = "\(baseURL)/signin-with-facebook"
         let parameters: [String: Any] = ["accessToken": accessToken]
 
-        return AF.request(url, method: .post, parameters: parameters)
+        return AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default)
             .validate()
             .publishDecodable(type: Account.self)
             .value()
@@ -42,12 +42,12 @@ class AuthenticationService: AuthenticationServiceProtocol {
         let url = "\(baseURL)/signin-with-apple"
         let parameters: [String: Any] = ["accessToken": accessToken]
 
-        return AF.request(url, method: .post, parameters: parameters)
+        return AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default)
             .validate()
             .publishDecodable(type: Account.self)
             .value()
             .mapError { $0 }
             .eraseToAnyPublisher()
     }
-
 }
+

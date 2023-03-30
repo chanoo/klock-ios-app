@@ -16,6 +16,15 @@ extension SignInViewModel: ASAuthorizationControllerDelegate {
             return
         }
         
+        // 사용자 이름 가져오기
+        let userIdentifier = appleIDCredential.user
+        let firstName = appleIDCredential.fullName?.givenName
+        let lastName = appleIDCredential.fullName?.familyName
+
+        // 000474.5cfb5d174ad042dc94e004a8e2029814.1731
+        // 이메일 가져오기 (옵셔널)
+        let email = appleIDCredential.email
+        
         authenticationService.signInWithApple(accessToken: appleIDToken)
             .sink(receiveCompletion: { completion in
                 switch completion {
