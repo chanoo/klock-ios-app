@@ -16,38 +16,33 @@ class AuthenticationService: AuthenticationServiceProtocol {
     // 로그인 함수
     func signIn(email: String, password: String) -> AnyPublisher<Account, AFError> {
         let url = "\(baseURL)/signin"
-        let parameters: [String: Any] = ["email": email, "password": password]
+        let requestDTO = SignInReqDTO(email: email, password: password)
 
-        return AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default)
-            .validate()
-            .publishDecodable(type: Account.self)
-            .value()
-            .mapError { $0 }
-            .eraseToAnyPublisher()
+        return requestAndDecode(url: url, parameters: requestDTO.dictionary)
     }
 
     func signInWithFacebook(accessToken: String) -> AnyPublisher<Account, AFError> {
         let url = "\(baseURL)/signin-with-facebook"
-        let parameters: [String: Any] = ["accessToken": accessToken]
+        let requestDTO = FacebookSignInReqDTO(accessToken: accessToken)
 
-        return AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default)
-            .validate()
-            .publishDecodable(type: Account.self)
-            .value()
-            .mapError { $0 }
-            .eraseToAnyPublisher()
+        return requestAndDecode(url: url, parameters: requestDTO.dictionary)
     }
     
     func signInWithApple(accessToken: String) -> AnyPublisher<Account, AFError> {
         let url = "\(baseURL)/signin-with-apple"
-        let parameters: [String: Any] = ["accessToken": accessToken]
+        let requestDTO = AppleSignInReqDTO(accessToken: accessToken)
 
+        return requestAndDecode(url: url, parameters: requestDTO.dictionary)
+    }
+    
+    private func requestAndDecode(url: String, parameters: [String: Any]) -> AnyPublisher<Account, AFError> {
         return AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default)
             .validate()
             .publishDecodable(type: Account.self)
+        
+        
             .value()
             .mapError { $0 }
             .eraseToAnyPublisher()
     }
 }
-
