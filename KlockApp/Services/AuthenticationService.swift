@@ -14,31 +14,31 @@ class AuthenticationService: AuthenticationServiceProtocol {
     private let baseURL = "https://api.klock.app/api/auth"
 
     // 로그인 함수
-    func signIn(email: String, password: String) -> AnyPublisher<Account, AFError> {
+    func signIn(email: String, password: String) -> AnyPublisher<AccountModel, AFError> {
         let url = "\(baseURL)/signin"
         let requestDTO = SignInReqDTO(email: email, password: password)
 
         return requestAndDecode(url: url, parameters: requestDTO.dictionary)
     }
 
-    func signInWithFacebook(accessToken: String) -> AnyPublisher<Account, AFError> {
+    func signInWithFacebook(accessToken: String) -> AnyPublisher<AccountModel, AFError> {
         let url = "\(baseURL)/signin-with-facebook"
         let requestDTO = FacebookSignInReqDTO(accessToken: accessToken)
 
         return requestAndDecode(url: url, parameters: requestDTO.dictionary)
     }
     
-    func signInWithApple(accessToken: String) -> AnyPublisher<Account, AFError> {
+    func signInWithApple(accessToken: String) -> AnyPublisher<AccountModel, AFError> {
         let url = "\(baseURL)/signin-with-apple"
         let requestDTO = AppleSignInReqDTO(accessToken: accessToken)
 
         return requestAndDecode(url: url, parameters: requestDTO.dictionary)
     }
     
-    private func requestAndDecode(url: String, parameters: [String: Any]) -> AnyPublisher<Account, AFError> {
+    private func requestAndDecode(url: String, parameters: [String: Any]) -> AnyPublisher<AccountModel, AFError> {
         return AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default)
             .validate()
-            .publishDecodable(type: Account.self)
+            .publishDecodable(type: AccountModel.self)
         
         
             .value()
