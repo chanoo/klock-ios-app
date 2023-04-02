@@ -10,7 +10,7 @@ import Alamofire
 import Combine
 
 class AuthenticationService: AuthenticationServiceProtocol {
-    
+
     private let baseURL = "https://api.klock.app/api/auth"
 
     // 로그인 함수
@@ -27,20 +27,18 @@ class AuthenticationService: AuthenticationServiceProtocol {
 
         return requestAndDecode(url: url, parameters: requestDTO.dictionary)
     }
-    
+
     func signInWithApple(accessToken: String) -> AnyPublisher<AccountModel, AFError> {
         let url = "\(baseURL)/signin-with-apple"
         let requestDTO = AppleSignInReqDTO(accessToken: accessToken)
 
         return requestAndDecode(url: url, parameters: requestDTO.dictionary)
     }
-    
+
     private func requestAndDecode(url: String, parameters: [String: Any]) -> AnyPublisher<AccountModel, AFError> {
         return AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default)
             .validate()
             .publishDecodable(type: AccountModel.self)
-        
-        
             .value()
             .mapError { $0 }
             .eraseToAnyPublisher()

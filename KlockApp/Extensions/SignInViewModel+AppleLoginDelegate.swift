@@ -15,7 +15,7 @@ extension SignInViewModel: ASAuthorizationControllerDelegate {
             print("Error during Apple login")
             return
         }
-        
+
         // 사용자 이름 가져오기
 //        let userIdentifier = appleIDCredential.user
 //        let firstName = appleIDCredential.fullName?.givenName
@@ -23,7 +23,7 @@ extension SignInViewModel: ASAuthorizationControllerDelegate {
 
         // 이메일 가져오기 (옵셔널)
 //        let email = appleIDCredential.email
-        
+
         authenticationService.signInWithApple(accessToken: appleIDToken)
             .sink(receiveCompletion: { completion in
                 switch completion {
@@ -37,7 +37,7 @@ extension SignInViewModel: ASAuthorizationControllerDelegate {
             })
             .store(in: &cancellableSet)
     }
-    
+
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         print("Error during Apple login: \(error.localizedDescription)")
     }

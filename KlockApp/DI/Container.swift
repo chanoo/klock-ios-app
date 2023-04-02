@@ -19,8 +19,8 @@ class Container {
 
     private func setup() {
         container.register(AuthenticationServiceProtocol.self) { _ in AuthenticationService() }
-        container.register(SignInViewModel.self) { r in
-            SignInViewModel(authenticationService: r.resolve(AuthenticationServiceProtocol.self)!)
+        container.register(SignInViewModel.self) { reg in
+            SignInViewModel(authenticationService: reg.resolve(AuthenticationServiceProtocol.self)!)
         }
     }
 

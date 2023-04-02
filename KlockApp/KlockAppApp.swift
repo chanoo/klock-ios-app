@@ -5,9 +5,9 @@ import FacebookCore
 struct KlockAppApp: App {
     let persistenceController = PersistenceController.shared
     let container = Container.shared
-    
+
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    
+
     var body: some Scene {
         WindowGroup {
             SignInView(viewModel: container.resolve(SignInViewModel.self)!)

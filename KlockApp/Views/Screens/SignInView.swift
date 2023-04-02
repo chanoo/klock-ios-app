@@ -12,7 +12,7 @@ struct SignInView: View {
 
                 FancyTextField(placeholder: "비밀번호", text: $viewModel.password, isSecureField: true)
                     .padding(.bottom, 20)
-                
+
                 if let errorMessage = viewModel.errorMessage {
                     Text(errorMessage)
                         .foregroundColor(.red)
@@ -23,14 +23,14 @@ struct SignInView: View {
                     viewModel.signInButtonTapped.send()
                 }, backgroundColor: .blue, foregroundColor: .white)
                 .padding(.bottom, 20)
-                
+
                 // Divider
                 RoundedRectangle(cornerRadius: 0)
                     .fill(Color.gray)
                     .frame(height: 1)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 30)
-                
+
                 HStack {
                     FancyButton(title: "페이스북으로 로그인", action: {
                         viewModel.signInWithFacebookTapped.send()

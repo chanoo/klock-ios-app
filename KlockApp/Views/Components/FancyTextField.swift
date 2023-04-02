@@ -12,14 +12,14 @@ struct FancyTextField: View {
     @Binding var text: String
     let keyboardType: UIKeyboardType
     let isSecureField: Bool
-    
+
     init(placeholder: String, text: Binding<String>, keyboardType: UIKeyboardType = .default, isSecureField: Bool = false) {
         self.placeholder = placeholder
         self._text = text
         self.keyboardType = keyboardType
         self.isSecureField = isSecureField
     }
-    
+
     var body: some View {
         Group {
             if isSecureField {

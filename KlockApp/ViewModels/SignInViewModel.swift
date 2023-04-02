@@ -22,7 +22,7 @@ class SignInViewModel: NSObject, ObservableObject {
     let signInButtonTapped = PassthroughSubject<Void, Never>()
     let signInWithFacebookTapped = PassthroughSubject<Void, Never>()
     let signInWithAppleTapped = PassthroughSubject<Void, Never>()
-    
+
     init(authenticationService: AuthenticationServiceProtocol = Container.shared.resolve(AuthenticationServiceProtocol.self)!) {
         self.authenticationService = authenticationService
         super.init()
@@ -58,7 +58,7 @@ class SignInViewModel: NSObject, ObservableObject {
             }
             .store(in: &cancellableSet)
     }
-    
+
     private func setupSignInWithFacebookTapped() {
           signInWithFacebookTapped
               .sink { [weak self] _ in
@@ -74,7 +74,6 @@ class SignInViewModel: NSObject, ObservableObject {
               }
               .store(in: &cancellableSet)
       }
-
 
     private func validateEmail() {
         if !emailValidator.isValid(email) {
@@ -98,7 +97,7 @@ class SignInViewModel: NSObject, ObservableObject {
             })
             .store(in: &cancellableSet)
     }
-    
+
     func signInWithFacebook() {
         // Implement Facebook login
         let loginManager = LoginManager()
@@ -107,12 +106,12 @@ class SignInViewModel: NSObject, ObservableObject {
                 print("Error during Facebook login: \(error.localizedDescription)")
                 return
             }
-            
+
             guard let result = result, !result.isCancelled, let accessToken = AccessToken.current?.tokenString else {
                 print("Facebook login cancelled")
                 return
             }
-            
+
             self?.authenticationService.signInWithFacebook(accessToken: accessToken)
                 .sink(receiveCompletion: { completion in
                     switch completion {
@@ -132,7 +131,7 @@ class SignInViewModel: NSObject, ObservableObject {
         // Implement Apple login
         let request = ASAuthorizationAppleIDProvider().createRequest()
         request.requestedScopes = [.fullName, .email]
-        
+
         let controller = ASAuthorizationController(authorizationRequests: [request])
         controller.delegate = self
         controller.performRequests()

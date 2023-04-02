@@ -14,7 +14,7 @@ struct FancyButton: View {
     let foregroundColor: Color
     let icon: Image? = nil
     let isBlock: Bool = true
-    
+
     var body: some View {
         Button(action: action) {
             HStack {
