@@ -12,8 +12,25 @@ struct FancyButton: View {
     let action: () -> Void
     let backgroundColor: Color
     let foregroundColor: Color
-    let icon: Image? = nil
-    let isBlock: Bool = true
+    let icon: Image?
+    let isBlock: Bool
+    let height: CGFloat
+
+    init(title: String,
+         action: @escaping () -> Void,
+         backgroundColor: Color,
+         foregroundColor: Color,
+         icon: Image? = nil,
+         isBlock: Bool = true,
+         height: CGFloat = 60) {
+        self.title = title
+        self.action = action
+        self.backgroundColor = backgroundColor
+        self.foregroundColor = foregroundColor
+        self.icon = icon
+        self.isBlock = isBlock
+        self.height = height
+    }
 
     var body: some View {
         Button(action: action) {
@@ -21,15 +38,16 @@ struct FancyButton: View {
                 if let icon = icon {
                     icon
                         .foregroundColor(foregroundColor)
-                        .padding(.trailing, 5)
+                        .padding(.trailing, 12)
                 }
                 Text(title)
                     .foregroundColor(foregroundColor)
+                    .fontWeight(.bold)
             }
             .padding()
-            .frame(maxWidth: isBlock ? .infinity : nil)
+            .frame(maxWidth: isBlock ? .infinity : nil, minHeight: height)
             .background(backgroundColor)
-            .cornerRadius(24)
+            .cornerRadius(height / 2)
         }
     }
 }

@@ -49,15 +49,13 @@ struct SignInView: View {
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 30)
 
-                        HStack {
-                            FancyButton(title: "페이스북으로 로그인", action: {
-                                viewModel.signInWithFacebookTapped.send()
-                            }, backgroundColor: .blue, foregroundColor: .white)
+                        FancyButton(title: "페이스북으로 시작하기", action: {
+                            viewModel.signInWithFacebookTapped.send()
+                        }, backgroundColor: Color("FacebookColor"), foregroundColor: .white, icon: Image("ic_facebook"))
 
-                            FancyButton(title: "애플로 로그인", action: {
-                                viewModel.signInWithAppleTapped.send()
-                            }, backgroundColor: .black, foregroundColor: .white)
-                        }
+                        FancyButton(title: "애플로 시작하기", action: {
+                            viewModel.signInWithAppleTapped.send()
+                        }, backgroundColor: .black, foregroundColor: .white, icon: Image("ic_apple"))
 
                     }
                     .padding()

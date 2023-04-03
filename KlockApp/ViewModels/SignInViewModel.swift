@@ -15,6 +15,8 @@ class SignInViewModel: NSObject, ObservableObject {
     @Published var password = ""
     @Published var errorMessage: String?
     @Published var destination: Destination?
+    @Published var provier: SocialProvider?
+    @Published var provierUserID: String?
 
     var cancellableSet: Set<AnyCancellable> = []
     let authenticationService: AuthenticationServiceProtocol

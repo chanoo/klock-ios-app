@@ -8,9 +8,9 @@
 import Foundation
 
 enum SocialProvider: String, Codable {
-    case google
-    case facebook
-    case twitter
+    case apple = "애플"
+    case facebook = "페이스북"
+    case kakao = "카카오"
 }
 
 struct SocialLoginModel: Codable {
