@@ -7,13 +7,14 @@
 
 import Foundation
 import Combine
-import FBSDKLoginKit
+import FacebookLogin
 import AuthenticationServices
 
 class SignInViewModel: NSObject, ObservableObject {
     @Published var email = ""
     @Published var password = ""
     @Published var errorMessage: String?
+    @Published var destination: Destination?
 
     var cancellableSet: Set<AnyCancellable> = []
     let authenticationService: AuthenticationServiceProtocol
@@ -135,6 +136,10 @@ class SignInViewModel: NSObject, ObservableObject {
         let controller = ASAuthorizationController(authorizationRequests: [request])
         controller.delegate = self
         controller.performRequests()
+    }
+
+    func resetDestination() {
+        destination = nil
     }
 
 }

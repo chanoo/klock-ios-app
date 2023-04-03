@@ -29,7 +29,7 @@ struct FancyButton: View {
             .padding()
             .frame(maxWidth: isBlock ? .infinity : nil)
             .background(backgroundColor)
-            .cornerRadius(5)
+            .cornerRadius(24)
         }
     }
 }

@@ -6,8 +6,10 @@
 //
 
 import AuthenticationServices
+import Alamofire
 
 extension SignInViewModel: ASAuthorizationControllerDelegate {
+
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential,
               let appleIDTokenData = appleIDCredential.identityToken,
@@ -17,23 +19,27 @@ extension SignInViewModel: ASAuthorizationControllerDelegate {
         }
 
         // 사용자 이름 가져오기
-//        let userIdentifier = appleIDCredential.user
-//        let firstName = appleIDCredential.fullName?.givenName
-//        let lastName = appleIDCredential.fullName?.familyName
+        let userIdentifier = appleIDCredential.user
+        let firstName = appleIDCredential.fullName?.givenName
+        let lastName = appleIDCredential.fullName?.familyName
 
         // 이메일 가져오기 (옵셔널)
-//        let email = appleIDCredential.email
+        let email = appleIDCredential.email
 
         authenticationService.signInWithApple(accessToken: appleIDToken)
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .failure(let error):
                     print("Error: \(error.localizedDescription)")
+                    if error.responseCode == 401 {
+                        self.destination = .signUp
+                    }
                 case .finished:
                     break
                 }
             }, receiveValue: { user in
                 print("User: \(user)")
+                self.destination = .home
             })
             .store(in: &cancellableSet)
     }

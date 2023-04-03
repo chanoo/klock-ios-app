@@ -22,6 +22,12 @@ class Container {
         container.register(SignInViewModel.self) { reg in
             SignInViewModel(authenticationService: reg.resolve(AuthenticationServiceProtocol.self)!)
         }
+        container.register(SignUpViewModel.self) { reg in
+            SignUpViewModel(authenticationService: reg.resolve(AuthenticationServiceProtocol.self)!)
+        }
+        container.register(SignUpTagsViewModel.self) { reg in
+            SignUpTagsViewModel(authenticationService: reg.resolve(AuthenticationServiceProtocol.self)!)
+        }
     }
 
     func resolve<Service>(_ serviceType: Service.Type) -> Service? {

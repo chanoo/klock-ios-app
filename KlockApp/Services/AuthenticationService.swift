@@ -33,6 +33,14 @@ class AuthenticationService: AuthenticationServiceProtocol {
         let requestDTO = AppleSignInReqDTO(accessToken: accessToken)
 
         return requestAndDecode(url: url, parameters: requestDTO.dictionary)
+            .mapError { error in
+                if error.responseCode == 401 {
+                    return AFError.responseValidationFailed(reason: .unacceptableStatusCode(code: 401))
+                } else {
+                    return error
+                }
+            }
+            .eraseToAnyPublisher()
     }
 
     private func requestAndDecode(url: String, parameters: [String: Any]) -> AnyPublisher<AccountModel, AFError> {
