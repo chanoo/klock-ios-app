@@ -12,6 +12,7 @@ struct KlockAppApp: App {
         WindowGroup {
             SignInView(viewModel: container.resolve(SignInViewModel.self)!)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .preferredColorScheme(.light) // Dark mode 비활성화
         }
         .onChange(of: UIApplication.shared.applicationState) { state in
             switch state {

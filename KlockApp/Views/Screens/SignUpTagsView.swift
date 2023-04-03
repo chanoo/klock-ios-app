@@ -52,3 +52,10 @@ struct SignUpTagsView: View {
         .padding()
     }
 }
+
+struct SignUpTagsView_Previews: PreviewProvider {
+    static var previews: some View {
+//        SignUpTagsView()
+        EmptyView()
+    }
+}

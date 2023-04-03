@@ -15,6 +15,7 @@ class SignUpViewModel: NSObject, ObservableObject {
     @Published var selectedTags: Set<String> = []
     @Published var showStudyTagsView = false
     @Published var destination: Destination?
+    @Published var nicknameTextFieldShouldBecomeFirstResponder: Bool = false
 
     private let authenticationService: AuthenticationServiceProtocol
     var cancellables: Set<AnyCancellable> = []

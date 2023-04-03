@@ -25,11 +25,20 @@ struct SignInView: View {
             VStack {
                 ScrollView {
                     VStack {
-                        FancyTextField(placeholder: "이메일 주소", text: $viewModel.email, keyboardType: .emailAddress)
-                            .padding(.top, 200)
 
-                        FancyTextField(placeholder: "비밀번호", text: $viewModel.password, isSecureField: true)
-                            .padding(.bottom, 20)
+                        Image("ic_klock")
+                            .padding(.top, 130)
+                            .padding(.bottom, 32)
+
+                        Text("여기까지 온 당신, 이미 반은 성공!")
+                            .foregroundColor(FancyColor.primary.color)
+                            .font(.system(size: 16))
+                            .padding(.bottom, 4)
+
+                        Text("제대로 성공하러 가볼까요?")
+                            .foregroundColor(FancyColor.primary.color)
+                            .font(.system(size: 24))
+                            .padding(.bottom, 80)
 
                         if let errorMessage = viewModel.errorMessage {
                             Text(errorMessage)
@@ -37,21 +46,10 @@ struct SignInView: View {
                                 .padding(.bottom, 20)
                         }
 
-                        FancyButton(title: "로그인", action: {
-                            viewModel.signInButtonTapped.send()
-                        }, backgroundColor: .blue, foregroundColor: .white)
-                        .padding(.bottom, 20)
-
-                        // Divider
-                        RoundedRectangle(cornerRadius: 0)
-                            .fill(Color.gray)
-                            .frame(height: 1)
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 30)
-
                         FancyButton(title: "페이스북으로 시작하기", action: {
                             viewModel.signInWithFacebookTapped.send()
-                        }, backgroundColor: Color("FacebookColor"), foregroundColor: .white, icon: Image("ic_facebook"))
+                        }, backgroundColor: FancyColor.facebook.color, foregroundColor: .white, icon: Image("ic_facebook"))
+                        .padding(.bottom, 18)
 
                         FancyButton(title: "애플로 시작하기", action: {
                             viewModel.signInWithAppleTapped.send()
@@ -70,7 +68,13 @@ struct SignInView: View {
                 .onAppear {
                     viewModel.resetDestination()
                 }
-            }
+            }.background(FancyColor.background.color.edgesIgnoringSafeArea(.all))
         }
+    }
+}
+
+struct SignInView_Previews: PreviewProvider {
+    static var previews: some View {
+        SignInView(viewModel: SignInViewModel())
     }
 }
