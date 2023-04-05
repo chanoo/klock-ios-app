@@ -21,6 +21,8 @@
 	<string>9aed01e69c67fd83316e4f0922fcac92</string>
 	<key>FacebookDisplayName</key>
 	<string>클라크</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
