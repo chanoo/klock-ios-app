@@ -1,0 +1,954 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		987E543A29D552520007E156 /* KlockAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E543929D552520007E156 /* KlockAppApp.swift */; };
+		987E543C29D552520007E156 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E543B29D552520007E156 /* ContentView.swift */; };
+		987E543E29D552530007E156 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 987E543D29D552530007E156 /* Assets.xcassets */; };
+		987E544129D552530007E156 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 987E544029D552530007E156 /* Preview Assets.xcassets */; };
+		987E544329D552530007E156 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E544229D552530007E156 /* Persistence.swift */; };
+		987E544629D552530007E156 /* KlockApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 987E544429D552530007E156 /* KlockApp.xcdatamodeld */; };
+		987E545129D552540007E156 /* KlockAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E545029D552540007E156 /* KlockAppTests.swift */; };
+		987E545B29D552540007E156 /* KlockAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E545A29D552540007E156 /* KlockAppUITests.swift */; };
+		987E545D29D552540007E156 /* KlockAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E545C29D552540007E156 /* KlockAppUITestsLaunchTests.swift */; };
+		98B21B1829D55DE0004EFE0E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 98B21B1729D55DE0004EFE0E /* README.md */; };
+		98B21B1B29D55F6C004EFE0E /* AuthenticationServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B1A29D55F6C004EFE0E /* AuthenticationServiceProtocol.swift */; };
+		98B21B1E29D56BAB004EFE0E /* EmailValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B1D29D56BAB004EFE0E /* EmailValidator.swift */; };
+		98B21B2129D56BDF004EFE0E /* RegexConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B2029D56BDF004EFE0E /* RegexConstants.swift */; };
+		98B21B2729D57A81004EFE0E /* SignInViewModel+AppleLoginDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B2629D57A81004EFE0E /* SignInViewModel+AppleLoginDelegate.swift */; };
+		98B21B3A29D5EBC3004EFE0E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B3929D5EBC3004EFE0E /* AppDelegate.swift */; };
+		98B21B3D29D5F54E004EFE0E /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 98B21B3C29D5F54E004EFE0E /* FacebookCore */; };
+		98B21B3F29D5F54E004EFE0E /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 98B21B3E29D5F54E004EFE0E /* FacebookLogin */; };
+		98B21B4429D60D25004EFE0E /* FancyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B4329D60D25004EFE0E /* FancyButton.swift */; };
+		98B21B4629D60EEB004EFE0E /* FancyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B4529D60EEB004EFE0E /* FancyTextField.swift */; };
+		98B21B4929D617A4004EFE0E /* AuthenticationServiceDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B4829D617A4004EFE0E /* AuthenticationServiceDTO.swift */; };
+		98B21B4B29D617F6004EFE0E /* Encodable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B4A29D617F6004EFE0E /* Encodable+Extensions.swift */; };
+		98B21B4D29D6F3A9004EFE0E /* AccountLevelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B4C29D6F3A9004EFE0E /* AccountLevelModel.swift */; };
+		98B21B4F29D6F3E1004EFE0E /* AccountTagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B4E29D6F3E1004EFE0E /* AccountTagModel.swift */; };
+		98B21B5229D6F404004EFE0E /* FriendRelationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B5129D6F404004EFE0E /* FriendRelationModel.swift */; };
+		98B21B5429D6F424004EFE0E /* DDayEventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B5329D6F424004EFE0E /* DDayEventModel.swift */; };
+		98B21B5729D6F492004EFE0E /* SocialLoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B5629D6F492004EFE0E /* SocialLoginModel.swift */; };
+		98B21B5929D6F4AE004EFE0E /* StudySessionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B5829D6F4AE004EFE0E /* StudySessionModel.swift */; };
+		98B21B5B29D6F4BF004EFE0E /* TagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B5A29D6F4BF004EFE0E /* TagModel.swift */; };
+		98B21B6C29D9A7A5004EFE0E /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B6B29D9A7A5004EFE0E /* HomeView.swift */; };
+		98B21B6E29D9D21A004EFE0E /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B6D29D9D21A004EFE0E /* SignUpViewModel.swift */; };
+		98B21B7029D9D390004EFE0E /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B6F29D9D390004EFE0E /* SignUpView.swift */; };
+		98B21B7229D9DC25004EFE0E /* SignUpTagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B7129D9DC25004EFE0E /* SignUpTagsView.swift */; };
+		98B21B7429D9FBA1004EFE0E /* SignUpTagsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B7329D9FBA1004EFE0E /* SignUpTagsViewModel.swift */; };
+		98B21B7629DA6288004EFE0E /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B7529DA6288004EFE0E /* Destination.swift */; };
+		98BDD21D29DAD1D400B0440F /* FancyColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BDD21C29DAD1D400B0440F /* FancyColor.swift */; };
+		98CE660B29D552BC0009916F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 98CE660A29D552BC0009916F /* Alamofire */; };
+		98CE661629D55A370009916F /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 98CE661529D55A370009916F /* Swinject */; };
+		98CE661929D55A650009916F /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CE661829D55A650009916F /* Container.swift */; };
+		98CE661B29D55AA40009916F /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CE661A29D55AA40009916F /* AuthenticationService.swift */; };
+		98CE661D29D55AE00009916F /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CE661C29D55AE00009916F /* AccountModel.swift */; };
+		98CE662129D55B730009916F /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CE662029D55B730009916F /* SignInViewModel.swift */; };
+		98CE662329D55BB10009916F /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CE662229D55BB10009916F /* SignInView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		987E544D29D552540007E156 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 987E542E29D552520007E156 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 987E543529D552520007E156;
+			remoteInfo = KlockApp;
+		};
+		987E545729D552540007E156 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 987E542E29D552520007E156 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 987E543529D552520007E156;
+			remoteInfo = KlockApp;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		987E543629D552520007E156 /* KlockApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KlockApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		987E543929D552520007E156 /* KlockAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlockAppApp.swift; sourceTree = "<group>"; };
+		987E543B29D552520007E156 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		987E543D29D552530007E156 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		987E544029D552530007E156 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		987E544229D552530007E156 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		987E544529D552530007E156 /* KlockApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = KlockApp.xcdatamodel; sourceTree = "<group>"; };
+		987E544729D552530007E156 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		987E544C29D552540007E156 /* KlockAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KlockAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		987E545029D552540007E156 /* KlockAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlockAppTests.swift; sourceTree = "<group>"; };
+		987E545629D552540007E156 /* KlockAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KlockAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		987E545A29D552540007E156 /* KlockAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlockAppUITests.swift; sourceTree = "<group>"; };
+		987E545C29D552540007E156 /* KlockAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlockAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		98B21B1729D55DE0004EFE0E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		98B21B1A29D55F6C004EFE0E /* AuthenticationServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationServiceProtocol.swift; sourceTree = "<group>"; };
+		98B21B1D29D56BAB004EFE0E /* EmailValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EmailValidator.swift; path = ../../../../../../EmailValidator.swift; sourceTree = "<group>"; };
+		98B21B2029D56BDF004EFE0E /* RegexConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegexConstants.swift; sourceTree = "<group>"; };
+		98B21B2629D57A81004EFE0E /* SignInViewModel+AppleLoginDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignInViewModel+AppleLoginDelegate.swift"; sourceTree = "<group>"; };
+		98B21B3929D5EBC3004EFE0E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		98B21B4029D5FA5B004EFE0E /* KlockAppDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KlockAppDebug.entitlements; sourceTree = "<group>"; };
+		98B21B4329D60D25004EFE0E /* FancyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyButton.swift; sourceTree = "<group>"; };
+		98B21B4529D60EEB004EFE0E /* FancyTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyTextField.swift; sourceTree = "<group>"; };
+		98B21B4829D617A4004EFE0E /* AuthenticationServiceDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationServiceDTO.swift; sourceTree = "<group>"; };
+		98B21B4A29D617F6004EFE0E /* Encodable+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Extensions.swift"; sourceTree = "<group>"; };
+		98B21B4C29D6F3A9004EFE0E /* AccountLevelModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountLevelModel.swift; sourceTree = "<group>"; };
+		98B21B4E29D6F3E1004EFE0E /* AccountTagModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTagModel.swift; sourceTree = "<group>"; };
+		98B21B5129D6F404004EFE0E /* FriendRelationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRelationModel.swift; sourceTree = "<group>"; };
+		98B21B5329D6F424004EFE0E /* DDayEventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDayEventModel.swift; sourceTree = "<group>"; };
+		98B21B5629D6F492004EFE0E /* SocialLoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginModel.swift; sourceTree = "<group>"; };
+		98B21B5829D6F4AE004EFE0E /* StudySessionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudySessionModel.swift; sourceTree = "<group>"; };
+		98B21B5A29D6F4BF004EFE0E /* TagModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagModel.swift; sourceTree = "<group>"; };
+		98B21B6B29D9A7A5004EFE0E /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		98B21B6D29D9D21A004EFE0E /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		98B21B6F29D9D390004EFE0E /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		98B21B7129D9DC25004EFE0E /* SignUpTagsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTagsView.swift; sourceTree = "<group>"; };
+		98B21B7329D9FBA1004EFE0E /* SignUpTagsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTagsViewModel.swift; sourceTree = "<group>"; };
+		98B21B7529DA6288004EFE0E /* Destination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Destination.swift; sourceTree = "<group>"; };
+		98BDD21C29DAD1D400B0440F /* FancyColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyColor.swift; sourceTree = "<group>"; };
+		98CE661829D55A650009916F /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
+		98CE661A29D55AA40009916F /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
+		98CE661C29D55AE00009916F /* AccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
+		98CE662029D55B730009916F /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
+		98CE662229D55BB10009916F /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		987E543329D552520007E156 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				98B21B3F29D5F54E004EFE0E /* FacebookLogin in Frameworks */,
+				98CE660B29D552BC0009916F /* Alamofire in Frameworks */,
+				98B21B3D29D5F54E004EFE0E /* FacebookCore in Frameworks */,
+				98CE661629D55A370009916F /* Swinject in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		987E544929D552540007E156 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		987E545329D552540007E156 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		987E542D29D552520007E156 = {
+			isa = PBXGroup;
+			children = (
+				98B21B1729D55DE0004EFE0E /* README.md */,
+				987E543829D552520007E156 /* KlockApp */,
+				987E544F29D552540007E156 /* KlockAppTests */,
+				987E545929D552540007E156 /* KlockAppUITests */,
+				987E543729D552520007E156 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		987E543729D552520007E156 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				987E543629D552520007E156 /* KlockApp.app */,
+				987E544C29D552540007E156 /* KlockAppTests.xctest */,
+				987E545629D552540007E156 /* KlockAppUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		987E543829D552520007E156 /* KlockApp */ = {
+			isa = PBXGroup;
+			children = (
+				98CE661729D55A440009916F /* DI */,
+				98CE660C29D553790009916F /* Models */,
+				98CE660F29D553980009916F /* Services */,
+				98B21B1929D55EFF004EFE0E /* Protocols */,
+				98CE660D29D553880009916F /* ViewModels */,
+				98CE660E29D553900009916F /* Views */,
+				98B21B2529D57A5F004EFE0E /* Extensions */,
+				98CE661029D5539E0009916F /* Utils */,
+				98CE661129D553A60009916F /* Resources */,
+				987E543929D552520007E156 /* KlockAppApp.swift */,
+				98B21B3929D5EBC3004EFE0E /* AppDelegate.swift */,
+				987E543B29D552520007E156 /* ContentView.swift */,
+				987E544229D552530007E156 /* Persistence.swift */,
+				98B21B4029D5FA5B004EFE0E /* KlockAppDebug.entitlements */,
+				987E544729D552530007E156 /* Info.plist */,
+				987E543F29D552530007E156 /* Preview Content */,
+			);
+			path = KlockApp;
+			sourceTree = "<group>";
+		};
+		987E543F29D552530007E156 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				987E544029D552530007E156 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		987E544F29D552540007E156 /* KlockAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				987E545029D552540007E156 /* KlockAppTests.swift */,
+			);
+			path = KlockAppTests;
+			sourceTree = "<group>";
+		};
+		987E545929D552540007E156 /* KlockAppUITests */ = {
+			isa = PBXGroup;
+			children = (
+				987E545A29D552540007E156 /* KlockAppUITests.swift */,
+				987E545C29D552540007E156 /* KlockAppUITestsLaunchTests.swift */,
+			);
+			path = KlockAppUITests;
+			sourceTree = "<group>";
+		};
+		98B21B1929D55EFF004EFE0E /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				98B21B1A29D55F6C004EFE0E /* AuthenticationServiceProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		98B21B1C29D56B3C004EFE0E /* Validators */ = {
+			isa = PBXGroup;
+			children = (
+				98B21B1D29D56BAB004EFE0E /* EmailValidator.swift */,
+			);
+			path = Validators;
+			sourceTree = "<group>";
+		};
+		98B21B1F29D56BD2004EFE0E /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				98B21B2029D56BDF004EFE0E /* RegexConstants.swift */,
+				98BDD21C29DAD1D400B0440F /* FancyColor.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		98B21B2529D57A5F004EFE0E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				98B21B2629D57A81004EFE0E /* SignInViewModel+AppleLoginDelegate.swift */,
+				98B21B4A29D617F6004EFE0E /* Encodable+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		98CE660C29D553790009916F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				98CE661C29D55AE00009916F /* AccountModel.swift */,
+				98B21B4C29D6F3A9004EFE0E /* AccountLevelModel.swift */,
+				98B21B4E29D6F3E1004EFE0E /* AccountTagModel.swift */,
+				98B21B5129D6F404004EFE0E /* FriendRelationModel.swift */,
+				98B21B5329D6F424004EFE0E /* DDayEventModel.swift */,
+				98B21B5629D6F492004EFE0E /* SocialLoginModel.swift */,
+				98B21B5829D6F4AE004EFE0E /* StudySessionModel.swift */,
+				98B21B5A29D6F4BF004EFE0E /* TagModel.swift */,
+				98B21B7529DA6288004EFE0E /* Destination.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		98CE660D29D553880009916F /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				98CE662029D55B730009916F /* SignInViewModel.swift */,
+				98B21B6D29D9D21A004EFE0E /* SignUpViewModel.swift */,
+				98B21B7329D9FBA1004EFE0E /* SignUpTagsViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		98CE660E29D553900009916F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				98CE661329D553F10009916F /* Screens */,
+				98CE661229D553EA0009916F /* Components */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		98CE660F29D553980009916F /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				98CE661A29D55AA40009916F /* AuthenticationService.swift */,
+				98B21B4829D617A4004EFE0E /* AuthenticationServiceDTO.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		98CE661029D5539E0009916F /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				98B21B1F29D56BD2004EFE0E /* Constants */,
+				98B21B1C29D56B3C004EFE0E /* Validators */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		98CE661129D553A60009916F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				987E544429D552530007E156 /* KlockApp.xcdatamodeld */,
+				987E543D29D552530007E156 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		98CE661229D553EA0009916F /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				98B21B4329D60D25004EFE0E /* FancyButton.swift */,
+				98B21B4529D60EEB004EFE0E /* FancyTextField.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		98CE661329D553F10009916F /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				98CE662229D55BB10009916F /* SignInView.swift */,
+				98B21B6B29D9A7A5004EFE0E /* HomeView.swift */,
+				98B21B6F29D9D390004EFE0E /* SignUpView.swift */,
+				98B21B7129D9DC25004EFE0E /* SignUpTagsView.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		98CE661729D55A440009916F /* DI */ = {
+			isa = PBXGroup;
+			children = (
+				98CE661829D55A650009916F /* Container.swift */,
+			);
+			path = DI;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		987E543529D552520007E156 /* KlockApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 987E546029D552540007E156 /* Build configuration list for PBXNativeTarget "KlockApp" */;
+			buildPhases = (
+				987E543229D552520007E156 /* Sources */,
+				987E543329D552520007E156 /* Frameworks */,
+				987E543429D552520007E156 /* Resources */,
+				98B21B5D29D6FD02004EFE0E /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				98B21B6529D99421004EFE0E /* PBXTargetDependency */,
+			);
+			name = KlockApp;
+			packageProductDependencies = (
+				98CE660A29D552BC0009916F /* Alamofire */,
+				98CE661529D55A370009916F /* Swinject */,
+				98B21B3C29D5F54E004EFE0E /* FacebookCore */,
+				98B21B3E29D5F54E004EFE0E /* FacebookLogin */,
+			);
+			productName = KlockApp;
+			productReference = 987E543629D552520007E156 /* KlockApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+		987E544B29D552540007E156 /* KlockAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 987E546329D552540007E156 /* Build configuration list for PBXNativeTarget "KlockAppTests" */;
+			buildPhases = (
+				987E544829D552540007E156 /* Sources */,
+				987E544929D552540007E156 /* Frameworks */,
+				987E544A29D552540007E156 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				987E544E29D552540007E156 /* PBXTargetDependency */,
+			);
+			name = KlockAppTests;
+			productName = KlockAppTests;
+			productReference = 987E544C29D552540007E156 /* KlockAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		987E545529D552540007E156 /* KlockAppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 987E546629D552540007E156 /* Build configuration list for PBXNativeTarget "KlockAppUITests" */;
+			buildPhases = (
+				987E545229D552540007E156 /* Sources */,
+				987E545329D552540007E156 /* Frameworks */,
+				987E545429D552540007E156 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				987E545829D552540007E156 /* PBXTargetDependency */,
+			);
+			name = KlockAppUITests;
+			productName = KlockAppUITests;
+			productReference = 987E545629D552540007E156 /* KlockAppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		987E542E29D552520007E156 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					987E543529D552520007E156 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+					987E544B29D552540007E156 = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = 987E543529D552520007E156;
+					};
+					987E545529D552540007E156 = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = 987E543529D552520007E156;
+					};
+				};
+			};
+			buildConfigurationList = 987E543129D552520007E156 /* Build configuration list for PBXProject "KlockApp" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				ko,
+				Base,
+			);
+			mainGroup = 987E542D29D552520007E156;
+			packageReferences = (
+				98CE660929D552BC0009916F /* XCRemoteSwiftPackageReference "Alamofire" */,
+				98CE661429D55A370009916F /* XCRemoteSwiftPackageReference "Swinject" */,
+				98B21B3B29D5F54E004EFE0E /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
+			);
+			productRefGroup = 987E543729D552520007E156 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				987E543529D552520007E156 /* KlockApp */,
+				987E544B29D552540007E156 /* KlockAppTests */,
+				987E545529D552540007E156 /* KlockAppUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		987E543429D552520007E156 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				98B21B1829D55DE0004EFE0E /* README.md in Resources */,
+				987E544129D552530007E156 /* Preview Assets.xcassets in Resources */,
+				987E543E29D552530007E156 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		987E544A29D552540007E156 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		987E545429D552540007E156 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		98B21B5D29D6FD02004EFE0E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/zsh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint --autocorrect\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		987E543229D552520007E156 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				98CE662329D55BB10009916F /* SignInView.swift in Sources */,
+				98B21B4D29D6F3A9004EFE0E /* AccountLevelModel.swift in Sources */,
+				98B21B5929D6F4AE004EFE0E /* StudySessionModel.swift in Sources */,
+				98B21B7629DA6288004EFE0E /* Destination.swift in Sources */,
+				98B21B1B29D55F6C004EFE0E /* AuthenticationServiceProtocol.swift in Sources */,
+				987E544329D552530007E156 /* Persistence.swift in Sources */,
+				98B21B2129D56BDF004EFE0E /* RegexConstants.swift in Sources */,
+				98B21B5729D6F492004EFE0E /* SocialLoginModel.swift in Sources */,
+				98B21B5B29D6F4BF004EFE0E /* TagModel.swift in Sources */,
+				98B21B3A29D5EBC3004EFE0E /* AppDelegate.swift in Sources */,
+				987E543C29D552520007E156 /* ContentView.swift in Sources */,
+				98CE661929D55A650009916F /* Container.swift in Sources */,
+				98CE661B29D55AA40009916F /* AuthenticationService.swift in Sources */,
+				98CE662129D55B730009916F /* SignInViewModel.swift in Sources */,
+				98B21B6E29D9D21A004EFE0E /* SignUpViewModel.swift in Sources */,
+				98B21B4629D60EEB004EFE0E /* FancyTextField.swift in Sources */,
+				98B21B5229D6F404004EFE0E /* FriendRelationModel.swift in Sources */,
+				98B21B6C29D9A7A5004EFE0E /* HomeView.swift in Sources */,
+				98B21B5429D6F424004EFE0E /* DDayEventModel.swift in Sources */,
+				98B21B7229D9DC25004EFE0E /* SignUpTagsView.swift in Sources */,
+				98B21B4429D60D25004EFE0E /* FancyButton.swift in Sources */,
+				98B21B4F29D6F3E1004EFE0E /* AccountTagModel.swift in Sources */,
+				987E544629D552530007E156 /* KlockApp.xcdatamodeld in Sources */,
+				987E543A29D552520007E156 /* KlockAppApp.swift in Sources */,
+				98B21B4B29D617F6004EFE0E /* Encodable+Extensions.swift in Sources */,
+				98B21B2729D57A81004EFE0E /* SignInViewModel+AppleLoginDelegate.swift in Sources */,
+				98B21B7029D9D390004EFE0E /* SignUpView.swift in Sources */,
+				98BDD21D29DAD1D400B0440F /* FancyColor.swift in Sources */,
+				98B21B1E29D56BAB004EFE0E /* EmailValidator.swift in Sources */,
+				98CE661D29D55AE00009916F /* AccountModel.swift in Sources */,
+				98B21B4929D617A4004EFE0E /* AuthenticationServiceDTO.swift in Sources */,
+				98B21B7429D9FBA1004EFE0E /* SignUpTagsViewModel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		987E544829D552540007E156 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				987E545129D552540007E156 /* KlockAppTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		987E545229D552540007E156 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				987E545D29D552540007E156 /* KlockAppUITestsLaunchTests.swift in Sources */,
+				987E545B29D552540007E156 /* KlockAppUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		987E544E29D552540007E156 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 987E543529D552520007E156 /* KlockApp */;
+			targetProxy = 987E544D29D552540007E156 /* PBXContainerItemProxy */;
+		};
+		987E545829D552540007E156 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 987E543529D552520007E156 /* KlockApp */;
+			targetProxy = 987E545729D552540007E156 /* PBXContainerItemProxy */;
+		};
+		98B21B6529D99421004EFE0E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 98B21B6429D99421004EFE0E /* SwiftLintPlugin */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		987E545E29D552540007E156 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_PREVIEWS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		987E545F29D552540007E156 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_PREVIEWS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		987E546129D552540007E156 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = KlockApp/KlockAppDebug.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"KlockApp/Preview Content\"";
+				DEVELOPMENT_TEAM = Z49D557LQF;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = KlockApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "클라크";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = app.klock.ios;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		987E546229D552540007E156 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"KlockApp/Preview Content\"";
+				DEVELOPMENT_TEAM = Z49D557LQF;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = KlockApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "클라크";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = app.klock.ios;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		987E546429D552540007E156 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z49D557LQF;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = app.klock.KlockAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KlockApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/KlockApp";
+			};
+			name = Debug;
+		};
+		987E546529D552540007E156 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z49D557LQF;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = app.klock.KlockAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KlockApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/KlockApp";
+			};
+			name = Release;
+		};
+		987E546729D552540007E156 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z49D557LQF;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = app.klock.KlockAppUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = KlockApp;
+			};
+			name = Debug;
+		};
+		987E546829D552540007E156 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z49D557LQF;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = app.klock.KlockAppUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = KlockApp;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		987E543129D552520007E156 /* Build configuration list for PBXProject "KlockApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				987E545E29D552540007E156 /* Debug */,
+				987E545F29D552540007E156 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		987E546029D552540007E156 /* Build configuration list for PBXNativeTarget "KlockApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				987E546129D552540007E156 /* Debug */,
+				987E546229D552540007E156 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		987E546329D552540007E156 /* Build configuration list for PBXNativeTarget "KlockAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				987E546429D552540007E156 /* Debug */,
+				987E546529D552540007E156 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		987E546629D552540007E156 /* Build configuration list for PBXNativeTarget "KlockAppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				987E546729D552540007E156 /* Debug */,
+				987E546829D552540007E156 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		98B21B3B29D5F54E004EFE0E /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 16.0.0;
+			};
+		};
+		98B21B6129D99409004EFE0E /* XCRemoteSwiftPackageReference "SwiftLint" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/SwiftLint";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.51.0;
+			};
+		};
+		98CE660929D552BC0009916F /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		98CE661429D55A370009916F /* XCRemoteSwiftPackageReference "Swinject" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Swinject/Swinject.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		98B21B3C29D5F54E004EFE0E /* FacebookCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 98B21B3B29D5F54E004EFE0E /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookCore;
+		};
+		98B21B3E29D5F54E004EFE0E /* FacebookLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 98B21B3B29D5F54E004EFE0E /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookLogin;
+		};
+		98B21B6429D99421004EFE0E /* SwiftLintPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 98B21B6129D99409004EFE0E /* XCRemoteSwiftPackageReference "SwiftLint" */;
+			productName = "plugin:SwiftLintPlugin";
+		};
+		98CE660A29D552BC0009916F /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 98CE660929D552BC0009916F /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		98CE661529D55A370009916F /* Swinject */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 98CE661429D55A370009916F /* XCRemoteSwiftPackageReference "Swinject" */;
+			productName = Swinject;
+		};
+/* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		987E544429D552530007E156 /* KlockApp.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				987E544529D552530007E156 /* KlockApp.xcdatamodel */,
+			);
+			currentVersion = 987E544529D552530007E156 /* KlockApp.xcdatamodel */;
+			path = KlockApp.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 987E542E29D552520007E156 /* Project object */;
+}
