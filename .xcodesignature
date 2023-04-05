@@ -1,0 +1,8 @@
+{
+    "trustedBuildTools": [
+        {
+            "bundleIdentifier": "io.realm.SwiftLint",
+            "version": "0.51.0"
+        }
+    ]
+}

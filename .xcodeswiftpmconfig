@@ -1,0 +1,8 @@
+import PackageDescription
+
+let config = XcodeCloud.SwiftPM.Configuration([
+    .package(url: "https://github.com/realm/SwiftLint.git", .upToNextMajor(from: "0.51.0"))
+])
+
+return config
+

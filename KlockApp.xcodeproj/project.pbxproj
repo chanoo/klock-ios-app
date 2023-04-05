@@ -346,12 +346,11 @@
 				987E543229D552520007E156 /* Sources */,
 				987E543329D552520007E156 /* Frameworks */,
 				987E543429D552520007E156 /* Resources */,
-				98B21B5D29D6FD02004EFE0E /* ShellScript */,
+				98BDD22629DDA2B900B0440F /* SwiftLint Script */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				98B21B6529D99421004EFE0E /* PBXTargetDependency */,
 			);
 			name = KlockApp;
 			packageProductDependencies = (
@@ -477,7 +476,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		98B21B5D29D6FD02004EFE0E /* ShellScript */ = {
+		98BDD22629DDA2B900B0440F /* SwiftLint Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -487,13 +486,14 @@
 			);
 			inputPaths = (
 			);
+			name = "SwiftLint Script";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/zsh;
-			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint --autocorrect\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint --fix && swiftlint\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -566,10 +566,6 @@
 			isa = PBXTargetDependency;
 			target = 987E543529D552520007E156 /* KlockApp */;
 			targetProxy = 987E545729D552540007E156 /* PBXContainerItemProxy */;
-		};
-		98B21B6529D99421004EFE0E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			productRef = 98B21B6429D99421004EFE0E /* SwiftLintPlugin */;
 		};
 /* End PBXTargetDependency section */
 
@@ -883,14 +879,6 @@
 				minimumVersion = 16.0.0;
 			};
 		};
-		98B21B6129D99409004EFE0E /* XCRemoteSwiftPackageReference "SwiftLint" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/realm/SwiftLint";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.51.0;
-			};
-		};
 		98CE660929D552BC0009916F /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -919,11 +907,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 98B21B3B29D5F54E004EFE0E /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
 			productName = FacebookLogin;
-		};
-		98B21B6429D99421004EFE0E /* SwiftLintPlugin */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 98B21B6129D99409004EFE0E /* XCRemoteSwiftPackageReference "SwiftLint" */;
-			productName = "plugin:SwiftLintPlugin";
 		};
 		98CE660A29D552BC0009916F /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
