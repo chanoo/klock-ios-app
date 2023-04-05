@@ -18,7 +18,6 @@
 		987E545D29D552540007E156 /* KlockAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E545C29D552540007E156 /* KlockAppUITestsLaunchTests.swift */; };
 		98B21B1829D55DE0004EFE0E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 98B21B1729D55DE0004EFE0E /* README.md */; };
 		98B21B1B29D55F6C004EFE0E /* AuthenticationServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B1A29D55F6C004EFE0E /* AuthenticationServiceProtocol.swift */; };
-		98B21B1E29D56BAB004EFE0E /* EmailValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B1D29D56BAB004EFE0E /* EmailValidator.swift */; };
 		98B21B2129D56BDF004EFE0E /* RegexConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B2029D56BDF004EFE0E /* RegexConstants.swift */; };
 		98B21B2729D57A81004EFE0E /* SignInViewModel+AppleLoginDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B2629D57A81004EFE0E /* SignInViewModel+AppleLoginDelegate.swift */; };
 		98B21B3A29D5EBC3004EFE0E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B3929D5EBC3004EFE0E /* AppDelegate.swift */; };
@@ -42,6 +41,7 @@
 		98B21B7429D9FBA1004EFE0E /* SignUpTagsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B7329D9FBA1004EFE0E /* SignUpTagsViewModel.swift */; };
 		98B21B7629DA6288004EFE0E /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B7529DA6288004EFE0E /* Destination.swift */; };
 		98BDD21D29DAD1D400B0440F /* FancyColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BDD21C29DAD1D400B0440F /* FancyColor.swift */; };
+		98BDD22029DD0FA800B0440F /* EmailValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BDD21F29DD0FA800B0440F /* EmailValidator.swift */; };
 		98CE660B29D552BC0009916F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 98CE660A29D552BC0009916F /* Alamofire */; };
 		98CE661629D55A370009916F /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 98CE661529D55A370009916F /* Swinject */; };
 		98CE661929D55A650009916F /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CE661829D55A650009916F /* Container.swift */; };
@@ -84,7 +84,6 @@
 		987E545C29D552540007E156 /* KlockAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlockAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		98B21B1729D55DE0004EFE0E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		98B21B1A29D55F6C004EFE0E /* AuthenticationServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationServiceProtocol.swift; sourceTree = "<group>"; };
-		98B21B1D29D56BAB004EFE0E /* EmailValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EmailValidator.swift; path = ../../../../../../EmailValidator.swift; sourceTree = "<group>"; };
 		98B21B2029D56BDF004EFE0E /* RegexConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegexConstants.swift; sourceTree = "<group>"; };
 		98B21B2629D57A81004EFE0E /* SignInViewModel+AppleLoginDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignInViewModel+AppleLoginDelegate.swift"; sourceTree = "<group>"; };
 		98B21B3929D5EBC3004EFE0E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -107,6 +106,7 @@
 		98B21B7329D9FBA1004EFE0E /* SignUpTagsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTagsViewModel.swift; sourceTree = "<group>"; };
 		98B21B7529DA6288004EFE0E /* Destination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Destination.swift; sourceTree = "<group>"; };
 		98BDD21C29DAD1D400B0440F /* FancyColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyColor.swift; sourceTree = "<group>"; };
+		98BDD21F29DD0FA800B0440F /* EmailValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailValidator.swift; sourceTree = "<group>"; };
 		98CE661829D55A650009916F /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
 		98CE661A29D55AA40009916F /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		98CE661C29D55AE00009916F /* AccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
@@ -223,7 +223,7 @@
 		98B21B1C29D56B3C004EFE0E /* Validators */ = {
 			isa = PBXGroup;
 			children = (
-				98B21B1D29D56BAB004EFE0E /* EmailValidator.swift */,
+				98BDD21F29DD0FA800B0440F /* EmailValidator.swift */,
 			);
 			path = Validators;
 			sourceTree = "<group>";
@@ -530,8 +530,8 @@
 				98B21B2729D57A81004EFE0E /* SignInViewModel+AppleLoginDelegate.swift in Sources */,
 				98B21B7029D9D390004EFE0E /* SignUpView.swift in Sources */,
 				98BDD21D29DAD1D400B0440F /* FancyColor.swift in Sources */,
-				98B21B1E29D56BAB004EFE0E /* EmailValidator.swift in Sources */,
 				98CE661D29D55AE00009916F /* AccountModel.swift in Sources */,
+				98BDD22029DD0FA800B0440F /* EmailValidator.swift in Sources */,
 				98B21B4929D617A4004EFE0E /* AuthenticationServiceDTO.swift in Sources */,
 				98B21B7429D9FBA1004EFE0E /* SignUpTagsViewModel.swift in Sources */,
 			);
