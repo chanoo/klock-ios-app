@@ -38,7 +38,7 @@ struct SignUpView: View {
         }
         .background(FancyColor.background.color.edgesIgnoringSafeArea(.all))
         .modifier(CommonViewModifier(title: "닉네임"))
-        .navigationBarItems(leading: BackButtonView(action: {}))
+        .navigationBarItems(leading: BackButtonView())
     }
 }
 

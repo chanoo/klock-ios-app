@@ -40,7 +40,7 @@ struct SignUpTagsView: View {
         }
         .background(FancyColor.background.color.edgesIgnoringSafeArea(.all))
         .modifier(CommonViewModifier(title: "태그 선택"))
-        .navigationBarItems(leading: BackButtonView(action: {}))
+        .navigationBarItems(leading: BackButtonView())
     }
     
     var backButton: some View {
