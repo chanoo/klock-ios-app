@@ -7,6 +7,21 @@
 
 import Foundation
 
+struct SignUpReqDTO: Encodable {
+    let username: String
+    let provider: String
+    let providerUserId: String
+    let tagId: Int64?
+}
+
+struct SignUpResDTO: Encodable {
+    let id: Int64
+    let username: String
+    let provider: String
+    let providerUserId: String
+    let tagId: Int64?
+}
+
 // SignInReqDTO
 struct SignInReqDTO: Encodable {
     let email: String

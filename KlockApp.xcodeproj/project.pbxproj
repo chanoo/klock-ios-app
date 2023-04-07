@@ -82,6 +82,7 @@
 		984D2C8329DFC311008D3EA9 /* UINavigationController+UIGestureRecognizerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+UIGestureRecognizerDelegate.swift"; sourceTree = "<group>"; };
 		984D2C8629DFDB5F008D3EA9 /* BackButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButtonView.swift; sourceTree = "<group>"; };
 		984D2C8A29DFDBAA008D3EA9 /* CommonViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonViewModifier.swift; sourceTree = "<group>"; };
+		984D2C8C29E00296008D3EA9 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		987E543629D552520007E156 /* KlockApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KlockApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		987E543929D552520007E156 /* KlockAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlockAppApp.swift; sourceTree = "<group>"; };
 		987E543B29D552520007E156 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -317,6 +318,7 @@
 				98B21B4829D617A4004EFE0E /* AuthenticationServiceDTO.swift */,
 				98E314B229DEE65E00EA1617 /* TagService.swift */,
 				98E314B629DEE6BB00EA1617 /* TagServiceDTO.swift */,
+				984D2C8C29E00296008D3EA9 /* README.md */,
 			);
 			path = Services;
 			sourceTree = "<group>";

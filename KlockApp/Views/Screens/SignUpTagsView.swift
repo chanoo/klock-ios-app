@@ -30,7 +30,7 @@ struct SignUpTagsView: View {
                     }.padding()
                     
                     FancyButton(title: "완료", action: {
-                        debugPrint("완료")
+                        viewModel.confirmButtonTapped.send()
                     }, backgroundColor: FancyColor.primary.color, foregroundColor: Color.white)
                     .padding(.top, 30)
                     Spacer()

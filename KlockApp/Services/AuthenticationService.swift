@@ -20,6 +20,16 @@ class AuthenticationService: AuthenticationServiceProtocol {
 
         return requestAndDecode(url: url, parameters: requestDTO.dictionary)
     }
+    
+    func signUp(username: String,
+                provider: String,
+                providerUserId: String,
+                tagId: Int64?) -> AnyPublisher<AccountModel, AFError> {
+        let url = "\(baseURL)/signup"
+        let requestDTO = SignUpReqDTO(username: username, provider: provider, providerUserId: providerUserId, tagId: tagId)
+
+        return requestAndDecode(url: url, parameters: requestDTO.dictionary)
+    }
 
     func signInWithFacebook(accessToken: String) -> AnyPublisher<AccountModel, AFError> {
         let url = "\(baseURL)/signin-with-facebook"
