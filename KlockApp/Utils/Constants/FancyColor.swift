@@ -8,10 +8,10 @@
 import SwiftUI
 
 enum FancyColor: String {
-    case primary = "ColorPrimary"
-    case secondary = "ColorSecondary"
-    case facebook = "ColorFacebook"
-    case background = "ColorBackground"
+    case primary = "color_primary"
+    case secondary = "color_secondary"
+    case facebook = "color_facebook"
+    case background = "color_background"
 
     var color: Color {
         Color(self.rawValue)
