@@ -13,16 +13,8 @@ struct SignUpView: View {
 
     @ViewBuilder
     var destinationView: some View {
-        if let destination = viewModel.destination {
-            switch destination {
-            case .signUpTag:
-                SignUpTagsView(selectedTags: $viewModel.selectedTags, onNext: {
-                    viewModel.signUp()
-                    presentationMode.wrappedValue.dismiss()
-                })
-            default:
-                EmptyView()
-            }
+        if viewModel.destination == .signUpTag {
+            SignUpTagsView(viewModel: SignUpTagsViewModel())
         } else {
             EmptyView()
         }
@@ -43,7 +35,9 @@ struct SignUpView: View {
             .onAppear {
                 viewModel.resetDestination()
             }
-        }.background(FancyColor.background.color.edgesIgnoringSafeArea(.all))
+        }
+        .background(FancyColor.background.color.edgesIgnoringSafeArea(.all))
+        .navigationBarTitle("닉네임", displayMode: .inline)
     }
 }
 
@@ -78,7 +72,6 @@ struct NicknameView: View {
                 }
                 .padding()
             }
-            .navigationBarTitle("닉네임", displayMode: .inline)
         }
     }
 }

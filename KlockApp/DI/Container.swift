@@ -14,19 +14,23 @@ class Container {
 
     private init() {
         container = Swinject.Container()
-        setup()
+        setupDependencies()
     }
 
-    private func setup() {
+    private func setupDependencies() {
+        // Services
         container.register(AuthenticationServiceProtocol.self) { _ in AuthenticationService() }
-        container.register(SignInViewModel.self) { reg in
-            SignInViewModel(authenticationService: reg.resolve(AuthenticationServiceProtocol.self)!)
+        container.register(TagServiceProtocol.self) { _ in TagService() }
+
+        // View Models
+        container.register(SignInViewModel.self) { resolver in
+            SignInViewModel(authenticationService: resolver.resolve(AuthenticationServiceProtocol.self)!)
         }
-        container.register(SignUpViewModel.self) { reg in
-            SignUpViewModel(authenticationService: reg.resolve(AuthenticationServiceProtocol.self)!)
+        container.register(SignUpViewModel.self) { resolver in
+            SignUpViewModel(authenticationService: resolver.resolve(AuthenticationServiceProtocol.self)!)
         }
-        container.register(SignUpTagsViewModel.self) { reg in
-            SignUpTagsViewModel(authenticationService: reg.resolve(AuthenticationServiceProtocol.self)!)
+        container.register(SignUpTagsViewModel.self) { resolver in
+            SignUpTagsViewModel(tagService: resolver.resolve(TagServiceProtocol.self)!)
         }
     }
 

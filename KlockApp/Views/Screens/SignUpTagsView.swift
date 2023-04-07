@@ -8,54 +8,43 @@
 import SwiftUI
 
 struct SignUpTagsView: View {
-    @Binding var selectedTags: Set<String>
-    @State private var tags: [String] = [] // 서버에서 가져온 태그 목록을 여기에 저장하세요.
-
-    var onNext: () -> Void
+    @StateObject var viewModel: SignUpTagsViewModel
 
     var body: some View {
         VStack {
-            Text("공부 중인 분야를 선택하세요")
-                .font(.largeTitle)
-                .padding()
-
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 100))]) {
-                ForEach(tags, id: \.self) { tag in
-                    Button(action: {
-                        if selectedTags.contains(tag) {
-                            selectedTags.remove(tag)
-                        } else {
-                            selectedTags.insert(tag)
-                        }
-                    }, label: {
-                        Text(tag)
-                            .foregroundColor(selectedTags.contains(tag) ? .white : .black)
-                            .padding()
-                            .background(selectedTags.contains(tag) ? Color.blue : Color.gray)
-                            .cornerRadius(8)
-                    })
+            ScrollView {
+                VStack {
+                    Text("나를 설명할 수 있는 단어를 골라보세요!")
+                        .font(.system(size: 18))
+                        .foregroundColor(Color.black)
+                        .fontWeight(.bold)
+                        .padding(.top, 32)
+                        .padding(.bottom, 32)
+                    
+                    FlowLayout(mode: .scrollable,
+                               items: viewModel.tags,
+                               itemSpacing: 4) {
+                        FancyButton(title: $0, action: {
+                            debugPrint("태그 선택")
+                        }, backgroundColor: Color.white, foregroundColor: FancyColor.primary.color, isBlock: false)
+                    }.padding()
+                    
+                    FancyButton(title: "완료", action: {
+                        debugPrint("완료")
+                    }, backgroundColor: FancyColor.primary.color, foregroundColor: Color.white)
+                    .padding(.top, 30)
+                    Spacer()
                 }
+                .padding()
             }
-
-            Button(action: {
-                onNext()
-            }, label: {
-                Text("완료")
-                    .foregroundColor(.white)
-                    .padding()
-                    .background(Color.blue)
-                    .cornerRadius(8)
-            })
-            .padding(.top, 30)
-            Spacer()
         }
-        .padding()
+        .background(FancyColor.background.color.edgesIgnoringSafeArea(.all))
+        .navigationBarTitle("태그 선택", displayMode: .inline)
     }
 }
 
 struct SignUpTagsView_Previews: PreviewProvider {
     static var previews: some View {
-//        SignUpTagsView()
-        EmptyView()
+        SignUpTagsView(viewModel: SignUpTagsViewModel())
     }
 }

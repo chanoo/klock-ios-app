@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		984D2C8029DFB197008D3EA9 /* FlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984D2C7F29DFB197008D3EA9 /* FlowLayout.swift */; };
 		987E543A29D552520007E156 /* KlockAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E543929D552520007E156 /* KlockAppApp.swift */; };
 		987E543C29D552520007E156 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E543B29D552520007E156 /* ContentView.swift */; };
 		987E543E29D552530007E156 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 987E543D29D552530007E156 /* Assets.xcassets */; };
@@ -49,6 +50,9 @@
 		98CE661D29D55AE00009916F /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CE661C29D55AE00009916F /* AccountModel.swift */; };
 		98CE662129D55B730009916F /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CE662029D55B730009916F /* SignInViewModel.swift */; };
 		98CE662329D55BB10009916F /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CE662229D55BB10009916F /* SignInView.swift */; };
+		98E314B329DEE65E00EA1617 /* TagService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E314B229DEE65E00EA1617 /* TagService.swift */; };
+		98E314B529DEE67B00EA1617 /* TagServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E314B429DEE67B00EA1617 /* TagServiceProtocol.swift */; };
+		98E314B729DEE6BB00EA1617 /* TagServiceDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E314B629DEE6BB00EA1617 /* TagServiceDTO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +73,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		984D2C7F29DFB197008D3EA9 /* FlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowLayout.swift; sourceTree = "<group>"; };
 		987E543629D552520007E156 /* KlockApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KlockApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		987E543929D552520007E156 /* KlockAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlockAppApp.swift; sourceTree = "<group>"; };
 		987E543B29D552520007E156 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -82,6 +87,7 @@
 		987E545629D552540007E156 /* KlockAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KlockAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		987E545A29D552540007E156 /* KlockAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlockAppUITests.swift; sourceTree = "<group>"; };
 		987E545C29D552540007E156 /* KlockAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlockAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		98A30CBE29DE8E1A002E42A2 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		98B21B1729D55DE0004EFE0E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		98B21B1A29D55F6C004EFE0E /* AuthenticationServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationServiceProtocol.swift; sourceTree = "<group>"; };
 		98B21B2029D56BDF004EFE0E /* RegexConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegexConstants.swift; sourceTree = "<group>"; };
@@ -112,6 +118,9 @@
 		98CE661C29D55AE00009916F /* AccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
 		98CE662029D55B730009916F /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		98CE662229D55BB10009916F /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		98E314B229DEE65E00EA1617 /* TagService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagService.swift; sourceTree = "<group>"; };
+		98E314B429DEE67B00EA1617 /* TagServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagServiceProtocol.swift; sourceTree = "<group>"; };
+		98E314B629DEE6BB00EA1617 /* TagServiceDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagServiceDTO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +155,7 @@
 		987E542D29D552520007E156 = {
 			isa = PBXGroup;
 			children = (
+				98A30CBE29DE8E1A002E42A2 /* MyPlayground.playground */,
 				98B21B1729D55DE0004EFE0E /* README.md */,
 				987E543829D552520007E156 /* KlockApp */,
 				987E544F29D552540007E156 /* KlockAppTests */,
@@ -216,6 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				98B21B1A29D55F6C004EFE0E /* AuthenticationServiceProtocol.swift */,
+				98E314B429DEE67B00EA1617 /* TagServiceProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -286,6 +297,8 @@
 			children = (
 				98CE661A29D55AA40009916F /* AuthenticationService.swift */,
 				98B21B4829D617A4004EFE0E /* AuthenticationServiceDTO.swift */,
+				98E314B229DEE65E00EA1617 /* TagService.swift */,
+				98E314B629DEE6BB00EA1617 /* TagServiceDTO.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -313,6 +326,7 @@
 			children = (
 				98B21B4329D60D25004EFE0E /* FancyButton.swift */,
 				98B21B4529D60EEB004EFE0E /* FancyTextField.swift */,
+				984D2C7F29DFB197008D3EA9 /* FlowLayout.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -411,9 +425,11 @@
 				TargetAttributes = {
 					987E543529D552520007E156 = {
 						CreatedOnToolsVersion = 14.2;
+						LastSwiftMigration = 1430;
 					};
 					987E544B29D552540007E156 = {
 						CreatedOnToolsVersion = 14.2;
+						LastSwiftMigration = 1430;
 						TestTargetID = 987E543529D552520007E156;
 					};
 					987E545529D552540007E156 = {
@@ -506,12 +522,14 @@
 				98B21B4D29D6F3A9004EFE0E /* AccountLevelModel.swift in Sources */,
 				98B21B5929D6F4AE004EFE0E /* StudySessionModel.swift in Sources */,
 				98B21B7629DA6288004EFE0E /* Destination.swift in Sources */,
+				98E314B529DEE67B00EA1617 /* TagServiceProtocol.swift in Sources */,
 				98B21B1B29D55F6C004EFE0E /* AuthenticationServiceProtocol.swift in Sources */,
 				987E544329D552530007E156 /* Persistence.swift in Sources */,
 				98B21B2129D56BDF004EFE0E /* RegexConstants.swift in Sources */,
 				98B21B5729D6F492004EFE0E /* SocialLoginModel.swift in Sources */,
 				98B21B5B29D6F4BF004EFE0E /* TagModel.swift in Sources */,
 				98B21B3A29D5EBC3004EFE0E /* AppDelegate.swift in Sources */,
+				984D2C8029DFB197008D3EA9 /* FlowLayout.swift in Sources */,
 				987E543C29D552520007E156 /* ContentView.swift in Sources */,
 				98CE661929D55A650009916F /* Container.swift in Sources */,
 				98CE661B29D55AA40009916F /* AuthenticationService.swift in Sources */,
@@ -522,6 +540,7 @@
 				98B21B6C29D9A7A5004EFE0E /* HomeView.swift in Sources */,
 				98B21B5429D6F424004EFE0E /* DDayEventModel.swift in Sources */,
 				98B21B7229D9DC25004EFE0E /* SignUpTagsView.swift in Sources */,
+				98E314B329DEE65E00EA1617 /* TagService.swift in Sources */,
 				98B21B4429D60D25004EFE0E /* FancyButton.swift in Sources */,
 				98B21B4F29D6F3E1004EFE0E /* AccountTagModel.swift in Sources */,
 				987E544629D552530007E156 /* KlockApp.xcdatamodeld in Sources */,
@@ -532,6 +551,7 @@
 				98BDD21D29DAD1D400B0440F /* FancyColor.swift in Sources */,
 				98CE661D29D55AE00009916F /* AccountModel.swift in Sources */,
 				98BDD22029DD0FA800B0440F /* EmailValidator.swift in Sources */,
+				98E314B729DEE6BB00EA1617 /* TagServiceDTO.swift in Sources */,
 				98B21B4929D617A4004EFE0E /* AuthenticationServiceDTO.swift in Sources */,
 				98B21B7429D9FBA1004EFE0E /* SignUpTagsViewModel.swift in Sources */,
 			);
@@ -691,6 +711,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = KlockApp/KlockAppDebug.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -716,6 +737,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -726,6 +748,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"KlockApp/Preview Content\"";
@@ -758,6 +781,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Z49D557LQF;
@@ -767,6 +791,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = app.klock.KlockAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KlockApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/KlockApp";
@@ -778,6 +803,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Z49D557LQF;

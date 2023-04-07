@@ -9,27 +9,48 @@ import Foundation
 import Combine
 import FacebookLogin
 import AuthenticationServices
+import Swinject
 
 class SignUpTagsViewModel: NSObject, ObservableObject {
     @Published var nickname: String = ""
     @Published var selectedTags: Set<String> = []
     @Published var showStudyTagsView = false
+    @Published var tags: [String] = []
 
-    private let authenticationService: AuthenticationServiceProtocol
+    private let tagService: TagServiceProtocol
     var cancellables: Set<AnyCancellable> = []
+    
+    let comfirmButtonTapped = PassthroughSubject<Void, Never>()
 
-    init(authenticationService: AuthenticationServiceProtocol = Container.shared.resolve(AuthenticationServiceProtocol.self)!) {
-        self.authenticationService = authenticationService
+    init(tagService: TagServiceProtocol = Container.shared.resolve(TagServiceProtocol.self)!) {
+        self.tagService = tagService
         super.init()
         setupBindings()
+        fetchTags()
     }
 
     private func setupBindings() {
+        setupConfirmButtonTapped()
+    }
+    
+    private func fetchTags() {
+        tagService.tags()
+            .sink { completion in
+                switch completion {
+                case .failure(let error):
+                    print("Error fetching tags: \(error)")
+                case .finished:
+                    break
+                }
+            } receiveValue: { tags in
+                self.tags = tags.map { $0.name }
+            }
+            .store(in: &cancellables)
+    }
+
+    
+    private func setupConfirmButtonTapped() {
 
     }
 
-    func signUp() {
-        // 회원 가입 처리 로직을 여기에 구현하세요.
-        // 예를 들어, authenticationService.signUp() 함수를 호출하고 선택한 태그와 닉네임을 전달할 수 있습니다.
-    }
 }
