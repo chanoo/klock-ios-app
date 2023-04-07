@@ -39,15 +39,8 @@ struct SignUpTagsView: View {
             }
         }
         .background(FancyColor.background.color.edgesIgnoringSafeArea(.all))
-        .navigationBarTitle("태그 선택", displayMode: .inline)
-        .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: backButton)
-        .onAppear {
-            AppState.shared.swipeEnabled = false
-        }
-        .onDisappear {
-            AppState.shared.swipeEnabled = true
-        }
+        .modifier(CommonViewModifier(title: "태그 선택"))
+        .navigationBarItems(leading: BackButtonView(action: {}))
     }
     
     var backButton: some View {
