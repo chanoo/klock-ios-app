@@ -26,6 +26,7 @@ KlockApp
 │   ├── Utils
 │   │   ├── Validators
 │   │   └── Constants
+│   ├── Managers
 │   └── Resources
 ├── KlockAppTests
 └── KlockAppUITests

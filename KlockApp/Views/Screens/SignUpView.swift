@@ -38,6 +38,24 @@ struct SignUpView: View {
         }
         .background(FancyColor.background.color.edgesIgnoringSafeArea(.all))
         .navigationBarTitle("닉네임", displayMode: .inline)
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: backButton)
+        .onAppear {
+            AppState.shared.swipeEnabled = false
+        }
+        .onDisappear {
+            AppState.shared.swipeEnabled = true
+        }
+    }
+    
+    var backButton: some View {
+        Button(action: {}) {
+            HStack {
+                Image(systemName: "chevron.left")
+                    .foregroundColor(FancyColor.primary.color) // 색상을 원하는대로 변경
+                Text("")
+            }
+        }
     }
 }
 
