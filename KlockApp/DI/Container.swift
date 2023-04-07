@@ -32,6 +32,9 @@ class Container {
         container.register(SignUpTagsViewModel.self) { resolver in
             SignUpTagsViewModel(tagService: resolver.resolve(TagServiceProtocol.self)!)
         }
+        container.register(SplashViewModel.self) { resolver in
+            SplashViewModel()
+        }
     }
 
     func resolve<Service>(_ serviceType: Service.Type) -> Service? {

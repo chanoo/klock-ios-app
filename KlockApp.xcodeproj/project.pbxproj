@@ -12,6 +12,8 @@
 		984D2C8429DFC311008D3EA9 /* UINavigationController+UIGestureRecognizerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984D2C8329DFC311008D3EA9 /* UINavigationController+UIGestureRecognizerDelegate.swift */; };
 		984D2C8729DFDB5F008D3EA9 /* BackButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984D2C8629DFDB5F008D3EA9 /* BackButtonView.swift */; };
 		984D2C8B29DFDBAA008D3EA9 /* CommonViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984D2C8A29DFDBAA008D3EA9 /* CommonViewModifier.swift */; };
+		984D2C8F29E067FE008D3EA9 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984D2C8E29E067FE008D3EA9 /* SplashView.swift */; };
+		984D2C9129E0728C008D3EA9 /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984D2C9029E0728C008D3EA9 /* SplashViewModel.swift */; };
 		987E543A29D552520007E156 /* KlockAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E543929D552520007E156 /* KlockAppApp.swift */; };
 		987E543C29D552520007E156 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E543B29D552520007E156 /* ContentView.swift */; };
 		987E543E29D552530007E156 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 987E543D29D552530007E156 /* Assets.xcassets */; };
@@ -84,6 +86,8 @@
 		984D2C8A29DFDBAA008D3EA9 /* CommonViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonViewModifier.swift; sourceTree = "<group>"; };
 		984D2C8C29E00296008D3EA9 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		984D2C8D29E056A6008D3EA9 /* KlockApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KlockApp.entitlements; sourceTree = "<group>"; };
+		984D2C8E29E067FE008D3EA9 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		984D2C9029E0728C008D3EA9 /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
 		987E543629D552520007E156 /* KlockApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KlockApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		987E543929D552520007E156 /* KlockAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlockAppApp.swift; sourceTree = "<group>"; };
 		987E543B29D552520007E156 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -300,6 +304,7 @@
 				98CE662029D55B730009916F /* SignInViewModel.swift */,
 				98B21B6D29D9D21A004EFE0E /* SignUpViewModel.swift */,
 				98B21B7329D9FBA1004EFE0E /* SignUpTagsViewModel.swift */,
+				984D2C9029E0728C008D3EA9 /* SplashViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -362,6 +367,7 @@
 				98B21B6B29D9A7A5004EFE0E /* HomeView.swift */,
 				98B21B6F29D9D390004EFE0E /* SignUpView.swift */,
 				98B21B7129D9DC25004EFE0E /* SignUpTagsView.swift */,
+				984D2C8E29E067FE008D3EA9 /* SplashView.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -545,6 +551,7 @@
 				98CE662329D55BB10009916F /* SignInView.swift in Sources */,
 				98B21B4D29D6F3A9004EFE0E /* AccountLevelModel.swift in Sources */,
 				984D2C8729DFDB5F008D3EA9 /* BackButtonView.swift in Sources */,
+				984D2C9129E0728C008D3EA9 /* SplashViewModel.swift in Sources */,
 				98B21B5929D6F4AE004EFE0E /* StudySessionModel.swift in Sources */,
 				98B21B7629DA6288004EFE0E /* Destination.swift in Sources */,
 				98E314B529DEE67B00EA1617 /* TagServiceProtocol.swift in Sources */,
@@ -553,6 +560,7 @@
 				98B21B2129D56BDF004EFE0E /* RegexConstants.swift in Sources */,
 				98B21B5729D6F492004EFE0E /* SocialLoginModel.swift in Sources */,
 				98B21B5B29D6F4BF004EFE0E /* TagModel.swift in Sources */,
+				984D2C8F29E067FE008D3EA9 /* SplashView.swift in Sources */,
 				98B21B3A29D5EBC3004EFE0E /* AppDelegate.swift in Sources */,
 				984D2C8029DFB197008D3EA9 /* FlowLayout.swift in Sources */,
 				987E543C29D552520007E156 /* ContentView.swift in Sources */,

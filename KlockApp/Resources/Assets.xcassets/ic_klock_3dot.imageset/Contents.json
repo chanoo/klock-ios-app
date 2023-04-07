@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "ic_klock_3dot.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

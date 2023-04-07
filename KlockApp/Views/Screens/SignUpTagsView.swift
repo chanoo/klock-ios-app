@@ -10,6 +10,20 @@ import SwiftUI
 struct SignUpTagsView: View {
     @StateObject var viewModel: SignUpTagsViewModel
 
+    @ViewBuilder
+    var destinationView: some View {
+        if let destination = viewModel.destination {
+            switch destination {
+            case .splash:
+                SplashView(viewModel: SplashViewModel())
+            default:
+                EmptyView()
+            }
+        } else {
+            EmptyView()
+        }
+    }
+    
     var body: some View {
         VStack {
             ScrollView {
@@ -37,20 +51,20 @@ struct SignUpTagsView: View {
                 }
                 .padding()
             }
+            NavigationLink(
+                destination: destinationView,
+                isActive: .constant(viewModel.destination != nil),
+                label: {
+                    EmptyView()
+                }
+            )
+            .onAppear {
+                viewModel.resetDestination()
+            }
         }
         .background(FancyColor.background.color.edgesIgnoringSafeArea(.all))
         .modifier(CommonViewModifier(title: "태그 선택"))
         .navigationBarItems(leading: BackButtonView())
-    }
-    
-    var backButton: some View {
-        Button(action: {}) {
-            HStack {
-                Image(systemName: "chevron.left")
-                    .foregroundColor(FancyColor.primary.color) // 색상을 원하는대로 변경
-                Text("")
-            }
-        }
     }
 }
 

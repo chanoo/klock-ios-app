@@ -9,4 +9,5 @@ enum Destination {
     case home
     case signUp
     case signUpTag
+    case splash
 }

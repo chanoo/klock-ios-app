@@ -9,7 +9,12 @@ import SwiftUI
 
 struct HomeView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        }
+        .background(FancyColor.background.color.edgesIgnoringSafeArea(.all))
+        .modifier(CommonViewModifier(title: "홈"))
+        .navigationBarItems(leading: BackButtonView())
     }
 }
 

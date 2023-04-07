@@ -18,6 +18,8 @@ class SignUpTagsViewModel: NSObject, ObservableObject {
     @Published var showStudyTagsView = false
     @Published var tags: [String] = []
 
+    @Published var destination: Destination?
+
     var cancellableSet: Set<AnyCancellable> = []
     private let tagService: TagServiceProtocol
     private let authenticationService: AuthenticationServiceProtocol
@@ -73,10 +75,11 @@ class SignUpTagsViewModel: NSObject, ObservableObject {
         // Implement the sign-up process here.
         // For example, call the authenticationService.signUp() function and pass the selected tags and nickname.
         authenticationService.signUp(username: nickname, provider: provider, providerUserId: providerUserId, tagId: nil)
-            .sink { completion in
+            .sink { [weak self] completion in
                 switch completion {
                 case .failure(let error):
                     print("Error signing up: \(error)")
+                    self?.destination = .splash
                 case .finished:
                     break
                 }
@@ -84,5 +87,9 @@ class SignUpTagsViewModel: NSObject, ObservableObject {
                 print("User signed up: \(user)")
             }
             .store(in: &cancellableSet)
+    }
+    
+    func resetDestination() {
+        destination = nil
     }
 }

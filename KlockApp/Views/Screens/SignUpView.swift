@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SignUpView: View {
-    @ObservedObject var viewModel: SignUpViewModel
+    @StateObject var viewModel: SignUpViewModel
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
     @ViewBuilder
