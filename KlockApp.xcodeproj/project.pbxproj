@@ -56,6 +56,7 @@
 		98CE661D29D55AE00009916F /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CE661C29D55AE00009916F /* AccountModel.swift */; };
 		98CE662129D55B730009916F /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CE662029D55B730009916F /* SignInViewModel.swift */; };
 		98CE662329D55BB10009916F /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CE662229D55BB10009916F /* SignInView.swift */; };
+		98D7C93F29E18CDE0075D201 /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 98D7C93E29E18CDE0075D201 /* CryptoSwift */; };
 		98E314B329DEE65E00EA1617 /* TagService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E314B229DEE65E00EA1617 /* TagService.swift */; };
 		98E314B529DEE67B00EA1617 /* TagServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E314B429DEE67B00EA1617 /* TagServiceProtocol.swift */; };
 		98E314B729DEE6BB00EA1617 /* TagServiceDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E314B629DEE6BB00EA1617 /* TagServiceDTO.swift */; };
@@ -145,6 +146,7 @@
 				98B21B3F29D5F54E004EFE0E /* FacebookLogin in Frameworks */,
 				98CE660B29D552BC0009916F /* Alamofire in Frameworks */,
 				98B21B3D29D5F54E004EFE0E /* FacebookCore in Frameworks */,
+				98D7C93F29E18CDE0075D201 /* CryptoSwift in Frameworks */,
 				98CE661629D55A370009916F /* Swinject in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -402,6 +404,7 @@
 				98CE661529D55A370009916F /* Swinject */,
 				98B21B3C29D5F54E004EFE0E /* FacebookCore */,
 				98B21B3E29D5F54E004EFE0E /* FacebookLogin */,
+				98D7C93E29E18CDE0075D201 /* CryptoSwift */,
 			);
 			productName = KlockApp;
 			productReference = 987E543629D552520007E156 /* KlockApp.app */;
@@ -482,6 +485,7 @@
 				98CE660929D552BC0009916F /* XCRemoteSwiftPackageReference "Alamofire" */,
 				98CE661429D55A370009916F /* XCRemoteSwiftPackageReference "Swinject" */,
 				98B21B3B29D5F54E004EFE0E /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
+				98D7C93D29E18CDE0075D201 /* XCRemoteSwiftPackageReference "CryptoSwift" */,
 			);
 			productRefGroup = 987E543729D552520007E156 /* Products */;
 			projectDirPath = "";
@@ -941,7 +945,7 @@
 			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 16.0.0;
+				minimumVersion = 16.0.1;
 			};
 		};
 		98CE660929D552BC0009916F /* XCRemoteSwiftPackageReference "Alamofire" */ = {
@@ -949,7 +953,7 @@
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
+				minimumVersion = 5.6.4;
 			};
 		};
 		98CE661429D55A370009916F /* XCRemoteSwiftPackageReference "Swinject" */ = {
@@ -957,7 +961,15 @@
 			repositoryURL = "https://github.com/Swinject/Swinject.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
+				minimumVersion = 2.8.3;
+			};
+		};
+		98D7C93D29E18CDE0075D201 /* XCRemoteSwiftPackageReference "CryptoSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/krzyzanowskim/CryptoSwift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.6.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -982,6 +994,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 98CE661429D55A370009916F /* XCRemoteSwiftPackageReference "Swinject" */;
 			productName = Swinject;
+		};
+		98D7C93E29E18CDE0075D201 /* CryptoSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 98D7C93D29E18CDE0075D201 /* XCRemoteSwiftPackageReference "CryptoSwift" */;
+			productName = CryptoSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 
