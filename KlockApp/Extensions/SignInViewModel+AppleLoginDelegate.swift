@@ -18,13 +18,11 @@ extension SignInViewModel: ASAuthorizationControllerDelegate {
             return
         }
 
-        // 사용자 이름 가져오기
-//        let userIdentifier = appleIDCredential.user
-//        let firstName = appleIDCredential.fullName?.givenName
-//        let lastName = appleIDCredential.fullName?.familyName
-
-        // 이메일 가져오기 (옵셔널)
-//        let email = appleIDCredential.email
+        signUpUserModel.provider = "APPLE";
+        signUpUserModel.providerUserId = appleIDCredential.user
+        signUpUserModel.firstName = appleIDCredential.fullName?.givenName ?? ""
+        signUpUserModel.lastName = appleIDCredential.fullName?.familyName ?? ""
+        signUpUserModel.email = appleIDCredential.email ?? ""
 
         authenticationService.signInWithApple(accessToken: appleIDToken)
             .sink(receiveCompletion: { completion in
@@ -32,14 +30,13 @@ extension SignInViewModel: ASAuthorizationControllerDelegate {
                 case .failure(let error):
                     print("Error: \(error.localizedDescription)")
                     if error.responseCode == 401 {
-                        self.destination = .signUp
+                        self.destination = (.signUp, self.signUpUserModel)
                     }
                 case .finished:
                     break
                 }
             }, receiveValue: { user in
                 print("User: \(user)")
-                self.destination = .home
             })
             .store(in: &cancellableSet)
     }

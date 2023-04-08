@@ -37,10 +37,16 @@ struct SignUpTagsView: View {
                     
                     FlowLayout(mode: .scrollable,
                                items: viewModel.tags,
-                               itemSpacing: 4) {
-                        FancyButton(title: $0, action: {
-                            debugPrint("태그 선택")
-                        }, backgroundColor: Color.white, foregroundColor: FancyColor.primary.color, isBlock: false)
+                               itemSpacing: 4) { tag in
+                        FancyButton(
+                            title: tag.name,
+                            action: {
+                                viewModel.toggleTagSelection(id: tag.id!)
+                            },
+                            backgroundColor: viewModel.selectedTagId == tag.id ? FancyColor.primary.color : Color.white,
+                            foregroundColor: viewModel.selectedTagId == tag.id ? Color.white : FancyColor.primary.color,
+                            isBlock: false
+                        )
                     }.padding()
                     
                     FancyButton(title: "완료", action: {
@@ -70,6 +76,6 @@ struct SignUpTagsView: View {
 
 struct SignUpTagsView_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpTagsView(viewModel: SignUpTagsViewModel())
+        SignUpTagsView(viewModel: SignUpTagsViewModel(signUpUserModel: SignUpUserModel()))
     }
 }

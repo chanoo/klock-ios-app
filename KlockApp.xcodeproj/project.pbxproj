@@ -15,7 +15,6 @@
 		984D2C8F29E067FE008D3EA9 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984D2C8E29E067FE008D3EA9 /* SplashView.swift */; };
 		984D2C9129E0728C008D3EA9 /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984D2C9029E0728C008D3EA9 /* SplashViewModel.swift */; };
 		987E543A29D552520007E156 /* KlockAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E543929D552520007E156 /* KlockAppApp.swift */; };
-		987E543C29D552520007E156 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E543B29D552520007E156 /* ContentView.swift */; };
 		987E543E29D552530007E156 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 987E543D29D552530007E156 /* Assets.xcassets */; };
 		987E544129D552530007E156 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 987E544029D552530007E156 /* Preview Assets.xcassets */; };
 		987E544329D552530007E156 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E544229D552530007E156 /* Persistence.swift */; };
@@ -57,6 +56,7 @@
 		98CE662129D55B730009916F /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CE662029D55B730009916F /* SignInViewModel.swift */; };
 		98CE662329D55BB10009916F /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CE662229D55BB10009916F /* SignInView.swift */; };
 		98D7C93F29E18CDE0075D201 /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 98D7C93E29E18CDE0075D201 /* CryptoSwift */; };
+		98D7C94929E1AB450075D201 /* SignUpUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D7C94829E1AB450075D201 /* SignUpUserModel.swift */; };
 		98E314B329DEE65E00EA1617 /* TagService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E314B229DEE65E00EA1617 /* TagService.swift */; };
 		98E314B529DEE67B00EA1617 /* TagServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E314B429DEE67B00EA1617 /* TagServiceProtocol.swift */; };
 		98E314B729DEE6BB00EA1617 /* TagServiceDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E314B629DEE6BB00EA1617 /* TagServiceDTO.swift */; };
@@ -91,7 +91,6 @@
 		984D2C9029E0728C008D3EA9 /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
 		987E543629D552520007E156 /* KlockApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KlockApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		987E543929D552520007E156 /* KlockAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlockAppApp.swift; sourceTree = "<group>"; };
-		987E543B29D552520007E156 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		987E543D29D552530007E156 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		987E544029D552530007E156 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		987E544229D552530007E156 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -133,6 +132,7 @@
 		98CE661C29D55AE00009916F /* AccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
 		98CE662029D55B730009916F /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		98CE662229D55BB10009916F /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		98D7C94829E1AB450075D201 /* SignUpUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpUserModel.swift; sourceTree = "<group>"; };
 		98E314B229DEE65E00EA1617 /* TagService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagService.swift; sourceTree = "<group>"; };
 		98E314B429DEE67B00EA1617 /* TagServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagServiceProtocol.swift; sourceTree = "<group>"; };
 		98E314B629DEE6BB00EA1617 /* TagServiceDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagServiceDTO.swift; sourceTree = "<group>"; };
@@ -214,7 +214,6 @@
 				98CE661129D553A60009916F /* Resources */,
 				987E543929D552520007E156 /* KlockAppApp.swift */,
 				98B21B3929D5EBC3004EFE0E /* AppDelegate.swift */,
-				987E543B29D552520007E156 /* ContentView.swift */,
 				987E544229D552530007E156 /* Persistence.swift */,
 				98B21B4029D5FA5B004EFE0E /* KlockAppDebug.entitlements */,
 				987E544729D552530007E156 /* Info.plist */,
@@ -296,6 +295,7 @@
 				98B21B5829D6F4AE004EFE0E /* StudySessionModel.swift */,
 				98B21B5A29D6F4BF004EFE0E /* TagModel.swift */,
 				98B21B7529DA6288004EFE0E /* Destination.swift */,
+				98D7C94829E1AB450075D201 /* SignUpUserModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -567,7 +567,6 @@
 				984D2C8F29E067FE008D3EA9 /* SplashView.swift in Sources */,
 				98B21B3A29D5EBC3004EFE0E /* AppDelegate.swift in Sources */,
 				984D2C8029DFB197008D3EA9 /* FlowLayout.swift in Sources */,
-				987E543C29D552520007E156 /* ContentView.swift in Sources */,
 				98CE661929D55A650009916F /* Container.swift in Sources */,
 				98CE661B29D55AA40009916F /* AuthenticationService.swift in Sources */,
 				98CE662129D55B730009916F /* SignInViewModel.swift in Sources */,
@@ -590,6 +589,7 @@
 				98BDD21D29DAD1D400B0440F /* FancyColor.swift in Sources */,
 				984D2C8429DFC311008D3EA9 /* UINavigationController+UIGestureRecognizerDelegate.swift in Sources */,
 				98CE661D29D55AE00009916F /* AccountModel.swift in Sources */,
+				98D7C94929E1AB450075D201 /* SignUpUserModel.swift in Sources */,
 				98BDD22029DD0FA800B0440F /* EmailValidator.swift in Sources */,
 				98E314B729DEE6BB00EA1617 /* TagServiceDTO.swift in Sources */,
 				98B21B4929D617A4004EFE0E /* AuthenticationServiceDTO.swift in Sources */,

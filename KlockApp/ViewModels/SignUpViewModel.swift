@@ -12,10 +12,10 @@ import AuthenticationServices
 import Swinject
 
 class SignUpViewModel: NSObject, ObservableObject {
-    @Published var nickname: String = ""
-    @Published var selectedTags: Set<String> = []
-    @Published var showStudyTagsView = false
+
     @Published var destination: Destination?
+    @Published var signUpUserModel: SignUpUserModel
+    
     @Published var nicknameTextFieldShouldBecomeFirstResponder: Bool = false
 
     private let authenticationService: AuthenticationServiceProtocol
@@ -23,7 +23,8 @@ class SignUpViewModel: NSObject, ObservableObject {
 
     let nextButtonTapped = PassthroughSubject<Void, Never>()
 
-    init(authenticationService: AuthenticationServiceProtocol = Container.shared.resolve(AuthenticationServiceProtocol.self)!) {
+    init(signUpUserModel: SignUpUserModel, authenticationService: AuthenticationServiceProtocol = Container.shared.resolve(AuthenticationServiceProtocol.self)!) {
+        self.signUpUserModel = signUpUserModel
         self.authenticationService = authenticationService
         super.init()
         setupBindings()

@@ -8,15 +8,16 @@
 import SwiftUI
 
 struct SignUpView: View {
-    @StateObject var viewModel: SignUpViewModel
+    
+    @ObservedObject var viewModel: SignUpViewModel
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
     @ViewBuilder
     var destinationView: some View {
         if viewModel.destination == .signUpTag {
-            SignUpTagsView(viewModel: SignUpTagsViewModel())
+            SignUpTagsView(viewModel: SignUpTagsViewModel(signUpUserModel: SignUpUserModel()))
         } else {
-            EmptyView()
+            SignInView(viewModel: SignInViewModel())
         }
     }
 
@@ -45,6 +46,17 @@ struct SignUpView: View {
 struct NicknameView: View {
     @ObservedObject var viewModel: SignUpViewModel
 
+    private var combinedName: Binding<String> {
+        Binding<String>(
+            get: {
+                "\(viewModel.signUpUserModel.lastName)\(viewModel.signUpUserModel.firstName)"
+            },
+            set: { newValue in
+                // Do nothing (or handle the changes if needed)
+            }
+        )
+    }
+
     var body: some View {
         VStack {
             ScrollView {
@@ -56,7 +68,7 @@ struct NicknameView: View {
                         .padding(.top, 32)
                         .padding(.bottom, 32)
 
-                    FancyTextField(placeholder: "닉네임", text: $viewModel.nickname, keyboardType: .default)
+                    FancyTextField(placeholder: "닉네임", text: combinedName, keyboardType: .default)
                         .padding(.bottom, 10)
                         .onAppear {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -79,6 +91,6 @@ struct NicknameView: View {
 
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpView(viewModel: SignUpViewModel())
+        SignUpView(viewModel: Container.shared.resolve(SignUpViewModel.self)!)
     }
 }

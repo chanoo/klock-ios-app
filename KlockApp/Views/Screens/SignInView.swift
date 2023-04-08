@@ -2,16 +2,16 @@ import SwiftUI
 
 struct SignInView: View {
     @ObservedObject var viewModel: SignInViewModel
+
     @Environment(\.managedObjectContext) private var viewContext
 
     @ViewBuilder
     var destinationView: some View {
-        if let destination = viewModel.destination {
+        if let destinationTuple = viewModel.destination {
+            let (destination, signUpUserModel) = destinationTuple
             switch destination {
-            case .home:
-                HomeView() // HomeView를 구현하신 것으로 가정합니다.
             case .signUp:
-                SignUpView(viewModel: SignUpViewModel()) // 컨테이너를 사용하지 않고 직접 인스턴스를 생성합니다.
+                SignUpView(viewModel: SignUpViewModel(signUpUserModel: signUpUserModel))
             default:
                 EmptyView()
             }
@@ -39,12 +39,6 @@ struct SignInView: View {
                             .foregroundColor(FancyColor.primary.color)
                             .font(.system(size: 24))
                             .padding(.bottom, 80)
-
-                        if let errorMessage = viewModel.errorMessage {
-                            Text(errorMessage)
-                                .foregroundColor(.red)
-                                .padding(.bottom, 20)
-                        }
 
                         FancyButton(title: "페이스북으로 시작하기", action: {
                             viewModel.signInWithFacebookTapped.send()

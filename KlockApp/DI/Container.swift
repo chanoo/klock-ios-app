@@ -27,10 +27,10 @@ class Container {
             SignInViewModel(authenticationService: resolver.resolve(AuthenticationServiceProtocol.self)!)
         }
         container.register(SignUpViewModel.self) { resolver in
-            SignUpViewModel(authenticationService: resolver.resolve(AuthenticationServiceProtocol.self)!)
+            SignUpViewModel(signUpUserModel: SignUpUserModel(), authenticationService: resolver.resolve(AuthenticationServiceProtocol.self)!)
         }
         container.register(SignUpTagsViewModel.self) { resolver in
-            SignUpTagsViewModel(tagService: resolver.resolve(TagServiceProtocol.self)!)
+            SignUpTagsViewModel(signUpUserModel: SignUpUserModel(), tagService: resolver.resolve(TagServiceProtocol.self)!)
         }
         container.register(SplashViewModel.self) { resolver in
             SplashViewModel()

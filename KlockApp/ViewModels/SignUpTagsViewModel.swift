@@ -11,12 +11,11 @@ import FacebookLogin
 import Swinject
 
 class SignUpTagsViewModel: NSObject, ObservableObject {
-    @Published var nickname: String = ""
-    @Published var provider: String = ""
-    @Published var providerUserId: String = ""
-    @Published var selectedTags: Set<String> = []
+    
+    @Published var signUpUserModel: SignUpUserModel
     @Published var showStudyTagsView = false
-    @Published var tags: [String] = []
+    @Published var selectedTagId: Int64?
+    @Published var tags: [TagModel] = []
 
     @Published var destination: Destination?
 
@@ -27,19 +26,30 @@ class SignUpTagsViewModel: NSObject, ObservableObject {
     let confirmButtonTapped = PassthroughSubject<Void, Never>()
 
     init(
+        signUpUserModel: SignUpUserModel,
         authenticationService: AuthenticationServiceProtocol = Container.shared.resolve(AuthenticationServiceProtocol.self)!,
         tagService: TagServiceProtocol = Container.shared.resolve(TagServiceProtocol.self)!) {
+        self.signUpUserModel = signUpUserModel
         self.authenticationService = authenticationService
         self.tagService = tagService
         super.init()
         setupBindings()
         fetchTags()
     }
-
+    
     // MARK: - Bindings
 
     private func setupBindings() {
         setupConfirmButtonTapped()
+    }
+    
+    // 태그 선택시 호출되는 메서드
+    func toggleTagSelection(id: Int64) {
+        if selectedTagId == id {
+            selectedTagId = nil
+        } else {
+            selectedTagId = id
+        }
     }
 
     // MARK: - Fetch Tags
@@ -54,7 +64,7 @@ class SignUpTagsViewModel: NSObject, ObservableObject {
                     break
                 }
             } receiveValue: { tags in
-                self.tags = tags.map { $0.name }
+                self.tags = tags.map { TagModel(id: $0.id, name: $0.name) }
             }
             .store(in: &cancellableSet)
     }
@@ -74,7 +84,7 @@ class SignUpTagsViewModel: NSObject, ObservableObject {
     func signUp() {
         // Implement the sign-up process here.
         // For example, call the authenticationService.signUp() function and pass the selected tags and nickname.
-        authenticationService.signUp(username: nickname, provider: provider, providerUserId: providerUserId, tagId: nil)
+        authenticationService.signUp(username: signUpUserModel.firstName, provider: signUpUserModel.provider, providerUserId: signUpUserModel.providerUserId, tagId: signUpUserModel.tagId)
             .sink { [weak self] completion in
                 switch completion {
                 case .failure(let error):
