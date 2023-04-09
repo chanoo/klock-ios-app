@@ -36,10 +36,16 @@ struct FancyTextFieldWrapper: UIViewRepresentable {
         uiView.text = text
         uiView.placeholder = placeholder
 
-        if firstResponder {
-            uiView.becomeFirstResponder()
-        } else {
-            uiView.resignFirstResponder()
+        DispatchQueue.main.async {
+            if firstResponder {
+                if !uiView.isFirstResponder {
+                    uiView.becomeFirstResponder()
+                }
+            } else {
+                if uiView.isFirstResponder {
+                    uiView.resignFirstResponder()
+                }
+            }
         }
     }
 
@@ -66,9 +72,13 @@ struct FancyTextField: View {
     let keyboardType: UIKeyboardType
     let isSecureField: Bool
     @Binding var firstResponder: Bool
+    var onCommit: (() -> Void)? = nil
 
     var body: some View {
         FancyTextFieldWrapper(placeholder: placeholder, text: $text, keyboardType: keyboardType, isSecureField: isSecureField, firstResponder: $firstResponder)
+            .onReceive(NotificationCenter.default.publisher(for: UITextField.textDidEndEditingNotification)) { _ in
+                onCommit?()
+            }
             .padding()
             .background(Color.white)
             .cornerRadius(22)

@@ -15,12 +15,13 @@ class SignUpViewModel: NSObject, ObservableObject {
 
     @Published var destination: Destination?
     @Published var signUpUserModel: SignUpUserModel
-    @Published var isNextButtonEnabled: Bool = false
+    @Published var isNextButtonEnabled = false
     @Published var nicknameTextFieldShouldBecomeFirstResponder: Bool = false
 
     private let authenticationService: AuthenticationServiceProtocol
     var cancellables: Set<AnyCancellable> = []
 
+    private var isNextButtonEnabledCancellable: AnyCancellable?
     let nextButtonTapped = PassthroughSubject<Void, Never>()
 
     init(signUpUserModel: SignUpUserModel, authenticationService: AuthenticationServiceProtocol = Container.shared.resolve(AuthenticationServiceProtocol.self)!) {
@@ -28,12 +29,19 @@ class SignUpViewModel: NSObject, ObservableObject {
         self.authenticationService = authenticationService
         super.init()
         setupBindings()
-        
+
         debugPrint("init SignUpViewModel", signUpUserModel.provider, signUpUserModel.providerUserId)
     }
 
     private func setupBindings() {
         setupNextButtonTapped()
+        setupIsNextButtonEnabled()
+    }
+    
+    private func setupIsNextButtonEnabled() {
+        isNextButtonEnabledCancellable = $signUpUserModel
+            .map { $0.username.count >= 2 }
+            .assign(to: \.isNextButtonEnabled, on: self)
     }
 
     private func setupNextButtonTapped() {
