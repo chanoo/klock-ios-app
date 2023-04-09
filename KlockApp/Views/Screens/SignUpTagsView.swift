@@ -37,7 +37,7 @@ struct SignUpTagsView: View {
                         FancyButton(
                             title: tag.name,
                             action: {
-                                viewModel.toggleTagSelection(id: tag.id!)
+                                viewModel.toggleTagSelectionSubject.send(tag.id!)
                             },
                             backgroundColor: viewModel.signUpUserModel.tagId == tag.id ? FancyColor.primary.color : Color.white,
                             foregroundColor: viewModel.signUpUserModel.tagId == tag.id ? Color.white : FancyColor.primary.color,

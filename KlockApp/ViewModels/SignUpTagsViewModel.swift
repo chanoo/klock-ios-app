@@ -48,10 +48,18 @@ class SignUpTagsViewModel: NSObject, ObservableObject {
         setupConfirmButtonTapped()
     }
     
-    // 태그 선택시 호출되는 메서드
-    func toggleTagSelection(id: Int64) {
-        toggleTagSelectionSubject.send(id)
-    }
+    private func setupToggleTagSelection() {
+        toggleTagSelectionSubject
+             .sink { [weak self] id in
+                 if self?.selectedTagId == id {
+                     self?.selectedTagId = nil
+                 } else {
+                     self?.selectedTagId = id
+                 }
+                 self?.signUpUserModel.tagId = self?.selectedTagId ?? 0
+             }
+             .store(in: &cancellableSet)
+     }
 
     // MARK: - Fetch Tags
 
@@ -70,20 +78,6 @@ class SignUpTagsViewModel: NSObject, ObservableObject {
             .store(in: &cancellableSet)
     }
     
-    private func setupToggleTagSelection() {
-        toggleTagSelectionSubject
-            .sink { [weak self] id in
-                if self?.selectedTagId == id {
-                    self?.selectedTagId = nil
-                } else {
-                    self?.selectedTagId = id
-                }
-                self?.signUpUserModel.tagId = self?.selectedTagId ?? 0
-            }
-            .store(in: &cancellableSet)
-    }
-
-
     // MARK: - Confirm Button Action
 
     private func setupConfirmButtonTapped() {
