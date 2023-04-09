@@ -30,7 +30,9 @@ extension SignInViewModel: ASAuthorizationControllerDelegate {
                 case .failure(let error):
                     print("Error: \(error.localizedDescription)")
                     if error.responseCode == 401 {
-                        self.destination = (.signUp, self.signUpUserModel)
+                        DispatchQueue.main.async {
+                            self.destination = (.signUp, self.signUpUserModel)
+                        }
                     }
                 case .finished:
                     break

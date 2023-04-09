@@ -28,6 +28,8 @@ class SignUpViewModel: NSObject, ObservableObject {
         self.authenticationService = authenticationService
         super.init()
         setupBindings()
+        
+        debugPrint("init SignUpViewModel", signUpUserModel.provider, signUpUserModel.providerUserId)
     }
 
     private func setupBindings() {

@@ -13,7 +13,7 @@ import AuthenticationServices
 class SignInViewModel: NSObject, ObservableObject {
     
     @Published var destination: (Destination, SignUpUserModel)?
-    @Published var signUpUserModel = SignUpUserModel()
+    @Published var signUpUserModel: SignUpUserModel
 
     var cancellableSet: Set<AnyCancellable> = []
     let authenticationService: AuthenticationServiceProtocol
@@ -25,8 +25,11 @@ class SignInViewModel: NSObject, ObservableObject {
 
     init(authenticationService: AuthenticationServiceProtocol = Container.shared.resolve(AuthenticationServiceProtocol.self)!) {
         self.authenticationService = authenticationService
+        self.signUpUserModel = SignUpUserModel()
         super.init()
         setupBindings()
+        
+        debugPrint("init SignInViewModel")
     }
 
     private func setupBindings() {

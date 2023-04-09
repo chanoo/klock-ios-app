@@ -23,6 +23,7 @@ class SignUpTagsViewModel: NSObject, ObservableObject {
     private let tagService: TagServiceProtocol
     private let authenticationService: AuthenticationServiceProtocol
 
+    let toggleTagSelectionSubject = PassthroughSubject<Int64, Never>()
     let confirmButtonTapped = PassthroughSubject<Void, Never>()
 
     init(
@@ -35,21 +36,21 @@ class SignUpTagsViewModel: NSObject, ObservableObject {
         super.init()
         setupBindings()
         fetchTags()
+            
+        self.signUpUserModel.tagId = self.selectedTagId ?? 0
+        debugPrint("init SignUpTagsViewModel", signUpUserModel.provider, signUpUserModel.providerUserId)
     }
     
     // MARK: - Bindings
 
     private func setupBindings() {
+        setupToggleTagSelection()
         setupConfirmButtonTapped()
     }
     
     // 태그 선택시 호출되는 메서드
     func toggleTagSelection(id: Int64) {
-        if selectedTagId == id {
-            selectedTagId = nil
-        } else {
-            selectedTagId = id
-        }
+        toggleTagSelectionSubject.send(id)
     }
 
     // MARK: - Fetch Tags
@@ -68,6 +69,20 @@ class SignUpTagsViewModel: NSObject, ObservableObject {
             }
             .store(in: &cancellableSet)
     }
+    
+    private func setupToggleTagSelection() {
+        toggleTagSelectionSubject
+            .sink { [weak self] id in
+                if self?.selectedTagId == id {
+                    self?.selectedTagId = nil
+                } else {
+                    self?.selectedTagId = id
+                }
+                self?.signUpUserModel.tagId = self?.selectedTagId ?? 0
+            }
+            .store(in: &cancellableSet)
+    }
+
 
     // MARK: - Confirm Button Action
 
@@ -82,8 +97,10 @@ class SignUpTagsViewModel: NSObject, ObservableObject {
     // MARK: - Sign Up
 
     func signUp() {
-        // Implement the sign-up process here.
-        // For example, call the authenticationService.signUp() function and pass the selected tags and nickname.
+        
+        // print signUpUserModel all properties
+        debugPrint("signUpUserModel: ", signUpUserModel.email, signUpUserModel.firstName, signUpUserModel.lastName, signUpUserModel.provider, signUpUserModel.providerUserId, signUpUserModel.tagId)
+        
         authenticationService.signUp(username: signUpUserModel.firstName, provider: signUpUserModel.provider, providerUserId: signUpUserModel.providerUserId, tagId: signUpUserModel.tagId)
             .sink { [weak self] completion in
                 switch completion {
@@ -103,3 +120,4 @@ class SignUpTagsViewModel: NSObject, ObservableObject {
         destination = nil
     }
 }
+

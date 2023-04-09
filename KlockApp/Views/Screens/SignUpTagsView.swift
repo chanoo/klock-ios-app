@@ -43,15 +43,22 @@ struct SignUpTagsView: View {
                             action: {
                                 viewModel.toggleTagSelection(id: tag.id!)
                             },
-                            backgroundColor: viewModel.selectedTagId == tag.id ? FancyColor.primary.color : Color.white,
-                            foregroundColor: viewModel.selectedTagId == tag.id ? Color.white : FancyColor.primary.color,
+                            backgroundColor: viewModel.signUpUserModel.tagId == tag.id ? FancyColor.primary.color : Color.white,
+                            foregroundColor: viewModel.signUpUserModel.tagId == tag.id ? Color.white : FancyColor.primary.color,
                             isBlock: false
                         )
-                    }.padding()
+                    }
                     
-                    FancyButton(title: "완료", action: {
-                        viewModel.confirmButtonTapped.send()
-                    }, backgroundColor: FancyColor.primary.color, foregroundColor: Color.white)
+                    FancyButton(
+                        title: "완료",
+                        action: {
+                            viewModel.confirmButtonTapped.send()
+                        },
+                        backgroundColor: FancyColor.primary.color,
+                        foregroundColor: Color.white
+                    )
+                    .disabled(viewModel.selectedTagId == nil)
+                    .opacity(viewModel.selectedTagId == nil ? 0.5 : 1)
                     .padding(.top, 30)
                     Spacer()
                 }

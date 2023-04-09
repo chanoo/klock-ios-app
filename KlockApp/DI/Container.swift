@@ -18,6 +18,9 @@ class Container {
     }
 
     private func setupDependencies() {
+        // Model
+        container.register(SignUpUserModel.self) { _ in SignUpUserModel() }
+        
         // Services
         container.register(AuthenticationServiceProtocol.self) { _ in AuthenticationService() }
         container.register(TagServiceProtocol.self) { _ in TagService() }
@@ -27,7 +30,8 @@ class Container {
             SignInViewModel(authenticationService: resolver.resolve(AuthenticationServiceProtocol.self)!)
         }
         container.register(SignUpViewModel.self) { resolver in
-            SignUpViewModel(signUpUserModel: SignUpUserModel(), authenticationService: resolver.resolve(AuthenticationServiceProtocol.self)!)
+            SignUpViewModel(signUpUserModel: resolver.resolve(SignUpUserModel.self)!,
+                            authenticationService: resolver.resolve(AuthenticationServiceProtocol.self)!)
         }
         container.register(SignUpTagsViewModel.self) { resolver in
             SignUpTagsViewModel(signUpUserModel: SignUpUserModel(), tagService: resolver.resolve(TagServiceProtocol.self)!)

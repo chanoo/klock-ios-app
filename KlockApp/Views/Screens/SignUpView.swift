@@ -8,18 +8,7 @@
 import SwiftUI
 
 struct SignUpView: View {
-    
     @ObservedObject var viewModel: SignUpViewModel
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-
-    @ViewBuilder
-    var destinationView: some View {
-        if viewModel.destination == .signUpTag {
-            SignUpTagsView(viewModel: SignUpTagsViewModel(signUpUserModel: SignUpUserModel()))
-        } else {
-            SignInView(viewModel: SignInViewModel())
-        }
-    }
 
     var body: some View {
         ScrollView {
@@ -27,15 +16,15 @@ struct SignUpView: View {
                 NicknameView(viewModel: viewModel)
             }
             NavigationLink(
-                destination: destinationView,
-                isActive: .constant(viewModel.destination != nil),
+                destination: SignUpTagsView(viewModel: SignUpTagsViewModel(signUpUserModel: viewModel.signUpUserModel)),
+                isActive: Binding<Bool>(
+                    get: { viewModel.destination == .signUpTag },
+                    set: { _ in viewModel.resetDestination() }
+                ),
                 label: {
                     EmptyView()
                 }
             )
-            .onAppear {
-                viewModel.resetDestination()
-            }
         }
         .background(FancyColor.background.color.edgesIgnoringSafeArea(.all))
         .modifier(CommonViewModifier(title: "닉네임"))
