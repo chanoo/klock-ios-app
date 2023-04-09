@@ -33,6 +33,10 @@ extension SignInViewModel: ASAuthorizationControllerDelegate {
                         DispatchQueue.main.async {
                             self.destination = (.signUp, self.signUpUserModel)
                         }
+                    } else {
+                        DispatchQueue.main.async {
+                            self.destination = (.home, self.signUpUserModel)
+                        }
                     }
                 case .finished:
                     break
