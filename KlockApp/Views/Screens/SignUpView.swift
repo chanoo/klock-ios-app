@@ -57,17 +57,27 @@ struct NicknameView: View {
                         .padding(.top, 32)
                         .padding(.bottom, 32)
 
-                    FancyTextField(placeholder: "닉네임", text: combinedName, keyboardType: .default)
+                    FancyTextField(
+                        placeholder: "닉네임",
+                        text: $viewModel.signUpUserModel.username,
+                        keyboardType: .default,
+                        isSecureField: false,
+                        firstResponder: $viewModel.nicknameTextFieldShouldBecomeFirstResponder)
                         .padding(.bottom, 10)
                         .onAppear {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                                 viewModel.nicknameTextFieldShouldBecomeFirstResponder = true
                             }
                         }
+                        .onChange(of: viewModel.signUpUserModel.username) { newValue in
+                            viewModel.isNextButtonEnabled = newValue.count >= 2
+                        }
 
                     FancyButton(title: "다음", action: {
                         viewModel.nextButtonTapped.send()
                     }, backgroundColor: FancyColor.primary.color, foregroundColor: .white)
+                    .disabled(!viewModel.isNextButtonEnabled)
+                    .opacity(viewModel.isNextButtonEnabled ? 1 : 0.5)
                     .padding(.bottom, 20)
 
                     Spacer()

@@ -12,6 +12,7 @@ class SignUpUserModel: ObservableObject {
     @Published var providerUserId: String = ""
     @Published var firstName: String = ""
     @Published var lastName: String = ""
+    @Published var username: String = ""
     @Published var email: String = ""
     @Published var tagId: Int64 = 0
 }

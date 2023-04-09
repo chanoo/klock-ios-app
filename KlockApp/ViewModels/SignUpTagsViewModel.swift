@@ -99,7 +99,7 @@ class SignUpTagsViewModel: NSObject, ObservableObject {
     func signUp() {
         
         // print signUpUserModel all properties
-        debugPrint("signUpUserModel: ", signUpUserModel.email, signUpUserModel.firstName, signUpUserModel.lastName, signUpUserModel.provider, signUpUserModel.providerUserId, signUpUserModel.tagId)
+        debugPrint("signUpUserModel: ", signUpUserModel.email, signUpUserModel.username, signUpUserModel.provider, signUpUserModel.providerUserId, signUpUserModel.tagId)
         
         authenticationService.signUp(username: signUpUserModel.firstName, provider: signUpUserModel.provider, providerUserId: signUpUserModel.providerUserId, tagId: signUpUserModel.tagId)
             .sink { [weak self] completion in

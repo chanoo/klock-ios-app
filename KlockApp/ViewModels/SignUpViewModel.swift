@@ -15,7 +15,7 @@ class SignUpViewModel: NSObject, ObservableObject {
 
     @Published var destination: Destination?
     @Published var signUpUserModel: SignUpUserModel
-    
+    @Published var isNextButtonEnabled: Bool = false
     @Published var nicknameTextFieldShouldBecomeFirstResponder: Bool = false
 
     private let authenticationService: AuthenticationServiceProtocol
