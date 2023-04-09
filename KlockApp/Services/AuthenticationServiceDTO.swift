@@ -14,11 +14,14 @@ struct SignUpReqDTO: Encodable {
     let tagId: Int64?
 }
 
-struct SignUpResDTO: Encodable {
+struct SignUpResDTO: Decodable {
     let id: Int64
+    let accessToken: String
+    let refreshToken: String
     let username: String
     let provider: String
     let providerUserId: String
+    let email: String?
     let tagId: Int64?
 }
 

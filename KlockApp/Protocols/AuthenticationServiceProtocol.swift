@@ -11,7 +11,7 @@ import Alamofire
 
 protocol AuthenticationServiceProtocol {
     func signIn(email: String, password: String) -> AnyPublisher<AccountModel, AFError>
-    func signUp(username: String, provider: String, providerUserId: String, tagId: Int64?) -> AnyPublisher<AccountModel, AFError>
+    func signUp(username: String, provider: String, providerUserId: String, tagId: Int64?) -> AnyPublisher<SignUpResDTO, AFError>
     func signInWithFacebook(accessToken: String) -> AnyPublisher<AccountModel, AFError>
     func signInWithApple(accessToken: String) -> AnyPublisher<AccountModel, AFError>
 }

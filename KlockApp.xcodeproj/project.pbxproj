@@ -57,6 +57,7 @@
 		98CE662329D55BB10009916F /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CE662229D55BB10009916F /* SignInView.swift */; };
 		98D7C93F29E18CDE0075D201 /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 98D7C93E29E18CDE0075D201 /* CryptoSwift */; };
 		98D7C94929E1AB450075D201 /* SignUpUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D7C94829E1AB450075D201 /* SignUpUserModel.swift */; };
+		98D7C94F29E332790075D201 /* APIErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D7C94E29E332790075D201 /* APIErrorModel.swift */; };
 		98E314B329DEE65E00EA1617 /* TagService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E314B229DEE65E00EA1617 /* TagService.swift */; };
 		98E314B529DEE67B00EA1617 /* TagServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E314B429DEE67B00EA1617 /* TagServiceProtocol.swift */; };
 		98E314B729DEE6BB00EA1617 /* TagServiceDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E314B629DEE6BB00EA1617 /* TagServiceDTO.swift */; };
@@ -133,6 +134,7 @@
 		98CE662029D55B730009916F /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		98CE662229D55BB10009916F /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		98D7C94829E1AB450075D201 /* SignUpUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpUserModel.swift; sourceTree = "<group>"; };
+		98D7C94E29E332790075D201 /* APIErrorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIErrorModel.swift; sourceTree = "<group>"; };
 		98E314B229DEE65E00EA1617 /* TagService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagService.swift; sourceTree = "<group>"; };
 		98E314B429DEE67B00EA1617 /* TagServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagServiceProtocol.swift; sourceTree = "<group>"; };
 		98E314B629DEE6BB00EA1617 /* TagServiceDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagServiceDTO.swift; sourceTree = "<group>"; };
@@ -296,6 +298,7 @@
 				98B21B5A29D6F4BF004EFE0E /* TagModel.swift */,
 				98B21B7529DA6288004EFE0E /* Destination.swift */,
 				98D7C94829E1AB450075D201 /* SignUpUserModel.swift */,
+				98D7C94E29E332790075D201 /* APIErrorModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -578,6 +581,7 @@
 				98B21B7229D9DC25004EFE0E /* SignUpTagsView.swift in Sources */,
 				98E314B329DEE65E00EA1617 /* TagService.swift in Sources */,
 				98B21B4429D60D25004EFE0E /* FancyButton.swift in Sources */,
+				98D7C94F29E332790075D201 /* APIErrorModel.swift in Sources */,
 				98B21B4F29D6F3E1004EFE0E /* AccountTagModel.swift in Sources */,
 				987E544629D552530007E156 /* KlockApp.xcdatamodeld in Sources */,
 				987E543A29D552520007E156 /* KlockAppApp.swift in Sources */,

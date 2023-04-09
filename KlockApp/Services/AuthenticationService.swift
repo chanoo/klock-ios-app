@@ -20,15 +20,33 @@ class AuthenticationService: AuthenticationServiceProtocol {
 
         return requestAndDecode(url: url, parameters: requestDTO.dictionary)
     }
-    
+
     func signUp(username: String,
                 provider: String,
                 providerUserId: String,
-                tagId: Int64?) -> AnyPublisher<AccountModel, AFError> {
+                tagId: Int64?) -> AnyPublisher<SignUpResDTO, AFError> {
         let url = "\(baseURL)/signup"
         let requestDTO = SignUpReqDTO(username: username, provider: provider, providerUserId: providerUserId, tagId: tagId)
-
-        return requestAndDecode(url: url, parameters: requestDTO.dictionary)
+        
+        return AF.request(url, method: .post, parameters: requestDTO.dictionary, encoding: JSONEncoding.default)
+            .validate()
+            .publishDecodable(type: SignUpResDTO.self)
+            .tryMap { result -> SignUpResDTO in
+                switch result.result {
+                case .success(let response):
+                    return response
+                case .failure(let error):
+                    if let data = result.data {
+                        let decoder = JSONDecoder()
+                        if let errorResponse = try? decoder.decode(APIErrorModel.self, from: data) {
+                            print("Server error message: \(errorResponse.error)")
+                        }
+                    }
+                    throw error
+                }
+            }
+            .mapError { $0 as! AFError }
+            .eraseToAnyPublisher()
     }
 
     func signInWithFacebook(accessToken: String) -> AnyPublisher<AccountModel, AFError> {

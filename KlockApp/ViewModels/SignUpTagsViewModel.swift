@@ -93,15 +93,19 @@ class SignUpTagsViewModel: NSObject, ObservableObject {
     func signUp() {
         
         // print signUpUserModel all properties
-        debugPrint("signUpUserModel: ", signUpUserModel.email, signUpUserModel.username, signUpUserModel.provider, signUpUserModel.providerUserId, signUpUserModel.tagId)
+        debugPrint("signUpUserModel: ", signUpUserModel.username, signUpUserModel.provider, signUpUserModel.providerUserId, signUpUserModel.tagId)
         
-        authenticationService.signUp(username: signUpUserModel.firstName, provider: signUpUserModel.provider, providerUserId: signUpUserModel.providerUserId, tagId: signUpUserModel.tagId)
+        authenticationService.signUp(
+            username: signUpUserModel.username,
+            provider: signUpUserModel.provider,
+            providerUserId: signUpUserModel.providerUserId,
+            tagId: signUpUserModel.tagId)
             .sink { [weak self] completion in
                 switch completion {
                 case .failure(let error):
                     print("Error signing up: \(error)")
-                    self?.destination = .splash
                 case .finished:
+                    self?.destination = .splash
                     break
                 }
             } receiveValue: { user in
