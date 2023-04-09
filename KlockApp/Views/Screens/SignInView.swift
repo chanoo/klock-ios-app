@@ -7,15 +7,10 @@ struct SignInView: View {
 
     @ViewBuilder
     var destinationView: some View {
-        if let destinationTuple = viewModel.destination {
-            let (destination, signUpUserModel) = destinationTuple
-            switch destination {
-            case .signUp:
-                SignUpView(viewModel: SignUpViewModel(signUpUserModel: signUpUserModel))
-            default:
-                EmptyView()
-            }
-        } else {
+        switch viewModel.destination {
+        case let (destination, signUpUserModel)? where destination == .signUp:
+            SignUpView(viewModel: SignUpViewModel(signUpUserModel: signUpUserModel))
+        case .none, _:
             EmptyView()
         }
     }

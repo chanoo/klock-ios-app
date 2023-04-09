@@ -12,14 +12,10 @@ struct SignUpTagsView: View {
 
     @ViewBuilder
     var destinationView: some View {
-        if let destination = viewModel.destination {
-            switch destination {
-            case .splash:
-                SplashView(viewModel: SplashViewModel())
-            default:
-                EmptyView()
-            }
-        } else {
+        switch viewModel.destination {
+        case .splash:
+            SplashView(viewModel: SplashViewModel())
+        case .none, _:
             EmptyView()
         }
     }
