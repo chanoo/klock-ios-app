@@ -2,6 +2,7 @@ import SwiftUI
 
 struct SignInView: View {
 
+    @EnvironmentObject var appFlowManager: AppFlowManager
     @EnvironmentObject var viewModel: SignInViewModel
     @State private var activeDestination: Destination?
 
@@ -38,17 +39,20 @@ struct SignInView: View {
         .background(FancyColor.background.color.edgesIgnoringSafeArea(.all))
         .onAppear {
             viewModel.onSignInWithFacebook = signInSuccessful
-            viewModel.onSignInWithApple = signInSuccessful
-            viewModel.onSignInWithAppleSuccess = signInSuccessful
+            viewModel.onSignUpProcess = signUpProcess
+            viewModel.onSignInSuccess = signInSuccessful
         }
         .onReceive(viewModel.signInSuccess, perform: { _ in
+            appFlowManager.navigateToDestination.send(.home)
+        })
+        .onReceive(viewModel.signUpProcess, perform: { _ in
             activeDestination = .signUpUsername
         })
         .background(
             NavigationLink(
                 destination: viewForDestination(activeDestination),
                 isActive: Binding<Bool>(
-                    get: { activeDestination == .signUpUsername },
+                    get: { activeDestination != nil },
                     set: { newValue in
                         if !newValue {
                             activeDestination = nil
@@ -64,17 +68,19 @@ struct SignInView: View {
     }
 
     private func viewForDestination(_ destination: Destination?) -> AnyView {
-        
         let signUpUserModel = viewModel.signUpUserModel
-        
-        debugPrint("signUpUserModel: ", signUpUserModel.username, signUpUserModel.provider, signUpUserModel.providerUserId, signUpUserModel.tagId)
-
         switch destination {
+        case .home:
+            return AnyView(HomeView())
         case .signUpUsername:
             return AnyView(SignUpUsernameView(viewModel: Container.shared.resolve(SignUpViewModel.self)).environmentObject(signUpUserModel))
         case .none, _:
             return AnyView(EmptyView())
         }
+    }
+    
+    private func signUpProcess() {
+        viewModel.signUpProcess.send()
     }
     
     private func signInSuccessful() {

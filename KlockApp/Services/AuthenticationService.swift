@@ -91,6 +91,6 @@ class AuthenticationService: AuthenticationServiceProtocol {
     }
     
     func isLoggedIn() -> Bool {
-        return UserDefaults.standard.string(forKey: "userToken") != nil
+        return UserDefaults.standard.string(forKey: "access.token") != nil
     }
 }

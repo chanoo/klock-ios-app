@@ -20,11 +20,12 @@ class SignInViewModel: NSObject, ObservableObject, ASAuthorizationControllerDele
 
     let signInWithFacebookTapped = PassthroughSubject<Void, Never>()
     let signInWithAppleTapped = PassthroughSubject<Void, Never>()
+    let signUpProcess = PassthroughSubject<Void, Never>()
     let signInSuccess = PassthroughSubject<Void, Never>()
 
     var onSignInWithFacebook: (() -> Void)?
-    var onSignInWithApple: (() -> Void)?
-    var onSignInWithAppleSuccess: (() -> Void)?
+    var onSignUpProcess: (() -> Void)?
+    var onSignInSuccess: (() -> Void)?
 
     init(authenticationService: AuthenticationServiceProtocol = Container.shared.resolve(AuthenticationServiceProtocol.self)) {
         self.signUpUserModel = SignUpUserModel()
@@ -121,7 +122,7 @@ class SignInViewModel: NSObject, ObservableObject, ASAuthorizationControllerDele
                     print("Error: \(error.localizedDescription)")
                     if error.responseCode == 401 {
                         DispatchQueue.main.async {
-                            self.onSignInWithApple?()
+                            self.onSignUpProcess?()
                         }
                     }
                 case .finished:
@@ -129,8 +130,9 @@ class SignInViewModel: NSObject, ObservableObject, ASAuthorizationControllerDele
                 }
             }, receiveValue: { user in
                 print("User: \(user)")
+                UserDefaults.standard.set(user.token, forKey: "access.token")
                 DispatchQueue.main.async {
-                    self.onSignInWithApple?()
+                    self.onSignInSuccess?()
                 }
             })
             .store(in: &cancellableSet)
