@@ -7,8 +7,11 @@
 
 import SwiftUI
 
-struct SignUpView: View {
-    @ObservedObject var viewModel: SignUpViewModel
+struct SignUpUsernameView: View {
+
+    @StateObject var viewModel: SignUpViewModel
+    @State private var activeDestination: Destination?
+    @EnvironmentObject var signUpUserModel: SignUpUserModel
 
     var body: some View {
         ZStack {
@@ -19,24 +22,47 @@ struct SignUpView: View {
             }
             .modifier(CommonViewModifier(title: "닉네임"))
             .navigationBarItems(leading: BackButtonView())
+            .onAppear {
+                viewModel.onUsernameNextButtonTapped = signInSuccessful
+            }
             .background(
                 NavigationLink(
-                    destination: SignUpTagsView(viewModel: SignUpTagsViewModel(signUpUserModel: viewModel.signUpUserModel)),
+                    destination: viewForDestination(activeDestination),
                     isActive: Binding<Bool>(
-                        get: { viewModel.destination == .signUpTag },
-                        set: { _ in viewModel.resetDestination() }
+                        get: { activeDestination == .signUpTags },
+                        set: { newValue in
+                            if !newValue {
+                                activeDestination = nil
+                            }
+                        }
                     ),
                     label: {
                         EmptyView()
                     }
                 )
+                .opacity(0)
             )
         }
+    }
+    
+    private func viewForDestination(_ destination: Destination?) -> AnyView {
+         switch destination {
+         case .signUpTags:
+             return AnyView(SignUpTagsView(viewModel: viewModel))
+         case .none, _:
+             return AnyView(EmptyView())
+         }
+     }
+
+    private func signInSuccessful() {
+        activeDestination = .signUpTags
     }
 }
 
 struct NicknameView: View {
-    @ObservedObject var viewModel: SignUpViewModel
+    
+    @StateObject var viewModel: SignUpViewModel
+    @EnvironmentObject var signUpUserModel: SignUpUserModel
 
     var body: some View {
         VStack {
@@ -59,6 +85,7 @@ struct NicknameView: View {
                     })
                     .padding(.bottom, 10)
                     .onAppear {
+                        viewModel.signUpUserModel = signUpUserModel
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                             viewModel.nicknameTextFieldShouldBecomeFirstResponder = true
                         }
@@ -86,6 +113,7 @@ struct NicknameView: View {
 
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpView(viewModel: Container.shared.resolve(SignUpViewModel.self)!)
+        SignUpUsernameView(viewModel: Container.shared.resolve(SignUpViewModel.self))
+            .environmentObject(AppFlowManager())
     }
 }

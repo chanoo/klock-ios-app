@@ -40,3 +40,7 @@ struct FacebookSignInReqDTO: Encodable {
 struct AppleSignInReqDTO: Encodable {
     let accessToken: String
 }
+
+struct AppleSignInResDTO: Decodable {
+    let token: String
+}

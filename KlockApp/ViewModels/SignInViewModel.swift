@@ -5,54 +5,57 @@
 //  Created by 성찬우 on 2023/03/30.
 //
 
-import Foundation
+import SwiftUI
 import Combine
-import FacebookLogin
 import AuthenticationServices
+import Alamofire
+import FacebookLogin
 
-class SignInViewModel: NSObject, ObservableObject {
-    
-    @Published var destination: (Destination, SignUpUserModel)?
+class SignInViewModel: NSObject, ObservableObject, ASAuthorizationControllerDelegate {
+
     @Published var signUpUserModel: SignUpUserModel
 
-    var cancellableSet: Set<AnyCancellable> = []
+    private var cancellableSet: Set<AnyCancellable> = []
     let authenticationService: AuthenticationServiceProtocol
-    private let emailValidator = EmailValidator()
 
-    let signInButtonTapped = PassthroughSubject<Void, Never>()
     let signInWithFacebookTapped = PassthroughSubject<Void, Never>()
     let signInWithAppleTapped = PassthroughSubject<Void, Never>()
+    let signInSuccess = PassthroughSubject<Void, Never>()
 
-    init(authenticationService: AuthenticationServiceProtocol = Container.shared.resolve(AuthenticationServiceProtocol.self)!) {
-        self.authenticationService = authenticationService
+    var onSignInWithFacebook: (() -> Void)?
+    var onSignInWithApple: (() -> Void)?
+    var onSignInWithAppleSuccess: (() -> Void)?
+
+    init(authenticationService: AuthenticationServiceProtocol = Container.shared.resolve(AuthenticationServiceProtocol.self)) {
         self.signUpUserModel = SignUpUserModel()
+        self.authenticationService = authenticationService as! AuthenticationService
         super.init()
         setupBindings()
-        
+
         debugPrint("init SignInViewModel")
     }
-
+    
     private func setupBindings() {
         setupSignInWithFacebookTapped()
         setupSignInWithAppleTapped()
     }
 
     private func setupSignInWithFacebookTapped() {
-          signInWithFacebookTapped
-              .sink { [weak self] _ in
-                  self?.signInWithFacebook()
-              }
-              .store(in: &cancellableSet)
-      }
+        signInWithFacebookTapped
+            .sink { [weak self] _ in
+                self?.signInWithFacebook()
+            }
+            .store(in: &cancellableSet)
+    }
 
-      private func setupSignInWithAppleTapped() {
-          signInWithAppleTapped
-              .sink { [weak self] _ in
-                  self?.signInWithApple()
-              }
-              .store(in: &cancellableSet)
-      }
-
+    private func setupSignInWithAppleTapped() {
+        signInWithAppleTapped
+            .sink { [weak self] _ in
+                self?.signInWithApple()
+            }
+            .store(in: &cancellableSet)
+    }
+    
     func signInWithFacebook() {
         // Implement Facebook login
         let loginManager = LoginManager()
@@ -77,23 +80,63 @@ class SignInViewModel: NSObject, ObservableObject {
                     }
                 }, receiveValue: { user in
                     print("User: \(user)")
+                    DispatchQueue.main.async {
+                        self?.onSignInWithFacebook?()
+                    }
                 })
                 .store(in: &self!.cancellableSet)
         }
     }
 
     func signInWithApple() {
-        // Implement Apple login
-        let request = ASAuthorizationAppleIDProvider().createRequest()
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let request = appleIDProvider.createRequest()
         request.requestedScopes = [.fullName, .email]
+        
+        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        authorizationController.delegate = self
+        authorizationController.performRequests()
+    }
+    
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential,
+              let appleIDTokenData = appleIDCredential.identityToken,
+              let appleIDToken = String(data: appleIDTokenData, encoding: .utf8) else {
+            print("Error during Apple login")
+            return
+        }
 
-        let controller = ASAuthorizationController(authorizationRequests: [request])
-        controller.delegate = self
-        controller.performRequests()
+        signUpUserModel.provider = "APPLE";
+        signUpUserModel.providerUserId = appleIDCredential.user
+        signUpUserModel.firstName = appleIDCredential.fullName?.givenName ?? ""
+        signUpUserModel.lastName = appleIDCredential.fullName?.familyName ?? ""
+        signUpUserModel.email = appleIDCredential.email ?? ""
+        
+        debugPrint("appleIDToken", appleIDToken)
+
+        authenticationService.signInWithApple(accessToken: appleIDToken)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .failure(let error):
+                    print("Error: \(error.localizedDescription)")
+                    if error.responseCode == 401 {
+                        DispatchQueue.main.async {
+                            self.onSignInWithApple?()
+                        }
+                    }
+                case .finished:
+                    break
+                }
+            }, receiveValue: { user in
+                print("User: \(user)")
+                DispatchQueue.main.async {
+                    self.onSignInWithApple?()
+                }
+            })
+            .store(in: &cancellableSet)
     }
 
-    func resetDestination() {
-        destination = nil
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        print("Error during Apple login: \(error.localizedDescription)")
     }
-
 }

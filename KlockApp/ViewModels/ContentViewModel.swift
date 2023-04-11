@@ -17,17 +17,22 @@ import SwiftUI
 
 class ContentViewModel: ObservableObject {
     @Published var currentView: AnyView
-
-    private var cancellableSet: Set<AnyCancellable> = []
     private let authService: AuthenticationServiceProtocol
 
     init(authService: AuthenticationServiceProtocol = Container.shared.resolve(AuthenticationServiceProtocol.self)) {
         self.authService = authService
-        
+        self.currentView = AnyView(EmptyView())
+    }
+    
+    func updateCurrentView(appFlowManager: AppFlowManager) {
         if authService.isLoggedIn() {
-            self.currentView = AnyView(HomeView())
+            self.currentView = AnyView(HomeView()
+                .environmentObject(appFlowManager))
         } else {
-            self.currentView = AnyView(SignInView(viewModel: Container.shared.resolve(SignInViewModel.self)))
+            let signInViewModel = Container.shared.resolve(SignInViewModel.self)
+            self.currentView = AnyView(SignInView()
+                .environmentObject(appFlowManager)
+                .environmentObject(signInViewModel))
         }
     }
 }

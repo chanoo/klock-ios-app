@@ -8,18 +8,11 @@
 import SwiftUI
 
 struct SignUpTagsView: View {
-    @StateObject var viewModel: SignUpTagsViewModel
 
-    @ViewBuilder
-    var destinationView: some View {
-        switch viewModel.destination {
-        case .splash:
-            SplashView(viewModel: SplashViewModel())
-        case .none, _:
-            EmptyView()
-        }
-    }
-    
+    @StateObject var viewModel: SignUpViewModel
+    @State private var activeDestination: Destination?
+    @EnvironmentObject var signUpUserModel: SignUpUserModel
+
     var body: some View {
         VStack {
             ScrollView {
@@ -60,25 +53,23 @@ struct SignUpTagsView: View {
                 }
                 .padding()
             }
-            NavigationLink(
-                destination: destinationView,
-                isActive: .constant(viewModel.destination != nil),
-                label: {
-                    EmptyView()
-                }
-            )
-            .onAppear {
-                viewModel.resetDestination()
-            }
         }
         .background(FancyColor.background.color.edgesIgnoringSafeArea(.all))
         .modifier(CommonViewModifier(title: "태그 선택"))
         .navigationBarItems(leading: BackButtonView())
+        .onAppear {
+            viewModel.fetchTagsSubject.send()
+        }
+    }
+    
+    private func signUpSuccessful() {
+        viewModel.signUpSuccess.send()
     }
 }
 
 struct SignUpTagsView_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpTagsView(viewModel: SignUpTagsViewModel(signUpUserModel: SignUpUserModel()))
+        SignUpTagsView(viewModel: Container.shared.resolve(SignUpViewModel.self))
+            .environmentObject(AppFlowManager())
     }
 }

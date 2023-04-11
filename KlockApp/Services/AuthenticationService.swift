@@ -56,18 +56,28 @@ class AuthenticationService: AuthenticationServiceProtocol {
         return requestAndDecode(url: url, parameters: requestDTO.dictionary)
     }
 
-    func signInWithApple(accessToken: String) -> AnyPublisher<AccountModel, AFError> {
+    func signInWithApple(accessToken: String) -> AnyPublisher<AppleSignInResDTO, AFError> {
         let url = "\(baseURL)/signin-with-apple"
         let requestDTO = AppleSignInReqDTO(accessToken: accessToken)
 
-        return requestAndDecode(url: url, parameters: requestDTO.dictionary)
-            .mapError { error in
-                if error.responseCode == 401 {
-                    return AFError.responseValidationFailed(reason: .unacceptableStatusCode(code: 401))
-                } else {
-                    return error
+        return AF.request(url, method: .post, parameters: requestDTO.dictionary, encoding: JSONEncoding.default)
+            .validate()
+            .publishDecodable(type: AppleSignInResDTO.self)
+            .tryMap { result -> AppleSignInResDTO in
+                switch result.result {
+                case .success(let response):
+                    return response
+                case .failure(let error):
+                    if let data = result.data {
+                        let decoder = JSONDecoder()
+                        if let errorResponse = try? decoder.decode(APIErrorModel.self, from: data) {
+                            print("Server error message: \(errorResponse.error)")
+                        }
+                    }
+                    throw error
                 }
             }
+            .mapError { $0 as! AFError }
             .eraseToAnyPublisher()
     }
 
@@ -78,5 +88,9 @@ class AuthenticationService: AuthenticationServiceProtocol {
             .value()
             .mapError { $0 }
             .eraseToAnyPublisher()
+    }
+    
+    func isLoggedIn() -> Bool {
+        return UserDefaults.standard.string(forKey: "userToken") != nil
     }
 }

@@ -18,7 +18,9 @@ class Container {
     }
 
     private func setupDependencies() {
-        // Model
+        // Managers
+        container.register(AppFlowManager.self) { _ in AppFlowManager() }
+        
         container.register(SignUpUserModel.self) { _ in SignUpUserModel() }
         
         // Services
@@ -26,22 +28,14 @@ class Container {
         container.register(TagServiceProtocol.self) { _ in TagService() }
 
         // View Models
-        container.register(SignInViewModel.self) { resolver in
-            SignInViewModel(authenticationService: resolver.resolve(AuthenticationServiceProtocol.self)!)
-        }
-        container.register(SignUpViewModel.self) { resolver in
-            SignUpViewModel(signUpUserModel: resolver.resolve(SignUpUserModel.self)!,
-                            authenticationService: resolver.resolve(AuthenticationServiceProtocol.self)!)
-        }
-        container.register(SignUpTagsViewModel.self) { resolver in
-            SignUpTagsViewModel(signUpUserModel: SignUpUserModel(), tagService: resolver.resolve(TagServiceProtocol.self)!)
-        }
-        container.register(SplashViewModel.self) { resolver in
-            SplashViewModel()
-        }
+        container.register(ContentViewModel.self) { resolver in ContentViewModel() }
+        container.register(SignInViewModel.self) { resolver in SignInViewModel() }
+        container.register(SignUpViewModel.self) { resolver in SignUpViewModel(signUpUserModel: resolver.resolve(SignUpUserModel.self) ?? SignUpUserModel() ) }
+        container.register(SplashViewModel.self) { resolver in SplashViewModel() }
+
     }
 
-    func resolve<Service>(_ serviceType: Service.Type) -> Service? {
-        return container.resolve(serviceType)
+    func resolve<Service>(_ serviceType: Service.Type) -> Service {
+        return container.resolve(serviceType)!
     }
 }

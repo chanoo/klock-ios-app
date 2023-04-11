@@ -8,6 +8,5 @@
 import Combine
 
 class AppFlowManager: ObservableObject {
-    @Published var destination: Destination? = nil
     let navigateToDestination = PassthroughSubject<Destination?, Never>()
 }

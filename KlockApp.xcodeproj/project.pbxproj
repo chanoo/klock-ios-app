@@ -25,7 +25,6 @@
 		98B21B1829D55DE0004EFE0E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 98B21B1729D55DE0004EFE0E /* README.md */; };
 		98B21B1B29D55F6C004EFE0E /* AuthenticationServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B1A29D55F6C004EFE0E /* AuthenticationServiceProtocol.swift */; };
 		98B21B2129D56BDF004EFE0E /* RegexConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B2029D56BDF004EFE0E /* RegexConstants.swift */; };
-		98B21B2729D57A81004EFE0E /* SignInViewModel+AppleLoginDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B2629D57A81004EFE0E /* SignInViewModel+AppleLoginDelegate.swift */; };
 		98B21B3A29D5EBC3004EFE0E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B3929D5EBC3004EFE0E /* AppDelegate.swift */; };
 		98B21B3D29D5F54E004EFE0E /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 98B21B3C29D5F54E004EFE0E /* FacebookCore */; };
 		98B21B3F29D5F54E004EFE0E /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 98B21B3E29D5F54E004EFE0E /* FacebookLogin */; };
@@ -42,9 +41,8 @@
 		98B21B5B29D6F4BF004EFE0E /* TagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B5A29D6F4BF004EFE0E /* TagModel.swift */; };
 		98B21B6C29D9A7A5004EFE0E /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B6B29D9A7A5004EFE0E /* HomeView.swift */; };
 		98B21B6E29D9D21A004EFE0E /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B6D29D9D21A004EFE0E /* SignUpViewModel.swift */; };
-		98B21B7029D9D390004EFE0E /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B6F29D9D390004EFE0E /* SignUpView.swift */; };
+		98B21B7029D9D390004EFE0E /* SignUpUsernameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B6F29D9D390004EFE0E /* SignUpUsernameView.swift */; };
 		98B21B7229D9DC25004EFE0E /* SignUpTagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B7129D9DC25004EFE0E /* SignUpTagsView.swift */; };
-		98B21B7429D9FBA1004EFE0E /* SignUpTagsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B7329D9FBA1004EFE0E /* SignUpTagsViewModel.swift */; };
 		98B21B7629DA6288004EFE0E /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B7529DA6288004EFE0E /* Destination.swift */; };
 		98BDD21D29DAD1D400B0440F /* FancyColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BDD21C29DAD1D400B0440F /* FancyColor.swift */; };
 		98BDD22029DD0FA800B0440F /* EmailValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BDD21F29DD0FA800B0440F /* EmailValidator.swift */; };
@@ -58,6 +56,10 @@
 		98D7C93F29E18CDE0075D201 /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 98D7C93E29E18CDE0075D201 /* CryptoSwift */; };
 		98D7C94929E1AB450075D201 /* SignUpUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D7C94829E1AB450075D201 /* SignUpUserModel.swift */; };
 		98D7C94F29E332790075D201 /* APIErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D7C94E29E332790075D201 /* APIErrorModel.swift */; };
+		98D7C95129E45C550075D201 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D7C95029E45C550075D201 /* ContentView.swift */; };
+		98D7C95329E460470075D201 /* AppFlowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D7C95229E460470075D201 /* AppFlowManager.swift */; };
+		98D7C95529E460D70075D201 /* SignUpFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D7C95429E460D70075D201 /* SignUpFlowView.swift */; };
+		98D7C95729E510990075D201 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D7C95629E510990075D201 /* ContentViewModel.swift */; };
 		98E314B329DEE65E00EA1617 /* TagService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E314B229DEE65E00EA1617 /* TagService.swift */; };
 		98E314B529DEE67B00EA1617 /* TagServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E314B429DEE67B00EA1617 /* TagServiceProtocol.swift */; };
 		98E314B729DEE6BB00EA1617 /* TagServiceDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E314B629DEE6BB00EA1617 /* TagServiceDTO.swift */; };
@@ -106,7 +108,6 @@
 		98B21B1729D55DE0004EFE0E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		98B21B1A29D55F6C004EFE0E /* AuthenticationServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationServiceProtocol.swift; sourceTree = "<group>"; };
 		98B21B2029D56BDF004EFE0E /* RegexConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegexConstants.swift; sourceTree = "<group>"; };
-		98B21B2629D57A81004EFE0E /* SignInViewModel+AppleLoginDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignInViewModel+AppleLoginDelegate.swift"; sourceTree = "<group>"; };
 		98B21B3929D5EBC3004EFE0E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		98B21B4029D5FA5B004EFE0E /* KlockAppDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KlockAppDebug.entitlements; sourceTree = "<group>"; };
 		98B21B4329D60D25004EFE0E /* FancyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyButton.swift; sourceTree = "<group>"; };
@@ -122,9 +123,8 @@
 		98B21B5A29D6F4BF004EFE0E /* TagModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagModel.swift; sourceTree = "<group>"; };
 		98B21B6B29D9A7A5004EFE0E /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		98B21B6D29D9D21A004EFE0E /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
-		98B21B6F29D9D390004EFE0E /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		98B21B6F29D9D390004EFE0E /* SignUpUsernameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpUsernameView.swift; sourceTree = "<group>"; };
 		98B21B7129D9DC25004EFE0E /* SignUpTagsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTagsView.swift; sourceTree = "<group>"; };
-		98B21B7329D9FBA1004EFE0E /* SignUpTagsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTagsViewModel.swift; sourceTree = "<group>"; };
 		98B21B7529DA6288004EFE0E /* Destination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Destination.swift; sourceTree = "<group>"; };
 		98BDD21C29DAD1D400B0440F /* FancyColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyColor.swift; sourceTree = "<group>"; };
 		98BDD21F29DD0FA800B0440F /* EmailValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailValidator.swift; sourceTree = "<group>"; };
@@ -135,6 +135,10 @@
 		98CE662229D55BB10009916F /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		98D7C94829E1AB450075D201 /* SignUpUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpUserModel.swift; sourceTree = "<group>"; };
 		98D7C94E29E332790075D201 /* APIErrorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIErrorModel.swift; sourceTree = "<group>"; };
+		98D7C95029E45C550075D201 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		98D7C95229E460470075D201 /* AppFlowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowManager.swift; sourceTree = "<group>"; };
+		98D7C95429E460D70075D201 /* SignUpFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpFlowView.swift; sourceTree = "<group>"; };
+		98D7C95629E510990075D201 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		98E314B229DEE65E00EA1617 /* TagService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagService.swift; sourceTree = "<group>"; };
 		98E314B429DEE67B00EA1617 /* TagServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagServiceProtocol.swift; sourceTree = "<group>"; };
 		98E314B629DEE6BB00EA1617 /* TagServiceDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagServiceDTO.swift; sourceTree = "<group>"; };
@@ -174,6 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				984D2C8129DFC2B3008D3EA9 /* AppState.swift */,
+				98D7C95229E460470075D201 /* AppFlowManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -278,7 +283,6 @@
 		98B21B2529D57A5F004EFE0E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				98B21B2629D57A81004EFE0E /* SignInViewModel+AppleLoginDelegate.swift */,
 				98B21B4A29D617F6004EFE0E /* Encodable+Extensions.swift */,
 				984D2C8329DFC311008D3EA9 /* UINavigationController+UIGestureRecognizerDelegate.swift */,
 			);
@@ -308,8 +312,8 @@
 			children = (
 				98CE662029D55B730009916F /* SignInViewModel.swift */,
 				98B21B6D29D9D21A004EFE0E /* SignUpViewModel.swift */,
-				98B21B7329D9FBA1004EFE0E /* SignUpTagsViewModel.swift */,
 				984D2C9029E0728C008D3EA9 /* SplashViewModel.swift */,
+				98D7C95629E510990075D201 /* ContentViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -370,9 +374,11 @@
 			children = (
 				98CE662229D55BB10009916F /* SignInView.swift */,
 				98B21B6B29D9A7A5004EFE0E /* HomeView.swift */,
-				98B21B6F29D9D390004EFE0E /* SignUpView.swift */,
+				98B21B6F29D9D390004EFE0E /* SignUpUsernameView.swift */,
 				98B21B7129D9DC25004EFE0E /* SignUpTagsView.swift */,
 				984D2C8E29E067FE008D3EA9 /* SplashView.swift */,
+				98D7C95029E45C550075D201 /* ContentView.swift */,
+				98D7C95429E460D70075D201 /* SignUpFlowView.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -559,6 +565,7 @@
 				98B21B4D29D6F3A9004EFE0E /* AccountLevelModel.swift in Sources */,
 				984D2C8729DFDB5F008D3EA9 /* BackButtonView.swift in Sources */,
 				984D2C9129E0728C008D3EA9 /* SplashViewModel.swift in Sources */,
+				98D7C95529E460D70075D201 /* SignUpFlowView.swift in Sources */,
 				98B21B5929D6F4AE004EFE0E /* StudySessionModel.swift in Sources */,
 				98B21B7629DA6288004EFE0E /* Destination.swift in Sources */,
 				98E314B529DEE67B00EA1617 /* TagServiceProtocol.swift in Sources */,
@@ -568,8 +575,10 @@
 				98B21B5729D6F492004EFE0E /* SocialLoginModel.swift in Sources */,
 				98B21B5B29D6F4BF004EFE0E /* TagModel.swift in Sources */,
 				984D2C8F29E067FE008D3EA9 /* SplashView.swift in Sources */,
+				98D7C95329E460470075D201 /* AppFlowManager.swift in Sources */,
 				98B21B3A29D5EBC3004EFE0E /* AppDelegate.swift in Sources */,
 				984D2C8029DFB197008D3EA9 /* FlowLayout.swift in Sources */,
+				98D7C95729E510990075D201 /* ContentViewModel.swift in Sources */,
 				98CE661929D55A650009916F /* Container.swift in Sources */,
 				98CE661B29D55AA40009916F /* AuthenticationService.swift in Sources */,
 				98CE662129D55B730009916F /* SignInViewModel.swift in Sources */,
@@ -586,9 +595,9 @@
 				987E544629D552530007E156 /* KlockApp.xcdatamodeld in Sources */,
 				987E543A29D552520007E156 /* KlockAppApp.swift in Sources */,
 				98B21B4B29D617F6004EFE0E /* Encodable+Extensions.swift in Sources */,
-				98B21B2729D57A81004EFE0E /* SignInViewModel+AppleLoginDelegate.swift in Sources */,
 				984D2C8B29DFDBAA008D3EA9 /* CommonViewModifier.swift in Sources */,
-				98B21B7029D9D390004EFE0E /* SignUpView.swift in Sources */,
+				98B21B7029D9D390004EFE0E /* SignUpUsernameView.swift in Sources */,
+				98D7C95129E45C550075D201 /* ContentView.swift in Sources */,
 				984D2C8229DFC2B3008D3EA9 /* AppState.swift in Sources */,
 				98BDD21D29DAD1D400B0440F /* FancyColor.swift in Sources */,
 				984D2C8429DFC311008D3EA9 /* UINavigationController+UIGestureRecognizerDelegate.swift in Sources */,
@@ -597,7 +606,6 @@
 				98BDD22029DD0FA800B0440F /* EmailValidator.swift in Sources */,
 				98E314B729DEE6BB00EA1617 /* TagServiceDTO.swift in Sources */,
 				98B21B4929D617A4004EFE0E /* AuthenticationServiceDTO.swift in Sources */,
-				98B21B7429D9FBA1004EFE0E /* SignUpTagsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
