@@ -23,6 +23,10 @@
 		985BE89229E6E0CD008582A3 /* CharacterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE89129E6E0CD008582A3 /* CharacterView.swift */; };
 		985BE89429E6E0DB008582A3 /* FriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE89329E6E0DB008582A3 /* FriendsView.swift */; };
 		985BE89629E6E359008582A3 /* ClockModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE89529E6E359008582A3 /* ClockModalView.swift */; };
+		985BE89829E6E559008582A3 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE89729E6E559008582A3 /* HomeViewModel.swift */; };
+		985BE89A29E6E579008582A3 /* FriendsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE89929E6E579008582A3 /* FriendsViewModel.swift */; };
+		985BE89C29E6E595008582A3 /* FriendModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE89B29E6E595008582A3 /* FriendModel.swift */; };
+		985BE89E29E6E5D0008582A3 /* FriendDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE89D29E6E5D0008582A3 /* FriendDetailView.swift */; };
 		987E543A29D552520007E156 /* KlockAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E543929D552520007E156 /* KlockAppApp.swift */; };
 		987E543E29D552530007E156 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 987E543D29D552530007E156 /* Assets.xcassets */; };
 		987E544129D552530007E156 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 987E544029D552530007E156 /* Preview Assets.xcassets */; };
@@ -109,6 +113,10 @@
 		985BE89129E6E0CD008582A3 /* CharacterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterView.swift; sourceTree = "<group>"; };
 		985BE89329E6E0DB008582A3 /* FriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsView.swift; sourceTree = "<group>"; };
 		985BE89529E6E359008582A3 /* ClockModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockModalView.swift; sourceTree = "<group>"; };
+		985BE89729E6E559008582A3 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		985BE89929E6E579008582A3 /* FriendsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewModel.swift; sourceTree = "<group>"; };
+		985BE89B29E6E595008582A3 /* FriendModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendModel.swift; sourceTree = "<group>"; };
+		985BE89D29E6E5D0008582A3 /* FriendDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendDetailView.swift; sourceTree = "<group>"; };
 		987E543629D552520007E156 /* KlockApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KlockApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		987E543929D552520007E156 /* KlockAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlockAppApp.swift; sourceTree = "<group>"; };
 		987E543D29D552530007E156 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -320,6 +328,7 @@
 				98B21B7529DA6288004EFE0E /* Destination.swift */,
 				98D7C94829E1AB450075D201 /* SignUpUserModel.swift */,
 				98D7C94E29E332790075D201 /* APIErrorModel.swift */,
+				985BE89B29E6E595008582A3 /* FriendModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -327,11 +336,13 @@
 		98CE660D29D553880009916F /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				985BE88329E652CE008582A3 /* README.md */,
 				98CE662029D55B730009916F /* SignInViewModel.swift */,
 				98B21B6D29D9D21A004EFE0E /* SignUpViewModel.swift */,
 				984D2C9029E0728C008D3EA9 /* SplashViewModel.swift */,
 				98D7C95629E510990075D201 /* ContentViewModel.swift */,
-				985BE88329E652CE008582A3 /* README.md */,
+				985BE89729E6E559008582A3 /* HomeViewModel.swift */,
+				985BE89929E6E579008582A3 /* FriendsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -404,6 +415,7 @@
 				985BE88F29E6DC49008582A3 /* SettingsView.swift */,
 				985BE89129E6E0CD008582A3 /* CharacterView.swift */,
 				985BE89329E6E0DB008582A3 /* FriendsView.swift */,
+				985BE89D29E6E5D0008582A3 /* FriendDetailView.swift */,
 				985BE89529E6E359008582A3 /* ClockModalView.swift */,
 			);
 			path = Screens;
@@ -593,6 +605,7 @@
 				984D2C8729DFDB5F008D3EA9 /* BackButtonView.swift in Sources */,
 				984D2C9129E0728C008D3EA9 /* SplashViewModel.swift in Sources */,
 				98D7C95529E460D70075D201 /* SignUpFlowView.swift in Sources */,
+				985BE89E29E6E5D0008582A3 /* FriendDetailView.swift in Sources */,
 				98B21B5929D6F4AE004EFE0E /* StudySessionModel.swift in Sources */,
 				98B21B7629DA6288004EFE0E /* Destination.swift in Sources */,
 				98E314B529DEE67B00EA1617 /* TagServiceProtocol.swift in Sources */,
@@ -616,6 +629,7 @@
 				98B21B6E29D9D21A004EFE0E /* SignUpViewModel.swift in Sources */,
 				98B21B4629D60EEB004EFE0E /* FancyTextField.swift in Sources */,
 				98B21B5229D6F404004EFE0E /* FriendRelationModel.swift in Sources */,
+				985BE89C29E6E595008582A3 /* FriendModel.swift in Sources */,
 				98B21B6C29D9A7A5004EFE0E /* HomeView.swift in Sources */,
 				98B21B5429D6F424004EFE0E /* DDayEventModel.swift in Sources */,
 				98B21B7229D9DC25004EFE0E /* SignUpTagsView.swift in Sources */,
@@ -624,6 +638,7 @@
 				98D7C94F29E332790075D201 /* APIErrorModel.swift in Sources */,
 				98B21B4F29D6F3E1004EFE0E /* AccountTagModel.swift in Sources */,
 				987E544629D552530007E156 /* KlockApp.xcdatamodeld in Sources */,
+				985BE89829E6E559008582A3 /* HomeViewModel.swift in Sources */,
 				985BE88E29E6DC3E008582A3 /* MissionView.swift in Sources */,
 				985BE89429E6E0DB008582A3 /* FriendsView.swift in Sources */,
 				987E543A29D552520007E156 /* KlockAppApp.swift in Sources */,
@@ -632,6 +647,7 @@
 				98B21B7029D9D390004EFE0E /* SignUpUsernameView.swift in Sources */,
 				985BE89629E6E359008582A3 /* ClockModalView.swift in Sources */,
 				98D7C95129E45C550075D201 /* ContentView.swift in Sources */,
+				985BE89A29E6E579008582A3 /* FriendsViewModel.swift in Sources */,
 				984D2C8229DFC2B3008D3EA9 /* AppState.swift in Sources */,
 				98BDD21D29DAD1D400B0440F /* FancyColor.swift in Sources */,
 				984D2C8429DFC311008D3EA9 /* UINavigationController+UIGestureRecognizerDelegate.swift in Sources */,
