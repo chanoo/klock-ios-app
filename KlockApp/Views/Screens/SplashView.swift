@@ -9,12 +9,12 @@ import SwiftUI
 
 struct SplashView: View {
     @StateObject var viewModel: SplashViewModel
-    
+
     @ViewBuilder
     var destinationView: some View {
         HomeView()
     }
-    
+
     var body: some View {
         ZStack {
             FancyColor.primary.color.edgesIgnoringSafeArea(.all)
@@ -22,7 +22,7 @@ struct SplashView: View {
             VStack {
                 Image("ic_klock_3dot")
                     .padding(.bottom, 32)
-                
+
                 Text("남과의 경쟁이 아닌")
                     .font(.system(size: 22))
                     .foregroundColor(Color.white)

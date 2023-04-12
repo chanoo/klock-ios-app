@@ -29,7 +29,7 @@ struct FlowStack<Content: View>: View {
     var body: some View {
         VStack(alignment: .leading, spacing: spacing) {
             ForEach(items) { item in
-                GeometryReader { geometry in
+                GeometryReader { _ in
                     content(item)
                         .fixedSize(horizontal: true, vertical: false)
                         .alignmentGuide(.leading) { _ in spacing }

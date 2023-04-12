@@ -13,7 +13,7 @@ import Swinject
 
 class SplashViewModel: NSObject, ObservableObject {
     @Published var destination: Destination?
-    
+
     var cancellables: Set<AnyCancellable> = []
 
     let nextButtonTapped = PassthroughSubject<Void, Never>()

@@ -29,13 +29,13 @@ class SignInViewModel: NSObject, ObservableObject, ASAuthorizationControllerDele
 
     init(authenticationService: AuthenticationServiceProtocol = Container.shared.resolve(AuthenticationServiceProtocol.self)) {
         self.signUpUserModel = SignUpUserModel()
-        self.authenticationService = authenticationService as! AuthenticationService
+        self.authenticationService = authenticationService
         super.init()
         setupBindings()
 
         debugPrint("init SignInViewModel")
     }
-    
+
     private func setupBindings() {
         setupSignInWithFacebookTapped()
         setupSignInWithAppleTapped()
@@ -56,7 +56,7 @@ class SignInViewModel: NSObject, ObservableObject, ASAuthorizationControllerDele
             }
             .store(in: &cancellableSet)
     }
-    
+
     func signInWithFacebook() {
         // Implement Facebook login
         let loginManager = LoginManager()
@@ -93,12 +93,12 @@ class SignInViewModel: NSObject, ObservableObject, ASAuthorizationControllerDele
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let request = appleIDProvider.createRequest()
         request.requestedScopes = [.fullName, .email]
-        
+
         let authorizationController = ASAuthorizationController(authorizationRequests: [request])
         authorizationController.delegate = self
         authorizationController.performRequests()
     }
-    
+
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential,
               let appleIDTokenData = appleIDCredential.identityToken,
@@ -107,12 +107,12 @@ class SignInViewModel: NSObject, ObservableObject, ASAuthorizationControllerDele
             return
         }
 
-        signUpUserModel.provider = "APPLE";
+        signUpUserModel.provider = "APPLE"
         signUpUserModel.providerUserId = appleIDCredential.user
         signUpUserModel.firstName = appleIDCredential.fullName?.givenName ?? ""
         signUpUserModel.lastName = appleIDCredential.fullName?.familyName ?? ""
         signUpUserModel.email = appleIDCredential.email ?? ""
-        
+
         debugPrint("appleIDToken", appleIDToken)
 
         authenticationService.signInWithApple(accessToken: appleIDToken)

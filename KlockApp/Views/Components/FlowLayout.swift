@@ -56,7 +56,7 @@ public struct FlowLayout<RefreshBinding, Data, ItemView: View>: View {
             viewMapping(item)
               .padding([.horizontal, .vertical], itemSpacing)
               .alignmentGuide(.leading, computeValue: { d in
-                if (abs(width - d.width) > g.size.width) {
+                if abs(width - d.width) > g.size.width {
                   width = 0
                   height -= lastHeight
                 }
@@ -69,7 +69,7 @@ public struct FlowLayout<RefreshBinding, Data, ItemView: View>: View {
                 }
                 return result
               })
-              .alignmentGuide(.top, computeValue: { d in
+              .alignmentGuide(.top, computeValue: { _ in
                 let result = height
                 if index == itemCount - 1 {
                   height = 0
@@ -104,7 +104,6 @@ private struct HeightReaderView: View {
   }
 }
 
-
 public extension FlowLayout where RefreshBinding == Never? {
     init(mode: Mode,
          items: [Data],
@@ -122,7 +121,7 @@ struct TestWithDeletion: View {
     @State private var items = ["Some long item here", "And then some longer one",
                                 "Short", "Items", "Here", "And", "A", "Few", "More",
                                 "And then a very very very long long long long long long long long longlong long long long long long longlong long long long long long longlong long long long long long longlong long long long long long longlong long long long long long long long one", "and", "then", "some", "short short short ones"]
-    
+
     var body: some View {
         VStack {
         Button("Delete all") {

@@ -27,7 +27,7 @@ class AuthenticationService: AuthenticationServiceProtocol {
                 tagId: Int64?) -> AnyPublisher<SignUpResDTO, AFError> {
         let url = "\(baseURL)/signup"
         let requestDTO = SignUpReqDTO(username: username, provider: provider, providerUserId: providerUserId, tagId: tagId)
-        
+
         return AF.request(url, method: .post, parameters: requestDTO.dictionary, encoding: JSONEncoding.default)
             .validate()
             .publishDecodable(type: SignUpResDTO.self)
@@ -89,7 +89,7 @@ class AuthenticationService: AuthenticationServiceProtocol {
             .mapError { $0 }
             .eraseToAnyPublisher()
     }
-    
+
     func isLoggedIn() -> Bool {
         return UserDefaults.standard.string(forKey: "access.token") != nil
     }

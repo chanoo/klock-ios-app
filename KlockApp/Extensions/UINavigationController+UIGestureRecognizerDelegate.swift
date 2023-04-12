@@ -9,7 +9,7 @@ import UIKit
 
 // UINavigationController를 확장하여 UIGestureRecognizerDelegate를 구현합니다.
 extension UINavigationController: UIGestureRecognizerDelegate {
-    
+
     // viewDidLoad()에서 호출되어 interactivePopGestureRecognizer의 delegate를 설정합니다.
     override open func viewDidLoad() {
         super.viewDidLoad()

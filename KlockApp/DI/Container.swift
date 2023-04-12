@@ -20,18 +20,18 @@ class Container {
     private func setupDependencies() {
         // Managers
         container.register(AppFlowManager.self) { _ in AppFlowManager() }
-        
+
         container.register(SignUpUserModel.self) { _ in SignUpUserModel() }
-        
+
         // Services
         container.register(AuthenticationServiceProtocol.self) { _ in AuthenticationService() }
         container.register(TagServiceProtocol.self) { _ in TagService() }
 
         // View Models
-        container.register(ContentViewModel.self) { resolver in ContentViewModel() }
-        container.register(SignInViewModel.self) { resolver in SignInViewModel() }
+        container.register(ContentViewModel.self) { _ in ContentViewModel() }
+        container.register(SignInViewModel.self) { _ in SignInViewModel() }
         container.register(SignUpViewModel.self) { resolver in SignUpViewModel(signUpUserModel: resolver.resolve(SignUpUserModel.self) ?? SignUpUserModel() ) }
-        container.register(SplashViewModel.self) { resolver in SplashViewModel() }
+        container.register(SplashViewModel.self) { _ in SplashViewModel() }
 
     }
 

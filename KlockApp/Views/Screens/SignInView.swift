@@ -78,11 +78,11 @@ struct SignInView: View {
             return AnyView(EmptyView())
         }
     }
-    
+
     private func signUpProcess() {
         viewModel.signUpProcess.send()
     }
-    
+
     private func signInSuccessful() {
         viewModel.signInSuccess.send()
     }
@@ -93,5 +93,3 @@ struct SignInView_Previews: PreviewProvider {
         SignInView()
     }
 }
-
-

@@ -23,7 +23,7 @@ class ContentViewModel: ObservableObject {
         self.authService = authService
         self.currentView = AnyView(EmptyView())
     }
-    
+
     func updateCurrentView(appFlowManager: AppFlowManager) {
         if authService.isLoggedIn() {
             self.currentView = AnyView(HomeView()

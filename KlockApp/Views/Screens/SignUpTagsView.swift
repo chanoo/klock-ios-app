@@ -23,7 +23,7 @@ struct SignUpTagsView: View {
                         .fontWeight(.bold)
                         .padding(.top, 32)
                         .padding(.bottom, 32)
-                    
+
                     FlowLayout(mode: .scrollable,
                                items: viewModel.tags,
                                itemSpacing: 4) { tag in
@@ -37,7 +37,7 @@ struct SignUpTagsView: View {
                             isBlock: false
                         )
                     }
-                    
+
                     FancyButton(
                         title: "완료",
                         action: {
@@ -61,7 +61,7 @@ struct SignUpTagsView: View {
             viewModel.fetchTagsSubject.send()
         }
     }
-    
+
     private func signUpSuccessful() {
         viewModel.signUpSuccess.send()
     }

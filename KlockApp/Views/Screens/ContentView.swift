@@ -15,7 +15,7 @@ struct ContentView: View {
         NavigationView {
             viewModel.currentView
         }
-        .onReceive(appFlowManager.navigateToDestination) { destination in
+        .onReceive(appFlowManager.navigateToDestination) { _ in
             viewModel.updateCurrentView(appFlowManager: appFlowManager)
         }
         .onAppear {

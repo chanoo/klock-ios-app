@@ -44,7 +44,7 @@ struct SignUpUsernameView: View {
             )
         }
     }
-    
+
     private func viewForDestination(_ destination: Destination?) -> AnyView {
          switch destination {
          case .signUpTags:
@@ -60,7 +60,7 @@ struct SignUpUsernameView: View {
 }
 
 struct NicknameView: View {
-    
+
     @StateObject var viewModel: SignUpViewModel
     @EnvironmentObject var signUpUserModel: SignUpUserModel
 

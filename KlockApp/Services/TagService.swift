@@ -10,7 +10,7 @@ import Alamofire
 import Combine
 
 class TagService: TagServiceProtocol {
-    
+
     private let baseURL = "https://api.klock.app/api/tags"
 
     func tags() -> AnyPublisher<[TagResDTO], Alamofire.AFError> {
@@ -23,5 +23,5 @@ class TagService: TagServiceProtocol {
             .mapError { $0 }
             .eraseToAnyPublisher()
     }
-    
+
 }

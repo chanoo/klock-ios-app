@@ -24,7 +24,7 @@ class SignUpViewModel: NSObject, ObservableObject {
 
     var cancellables: Set<AnyCancellable> = []
     var isNextButtonEnabledCancellable: AnyCancellable?
-    
+
     let nextButtonTapped = PassthroughSubject<Void, Never>()
     let toggleTagSelectionSubject = PassthroughSubject<Int64, Never>()
     let confirmButtonTapped = PassthroughSubject<Void, Never>()
@@ -47,7 +47,6 @@ class SignUpViewModel: NSObject, ObservableObject {
         self.signUpUserModel.tagId = self.selectedTagId ?? 0
     }
 
-
     private func setupBindings() {
         setupNextButtonTapped()
         setupIsNextButtonEnabled()
@@ -55,7 +54,7 @@ class SignUpViewModel: NSObject, ObservableObject {
         setupSignUpButtonTapped()
         setupFetchTags()
     }
-    
+
     private func setupIsNextButtonEnabled() {
         isNextButtonEnabledCancellable = $signUpUserModel
             .map { $0.username.count >= 2 }
@@ -69,7 +68,7 @@ class SignUpViewModel: NSObject, ObservableObject {
             }
             .store(in: &cancellables)
     }
-    
+
     private func setupToggleTagSelection() {
         toggleTagSelectionSubject
              .sink { [weak self] id in
@@ -84,7 +83,7 @@ class SignUpViewModel: NSObject, ObservableObject {
      }
 
     // MARK: - Fetch Tags
-    
+
     private func setupFetchTags() {
         fetchTagsSubject
             .sink { [weak self] _ in
@@ -107,7 +106,7 @@ class SignUpViewModel: NSObject, ObservableObject {
             }
             .store(in: &cancellables)
     }
-    
+
     // MARK: - Confirm Button Action
 
     private func setupSignUpButtonTapped() {
@@ -121,7 +120,7 @@ class SignUpViewModel: NSObject, ObservableObject {
     // MARK: - Sign Up
 
     func signUp() {
-        
+
         // print signUpUserModel all properties
         debugPrint("signUpUserModel: ", signUpUserModel.username, signUpUserModel.provider, signUpUserModel.providerUserId, signUpUserModel.tagId)
 
@@ -145,5 +144,5 @@ class SignUpViewModel: NSObject, ObservableObject {
             }
             .store(in: &cancellables)
     }
-    
+
 }

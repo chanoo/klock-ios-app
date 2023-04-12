@@ -12,7 +12,7 @@ struct EmailValidator {
     private let emailPredicate: NSPredicate
 
     init() {
-        emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailPattern)
+        emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailPattern)
     }
 
     func isValid(_ email: String) -> Bool {

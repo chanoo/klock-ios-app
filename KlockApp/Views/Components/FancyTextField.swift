@@ -72,7 +72,7 @@ struct FancyTextField: View {
     let keyboardType: UIKeyboardType
     let isSecureField: Bool
     @Binding var firstResponder: Bool
-    var onCommit: (() -> Void)? = nil
+    var onCommit: (() -> Void)?
 
     var body: some View {
         FancyTextFieldWrapper(placeholder: placeholder, text: $text, keyboardType: keyboardType, isSecureField: isSecureField, firstResponder: $firstResponder)
