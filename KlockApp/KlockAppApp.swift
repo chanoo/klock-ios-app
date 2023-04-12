@@ -16,7 +16,6 @@ struct KlockAppApp: App {
             ContentView(viewModel: container.resolve(ContentViewModel.self))
                 .environmentObject(appFlowManager)
                 .environmentObject(signUpUserModel)
-                .preferredColorScheme(.light)
         }
         .onChange(of: UIApplication.shared.applicationState) { handleAppStateChange($0) }
     }
