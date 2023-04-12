@@ -43,3 +43,36 @@ passthroughSubject.send(35) // 출력 안됨
 //    1 Completed with: finished
 //    2 Completed with: finished
 ```
+
+## super.init() 호출 순서 차이가 있을까요?
+
+```swift
+init(authenticationService: AuthenticationServiceProtocol = Container.shared.resolve(AuthenticationServiceProtocol.self)) {
+    self.signUpUserModel = SignUpUserModel()
+    self.authenticationService = authenticationService as! AuthenticationService
+    super.init()
+
+    setupBindings()
+}
+```
+
+```swift
+init(authenticationService: AuthenticationServiceProtocol = Container.shared.resolve(AuthenticationServiceProtocol.self)) {
+    super.init()
+    self.signUpUserModel = SignUpUserModel()
+    self.authenticationService = authenticationService as! AuthenticationService
+
+    setupBindings()
+}
+```
+
+super.init() 의 순서 변경에는 큰 차이가 없습니다. super.init()을 호출하는 위치가 이동하였을 뿐이며, 이것이 초기화에 실질적인 영향을 미치지 않습니다. 하지만 일반적으로 스위프트에서는 super.init()을 모든 속성 초기화 이후에 호출하는 것이 좋습니다. 그 이유는 다음과 같습니다:
+
+1. 초기화 중에 발생할 수 있는 불완전한 상태를 최소화하기 위해, 속성 초기화를 먼저 완료하고 상위 클래스의 초기화를 호출합니다. 이렇게 하면 상위 클래스의 초기화 메소드에서 하위 클래스의 속성을 안전하게 사용할 수 있습니다.
+2. 일부 초기화 작업은 상위 클래스에서 처리될 수 있으며, 하위 클래스에서 속성을 먼저 초기화한 후 해당 작업을 수행할 수 있습니다. 이렇게 하면 잠재적인 문제나 충돌을 피할 수 있습니다.
+
+따라서 원래 코드에서 super.init() 호출 위치가 더 적절합니다. 하지만 이 경우에는 상위 클래스인 NSObject의 init()이 비어 있고, 부모 클래스의 초기화 과정에서 하위 클래스 속성을 사용하지 않으므로 큰 문제는 없습니다. 하지만 습관적으로 모든 속성 초기화 이후에 super.init()을 호출하는 것이 좋습니다.
+
+
+
+
