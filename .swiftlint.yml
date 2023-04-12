@@ -2,3 +2,6 @@ force_cast: warning
 line_length: 500
 identifier_name:
   min_length: 1 # only min_length
+  allowed_symbols:
+    - "_"
+
