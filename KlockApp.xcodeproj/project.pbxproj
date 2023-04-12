@@ -92,6 +92,7 @@
 		984D2C8D29E056A6008D3EA9 /* KlockApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KlockApp.entitlements; sourceTree = "<group>"; };
 		984D2C8E29E067FE008D3EA9 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		984D2C9029E0728C008D3EA9 /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
+		985BE88329E652CE008582A3 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		987E543629D552520007E156 /* KlockApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KlockApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		987E543929D552520007E156 /* KlockAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlockAppApp.swift; sourceTree = "<group>"; };
 		987E543D29D552530007E156 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -314,6 +315,7 @@
 				98B21B6D29D9D21A004EFE0E /* SignUpViewModel.swift */,
 				984D2C9029E0728C008D3EA9 /* SplashViewModel.swift */,
 				98D7C95629E510990075D201 /* ContentViewModel.swift */,
+				985BE88329E652CE008582A3 /* README.md */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
