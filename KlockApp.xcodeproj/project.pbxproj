@@ -15,6 +15,14 @@
 		984D2C8F29E067FE008D3EA9 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984D2C8E29E067FE008D3EA9 /* SplashView.swift */; };
 		984D2C9129E0728C008D3EA9 /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984D2C9029E0728C008D3EA9 /* SplashViewModel.swift */; };
 		985BE88629E6A23A008582A3 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 985BE88529E6A23A008582A3 /* Alamofire */; };
+		985BE88829E6DC1D008582A3 /* StudyTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE88729E6DC1D008582A3 /* StudyTimeView.swift */; };
+		985BE88A29E6DC2C008582A3 /* ChatGPTView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE88929E6DC2C008582A3 /* ChatGPTView.swift */; };
+		985BE88C29E6DC35008582A3 /* StudyTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE88B29E6DC35008582A3 /* StudyTimerView.swift */; };
+		985BE88E29E6DC3E008582A3 /* MissionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE88D29E6DC3E008582A3 /* MissionView.swift */; };
+		985BE89029E6DC49008582A3 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE88F29E6DC49008582A3 /* SettingsView.swift */; };
+		985BE89229E6E0CD008582A3 /* CharacterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE89129E6E0CD008582A3 /* CharacterView.swift */; };
+		985BE89429E6E0DB008582A3 /* FriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE89329E6E0DB008582A3 /* FriendsView.swift */; };
+		985BE89629E6E359008582A3 /* ClockModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE89529E6E359008582A3 /* ClockModalView.swift */; };
 		987E543A29D552520007E156 /* KlockAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E543929D552520007E156 /* KlockAppApp.swift */; };
 		987E543E29D552530007E156 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 987E543D29D552530007E156 /* Assets.xcassets */; };
 		987E544129D552530007E156 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 987E544029D552530007E156 /* Preview Assets.xcassets */; };
@@ -93,6 +101,14 @@
 		984D2C8E29E067FE008D3EA9 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		984D2C9029E0728C008D3EA9 /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
 		985BE88329E652CE008582A3 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		985BE88729E6DC1D008582A3 /* StudyTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyTimeView.swift; sourceTree = "<group>"; };
+		985BE88929E6DC2C008582A3 /* ChatGPTView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGPTView.swift; sourceTree = "<group>"; };
+		985BE88B29E6DC35008582A3 /* StudyTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyTimerView.swift; sourceTree = "<group>"; };
+		985BE88D29E6DC3E008582A3 /* MissionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionView.swift; sourceTree = "<group>"; };
+		985BE88F29E6DC49008582A3 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		985BE89129E6E0CD008582A3 /* CharacterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterView.swift; sourceTree = "<group>"; };
+		985BE89329E6E0DB008582A3 /* FriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsView.swift; sourceTree = "<group>"; };
+		985BE89529E6E359008582A3 /* ClockModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockModalView.swift; sourceTree = "<group>"; };
 		987E543629D552520007E156 /* KlockApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KlockApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		987E543929D552520007E156 /* KlockAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlockAppApp.swift; sourceTree = "<group>"; };
 		987E543D29D552530007E156 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -381,6 +397,14 @@
 				984D2C8E29E067FE008D3EA9 /* SplashView.swift */,
 				98D7C95029E45C550075D201 /* ContentView.swift */,
 				98D7C95429E460D70075D201 /* SignUpFlowView.swift */,
+				985BE88729E6DC1D008582A3 /* StudyTimeView.swift */,
+				985BE88929E6DC2C008582A3 /* ChatGPTView.swift */,
+				985BE88B29E6DC35008582A3 /* StudyTimerView.swift */,
+				985BE88D29E6DC3E008582A3 /* MissionView.swift */,
+				985BE88F29E6DC49008582A3 /* SettingsView.swift */,
+				985BE89129E6E0CD008582A3 /* CharacterView.swift */,
+				985BE89329E6E0DB008582A3 /* FriendsView.swift */,
+				985BE89529E6E359008582A3 /* ClockModalView.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -564,6 +588,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				98CE662329D55BB10009916F /* SignInView.swift in Sources */,
+				985BE88829E6DC1D008582A3 /* StudyTimeView.swift in Sources */,
 				98B21B4D29D6F3A9004EFE0E /* AccountLevelModel.swift in Sources */,
 				984D2C8729DFDB5F008D3EA9 /* BackButtonView.swift in Sources */,
 				984D2C9129E0728C008D3EA9 /* SplashViewModel.swift in Sources */,
@@ -574,13 +599,17 @@
 				98B21B1B29D55F6C004EFE0E /* AuthenticationServiceProtocol.swift in Sources */,
 				987E544329D552530007E156 /* Persistence.swift in Sources */,
 				98B21B2129D56BDF004EFE0E /* RegexConstants.swift in Sources */,
+				985BE88A29E6DC2C008582A3 /* ChatGPTView.swift in Sources */,
 				98B21B5729D6F492004EFE0E /* SocialLoginModel.swift in Sources */,
 				98B21B5B29D6F4BF004EFE0E /* TagModel.swift in Sources */,
+				985BE89029E6DC49008582A3 /* SettingsView.swift in Sources */,
 				984D2C8F29E067FE008D3EA9 /* SplashView.swift in Sources */,
 				98D7C95329E460470075D201 /* AppFlowManager.swift in Sources */,
 				98B21B3A29D5EBC3004EFE0E /* AppDelegate.swift in Sources */,
 				984D2C8029DFB197008D3EA9 /* FlowLayout.swift in Sources */,
 				98D7C95729E510990075D201 /* ContentViewModel.swift in Sources */,
+				985BE89229E6E0CD008582A3 /* CharacterView.swift in Sources */,
+				985BE88C29E6DC35008582A3 /* StudyTimerView.swift in Sources */,
 				98CE661929D55A650009916F /* Container.swift in Sources */,
 				98CE661B29D55AA40009916F /* AuthenticationService.swift in Sources */,
 				98CE662129D55B730009916F /* SignInViewModel.swift in Sources */,
@@ -595,10 +624,13 @@
 				98D7C94F29E332790075D201 /* APIErrorModel.swift in Sources */,
 				98B21B4F29D6F3E1004EFE0E /* AccountTagModel.swift in Sources */,
 				987E544629D552530007E156 /* KlockApp.xcdatamodeld in Sources */,
+				985BE88E29E6DC3E008582A3 /* MissionView.swift in Sources */,
+				985BE89429E6E0DB008582A3 /* FriendsView.swift in Sources */,
 				987E543A29D552520007E156 /* KlockAppApp.swift in Sources */,
 				98B21B4B29D617F6004EFE0E /* Encodable+Extensions.swift in Sources */,
 				984D2C8B29DFDBAA008D3EA9 /* CommonViewModifier.swift in Sources */,
 				98B21B7029D9D390004EFE0E /* SignUpUsernameView.swift in Sources */,
+				985BE89629E6E359008582A3 /* ClockModalView.swift in Sources */,
 				98D7C95129E45C550075D201 /* ContentView.swift in Sources */,
 				984D2C8229DFC2B3008D3EA9 /* AppState.swift in Sources */,
 				98BDD21D29DAD1D400B0440F /* FancyColor.swift in Sources */,
