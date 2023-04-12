@@ -7,80 +7,49 @@
 
 import SwiftUI
 
-struct FancyTextFieldWrapper: UIViewRepresentable {
-    let placeholder: String
-    @Binding var text: String
-    let keyboardType: UIKeyboardType
-    let isSecureField: Bool
-    @Binding var firstResponder: Bool
-
-    init(placeholder: String, text: Binding<String>, keyboardType: UIKeyboardType = .default, isSecureField: Bool = false, firstResponder: Binding<Bool>) {
-        self.placeholder = placeholder
-        self._text = text
-        self.keyboardType = keyboardType
-        self.isSecureField = isSecureField
-        self._firstResponder = firstResponder
-    }
-
-    func makeUIView(context: Context) -> UITextField {
-        let textField = UITextField()
-        textField.keyboardType = keyboardType
-        textField.isSecureTextEntry = isSecureField
-        textField.delegate = context.coordinator
-        textField.addTarget(context.coordinator, action: #selector(Coordinator.textFieldDidChange(_:)), for: .editingChanged)
-        textField.setContentHuggingPriority(.defaultHigh, for: .vertical)
-        return textField
-    }
-
-    func updateUIView(_ uiView: UITextField, context: Context) {
-        uiView.text = text
-        uiView.placeholder = placeholder
-
-        DispatchQueue.main.async {
-            if firstResponder {
-                if !uiView.isFirstResponder {
-                    uiView.becomeFirstResponder()
-                }
-            } else {
-                if uiView.isFirstResponder {
-                    uiView.resignFirstResponder()
-                }
-            }
-        }
-    }
-
-    func makeCoordinator() -> Coordinator {
-        Coordinator(self)
-    }
-
-    class Coordinator: NSObject, UITextFieldDelegate {
-        var fancyTextFieldWrapper: FancyTextFieldWrapper
-
-        init(_ fancyTextFieldWrapper: FancyTextFieldWrapper) {
-            self.fancyTextFieldWrapper = fancyTextFieldWrapper
-        }
-
-        @objc func textFieldDidChange(_ textField: UITextField) {
-            fancyTextFieldWrapper.text = textField.text ?? ""
-        }
-    }
-}
-
 struct FancyTextField: View {
     let placeholder: String
     @Binding var text: String
-    let keyboardType: UIKeyboardType
-    let isSecureField: Bool
+    let keyboardType: UIKeyboardType?
+    let isSecureField: Bool?
     @Binding var firstResponder: Bool
     var onCommit: (() -> Void)?
 
+    @FocusState private var isFocused: Bool
+
     var body: some View {
-        FancyTextFieldWrapper(placeholder: placeholder, text: $text, keyboardType: keyboardType, isSecureField: isSecureField, firstResponder: $firstResponder)
-            .onReceive(NotificationCenter.default.publisher(for: UITextField.textDidEndEditingNotification)) { _ in
+        if isSecureField == true {
+            SecureField(placeholder, text: $text, onCommit: {
                 onCommit?()
-            }
+            })
+            .keyboardType(keyboardType ?? .default)
+            .focused($isFocused)
             .padding()
             .background(Color.white)
             .cornerRadius(22)
+            .onChange(of: firstResponder) { value in
+                if value {
+                    isFocused = true
+                } else {
+                    isFocused = false
+                }
+            }
+        } else {
+            TextField(placeholder, text: $text, onCommit: {
+                onCommit?()
+            })
+            .keyboardType(keyboardType ?? .default)
+            .focused($isFocused)
+            .padding()
+            .background(FancyColor.background.color)
+            .cornerRadius(22)
+            .onChange(of: firstResponder) { value in
+                if value {
+                    isFocused = true
+                } else {
+                    isFocused = false
+                }
+            }
+        }
     }
 }

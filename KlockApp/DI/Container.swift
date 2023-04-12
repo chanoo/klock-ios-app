@@ -25,6 +25,7 @@ class Container {
 
         // Services
         container.register(AuthenticationServiceProtocol.self) { _ in AuthenticationService() }
+        container.register(ChatGPTServiceProtocol.self) { _ in ChatGPTService() }
         container.register(TagServiceProtocol.self) { _ in TagService() }
 
         // View Models
@@ -32,7 +33,7 @@ class Container {
         container.register(SignInViewModel.self) { _ in SignInViewModel() }
         container.register(SignUpViewModel.self) { resolver in SignUpViewModel(signUpUserModel: resolver.resolve(SignUpUserModel.self) ?? SignUpUserModel() ) }
         container.register(SplashViewModel.self) { _ in SplashViewModel() }
-
+        container.register(ChatBotViewModel.self) { _ in ChatBotViewModel() }
     }
 
     func resolve<Service>(_ serviceType: Service.Type) -> Service {

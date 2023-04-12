@@ -11,16 +11,19 @@ struct StudyTimerView: View {
     @State private var isShowingClockModal = false
 
     var body: some View {
-        VStack {
-            Text("공부 시간 타이머")
-            Button(action: {
-                isShowingClockModal.toggle()
-            }) {
-                Image(systemName: "play.circle.fill")
-                    .resizable()
-                    .frame(width: 60, height: 60)
-                    .foregroundColor(.blue)
+        GeometryReader { geometry in
+            VStack {
+                Text("공부 시간 타이머")
+                Button(action: {
+                    isShowingClockModal.toggle()
+                }) {
+                    Image(systemName: "play.circle.fill")
+                        .resizable()
+                        .frame(width: 60, height: 60)
+                        .foregroundColor(.blue)
+                }
             }
+            .frame(width: geometry.size.width, height: geometry.size.height)
         }
         .sheet(isPresented: $isShowingClockModal) {
             ClockModalView()

@@ -9,7 +9,10 @@ import SwiftUI
 
 struct StudyTimeView: View {
     var body: some View {
-        Text("공부 시간 동계")
+        VStack {
+            Text("공부 시간")
+        }
+        .navigationBarTitle("공부 시간")
     }
 }
 

@@ -12,7 +12,6 @@ struct CommonViewModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .background(FancyColor.background.color.edgesIgnoringSafeArea(.all))
             .navigationBarTitle(title, displayMode: .inline)
             .navigationBarBackButtonHidden(true)
             .onAppear {
