@@ -21,7 +21,7 @@ struct Request: Codable {
 }
 
 class ChatGPTService: NSObject, ChatGPTServiceProtocol {
-    
+
     private let apiKey = EnvironmentValuesProvider.shared.openaiAPIKey
 
     func send(messages: [MessageModel], onReceived: @escaping (String) -> Void, completion: @escaping (Result<String, Error>) -> Void) {

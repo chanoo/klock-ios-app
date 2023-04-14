@@ -12,14 +12,14 @@ struct MessageModel: Identifiable, Codable {
     let content: String
     let chatBotID: Int64?
     let role: String
-    
+
     init(content: String, role: String, chatBotID: Int64?) {
         self.id = UUID()
         self.content = content
         self.chatBotID = chatBotID
         self.role = role
     }
-    
+
     var isUser: Bool {
         return role == "user"
     }

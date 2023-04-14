@@ -10,12 +10,12 @@ import Alamofire
 import Combine
 
 class ChatBotService: ChatBotServiceProtocol {
-    
+
     private let baseURL = "https://api.klock.app/api/chatbots"
-    
+
     func getActiveChatBots() -> AnyPublisher<[ChatBotModel], AFError> {
         let url = "\(baseURL)?active=true"
-        
+
         return AF.request(url, method: .get, encoding: JSONEncoding.default)
             .validate()
             .publishDecodable(type: [ChatBotModel].self)
