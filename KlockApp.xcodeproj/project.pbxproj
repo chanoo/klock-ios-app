@@ -272,7 +272,7 @@
 				98B21B3929D5EBC3004EFE0E /* AppDelegate.swift */,
 				987E544229D552530007E156 /* Persistence.swift */,
 				98B21B4029D5FA5B004EFE0E /* KlockAppDebug.entitlements */,
-				987E544429D552530007E156 /* KlockApp.xcdatamodeld */,
+				984D2C8D29E056A6008D3EA9 /* KlockApp.entitlements */,
 				987E544729D552530007E156 /* Info.plist */,
 				987E543F29D552530007E156 /* Preview Content */,
 			);
@@ -416,7 +416,7 @@
 			children = (
 				985BE8AC29E73900008582A3 /* Config.xcconfig */,
 				98DC292929E90DAE00882E36 /* ConfigDebug.xcconfig */,
-				984D2C8D29E056A6008D3EA9 /* KlockApp.entitlements */,
+				987E544429D552530007E156 /* KlockApp.xcdatamodeld */,
 				987E543D29D552530007E156 /* Assets.xcassets */,
 			);
 			path = Resources;
