@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ChatBotModel: Identifiable {
+struct ChatBotModel: Identifiable, Codable {
     let id: Int64?
     let subject: String
     let title: String

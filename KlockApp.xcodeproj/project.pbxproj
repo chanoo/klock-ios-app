@@ -80,6 +80,9 @@
 		98D7C95329E460470075D201 /* AppFlowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D7C95229E460470075D201 /* AppFlowManager.swift */; };
 		98D7C95529E460D70075D201 /* SignUpFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D7C95429E460D70075D201 /* SignUpFlowView.swift */; };
 		98D7C95729E510990075D201 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D7C95629E510990075D201 /* ContentViewModel.swift */; };
+		98DC292B29E9373D00882E36 /* ChatBotService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DC292A29E9373D00882E36 /* ChatBotService.swift */; };
+		98DC292D29E9380200882E36 /* ChatBotDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DC292C29E9380200882E36 /* ChatBotDTO.swift */; };
+		98DC292F29E9383900882E36 /* ChatBotServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DC292E29E9383900882E36 /* ChatBotServiceProtocol.swift */; };
 		98E314B329DEE65E00EA1617 /* TagService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E314B229DEE65E00EA1617 /* TagService.swift */; };
 		98E314B529DEE67B00EA1617 /* TagServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E314B429DEE67B00EA1617 /* TagServiceProtocol.swift */; };
 		98E314B729DEE6BB00EA1617 /* TagServiceDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E314B629DEE6BB00EA1617 /* TagServiceDTO.swift */; };
@@ -182,6 +185,9 @@
 		98D7C95429E460D70075D201 /* SignUpFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpFlowView.swift; sourceTree = "<group>"; };
 		98D7C95629E510990075D201 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		98DC292929E90DAE00882E36 /* ConfigDebug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ConfigDebug.xcconfig; sourceTree = "<group>"; };
+		98DC292A29E9373D00882E36 /* ChatBotService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotService.swift; sourceTree = "<group>"; };
+		98DC292C29E9380200882E36 /* ChatBotDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotDTO.swift; sourceTree = "<group>"; };
+		98DC292E29E9383900882E36 /* ChatBotServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotServiceProtocol.swift; sourceTree = "<group>"; };
 		98E314B229DEE65E00EA1617 /* TagService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagService.swift; sourceTree = "<group>"; };
 		98E314B429DEE67B00EA1617 /* TagServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagServiceProtocol.swift; sourceTree = "<group>"; };
 		98E314B629DEE6BB00EA1617 /* TagServiceDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagServiceDTO.swift; sourceTree = "<group>"; };
@@ -302,6 +308,7 @@
 			children = (
 				98B21B1A29D55F6C004EFE0E /* AuthenticationServiceProtocol.swift */,
 				985BE8A529E6EA60008582A3 /* ChatGPTServiceProtocol.swift */,
+				98DC292E29E9383900882E36 /* ChatBotServiceProtocol.swift */,
 				98E314B429DEE67B00EA1617 /* TagServiceProtocol.swift */,
 			);
 			path = Protocols;
@@ -385,6 +392,8 @@
 				98CE661A29D55AA40009916F /* AuthenticationService.swift */,
 				98B21B4829D617A4004EFE0E /* AuthenticationServiceDTO.swift */,
 				985BE8A329E6EA3E008582A3 /* ChatGPTService.swift */,
+				98DC292A29E9373D00882E36 /* ChatBotService.swift */,
+				98DC292C29E9380200882E36 /* ChatBotDTO.swift */,
 				98E314B229DEE65E00EA1617 /* TagService.swift */,
 				98E314B629DEE6BB00EA1617 /* TagServiceDTO.swift */,
 				984D2C8C29E00296008D3EA9 /* README.md */,
@@ -646,6 +655,7 @@
 				98B21B5B29D6F4BF004EFE0E /* TagModel.swift in Sources */,
 				985BE89029E6DC49008582A3 /* SettingsView.swift in Sources */,
 				984D2C8F29E067FE008D3EA9 /* SplashView.swift in Sources */,
+				98DC292B29E9373D00882E36 /* ChatBotService.swift in Sources */,
 				98D7C95329E460470075D201 /* AppFlowManager.swift in Sources */,
 				985BE8A429E6EA3E008582A3 /* ChatGPTService.swift in Sources */,
 				985BE8B229E7D510008582A3 /* ChatBotListView.swift in Sources */,
@@ -657,6 +667,7 @@
 				985BE88C29E6DC35008582A3 /* StudyTimerView.swift in Sources */,
 				98CE661929D55A650009916F /* Container.swift in Sources */,
 				98CE661B29D55AA40009916F /* AuthenticationService.swift in Sources */,
+				98DC292D29E9380200882E36 /* ChatBotDTO.swift in Sources */,
 				98CE662129D55B730009916F /* SignInViewModel.swift in Sources */,
 				98B21B6E29D9D21A004EFE0E /* SignUpViewModel.swift in Sources */,
 				98B21B4629D60EEB004EFE0E /* FancyTextField.swift in Sources */,
@@ -692,6 +703,7 @@
 				98BDD22029DD0FA800B0440F /* EmailValidator.swift in Sources */,
 				98E314B729DEE6BB00EA1617 /* TagServiceDTO.swift in Sources */,
 				98B21B4929D617A4004EFE0E /* AuthenticationServiceDTO.swift in Sources */,
+				98DC292F29E9383900882E36 /* ChatBotServiceProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

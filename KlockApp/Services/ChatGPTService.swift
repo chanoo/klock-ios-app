@@ -7,18 +7,19 @@
 import Foundation
 import Alamofire
 
+// Request 구조체 수정
 struct Request: Codable {
     let model: String
     let messages: [[String: String]]
     let stream: Bool
 
-    init(content: String, message: String) {
+    init(content: String, conversationHistory: [MessageModel]) {
         self.model = "gpt-3.5-turbo"
-        self.messages = [
-            ["role": "system", "content": content],
-            ["role": "user", "content": "한국어로 설명 해 주세요."],
-            ["role": "user", "content": message],
-        ]
+        
+        var messagesArray: [[String: String]] = [["role": "system", "content": content]]
+        messagesArray += conversationHistory.map { ["role": $0.isUser ? "user" : "assistant", "content": $0.content] }
+        
+        self.messages = messagesArray
         self.stream = true
     }
 }
@@ -27,7 +28,7 @@ class ChatGPTService: NSObject, ChatGPTServiceProtocol {
     
     private let apiKey = EnvironmentValuesProvider.shared.openaiAPIKey
 
-    func sendMessage(_ content: String, _ message: String, onReceived: @escaping (String) -> Void, completion: @escaping (Result<String, Error>) -> Void) {
+    func sendMessage(_ content: String, _ conversationHistory: [MessageModel], onReceived: @escaping (String) -> Void, completion: @escaping (Result<String, Error>) -> Void) {
         let urlString = "https://api.openai.com/v1/chat/completions"
         guard let url = URL(string: urlString) else {
             completion(.failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
@@ -40,7 +41,7 @@ class ChatGPTService: NSObject, ChatGPTServiceProtocol {
             "Content-Type": "application/json"
         ]
 
-        let parameters = Request(content: content, message: message)
+        let parameters = Request(content: content, conversationHistory: conversationHistory)
         let request = AF.streamRequest(url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers)
         request.responseStreamString { stream in
             switch stream.event {

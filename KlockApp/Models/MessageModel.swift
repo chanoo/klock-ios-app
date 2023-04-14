@@ -11,4 +11,5 @@ struct MessageModel: Identifiable, Equatable {
     let id = UUID()
     let content: String
     let isUser: Bool
+    let chatBotID: Int64?
 }

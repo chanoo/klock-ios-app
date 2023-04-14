@@ -38,7 +38,7 @@ struct ChatBotChatView: View {
                             ChatBubble(messageModel: tempMessage, isPreparingResponse: $viewModel.isPreparingResponse)
                         }
                         
-                        ForEach(viewModel.messages.reversed()) { messageModel in
+                        ForEach(viewModel.messages[chatBot.id, default: []].reversed()) { messageModel in
                             ChatBubble(messageModel: messageModel, isPreparingResponse: $viewModel.isPreparingResponse)
                         }
                     }
@@ -68,7 +68,7 @@ struct ChatBotChatView: View {
                     .background(viewModel.isPreparingResponse ? FancyColor.primary.color.opacity(0.5) : FancyColor.primary.color)
 
                     Button(action: {
-                        viewModel.sendMessage(content: chatBot.persona)
+                        viewModel.sendMessage(content: chatBot.persona, chatBotID: chatBot.id)
                     }) {
                         Text("보내기").foregroundColor(.white)
                     }
