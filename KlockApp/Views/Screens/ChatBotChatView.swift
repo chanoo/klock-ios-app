@@ -44,8 +44,8 @@ struct ChatBotChatView: View {
                     }
                 }
             }
-            .rotationEffect(.degrees(180)) // ScrollView를 180도 회전
-            
+            .rotationEffect(.degrees(180), anchor: .center)
+
             // ChatGPTView의 body 내에서 HStack 부분
             HStack(spacing: 0) {
                 HStack(spacing: 0) {
@@ -84,6 +84,9 @@ struct ChatBotChatView: View {
         }
         .modifier(CommonViewModifier(title: chatBot.subject))
         .navigationBarItems(leading: BackButtonView())
+        .onAppear {
+            viewModel.loadStoredMessages(chatBotID: chatBot.id)
+        }
     }
 }
 
@@ -115,8 +118,8 @@ struct ChatBubble: View {
             .padding(.bottom, 10)
             .padding(.leading, messageModel.isUser ? 0 : 10)
             .padding(.trailing, messageModel.isUser ? 10 : 0)
-            .rotationEffect(.degrees(180)) // 각 메시지 버블을 180도 회전
         }
+        .rotationEffect(.degrees(180), anchor: .center) // VStack을 180도 회전
     }
 }
 

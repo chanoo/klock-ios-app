@@ -3,7 +3,6 @@ import FacebookCore
 
 @main
 struct KlockAppApp: App {
-    let persistenceController = PersistenceController.shared
     let container = Container.shared
 
     @StateObject private var appFlowManager = AppFlowManager()

@@ -28,6 +28,7 @@ class Container {
         container.register(ChatGPTServiceProtocol.self) { _ in ChatGPTService() }
         container.register(TagServiceProtocol.self) { _ in TagService() }
         container.register(ChatBotServiceProtocol.self) { _ in ChatBotService() }
+        container.register(MessageServiceProtocol.self) { _ in MessageService() }
 
         // View Models
         container.register(ContentViewModel.self) { _ in ContentViewModel() }

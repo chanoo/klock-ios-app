@@ -38,7 +38,6 @@
 		987E543A29D552520007E156 /* KlockAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E543929D552520007E156 /* KlockAppApp.swift */; };
 		987E543E29D552530007E156 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 987E543D29D552530007E156 /* Assets.xcassets */; };
 		987E544129D552530007E156 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 987E544029D552530007E156 /* Preview Assets.xcassets */; };
-		987E544329D552530007E156 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E544229D552530007E156 /* Persistence.swift */; };
 		987E544629D552530007E156 /* KlockApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 987E544429D552530007E156 /* KlockApp.xcdatamodeld */; };
 		987E545129D552540007E156 /* KlockAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E545029D552540007E156 /* KlockAppTests.swift */; };
 		987E545B29D552540007E156 /* KlockAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E545A29D552540007E156 /* KlockAppUITests.swift */; };
@@ -73,6 +72,9 @@
 		98CE661D29D55AE00009916F /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CE661C29D55AE00009916F /* AccountModel.swift */; };
 		98CE662129D55B730009916F /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CE662029D55B730009916F /* SignInViewModel.swift */; };
 		98CE662329D55BB10009916F /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CE662229D55BB10009916F /* SignInView.swift */; };
+		98D2826729E988100039E6E6 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D2826629E988100039E6E6 /* CoreDataManager.swift */; };
+		98D2826929E988D00039E6E6 /* MessageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D2826829E988D00039E6E6 /* MessageService.swift */; };
+		98D2826B29E988E70039E6E6 /* MessageServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D2826A29E988E70039E6E6 /* MessageServiceProtocol.swift */; };
 		98D7C94929E1AB450075D201 /* SignUpUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D7C94829E1AB450075D201 /* SignUpUserModel.swift */; };
 		98D7C94F29E332790075D201 /* APIErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D7C94E29E332790075D201 /* APIErrorModel.swift */; };
 		98D7C95129E45C550075D201 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D7C95029E45C550075D201 /* ContentView.swift */; };
@@ -140,7 +142,6 @@
 		987E543929D552520007E156 /* KlockAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlockAppApp.swift; sourceTree = "<group>"; };
 		987E543D29D552530007E156 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		987E544029D552530007E156 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		987E544229D552530007E156 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		987E544529D552530007E156 /* KlockApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = KlockApp.xcdatamodel; sourceTree = "<group>"; };
 		987E544729D552530007E156 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		987E544C29D552540007E156 /* KlockAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KlockAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -177,6 +178,9 @@
 		98CE661C29D55AE00009916F /* AccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
 		98CE662029D55B730009916F /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		98CE662229D55BB10009916F /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		98D2826629E988100039E6E6 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		98D2826829E988D00039E6E6 /* MessageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageService.swift; sourceTree = "<group>"; };
+		98D2826A29E988E70039E6E6 /* MessageServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageServiceProtocol.swift; sourceTree = "<group>"; };
 		98D7C94829E1AB450075D201 /* SignUpUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpUserModel.swift; sourceTree = "<group>"; };
 		98D7C94E29E332790075D201 /* APIErrorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIErrorModel.swift; sourceTree = "<group>"; };
 		98D7C95029E45C550075D201 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -226,6 +230,7 @@
 			children = (
 				984D2C8129DFC2B3008D3EA9 /* AppState.swift */,
 				98D7C95229E460470075D201 /* AppFlowManager.swift */,
+				98D2826629E988100039E6E6 /* CoreDataManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -268,7 +273,6 @@
 				98CE661129D553A60009916F /* Resources */,
 				987E543929D552520007E156 /* KlockAppApp.swift */,
 				98B21B3929D5EBC3004EFE0E /* AppDelegate.swift */,
-				987E544229D552530007E156 /* Persistence.swift */,
 				98B21B4029D5FA5B004EFE0E /* KlockAppDebug.entitlements */,
 				984D2C8D29E056A6008D3EA9 /* KlockApp.entitlements */,
 				987E544729D552530007E156 /* Info.plist */,
@@ -309,6 +313,7 @@
 				985BE8A529E6EA60008582A3 /* ChatGPTServiceProtocol.swift */,
 				98DC292E29E9383900882E36 /* ChatBotServiceProtocol.swift */,
 				98E314B429DEE67B00EA1617 /* TagServiceProtocol.swift */,
+				98D2826A29E988E70039E6E6 /* MessageServiceProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -392,6 +397,7 @@
 				98B21B4829D617A4004EFE0E /* AuthenticationServiceDTO.swift */,
 				985BE8A329E6EA3E008582A3 /* ChatGPTService.swift */,
 				98DC292A29E9373D00882E36 /* ChatBotService.swift */,
+				98D2826829E988D00039E6E6 /* MessageService.swift */,
 				98DC292C29E9380200882E36 /* ChatBotDTO.swift */,
 				98E314B229DEE65E00EA1617 /* TagService.swift */,
 				98E314B629DEE6BB00EA1617 /* TagServiceDTO.swift */,
@@ -644,7 +650,6 @@
 				98B21B7629DA6288004EFE0E /* Destination.swift in Sources */,
 				98E314B529DEE67B00EA1617 /* TagServiceProtocol.swift in Sources */,
 				98B21B1B29D55F6C004EFE0E /* AuthenticationServiceProtocol.swift in Sources */,
-				987E544329D552530007E156 /* Persistence.swift in Sources */,
 				98B21B2129D56BDF004EFE0E /* RegexConstants.swift in Sources */,
 				985BE88A29E6DC2C008582A3 /* ChatBotChatView.swift in Sources */,
 				98B21B5729D6F492004EFE0E /* SocialLoginModel.swift in Sources */,
@@ -661,12 +666,14 @@
 				98D7C95729E510990075D201 /* ContentViewModel.swift in Sources */,
 				985BE89229E6E0CD008582A3 /* CharacterView.swift in Sources */,
 				985BE88C29E6DC35008582A3 /* StudyTimerView.swift in Sources */,
+				98D2826B29E988E70039E6E6 /* MessageServiceProtocol.swift in Sources */,
 				98CE661929D55A650009916F /* Container.swift in Sources */,
 				98CE661B29D55AA40009916F /* AuthenticationService.swift in Sources */,
 				98DC292D29E9380200882E36 /* ChatBotDTO.swift in Sources */,
 				98CE662129D55B730009916F /* SignInViewModel.swift in Sources */,
 				98B21B6E29D9D21A004EFE0E /* SignUpViewModel.swift in Sources */,
 				98B21B4629D60EEB004EFE0E /* FancyTextField.swift in Sources */,
+				98D2826929E988D00039E6E6 /* MessageService.swift in Sources */,
 				985BE8AE29E73A76008582A3 /* EnvironmentValuesProvider.swift in Sources */,
 				98B21B5229D6F404004EFE0E /* FriendRelationModel.swift in Sources */,
 				985BE89C29E6E595008582A3 /* FriendModel.swift in Sources */,
@@ -686,6 +693,7 @@
 				987E543A29D552520007E156 /* KlockAppApp.swift in Sources */,
 				98B21B4B29D617F6004EFE0E /* Encodable+Extensions.swift in Sources */,
 				985BE8A629E6EA60008582A3 /* ChatGPTServiceProtocol.swift in Sources */,
+				98D2826729E988100039E6E6 /* CoreDataManager.swift in Sources */,
 				984D2C8B29DFDBAA008D3EA9 /* CommonViewModifier.swift in Sources */,
 				98B21B7029D9D390004EFE0E /* SignUpUsernameView.swift in Sources */,
 				985BE89629E6E359008582A3 /* ClockModalView.swift in Sources */,
