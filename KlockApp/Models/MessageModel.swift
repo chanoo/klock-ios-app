@@ -7,9 +7,20 @@
 
 import Foundation
 
-struct MessageModel: Identifiable, Equatable {
-    let id = UUID()
+struct MessageModel: Identifiable, Codable {
+    let id: UUID
     let content: String
-    let isUser: Bool
     let chatBotID: Int64?
+    let role: String
+    
+    init(content: String, role: String, chatBotID: Int64?) {
+        self.id = UUID()
+        self.content = content
+        self.chatBotID = chatBotID
+        self.role = role
+    }
+    
+    var isUser: Bool {
+        return role == "user"
+    }
 }

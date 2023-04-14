@@ -9,11 +9,11 @@ import Combine
 import Foundation
 
 class ChatBotViewModel: ObservableObject {
+    @Published var chatBots: [ChatBotModel] = [] // 수정
     @Published var messages: [Int64?: [MessageModel]] = [:] // 수정
     @Published var tempMessage: MessageModel?
     @Published var newMessage: String = ""
     @Published var isPreparingResponse: Bool = false // 추가
-    @Published var chatBots: [ChatBotModel] = [] // 수정
 
     var cancellables: Set<AnyCancellable> = []
 
@@ -24,22 +24,25 @@ class ChatBotViewModel: ObservableObject {
         getActiveChatBots()
     }
 
-    func sendMessage(content: String, chatBotID: Int64?) {
+    func sendMessage(chatBotID: Int64?) {
         guard !newMessage.isEmpty else { return }
 
-        let userMessage = MessageModel(content: newMessage, isUser: true, chatBotID: chatBotID)
+        let userMessage = MessageModel(
+            content: newMessage,
+            role: "user",
+            chatBotID: chatBotID)
         messages[chatBotID, default: []].append(userMessage)
 
         self.isPreparingResponse = true
 
-        chatGPTService.sendMessage(content, messages[chatBotID] ?? [], onReceived: { [weak self] response in
+        chatGPTService.send(messages: messages[chatBotID] ?? [], onReceived: { [weak self] response in
             DispatchQueue.main.async {
                 if let existingContent = self?.tempMessage?.content {
                     let updatedContent = existingContent + response
-                    let aiMessage = MessageModel(content: updatedContent, isUser: false, chatBotID: chatBotID)
+                    let aiMessage = MessageModel(content: updatedContent, role: "assistant", chatBotID: chatBotID)
                     self?.tempMessage = aiMessage
                 } else {
-                    let aiMessage = MessageModel(content: response, isUser: false, chatBotID: chatBotID)
+                    let aiMessage = MessageModel(content: response, role: "assistant", chatBotID: chatBotID)
                     self?.tempMessage = aiMessage
                 }
             }
@@ -72,9 +75,17 @@ class ChatBotViewModel: ObservableObject {
                     print("Error: \(error.localizedDescription)")
                 }
             } receiveValue: { [weak self] chatBots in
-                self?.chatBots = chatBots
+                guard let self = self else { return }
+                self.chatBots = chatBots
+
+                // Add persona as a system message for chatbots with empty conversation history
+                for chatBot in chatBots {
+                    if self.messages[chatBot.id]?.isEmpty ?? true {
+                        let systemMessage = MessageModel(content: chatBot.persona, role: "system", chatBotID: chatBot.id)
+                        self.messages[chatBot.id] = [systemMessage]
+                    }
+                }
             }.store(in: &cancellables)
     }
-
 
 }

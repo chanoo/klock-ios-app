@@ -68,7 +68,7 @@ struct ChatBotChatView: View {
                     .background(viewModel.isPreparingResponse ? FancyColor.primary.color.opacity(0.5) : FancyColor.primary.color)
 
                     Button(action: {
-                        viewModel.sendMessage(content: chatBot.persona, chatBotID: chatBot.id)
+                        viewModel.sendMessage(chatBotID: chatBot.id)
                     }) {
                         Text("보내기").foregroundColor(.white)
                     }
