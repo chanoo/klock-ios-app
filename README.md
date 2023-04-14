@@ -8,6 +8,7 @@
 * Swinject (Dependency Injection)
 * Combine (Reactive Programing)
 * MVVM (Architecture)
+* CoreData (Local Storage)
 
 ## Structure
 
