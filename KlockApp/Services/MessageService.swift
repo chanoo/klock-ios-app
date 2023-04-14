@@ -51,4 +51,29 @@ class MessageService: MessageServiceProtocol {
             }
         }.eraseToAnyPublisher()
     }
+
+    func deleteStoredMessages(chatBotID: Int64?) -> AnyPublisher<Bool, Error> {
+        return Future<Bool, Error> { promise in
+            guard let chatBotID = chatBotID else {
+                return promise(.failure(NSError(domain: "ChatBot ID is missing", code: 1001, userInfo: nil)))
+            }
+
+            let context = self.coreDataManager.persistentContainer.viewContext
+            let fetchRequest = NSFetchRequest<MessageEntity>(entityName: "MessageEntity")
+            fetchRequest.predicate = NSPredicate(format: "chatBotID == %lld", chatBotID)
+
+            do {
+                let storedMessages = try context.fetch(fetchRequest)
+
+                for message in storedMessages {
+                    context.delete(message)
+                }
+
+                try context.save()
+                promise(.success(true))
+            } catch {
+                promise(.failure(error))
+            }
+        }.eraseToAnyPublisher()
+    }
 }

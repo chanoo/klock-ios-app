@@ -11,4 +11,5 @@ import CoreData
 protocol MessageServiceProtocol {
     func saveMessage(message: MessageModel) -> AnyPublisher<Bool, Error>
     func fetchMessages(chatBotID: Int64?) -> AnyPublisher<[MessageModel], Error>
+    func deleteStoredMessages(chatBotID: Int64?) -> AnyPublisher<Bool, Error>
 }

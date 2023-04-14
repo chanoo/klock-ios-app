@@ -24,6 +24,27 @@ class ChatBotViewModel: ObservableObject {
     init() {
         getActiveChatBots()
     }
+    
+    func initializeAssistant(chatBotID: Int64?, persona: String) {
+        guard let chatBotID = chatBotID, messages[chatBotID]?.isEmpty == true else { return }
+        
+        let systemMessage = MessageModel(content: persona, role: "system", chatBotID: chatBotID)
+        saveAndAppendMessage(systemMessage, chatBotID: chatBotID)
+    }
+
+    func clearMessages(chatBotID: Int64?) {
+        messages[chatBotID]?.removeAll()
+        messageService.deleteStoredMessages(chatBotID: chatBotID)
+            .sink { completion in
+                switch completion {
+                case .failure(let error):
+                    print("Failed to delete stored messages: \(error)")
+                case .finished:
+                    print("Successfully deleted stored messages")
+                }
+            } receiveValue: { _ in }
+            .store(in: &cancellables)
+    }
 
     func sendMessage(chatBotID: Int64?) {
         guard !newMessage.isEmpty else { return }
@@ -76,7 +97,7 @@ class ChatBotViewModel: ObservableObject {
             } receiveValue: { _ in }
             .store(in: &cancellables)
     }
-    
+
     func loadStoredMessages(chatBotID: Int64?) {
         for chatBot in chatBots {
             messageService.fetchMessages(chatBotID: chatBot.id)
@@ -93,15 +114,33 @@ class ChatBotViewModel: ObservableObject {
                 .store(in: &cancellables)
         }
     }
-    
+
+    func deleteStoredMessages(chatBotID: Int64?) {
+        messageService.deleteStoredMessages(chatBotID: chatBotID)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .failure(let error):
+                    print("Error deleting messages: \(error.localizedDescription)")
+                case .finished:
+                    break
+                }
+            }, receiveValue: { success in
+                if success {
+                    print("Messages deleted successfully")
+                    self.messages[chatBotID] = []
+                }
+            })
+            .store(in: &cancellables)
+    }
+
     private func getActiveChatBots() {
         chatBotService.getActiveChatBots()
-            .sink { completion in
+            .sink { _ in
                 // ...
             } receiveValue: { [weak self] chatBots in
                 guard let self = self else { return }
                 self.chatBots = chatBots
             }.store(in: &cancellables)
     }
-    
+
 }
