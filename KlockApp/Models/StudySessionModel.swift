@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct StudySessionModel: Codable {
+struct StudySessionModel: Identifiable, Codable {
     let id: Int64?
     let accountId: Int64
     let startTime: Date

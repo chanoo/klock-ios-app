@@ -91,6 +91,9 @@
 		98E9385F29EA5856009CBF32 /* ClockModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E9385E29EA5856009CBF32 /* ClockModel.swift */; };
 		98E9386129EA5871009CBF32 /* ClockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E9386029EA5871009CBF32 /* ClockViewModel.swift */; };
 		98E9386529EA5899009CBF32 /* AnalogClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E9386429EA5899009CBF32 /* AnalogClockView.swift */; };
+		98E9386729EAD173009CBF32 /* StudySessionServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E9386629EAD173009CBF32 /* StudySessionServiceProtocol.swift */; };
+		98E9386929EAD199009CBF32 /* StudySessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E9386829EAD199009CBF32 /* StudySessionService.swift */; };
+		98E9386B29EAD1C3009CBF32 /* StudySessionServiceDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E9386A29EAD1C3009CBF32 /* StudySessionServiceDTO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -203,6 +206,9 @@
 		98E9385E29EA5856009CBF32 /* ClockModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockModel.swift; sourceTree = "<group>"; };
 		98E9386029EA5871009CBF32 /* ClockViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockViewModel.swift; sourceTree = "<group>"; };
 		98E9386429EA5899009CBF32 /* AnalogClockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalogClockView.swift; sourceTree = "<group>"; };
+		98E9386629EAD173009CBF32 /* StudySessionServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudySessionServiceProtocol.swift; sourceTree = "<group>"; };
+		98E9386829EAD199009CBF32 /* StudySessionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudySessionService.swift; sourceTree = "<group>"; };
+		98E9386A29EAD1C3009CBF32 /* StudySessionServiceDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudySessionServiceDTO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -324,6 +330,7 @@
 				98DC292E29E9383900882E36 /* ChatBotServiceProtocol.swift */,
 				98E314B429DEE67B00EA1617 /* TagServiceProtocol.swift */,
 				98D2826A29E988E70039E6E6 /* MessageServiceProtocol.swift */,
+				98E9386629EAD173009CBF32 /* StudySessionServiceProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -414,6 +421,8 @@
 				98E9385129EA3AC4009CBF32 /* MessageServiceDTO.swift */,
 				98E314B229DEE65E00EA1617 /* TagService.swift */,
 				98E314B629DEE6BB00EA1617 /* TagServiceDTO.swift */,
+				98E9386829EAD199009CBF32 /* StudySessionService.swift */,
+				98E9386A29EAD1C3009CBF32 /* StudySessionServiceDTO.swift */,
 				984D2C8C29E00296008D3EA9 /* README.md */,
 			);
 			path = Services;
@@ -692,6 +701,7 @@
 				984D2C9129E0728C008D3EA9 /* SplashViewModel.swift in Sources */,
 				98E9386129EA5871009CBF32 /* ClockViewModel.swift in Sources */,
 				985BE89E29E6E5D0008582A3 /* FriendDetailView.swift in Sources */,
+				98E9386729EAD173009CBF32 /* StudySessionServiceProtocol.swift in Sources */,
 				98B21B5929D6F4AE004EFE0E /* StudySessionModel.swift in Sources */,
 				98B21B7629DA6288004EFE0E /* Destination.swift in Sources */,
 				98E314B529DEE67B00EA1617 /* TagServiceProtocol.swift in Sources */,
@@ -726,9 +736,11 @@
 				98B21B6C29D9A7A5004EFE0E /* HomeView.swift in Sources */,
 				98B21B5429D6F424004EFE0E /* DDayEventModel.swift in Sources */,
 				98B21B7229D9DC25004EFE0E /* SignUpTagsView.swift in Sources */,
+				98E9386B29EAD1C3009CBF32 /* StudySessionServiceDTO.swift in Sources */,
 				98E314B329DEE65E00EA1617 /* TagService.swift in Sources */,
 				98E9384E29EA3935009CBF32 /* RoundedCorners.swift in Sources */,
 				98B21B4429D60D25004EFE0E /* FancyButton.swift in Sources */,
+				98E9386929EAD199009CBF32 /* StudySessionService.swift in Sources */,
 				98D7C94F29E332790075D201 /* APIErrorModel.swift in Sources */,
 				98B21B4F29D6F3E1004EFE0E /* AccountTagModel.swift in Sources */,
 				985BE8A229E6E906008582A3 /* MessageModel.swift in Sources */,

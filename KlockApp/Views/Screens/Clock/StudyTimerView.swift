@@ -19,8 +19,8 @@ struct StudyTimerView: View {
                 }) {
                     Image(systemName: "play.circle.fill")
                         .resizable()
-                        .frame(width: 60, height: 60)
-                        .foregroundColor(.blue)
+                        .frame(width: 100, height: 100)
+                        .foregroundColor(FancyColor.primary.color)
                 }
             }
             .frame(width: geometry.size.width, height: geometry.size.height)

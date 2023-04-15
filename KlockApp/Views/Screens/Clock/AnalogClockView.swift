@@ -12,6 +12,20 @@ struct AnalogClockView: View {
     @State private var currentTime = Date()
 
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    
+    private func elapsedTimeToString() -> String {
+        let hours = Int(viewModel.elapsedTime) / 3600
+        let minutes = Int(viewModel.elapsedTime) % 3600 / 60
+        let seconds = Int(viewModel.elapsedTime) % 60
+        return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+    }
+    
+//    func finishStudySession() {
+//        if let lastStudySession = viewModel.studySessions.last {
+//            lastStudySession.endTime = Date()
+//            $viewModel.saveStudySession(startTime: lastStudySession.startTime, endTime: lastStudySession.endTime)
+//        }
+//    }
 
     var body: some View {
         ZStack {
@@ -58,17 +72,33 @@ struct AnalogClockView: View {
                                 .foregroundColor(isAfternoon ? FancyColor.primary.color.opacity(0.9) : FancyColor.primary.color.opacity(0.7))
                                 .frame(width: viewModel.clockModel.clockSize.width, height: viewModel.clockModel.clockSize.height) // 프레임 크기를 시계 크기와 동일하게 설정
                             }
+                            .onAppear {
+                                UIScrollView.appearance().keyboardDismissMode = .interactive
+                            }
+                            .environment(\.layoutDirection, .rightToLeft) // 경고를 숨기기 위한 코드
                         }
+                        
+                        Text(elapsedTimeToString())
+                            .font(.largeTitle)
+                            .padding()
+                            .background(Color.black.opacity(0.7))
+                            .foregroundColor(.white)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                            .position(x: viewModel.clockModel.clockSize.width / 2, y: viewModel.clockModel.clockSize.height + 80)
                     }
                 )
-            
-            // 도넛 그래프 추가
-       
+
         }
         .onReceive(timer) { _ in
+            viewModel.elapsedTime += 1
+            viewModel.saveStudyTime()
             currentTime = Date()
             let _ = viewModel.objectWillChange
         }
+        .onAppear {
+            viewModel.loadStudyTime()
+        }
+
     }
     
     private func angleForTime(date: Date) -> Double {
@@ -96,6 +126,13 @@ struct AnalogClockView: View {
         return Double(second) / 60 * 360
     }
 }
+
+//extension AnalogClockView: Dismissable {
+//    func dismiss() {
+//        finishStudySession()
+////        presentationMode.wrappedValue.dismiss()
+//    }
+//}
 
 // ClockHand 구조체는 시계의 바늘을 표시하는 View 입니다.
 struct ClockHand: View {

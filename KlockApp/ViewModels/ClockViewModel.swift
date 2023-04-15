@@ -9,16 +9,29 @@ import Foundation
 import SwiftUI
 
 class ClockViewModel: ObservableObject {
-    @Published var clockModel: ClockModel
+    private let studyTimeKey = "studyTime"
+    @Published var studySessions: [StudySessionModel] = []
     @Published var elapsedTime: TimeInterval = 0
-    var studySessions: [StudySessionModel]
-    
+    @Published var clockModel: ClockModel
+
     init(clockModel: ClockModel) {
         self.clockModel = clockModel
         self.studySessions = []
         self.studySessions = generateSampleStudySessions()
+        loadStudyTime() // Add this line
     }
     
+    deinit {
+        saveStudyTime() // Add this line
+    }
+
+    func saveStudyTime() {
+        UserDefaults.standard.set(elapsedTime, forKey: studyTimeKey)
+    }
+
+    func loadStudyTime() {
+        elapsedTime = UserDefaults.standard.double(forKey: studyTimeKey)
+    }
 
     func generateSampleStudySessions() -> [StudySessionModel] {
         let dateFormatter = DateFormatter()
