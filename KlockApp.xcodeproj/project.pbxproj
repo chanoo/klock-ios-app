@@ -88,6 +88,7 @@
 		98E314B529DEE67B00EA1617 /* TagServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E314B429DEE67B00EA1617 /* TagServiceProtocol.swift */; };
 		98E314B729DEE6BB00EA1617 /* TagServiceDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E314B629DEE6BB00EA1617 /* TagServiceDTO.swift */; };
 		98E9384E29EA3935009CBF32 /* RoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E9384D29EA3935009CBF32 /* RoundedCorners.swift */; };
+		98E9385029EA39A8009CBF32 /* ChatGPTServiceDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E9384F29EA39A8009CBF32 /* ChatGPTServiceDTO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -196,6 +197,7 @@
 		98E314B429DEE67B00EA1617 /* TagServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagServiceProtocol.swift; sourceTree = "<group>"; };
 		98E314B629DEE6BB00EA1617 /* TagServiceDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagServiceDTO.swift; sourceTree = "<group>"; };
 		98E9384D29EA3935009CBF32 /* RoundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorners.swift; sourceTree = "<group>"; };
+		98E9384F29EA39A8009CBF32 /* ChatGPTServiceDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGPTServiceDTO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -398,6 +400,7 @@
 				98CE661A29D55AA40009916F /* AuthenticationService.swift */,
 				98B21B4829D617A4004EFE0E /* AuthenticationServiceDTO.swift */,
 				985BE8A329E6EA3E008582A3 /* ChatGPTService.swift */,
+				98E9384F29EA39A8009CBF32 /* ChatGPTServiceDTO.swift */,
 				98DC292A29E9373D00882E36 /* ChatBotService.swift */,
 				98D2826829E988D00039E6E6 /* MessageService.swift */,
 				98DC292C29E9380200882E36 /* ChatBotDTO.swift */,
@@ -694,6 +697,7 @@
 				985BE89829E6E559008582A3 /* HomeViewModel.swift in Sources */,
 				985BE88E29E6DC3E008582A3 /* MissionView.swift in Sources */,
 				985BE89429E6E0DB008582A3 /* FriendsView.swift in Sources */,
+				98E9385029EA39A8009CBF32 /* ChatGPTServiceDTO.swift in Sources */,
 				987E543A29D552520007E156 /* KlockAppApp.swift in Sources */,
 				98B21B4B29D617F6004EFE0E /* Encodable+Extensions.swift in Sources */,
 				985BE8A629E6EA60008582A3 /* ChatGPTServiceProtocol.swift in Sources */,

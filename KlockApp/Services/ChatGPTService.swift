@@ -7,19 +7,6 @@
 import Foundation
 import Alamofire
 
-// Request 구조체 수정
-struct Request: Codable {
-    let model: String
-    let messages: [[String: String]]
-    let stream: Bool
-
-    init(messages: [MessageModel]) {
-        self.model = "gpt-3.5-turbo"
-        self.messages = messages.map { ["role": $0.role, "content": $0.content] }
-        self.stream = true
-    }
-}
-
 class ChatGPTService: NSObject, ChatGPTServiceProtocol {
 
     private let apiKey = EnvironmentValuesProvider.shared.openaiAPIKey
@@ -37,7 +24,7 @@ class ChatGPTService: NSObject, ChatGPTServiceProtocol {
             "Content-Type": "application/json"
         ]
 
-        let parameters = Request(messages: messages)
+        let parameters = ChatCompletionsReqDTO(messages: messages)
         let request = AF.streamRequest(url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers)
         request.responseStreamString { stream in
             switch stream.event {
