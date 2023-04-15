@@ -150,7 +150,7 @@
 		987E545629D552540007E156 /* KlockAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KlockAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		987E545A29D552540007E156 /* KlockAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlockAppUITests.swift; sourceTree = "<group>"; };
 		987E545C29D552540007E156 /* KlockAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlockAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		98A30CBE29DE8E1A002E42A2 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		98A30CBE29DE8E1A002E42A2 /* KlockAppPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = KlockAppPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		98B21B1729D55DE0004EFE0E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		98B21B1A29D55F6C004EFE0E /* AuthenticationServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationServiceProtocol.swift; sourceTree = "<group>"; };
 		98B21B2029D56BDF004EFE0E /* RegexConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegexConstants.swift; sourceTree = "<group>"; };
@@ -242,8 +242,8 @@
 		987E542D29D552520007E156 = {
 			isa = PBXGroup;
 			children = (
-				98A30CBE29DE8E1A002E42A2 /* MyPlayground.playground */,
 				98B21B1729D55DE0004EFE0E /* README.md */,
+				98A30CBE29DE8E1A002E42A2 /* KlockAppPlayground.playground */,
 				987E543829D552520007E156 /* KlockApp */,
 				987E544F29D552540007E156 /* KlockAppTests */,
 				987E545929D552540007E156 /* KlockAppUITests */,
