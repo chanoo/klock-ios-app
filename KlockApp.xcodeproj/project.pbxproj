@@ -82,13 +82,14 @@
 		98D7C95529E460D70075D201 /* SignUpFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D7C95429E460D70075D201 /* SignUpFlowView.swift */; };
 		98D7C95729E510990075D201 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D7C95629E510990075D201 /* ContentViewModel.swift */; };
 		98DC292B29E9373D00882E36 /* ChatBotService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DC292A29E9373D00882E36 /* ChatBotService.swift */; };
-		98DC292D29E9380200882E36 /* ChatBotDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DC292C29E9380200882E36 /* ChatBotDTO.swift */; };
+		98DC292D29E9380200882E36 /* ChatBotServiceDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DC292C29E9380200882E36 /* ChatBotServiceDTO.swift */; };
 		98DC292F29E9383900882E36 /* ChatBotServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DC292E29E9383900882E36 /* ChatBotServiceProtocol.swift */; };
 		98E314B329DEE65E00EA1617 /* TagService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E314B229DEE65E00EA1617 /* TagService.swift */; };
 		98E314B529DEE67B00EA1617 /* TagServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E314B429DEE67B00EA1617 /* TagServiceProtocol.swift */; };
 		98E314B729DEE6BB00EA1617 /* TagServiceDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E314B629DEE6BB00EA1617 /* TagServiceDTO.swift */; };
 		98E9384E29EA3935009CBF32 /* RoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E9384D29EA3935009CBF32 /* RoundedCorners.swift */; };
 		98E9385029EA39A8009CBF32 /* ChatGPTServiceDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E9384F29EA39A8009CBF32 /* ChatGPTServiceDTO.swift */; };
+		98E9385229EA3AC4009CBF32 /* MessageServiceDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E9385129EA3AC4009CBF32 /* MessageServiceDTO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -191,13 +192,14 @@
 		98D7C95629E510990075D201 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		98DC292929E90DAE00882E36 /* ConfigDebug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ConfigDebug.xcconfig; sourceTree = "<group>"; };
 		98DC292A29E9373D00882E36 /* ChatBotService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotService.swift; sourceTree = "<group>"; };
-		98DC292C29E9380200882E36 /* ChatBotDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotDTO.swift; sourceTree = "<group>"; };
+		98DC292C29E9380200882E36 /* ChatBotServiceDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotServiceDTO.swift; sourceTree = "<group>"; };
 		98DC292E29E9383900882E36 /* ChatBotServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotServiceProtocol.swift; sourceTree = "<group>"; };
 		98E314B229DEE65E00EA1617 /* TagService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagService.swift; sourceTree = "<group>"; };
 		98E314B429DEE67B00EA1617 /* TagServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagServiceProtocol.swift; sourceTree = "<group>"; };
 		98E314B629DEE6BB00EA1617 /* TagServiceDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagServiceDTO.swift; sourceTree = "<group>"; };
 		98E9384D29EA3935009CBF32 /* RoundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorners.swift; sourceTree = "<group>"; };
 		98E9384F29EA39A8009CBF32 /* ChatGPTServiceDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGPTServiceDTO.swift; sourceTree = "<group>"; };
+		98E9385129EA3AC4009CBF32 /* MessageServiceDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageServiceDTO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -402,8 +404,9 @@
 				985BE8A329E6EA3E008582A3 /* ChatGPTService.swift */,
 				98E9384F29EA39A8009CBF32 /* ChatGPTServiceDTO.swift */,
 				98DC292A29E9373D00882E36 /* ChatBotService.swift */,
+				98DC292C29E9380200882E36 /* ChatBotServiceDTO.swift */,
 				98D2826829E988D00039E6E6 /* MessageService.swift */,
-				98DC292C29E9380200882E36 /* ChatBotDTO.swift */,
+				98E9385129EA3AC4009CBF32 /* MessageServiceDTO.swift */,
 				98E314B229DEE65E00EA1617 /* TagService.swift */,
 				98E314B629DEE6BB00EA1617 /* TagServiceDTO.swift */,
 				984D2C8C29E00296008D3EA9 /* README.md */,
@@ -675,7 +678,7 @@
 				98D2826B29E988E70039E6E6 /* MessageServiceProtocol.swift in Sources */,
 				98CE661929D55A650009916F /* Container.swift in Sources */,
 				98CE661B29D55AA40009916F /* AuthenticationService.swift in Sources */,
-				98DC292D29E9380200882E36 /* ChatBotDTO.swift in Sources */,
+				98DC292D29E9380200882E36 /* ChatBotServiceDTO.swift in Sources */,
 				98CE662129D55B730009916F /* SignInViewModel.swift in Sources */,
 				98B21B6E29D9D21A004EFE0E /* SignUpViewModel.swift in Sources */,
 				98B21B4629D60EEB004EFE0E /* FancyTextField.swift in Sources */,
@@ -694,6 +697,7 @@
 				985BE8AB29E6F4EC008582A3 /* ChatGPTResponse.swift in Sources */,
 				985BE8A229E6E906008582A3 /* MessageModel.swift in Sources */,
 				987E544629D552530007E156 /* KlockApp.xcdatamodeld in Sources */,
+				98E9385229EA3AC4009CBF32 /* MessageServiceDTO.swift in Sources */,
 				985BE89829E6E559008582A3 /* HomeViewModel.swift in Sources */,
 				985BE88E29E6DC3E008582A3 /* MissionView.swift in Sources */,
 				985BE89429E6E0DB008582A3 /* FriendsView.swift in Sources */,
