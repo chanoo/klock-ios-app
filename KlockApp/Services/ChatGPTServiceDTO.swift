@@ -18,3 +18,21 @@ struct ChatCompletionsReqDTO: Codable {
         self.stream = true
     }
 }
+
+struct ChatCompletionsResDTO: Codable {
+    let id: String
+    let object: String
+    let created: Int
+    let model: String
+    let choices: [ChatGPTChoice]
+
+    struct ChatGPTChoice: Codable {
+        let delta: ChatGPTDelta
+        let index: Int
+        let finish_reason: String?
+
+        struct ChatGPTDelta: Codable {
+            let content: String?
+        }
+    }
+}

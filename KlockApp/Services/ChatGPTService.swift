@@ -38,7 +38,7 @@ class ChatGPTService: NSObject, ChatGPTServiceProtocol {
                             DispatchQueue.main.async {
                                 completion(.success(""))
                             }
-                        } else if let data = eventData.data(using: .utf8), let response = try? JSONDecoder().decode(ChatGPTResponse.self, from: data), let deltaContent = response.choices.first?.delta.content {
+                        } else if let data = eventData.data(using: .utf8), let response = try? JSONDecoder().decode(ChatCompletionsResDTO.self, from: data), let deltaContent = response.choices.first?.delta.content {
                             DispatchQueue.main.async {
                                 onReceived(deltaContent)
                             }

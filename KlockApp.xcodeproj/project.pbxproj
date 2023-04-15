@@ -31,7 +31,6 @@
 		985BE8A229E6E906008582A3 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE8A129E6E906008582A3 /* MessageModel.swift */; };
 		985BE8A429E6EA3E008582A3 /* ChatGPTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE8A329E6EA3E008582A3 /* ChatGPTService.swift */; };
 		985BE8A629E6EA60008582A3 /* ChatGPTServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE8A529E6EA60008582A3 /* ChatGPTServiceProtocol.swift */; };
-		985BE8AB29E6F4EC008582A3 /* ChatGPTResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE8AA29E6F4EC008582A3 /* ChatGPTResponse.swift */; };
 		985BE8AE29E73A76008582A3 /* EnvironmentValuesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE8AD29E73A76008582A3 /* EnvironmentValuesProvider.swift */; };
 		985BE8B029E7D48A008582A3 /* ChatBotModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE8AF29E7D48A008582A3 /* ChatBotModel.swift */; };
 		985BE8B229E7D510008582A3 /* ChatBotListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE8B129E7D510008582A3 /* ChatBotListView.swift */; };
@@ -136,7 +135,6 @@
 		985BE8A129E6E906008582A3 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
 		985BE8A329E6EA3E008582A3 /* ChatGPTService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGPTService.swift; sourceTree = "<group>"; };
 		985BE8A529E6EA60008582A3 /* ChatGPTServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGPTServiceProtocol.swift; sourceTree = "<group>"; };
-		985BE8AA29E6F4EC008582A3 /* ChatGPTResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGPTResponse.swift; sourceTree = "<group>"; };
 		985BE8AC29E73900008582A3 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		985BE8AD29E73A76008582A3 /* EnvironmentValuesProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentValuesProvider.swift; sourceTree = "<group>"; };
 		985BE8AF29E7D48A008582A3 /* ChatBotModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotModel.swift; sourceTree = "<group>"; };
@@ -244,7 +242,6 @@
 		987E542D29D552520007E156 = {
 			isa = PBXGroup;
 			children = (
-				985BE8AD29E73A76008582A3 /* EnvironmentValuesProvider.swift */,
 				98A30CBE29DE8E1A002E42A2 /* MyPlayground.playground */,
 				98B21B1729D55DE0004EFE0E /* README.md */,
 				987E543829D552520007E156 /* KlockApp */,
@@ -279,6 +276,7 @@
 				98CE661129D553A60009916F /* Resources */,
 				987E543929D552520007E156 /* KlockAppApp.swift */,
 				98B21B3929D5EBC3004EFE0E /* AppDelegate.swift */,
+				985BE8AD29E73A76008582A3 /* EnvironmentValuesProvider.swift */,
 				98B21B4029D5FA5B004EFE0E /* KlockAppDebug.entitlements */,
 				984D2C8D29E056A6008D3EA9 /* KlockApp.entitlements */,
 				987E544729D552530007E156 /* Info.plist */,
@@ -366,7 +364,6 @@
 				98D7C94E29E332790075D201 /* APIErrorModel.swift */,
 				985BE89B29E6E595008582A3 /* FriendModel.swift */,
 				985BE8A129E6E906008582A3 /* MessageModel.swift */,
-				985BE8AA29E6F4EC008582A3 /* ChatGPTResponse.swift */,
 				985BE8AF29E7D48A008582A3 /* ChatBotModel.swift */,
 			);
 			path = Models;
@@ -694,7 +691,6 @@
 				98B21B4429D60D25004EFE0E /* FancyButton.swift in Sources */,
 				98D7C94F29E332790075D201 /* APIErrorModel.swift in Sources */,
 				98B21B4F29D6F3E1004EFE0E /* AccountTagModel.swift in Sources */,
-				985BE8AB29E6F4EC008582A3 /* ChatGPTResponse.swift in Sources */,
 				985BE8A229E6E906008582A3 /* MessageModel.swift in Sources */,
 				987E544629D552530007E156 /* KlockApp.xcdatamodeld in Sources */,
 				98E9385229EA3AC4009CBF32 /* MessageServiceDTO.swift in Sources */,
