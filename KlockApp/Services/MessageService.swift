@@ -17,11 +17,14 @@ class MessageService: MessageServiceProtocol {
             guard let entity = NSEntityDescription.entity(forEntityName: "MessageEntity", in: context) else {
                 return promise(.failure(NSError(domain: "Error in creating entity", code: 1000, userInfo: nil)))
             }
-
+            guard let chatBotID = message.chatBotID else {
+                return promise(.failure(NSError(domain: "ChatBotID is missing", code: 1001, userInfo: nil)))
+            }
+            
             let messageEntity = NSManagedObject(entity: entity, insertInto: context) as! MessageEntity
             messageEntity.content = message.content
             messageEntity.role = message.role
-            messageEntity.chatBotID = message.chatBotID ?? 0
+            messageEntity.chatBotID = chatBotID
             messageEntity.timeStamp = Date()
 
             do {
@@ -35,9 +38,13 @@ class MessageService: MessageServiceProtocol {
 
     func fetchMessages(chatBotID: Int64?) -> AnyPublisher<[MessageModel], Error> {
         return Future<[MessageModel], Error> { promise in
+            guard let chatBotID = chatBotID else {
+                return promise(.failure(NSError(domain: "ChatBotID is missing", code: 1001, userInfo: nil)))
+            }
+
             let context = self.coreDataManager.persistentContainer.viewContext
             let fetchRequest = NSFetchRequest<MessageEntity>(entityName: "MessageEntity")
-            fetchRequest.predicate = NSPredicate(format: "chatBotID == %@", NSNumber(value: chatBotID ?? 0))
+            fetchRequest.predicate = NSPredicate(format: "chatBotID == %@", NSNumber(value: chatBotID))
             fetchRequest.sortDescriptors = [NSSortDescriptor(key: "timeStamp", ascending: true)]
 
             do {
