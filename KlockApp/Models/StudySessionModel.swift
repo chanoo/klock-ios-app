@@ -19,4 +19,8 @@ struct StudySessionModel: Codable {
         case startTime = "start_time"
         case endTime = "end_time"
     }
+
+    var sessionDuration: TimeInterval {
+        return endTime.timeIntervalSince(startTime)
+    }
 }

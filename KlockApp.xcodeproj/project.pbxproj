@@ -88,6 +88,9 @@
 		98E9385029EA39A8009CBF32 /* ChatGPTServiceDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E9384F29EA39A8009CBF32 /* ChatGPTServiceDTO.swift */; };
 		98E9385229EA3AC4009CBF32 /* MessageServiceDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E9385129EA3AC4009CBF32 /* MessageServiceDTO.swift */; };
 		98E9385829EA4C45009CBF32 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 98E9385729EA4C45009CBF32 /* Alamofire */; };
+		98E9385F29EA5856009CBF32 /* ClockModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E9385E29EA5856009CBF32 /* ClockModel.swift */; };
+		98E9386129EA5871009CBF32 /* ClockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E9386029EA5871009CBF32 /* ClockViewModel.swift */; };
+		98E9386529EA5899009CBF32 /* AnalogClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E9386429EA5899009CBF32 /* AnalogClockView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -197,6 +200,9 @@
 		98E9384F29EA39A8009CBF32 /* ChatGPTServiceDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGPTServiceDTO.swift; sourceTree = "<group>"; };
 		98E9385129EA3AC4009CBF32 /* MessageServiceDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageServiceDTO.swift; sourceTree = "<group>"; };
 		98E9385C29EA54E8009CBF32 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		98E9385E29EA5856009CBF32 /* ClockModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockModel.swift; sourceTree = "<group>"; };
+		98E9386029EA5871009CBF32 /* ClockViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockViewModel.swift; sourceTree = "<group>"; };
+		98E9386429EA5899009CBF32 /* AnalogClockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalogClockView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -365,6 +371,7 @@
 				985BE89B29E6E595008582A3 /* FriendModel.swift */,
 				985BE8A129E6E906008582A3 /* MessageModel.swift */,
 				985BE8AF29E7D48A008582A3 /* ChatBotModel.swift */,
+				98E9385E29EA5856009CBF32 /* ClockModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -380,6 +387,7 @@
 				985BE89729E6E559008582A3 /* HomeViewModel.swift */,
 				985BE89929E6E579008582A3 /* FriendsViewModel.swift */,
 				985BE89F29E6E836008582A3 /* ChatBotViewModel.swift */,
+				98E9386029EA5871009CBF32 /* ClockViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -447,6 +455,7 @@
 		98CE661329D553F10009916F /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				98E9385D29EA5844009CBF32 /* Clock */,
 				98E9385B29EA54B1009CBF32 /* Friends */,
 				98E9385A29EA546E009CBF32 /* ChatBot */,
 				98E9385929EA5456009CBF32 /* SignUp */,
@@ -454,7 +463,6 @@
 				98B21B6B29D9A7A5004EFE0E /* HomeView.swift */,
 				984D2C8E29E067FE008D3EA9 /* SplashView.swift */,
 				985BE88729E6DC1D008582A3 /* StudyTimeView.swift */,
-				985BE88B29E6DC35008582A3 /* StudyTimerView.swift */,
 				985BE88D29E6DC3E008582A3 /* MissionView.swift */,
 				985BE88F29E6DC49008582A3 /* SettingsView.swift */,
 				985BE89129E6E0CD008582A3 /* CharacterView.swift */,
@@ -497,6 +505,15 @@
 				985BE89D29E6E5D0008582A3 /* FriendDetailView.swift */,
 			);
 			path = Friends;
+			sourceTree = "<group>";
+		};
+		98E9385D29EA5844009CBF32 /* Clock */ = {
+			isa = PBXGroup;
+			children = (
+				985BE88B29E6DC35008582A3 /* StudyTimerView.swift */,
+				98E9386429EA5899009CBF32 /* AnalogClockView.swift */,
+			);
+			path = Clock;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -673,6 +690,7 @@
 				985BE8B029E7D48A008582A3 /* ChatBotModel.swift in Sources */,
 				984D2C8729DFDB5F008D3EA9 /* BackButtonView.swift in Sources */,
 				984D2C9129E0728C008D3EA9 /* SplashViewModel.swift in Sources */,
+				98E9386129EA5871009CBF32 /* ClockViewModel.swift in Sources */,
 				985BE89E29E6E5D0008582A3 /* FriendDetailView.swift in Sources */,
 				98B21B5929D6F4AE004EFE0E /* StudySessionModel.swift in Sources */,
 				98B21B7629DA6288004EFE0E /* Destination.swift in Sources */,
@@ -731,9 +749,11 @@
 				985BE89A29E6E579008582A3 /* FriendsViewModel.swift in Sources */,
 				984D2C8229DFC2B3008D3EA9 /* AppState.swift in Sources */,
 				98BDD21D29DAD1D400B0440F /* FancyColor.swift in Sources */,
+				98E9385F29EA5856009CBF32 /* ClockModel.swift in Sources */,
 				984D2C8429DFC311008D3EA9 /* UINavigationController+UIGestureRecognizerDelegate.swift in Sources */,
 				98CE661D29D55AE00009916F /* AccountModel.swift in Sources */,
 				98D7C94929E1AB450075D201 /* SignUpUserModel.swift in Sources */,
+				98E9386529EA5899009CBF32 /* AnalogClockView.swift in Sources */,
 				98BDD22029DD0FA800B0440F /* EmailValidator.swift in Sources */,
 				98E314B729DEE6BB00EA1617 /* TagServiceDTO.swift in Sources */,
 				98B21B4929D617A4004EFE0E /* AuthenticationServiceDTO.swift in Sources */,

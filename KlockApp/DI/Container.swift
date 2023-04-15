@@ -6,6 +6,7 @@
 //
 
 import Swinject
+import UIKit
 
 class Container {
     static let shared = Container()
@@ -21,7 +22,23 @@ class Container {
         // Managers
         container.register(AppFlowManager.self) { _ in AppFlowManager() }
 
+        // Models
         container.register(SignUpUserModel.self) { _ in SignUpUserModel() }
+        container.register(ClockModel.self) { _ in
+             ClockModel(
+                 hourHandLength: 180,
+                 minuteHandLength: 200,
+                 secondHandLength: 250,
+                 hourHandThickness: 4,
+                 minuteHandThickness: 3,
+                 secondHandThickness: 2,
+                 hourHandImageName: nil,
+                 minuteHandImageName: nil,
+                 secondHandImageName: nil,
+                 clockBackgroundImageName: "clockBackground",
+                 clockSize: CGSize(width: 300, height: 300)
+             )
+         }
 
         // Services
         container.register(AuthenticationServiceProtocol.self) { _ in AuthenticationService() }
@@ -36,7 +53,11 @@ class Container {
         container.register(SignUpViewModel.self) { resolver in SignUpViewModel(signUpUserModel: resolver.resolve(SignUpUserModel.self) ?? SignUpUserModel() ) }
         container.register(SplashViewModel.self) { _ in SplashViewModel() }
         container.register(ChatBotViewModel.self) { _ in ChatBotViewModel() }
-    }
+        container.register(ClockViewModel.self) { resolver in
+            let clockModel = resolver.resolve(ClockModel.self)!
+            return ClockViewModel(clockModel: clockModel)
+        }
+   }
 
     func resolve<Service>(_ serviceType: Service.Type) -> Service {
         return container.resolve(serviceType)!

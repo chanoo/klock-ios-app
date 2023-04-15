@@ -26,7 +26,7 @@ struct StudyTimerView: View {
             .frame(width: geometry.size.width, height: geometry.size.height)
         }
         .sheet(isPresented: $isShowingClockModal) {
-            ClockModalView()
+            AnalogClockView()
         }
     }
 }
