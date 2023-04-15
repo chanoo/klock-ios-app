@@ -87,6 +87,7 @@
 		98E314B329DEE65E00EA1617 /* TagService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E314B229DEE65E00EA1617 /* TagService.swift */; };
 		98E314B529DEE67B00EA1617 /* TagServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E314B429DEE67B00EA1617 /* TagServiceProtocol.swift */; };
 		98E314B729DEE6BB00EA1617 /* TagServiceDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E314B629DEE6BB00EA1617 /* TagServiceDTO.swift */; };
+		98E9384E29EA3935009CBF32 /* RoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E9384D29EA3935009CBF32 /* RoundedCorners.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -194,6 +195,7 @@
 		98E314B229DEE65E00EA1617 /* TagService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagService.swift; sourceTree = "<group>"; };
 		98E314B429DEE67B00EA1617 /* TagServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagServiceProtocol.swift; sourceTree = "<group>"; };
 		98E314B629DEE6BB00EA1617 /* TagServiceDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagServiceDTO.swift; sourceTree = "<group>"; };
+		98E9384D29EA3935009CBF32 /* RoundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorners.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -434,6 +436,7 @@
 				984D2C7F29DFB197008D3EA9 /* FlowLayout.swift */,
 				984D2C8629DFDB5F008D3EA9 /* BackButtonView.swift */,
 				984D2C8A29DFDBAA008D3EA9 /* CommonViewModifier.swift */,
+				98E9384D29EA3935009CBF32 /* RoundedCorners.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -681,6 +684,7 @@
 				98B21B5429D6F424004EFE0E /* DDayEventModel.swift in Sources */,
 				98B21B7229D9DC25004EFE0E /* SignUpTagsView.swift in Sources */,
 				98E314B329DEE65E00EA1617 /* TagService.swift in Sources */,
+				98E9384E29EA3935009CBF32 /* RoundedCorners.swift in Sources */,
 				98B21B4429D60D25004EFE0E /* FancyButton.swift in Sources */,
 				98D7C94F29E332790075D201 /* APIErrorModel.swift in Sources */,
 				98B21B4F29D6F3E1004EFE0E /* AccountTagModel.swift in Sources */,
