@@ -34,7 +34,7 @@ struct HomeView: View {
 
     var body: some View {
         TabView(selection: $selection) {
-            StudyTimeView()
+            CalendarView()
                 .tabItem {
                     Label("공부 시간", systemImage: "clock")
                 }

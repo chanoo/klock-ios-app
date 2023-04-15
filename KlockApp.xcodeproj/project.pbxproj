@@ -14,7 +14,6 @@
 		984D2C8B29DFDBAA008D3EA9 /* CommonViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984D2C8A29DFDBAA008D3EA9 /* CommonViewModifier.swift */; };
 		984D2C8F29E067FE008D3EA9 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984D2C8E29E067FE008D3EA9 /* SplashView.swift */; };
 		984D2C9129E0728C008D3EA9 /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984D2C9029E0728C008D3EA9 /* SplashViewModel.swift */; };
-		985BE88829E6DC1D008582A3 /* StudyTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE88729E6DC1D008582A3 /* StudyTimeView.swift */; };
 		985BE88A29E6DC2C008582A3 /* ChatBotChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE88929E6DC2C008582A3 /* ChatBotChatView.swift */; };
 		985BE88C29E6DC35008582A3 /* StudyTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE88B29E6DC35008582A3 /* StudyTimerView.swift */; };
 		985BE88E29E6DC3E008582A3 /* MissionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE88D29E6DC3E008582A3 /* MissionView.swift */; };
@@ -33,6 +32,10 @@
 		985BE8AE29E73A76008582A3 /* EnvironmentValuesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE8AD29E73A76008582A3 /* EnvironmentValuesProvider.swift */; };
 		985BE8B029E7D48A008582A3 /* ChatBotModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE8AF29E7D48A008582A3 /* ChatBotModel.swift */; };
 		985BE8B229E7D510008582A3 /* ChatBotListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE8B129E7D510008582A3 /* ChatBotListView.swift */; };
+		986E5DB029EAEF3700FF7047 /* CalendarDateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986E5DAF29EAEF3700FF7047 /* CalendarDateModel.swift */; };
+		986E5DB229EAEF5600FF7047 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986E5DB129EAEF5600FF7047 /* CalendarViewModel.swift */; };
+		986E5DB429EAEF9200FF7047 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986E5DB329EAEF9200FF7047 /* CalendarView.swift */; };
+		986E5DB629EAF06D00FF7047 /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986E5DB529EAF06D00FF7047 /* DayView.swift */; };
 		987E543A29D552520007E156 /* KlockAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E543929D552520007E156 /* KlockAppApp.swift */; };
 		987E543E29D552530007E156 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 987E543D29D552530007E156 /* Assets.xcassets */; };
 		987E544129D552530007E156 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 987E544029D552530007E156 /* Preview Assets.xcassets */; };
@@ -124,7 +127,6 @@
 		984D2C8E29E067FE008D3EA9 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		984D2C9029E0728C008D3EA9 /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
 		985BE88329E652CE008582A3 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		985BE88729E6DC1D008582A3 /* StudyTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyTimeView.swift; sourceTree = "<group>"; };
 		985BE88929E6DC2C008582A3 /* ChatBotChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotChatView.swift; sourceTree = "<group>"; };
 		985BE88B29E6DC35008582A3 /* StudyTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyTimerView.swift; sourceTree = "<group>"; };
 		985BE88D29E6DC3E008582A3 /* MissionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionView.swift; sourceTree = "<group>"; };
@@ -144,6 +146,10 @@
 		985BE8AD29E73A76008582A3 /* EnvironmentValuesProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentValuesProvider.swift; sourceTree = "<group>"; };
 		985BE8AF29E7D48A008582A3 /* ChatBotModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotModel.swift; sourceTree = "<group>"; };
 		985BE8B129E7D510008582A3 /* ChatBotListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotListView.swift; sourceTree = "<group>"; };
+		986E5DAF29EAEF3700FF7047 /* CalendarDateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDateModel.swift; sourceTree = "<group>"; };
+		986E5DB129EAEF5600FF7047 /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
+		986E5DB329EAEF9200FF7047 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		986E5DB529EAF06D00FF7047 /* DayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
 		987E543629D552520007E156 /* KlockApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KlockApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		987E543929D552520007E156 /* KlockAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlockAppApp.swift; sourceTree = "<group>"; };
 		987E543D29D552530007E156 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -379,6 +385,7 @@
 				985BE8A129E6E906008582A3 /* MessageModel.swift */,
 				985BE8AF29E7D48A008582A3 /* ChatBotModel.swift */,
 				98E9385E29EA5856009CBF32 /* ClockModel.swift */,
+				986E5DAF29EAEF3700FF7047 /* CalendarDateModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -395,6 +402,7 @@
 				985BE89929E6E579008582A3 /* FriendsViewModel.swift */,
 				985BE89F29E6E836008582A3 /* ChatBotViewModel.swift */,
 				98E9386029EA5871009CBF32 /* ClockViewModel.swift */,
+				986E5DB129EAEF5600FF7047 /* CalendarViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -457,6 +465,7 @@
 				984D2C8629DFDB5F008D3EA9 /* BackButtonView.swift */,
 				984D2C8A29DFDBAA008D3EA9 /* CommonViewModifier.swift */,
 				98E9384D29EA3935009CBF32 /* RoundedCorners.swift */,
+				986E5DB529EAF06D00FF7047 /* DayView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -471,11 +480,11 @@
 				98D7C95029E45C550075D201 /* ContentView.swift */,
 				98B21B6B29D9A7A5004EFE0E /* HomeView.swift */,
 				984D2C8E29E067FE008D3EA9 /* SplashView.swift */,
-				985BE88729E6DC1D008582A3 /* StudyTimeView.swift */,
 				985BE88D29E6DC3E008582A3 /* MissionView.swift */,
 				985BE88F29E6DC49008582A3 /* SettingsView.swift */,
 				985BE89129E6E0CD008582A3 /* CharacterView.swift */,
 				985BE89529E6E359008582A3 /* ClockModalView.swift */,
+				986E5DB329EAEF9200FF7047 /* CalendarView.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -694,7 +703,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				98CE662329D55BB10009916F /* SignInView.swift in Sources */,
-				985BE88829E6DC1D008582A3 /* StudyTimeView.swift in Sources */,
 				98B21B4D29D6F3A9004EFE0E /* AccountLevelModel.swift in Sources */,
 				985BE8B029E7D48A008582A3 /* ChatBotModel.swift in Sources */,
 				984D2C8729DFDB5F008D3EA9 /* BackButtonView.swift in Sources */,
@@ -724,6 +732,7 @@
 				985BE88C29E6DC35008582A3 /* StudyTimerView.swift in Sources */,
 				98D2826B29E988E70039E6E6 /* MessageServiceProtocol.swift in Sources */,
 				98CE661929D55A650009916F /* Container.swift in Sources */,
+				986E5DB629EAF06D00FF7047 /* DayView.swift in Sources */,
 				98CE661B29D55AA40009916F /* AuthenticationService.swift in Sources */,
 				98DC292D29E9380200882E36 /* ChatBotServiceDTO.swift in Sources */,
 				98CE662129D55B730009916F /* SignInViewModel.swift in Sources */,
@@ -743,6 +752,7 @@
 				98E9386929EAD199009CBF32 /* StudySessionService.swift in Sources */,
 				98D7C94F29E332790075D201 /* APIErrorModel.swift in Sources */,
 				98B21B4F29D6F3E1004EFE0E /* AccountTagModel.swift in Sources */,
+				986E5DB429EAEF9200FF7047 /* CalendarView.swift in Sources */,
 				985BE8A229E6E906008582A3 /* MessageModel.swift in Sources */,
 				987E544629D552530007E156 /* KlockApp.xcdatamodeld in Sources */,
 				98E9385229EA3AC4009CBF32 /* MessageServiceDTO.swift in Sources */,
@@ -758,12 +768,14 @@
 				98B21B7029D9D390004EFE0E /* SignUpUsernameView.swift in Sources */,
 				985BE89629E6E359008582A3 /* ClockModalView.swift in Sources */,
 				98D7C95129E45C550075D201 /* ContentView.swift in Sources */,
+				986E5DB229EAEF5600FF7047 /* CalendarViewModel.swift in Sources */,
 				985BE89A29E6E579008582A3 /* FriendsViewModel.swift in Sources */,
 				984D2C8229DFC2B3008D3EA9 /* AppState.swift in Sources */,
 				98BDD21D29DAD1D400B0440F /* FancyColor.swift in Sources */,
 				98E9385F29EA5856009CBF32 /* ClockModel.swift in Sources */,
 				984D2C8429DFC311008D3EA9 /* UINavigationController+UIGestureRecognizerDelegate.swift in Sources */,
 				98CE661D29D55AE00009916F /* AccountModel.swift in Sources */,
+				986E5DB029EAEF3700FF7047 /* CalendarDateModel.swift in Sources */,
 				98D7C94929E1AB450075D201 /* SignUpUserModel.swift in Sources */,
 				98E9386529EA5899009CBF32 /* AnalogClockView.swift in Sources */,
 				98BDD22029DD0FA800B0440F /* EmailValidator.swift in Sources */,

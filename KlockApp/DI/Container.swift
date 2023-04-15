@@ -57,6 +57,7 @@ class Container {
             let clockModel = resolver.resolve(ClockModel.self)!
             return ClockViewModel(clockModel: clockModel)
         }
+        container.register(CalendarViewModel.self) { _ in CalendarViewModel() }
    }
 
     func resolve<Service>(_ serviceType: Service.Type) -> Service {

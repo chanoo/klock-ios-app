@@ -33,6 +33,6 @@ struct StudyTimerView: View {
 
 struct StudyTimerView_Previews: PreviewProvider {
     static var previews: some View {
-        StudyTimerView()
+        ContentView(viewModel: Container.shared.resolve(ContentViewModel.self))
     }
 }
