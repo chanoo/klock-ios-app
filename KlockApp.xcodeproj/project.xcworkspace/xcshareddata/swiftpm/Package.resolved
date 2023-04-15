@@ -3,7 +3,7 @@
     {
       "identity" : "alamofire",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Alamofire/Alamofire.git",
+      "location" : "https://github.com/Alamofire/Alamofire",
       "state" : {
         "revision" : "78424be314842833c04bc3bef5b72e85fff99204",
         "version" : "5.6.4"

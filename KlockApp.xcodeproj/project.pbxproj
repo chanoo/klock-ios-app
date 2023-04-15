@@ -14,7 +14,6 @@
 		984D2C8B29DFDBAA008D3EA9 /* CommonViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984D2C8A29DFDBAA008D3EA9 /* CommonViewModifier.swift */; };
 		984D2C8F29E067FE008D3EA9 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984D2C8E29E067FE008D3EA9 /* SplashView.swift */; };
 		984D2C9129E0728C008D3EA9 /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984D2C9029E0728C008D3EA9 /* SplashViewModel.swift */; };
-		985BE88629E6A23A008582A3 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 985BE88529E6A23A008582A3 /* Alamofire */; };
 		985BE88829E6DC1D008582A3 /* StudyTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE88729E6DC1D008582A3 /* StudyTimeView.swift */; };
 		985BE88A29E6DC2C008582A3 /* ChatBotChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE88929E6DC2C008582A3 /* ChatBotChatView.swift */; };
 		985BE88C29E6DC35008582A3 /* StudyTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE88B29E6DC35008582A3 /* StudyTimerView.swift */; };
@@ -89,6 +88,7 @@
 		98E9384E29EA3935009CBF32 /* RoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E9384D29EA3935009CBF32 /* RoundedCorners.swift */; };
 		98E9385029EA39A8009CBF32 /* ChatGPTServiceDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E9384F29EA39A8009CBF32 /* ChatGPTServiceDTO.swift */; };
 		98E9385229EA3AC4009CBF32 /* MessageServiceDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E9385129EA3AC4009CBF32 /* MessageServiceDTO.swift */; };
+		98E9385829EA4C45009CBF32 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 98E9385729EA4C45009CBF32 /* Alamofire */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -205,8 +205,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				985BE88629E6A23A008582A3 /* Alamofire in Frameworks */,
 				98B21B3F29D5F54E004EFE0E /* FacebookLogin in Frameworks */,
+				98E9385829EA4C45009CBF32 /* Alamofire in Frameworks */,
 				98B21B3D29D5F54E004EFE0E /* FacebookCore in Frameworks */,
 				98CE661629D55A370009916F /* Swinject in Frameworks */,
 			);
@@ -497,7 +497,7 @@
 				98CE661529D55A370009916F /* Swinject */,
 				98B21B3C29D5F54E004EFE0E /* FacebookCore */,
 				98B21B3E29D5F54E004EFE0E /* FacebookLogin */,
-				985BE88529E6A23A008582A3 /* Alamofire */,
+				98E9385729EA4C45009CBF32 /* Alamofire */,
 			);
 			productName = KlockApp;
 			productReference = 987E543629D552520007E156 /* KlockApp.app */;
@@ -577,7 +577,7 @@
 			packageReferences = (
 				98CE661429D55A370009916F /* XCRemoteSwiftPackageReference "Swinject" */,
 				98B21B3B29D5F54E004EFE0E /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
-				985BE88429E6A23A008582A3 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				98E9385629EA4C45009CBF32 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = 987E543729D552520007E156 /* Products */;
 			projectDirPath = "";
@@ -1064,14 +1064,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		985BE88429E6A23A008582A3 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Alamofire/Alamofire";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.6.4;
-			};
-		};
 		98B21B3B29D5F54E004EFE0E /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
@@ -1088,14 +1080,17 @@
 				minimumVersion = 2.8.3;
 			};
 		};
+		98E9385629EA4C45009CBF32 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.6.4;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		985BE88529E6A23A008582A3 /* Alamofire */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 985BE88429E6A23A008582A3 /* XCRemoteSwiftPackageReference "Alamofire" */;
-			productName = Alamofire;
-		};
 		98B21B3C29D5F54E004EFE0E /* FacebookCore */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 98B21B3B29D5F54E004EFE0E /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
@@ -1110,6 +1105,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 98CE661429D55A370009916F /* XCRemoteSwiftPackageReference "Swinject" */;
 			productName = Swinject;
+		};
+		98E9385729EA4C45009CBF32 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 98E9385629EA4C45009CBF32 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
 
