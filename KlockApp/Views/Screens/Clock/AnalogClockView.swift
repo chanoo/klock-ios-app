@@ -39,7 +39,7 @@ struct AnalogClockView: View {
 
             Circle()
                 .stroke(lineWidth: 1)
-                .foregroundColor(.black)
+                .foregroundColor(.clear)
                 .frame(width: viewModel.clockModel.clockSize.width, height: viewModel.clockModel.clockSize.height)
                 .overlay(
                     ZStack {
@@ -49,13 +49,25 @@ struct AnalogClockView: View {
 
                         ClockHand(angle: .degrees(secondAngle), length: viewModel.clockModel.secondHandLength, thickness: viewModel.clockModel.secondHandThickness, color: .red, imageName: viewModel.clockModel.secondHandImageName, clockSize: viewModel.clockModel.clockSize)
                         
+                        Circle()
+                            .stroke(lineWidth: 10)
+                            .foregroundColor(.gray)
+                            .frame(width: viewModel.clockModel.clockSize.width - 10, height: viewModel.clockModel.clockSize.height - 10)
+                            .opacity(0.1)
+                        
+                        Circle()
+                            .stroke(lineWidth: 10)
+                            .foregroundColor(.gray)
+                            .frame(width: viewModel.clockModel.clockSize.width - 30, height: viewModel.clockModel.clockSize.height - 30)
+                            .opacity(0.3)
+                        
                         ZStack {
                             ForEach(viewModel.studySessions.indices) { index in
                                 let studySession = viewModel.studySessions[index]
                                 let elapsedTime = studySession.endTime.timeIntervalSince(studySession.startTime)
                                 let isAfternoon = Calendar.current.component(.hour, from: studySession.startTime) >= 12
-                                let lineWidth: CGFloat = isAfternoon ? 5 : 5
-                                let circleRadius = isAfternoon ? (viewModel.clockModel.clockSize.width / 2) + 12: (viewModel.clockModel.clockSize.width / 2) + 5
+                                let lineWidth: CGFloat = isAfternoon ? 10 : 10
+                                let circleRadius = isAfternoon ? (viewModel.clockModel.clockSize.width / 2) - 5: (viewModel.clockModel.clockSize.width / 2) - 15
                                 let startAngle = angleForTime(date: studySession.startTime)
                                 let endAngle = startAngle + elapsedTime / (12 * 3600) * 360
 
@@ -68,8 +80,8 @@ struct AnalogClockView: View {
                                     path.addArc(center: CGPoint(x: viewModel.clockModel.clockSize.width / 2, y: viewModel.clockModel.clockSize.height / 2), radius: circleRadius, startAngle: .degrees(startAngle - 90), endAngle: .degrees(endAngle - 90), clockwise: false)
                                     path.addLine(to: endPoint)
                                 }
-                                .stroke(style: StrokeStyle(lineWidth: lineWidth, lineCap: .round, lineJoin: .round))
-                                .foregroundColor(isAfternoon ? FancyColor.primary.color.opacity(0.9) : FancyColor.primary.color.opacity(0.7))
+                                .stroke(style: StrokeStyle(lineWidth: lineWidth, lineCap: .square, lineJoin: .round))
+                                .foregroundColor(isAfternoon ? FancyColor.secondary.color.opacity(1.0) : FancyColor.primary.color.opacity(1.0))
                                 .frame(width: viewModel.clockModel.clockSize.width, height: viewModel.clockModel.clockSize.height) // 프레임 크기를 시계 크기와 동일하게 설정
                             }
                             .onAppear {
@@ -126,13 +138,6 @@ struct AnalogClockView: View {
         return Double(second) / 60 * 360
     }
 }
-
-//extension AnalogClockView: Dismissable {
-//    func dismiss() {
-//        finishStudySession()
-////        presentationMode.wrappedValue.dismiss()
-//    }
-//}
 
 // ClockHand 구조체는 시계의 바늘을 표시하는 View 입니다.
 struct ClockHand: View {
