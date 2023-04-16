@@ -18,7 +18,7 @@ struct CalendarView: View {
         let calendar = Calendar.current
         let dayOfWeek = calendar.component(.weekday, from: today) - calendar.firstWeekday
         let currentWeekStartDate = calendar.date(byAdding: .day, value: -dayOfWeek, to: today) ?? today
-        return calendar.date(byAdding: .weekOfYear, value: -weeks, to: currentWeekStartDate) ?? currentWeekStartDate
+        return calendar.date(byAdding: .weekOfYear, value: -weeks + 1, to: currentWeekStartDate) ?? currentWeekStartDate
     }
 
     private var horizontalPadding: CGFloat {
@@ -84,10 +84,16 @@ struct CalendarView: View {
                         
                         VStack(alignment: .center, spacing: 0) {
                             let studySessions = viewModel.studySessions[dateString] ?? []
-                            let backgroundColor = color(for: studySessions)
-                            DayView(size: dayViewSize, backgroundColor: backgroundColor)
+                            let backgroundColor = color(for: studySessions, date: currentDate)
+                            let randomDelay = Double.random(in: 0...2)
+                            let maxBlinks = studySessions.isEmpty ? 0 : Int.random(in: 1...2)
+                            DayView(size: dayViewSize, backgroundColor: backgroundColor, fadeInOutDuration: 0.5, randomDelay: randomDelay, maxBlinks: maxBlinks) {
+                                // 여기에 버튼을 클릭했을 때의 액션을 추가하세요.
+                                debugPrint(dateString, studySessions)
+                            }
                         }
                     }
+
                 }
             }
             
@@ -121,11 +127,20 @@ struct CalendarView: View {
         dateFormatter.dateFormat = "d"
         return dateFormatter.string(from: date)
     }
+    
+    private func isFuture(date: Date) -> Bool {
+        let now = Date()
+        return date > now
+    }
 
-    private func color(for studySessions: [StudySessionModel]) -> Color {
-        debugPrint("studySessions", studySessions)
+    private func color(for studySessions: [StudySessionModel], date: Date) -> Color {
         let totalDuration = studySessions.reduce(0) { $0 + $1.sessionDuration }
+        let isFutureDate = Calendar.current.compare(date, to: Date(), toGranularity: .day) == .orderedDescending
 
+        if isFutureDate {
+            return Color.clear // 미래의 날짜에 원하는 색상을 설정하세요.
+        }
+        
         let hour = 60 * 60
         let leve1: Double = Double(hour * 1)
         let leve2: Double = Double(hour * 2)
@@ -136,15 +151,15 @@ struct CalendarView: View {
         case 0:
             return Color.gray.opacity(0.3)
         case 1...leve1:
-            return FancyColor.secondary.color.opacity(0.2)
+            return Color.green.opacity(0.2)
         case leve1...leve2:
-            return FancyColor.secondary.color.opacity(0.4)
+            return Color.green.opacity(0.4)
         case leve2...leve3:
-            return FancyColor.secondary.color.opacity(0.6)
+            return Color.green.opacity(0.6)
         case leve3...leve4:
-            return FancyColor.secondary.color.opacity(0.8)
+            return Color.green.opacity(0.8)
         default:
-            return FancyColor.secondary.color
+            return Color.green
         }
     }
 }

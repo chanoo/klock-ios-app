@@ -24,6 +24,7 @@ class CalendarViewModel: ObservableObject {
     func stringFromDate(_ date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyyMMdd"
+        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
         return dateFormatter.string(from: date)
     }
     
@@ -44,6 +45,7 @@ class CalendarViewModel: ObservableObject {
         while currentDate <= endDate {
             let sessions = generateSampleStudySessions(forDate: currentDate)
             let dateString = stringFromDate(currentDate)
+            debugPrint(currentDate, dateString)
             studySessions[dateString] = sessions
             
             currentDate = calendar.date(byAdding: .day, value: 1, to: currentDate) ?? endDate
