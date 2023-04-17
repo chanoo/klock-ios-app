@@ -14,14 +14,14 @@ class MessageService: MessageServiceProtocol {
     func saveMessage(message: MessageModel) -> AnyPublisher<Bool, Error> {
         return Future<Bool, Error> { promise in
             let context = self.coreDataManager.persistentContainer.viewContext
-            guard let entity = NSEntityDescription.entity(forEntityName: "MessageEntity", in: context) else {
+            guard let entity = NSEntityDescription.entity(forEntityName: "Message", in: context) else {
                 return promise(.failure(NSError(domain: "Error in creating entity", code: 1000, userInfo: nil)))
             }
             guard let chatBotID = message.chatBotID else {
                 return promise(.failure(NSError(domain: "ChatBotID is missing", code: 1001, userInfo: nil)))
             }
             
-            let messageEntity = NSManagedObject(entity: entity, insertInto: context) as! MessageEntity
+            let messageEntity = NSManagedObject(entity: entity, insertInto: context) as! Message
             messageEntity.content = message.content
             messageEntity.role = message.role
             messageEntity.chatBotID = chatBotID
@@ -43,7 +43,7 @@ class MessageService: MessageServiceProtocol {
             }
 
             let context = self.coreDataManager.persistentContainer.viewContext
-            let fetchRequest = NSFetchRequest<MessageEntity>(entityName: "MessageEntity")
+            let fetchRequest = NSFetchRequest<Message>(entityName: "Message")
             fetchRequest.predicate = NSPredicate(format: "chatBotID == %@", NSNumber(value: chatBotID))
             fetchRequest.sortDescriptors = [NSSortDescriptor(key: "timeStamp", ascending: true)]
 
@@ -66,7 +66,7 @@ class MessageService: MessageServiceProtocol {
             }
 
             let context = self.coreDataManager.persistentContainer.viewContext
-            let fetchRequest = NSFetchRequest<MessageEntity>(entityName: "MessageEntity")
+            let fetchRequest = NSFetchRequest<Message>(entityName: "Message")
             fetchRequest.predicate = NSPredicate(format: "chatBotID == %lld", chatBotID)
 
             do {

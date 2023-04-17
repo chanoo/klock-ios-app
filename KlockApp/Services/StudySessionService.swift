@@ -7,7 +7,7 @@ class StudySessionService: StudySessionServiceProtocol {
     func fetchStudySessions() -> AnyPublisher<[StudySessionModel], Error> {
         return Future<[StudySessionModel], Error> { promise in
             let context = self.coreDataManager.persistentContainer.viewContext
-            let fetchRequest = NSFetchRequest<StudySessionEntity>(entityName: "StudySessionEntity")
+            let fetchRequest = NSFetchRequest<StudySession>(entityName: "StudySession")
             fetchRequest.sortDescriptors = [NSSortDescriptor(key: "startTime", ascending: true)]
 
             do {
@@ -25,11 +25,11 @@ class StudySessionService: StudySessionServiceProtocol {
     func saveStudySession(startTime: Date, endTime: Date) -> AnyPublisher<Bool, Error> {
         return Future<Bool, Error> { promise in
             let context = self.coreDataManager.persistentContainer.viewContext
-            guard let entity = NSEntityDescription.entity(forEntityName: "StudySessionEntity", in: context) else {
+            guard let entity = NSEntityDescription.entity(forEntityName: "StudySession", in: context) else {
                 return promise(.failure(NSError(domain: "Error in creating entity", code: 1000, userInfo: nil)))
             }
 
-            let studySessionEntity = NSManagedObject(entity: entity, insertInto: context) as! StudySessionEntity
+            let studySessionEntity = NSManagedObject(entity: entity, insertInto: context) as! StudySession
             studySessionEntity.startTime = startTime
             studySessionEntity.endTime = endTime
 
@@ -45,7 +45,7 @@ class StudySessionService: StudySessionServiceProtocol {
     func deleteStoredStudySessions() -> AnyPublisher<Bool, Error> {
         return Future<Bool, Error> { promise in
             let context = self.coreDataManager.persistentContainer.viewContext
-            let fetchRequest = NSFetchRequest<StudySessionEntity>(entityName: "StudySessionEntity")
+            let fetchRequest = NSFetchRequest<StudySession>(entityName: "StudySession")
 
             do {
                 let storedSessions = try context.fetch(fetchRequest)
