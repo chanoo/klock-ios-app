@@ -12,7 +12,7 @@ class CalendarViewModel: ObservableObject {
     @Published var studySessions: [String: [StudySessionModel]] = [:]
     
     init() {
-        generateSampleData(startDateString: "20230121", endDateString: "20230413")
+        generateSampleData(startDateString: "20230120", endDateString: "20230413")
     }
     
     private func dateFromString(_ dateString: String) -> Date? {
@@ -43,15 +43,18 @@ class CalendarViewModel: ObservableObject {
         var currentDate = startDate
         
         while currentDate <= endDate {
-            let sessions = generateSampleStudySessions(forDate: currentDate)
-            let dateString = stringFromDate(currentDate)
-            debugPrint(currentDate, dateString)
-            studySessions[dateString] = sessions
+            let shouldGenerateData = Int.random(in: 1...7)
+            
+            if shouldGenerateData <= 6 { // 6/7 확률로 샘플 데이터 생성
+                let sessions = generateSampleStudySessions(forDate: currentDate)
+                let dateString = stringFromDate(currentDate)
+                studySessions[dateString] = sessions
+            }
             
             currentDate = calendar.date(byAdding: .day, value: 1, to: currentDate) ?? endDate
         }
     }
-    
+
     private func generateSampleStudySessions(forDate date: Date) -> [StudySessionModel] {
         let numberOfSessions = Int.random(in: 3...7)
         var sessions: [StudySessionModel] = []
