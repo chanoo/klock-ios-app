@@ -7,31 +7,76 @@
 
 import Foundation
 import SwiftUI
+import Combine
 
 class ClockViewModel: ObservableObject {
+    
     private let studyTimeKey = "studyTime"
-    @Published var studySessions: [StudySessionModel] = []
-    @Published var elapsedTime: TimeInterval = 0
-    @Published var clockModel: ClockModel
+     private let savedTimeKey = "savedTime" // Add this line
+     @Published var studySessions: [StudySessionModel] = []
+     @Published var elapsedTime: TimeInterval = 0
+     @Published var clockModel: ClockModel
+
+    private let studySessionService: StudySessionServiceProtocol = Container.shared.resolve(StudySessionServiceProtocol.self)
+
+    var cancellables: Set<AnyCancellable> = []
 
     init(clockModel: ClockModel) {
-        self.clockModel = clockModel
-        self.studySessions = []
-        self.studySessions = generateSampleStudySessions()
-        loadStudyTime() // Add this line
-    }
+         self.clockModel = clockModel
+         self.studySessions = []
+         self.studySessions = generateSampleStudySessions()
+         loadStudyTime()
+         saveStudyTime() // Add this line
+     }
+     
+     deinit {
+         saveStudyTime()
+     }
     
-    deinit {
-        saveStudyTime() // Add this line
+    func stopAndSaveStudySession() {
+        let startTime = Date().addingTimeInterval(-elapsedTime)
+        let endTime = Date()
+        
+        studySessionService.saveStudySession(startTime: startTime, endTime: endTime)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .failure(let error):
+                    print("Error saving study session: \(error)")
+                case .finished:
+                    print("Study session saved successfully")
+                }
+            }, receiveValue: { _ in
+                self.deleteStudyTime()
+            })
+            .store(in: &cancellables)
     }
 
-    func saveStudyTime() {
-        UserDefaults.standard.set(elapsedTime, forKey: studyTimeKey)
+     func saveStudyTime() {
+         debugPrint("saveStudyTime", elapsedTime)
+         UserDefaults.standard.set(elapsedTime, forKey: studyTimeKey)
+         let now = Date().timeIntervalSince1970 // Add this line
+         UserDefaults.standard.set(now, forKey: savedTimeKey) // Add this line
+     }
+
+     func loadStudyTime() {
+         elapsedTime = UserDefaults.standard.double(forKey: studyTimeKey)
+         calculateElapsedTime() // Add this line
+     }
+    
+    func deleteStudyTime() {
+        elapsedTime = 0
+        UserDefaults.standard.removeObject(forKey: studyTimeKey)
     }
 
-    func loadStudyTime() {
-        elapsedTime = UserDefaults.standard.double(forKey: studyTimeKey)
-    }
+     func calculateElapsedTime() {
+         let savedTime = UserDefaults.standard.double(forKey: savedTimeKey)
+         if savedTime != 0 {
+             let currentTime = Date().timeIntervalSince1970
+             let timeDifference = currentTime - savedTime
+             elapsedTime += timeDifference
+             saveStudyTime()
+         }
+     }
 
     func generateSampleStudySessions() -> [StudySessionModel] {
         let dateFormatter = DateFormatter()

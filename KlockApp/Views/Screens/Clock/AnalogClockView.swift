@@ -10,6 +10,7 @@ import SwiftUI
 struct AnalogClockView: View {
     @ObservedObject private var viewModel: ClockViewModel = Container.shared.resolve(ClockViewModel.self)
     @State private var currentTime = Date()
+    @Environment(\.presentationMode) var presentationMode
 
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
@@ -19,13 +20,6 @@ struct AnalogClockView: View {
         let seconds = Int(viewModel.elapsedTime) % 60
         return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
     }
-    
-//    func finishStudySession() {
-//        if let lastStudySession = viewModel.studySessions.last {
-//            lastStudySession.endTime = Date()
-//            $viewModel.saveStudySession(startTime: lastStudySession.startTime, endTime: lastStudySession.endTime)
-//        }
-//    }
 
     var body: some View {
         ZStack {
@@ -84,9 +78,6 @@ struct AnalogClockView: View {
                                 .foregroundColor(isAfternoon ? FancyColor.secondary.color.opacity(1.0) : FancyColor.primary.color.opacity(1.0))
                                 .frame(width: viewModel.clockModel.clockSize.width, height: viewModel.clockModel.clockSize.height) // 프레임 크기를 시계 크기와 동일하게 설정
                             }
-                            .onAppear {
-                                UIScrollView.appearance().keyboardDismissMode = .interactive
-                            }
                             .environment(\.layoutDirection, .rightToLeft) // 경고를 숨기기 위한 코드
                         }
                         
@@ -96,7 +87,14 @@ struct AnalogClockView: View {
                             .background(Color.black.opacity(0.7))
                             .foregroundColor(.white)
                             .clipShape(RoundedRectangle(cornerRadius: 10))
-                            .position(x: viewModel.clockModel.clockSize.width / 2, y: viewModel.clockModel.clockSize.height + 80)
+                            .position(x: viewModel.clockModel.clockSize.width / 2, y: -viewModel.clockModel.clockSize.height / 2)
+                        
+                        FancyButton(title: "정지", action: {
+                            viewModel.stopAndSaveStudySession()
+                            presentationMode.wrappedValue.dismiss()
+                        }, backgroundColor: FancyColor.primary.color, foregroundColor: .white)
+                        .position(x: viewModel.clockModel.clockSize.width / 2, y: viewModel.clockModel.clockSize.height + 80)
+
                     }
                 )
 
@@ -109,6 +107,9 @@ struct AnalogClockView: View {
         }
         .onAppear {
             viewModel.loadStudyTime()
+        }
+        .onDisappear() {
+            viewModel.saveStudyTime()
         }
 
     }
