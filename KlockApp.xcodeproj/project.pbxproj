@@ -117,6 +117,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		980C623229EC621C00D0A7B5 /* FamilyControls.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FamilyControls.framework; path = System/Library/Frameworks/FamilyControls.framework; sourceTree = SDKROOT; };
 		984D2C7F29DFB197008D3EA9 /* FlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowLayout.swift; sourceTree = "<group>"; };
 		984D2C8129DFC2B3008D3EA9 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		984D2C8329DFC311008D3EA9 /* UINavigationController+UIGestureRecognizerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+UIGestureRecognizerDelegate.swift"; sourceTree = "<group>"; };
@@ -254,6 +255,14 @@
 			path = Calendar;
 			sourceTree = "<group>";
 		};
+		980C623129EC621B00D0A7B5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				980C623229EC621C00D0A7B5 /* FamilyControls.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		984D2C8529DFC479008D3EA9 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -273,6 +282,7 @@
 				987E544F29D552540007E156 /* KlockAppTests */,
 				987E545929D552540007E156 /* KlockAppUITests */,
 				987E543729D552520007E156 /* Products */,
+				980C623129EC621B00D0A7B5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
