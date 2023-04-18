@@ -6,60 +6,63 @@
 
 import SwiftUI
 
-struct FancyTabView<Content: View>: View {
-    @Environment(\.colorScheme) var colorScheme
+struct FancyTabView: View {
     @Binding var selection: Int
-    let content: Content
-    let imageNames: [String]
+    let items: [(imageName: String, content: AnyView)]
 
-    init(selection: Binding<Int>, imageNames: [String], @ViewBuilder content: () -> Content) {
+    init(selection: Binding<Int>, items: [(imageName: String, content: AnyView)]) {
         self._selection = selection
-        self.content = content()
-        self.imageNames = imageNames
+        self.items = items
     }
 
-    private func tabButton(_ index: Int) -> some View {
-        Button(action: {
-            self.selection = index
-        }) {
-            VStack(alignment: .center, spacing: 0) {
-                if selection == index {
-                    Rectangle()
-                        .fill(FancyColor.primary.color)
-                        .frame(height: 2)
-                } else {
-                    Rectangle()
-                        .fill(Color.gray.opacity(0.3))
-                        .frame(height: 1)
-                }
-                
-                Spacer()
-                
-                Image(imageNames[index])
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(maxWidth: 24, maxHeight: 24)
-                    .foregroundColor(selection == index ? FancyColor.primary.color : colorScheme == .dark ? .white.opacity(0.9) : .black)
-                    
-                Spacer()
-            }
-        }
-    }
-    
     var body: some View {
         VStack(spacing: 0) {
-            content
+            items[selection].content
 
             HStack(spacing: 0) {
                 HStack(spacing: 0) {
-                    ForEach(0..<imageNames.count, id: \.self) { index in
-                        tabButton(index)
+                    ForEach(0..<items.count, id: \.self) { index in
+                        Button(action: {
+                            selection = index
+                        }) {
+                            FancyTabItem(imageName: items[index].imageName, isSelected: selection == index)
+                        }
                     }
                 }
                 .padding(.horizontal)
                 .frame(height: 60)
             }
             .background(FancyColor.background.color)
+        }
+    }
+}
+
+struct FancyTabItem: View {
+    @Environment(\.colorScheme) var colorScheme
+    let imageName: String
+    let isSelected: Bool
+    
+    var body: some View {
+        VStack {
+            if isSelected {
+                Rectangle()
+                    .fill(FancyColor.primary.color)
+                    .frame(height: 2)
+            } else {
+                Rectangle()
+                    .fill(Color.gray.opacity(0.3))
+                    .frame(height: 1)
+            }
+            
+            Spacer()
+            
+            Image(imageName)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(maxWidth: 22, maxHeight: 22)
+                .foregroundColor(isSelected ? FancyColor.primary.color : colorScheme == .dark ? .white.opacity(0.9) : .black )
+            
+            Spacer()
         }
     }
 }

@@ -27,22 +27,12 @@ struct HomeView: View {
     }
 
     var body: some View {
-        FancyTabView(selection: $selection, imageNames: [
-            "ic_clock",
-            "ic_bar_graph",
-            "ic_bachelor_cap",
-            "ic_person"
-        ]) {
-            if selection == 0 {
-                StudyTimerView()
-            } else if selection == 1 {
-                CalendarView()
-            } else if selection == 2 {
-                ChatBotListView()
-            } else if selection == 3 {
-                FriendsView()
-            }
-        }
+        FancyTabView(selection: $selection, items: [
+            (imageName: "ic_clock", content: AnyView(StudyTimerView())),
+            (imageName: "ic_bar_graph", content: AnyView(CalendarView())),
+            (imageName: "ic_bachelor_cap", content: AnyView(ChatBotListView())),
+            (imageName: "ic_person", content: AnyView(FriendsView()))
+        ])
         .navigationBarTitle(title)
         .onChange(of: selection) { newSelection in
             updateTitle(newSelection)
