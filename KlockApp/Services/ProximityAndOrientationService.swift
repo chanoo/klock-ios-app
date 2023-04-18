@@ -10,7 +10,7 @@ import CoreMotion
 import Combine
 import UIKit
 
-class AmbientLightService {
+class ProximityAndOrientationService: ProximityAndOrientationServiceProtocol {
     private let motionManager: CMMotionManager
     private var cancellable: AnyCancellable?
     private var isUpsideDown = false

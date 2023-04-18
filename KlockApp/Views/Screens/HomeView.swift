@@ -31,7 +31,7 @@ struct HomeView: View {
             (imageName: "ic_clock", content: AnyView(StudyTimerView())),
             (imageName: "ic_bar_graph", content: AnyView(CalendarView())),
             (imageName: "ic_bachelor_cap", content: AnyView(ChatBotListView())),
-            (imageName: "ic_person", content: AnyView(AmbientLightView()))
+            (imageName: "ic_person", content: AnyView(FriendsView()))
         ])
         .navigationBarTitle(title)
         .onChange(of: selection) { newSelection in

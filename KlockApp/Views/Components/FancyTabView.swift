@@ -60,8 +60,8 @@ struct FancyTabItem: View {
             Image(imageName)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(maxWidth: 22, maxHeight: 22)
-                .foregroundColor(isSelected ? FancyColor.primary.color : colorScheme == .dark ? .white.opacity(0.9) : .black )
+                .frame(maxWidth: 28, maxHeight: 28)
+                .foregroundColor(isSelected ? FancyColor.primary.color : colorScheme == .dark ? .white.opacity(0.8) : .black )
             
             Spacer()
         }

@@ -47,6 +47,7 @@ class Container {
         container.register(ChatBotServiceProtocol.self) { _ in ChatBotService() }
         container.register(MessageServiceProtocol.self) { _ in MessageService() }
         container.register(StudySessionServiceProtocol.self) { _ in StudySessionService() }
+        container.register(ProximityAndOrientationServiceProtocol.self) { _ in ProximityAndOrientationService() }
 
         // View Models
         container.register(ContentViewModel.self) { _ in ContentViewModel() }

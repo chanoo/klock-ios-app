@@ -8,32 +8,47 @@
 import Foundation
 import SwiftUI
 import Combine
+import AudioToolbox
 
 class ClockViewModel: ObservableObject {
-    
+
     private let studyTimeKey = "studyTime"
-     private let savedTimeKey = "savedTime" // Add this line
-     @Published var studySessions: [StudySessionModel] = []
-     @Published var elapsedTime: TimeInterval = 0
-     @Published var clockModel: ClockModel
+    private let savedTimeKey = "savedTime" // Add this line
+    @Published var studySessions: [StudySessionModel] = []
+    @Published var elapsedTime: TimeInterval = 0
+    @Published var clockModel: ClockModel
+    private var cancellable: AnyCancellable?
+
+    @Published var isDark: Bool = false
 
     private let studySessionService: StudySessionServiceProtocol = Container.shared.resolve(StudySessionServiceProtocol.self)
+    private let proximityAndOrientationService: ProximityAndOrientationServiceProtocol = Container.shared.resolve(ProximityAndOrientationServiceProtocol.self)
 
     private var orientationObserver: NSObjectProtocol?
     var cancellables: Set<AnyCancellable> = []
 
     init(clockModel: ClockModel) {
-         self.clockModel = clockModel
-         self.studySessions = []
-         self.studySessions = generateSampleStudySessions()
-         loadStudyTime()
-         saveStudyTime() // Add this line
-     }
-     
-     deinit {
-         saveStudyTime()
-     }
-    
+        self.clockModel = clockModel
+        self.studySessions = []
+        self.studySessions = generateSampleStudySessions()
+        loadStudyTime()
+        saveStudyTime() // Add this line
+        setupSensor()
+    }
+
+    deinit {
+        saveStudyTime()
+    }
+
+    private func setupSensor() {
+        cancellable = proximityAndOrientationService.setupSensor()
+            .assign(to: \.isDark, on: self)
+    }
+
+    func playVibration() {
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
+    }
+
     func stopAndSaveStudySession() {
         let startTime = Date().addingTimeInterval(-elapsedTime)
         let endTime = Date()
@@ -52,31 +67,31 @@ class ClockViewModel: ObservableObject {
             .store(in: &cancellables)
     }
 
-     func saveStudyTime() {
-         UserDefaults.standard.set(elapsedTime, forKey: studyTimeKey)
-         let now = Date().timeIntervalSince1970 // Add this line
-         UserDefaults.standard.set(now, forKey: savedTimeKey) // Add this line
-     }
+    func saveStudyTime() {
+        UserDefaults.standard.set(elapsedTime, forKey: studyTimeKey)
+        let now = Date().timeIntervalSince1970 // Add this line
+        UserDefaults.standard.set(now, forKey: savedTimeKey) // Add this line
+    }
 
-     func loadStudyTime() {
-         elapsedTime = UserDefaults.standard.double(forKey: studyTimeKey)
-         calculateElapsedTime() // Add this line
-     }
-    
+    func loadStudyTime() {
+        elapsedTime = UserDefaults.standard.double(forKey: studyTimeKey)
+        calculateElapsedTime() // Add this line
+    }
+
     func deleteStudyTime() {
         elapsedTime = 0
         UserDefaults.standard.removeObject(forKey: studyTimeKey)
     }
 
-     func calculateElapsedTime() {
-         let savedTime = UserDefaults.standard.double(forKey: savedTimeKey)
-         if savedTime != 0 {
-             let currentTime = Date().timeIntervalSince1970
-             let timeDifference = currentTime - savedTime
-             elapsedTime += timeDifference
-             saveStudyTime()
-         }
-     }
+    func calculateElapsedTime() {
+        let savedTime = UserDefaults.standard.double(forKey: savedTimeKey)
+        if savedTime != 0 {
+            let currentTime = Date().timeIntervalSince1970
+            let timeDifference = currentTime - savedTime
+            elapsedTime += timeDifference
+            saveStudyTime()
+        }
+    }
 
     func generateSampleStudySessions() -> [StudySessionModel] {
         let dateFormatter = DateFormatter()
@@ -114,3 +129,4 @@ class ClockViewModel: ObservableObject {
     }
 
 }
+
