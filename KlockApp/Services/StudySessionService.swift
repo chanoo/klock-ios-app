@@ -13,7 +13,7 @@ class StudySessionService: StudySessionServiceProtocol {
             do {
                 let fetchedEntities = try context.fetch(fetchRequest)
                 let studySessions = fetchedEntities.map { entity -> StudySessionModel in
-                    StudySessionModel(id: entity.id, accountId: 1, startTime: entity.startTime ?? Date(), endTime: entity.endTime ?? Date())
+                    StudySessionModel(id: entity.id, accountId: 1, startTime: entity.startTime ?? Date(), endTime: entity.endTime ?? Date(), syncDate: nil)
                 }
                 promise(.success(studySessions))
             } catch {

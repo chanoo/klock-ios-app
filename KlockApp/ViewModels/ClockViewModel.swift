@@ -19,6 +19,7 @@ class ClockViewModel: ObservableObject {
 
     private let studySessionService: StudySessionServiceProtocol = Container.shared.resolve(StudySessionServiceProtocol.self)
 
+    private var orientationObserver: NSObjectProtocol?
     var cancellables: Set<AnyCancellable> = []
 
     init(clockModel: ClockModel) {
@@ -100,7 +101,7 @@ class ClockViewModel: ObservableObject {
         for i in 0..<sampleTimes.count {
             if let startTime = dateFormatter.date(from: sampleTimes[i].start),
                let endTime = dateFormatter.date(from: sampleTimes[i].end) {
-                let studySession = StudySessionModel(id: Int64(i), accountId: 1, startTime: startTime, endTime: endTime)
+                let studySession = StudySessionModel(id: Int64(i), accountId: 1, startTime: startTime, endTime: endTime, syncDate: nil)
                 sampleStudySessions.append(studySession)
             }
         }

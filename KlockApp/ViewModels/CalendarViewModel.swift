@@ -68,7 +68,8 @@ class CalendarViewModel: ObservableObject {
                 id: Int64.random(in: 1...10000),
                 accountId: Int64.random(in: 1...100),
                 startTime: startTime,
-                endTime: endTime
+                endTime: endTime,
+                syncDate: nil
             )
             
             sessions.append(session)
