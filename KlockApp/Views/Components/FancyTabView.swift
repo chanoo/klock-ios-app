@@ -51,13 +51,15 @@ struct FancyTabView<Content: View>: View {
             content
 
             HStack(spacing: 0) {
-                ForEach(0..<imageNames.count, id: \.self) { index in
-                    tabButton(index)
+                HStack(spacing: 0) {
+                    ForEach(0..<imageNames.count, id: \.self) { index in
+                        tabButton(index)
+                    }
                 }
+                .padding(.horizontal)
+                .frame(height: 60)
             }
-//            .padding(.horizontal)
             .background(FancyColor.background.color)
-            .frame(height: 60)
         }
     }
 }

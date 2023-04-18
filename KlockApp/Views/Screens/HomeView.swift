@@ -19,6 +19,8 @@ struct HomeView: View {
             title = "통계"
         case 2:
             title = "Ai 선생님"
+        case 3:
+            title = "캐릭터"
         default:
             title = ""
         }
@@ -28,14 +30,17 @@ struct HomeView: View {
         FancyTabView(selection: $selection, imageNames: [
             "ic_clock",
             "ic_bar_graph",
-            "ic_bachelor_cap"
+            "ic_bachelor_cap",
+            "ic_person"
         ]) {
             if selection == 0 {
-                CalendarView()
-            } else if selection == 1 {
                 StudyTimerView()
+            } else if selection == 1 {
+                CalendarView()
             } else if selection == 2 {
                 ChatBotListView()
+            } else if selection == 3 {
+                FriendsView()
             }
         }
         .navigationBarTitle(title)
