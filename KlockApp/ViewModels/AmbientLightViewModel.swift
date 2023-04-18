@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import AudioToolbox
 
 class AmbientLightViewModel: ObservableObject {
     private let ambientLightService: AmbientLightService
@@ -22,5 +23,9 @@ class AmbientLightViewModel: ObservableObject {
     private func setupSensor() {
         cancellable = ambientLightService.setupSensor()
             .assign(to: \.isDark, on: self)
+    }
+    
+    func playVibration() {
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
     }
 }

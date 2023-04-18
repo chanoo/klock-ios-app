@@ -8,7 +8,7 @@
 import Foundation
 import UserNotifications
 
-class NotificationManager {
+class NotificationManager: NSObject, ObservableObject {
     static func sendLocalNotification() {
         let content = UNMutableNotificationContent()
         content.title = "어두운 환경 감지"
@@ -23,5 +23,11 @@ class NotificationManager {
                 print("Notification Error: \(error)")
             }
         }
+    }
+}
+
+extension NotificationManager: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.banner, .sound])
     }
 }

@@ -7,9 +7,14 @@ struct KlockAppApp: App {
 
     @StateObject private var appFlowManager = AppFlowManager()
     @StateObject private var signUpUserModel = SignUpUserModel()
+    @StateObject private var notificationManager = NotificationManager()
 
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
+    init() {
+        requestNotificationAuthorization()
+    }
+    
     var body: some Scene {
         WindowGroup {
             ContentView(viewModel: container.resolve(ContentViewModel.self))
@@ -23,6 +28,7 @@ struct KlockAppApp: App {
         switch state {
         case .active:
             // 앱이 활성 상태일 때 수행할 작업을 여기에 작성하세요.
+            UNUserNotificationCenter.current().delegate = notificationManager
             break
         case .inactive:
             // 앱이 비활성 상태일 때 수행할 작업을 여기에 작성하세요.
@@ -35,4 +41,13 @@ struct KlockAppApp: App {
             break
         }
     }
+    
+    func requestNotificationAuthorization() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+            if let error = error {
+                print("Notification authorization error: \(error)")
+            }
+        }
+    }
+
 }

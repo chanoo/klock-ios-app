@@ -15,6 +15,7 @@ struct AmbientLightView: View {
             if viewModel.isDark {
                 Text("어두운 환경 감지")
                     .onAppear {
+                        viewModel.playVibration()
                         NotificationManager.sendLocalNotification()
                     }
             } else {
