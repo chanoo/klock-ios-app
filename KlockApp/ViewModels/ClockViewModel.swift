@@ -52,7 +52,6 @@ class ClockViewModel: ObservableObject {
     }
 
      func saveStudyTime() {
-         debugPrint("saveStudyTime", elapsedTime)
          UserDefaults.standard.set(elapsedTime, forKey: studyTimeKey)
          let now = Date().timeIntervalSince1970 // Add this line
          UserDefaults.standard.set(now, forKey: savedTimeKey) // Add this line

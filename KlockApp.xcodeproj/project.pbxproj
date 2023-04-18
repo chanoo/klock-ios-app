@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		980C623629EE760100D0A7B5 /* FancyTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980C623529EE760100D0A7B5 /* FancyTabView.swift */; };
 		984D2C8029DFB197008D3EA9 /* FlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984D2C7F29DFB197008D3EA9 /* FlowLayout.swift */; };
 		984D2C8229DFC2B3008D3EA9 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984D2C8129DFC2B3008D3EA9 /* AppState.swift */; };
 		984D2C8429DFC311008D3EA9 /* UINavigationController+UIGestureRecognizerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984D2C8329DFC311008D3EA9 /* UINavigationController+UIGestureRecognizerDelegate.swift */; };
@@ -119,6 +120,7 @@
 /* Begin PBXFileReference section */
 		980C623229EC621C00D0A7B5 /* FamilyControls.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FamilyControls.framework; path = System/Library/Frameworks/FamilyControls.framework; sourceTree = SDKROOT; };
 		980C623429ED32E000D0A7B5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		980C623529EE760100D0A7B5 /* FancyTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyTabView.swift; sourceTree = "<group>"; };
 		984D2C7F29DFB197008D3EA9 /* FlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowLayout.swift; sourceTree = "<group>"; };
 		984D2C8129DFC2B3008D3EA9 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		984D2C8329DFC311008D3EA9 /* UINavigationController+UIGestureRecognizerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+UIGestureRecognizerDelegate.swift"; sourceTree = "<group>"; };
@@ -486,6 +488,7 @@
 				984D2C8A29DFDBAA008D3EA9 /* CommonViewModifier.swift */,
 				98E9384D29EA3935009CBF32 /* RoundedCorners.swift */,
 				986E5DB529EAF06D00FF7047 /* DayView.swift */,
+				980C623529EE760100D0A7B5 /* FancyTabView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -792,6 +795,7 @@
 				985BE89A29E6E579008582A3 /* FriendsViewModel.swift in Sources */,
 				984D2C8229DFC2B3008D3EA9 /* AppState.swift in Sources */,
 				98BDD21D29DAD1D400B0440F /* FancyColor.swift in Sources */,
+				980C623629EE760100D0A7B5 /* FancyTabView.swift in Sources */,
 				98E9385F29EA5856009CBF32 /* ClockModel.swift in Sources */,
 				984D2C8429DFC311008D3EA9 /* UINavigationController+UIGestureRecognizerDelegate.swift in Sources */,
 				98CE661D29D55AE00009916F /* AccountModel.swift in Sources */,

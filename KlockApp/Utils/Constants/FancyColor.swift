@@ -12,6 +12,7 @@ enum FancyColor: String {
     case secondary = "color_secondary"
     case facebook = "color_facebook"
     case background = "color_background"
+    case gray9 = "color_gray9"
 
     var color: Color {
         Color(self.rawValue)
