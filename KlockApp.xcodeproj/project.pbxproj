@@ -118,6 +118,7 @@
 
 /* Begin PBXFileReference section */
 		980C623229EC621C00D0A7B5 /* FamilyControls.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FamilyControls.framework; path = System/Library/Frameworks/FamilyControls.framework; sourceTree = SDKROOT; };
+		980C623429ED32E000D0A7B5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		984D2C7F29DFB197008D3EA9 /* FlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowLayout.swift; sourceTree = "<group>"; };
 		984D2C8129DFC2B3008D3EA9 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		984D2C8329DFC311008D3EA9 /* UINavigationController+UIGestureRecognizerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+UIGestureRecognizerDelegate.swift"; sourceTree = "<group>"; };
@@ -269,6 +270,7 @@
 				984D2C8129DFC2B3008D3EA9 /* AppState.swift */,
 				98D7C95229E460470075D201 /* AppFlowManager.swift */,
 				98D2826629E988100039E6E6 /* CoreDataManager.swift */,
+				980C623429ED32E000D0A7B5 /* README.md */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
