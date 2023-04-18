@@ -18,6 +18,7 @@ struct FancyTabView: View {
     var body: some View {
         VStack(spacing: 0) {
             items[selection].content
+                .frame(maxHeight: .infinity) // 추가
 
             HStack(spacing: 0) {
                 HStack(spacing: 0) {
