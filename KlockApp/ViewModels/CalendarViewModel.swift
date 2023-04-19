@@ -10,12 +10,64 @@ import Combine
 
 class CalendarViewModel: ObservableObject {
     @Published var studySessions: [String: [StudySessionModel]] = [:]
-    
+    private let studySessionService: StudySessionServiceProtocol = Container.shared.resolve(StudySessionServiceProtocol.self)
+    private var cancellables = Set<AnyCancellable>()
+
     init() {
-        generateSampleData(startDateString: "20230120", endDateString: "20230413")
+        self.generateSampleData(startDateString: "20230120", endDateString: "20230413")
+        self.fetchStudySession()
     }
     
-    private func dateFromString(_ dateString: String) -> Date? {
+    private func fetchStudySession() {
+        
+        studySessionService.fetchStudySessions()
+            .sink { completion in
+                switch completion {
+                case .failure(let error):
+                    print("Error fetching study sessions: \(error)")
+                case .finished:
+                    break
+                }
+            } receiveValue: { studySessions in
+                DispatchQueue.main.async {
+                    var groupedStudySessions: [String: [StudySessionModel]] = [:]
+
+                    for session in studySessions {
+                        debugPrint("session", session)
+                        let dateString = self.stringFromDate(session.startTime)
+                        if groupedStudySessions[dateString] == nil {
+                            groupedStudySessions[dateString] = [session]
+                        } else {
+                            groupedStudySessions[dateString]?.append(session)
+                        }
+                    }
+
+                    self.studySessions = groupedStudySessions
+                }
+            }
+            .store(in: &cancellables)
+        
+    }
+    
+    func deleteStoredStudySessions() {
+        studySessionService.deleteStoredStudySessions()
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .failure(let error):
+                    print("Error deleting study sessions: \(error.localizedDescription)")
+                case .finished:
+                    break
+                }
+            }, receiveValue: { success in
+                if success {
+                    print("Study Sessions deleted successfully")
+                    self.studySessions = [:]
+                }
+            })
+            .store(in: &cancellables)
+    }
+    
+    func dateFromString(_ dateString: String) -> Date? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyyMMdd"
         return dateFormatter.date(from: dateString)

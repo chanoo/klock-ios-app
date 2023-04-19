@@ -8,7 +8,10 @@ class StudySessionService: StudySessionServiceProtocol {
         return Future<[StudySessionModel], Error> { promise in
             let context = self.coreDataManager.persistentContainer.viewContext
             let fetchRequest = NSFetchRequest<StudySession>(entityName: "StudySession")
-            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "startTime", ascending: true)]
+            fetchRequest.sortDescriptors = [
+//                NSSortDescriptor(key: "id", ascending: false),
+                NSSortDescriptor(key: "startTime", ascending: false)
+            ]
 
             do {
                 let fetchedEntities = try context.fetch(fetchRequest)
@@ -22,6 +25,7 @@ class StudySessionService: StudySessionServiceProtocol {
         }.eraseToAnyPublisher()
     }
 
+
     func saveStudySession(startTime: Date, endTime: Date) -> AnyPublisher<Bool, Error> {
         return Future<Bool, Error> { promise in
             let context = self.coreDataManager.persistentContainer.viewContext
@@ -32,6 +36,20 @@ class StudySessionService: StudySessionServiceProtocol {
             let studySessionEntity = NSManagedObject(entity: entity, insertInto: context) as! StudySession
             studySessionEntity.startTime = startTime
             studySessionEntity.endTime = endTime
+            
+            // Assign auto-incrementing ID
+            let fetchRequest = NSFetchRequest<StudySession>(entityName: "StudySession")
+            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: false)]
+            fetchRequest.fetchLimit = 1
+
+            do {
+                let lastEntity = try context.fetch(fetchRequest).first
+                let id = (lastEntity?.id ?? 0) + 1
+                studySessionEntity.id = id
+            } catch {
+                promise(.failure(error))
+                return
+            }
 
             do {
                 try context.save()
