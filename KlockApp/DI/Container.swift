@@ -26,7 +26,7 @@ class Container {
         container.register(SignUpUserModel.self) { _ in SignUpUserModel() }
         container.register(ClockModel.self) { _ in
              ClockModel(
-                 hourHandLength: 180,
+                 hourHandLength: 150,
                  minuteHandLength: 200,
                  secondHandLength: 250,
                  hourHandThickness: 4,
@@ -35,7 +35,7 @@ class Container {
                  hourHandImageName: nil,
                  minuteHandImageName: nil,
                  secondHandImageName: nil,
-                 clockBackgroundImageName: "clockBackground",
+                 clockBackgroundImageName: "img_watch_face1",
                  clockSize: CGSize(width: 300, height: 300)
              )
          }

@@ -21,12 +21,12 @@ struct AnalogClockView: View {
                 Image(imageName)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(width: viewModel.clockModel.clockSize.width, height: viewModel.clockModel.clockSize.height)
+                    .frame(width: viewModel.clockModel.clockSize.width - 45,
+                           height: viewModel.clockModel.clockSize.height - 45)
             }
 
             Circle()
-                .stroke(lineWidth: 1)
-                .foregroundColor(.clear)
+                .foregroundColor(FancyColor.primary.color.opacity(0.2))
                 .frame(width: viewModel.clockModel.clockSize.width, height: viewModel.clockModel.clockSize.height)
                 .overlay(
                     ZStack {
@@ -49,27 +49,10 @@ struct AnalogClockView: View {
                             .opacity(0.3)
                         
                         ZStack {
+                            ClockOutLine(studySession: viewModel.currentStudySession)
                             ForEach(viewModel.studySessions.indices) { index in
                                 let studySession = viewModel.studySessions[index]
-                                let elapsedTime = studySession.endTime.timeIntervalSince(studySession.startTime)
-                                let isAfternoon = Calendar.current.component(.hour, from: studySession.startTime) >= 12
-                                let lineWidth: CGFloat = isAfternoon ? 10 : 10
-                                let circleRadius = isAfternoon ? (viewModel.clockModel.clockSize.width / 2) - 5: (viewModel.clockModel.clockSize.width / 2) - 15
-                                let startAngle = angleForTime(date: studySession.startTime)
-                                let endAngle = startAngle + elapsedTime / (12 * 3600) * 360
-
-                                // 원래 코드에서는 Circle().trim(from: 0, to: trimTo)를 사용하였으나, 이제 시작 각도와 종료 각도를 사용하여 도넛 그래프를 그립니다.
-                                Path { path in
-                                    let startPoint = CGPoint(x: viewModel.clockModel.clockSize.width / 2 + circleRadius * cos(CGFloat(startAngle - 90) * .pi / 180), y: viewModel.clockModel.clockSize.height / 2 + circleRadius * sin(CGFloat(startAngle - 90) * .pi / 180))
-                                    let endPoint = CGPoint(x: viewModel.clockModel.clockSize.width / 2 + circleRadius * cos(CGFloat(endAngle - 90) * .pi / 180), y: viewModel.clockModel.clockSize.height / 2 + circleRadius * sin(CGFloat(endAngle - 90) * .pi / 180))
-
-                                    path.move(to: startPoint)
-                                    path.addArc(center: CGPoint(x: viewModel.clockModel.clockSize.width / 2, y: viewModel.clockModel.clockSize.height / 2), radius: circleRadius, startAngle: .degrees(startAngle - 90), endAngle: .degrees(endAngle - 90), clockwise: false)
-                                    path.addLine(to: endPoint)
-                                }
-                                .stroke(style: StrokeStyle(lineWidth: lineWidth, lineCap: .square, lineJoin: .round))
-                                .foregroundColor(isAfternoon ? FancyColor.secondary.color.opacity(1.0) : FancyColor.primary.color.opacity(1.0))
-                                .frame(width: viewModel.clockModel.clockSize.width, height: viewModel.clockModel.clockSize.height) // 프레임 크기를 시계 크기와 동일하게 설정
+                                ClockOutLine(studySession: studySession)
                             }
                             .environment(\.layoutDirection, .rightToLeft) // 경고를 숨기기 위한 코드
                         }
@@ -82,7 +65,7 @@ struct AnalogClockView: View {
                             .clipShape(RoundedRectangle(cornerRadius: 10))
                             .position(x: viewModel.clockModel.clockSize.width / 2, y: -viewModel.clockModel.clockSize.height / 2)
                         
-                        FancyButton(title: "정지", action: {
+                        FancyButton(title: "잠시 멈춤", action: {
                             viewModel.stopAndSaveStudySession()
                             presentationMode.wrappedValue.dismiss()
                         }, backgroundColor: FancyColor.primary.color, foregroundColor: .white)
@@ -95,21 +78,16 @@ struct AnalogClockView: View {
         .onReceive(timer) { _ in
             viewModel.elapsedTime += 1
             currentTime = Date()
+            viewModel.updateTime()
             let _ = viewModel.objectWillChange
         }
         .onAppear {
             viewModel.loadStudyTime()
+            viewModel.updateTime()
         }
 
     }
     
-    private func angleForTime(date: Date) -> Double {
-        let hour = Calendar.current.component(.hour, from: date)
-        let minute = Calendar.current.component(.minute, from: date)
-        let second = Calendar.current.component(.second, from: date)
-        let totalSeconds = Double(hour * 3600 + minute * 60 + second)
-        return totalSeconds / 43200 * 360
-    }
 
     private var hourAngle: Double {
         let hour = Calendar.current.component(.hour, from: currentTime)
@@ -126,6 +104,32 @@ struct AnalogClockView: View {
     private var secondAngle: Double {
         let second = Calendar.current.component(.second, from: currentTime)
         return Double(second) / 60 * 360
+    }
+}
+
+struct ClockOutLine: View {
+    @ObservedObject private var viewModel: ClockViewModel = Container.shared.resolve(ClockViewModel.self)
+    let studySession: StudySessionModel
+
+    var body: some View {
+        let elapsedTime = studySession.endTime.timeIntervalSince(studySession.startTime)
+        let isAfternoon = Calendar.current.component(.hour, from: studySession.startTime) >= 12
+        let lineWidth: CGFloat = isAfternoon ? 10 : 10
+        let circleRadius = isAfternoon ? (viewModel.clockModel.clockSize.width / 2) - 5: (viewModel.clockModel.clockSize.width / 2) - 15
+        let startAngle = viewModel.angleForTime(date: studySession.startTime)
+        let endAngle = startAngle + elapsedTime / (12 * 3600) * 360
+
+        Path { path in
+            let startPoint = CGPoint(x: viewModel.clockModel.clockSize.width / 2 + circleRadius * cos(CGFloat(startAngle - 90) * .pi / 180), y: viewModel.clockModel.clockSize.height / 2 + circleRadius * sin(CGFloat(startAngle - 90) * .pi / 180))
+            let endPoint = CGPoint(x: viewModel.clockModel.clockSize.width / 2 + circleRadius * cos(CGFloat(endAngle - 90) * .pi / 180), y: viewModel.clockModel.clockSize.height / 2 + circleRadius * sin(CGFloat(endAngle - 90) * .pi / 180))
+
+            path.move(to: startPoint)
+            path.addArc(center: CGPoint(x: viewModel.clockModel.clockSize.width / 2, y: viewModel.clockModel.clockSize.height / 2), radius: circleRadius, startAngle: .degrees(startAngle - 90), endAngle: .degrees(endAngle - 90), clockwise: false)
+            path.addLine(to: endPoint)
+        }
+        .stroke(style: StrokeStyle(lineWidth: lineWidth, lineCap: .butt, lineJoin: .round))
+        .foregroundColor(isAfternoon ? FancyColor.primary.color.opacity(1.0) : FancyColor.primary.color.opacity(0.5))
+        .frame(width: viewModel.clockModel.clockSize.width, height: viewModel.clockModel.clockSize.height) // 프레임 크기를 시계 크기와 동일하게 설정
     }
 }
 

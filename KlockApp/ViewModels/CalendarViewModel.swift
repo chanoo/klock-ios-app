@@ -14,7 +14,7 @@ class CalendarViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
 
     init() {
-        self.generateSampleData(startDateString: "20230120", endDateString: "20230413")
+//        self.generateSampleData(startDateString: "20230120", endDateString: "20230413")
         self.fetchStudySession()
     }
     

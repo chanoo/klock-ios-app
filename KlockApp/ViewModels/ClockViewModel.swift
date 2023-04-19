@@ -14,6 +14,8 @@ class ClockViewModel: ObservableObject {
 
     private let studyStartTimeKey = "studyStartTime"
     @Published var studySessions: [StudySessionModel] = []
+    @Published var currentStudySession: StudySessionModel
+
     @Published var elapsedTime: TimeInterval = 0
     @Published var clockModel: ClockModel
     private var cancellable: AnyCancellable?
@@ -29,6 +31,8 @@ class ClockViewModel: ObservableObject {
     init(clockModel: ClockModel) {
         self.clockModel = clockModel
         self.studySessions = []
+        let now = Date()
+        self.currentStudySession = StudySessionModel(id: 0, accountId: 1, startTime: now, endTime: now, syncDate: nil)
 //        self.studySessions = generateSampleStudySessions()
         setupSensor()
     }
@@ -63,8 +67,12 @@ class ClockViewModel: ObservableObject {
     func loadStudyTime() {
         let currentTime = UserDefaults.standard.double(forKey: studyStartTimeKey)
         if currentTime == 0 {
-            let currentTime = Date().timeIntervalSince1970
-            UserDefaults.standard.set(currentTime, forKey: studyStartTimeKey)
+            let now = Date()
+            UserDefaults.standard.set(now.timeIntervalSince1970, forKey: studyStartTimeKey)
+            currentStudySession = StudySessionModel(id: 0, accountId: 1, startTime: now, endTime: now, syncDate: nil)
+        } else {
+            let startTime = Date(timeIntervalSince1970: currentTime)
+            currentStudySession = StudySessionModel(id: 0, accountId: 1, startTime: startTime, endTime: startTime, syncDate: nil)
         }
         calculateElapsedTime()
         debugPrint("elapsedTime", elapsedTime)
@@ -84,11 +92,29 @@ class ClockViewModel: ObservableObject {
         }
     }
     
+    func updateTime() {
+        let now = Date()
+        currentStudySession = StudySessionModel(
+            id: currentStudySession.id,
+            accountId: currentStudySession.accountId,
+            startTime: currentStudySession.startTime,
+            endTime: now,
+            syncDate: nil)
+    }
+    
     func elapsedTimeToString() -> String {
         let hours = Int(elapsedTime) / 3600
         let minutes = Int(elapsedTime) % 3600 / 60
         let seconds = Int(elapsedTime) % 60
         return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+    }
+    
+    func angleForTime(date: Date) -> Double {
+        let hour = Calendar.current.component(.hour, from: date)
+        let minute = Calendar.current.component(.minute, from: date)
+        let second = Calendar.current.component(.second, from: date)
+        let totalSeconds = Double(hour * 3600 + minute * 60 + second)
+        return totalSeconds / 43200 * 360
     }
 
     func generateSampleStudySessions() -> [StudySessionModel] {
