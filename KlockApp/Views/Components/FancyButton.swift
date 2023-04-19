@@ -44,7 +44,8 @@ struct FancyButton: View {
                     .foregroundColor(foregroundColor)
                     .fontWeight(.bold)
             }
-            .padding()
+            .padding(.leading, 30)
+            .padding(.trailing, 30)
             .frame(maxWidth: isBlock ? .infinity : nil, minHeight: height)
             .background(backgroundColor)
             .cornerRadius(height / 2)
