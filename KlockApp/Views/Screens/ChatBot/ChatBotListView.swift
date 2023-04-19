@@ -29,7 +29,7 @@ struct ChatBotRow: View {
             Image(chatBot.chatBotImageUrl) // Replace this with your image source
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(width: 60, height: 60)
+                .frame(width: 70, height: 70)
                 .clipShape(Circle())
             
             VStack(alignment: .leading) {
