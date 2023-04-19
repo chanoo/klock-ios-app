@@ -142,6 +142,6 @@ struct ChatBotChatView_Previews: PreviewProvider {
     @StateObject var viewModel = ChatBotViewModel()
 
     static var previews: some View {
-        ChatBotChatView(chatBot: ChatBotModel(id: 1, subject: "국어", title: "Ai 선생님", name: "", persona: ""))
+        ChatBotChatView(chatBot: ChatBotModel(id: 1, subject: "국어", title: "Ai 선생님", name: "", chatBotImageUrl: "img_english_teacher", persona: ""))
     }
 }

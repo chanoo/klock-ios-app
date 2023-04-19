@@ -14,9 +14,37 @@ struct ChatBotListView: View {
         VStack(spacing: 0) {
             List(viewModel.chatBots) { chatBot in
                 NavigationLink(destination: ChatBotChatView(viewModel: viewModel, chatBot: chatBot)) {
-                    Text(chatBot.title)
+                    ChatBotRow(chatBot: chatBot)
                 }
             }
+        }
+    }
+}
+
+struct ChatBotRow: View {
+    let chatBot: ChatBotModel
+    
+    var body: some View {
+        HStack {
+            Image(chatBot.chatBotImageUrl) // Replace this with your image source
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: 60, height: 60)
+                .clipShape(Circle())
+            
+            VStack(alignment: .leading) {
+                Spacer()
+                Text("\(chatBot.subject) \(chatBot.name)")
+                    .font(.headline)
+                
+                Spacer()
+                
+                Text(chatBot.title)
+                    .font(.subheadline)
+                    .lineLimit(1)
+                Spacer()
+            }
+            .padding(.leading, 10)
         }
     }
 }

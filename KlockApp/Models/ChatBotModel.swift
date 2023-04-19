@@ -12,5 +12,6 @@ struct ChatBotModel: Identifiable, Codable {
     let subject: String
     let title: String
     let name: String
+    let chatBotImageUrl: String
     let persona: String
 }
