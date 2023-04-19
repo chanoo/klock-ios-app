@@ -12,8 +12,7 @@ import AudioToolbox
 
 class ClockViewModel: ObservableObject {
 
-    private let studyTimeKey = "studyTime"
-    private let savedTimeKey = "savedTime" // Add this line
+    private let studyStartTimeKey = "studyStartTime"
     @Published var studySessions: [StudySessionModel] = []
     @Published var elapsedTime: TimeInterval = 0
     @Published var clockModel: ClockModel
@@ -30,14 +29,8 @@ class ClockViewModel: ObservableObject {
     init(clockModel: ClockModel) {
         self.clockModel = clockModel
         self.studySessions = []
-        self.studySessions = generateSampleStudySessions()
-        loadStudyTime()
-        saveStudyTime() // Add this line
+//        self.studySessions = generateSampleStudySessions()
         setupSensor()
-    }
-
-    deinit {
-        saveStudyTime()
     }
 
     private func setupSensor() {
@@ -67,30 +60,35 @@ class ClockViewModel: ObservableObject {
             .store(in: &cancellables)
     }
 
-    func saveStudyTime() {
-        UserDefaults.standard.set(elapsedTime, forKey: studyTimeKey)
-        let now = Date().timeIntervalSince1970 // Add this line
-        UserDefaults.standard.set(now, forKey: savedTimeKey) // Add this line
-    }
-
     func loadStudyTime() {
-        elapsedTime = UserDefaults.standard.double(forKey: studyTimeKey)
-        calculateElapsedTime() // Add this line
+        let currentTime = UserDefaults.standard.double(forKey: studyStartTimeKey)
+        if currentTime == 0 {
+            let currentTime = Date().timeIntervalSince1970
+            UserDefaults.standard.set(currentTime, forKey: studyStartTimeKey)
+        }
+        calculateElapsedTime()
+        debugPrint("elapsedTime", elapsedTime)
     }
 
     func deleteStudyTime() {
         elapsedTime = 0
-        UserDefaults.standard.removeObject(forKey: studyTimeKey)
+        UserDefaults.standard.removeObject(forKey: studyStartTimeKey)
     }
 
     func calculateElapsedTime() {
-        let savedTime = UserDefaults.standard.double(forKey: savedTimeKey)
-        if savedTime != 0 {
+        let startTimeKey = UserDefaults.standard.double(forKey: studyStartTimeKey)
+        if startTimeKey != 0 {
             let currentTime = Date().timeIntervalSince1970
-            let timeDifference = currentTime - savedTime
+            let timeDifference = currentTime - startTimeKey
             elapsedTime += timeDifference
-            saveStudyTime()
         }
+    }
+    
+    func elapsedTimeToString() -> String {
+        let hours = Int(elapsedTime) / 3600
+        let minutes = Int(elapsedTime) % 3600 / 60
+        let seconds = Int(elapsedTime) % 60
+        return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
     }
 
     func generateSampleStudySessions() -> [StudySessionModel] {

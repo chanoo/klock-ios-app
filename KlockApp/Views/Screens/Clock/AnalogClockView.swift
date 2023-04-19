@@ -14,13 +14,6 @@ struct AnalogClockView: View {
 
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
-    private func elapsedTimeToString() -> String {
-        let hours = Int(viewModel.elapsedTime) / 3600
-        let minutes = Int(viewModel.elapsedTime) % 3600 / 60
-        let seconds = Int(viewModel.elapsedTime) % 60
-        return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
-    }
-
     var body: some View {
         ZStack {
             
@@ -81,7 +74,7 @@ struct AnalogClockView: View {
                             .environment(\.layoutDirection, .rightToLeft) // 경고를 숨기기 위한 코드
                         }
                         
-                        Text(elapsedTimeToString())
+                        Text(viewModel.elapsedTimeToString())
                             .font(.largeTitle)
                             .padding()
                             .background(Color.black.opacity(0.7))
@@ -101,15 +94,11 @@ struct AnalogClockView: View {
         }
         .onReceive(timer) { _ in
             viewModel.elapsedTime += 1
-            viewModel.saveStudyTime()
             currentTime = Date()
             let _ = viewModel.objectWillChange
         }
         .onAppear {
             viewModel.loadStudyTime()
-        }
-        .onDisappear() {
-            viewModel.saveStudyTime()
         }
 
     }

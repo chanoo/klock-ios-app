@@ -27,6 +27,7 @@ struct StudyTimerView: View {
                     Text("밝은 환경")
                 }
                 Button(action: {
+                    viewModel.loadStudyTime()
                     isShowingClockModal.toggle()
                 }) {
                     Image(systemName: "play.circle.fill")
