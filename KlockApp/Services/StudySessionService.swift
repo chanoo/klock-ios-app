@@ -26,8 +26,8 @@ class StudySessionService: StudySessionServiceProtocol {
     }
 
 
-    func saveStudySession(startTime: Date, endTime: Date) -> AnyPublisher<Bool, Error> {
-        return Future<Bool, Error> { promise in
+    func saveStudySession(startTime: Date, endTime: Date) -> AnyPublisher<StudySessionModel, Error> {
+        return Future<StudySessionModel, Error> { promise in
             let context = self.coreDataManager.persistentContainer.viewContext
             guard let entity = NSEntityDescription.entity(forEntityName: "StudySession", in: context) else {
                 return promise(.failure(NSError(domain: "Error in creating entity", code: 1000, userInfo: nil)))
@@ -53,13 +53,14 @@ class StudySessionService: StudySessionServiceProtocol {
 
             do {
                 try context.save()
-                promise(.success(true))
+                let savedSession = StudySessionModel(id: studySessionEntity.id, accountId: 1, startTime: studySessionEntity.startTime ?? Date(), endTime: studySessionEntity.endTime ?? Date(), syncDate: nil)
+                promise(.success(savedSession))
             } catch {
                 promise(.failure(error))
             }
         }.eraseToAnyPublisher()
     }
-    
+
     func deleteStudySessionById(id: Int64) -> AnyPublisher<Bool, Error> {
         return Future<Bool, Error> { promise in
             let context = self.coreDataManager.persistentContainer.viewContext

@@ -10,7 +10,7 @@ import Combine
 
 protocol StudySessionServiceProtocol {
     func fetchStudySessions() -> AnyPublisher<[StudySessionModel], Error>
-    func saveStudySession(startTime: Date, endTime: Date) -> AnyPublisher<Bool, Error>
+    func saveStudySession(startTime: Date, endTime: Date) -> AnyPublisher<StudySessionModel, Error>
     func deleteStudySessionById(id: Int64) -> AnyPublisher<Bool, Error>
     func deleteStoredStudySessions() -> AnyPublisher<Bool, Error>
 }
