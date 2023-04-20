@@ -14,18 +14,6 @@ struct StudyTimerView: View {
     var body: some View {
         GeometryReader { geometry in
             VStack {
-                if viewModel.isDark {
-                    Text("공부 시간 타이머")
-                        .onAppear {
-                            if !isShowingClockModal {
-                                isShowingClockModal.toggle()
-                            }
-                            viewModel.playVibration()
-                            NotificationManager.sendLocalNotification()
-                        }
-                } else {
-                    Text("밝은 환경")
-                }
                 Button(action: {
                     viewModel.loadStudyTime()
                     isShowingClockModal.toggle()
@@ -37,6 +25,13 @@ struct StudyTimerView: View {
                 }
             }
             .frame(width: geometry.size.width, height: geometry.size.height)
+            .onAppear {
+                if viewModel.isDark && !isShowingClockModal {
+                    isShowingClockModal.toggle()
+                    viewModel.playVibration()
+                    NotificationManager.sendLocalNotification()
+                }
+            }
         }
         .sheet(isPresented: $isShowingClockModal) {
             AnalogClockView()
