@@ -85,7 +85,7 @@ struct AnalogClockView: View {
 
                 FancyButton(title: "잠시 멈춤", action: {
                     viewModel.stopAndSaveStudySession()
-                    presentationMode.wrappedValue.dismiss()
+//                    presentationMode.wrappedValue.dismiss()
                 }, backgroundColor: .pink.opacity(0.8), foregroundColor: .white, isBlock: false)
                 
                 Spacer()

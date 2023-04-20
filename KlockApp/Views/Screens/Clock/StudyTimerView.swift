@@ -15,7 +15,6 @@ struct StudyTimerView: View {
         GeometryReader { geometry in
             VStack {
                 Button(action: {
-                    viewModel.loadStudyTime()
                     isShowingClockModal.toggle()
                 }) {
                     Image(systemName: "play.circle.fill")

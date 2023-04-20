@@ -51,6 +51,8 @@ class ClockViewModel: ObservableObject {
         let startTime = Date().addingTimeInterval(-elapsedTime)
         let endTime = Date()
 
+        Toast.show(message: "10초 후 저장됩니다.");
+
         // 10초 후 실행되는 코드 블록
         stopAndSaveCancellable = Just(())
             .delay(for: .seconds(10), scheduler: RunLoop.main)
@@ -58,6 +60,7 @@ class ClockViewModel: ObservableObject {
                 
                 // endTime - startTime이 30초 이하인 경우 저장하지 않음
                 guard endTime.timeIntervalSince(startTime) > 30 else {
+                    Toast.show(message: "30초 미만은 기록되지 않습니다.");
                     self?.deleteStudyTime()
                     return
                 }
