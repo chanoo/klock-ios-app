@@ -9,8 +9,7 @@ class StudySessionService: StudySessionServiceProtocol {
             let context = self.coreDataManager.persistentContainer.viewContext
             let fetchRequest = NSFetchRequest<StudySession>(entityName: "StudySession")
             fetchRequest.sortDescriptors = [
-//                NSSortDescriptor(key: "id", ascending: false),
-                NSSortDescriptor(key: "startTime", ascending: false)
+                NSSortDescriptor(key: "id", ascending: false),
             ]
 
             do {
