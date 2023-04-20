@@ -119,17 +119,23 @@ struct ClockOutLine: View {
 
     var body: some View {
         let morningEndTime = Calendar.current.date(bySettingHour: 11, minute: 59, second: 59, of: studySession.startTime)!
-        
+        let eveningEndTime = Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: studySession.startTime)!
+
         if studySession.startTime <= morningEndTime && studySession.endTime > morningEndTime {
             // Session spans across morning and afternoon
             ClockOutLineSegment(studySession: studySession, startTime: studySession.startTime, endTime: morningEndTime)
             ClockOutLineSegment(studySession: studySession, startTime: morningEndTime.addingTimeInterval(1), endTime: studySession.endTime)
+        } else if studySession.startTime > morningEndTime && studySession.endTime > eveningEndTime {
+            // Session starts in the afternoon and continues to the next day
+            ClockOutLineSegment(studySession: studySession, startTime: studySession.startTime, endTime: eveningEndTime)
+            ClockOutLineSegment(studySession: studySession, startTime: eveningEndTime.addingTimeInterval(1), endTime: studySession.endTime)
         } else {
             // Session is either in the morning or afternoon
             ClockOutLineSegment(studySession: studySession, startTime: studySession.startTime, endTime: studySession.endTime)
         }
     }
 }
+
 
 struct ClockOutLineSegment: View {
     @ObservedObject private var viewModel: ClockViewModel = Container.shared.resolve(ClockViewModel.self)
