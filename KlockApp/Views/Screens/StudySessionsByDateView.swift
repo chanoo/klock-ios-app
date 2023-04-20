@@ -106,21 +106,11 @@ struct StudySessionRow: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text("\(studySession.id ?? 0). \(timeString(from: studySession.startTime)) ~ \(timeString(from: studySession.endTime))")
-            Text("\(timeIntervalToHMS(timeInterval: studySession.sessionDuration))")
+            Text(TimeUtils.elapsedTimeToString(elapsedTime: studySession.sessionDuration))
         }
-    }
-    func timeIntervalToHMS(timeInterval: TimeInterval) -> String {
-        let totalSeconds = Int(timeInterval)
-        let hours = totalSeconds / 3600
-        let minutes = (totalSeconds % 3600) / 60
-        let seconds = totalSeconds % 60
-        
-        return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
     }
 
     private func timeString(from date: Date) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.timeStyle = .short
-        return dateFormatter.string(from: date)
+        return viewModel.timeFormatter.string(from: date)
     }
 }

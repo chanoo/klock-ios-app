@@ -13,6 +13,12 @@ class CalendarViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     private let studySessionService: StudySessionServiceProtocol = Container.shared.resolve(StudySessionServiceProtocol.self)
     private var cancellables = Set<AnyCancellable>()
+    // DateFormatter를 프로퍼티로 추가합니다.
+    lazy var timeFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.timeStyle = .short
+        return formatter
+    }()
 
     init() {
         self.fetchStudySession()
@@ -87,6 +93,24 @@ class CalendarViewModel: ObservableObject {
                 }
             })
             .store(in: &cancellables)
+    }
+    
+    func sortedDates() -> [String] {
+        return Array(studySessions.keys).sorted { (date1, date2) -> Bool in
+            guard let date1Obj = dateFromString(date1), let date2Obj = dateFromString(date2) else {
+                return false
+            }
+            return date1Obj > date2Obj
+        }
+    }
+
+    func onDelete(at offsets: IndexSet, dateString: String) {
+        guard let index = offsets.first,
+              let studySession = studySessions[dateString]?[index],
+              let id = studySession.id else {
+            return
+        }
+        deleteStudySessionById(id: id)
     }
     
     func dateFromString(_ dateString: String) -> Date? {
