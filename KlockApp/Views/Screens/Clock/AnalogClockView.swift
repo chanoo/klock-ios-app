@@ -55,7 +55,7 @@ struct AnalogClockView: View {
 
                                 ClockHand(angle: .degrees(minuteAngle), length: viewModel.clockModel.minuteHandLength, thickness: viewModel.clockModel.minuteHandThickness, color: .black, imageName: viewModel.clockModel.minuteHandImageName, clockSize: viewModel.clockModel.clockSize)
 
-                                ClockHand(angle: .degrees(secondAngle), length: viewModel.clockModel.secondHandLength, thickness: viewModel.clockModel.secondHandThickness, color: .red, imageName: viewModel.clockModel.secondHandImageName, clockSize: viewModel.clockModel.clockSize)
+                                ClockHand(angle: .degrees(secondAngle), length: viewModel.clockModel.secondHandLength, thickness: viewModel.clockModel.secondHandThickness, color: .pink, imageName: viewModel.clockModel.secondHandImageName, clockSize: viewModel.clockModel.clockSize)
                                 
                                 Circle()
                                     .stroke(lineWidth: 10)
@@ -187,7 +187,7 @@ struct ClockHand: View {
         if let imageName = imageName {
             GeometryReader { geometry in
                 Image(imageName)
-                    .foregroundColor(.pink)
+                    .foregroundColor(color)
                     .rotationEffect(angle, anchor: .center) // 회전 중심을 조정합니다.
                     .position(x: clockSize.width / 2, y: clockSize.height / 2) // 바늘을 시계의 중앙에 위치시킵니다.
             }
