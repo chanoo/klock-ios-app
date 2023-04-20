@@ -10,30 +10,35 @@ import Combine
 
 class CalendarViewModel: ObservableObject {
     @Published var studySessions: [String: [StudySessionModel]] = [:]
+    @Published var isLoading: Bool = false
     private let studySessionService: StudySessionServiceProtocol = Container.shared.resolve(StudySessionServiceProtocol.self)
     private var cancellables = Set<AnyCancellable>()
 
     init() {
-//        self.generateSampleData(startDateString: "20230120", endDateString: "20230413")
         self.fetchStudySession()
     }
     
-    private func fetchStudySession() {
-        
+    func fetchStudySession() {
+        isLoading = true
+
         studySessionService.fetchStudySessions()
-            .sink { completion in
+            .sink { [weak self] completion in
+                guard let self = self else { return }
                 switch completion {
                 case .failure(let error):
                     print("Error fetching study sessions: \(error)")
                 case .finished:
                     break
                 }
-            } receiveValue: { studySessions in
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                }
+            } receiveValue: { [weak self] studySessions in
+                guard let self = self else { return }
                 DispatchQueue.main.async {
                     var groupedStudySessions: [String: [StudySessionModel]] = [:]
 
                     for session in studySessions {
-                        debugPrint("session", session)
                         let dateString = self.stringFromDate(session.startTime)
                         if groupedStudySessions[dateString] == nil {
                             groupedStudySessions[dateString] = [session]
@@ -46,9 +51,8 @@ class CalendarViewModel: ObservableObject {
                 }
             }
             .store(in: &cancellables)
-        
     }
-    
+
     func deleteStudySessionById(id: Int64) {
         studySessionService.deleteStudySessionById(id: id)
             .sink(receiveCompletion: { completion in
@@ -111,40 +115,64 @@ class CalendarViewModel: ObservableObject {
     private func generateSampleDataWithDates(startDate: Date, endDate: Date) {
         let calendar = Calendar.current
         var currentDate = startDate
-        
+
+        let dispatchGroup = DispatchGroup()
+
         while currentDate <= endDate {
             let shouldGenerateData = Int.random(in: 1...7)
-            
+
             if shouldGenerateData <= 6 { // 6/7 확률로 샘플 데이터 생성
-                let sessions = generateSampleStudySessions(forDate: currentDate)
-                let dateString = stringFromDate(currentDate)
-                studySessions[dateString] = sessions
+                dispatchGroup.enter()
+                generateSampleStudySessions(forDate: currentDate)
+                    .sink(receiveCompletion: { _ in },
+                          receiveValue: { sessions in
+                              let dateString = self.stringFromDate(currentDate)
+                              self.studySessions[dateString] = sessions
+                              dispatchGroup.leave()
+                          })
+                    .store(in: &cancellables)
             }
-            
+
             currentDate = calendar.date(byAdding: .day, value: 1, to: currentDate) ?? endDate
+        }
+
+        dispatchGroup.notify(queue: .main) {
+            // 모든 데이터가 생성되고 studySessions이 업데이트되면 이 블록이 실행됩니다.
+            // 필요한 UI 업데이트 또는 다른 작업을 여기서 수행하세요.
         }
     }
 
-    private func generateSampleStudySessions(forDate date: Date) -> [StudySessionModel] {
-        let numberOfSessions = Int.random(in: 3...7)
-        var sessions: [StudySessionModel] = []
-        
-        for _ in 0..<numberOfSessions {
-            let randomDuration = TimeInterval(Int.random(in: 600...3600))
-            let startTime = date.addingTimeInterval(-randomDuration)
-            let endTime = date
-            
-            let session = StudySessionModel(
-                id: Int64.random(in: 1...10000),
-                accountId: Int64.random(in: 1...100),
-                startTime: startTime,
-                endTime: endTime,
-                syncDate: nil
-            )
-            
-            sessions.append(session)
-        }
-        
-        return sessions
+
+    private func generateSampleStudySessions(forDate date: Date) -> AnyPublisher<[StudySessionModel], Error> {
+        return Future<[StudySessionModel], Error> { promise in
+            let numberOfSessions = Int.random(in: 3...7)
+            var sessions: [StudySessionModel] = []
+
+            let dispatchGroup = DispatchGroup()
+
+            for _ in 0..<numberOfSessions {
+                let randomDuration = TimeInterval(Int.random(in: 600...3600))
+                let startTime = date.addingTimeInterval(-randomDuration)
+                let endTime = date
+
+                dispatchGroup.enter()
+
+                self.studySessionService.saveStudySession(startTime: startTime, endTime: endTime)
+                    .sink(receiveCompletion: { completion in
+                        if case .failure(let error) = completion {
+                            promise(.failure(error))
+                            dispatchGroup.leave()
+                        }
+                    }, receiveValue: { savedSession in
+                        sessions.append(savedSession)
+                        dispatchGroup.leave()
+                    }).store(in: &self.cancellables)
+            }
+
+            dispatchGroup.notify(queue: .main) {
+                promise(.success(sessions))
+            }
+        }.eraseToAnyPublisher()
     }
+
 }

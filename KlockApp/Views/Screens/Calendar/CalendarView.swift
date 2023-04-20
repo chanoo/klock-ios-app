@@ -31,32 +31,38 @@ struct CalendarView: View {
       
     var body: some View {
         VStack {
-            if weeks > 15 {
-                ScrollView(.horizontal, showsIndicators: false) {
-                    VStack {
-                        RoundedRectangle(cornerRadius: 10)
-                            .stroke(Color.gray.opacity(0.2), lineWidth: 1)
-                            .overlay(
-                                calendarBody
-                                    .padding(.leading, dayViewSize + spacing)
-                            )
-                            .shadow(color: Color.gray.opacity(0.3), radius: 5, x: 0, y: 2)
-                    }
-                    .padding(.all, 10)
-                }
-
-                VStack(alignment: .leading, spacing: spacing) {
-                    DayView(size: dayViewSize, backgroundColor: .clear)
-                    ForEach(0..<7) { day in
-                        DayView(displayText: DateFormatter().shortWeekdaySymbols[day].prefix(1).uppercased(), size: dayViewSize, backgroundColor: .clear)
-                    }
-                    Spacer()
-                }
-
+            if viewModel.isLoading {
+                // 로딩 인디케이터를 표시
+                ProgressView()
             } else {
-                calendarBody
+                // 기존 캘린더 뷰를 표시
+                if weeks > 15 {
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        VStack {
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(Color.gray.opacity(0.2), lineWidth: 1)
+                                .overlay(
+                                    calendarBody
+                                        .padding(.leading, dayViewSize + spacing)
+                                )
+                                .shadow(color: Color.gray.opacity(0.3), radius: 5, x: 0, y: 2)
+                        }
+                        .padding(.all, 10)
+                    }
+
+                    VStack(alignment: .leading, spacing: spacing) {
+                        DayView(size: dayViewSize, backgroundColor: .clear)
+                        ForEach(0..<7) { day in
+                            DayView(displayText: DateFormatter().shortWeekdaySymbols[day].prefix(1).uppercased(), size: dayViewSize, backgroundColor: .clear)
+                        }
+                        Spacer()
+                    }
+
+                } else {
+                    calendarBody
+                }
+
             }
-            
         }
         .navigationBarTitle("공부 시간")        
     }
