@@ -19,6 +19,7 @@ class ClockViewModel: ObservableObject {
     @Published var elapsedTime: TimeInterval = 0
     @Published var clockModel: ClockModel
     private var cancellable: AnyCancellable?
+    private var stopAndSaveCancellable: AnyCancellable?
 
     @Published var isDark: Bool = false
 
@@ -49,22 +50,41 @@ class ClockViewModel: ObservableObject {
     func stopAndSaveStudySession() {
         let startTime = Date().addingTimeInterval(-elapsedTime)
         let endTime = Date()
-        
-        studySessionService.saveStudySession(startTime: startTime, endTime: endTime)
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                case .failure(let error):
-                    print("Error saving study session: \(error)")
-                case .finished:
-                    print("Study session saved successfully")
+
+        // 10초 후 실행되는 코드 블록
+        stopAndSaveCancellable = Just(())
+            .delay(for: .seconds(10), scheduler: RunLoop.main)
+            .sink(receiveValue: { [weak self] _ in
+                
+                // endTime - startTime이 30초 이하인 경우 저장하지 않음
+                guard endTime.timeIntervalSince(startTime) > 30 else {
+                    self?.deleteStudyTime()
+                    return
                 }
-            }, receiveValue: { _ in
-                self.deleteStudyTime()
+                
+                self?.studySessionService.saveStudySession(startTime: startTime, endTime: endTime)
+                    .sink(receiveCompletion: { completion in
+                        switch completion {
+                        case .failure(let error):
+                            print("Error saving study session: \(error)")
+                        case .finished:
+                            print("Study session saved successfully")
+                        }
+                    }, receiveValue: { _ in
+                        self?.deleteStudyTime()
+                    })
+                    .store(in: &self!.cancellables)
             })
-            .store(in: &cancellables)
+    }
+    
+    func stopAndSaveCancel() {
+        // 이미 실행 중인 10초 지연 저장 작업이 있다면 취소
+        stopAndSaveCancellable?.cancel()
+        stopAndSaveCancellable = nil
     }
 
     func loadStudyTime() {
+        stopAndSaveCancel()
         let currentTime = UserDefaults.standard.double(forKey: studyStartTimeKey)
         if currentTime == 0 {
             let now = Date()
@@ -74,9 +94,14 @@ class ClockViewModel: ObservableObject {
             let startTime = Date(timeIntervalSince1970: currentTime)
             currentStudySession = StudySessionModel(id: 0, accountId: 1, startTime: startTime, endTime: startTime, syncDate: nil)
         }
+
+        // 이전 elapsedTime을 초기화
+        elapsedTime = 0
+
         calculateElapsedTime()
         debugPrint("elapsedTime", elapsedTime)
     }
+
 
     func deleteStudyTime() {
         elapsedTime = 0
@@ -103,18 +128,11 @@ class ClockViewModel: ObservableObject {
     }
     
     func elapsedTimeToString() -> String {
-        let hours = Int(elapsedTime) / 3600
-        let minutes = Int(elapsedTime) % 3600 / 60
-        let seconds = Int(elapsedTime) % 60
-        return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+        return TimeUtils.elapsedTimeToString(elapsedTime: elapsedTime)
     }
     
     func angleForTime(date: Date) -> Double {
-        let hour = Calendar.current.component(.hour, from: date)
-        let minute = Calendar.current.component(.minute, from: date)
-        let second = Calendar.current.component(.second, from: date)
-        let totalSeconds = Double(hour * 3600 + minute * 60 + second)
-        return totalSeconds / 43200 * 360
+        return TimeUtils.angleForTime(date: date)
     }
 
     func generateSampleStudySessions() -> [StudySessionModel] {
