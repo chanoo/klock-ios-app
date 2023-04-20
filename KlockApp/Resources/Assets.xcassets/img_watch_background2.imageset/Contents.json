@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "img_watch_background2.jpg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

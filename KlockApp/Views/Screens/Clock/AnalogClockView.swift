@@ -11,76 +11,87 @@ struct AnalogClockView: View {
     @ObservedObject private var viewModel: ClockViewModel = Container.shared.resolve(ClockViewModel.self)
     @State private var currentTime = Date()
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.colorScheme) var colorScheme
 
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
-        VStack {
-            
-            Spacer()
+        ZStack {
 
-            Text(viewModel.elapsedTimeToString())
-                .font(.largeTitle)
-                .padding()
-                .background(Color.black.opacity(0.5))
-                .foregroundColor(.white)
-                .clipShape(RoundedRectangle(cornerRadius: 10))
-            
-            Spacer(minLength: 30)
+            Image("img_watch_background4")
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .edgesIgnoringSafeArea(.all)
 
-            ZStack {
-                if let imageName = viewModel.clockModel.clockBackgroundImageName {
-                    Image(imageName)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: viewModel.clockModel.clockSize.width - 45,
-                               height: viewModel.clockModel.clockSize.height - 45)
-                }
+            VStack {
                 
-                Circle()
-                    .foregroundColor(FancyColor.primary.color.opacity(0.2))
-                    .frame(width: viewModel.clockModel.clockSize.width,
-                           height: viewModel.clockModel.clockSize.height)
-                    .overlay(
-                        ZStack {
-                            ClockHand(angle: .degrees(hourAngle), length: viewModel.clockModel.hourHandLength, thickness: viewModel.clockModel.hourHandThickness, color: .black, imageName: viewModel.clockModel.hourHandImageName, clockSize: viewModel.clockModel.clockSize)
+                Spacer()
 
-                            ClockHand(angle: .degrees(minuteAngle), length: viewModel.clockModel.minuteHandLength, thickness: viewModel.clockModel.minuteHandThickness, color: .black, imageName: viewModel.clockModel.minuteHandImageName, clockSize: viewModel.clockModel.clockSize)
+                Text(viewModel.elapsedTimeToString())
+                    .font(.largeTitle)
+                    .padding()
+                    .background(.white.opacity(0.5))
+                    .foregroundColor(.black)
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                
+                Spacer(minLength: 30)
 
-                            ClockHand(angle: .degrees(secondAngle), length: viewModel.clockModel.secondHandLength, thickness: viewModel.clockModel.secondHandThickness, color: .red, imageName: viewModel.clockModel.secondHandImageName, clockSize: viewModel.clockModel.clockSize)
-                            
-                            Circle()
-                                .stroke(lineWidth: 10)
-                                .foregroundColor(.gray)
-                                .frame(width: viewModel.clockModel.clockSize.width - 10, height: viewModel.clockModel.clockSize.height - 10)
-                                .opacity(0.1)
-                            
-                            Circle()
-                                .stroke(lineWidth: 10)
-                                .foregroundColor(.gray)
-                                .frame(width: viewModel.clockModel.clockSize.width - 30, height: viewModel.clockModel.clockSize.height - 30)
-                                .opacity(0.3)
-                            
+                ZStack {
+                    
+                    Circle()
+                        .foregroundColor(colorScheme == .dark ? FancyColor.primary.color.opacity(0.2) : .white.opacity(0.5))
+                        .frame(width: viewModel.clockModel.clockSize.width,
+                               height: viewModel.clockModel.clockSize.height)
+                        .overlay(
                             ZStack {
-                                ClockOutLine(studySession: viewModel.currentStudySession)
-                                ForEach(viewModel.studySessions.indices) { index in
-                                    let studySession = viewModel.studySessions[index]
-                                    ClockOutLine(studySession: studySession)
+                                if let imageName = viewModel.clockModel.clockBackgroundImageName {
+                                    Image(imageName)
+                                        .foregroundColor(FancyColor.primary.color.opacity(0.8))
+                                        .frame(width: viewModel.clockModel.clockSize.width,
+                                               height: viewModel.clockModel.clockSize.height)
                                 }
-                                .environment(\.layoutDirection, .rightToLeft) // 경고를 숨기기 위한 코드
+                                
+                                ClockHand(angle: .degrees(hourAngle), length: viewModel.clockModel.hourHandLength, thickness: viewModel.clockModel.hourHandThickness, color: .black, imageName: viewModel.clockModel.hourHandImageName, clockSize: viewModel.clockModel.clockSize)
+
+                                ClockHand(angle: .degrees(minuteAngle), length: viewModel.clockModel.minuteHandLength, thickness: viewModel.clockModel.minuteHandThickness, color: .black, imageName: viewModel.clockModel.minuteHandImageName, clockSize: viewModel.clockModel.clockSize)
+
+                                ClockHand(angle: .degrees(secondAngle), length: viewModel.clockModel.secondHandLength, thickness: viewModel.clockModel.secondHandThickness, color: .red, imageName: viewModel.clockModel.secondHandImageName, clockSize: viewModel.clockModel.clockSize)
+                                
+                                Circle()
+                                    .stroke(lineWidth: 10)
+                                    .foregroundColor(.gray)
+                                    .frame(width: viewModel.clockModel.clockSize.width - 10, height: viewModel.clockModel.clockSize.height - 10)
+                                    .opacity(0.1)
+                                
+                                Circle()
+                                    .stroke(lineWidth: 10)
+                                    .foregroundColor(.gray)
+                                    .frame(width: viewModel.clockModel.clockSize.width - 30, height: viewModel.clockModel.clockSize.height - 30)
+                                    .opacity(0.3)
+                                
+                                ZStack {
+                                    ClockOutLine(studySession: viewModel.currentStudySession)
+                                    ForEach(viewModel.studySessions.indices) { index in
+                                        let studySession = viewModel.studySessions[index]
+                                        ClockOutLine(studySession: studySession)
+                                    }
+                                    .environment(\.layoutDirection, .rightToLeft) // 경고를 숨기기 위한 코드
+                                }
                             }
-                        }
-                    )
+                        )
+                }
+
+                Spacer(minLength: 30)
+
+                FancyButton(title: "잠시 멈춤", action: {
+                    viewModel.stopAndSaveStudySession()
+                    presentationMode.wrappedValue.dismiss()
+                }, backgroundColor: FancyColor.primary.color, foregroundColor: .white, isBlock: false)
+                
+                Spacer()
+
             }
 
-            Spacer(minLength: 30)
-
-            FancyButton(title: "잠시 멈춤", action: {
-                viewModel.stopAndSaveStudySession()
-                presentationMode.wrappedValue.dismiss()
-            }, backgroundColor: FancyColor.primary.color, foregroundColor: .white, isBlock: false)
-            
-            Spacer()
 
         }
         .onReceive(timer) { _ in
@@ -110,7 +121,7 @@ struct AnalogClockView: View {
     }
 
     private var secondAngle: Double {
-        let second = Calendar.current.component(.second, from: currentTime - 15)
+        let second = Calendar.current.component(.second, from: currentTime)
         return Double(second) / 60 * 360
     }
 }
@@ -136,7 +147,7 @@ struct ClockOutLine: View {
             path.addLine(to: endPoint)
         }
         .stroke(style: StrokeStyle(lineWidth: lineWidth, lineCap: .butt, lineJoin: .round))
-        .foregroundColor(isAfternoon ? FancyColor.primary.color.opacity(1.0) : FancyColor.primary.color.opacity(0.5))
+        .foregroundColor(isAfternoon ? FancyColor.primary.color.opacity(0.7) : FancyColor.primary.color.opacity(0.9))
         .frame(width: viewModel.clockModel.clockSize.width, height: viewModel.clockModel.clockSize.height) // 프레임 크기를 시계 크기와 동일하게 설정
     }
 }
@@ -157,9 +168,6 @@ struct ClockHand: View {
         if let imageName = imageName {
             GeometryReader { geometry in
                 Image(imageName)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 270, height: 36) // 바늘 길이를 1/10만큼 늘립니다.
                     .rotationEffect(angle, anchor: .center) // 회전 중심을 조정합니다.
                     .position(x: clockSize.width / 2, y: clockSize.height / 2) // 바늘을 시계의 중앙에 위치시킵니다.
             }
