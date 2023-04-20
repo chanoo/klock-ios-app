@@ -34,7 +34,7 @@ class Container {
                  secondHandThickness: 2,
                  hourHandImageName: nil,
                  minuteHandImageName: nil,
-                 secondHandImageName: "ic_hand_sec",
+                 secondHandImageName: "img_watch_hand_sec",
                  clockBackgroundImageName: "img_watch_face1",
                  clockSize: CGSize(width: 300, height: 300)
              )
