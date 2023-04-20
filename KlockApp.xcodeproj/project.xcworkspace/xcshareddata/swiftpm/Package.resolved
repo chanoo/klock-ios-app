@@ -19,6 +19,15 @@
       }
     },
     {
+      "identity" : "foast",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/chanoo/Foast",
+      "state" : {
+        "branch" : "main",
+        "revision" : "125cf7da885b23c2dad80302b63f0d73e89d9c1a"
+      }
+    },
+    {
       "identity" : "swinject",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Swinject/Swinject.git",

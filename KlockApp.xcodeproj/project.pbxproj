@@ -8,13 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		980C623629EE760100D0A7B5 /* FancyTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980C623529EE760100D0A7B5 /* FancyTabView.swift */; };
+		9820035029F1A6DA0056CA03 /* Foast in Frameworks */ = {isa = PBXBuildFile; productRef = 9820034F29F1A6DA0056CA03 /* Foast */; };
 		9843B7D929EEE09400F91DAD /* ProximityAndOrientationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9843B7D829EEE09400F91DAD /* ProximityAndOrientationService.swift */; };
 		9843B7DD29EEE0EB00F91DAD /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9843B7DC29EEE0EB00F91DAD /* NotificationManager.swift */; };
 		9843B7E529EF086600F91DAD /* ProximityAndOrientationServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9843B7E429EF086600F91DAD /* ProximityAndOrientationServiceProtocol.swift */; };
 		9843B7E729EFBF8200F91DAD /* StudySessionsByDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9843B7E629EFBF8200F91DAD /* StudySessionsByDateView.swift */; };
 		9843B7E929F0EB5200F91DAD /* TimeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9843B7E829F0EB5200F91DAD /* TimeUtils.swift */; };
-		9843B7F629F13DB100F91DAD /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9843B7F529F13DB100F91DAD /* ToastView.swift */; };
-		9843B7FD29F1475500F91DAD /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9843B7FC29F1475500F91DAD /* Toast.swift */; };
 		984D2C8029DFB197008D3EA9 /* FlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984D2C7F29DFB197008D3EA9 /* FlowLayout.swift */; };
 		984D2C8229DFC2B3008D3EA9 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984D2C8129DFC2B3008D3EA9 /* AppState.swift */; };
 		984D2C8429DFC311008D3EA9 /* UINavigationController+UIGestureRecognizerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984D2C8329DFC311008D3EA9 /* UINavigationController+UIGestureRecognizerDelegate.swift */; };
@@ -132,8 +131,6 @@
 		9843B7E429EF086600F91DAD /* ProximityAndOrientationServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProximityAndOrientationServiceProtocol.swift; sourceTree = "<group>"; };
 		9843B7E629EFBF8200F91DAD /* StudySessionsByDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudySessionsByDateView.swift; sourceTree = "<group>"; };
 		9843B7E829F0EB5200F91DAD /* TimeUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeUtils.swift; sourceTree = "<group>"; };
-		9843B7F529F13DB100F91DAD /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
-		9843B7FC29F1475500F91DAD /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		984D2C7F29DFB197008D3EA9 /* FlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowLayout.swift; sourceTree = "<group>"; };
 		984D2C8129DFC2B3008D3EA9 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		984D2C8329DFC311008D3EA9 /* UINavigationController+UIGestureRecognizerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+UIGestureRecognizerDelegate.swift"; sourceTree = "<group>"; };
@@ -239,6 +236,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				98B21B3F29D5F54E004EFE0E /* FacebookLogin in Frameworks */,
+				9820035029F1A6DA0056CA03 /* Foast in Frameworks */,
 				98E9385829EA4C45009CBF32 /* Alamofire in Frameworks */,
 				98B21B3D29D5F54E004EFE0E /* FacebookCore in Frameworks */,
 				98CE661629D55A370009916F /* Swinject in Frameworks */,
@@ -478,7 +476,6 @@
 				98B21B1F29D56BD2004EFE0E /* Constants */,
 				98B21B1C29D56B3C004EFE0E /* Validators */,
 				9843B7E829F0EB5200F91DAD /* TimeUtils.swift */,
-				9843B7FC29F1475500F91DAD /* Toast.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -505,7 +502,6 @@
 				98E9384D29EA3935009CBF32 /* RoundedCorners.swift */,
 				986E5DB529EAF06D00FF7047 /* DayView.swift */,
 				980C623529EE760100D0A7B5 /* FancyTabView.swift */,
-				9843B7F529F13DB100F91DAD /* ToastView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -597,6 +593,7 @@
 				98B21B3C29D5F54E004EFE0E /* FacebookCore */,
 				98B21B3E29D5F54E004EFE0E /* FacebookLogin */,
 				98E9385729EA4C45009CBF32 /* Alamofire */,
+				9820034F29F1A6DA0056CA03 /* Foast */,
 			);
 			productName = KlockApp;
 			productReference = 987E543629D552520007E156 /* KlockApp.app */;
@@ -677,6 +674,7 @@
 				98CE661429D55A370009916F /* XCRemoteSwiftPackageReference "Swinject" */,
 				98B21B3B29D5F54E004EFE0E /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
 				98E9385629EA4C45009CBF32 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				9820034E29F1A6DA0056CA03 /* XCRemoteSwiftPackageReference "Foast" */,
 			);
 			productRefGroup = 987E543729D552520007E156 /* Products */;
 			projectDirPath = "";
@@ -771,7 +769,6 @@
 				985BE8B229E7D510008582A3 /* ChatBotListView.swift in Sources */,
 				98B21B3A29D5EBC3004EFE0E /* AppDelegate.swift in Sources */,
 				985BE8A029E6E836008582A3 /* ChatBotViewModel.swift in Sources */,
-				9843B7F629F13DB100F91DAD /* ToastView.swift in Sources */,
 				984D2C8029DFB197008D3EA9 /* FlowLayout.swift in Sources */,
 				98D7C95729E510990075D201 /* ContentViewModel.swift in Sources */,
 				985BE89229E6E0CD008582A3 /* CharacterView.swift in Sources */,
@@ -784,7 +781,6 @@
 				98CE662129D55B730009916F /* SignInViewModel.swift in Sources */,
 				98B21B6E29D9D21A004EFE0E /* SignUpViewModel.swift in Sources */,
 				98B21B4629D60EEB004EFE0E /* FancyTextField.swift in Sources */,
-				9843B7FD29F1475500F91DAD /* Toast.swift in Sources */,
 				98D2826929E988D00039E6E6 /* MessageService.swift in Sources */,
 				985BE8AE29E73A76008582A3 /* EnvironmentValuesProvider.swift in Sources */,
 				98B21B5229D6F404004EFE0E /* FriendRelationModel.swift in Sources */,
@@ -1184,6 +1180,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		9820034E29F1A6DA0056CA03 /* XCRemoteSwiftPackageReference "Foast" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/chanoo/Foast";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		98B21B3B29D5F54E004EFE0E /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
@@ -1211,6 +1215,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		9820034F29F1A6DA0056CA03 /* Foast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9820034E29F1A6DA0056CA03 /* XCRemoteSwiftPackageReference "Foast" */;
+			productName = Foast;
+		};
 		98B21B3C29D5F54E004EFE0E /* FacebookCore */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 98B21B3B29D5F54E004EFE0E /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
