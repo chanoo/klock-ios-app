@@ -118,7 +118,6 @@ struct ClockOutLine: View {
     let studySession: StudySessionModel
 
     var body: some View {
-        let elapsedTime = studySession.endTime.timeIntervalSince(studySession.startTime)
         let morningEndTime = Calendar.current.date(bySettingHour: 11, minute: 59, second: 59, of: studySession.startTime)!
         
         if studySession.startTime <= morningEndTime && studySession.endTime > morningEndTime {
