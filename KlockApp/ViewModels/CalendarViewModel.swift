@@ -49,6 +49,24 @@ class CalendarViewModel: ObservableObject {
         
     }
     
+    func deleteStudySessionById(id: Int64) {
+        studySessionService.deleteStudySessionById(id: id)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .failure(let error):
+                    print("Error deleting study session: \(error.localizedDescription)")
+                case .finished:
+                    break
+                }
+            }, receiveValue: { success in
+                if success {
+                    print("Study session with id \(id) deleted successfully")
+                    self.fetchStudySession()
+                }
+            })
+            .store(in: &cancellables)
+    }
+    
     func deleteStoredStudySessions() {
         studySessionService.deleteStoredStudySessions()
             .sink(receiveCompletion: { completion in

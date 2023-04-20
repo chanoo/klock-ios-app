@@ -23,6 +23,14 @@ struct StudySessionsByDateView: View {
                     ForEach(viewModel.studySessions[dateString]!, id: \.id) { studySession in
                         StudySessionRow(studySession: studySession)
                     }
+                    .onDelete(perform: { indexSet in
+                        guard let index = indexSet.first,
+                              let studySession = viewModel.studySessions[dateString]?[index],
+                              let id = studySession.id else {
+                            return
+                        }
+                        viewModel.deleteStudySessionById(id: id)
+                    })
                 }
             }
             .alert(isPresented: $showAlert) {
@@ -44,6 +52,7 @@ struct StudySessionsByDateView: View {
 }
 
 struct StudySessionRow: View {
+    @StateObject var viewModel: CalendarViewModel = Container.shared.resolve(CalendarViewModel.self)
     let studySession: StudySessionModel
 
     var body: some View {
@@ -52,7 +61,6 @@ struct StudySessionRow: View {
             Text("\(timeIntervalToHMS(timeInterval: studySession.sessionDuration))")
         }
     }
-    
     func timeIntervalToHMS(timeInterval: TimeInterval) -> String {
         let totalSeconds = Int(timeInterval)
         let hours = totalSeconds / 3600

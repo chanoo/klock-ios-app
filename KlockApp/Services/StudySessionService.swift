@@ -2,6 +2,7 @@ import Combine
 import CoreData
 
 class StudySessionService: StudySessionServiceProtocol {
+
     private let coreDataManager = CoreDataManager.shared
 
     func fetchStudySessions() -> AnyPublisher<[StudySessionModel], Error> {
@@ -58,7 +59,28 @@ class StudySessionService: StudySessionServiceProtocol {
             }
         }.eraseToAnyPublisher()
     }
+    
+    func deleteStudySessionById(id: Int64) -> AnyPublisher<Bool, Error> {
+        return Future<Bool, Error> { promise in
+            let context = self.coreDataManager.persistentContainer.viewContext
+            let fetchRequest = NSFetchRequest<StudySession>(entityName: "StudySession")
+            fetchRequest.predicate = NSPredicate(format: "id == %d", id)
+            fetchRequest.fetchLimit = 1
 
+            do {
+                if let studySession = try context.fetch(fetchRequest).first {
+                    context.delete(studySession)
+                    try context.save()
+                    promise(.success(true))
+                } else {
+                    promise(.failure(NSError(domain: "Study session with id \(id) not found", code: 1001, userInfo: nil)))
+                }
+            } catch {
+                promise(.failure(error))
+            }
+        }.eraseToAnyPublisher()
+    }
+    
     func deleteStoredStudySessions() -> AnyPublisher<Bool, Error> {
         return Future<Bool, Error> { promise in
             let context = self.coreDataManager.persistentContainer.viewContext
