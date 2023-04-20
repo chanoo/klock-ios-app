@@ -71,11 +71,6 @@ struct AnalogClockView: View {
                                 
                                 ZStack {
                                     ClockOutLine(studySession: viewModel.currentStudySession)
-                                    ForEach(viewModel.studySessions.indices) { index in
-                                        let studySession = viewModel.studySessions[index]
-                                        ClockOutLine(studySession: studySession)
-                                    }
-                                    .environment(\.layoutDirection, .rightToLeft) // 경고를 숨기기 위한 코드
                                 }
                             }
                         )
@@ -85,7 +80,7 @@ struct AnalogClockView: View {
 
                 FancyButton(title: "잠시 멈춤", action: {
                     viewModel.stopAndSaveStudySession()
-//                    presentationMode.wrappedValue.dismiss()
+                    presentationMode.wrappedValue.dismiss()
                 }, backgroundColor: .pink.opacity(0.8), foregroundColor: .white, isBlock: false)
                 
                 Spacer()
@@ -100,27 +95,21 @@ struct AnalogClockView: View {
         }
         .onAppear {
             viewModel.loadStudyTime()
-            viewModel.updateTime()
         }
 
     }
     
 
     private var hourAngle: Double {
-        let hour = Calendar.current.component(.hour, from: currentTime)
-        let minute = Calendar.current.component(.minute, from: currentTime)
-        return (Double(hour % 12) + Double(minute) / 60) / 12 * 360
+        viewModel.hourAngle(for: currentTime)
     }
 
     private var minuteAngle: Double {
-        let minute = Calendar.current.component(.minute, from: currentTime)
-        let second = Calendar.current.component(.second, from: currentTime)
-        return (Double(minute) + Double(second) / 60) / 60 * 360
+        viewModel.minuteAngle(for: currentTime)
     }
 
     private var secondAngle: Double {
-        let second = Calendar.current.component(.second, from: currentTime)
-        return Double(second) / 60 * 360
+        viewModel.secondAngle(for: currentTime)
     }
 }
 
