@@ -13,49 +13,53 @@ struct StudySessionsByDateView: View {
     @State private var showGenerateSampleDataSheet = false
 
     var body: some View {
-        List {
-            ForEach(Array(viewModel.studySessions.keys).sorted(by: { (date1, date2) -> Bool in
-                guard let date1Obj = viewModel.dateFromString(date1), let date2Obj = viewModel.dateFromString(date2) else {
-                    return false
-                }
-                return date1Obj > date2Obj
-            }), id: \.self) { dateString in
-                Section(header: Text(dateString)) {
-                    ForEach(viewModel.studySessions[dateString]!, id: \.id) { studySession in
-                        StudySessionRow(studySession: studySession)
+        if viewModel.isLoading {
+            // 로딩 인디케이터를 표시
+            ProgressView()
+        } else {
+            List {
+                ForEach(Array(viewModel.studySessions.keys).sorted(by: { (date1, date2) -> Bool in
+                    guard let date1Obj = viewModel.dateFromString(date1), let date2Obj = viewModel.dateFromString(date2) else {
+                        return false
                     }
-                    .onDelete(perform: { indexSet in
-                        guard let index = indexSet.first,
-                              let studySession = viewModel.studySessions[dateString]?[index],
-                              let id = studySession.id else {
-                            return
+                    return date1Obj > date2Obj
+                }), id: \.self) { dateString in
+                    Section(header: Text(dateString)) {
+                        ForEach(viewModel.studySessions[dateString]!, id: \.id) { studySession in
+                            StudySessionRow(viewModel: viewModel, studySession: studySession)
                         }
-                        viewModel.deleteStudySessionById(id: id)
-                    })
+                        .onDelete(perform: { indexSet in
+                            guard let index = indexSet.first,
+                                  let studySession = viewModel.studySessions[dateString]?[index],
+                                  let id = studySession.id else {
+                                return
+                            }
+                            viewModel.deleteStudySessionById(id: id)
+                        })
+                    }
+                }
+                .alert(isPresented: $showAlert) {
+                    Alert(
+                        title: Text("삭제"),
+                        message: Text("공부 기록을 삭제하시겠습니까?"),
+                        primaryButton: .destructive(Text("삭제")) {
+                            viewModel.deleteStoredStudySessions()
+                        },
+                        secondaryButton: .cancel())
                 }
             }
-            .alert(isPresented: $showAlert) {
-                Alert(
-                    title: Text("삭제"),
-                    message: Text("공부 기록을 삭제하시겠습니까?"),
-                    primaryButton: .destructive(Text("삭제")) {
-                        viewModel.deleteStoredStudySessions()
-                    },
-                    secondaryButton: .cancel())
+            .navigationBarTitle("공부 시간")
+            .navigationBarItems(
+                leading: Button(action: { showGenerateSampleDataSheet = true }) {
+                    Image(systemName: "arrow.clockwise.circle")
+                },
+                trailing: Button(action: { showAlert = true }) {
+                    Image(systemName: "trash")
+                })
+            .sheet(isPresented: $showGenerateSampleDataSheet) {
+                GenerateSampleDataView(viewModel: viewModel, isPresented: $showGenerateSampleDataSheet)
             }
         }
-        .navigationBarTitle("공부 시간")
-        .navigationBarItems(
-            leading: Button(action: { showGenerateSampleDataSheet = true }) {
-                Image(systemName: "arrow.clockwise.circle")
-            },
-            trailing: Button(action: { showAlert = true }) {
-                Image(systemName: "trash")
-            })
-        .sheet(isPresented: $showGenerateSampleDataSheet) {
-            GenerateSampleDataView(viewModel: viewModel, isPresented: $showGenerateSampleDataSheet)
-        }
-
     }
 }
 
@@ -100,7 +104,7 @@ struct GenerateSampleDataView: View {
 }
 
 struct StudySessionRow: View {
-    @StateObject var viewModel: CalendarViewModel = Container.shared.resolve(CalendarViewModel.self)
+    @ObservedObject var viewModel: CalendarViewModel
     let studySession: StudySessionModel
 
     var body: some View {
