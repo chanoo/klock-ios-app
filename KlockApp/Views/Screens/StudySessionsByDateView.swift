@@ -11,6 +11,7 @@ struct StudySessionsByDateView: View {
     @StateObject var viewModel: CalendarViewModel = Container.shared.resolve(CalendarViewModel.self)
     @State private var showAlert = false
     @State private var showGenerateSampleDataSheet = false
+    @State private var isShowingSelectTimer = false
 
     var body: some View {
         if viewModel.isLoading {

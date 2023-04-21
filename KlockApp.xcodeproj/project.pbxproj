@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		980C623629EE760100D0A7B5 /* FancyTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980C623529EE760100D0A7B5 /* FancyTabView.swift */; };
+		981881C229F26879002A4395 /* SelectTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981881C129F26879002A4395 /* SelectTimerView.swift */; };
+		981881C429F26EF9002A4395 /* StudyTimeTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981881C329F26EF9002A4395 /* StudyTimeTimerView.swift */; };
+		981881C629F26F00002A4395 /* PomodoroTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981881C529F26F00002A4395 /* PomodoroTimerView.swift */; };
+		981881C829F26F07002A4395 /* ExamTimeTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981881C729F26F07002A4395 /* ExamTimeTimerView.swift */; };
+		981881CA29F27316002A4395 /* PageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981881C929F27316002A4395 /* PageControl.swift */; };
 		9820035029F1A6DA0056CA03 /* Foast in Frameworks */ = {isa = PBXBuildFile; productRef = 9820034F29F1A6DA0056CA03 /* Foast */; };
 		9843B7D929EEE09400F91DAD /* ProximityAndOrientationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9843B7D829EEE09400F91DAD /* ProximityAndOrientationService.swift */; };
 		9843B7DD29EEE0EB00F91DAD /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9843B7DC29EEE0EB00F91DAD /* NotificationManager.swift */; };
@@ -126,6 +131,11 @@
 		980C623229EC621C00D0A7B5 /* FamilyControls.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FamilyControls.framework; path = System/Library/Frameworks/FamilyControls.framework; sourceTree = SDKROOT; };
 		980C623429ED32E000D0A7B5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		980C623529EE760100D0A7B5 /* FancyTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyTabView.swift; sourceTree = "<group>"; };
+		981881C129F26879002A4395 /* SelectTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTimerView.swift; sourceTree = "<group>"; };
+		981881C329F26EF9002A4395 /* StudyTimeTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyTimeTimerView.swift; sourceTree = "<group>"; };
+		981881C529F26F00002A4395 /* PomodoroTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroTimerView.swift; sourceTree = "<group>"; };
+		981881C729F26F07002A4395 /* ExamTimeTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamTimeTimerView.swift; sourceTree = "<group>"; };
+		981881C929F27316002A4395 /* PageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageControl.swift; sourceTree = "<group>"; };
 		9843B7D829EEE09400F91DAD /* ProximityAndOrientationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProximityAndOrientationService.swift; sourceTree = "<group>"; };
 		9843B7DC29EEE0EB00F91DAD /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		9843B7E429EF086600F91DAD /* ProximityAndOrientationServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProximityAndOrientationServiceProtocol.swift; sourceTree = "<group>"; };
@@ -502,6 +512,7 @@
 				98E9384D29EA3935009CBF32 /* RoundedCorners.swift */,
 				986E5DB529EAF06D00FF7047 /* DayView.swift */,
 				980C623529EE760100D0A7B5 /* FancyTabView.swift */,
+				981881C929F27316002A4395 /* PageControl.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -567,6 +578,10 @@
 			children = (
 				985BE88B29E6DC35008582A3 /* StudyTimerView.swift */,
 				98E9386429EA5899009CBF32 /* AnalogClockView.swift */,
+				981881C129F26879002A4395 /* SelectTimerView.swift */,
+				981881C329F26EF9002A4395 /* StudyTimeTimerView.swift */,
+				981881C529F26F00002A4395 /* PomodoroTimerView.swift */,
+				981881C729F26F07002A4395 /* ExamTimeTimerView.swift */,
 			);
 			path = Clock;
 			sourceTree = "<group>";
@@ -754,12 +769,14 @@
 				98B21B5929D6F4AE004EFE0E /* StudySessionModel.swift in Sources */,
 				98B21B7629DA6288004EFE0E /* Destination.swift in Sources */,
 				98E314B529DEE67B00EA1617 /* TagServiceProtocol.swift in Sources */,
+				981881C629F26F00002A4395 /* PomodoroTimerView.swift in Sources */,
 				98B21B1B29D55F6C004EFE0E /* AuthenticationServiceProtocol.swift in Sources */,
 				98B21B2129D56BDF004EFE0E /* RegexConstants.swift in Sources */,
 				985BE88A29E6DC2C008582A3 /* ChatBotChatView.swift in Sources */,
 				98B21B5729D6F492004EFE0E /* SocialLoginModel.swift in Sources */,
 				98B21B5B29D6F4BF004EFE0E /* TagModel.swift in Sources */,
 				985BE89029E6DC49008582A3 /* SettingsView.swift in Sources */,
+				981881CA29F27316002A4395 /* PageControl.swift in Sources */,
 				9843B7DD29EEE0EB00F91DAD /* NotificationManager.swift in Sources */,
 				9843B7E529EF086600F91DAD /* ProximityAndOrientationServiceProtocol.swift in Sources */,
 				984D2C8F29E067FE008D3EA9 /* SplashView.swift in Sources */,
@@ -768,6 +785,7 @@
 				985BE8A429E6EA3E008582A3 /* ChatGPTService.swift in Sources */,
 				985BE8B229E7D510008582A3 /* ChatBotListView.swift in Sources */,
 				98B21B3A29D5EBC3004EFE0E /* AppDelegate.swift in Sources */,
+				981881C429F26EF9002A4395 /* StudyTimeTimerView.swift in Sources */,
 				985BE8A029E6E836008582A3 /* ChatBotViewModel.swift in Sources */,
 				984D2C8029DFB197008D3EA9 /* FlowLayout.swift in Sources */,
 				98D7C95729E510990075D201 /* ContentViewModel.swift in Sources */,
@@ -789,6 +807,7 @@
 				98B21B5429D6F424004EFE0E /* DDayEventModel.swift in Sources */,
 				98B21B7229D9DC25004EFE0E /* SignUpTagsView.swift in Sources */,
 				98E9386B29EAD1C3009CBF32 /* StudySessionServiceDTO.swift in Sources */,
+				981881C229F26879002A4395 /* SelectTimerView.swift in Sources */,
 				98E314B329DEE65E00EA1617 /* TagService.swift in Sources */,
 				98E9384E29EA3935009CBF32 /* RoundedCorners.swift in Sources */,
 				9843B7E729EFBF8200F91DAD /* StudySessionsByDateView.swift in Sources */,
@@ -802,6 +821,7 @@
 				98E9385229EA3AC4009CBF32 /* MessageServiceDTO.swift in Sources */,
 				985BE89829E6E559008582A3 /* HomeViewModel.swift in Sources */,
 				985BE88E29E6DC3E008582A3 /* MissionView.swift in Sources */,
+				981881C829F26F07002A4395 /* ExamTimeTimerView.swift in Sources */,
 				985BE89429E6E0DB008582A3 /* FriendsView.swift in Sources */,
 				98E9385029EA39A8009CBF32 /* ChatGPTServiceDTO.swift in Sources */,
 				987E543A29D552520007E156 /* KlockAppApp.swift in Sources */,

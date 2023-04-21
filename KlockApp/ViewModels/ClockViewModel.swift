@@ -16,7 +16,7 @@ class ClockViewModel: ObservableObject {
     private let studyStartTimeKey = "studyStartTime"
     @Published var studySessions: [StudySessionModel] = []
     @Published var currentStudySession: StudySessionModel
-
+    @Published var currentTime = Date()
     @Published var elapsedTime: TimeInterval = 0
     @Published var clockModel: ClockModel
     private var cancellable: AnyCancellable?

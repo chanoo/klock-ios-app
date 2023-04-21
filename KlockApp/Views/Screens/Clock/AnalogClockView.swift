@@ -9,7 +9,6 @@ import SwiftUI
 
 struct AnalogClockView: View {
     @ObservedObject private var viewModel: ClockViewModel = Container.shared.resolve(ClockViewModel.self)
-    @State private var currentTime = Date()
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.colorScheme) var colorScheme
 
@@ -89,7 +88,7 @@ struct AnalogClockView: View {
         }
         .onReceive(timer) { _ in
             viewModel.elapsedTime += 1
-            currentTime = Date()
+            viewModel.currentTime = Date()
             viewModel.updateTime()
             let _ = viewModel.objectWillChange
         }
@@ -101,15 +100,15 @@ struct AnalogClockView: View {
     
 
     private var hourAngle: Double {
-        viewModel.hourAngle(for: currentTime)
+        viewModel.hourAngle(for: viewModel.currentTime)
     }
 
     private var minuteAngle: Double {
-        viewModel.minuteAngle(for: currentTime)
+        viewModel.minuteAngle(for: viewModel.currentTime)
     }
 
     private var secondAngle: Double {
-        viewModel.secondAngle(for: currentTime)
+        viewModel.secondAngle(for: viewModel.currentTime)
     }
 }
 
