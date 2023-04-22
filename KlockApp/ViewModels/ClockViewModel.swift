@@ -54,7 +54,7 @@ class ClockViewModel: ObservableObject {
         let startTime = Date().addingTimeInterval(-elapsedTime)
         let endTime = Date()
 
-        Foast.show(message: "10초 후 저장됩니다.");
+        Foast.show(message: "10초 후 저장됩니다.", duration: 10);
 
         // 10초 후 실행되는 코드 블록
         stopAndSaveCancellable = Just(())
