@@ -24,7 +24,16 @@
       "location" : "https://github.com/chanoo/Foast",
       "state" : {
         "branch" : "main",
-        "revision" : "125cf7da885b23c2dad80302b63f0d73e89d9c1a"
+        "revision" : "341327deb0bc36a6ad069a10a12298e48afff50e"
+      }
+    },
+    {
+      "identity" : "lottie-spm",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/airbnb/lottie-spm.git",
+      "state" : {
+        "revision" : "c3852816c622ad35a03ed39c187c1644ece2382b",
+        "version" : "4.1.3"
       }
     },
     {

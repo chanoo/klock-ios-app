@@ -42,7 +42,7 @@ struct StudyTimeTimerView: View {
         }
         .background(FancyColor.background.color)
         .cornerRadius(8)
-        .shadow(color: Color.black.opacity(0.4), radius: 4, x: 0, y: 4)
+        .shadow(color: Color.black.opacity(0.2), radius: 8, x: 0, y: 0)
         .onAppear {
             if viewModel.isDark && !isShowingClockModal {
                 isShowingClockModal.toggle()

@@ -13,6 +13,9 @@
 		981881C629F26F00002A4395 /* PomodoroTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981881C529F26F00002A4395 /* PomodoroTimerView.swift */; };
 		981881C829F26F07002A4395 /* ExamTimeTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981881C729F26F07002A4395 /* ExamTimeTimerView.swift */; };
 		981881CA29F27316002A4395 /* PageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981881C929F27316002A4395 /* PageControl.swift */; };
+		981881CD29F3847A002A4395 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 981881CC29F3847A002A4395 /* Lottie */; };
+		981881CF29F386A4002A4395 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981881CE29F386A4002A4395 /* LottieView.swift */; };
+		981881D329F39030002A4395 /* lottie-plus.json in Resources */ = {isa = PBXBuildFile; fileRef = 981881D229F39030002A4395 /* lottie-plus.json */; };
 		9820035029F1A6DA0056CA03 /* Foast in Frameworks */ = {isa = PBXBuildFile; productRef = 9820034F29F1A6DA0056CA03 /* Foast */; };
 		9843B7D929EEE09400F91DAD /* ProximityAndOrientationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9843B7D829EEE09400F91DAD /* ProximityAndOrientationService.swift */; };
 		9843B7DD29EEE0EB00F91DAD /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9843B7DC29EEE0EB00F91DAD /* NotificationManager.swift */; };
@@ -136,6 +139,8 @@
 		981881C529F26F00002A4395 /* PomodoroTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroTimerView.swift; sourceTree = "<group>"; };
 		981881C729F26F07002A4395 /* ExamTimeTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamTimeTimerView.swift; sourceTree = "<group>"; };
 		981881C929F27316002A4395 /* PageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageControl.swift; sourceTree = "<group>"; };
+		981881CE29F386A4002A4395 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
+		981881D229F39030002A4395 /* lottie-plus.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "lottie-plus.json"; sourceTree = "<group>"; };
 		9843B7D829EEE09400F91DAD /* ProximityAndOrientationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProximityAndOrientationService.swift; sourceTree = "<group>"; };
 		9843B7DC29EEE0EB00F91DAD /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		9843B7E429EF086600F91DAD /* ProximityAndOrientationServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProximityAndOrientationServiceProtocol.swift; sourceTree = "<group>"; };
@@ -250,6 +255,7 @@
 				98E9385829EA4C45009CBF32 /* Alamofire in Frameworks */,
 				98B21B3D29D5F54E004EFE0E /* FacebookCore in Frameworks */,
 				98CE661629D55A370009916F /* Swinject in Frameworks */,
+				981881CD29F3847A002A4395 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -493,6 +499,7 @@
 		98CE661129D553A60009916F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				981881D229F39030002A4395 /* lottie-plus.json */,
 				985BE8AC29E73900008582A3 /* Config.xcconfig */,
 				98DC292929E90DAE00882E36 /* ConfigDebug.xcconfig */,
 				987E544429D552530007E156 /* KlockApp.xcdatamodeld */,
@@ -513,6 +520,7 @@
 				986E5DB529EAF06D00FF7047 /* DayView.swift */,
 				980C623529EE760100D0A7B5 /* FancyTabView.swift */,
 				981881C929F27316002A4395 /* PageControl.swift */,
+				981881CE29F386A4002A4395 /* LottieView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -609,6 +617,7 @@
 				98B21B3E29D5F54E004EFE0E /* FacebookLogin */,
 				98E9385729EA4C45009CBF32 /* Alamofire */,
 				9820034F29F1A6DA0056CA03 /* Foast */,
+				981881CC29F3847A002A4395 /* Lottie */,
 			);
 			productName = KlockApp;
 			productReference = 987E543629D552520007E156 /* KlockApp.app */;
@@ -690,6 +699,7 @@
 				98B21B3B29D5F54E004EFE0E /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
 				98E9385629EA4C45009CBF32 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				9820034E29F1A6DA0056CA03 /* XCRemoteSwiftPackageReference "Foast" */,
+				981881CB29F3847A002A4395 /* XCRemoteSwiftPackageReference "lottie-spm" */,
 			);
 			productRefGroup = 987E543729D552520007E156 /* Products */;
 			projectDirPath = "";
@@ -709,6 +719,7 @@
 			files = (
 				98B21B1829D55DE0004EFE0E /* README.md in Resources */,
 				987E544129D552530007E156 /* Preview Assets.xcassets in Resources */,
+				981881D329F39030002A4395 /* lottie-plus.json in Resources */,
 				987E543E29D552530007E156 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -816,6 +827,7 @@
 				98D7C94F29E332790075D201 /* APIErrorModel.swift in Sources */,
 				98B21B4F29D6F3E1004EFE0E /* AccountTagModel.swift in Sources */,
 				986E5DB429EAEF9200FF7047 /* CalendarView.swift in Sources */,
+				981881CF29F386A4002A4395 /* LottieView.swift in Sources */,
 				985BE8A229E6E906008582A3 /* MessageModel.swift in Sources */,
 				987E544629D552530007E156 /* KlockApp.xcdatamodeld in Sources */,
 				98E9385229EA3AC4009CBF32 /* MessageServiceDTO.swift in Sources */,
@@ -1200,6 +1212,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		981881CB29F3847A002A4395 /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-spm.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 		9820034E29F1A6DA0056CA03 /* XCRemoteSwiftPackageReference "Foast" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/chanoo/Foast";
@@ -1235,6 +1255,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		981881CC29F3847A002A4395 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 981881CB29F3847A002A4395 /* XCRemoteSwiftPackageReference "lottie-spm" */;
+			productName = Lottie;
+		};
 		9820034F29F1A6DA0056CA03 /* Foast */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 9820034E29F1A6DA0056CA03 /* XCRemoteSwiftPackageReference "Foast" */;

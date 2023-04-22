@@ -7,6 +7,7 @@
 
 import SwiftUI
 import UniformTypeIdentifiers
+import Lottie
 
 struct StudyTimerView: View {
     @StateObject private var viewModel: ClockViewModel = Container.shared.resolve(ClockViewModel.self)
@@ -25,13 +26,12 @@ struct StudyTimerView: View {
                     ForEach(0 ..< timerCardViews.count, id: \.self) { index in
                         VStack {
                             timerCardViews[index]
-                                .frame(width: geometry.size.width - 32, height: geometry.size.height - 48)
+                                .frame(width: geometry.size.width - 40, height: geometry.size.height - 40)
                                 .onDrag {
                                     NSItemProvider(object: String(index) as NSString)
                                 }
                                 .onDrop(of: [UTType.text], delegate: TimerDropDelegate(index: index, timerCardViews: $timerCardViews))
                         }
-                        .padding(.bottom, 28)
                     }
                     Button(action: {
                         isShowingSelectTimer.toggle()
@@ -39,19 +39,16 @@ struct StudyTimerView: View {
                         ZStack {
                             RoundedRectangle(cornerRadius: 8)
                                 .fill(FancyColor.background.color)
-                                .frame(width: geometry.size.width - 32, height: geometry.size.height - 48)
-                                .shadow(color: Color.black.opacity(0.4), radius: 4, x: 0, y: 4)
+                                .frame(width: geometry.size.width - 40, height: geometry.size.height - 40)
+                                .shadow(color: Color.black.opacity(0.2), radius: 8, x: 0, y: 0)
                             
-                            Image(systemName: "plus")
-                                .resizable()
-                                .frame(width: 28, height: 28)
-                                .foregroundColor(FancyColor.primary.color)
+                            LottieView(name: "lottie-plus")
+                                .frame(width: 128, height: 128)
                         }
-                        .padding(.bottom, 28)
                     }
                 }
-                .tabViewStyle(PageTabViewStyle())
-                .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
+                .tabViewStyle(.page(indexDisplayMode: .never))
+//                .indexViewStyle(.page(backgroundDisplayMode: .never))
                 Spacer()
             }
             .frame(width: geometry.size.width, height: geometry.size.height)
