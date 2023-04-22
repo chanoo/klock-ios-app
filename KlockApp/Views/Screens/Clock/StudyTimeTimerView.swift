@@ -13,16 +13,36 @@ struct StudyTimeTimerView: View {
     @State private var isShowingClockModal = false
 
     var body: some View {
-        VStack {
-            Button(action: {
-                isShowingClockModal.toggle()
-            }) {
-                Image(systemName: "play.circle.fill")
-                    .resizable()
-                    .frame(width: 100, height: 100)
-                    .foregroundColor(FancyColor.primary.color)
+        GeometryReader { geometry in
+            VStack {
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        withAnimation(.spring()) {
+                        }
+                    }) {
+                        Image(systemName: "gearshape")
+                            .resizable()
+                            .frame(width: 20, height: 20)
+                            .padding(24)
+                    }
+                }
+                Spacer()
+                Button(action: {
+                    isShowingClockModal.toggle()
+                }) {
+                    Image(systemName: "play.circle.fill")
+                        .resizable()
+                        .frame(width: 100, height: 100)
+                        .foregroundColor(FancyColor.primary.color)
+                }
+                Spacer()
             }
+            .frame(width: geometry.size.width, height: geometry.size.height)
         }
+        .background(FancyColor.background.color)
+        .cornerRadius(8)
+        .shadow(color: Color.black.opacity(0.4), radius: 4, x: 0, y: 4)
         .onAppear {
             if viewModel.isDark && !isShowingClockModal {
                 isShowingClockModal.toggle()

@@ -9,7 +9,30 @@ import SwiftUI
 
 struct ExamTimeTimerView: View {
     var body: some View {
-        Text("시험시간 타이머")
+        GeometryReader { geometry in
+            VStack {
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        withAnimation(.spring()) {
+                        }
+                    }) {
+                        Image(systemName: "gearshape")
+                            .resizable()
+                            .frame(width: 20, height: 20)
+                            .padding(24)
+                    }
+                }
+                Spacer()
+                Text("시험시간 타이머")
+                Spacer()
+            }
+            .frame(width: geometry.size.width, height: geometry.size.height)
+            .background(FancyColor.background.color)
+            .cornerRadius(8)
+            .shadow(color: Color.black.opacity(0.4), radius: 4, x: 0, y: 4)
+        }
+        
     }
 }
 

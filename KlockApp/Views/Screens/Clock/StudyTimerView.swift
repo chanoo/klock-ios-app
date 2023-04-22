@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import UniformTypeIdentifiers
 
 struct StudyTimerView: View {
     @StateObject private var viewModel: ClockViewModel = Container.shared.resolve(ClockViewModel.self)
     @State private var isShowingSelectTimer = false
+    @State private var isEditMode: Bool = false
     @State private var timerCardViews: [AnyView] = [
         AnyView(StudyTimeTimerView()),
         AnyView(PomodoroTimerView()),
@@ -21,30 +23,35 @@ struct StudyTimerView: View {
             VStack {
                 TabView {
                     ForEach(0 ..< timerCardViews.count, id: \.self) { index in
-                        timerCardViews[index]
-                            .frame(width: geometry.size.width - 32, height: geometry.size.height - 32)
-                            .background(Color.white)
-                            .cornerRadius(8)
-                            .shadow(color: Color.gray.opacity(0.4), radius: 4, x: 0, y: 4)
+                        VStack {
+                            timerCardViews[index]
+                                .frame(width: geometry.size.width - 32, height: geometry.size.height - 48)
+                                .onDrag {
+                                    NSItemProvider(object: String(index) as NSString)
+                                }
+                                .onDrop(of: [UTType.text], delegate: TimerDropDelegate(index: index, timerCardViews: $timerCardViews))
+                        }
+                        .padding(.bottom, 28)
                     }
                     Button(action: {
                         isShowingSelectTimer.toggle()
                     }) {
                         ZStack {
                             RoundedRectangle(cornerRadius: 8)
-                                .fill(Color.white)
-                                .frame(width: geometry.size.width - 32, height: geometry.size.height - 32)
-                                .shadow(color: Color.gray.opacity(0.4), radius: 4, x: 0, y: 4)
+                                .fill(FancyColor.background.color)
+                                .frame(width: geometry.size.width - 32, height: geometry.size.height - 48)
+                                .shadow(color: Color.black.opacity(0.4), radius: 4, x: 0, y: 4)
                             
                             Image(systemName: "plus")
                                 .resizable()
-                                .frame(width: 60, height: 60)
+                                .frame(width: 28, height: 28)
                                 .foregroundColor(FancyColor.primary.color)
                         }
+                        .padding(.bottom, 28)
                     }
                 }
                 .tabViewStyle(PageTabViewStyle())
-                .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
+                .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
                 Spacer()
             }
             .frame(width: geometry.size.width, height: geometry.size.height)
@@ -58,6 +65,26 @@ struct StudyTimerView: View {
                 SelectTimerView()
             }
         }
+    }
+}
+
+struct TimerDropDelegate: DropDelegate {
+    let index: Int
+    @Binding var timerCardViews: [AnyView]
+    
+    func performDrop(info: DropInfo) -> Bool {
+        if let source = info.itemProviders(for: [.text]).first {
+            source.loadItem(forTypeIdentifier: UTType.text.identifier, options: nil) { (data, error) in
+                if let data = data as? Data, let sourceIndex = Int(String(data: data, encoding: .utf8) ?? "") {
+                    DispatchQueue.main.async {
+                        let sourceView = timerCardViews.remove(at: sourceIndex)
+                        timerCardViews.insert(sourceView, at: index)
+                    }
+                }
+            }
+            return true
+        }
+        return false
     }
 }
 
