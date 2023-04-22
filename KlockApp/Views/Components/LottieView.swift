@@ -13,7 +13,8 @@ struct LottieView: UIViewRepresentable {
 
     func makeUIView(context: UIViewRepresentableContext<LottieView>) -> LottieAnimationView {
         let animationView = LottieAnimationView(name: name)
-        animationView.loopMode = .playOnce
+        animationView.loopMode = .loop
+        animationView.animationSpeed = 0.7
         animationView.play()
         return animationView
     }
