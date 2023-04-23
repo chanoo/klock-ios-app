@@ -28,7 +28,7 @@ struct HomeView: View {
 
     var body: some View {
         FancyTabView(selection: $selection, items: [
-            (imageName: "ic_clock", content: AnyView(StudyTimerView())),
+            (imageName: "ic_clock", content: AnyView(TimeTimerView())),
             (imageName: "ic_bar_graph", content: AnyView(CalendarView())),
             (imageName: "ic_bachelor_cap", content: AnyView(ChatBotListView())),
             (imageName: "ic_person", content: AnyView(FriendsView())),

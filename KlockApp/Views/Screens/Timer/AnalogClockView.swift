@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AnalogClockView: View {
-    @ObservedObject private var viewModel: ClockViewModel = Container.shared.resolve(ClockViewModel.self)
+    @ObservedObject private var viewModel = Container.shared.resolve(TimeTimerViewModel.self)
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.colorScheme) var colorScheme
 
@@ -113,7 +113,7 @@ struct AnalogClockView: View {
 }
 
 struct ClockOutLine: View {
-    @ObservedObject private var viewModel: ClockViewModel = Container.shared.resolve(ClockViewModel.self)
+    @ObservedObject private var viewModel = Container.shared.resolve(TimeTimerViewModel.self)
     let studySession: StudySessionModel
 
     var body: some View {
@@ -137,7 +137,7 @@ struct ClockOutLine: View {
 
 
 struct ClockOutLineSegment: View {
-    @ObservedObject private var viewModel: ClockViewModel = Container.shared.resolve(ClockViewModel.self)
+    @ObservedObject private var viewModel = Container.shared.resolve(TimeTimerViewModel.self)
     let studySession: StudySessionModel
     let startTime: Date
     let endTime: Date

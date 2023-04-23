@@ -55,11 +55,12 @@ class Container {
         container.register(SignUpViewModel.self) { resolver in SignUpViewModel(signUpUserModel: resolver.resolve(SignUpUserModel.self) ?? SignUpUserModel() ) }
         container.register(SplashViewModel.self) { _ in SplashViewModel() }
         container.register(ChatBotViewModel.self) { _ in ChatBotViewModel() }
-        container.register(ClockViewModel.self) { resolver in
+        container.register(TimeTimerViewModel.self) { resolver in
             let clockModel = resolver.resolve(ClockModel.self)!
-            return ClockViewModel(clockModel: clockModel)
+            return TimeTimerViewModel(clockModel: clockModel)
         }
         container.register(CalendarViewModel.self) { _ in CalendarViewModel() }
+        container.register(PomodoroTimerViewModel.self) { _ in PomodoroTimerViewModel() }
    }
 
     func resolve<Service>(_ serviceType: Service.Type) -> Service {

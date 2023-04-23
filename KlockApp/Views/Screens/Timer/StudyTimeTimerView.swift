@@ -9,7 +9,7 @@ import SwiftUI
 
 struct StudyTimeTimerView: View {
     
-    @StateObject private var viewModel: ClockViewModel = Container.shared.resolve(ClockViewModel.self)
+    @StateObject private var viewModel = Container.shared.resolve(TimeTimerViewModel.self)
     @State private var isShowingClockModal = false
 
     var body: some View {

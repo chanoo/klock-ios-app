@@ -1,5 +1,5 @@
 //
-//  ClockViewModel.swift
+//  TimeTimerViewModel.swift
 //  KlockApp
 //
 //  Created by 성찬우 on 2023/04/15.
@@ -11,7 +11,7 @@ import Combine
 import AudioToolbox
 import Foast
 
-class ClockViewModel: ObservableObject {
+class TimeTimerViewModel: ObservableObject {
 
     private let studyStartTimeKey = "studyStartTime"
     @Published var studySessions: [StudySessionModel] = []

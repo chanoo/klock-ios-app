@@ -1,5 +1,5 @@
 //
-//  StudyTimerView.swift
+//  TimeTimerView.swift
 //  KlockApp
 //
 //  Created by 성찬우 on 2023/04/12.
@@ -9,8 +9,8 @@ import SwiftUI
 import UniformTypeIdentifiers
 import Lottie
 
-struct StudyTimerView: View {
-    @StateObject private var viewModel: ClockViewModel = Container.shared.resolve(ClockViewModel.self)
+struct TimeTimerView: View {
+    @StateObject private var viewModel = Container.shared.resolve(TimeTimerViewModel.self)
     @State private var isShowingSelectTimer = false
     @State private var timerCardViews: [AnyView] = [
         AnyView(StudyTimeTimerView()),
@@ -48,7 +48,7 @@ struct StudyTimerView: View {
                     }
                 }
                 .tabViewStyle(.page(indexDisplayMode: .never))
-//                .indexViewStyle(.page(backgroundDisplayMode: .never))
+                
                 Spacer()
             }
             .frame(width: geometry.size.width, height: geometry.size.height)
