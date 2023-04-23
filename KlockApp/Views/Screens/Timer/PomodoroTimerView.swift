@@ -43,7 +43,8 @@ struct PomodoroTimerView: View {
             }
             .background(FancyColor.background.color)
             .cornerRadius(8)
-            .shadow(color: Color.black.opacity(0.2), radius: 8, x: 0, y: 0)            .rotation3DEffect(
+            .shadow(color: Color.black.opacity(0.2), radius: 8, x: 0, y: 0)
+            .rotation3DEffect(
                 .degrees(isFlipped ? 180 : 0),
                 axis: (x: 0.0, y: 1.0, z: 0.0)
             )
