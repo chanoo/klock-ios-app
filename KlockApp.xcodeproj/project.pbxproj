@@ -541,7 +541,7 @@
 			isa = PBXGroup;
 			children = (
 				980C623029EBDDE800D0A7B5 /* Calendar */,
-				98E9385D29EA5844009CBF32 /* Clock */,
+				98E9385D29EA5844009CBF32 /* Timer */,
 				98E9385B29EA54B1009CBF32 /* Friends */,
 				98E9385A29EA546E009CBF32 /* ChatBot */,
 				98E9385929EA5456009CBF32 /* SignUp */,
@@ -593,7 +593,7 @@
 			path = Friends;
 			sourceTree = "<group>";
 		};
-		98E9385D29EA5844009CBF32 /* Clock */ = {
+		98E9385D29EA5844009CBF32 /* Timer */ = {
 			isa = PBXGroup;
 			children = (
 				985BE88B29E6DC35008582A3 /* StudyTimerView.swift */,
@@ -603,7 +603,7 @@
 				981881C529F26F00002A4395 /* PomodoroTimerView.swift */,
 				981881C729F26F07002A4395 /* ExamTimeTimerView.swift */,
 			);
-			path = Clock;
+			path = Timer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

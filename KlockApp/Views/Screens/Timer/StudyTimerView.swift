@@ -12,11 +12,11 @@ import Lottie
 struct StudyTimerView: View {
     @StateObject private var viewModel: ClockViewModel = Container.shared.resolve(ClockViewModel.self)
     @State private var isShowingSelectTimer = false
-    @State private var isEditMode: Bool = false
     @State private var timerCardViews: [AnyView] = [
         AnyView(StudyTimeTimerView()),
         AnyView(PomodoroTimerView()),
-        AnyView(ExamTimeTimerView())
+        AnyView(ExamTimeTimerView()),
+        AnyView(PomodoroTimerView())
     ]
 
     var body: some View {
