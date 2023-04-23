@@ -9,7 +9,7 @@ import Foundation
 import Combine
 import CoreData
 
-class AccountService: AccountServiceProtocol {
+class AccountLocalService: AccountServiceProtocol {
 
     private let coreDataManager = CoreDataManager.shared
 

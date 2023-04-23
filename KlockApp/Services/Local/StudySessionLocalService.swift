@@ -1,7 +1,7 @@
 import Combine
 import CoreData
 
-class StudySessionService: StudySessionServiceProtocol {
+class StudySessionLocalService: StudySessionServiceProtocol {
 
     private let coreDataManager = CoreDataManager.shared
 

@@ -9,7 +9,7 @@ import Foundation
 import Combine
 import CoreData
 
-class AccountTimerService: AccountTimerServiceProtocol {
+class AccountTimerLocalService: AccountTimerServiceProtocol {
     private let coreDataManager = CoreDataManager.shared
 
     func create(account: Account, type: String, active: Bool, createdAt: Date) -> AnyPublisher<AccountTimer, Error> {

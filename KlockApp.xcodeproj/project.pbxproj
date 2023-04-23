@@ -22,10 +22,10 @@
 		981B389729F44B1C00AB0EF8 /* ExamTimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981B389629F44B1C00AB0EF8 /* ExamTimerModel.swift */; };
 		9820035029F1A6DA0056CA03 /* Foast in Frameworks */ = {isa = PBXBuildFile; productRef = 9820034F29F1A6DA0056CA03 /* Foast */; };
 		9833FFC029F54DE700CC33F7 /* PomodoroTimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9833FFBF29F54DE700CC33F7 /* PomodoroTimerViewModel.swift */; };
-		9833FFC229F5759E00CC33F7 /* AccountTimerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9833FFC129F5759E00CC33F7 /* AccountTimerService.swift */; };
+		9833FFC229F5759E00CC33F7 /* AccountTimerLocalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9833FFC129F5759E00CC33F7 /* AccountTimerLocalService.swift */; };
 		9833FFC429F5769700CC33F7 /* AccountTimerServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9833FFC329F5769700CC33F7 /* AccountTimerServiceProtocol.swift */; };
 		9833FFC629F58F5C00CC33F7 /* AccountServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9833FFC529F58F5C00CC33F7 /* AccountServiceProtocol.swift */; };
-		9833FFC829F58F8A00CC33F7 /* AccountService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9833FFC729F58F8A00CC33F7 /* AccountService.swift */; };
+		9833FFC829F58F8A00CC33F7 /* AccountLocalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9833FFC729F58F8A00CC33F7 /* AccountLocalService.swift */; };
 		9843B7D929EEE09400F91DAD /* ProximityAndOrientationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9843B7D829EEE09400F91DAD /* ProximityAndOrientationService.swift */; };
 		9843B7DD29EEE0EB00F91DAD /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9843B7DC29EEE0EB00F91DAD /* NotificationManager.swift */; };
 		9843B7E529EF086600F91DAD /* ProximityAndOrientationServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9843B7E429EF086600F91DAD /* ProximityAndOrientationServiceProtocol.swift */; };
@@ -97,7 +97,7 @@
 		98CE662129D55B730009916F /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CE662029D55B730009916F /* SignInViewModel.swift */; };
 		98CE662329D55BB10009916F /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CE662229D55BB10009916F /* SignInView.swift */; };
 		98D2826729E988100039E6E6 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D2826629E988100039E6E6 /* CoreDataManager.swift */; };
-		98D2826929E988D00039E6E6 /* MessageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D2826829E988D00039E6E6 /* MessageService.swift */; };
+		98D2826929E988D00039E6E6 /* MessageLocalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D2826829E988D00039E6E6 /* MessageLocalService.swift */; };
 		98D2826B29E988E70039E6E6 /* MessageServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D2826A29E988E70039E6E6 /* MessageServiceProtocol.swift */; };
 		98D7C94929E1AB450075D201 /* SignUpUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D7C94829E1AB450075D201 /* SignUpUserModel.swift */; };
 		98D7C94F29E332790075D201 /* APIErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D7C94E29E332790075D201 /* APIErrorModel.swift */; };
@@ -118,7 +118,7 @@
 		98E9386129EA5871009CBF32 /* TimeTimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E9386029EA5871009CBF32 /* TimeTimerViewModel.swift */; };
 		98E9386529EA5899009CBF32 /* AnalogClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E9386429EA5899009CBF32 /* AnalogClockView.swift */; };
 		98E9386729EAD173009CBF32 /* StudySessionServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E9386629EAD173009CBF32 /* StudySessionServiceProtocol.swift */; };
-		98E9386929EAD199009CBF32 /* StudySessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E9386829EAD199009CBF32 /* StudySessionService.swift */; };
+		98E9386929EAD199009CBF32 /* StudySessionLocalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E9386829EAD199009CBF32 /* StudySessionLocalService.swift */; };
 		98E9386B29EAD1C3009CBF32 /* StudySessionServiceDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E9386A29EAD1C3009CBF32 /* StudySessionServiceDTO.swift */; };
 /* End PBXBuildFile section */
 
@@ -155,10 +155,10 @@
 		981B389429F44B1200AB0EF8 /* StudyTimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyTimerModel.swift; sourceTree = "<group>"; };
 		981B389629F44B1C00AB0EF8 /* ExamTimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamTimerModel.swift; sourceTree = "<group>"; };
 		9833FFBF29F54DE700CC33F7 /* PomodoroTimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroTimerViewModel.swift; sourceTree = "<group>"; };
-		9833FFC129F5759E00CC33F7 /* AccountTimerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTimerService.swift; sourceTree = "<group>"; };
+		9833FFC129F5759E00CC33F7 /* AccountTimerLocalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTimerLocalService.swift; sourceTree = "<group>"; };
 		9833FFC329F5769700CC33F7 /* AccountTimerServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTimerServiceProtocol.swift; sourceTree = "<group>"; };
 		9833FFC529F58F5C00CC33F7 /* AccountServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountServiceProtocol.swift; sourceTree = "<group>"; };
-		9833FFC729F58F8A00CC33F7 /* AccountService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountService.swift; sourceTree = "<group>"; };
+		9833FFC729F58F8A00CC33F7 /* AccountLocalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountLocalService.swift; sourceTree = "<group>"; };
 		9843B7D829EEE09400F91DAD /* ProximityAndOrientationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProximityAndOrientationService.swift; sourceTree = "<group>"; };
 		9843B7DC29EEE0EB00F91DAD /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		9843B7E429EF086600F91DAD /* ProximityAndOrientationServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProximityAndOrientationServiceProtocol.swift; sourceTree = "<group>"; };
@@ -237,7 +237,7 @@
 		98CE662029D55B730009916F /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		98CE662229D55BB10009916F /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		98D2826629E988100039E6E6 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
-		98D2826829E988D00039E6E6 /* MessageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageService.swift; sourceTree = "<group>"; };
+		98D2826829E988D00039E6E6 /* MessageLocalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageLocalService.swift; sourceTree = "<group>"; };
 		98D2826A29E988E70039E6E6 /* MessageServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageServiceProtocol.swift; sourceTree = "<group>"; };
 		98D7C94829E1AB450075D201 /* SignUpUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpUserModel.swift; sourceTree = "<group>"; };
 		98D7C94E29E332790075D201 /* APIErrorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIErrorModel.swift; sourceTree = "<group>"; };
@@ -259,7 +259,7 @@
 		98E9386029EA5871009CBF32 /* TimeTimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTimerViewModel.swift; sourceTree = "<group>"; };
 		98E9386429EA5899009CBF32 /* AnalogClockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalogClockView.swift; sourceTree = "<group>"; };
 		98E9386629EAD173009CBF32 /* StudySessionServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudySessionServiceProtocol.swift; sourceTree = "<group>"; };
-		98E9386829EAD199009CBF32 /* StudySessionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudySessionService.swift; sourceTree = "<group>"; };
+		98E9386829EAD199009CBF32 /* StudySessionLocalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudySessionLocalService.swift; sourceTree = "<group>"; };
 		98E9386A29EAD1C3009CBF32 /* StudySessionServiceDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudySessionServiceDTO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -313,15 +313,15 @@
 		9833FFC929F59CA700CC33F7 /* Local */ = {
 			isa = PBXGroup;
 			children = (
-				9833FFC729F58F8A00CC33F7 /* AccountService.swift */,
-				9833FFC129F5759E00CC33F7 /* AccountTimerService.swift */,
-				98D2826829E988D00039E6E6 /* MessageService.swift */,
-				98E9386829EAD199009CBF32 /* StudySessionService.swift */,
+				9833FFC729F58F8A00CC33F7 /* AccountLocalService.swift */,
+				9833FFC129F5759E00CC33F7 /* AccountTimerLocalService.swift */,
+				98D2826829E988D00039E6E6 /* MessageLocalService.swift */,
+				98E9386829EAD199009CBF32 /* StudySessionLocalService.swift */,
 			);
 			path = Local;
 			sourceTree = "<group>";
 		};
-		9833FFCA29F59CB400CC33F7 /* API */ = {
+		9833FFCA29F59CB400CC33F7 /* Remote */ = {
 			isa = PBXGroup;
 			children = (
 				98CE661A29D55AA40009916F /* AuthenticationService.swift */,
@@ -329,7 +329,7 @@
 				98DC292A29E9373D00882E36 /* ChatBotService.swift */,
 				98E314B229DEE65E00EA1617 /* TagService.swift */,
 			);
-			path = API;
+			path = Remote;
 			sourceTree = "<group>";
 		};
 		9833FFCB29F59E6400CC33F7 /* DTO */ = {
@@ -528,7 +528,7 @@
 			isa = PBXGroup;
 			children = (
 				98B21B1929D55EFF004EFE0E /* Protocols */,
-				9833FFCA29F59CB400CC33F7 /* API */,
+				9833FFCA29F59CB400CC33F7 /* Remote */,
 				9833FFC929F59CA700CC33F7 /* Local */,
 				9833FFCB29F59E6400CC33F7 /* DTO */,
 				9843B7D829EEE09400F91DAD /* ProximityAndOrientationService.swift */,
@@ -863,7 +863,7 @@
 				98CE662129D55B730009916F /* SignInViewModel.swift in Sources */,
 				98B21B6E29D9D21A004EFE0E /* SignUpViewModel.swift in Sources */,
 				98B21B4629D60EEB004EFE0E /* FancyTextField.swift in Sources */,
-				98D2826929E988D00039E6E6 /* MessageService.swift in Sources */,
+				98D2826929E988D00039E6E6 /* MessageLocalService.swift in Sources */,
 				985BE8AE29E73A76008582A3 /* EnvironmentValuesProvider.swift in Sources */,
 				981B389529F44B1200AB0EF8 /* StudyTimerModel.swift in Sources */,
 				98B21B5229D6F404004EFE0E /* FriendRelationModel.swift in Sources */,
@@ -880,18 +880,18 @@
 				9843B7E729EFBF8200F91DAD /* StudySessionsByDateView.swift in Sources */,
 				9833FFC429F5769700CC33F7 /* AccountTimerServiceProtocol.swift in Sources */,
 				98B21B4429D60D25004EFE0E /* FancyButton.swift in Sources */,
-				98E9386929EAD199009CBF32 /* StudySessionService.swift in Sources */,
+				98E9386929EAD199009CBF32 /* StudySessionLocalService.swift in Sources */,
 				98D7C94F29E332790075D201 /* APIErrorModel.swift in Sources */,
 				98B21B4F29D6F3E1004EFE0E /* AccountTagModel.swift in Sources */,
 				986E5DB429EAEF9200FF7047 /* CalendarView.swift in Sources */,
 				981881CF29F386A4002A4395 /* LottieView.swift in Sources */,
 				985BE8A229E6E906008582A3 /* MessageModel.swift in Sources */,
-				9833FFC229F5759E00CC33F7 /* AccountTimerService.swift in Sources */,
+				9833FFC229F5759E00CC33F7 /* AccountTimerLocalService.swift in Sources */,
 				987E544629D552530007E156 /* KlockApp.xcdatamodeld in Sources */,
 				98E9385229EA3AC4009CBF32 /* MessageServiceDTO.swift in Sources */,
 				985BE89829E6E559008582A3 /* HomeViewModel.swift in Sources */,
 				981B389729F44B1C00AB0EF8 /* ExamTimerModel.swift in Sources */,
-				9833FFC829F58F8A00CC33F7 /* AccountService.swift in Sources */,
+				9833FFC829F58F8A00CC33F7 /* AccountLocalService.swift in Sources */,
 				985BE88E29E6DC3E008582A3 /* MissionView.swift in Sources */,
 				981881C829F26F07002A4395 /* ExamTimeTimerView.swift in Sources */,
 				985BE89429E6E0DB008582A3 /* FriendsView.swift in Sources */,

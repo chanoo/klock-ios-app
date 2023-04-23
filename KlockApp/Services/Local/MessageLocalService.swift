@@ -8,7 +8,7 @@
 import Combine
 import CoreData
 
-class MessageService: MessageServiceProtocol {
+class MessageLocalService: MessageServiceProtocol {
     private let coreDataManager = CoreDataManager.shared
 
     func saveMessage(message: MessageModel) -> AnyPublisher<Bool, Error> {

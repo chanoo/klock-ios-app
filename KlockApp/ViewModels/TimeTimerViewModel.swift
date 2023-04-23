@@ -24,7 +24,9 @@ class TimeTimerViewModel: ObservableObject {
 
     @Published var isDark: Bool = false
 
-    private let studySessionService: StudySessionServiceProtocol = Container.shared.resolve(StudySessionServiceProtocol.self)
+    private let accountService = Container.shared.resolve(AccountServiceProtocol.self)
+    private let AccountTimerService = Container.shared.resolve(AccountTimerServiceProtocol.self)
+    private let studySessionService = Container.shared.resolve(StudySessionServiceProtocol.self)
     private let proximityAndOrientationService: ProximityAndOrientationServiceProtocol = Container.shared.resolve(ProximityAndOrientationServiceProtocol.self)
 
     private var orientationObserver: NSObjectProtocol?
