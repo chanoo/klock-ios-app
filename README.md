@@ -18,7 +18,9 @@ KlockApp
 │   ├── DI
 │   ├── Models
 │   ├── Services
-│   ├── Protocols
+│   │   ├── Protocols
+│   │   ├── API
+│   │   └── Local
 │   ├── ViewModels
 │   ├── Views
 │   │   ├── Screens

@@ -310,6 +310,41 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		9833FFC929F59CA700CC33F7 /* Local */ = {
+			isa = PBXGroup;
+			children = (
+				9833FFC729F58F8A00CC33F7 /* AccountService.swift */,
+				9833FFC129F5759E00CC33F7 /* AccountTimerService.swift */,
+				98D2826829E988D00039E6E6 /* MessageService.swift */,
+				98E9386829EAD199009CBF32 /* StudySessionService.swift */,
+			);
+			path = Local;
+			sourceTree = "<group>";
+		};
+		9833FFCA29F59CB400CC33F7 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				98CE661A29D55AA40009916F /* AuthenticationService.swift */,
+				985BE8A329E6EA3E008582A3 /* ChatGPTService.swift */,
+				98DC292A29E9373D00882E36 /* ChatBotService.swift */,
+				98E314B229DEE65E00EA1617 /* TagService.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		9833FFCB29F59E6400CC33F7 /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				98E9385129EA3AC4009CBF32 /* MessageServiceDTO.swift */,
+				98E9386A29EAD1C3009CBF32 /* StudySessionServiceDTO.swift */,
+				98B21B4829D617A4004EFE0E /* AuthenticationServiceDTO.swift */,
+				98E9384F29EA39A8009CBF32 /* ChatGPTServiceDTO.swift */,
+				98DC292C29E9380200882E36 /* ChatBotServiceDTO.swift */,
+				98E314B629DEE6BB00EA1617 /* TagServiceDTO.swift */,
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
 		984D2C8529DFC479008D3EA9 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -351,7 +386,6 @@
 				98CE661729D55A440009916F /* DI */,
 				98CE660C29D553790009916F /* Models */,
 				98CE660F29D553980009916F /* Services */,
-				98B21B1929D55EFF004EFE0E /* Protocols */,
 				98CE660D29D553880009916F /* ViewModels */,
 				98CE660E29D553900009916F /* Views */,
 				98B21B2529D57A5F004EFE0E /* Extensions */,
@@ -493,20 +527,10 @@
 		98CE660F29D553980009916F /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				9833FFC729F58F8A00CC33F7 /* AccountService.swift */,
-				9833FFC129F5759E00CC33F7 /* AccountTimerService.swift */,
-				98CE661A29D55AA40009916F /* AuthenticationService.swift */,
-				98B21B4829D617A4004EFE0E /* AuthenticationServiceDTO.swift */,
-				985BE8A329E6EA3E008582A3 /* ChatGPTService.swift */,
-				98E9384F29EA39A8009CBF32 /* ChatGPTServiceDTO.swift */,
-				98DC292A29E9373D00882E36 /* ChatBotService.swift */,
-				98DC292C29E9380200882E36 /* ChatBotServiceDTO.swift */,
-				98D2826829E988D00039E6E6 /* MessageService.swift */,
-				98E9385129EA3AC4009CBF32 /* MessageServiceDTO.swift */,
-				98E314B229DEE65E00EA1617 /* TagService.swift */,
-				98E314B629DEE6BB00EA1617 /* TagServiceDTO.swift */,
-				98E9386829EAD199009CBF32 /* StudySessionService.swift */,
-				98E9386A29EAD1C3009CBF32 /* StudySessionServiceDTO.swift */,
+				98B21B1929D55EFF004EFE0E /* Protocols */,
+				9833FFCA29F59CB400CC33F7 /* API */,
+				9833FFC929F59CA700CC33F7 /* Local */,
+				9833FFCB29F59E6400CC33F7 /* DTO */,
 				9843B7D829EEE09400F91DAD /* ProximityAndOrientationService.swift */,
 				984D2C8C29E00296008D3EA9 /* README.md */,
 			);
