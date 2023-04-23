@@ -10,6 +10,7 @@ import SwiftUI
 import Combine
 import AudioToolbox
 import Foast
+import UniformTypeIdentifiers
 
 class TimeTimerViewModel: ObservableObject {
 
@@ -25,12 +26,19 @@ class TimeTimerViewModel: ObservableObject {
     @Published var isDark: Bool = false
 
     private let accountService = Container.shared.resolve(AccountServiceProtocol.self)
-    private let AccountTimerService = Container.shared.resolve(AccountTimerServiceProtocol.self)
+    private let accountTimerService = Container.shared.resolve(AccountTimerServiceProtocol.self)
     private let studySessionService = Container.shared.resolve(StudySessionServiceProtocol.self)
-    private let proximityAndOrientationService: ProximityAndOrientationServiceProtocol = Container.shared.resolve(ProximityAndOrientationServiceProtocol.self)
+    private let proximityAndOrientationService = Container.shared.resolve(ProximityAndOrientationServiceProtocol.self)
 
     private var orientationObserver: NSObjectProtocol?
     var cancellables: Set<AnyCancellable> = []
+    
+    @Published var timerCardViews: [AnyView] = [
+        AnyView(StudyTimeTimerView()),
+        AnyView(PomodoroTimerView()),
+        AnyView(ExamTimeTimerView()),
+        AnyView(PomodoroTimerView())
+    ]
 
     init(clockModel: ClockModel) {
         self.clockModel = clockModel
@@ -142,6 +150,18 @@ class TimeTimerViewModel: ObservableObject {
         return TimeUtils.angleForTime(date: date)
     }
 
+    func dropDelegate(for index: Int) -> TimerDropDelegate {
+        TimerDropDelegate(viewModel: self, index: index)
+    }
+
+    func removeTimerCard(at index: Int) {
+        timerCardViews.remove(at: index)
+    }
+
+    func insertTimerCard(_ timerCard: AnyView, at index: Int) {
+        timerCardViews.insert(timerCard, at: index)
+    }
+
     func hourAngle(for date: Date) -> Double {
         let hour = Calendar.current.component(.hour, from: date)
         let minute = Calendar.current.component(.minute, from: date)
@@ -157,6 +177,27 @@ class TimeTimerViewModel: ObservableObject {
     func secondAngle(for date: Date) -> Double {
         let second = Calendar.current.component(.second, from: date)
         return Double(second) / 60 * 360
+    }
+    
+    struct TimerDropDelegate: DropDelegate {
+        let viewModel: TimeTimerViewModel
+        let index: Int
+        
+        func performDrop(info: DropInfo) -> Bool {
+            if let source = info.itemProviders(for: [.text]).first {
+                source.loadItem(forTypeIdentifier: UTType.text.identifier, options: nil) { (data, error) in
+                    if let data = data as? Data, let sourceIndex = Int(String(data: data, encoding: .utf8) ?? "") {
+                        DispatchQueue.main.async {
+                            viewModel.removeTimerCard(at: sourceIndex)
+                            let sourceView = viewModel.timerCardViews.remove(at: sourceIndex)
+                            viewModel.insertTimerCard(sourceView, at: index)
+                        }
+                    }
+                }
+                return true
+            }
+            return false
+        }
     }
 
 }

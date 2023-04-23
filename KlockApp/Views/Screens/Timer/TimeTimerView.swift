@@ -12,25 +12,19 @@ import Lottie
 struct TimeTimerView: View {
     @StateObject private var viewModel = Container.shared.resolve(TimeTimerViewModel.self)
     @State private var isShowingSelectTimer = false
-    @State private var timerCardViews: [AnyView] = [
-        AnyView(StudyTimeTimerView()),
-        AnyView(PomodoroTimerView()),
-        AnyView(ExamTimeTimerView()),
-        AnyView(PomodoroTimerView())
-    ]
 
     var body: some View {
         GeometryReader { geometry in
             VStack {
                 TabView {
-                    ForEach(0 ..< timerCardViews.count, id: \.self) { index in
+                    ForEach(viewModel.timerCardViews.indices, id: \.self) { index in
                         VStack {
-                            timerCardViews[index]
+                            viewModel.timerCardViews[index]
                                 .frame(width: geometry.size.width - 40, height: geometry.size.height - 40)
                                 .onDrag {
                                     NSItemProvider(object: String(index) as NSString)
                                 }
-                                .onDrop(of: [UTType.text], delegate: TimerDropDelegate(index: index, timerCardViews: $timerCardViews))
+                                .onDrop(of: [UTType.text], delegate: viewModel.dropDelegate(for: index))
                         }
                     }
                     Button(action: {
@@ -62,26 +56,6 @@ struct TimeTimerView: View {
                 SelectTimerView()
             }
         }
-    }
-}
-
-struct TimerDropDelegate: DropDelegate {
-    let index: Int
-    @Binding var timerCardViews: [AnyView]
-    
-    func performDrop(info: DropInfo) -> Bool {
-        if let source = info.itemProviders(for: [.text]).first {
-            source.loadItem(forTypeIdentifier: UTType.text.identifier, options: nil) { (data, error) in
-                if let data = data as? Data, let sourceIndex = Int(String(data: data, encoding: .utf8) ?? "") {
-                    DispatchQueue.main.async {
-                        let sourceView = timerCardViews.remove(at: sourceIndex)
-                        timerCardViews.insert(sourceView, at: index)
-                    }
-                }
-            }
-            return true
-        }
-        return false
     }
 }
 
