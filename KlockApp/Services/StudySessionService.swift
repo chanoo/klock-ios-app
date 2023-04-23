@@ -5,6 +5,10 @@ class StudySessionService: StudySessionServiceProtocol {
 
     private let coreDataManager = CoreDataManager.shared
 
+    private func mapEntityToModel(_ entity: StudySession) -> StudySessionModel {
+        return StudySessionModel(id: entity.id, accountId: 1, startTime: entity.startTime ?? Date(), endTime: entity.endTime ?? Date(), syncDate: nil)
+    }
+
     func fetchStudySessions() -> AnyPublisher<[StudySessionModel], Error> {
         return Future<[StudySessionModel], Error> { promise in
             let context = self.coreDataManager.persistentContainer.viewContext
@@ -15,9 +19,7 @@ class StudySessionService: StudySessionServiceProtocol {
 
             do {
                 let fetchedEntities = try context.fetch(fetchRequest)
-                let studySessions = fetchedEntities.map { entity -> StudySessionModel in
-                    StudySessionModel(id: entity.id, accountId: 1, startTime: entity.startTime ?? Date(), endTime: entity.endTime ?? Date(), syncDate: nil)
-                }
+                let studySessions = fetchedEntities.map { self.mapEntityToModel($0) }
                 promise(.success(studySessions))
             } catch {
                 promise(.failure(error))
@@ -25,8 +27,7 @@ class StudySessionService: StudySessionServiceProtocol {
         }.eraseToAnyPublisher()
     }
 
-
-    func saveStudySession(startTime: Date, endTime: Date) -> AnyPublisher<StudySessionModel, Error> {
+    func saveStudySession(accountTimer: AccountTimer, startTime: Date, endTime: Date) -> AnyPublisher<StudySessionModel, Error> {
         return Future<StudySessionModel, Error> { promise in
             let context = self.coreDataManager.persistentContainer.viewContext
             guard let entity = NSEntityDescription.entity(forEntityName: "StudySession", in: context) else {
@@ -36,7 +37,7 @@ class StudySessionService: StudySessionServiceProtocol {
             let studySessionEntity = NSManagedObject(entity: entity, insertInto: context) as! StudySession
             studySessionEntity.startTime = startTime
             studySessionEntity.endTime = endTime
-            
+
             // Assign auto-incrementing ID
             let fetchRequest = NSFetchRequest<StudySession>(entityName: "StudySession")
             fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: false)]
@@ -53,7 +54,7 @@ class StudySessionService: StudySessionServiceProtocol {
 
             do {
                 try context.save()
-                let savedSession = StudySessionModel(id: studySessionEntity.id, accountId: 1, startTime: studySessionEntity.startTime ?? Date(), endTime: studySessionEntity.endTime ?? Date(), syncDate: nil)
+                let savedSession = self.mapEntityToModel(studySessionEntity)
                 promise(.success(savedSession))
             } catch {
                 promise(.failure(error))
@@ -81,7 +82,7 @@ class StudySessionService: StudySessionServiceProtocol {
             }
         }.eraseToAnyPublisher()
     }
-    
+
     func deleteStoredStudySessions() -> AnyPublisher<Bool, Error> {
         return Future<Bool, Error> { promise in
             let context = self.coreDataManager.persistentContainer.viewContext

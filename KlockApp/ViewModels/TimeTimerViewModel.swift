@@ -67,8 +67,11 @@ class TimeTimerViewModel: ObservableObject {
                     self?.deleteStudyTime()
                     return
                 }
+            
+                let accountTimer = AccountTimer()
+                accountTimer.id = 1
                 
-                self?.studySessionService.saveStudySession(startTime: startTime, endTime: endTime)
+                self?.studySessionService.saveStudySession(accountTimer: accountTimer, startTime: startTime, endTime: endTime)
                     .sink(receiveCompletion: { completion in
                         switch completion {
                         case .failure(let error):

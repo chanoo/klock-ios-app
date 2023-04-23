@@ -9,11 +9,13 @@ import Foundation
 
 struct StudyTimerModel: Identifiable, Codable {
     let id: Int64?
+    let accountId: Int64
     let accountTimerId: Int64
     let title: String
 
     enum CodingKeys: String, CodingKey {
         case id
+        case accountId = "account_id"
         case accountTimerId = "account_timer_id"
         case title
     }

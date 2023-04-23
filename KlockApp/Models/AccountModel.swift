@@ -14,7 +14,7 @@ enum AccountRole: String, Codable {
 
 struct AccountModel: Codable {
     let id: Int64?
-    let email: String
+    let email: String?
     let hashedPassword: String?
     let username: String
     let totalStudyTime: Int

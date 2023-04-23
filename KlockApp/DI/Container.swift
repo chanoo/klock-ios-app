@@ -35,12 +35,14 @@ class Container {
          }
 
         // Services
+        container.register(AccountServiceProtocol.self) { _ in AccountService() }
         container.register(AuthenticationServiceProtocol.self) { _ in AuthenticationService() }
         container.register(ChatGPTServiceProtocol.self) { _ in ChatGPTService() }
         container.register(TagServiceProtocol.self) { _ in TagService() }
         container.register(ChatBotServiceProtocol.self) { _ in ChatBotService() }
         container.register(MessageServiceProtocol.self) { _ in MessageService() }
         container.register(StudySessionServiceProtocol.self) { _ in StudySessionService() }
+        container.register(AccountTimerServiceProtocol.self) { _ in AccountTimerService() }
         container.register(ProximityAndOrientationServiceProtocol.self) { _ in ProximityAndOrientationService() }
 
         // View Models

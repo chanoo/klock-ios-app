@@ -11,7 +11,9 @@ import Combine
 class CalendarViewModel: ObservableObject {
     @Published var studySessions: [String: [StudySessionModel]] = [:]
     @Published var isLoading: Bool = false
-    private let studySessionService: StudySessionServiceProtocol = Container.shared.resolve(StudySessionServiceProtocol.self)
+    private let studySessionService = Container.shared.resolve(StudySessionServiceProtocol.self)
+    private let accountTimerService = Container.shared.resolve(AccountTimerServiceProtocol.self)
+    private let accountService = Container.shared.resolve(AccountServiceProtocol.self)
     private var cancellables = Set<AnyCancellable>()
     // DateFormatter를 프로퍼티로 추가합니다.
     lazy var timeFormatter: DateFormatter = {
@@ -22,6 +24,8 @@ class CalendarViewModel: ObservableObject {
 
     init() {
         self.fetchStudySession()
+        
+        _ = accountService.create(email: "chanoo@gmail.com", username: "차누")
     }
     
     func fetchStudySession() {
@@ -166,36 +170,45 @@ class CalendarViewModel: ObservableObject {
         }
     }
 
-
     private func generateSampleStudySessions(forDate date: Date) -> AnyPublisher<[StudySessionModel], Error> {
         return Future<[StudySessionModel], Error> { promise in
             let numberOfSessions = Int.random(in: 3...7)
             var sessions: [StudySessionModel] = []
 
-            let dispatchGroup = DispatchGroup()
+            self.accountTimerService.fetch()
+                .sink(receiveCompletion: { completion in
+                    if case .failure(let error) = completion {
+                        promise(.failure(error))
+                    }
+                }, receiveValue: { accountTimers in
+                    let dispatchGroup = DispatchGroup()
 
-            for _ in 0..<numberOfSessions {
-                let randomDuration = TimeInterval(Int.random(in: 600...3600))
-                let startTime = date.addingTimeInterval(-randomDuration)
-                let endTime = date
+                    for _ in 0..<numberOfSessions {
+                        let randomDuration = TimeInterval(Int.random(in: 600...3600))
+                        let startTime = date.addingTimeInterval(-randomDuration)
+                        let endTime = date
 
-                dispatchGroup.enter()
+                        // Select a random AccountTimerModel instance
+                        let randomAccountTimer = accountTimers.randomElement()
 
-                self.studySessionService.saveStudySession(startTime: startTime, endTime: endTime)
-                    .sink(receiveCompletion: { completion in
-                        if case .failure(let error) = completion {
-                            promise(.failure(error))
-                            dispatchGroup.leave()
-                        }
-                    }, receiveValue: { savedSession in
-                        sessions.append(savedSession)
-                        dispatchGroup.leave()
-                    }).store(in: &self.cancellables)
-            }
+                        dispatchGroup.enter()
 
-            dispatchGroup.notify(queue: .main) {
-                promise(.success(sessions))
-            }
+                        self.studySessionService.saveStudySession(accountTimer: randomAccountTimer!, startTime: startTime, endTime: endTime)
+                            .sink(receiveCompletion: { completion in
+                                if case .failure(let error) = completion {
+                                    promise(.failure(error))
+                                    dispatchGroup.leave()
+                                }
+                            }, receiveValue: { savedSession in
+                                sessions.append(savedSession)
+                                dispatchGroup.leave()
+                            }).store(in: &self.cancellables)
+                    }
+
+                    dispatchGroup.notify(queue: .main) {
+                        promise(.success(sessions))
+                    }
+                }).store(in: &self.cancellables)
         }.eraseToAnyPublisher()
     }
 
