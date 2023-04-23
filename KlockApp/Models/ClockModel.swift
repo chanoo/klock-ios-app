@@ -8,15 +8,9 @@
 import SwiftUI
 
 struct ClockModel {
-    var hourHandLength: CGFloat
-    var minuteHandLength: CGFloat
-    var secondHandLength: CGFloat
-    var hourHandThickness: CGFloat
-    var minuteHandThickness: CGFloat
-    var secondHandThickness: CGFloat
-    var hourHandImageName: String?
-    var minuteHandImageName: String?
-    var secondHandImageName: String?
+    var hourHandImageName: String
+    var minuteHandImageName: String
+    var secondHandImageName: String
     var clockBackgroundImageName: String?
     var clockSize: CGSize
 }

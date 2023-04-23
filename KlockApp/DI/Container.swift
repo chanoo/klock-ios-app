@@ -26,12 +26,6 @@ class Container {
         container.register(SignUpUserModel.self) { _ in SignUpUserModel() }
         container.register(ClockModel.self) { _ in
              ClockModel(
-                 hourHandLength: 150,
-                 minuteHandLength: 200,
-                 secondHandLength: 250,
-                 hourHandThickness: 4,
-                 minuteHandThickness: 3,
-                 secondHandThickness: 2,
                  hourHandImageName: "img_watch_hand_hour",
                  minuteHandImageName: "img_watch_hand_min",
                  secondHandImageName: "img_watch_hand_sec",

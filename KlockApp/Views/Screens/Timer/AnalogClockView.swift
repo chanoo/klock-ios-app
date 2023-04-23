@@ -49,13 +49,13 @@ struct AnalogClockView: View {
                                         .frame(width: viewModel.clockModel.clockSize.width,
                                                height: viewModel.clockModel.clockSize.height)
                                 }
-                                
-                                ClockHand(angle: .degrees(hourAngle), length: viewModel.clockModel.hourHandLength, thickness: viewModel.clockModel.hourHandThickness, color: .black, imageName: viewModel.clockModel.hourHandImageName, clockSize: viewModel.clockModel.clockSize)
 
-                                ClockHand(angle: .degrees(minuteAngle), length: viewModel.clockModel.minuteHandLength, thickness: viewModel.clockModel.minuteHandThickness, color: .black, imageName: viewModel.clockModel.minuteHandImageName, clockSize: viewModel.clockModel.clockSize)
+                                ClockHand(angle: .degrees(hourAngle), color: .black, imageName: viewModel.clockModel.hourHandImageName, clockSize: viewModel.clockModel.clockSize)
 
-                                ClockHand(angle: .degrees(secondAngle), length: viewModel.clockModel.secondHandLength, thickness: viewModel.clockModel.secondHandThickness, color: .pink, imageName: viewModel.clockModel.secondHandImageName, clockSize: viewModel.clockModel.clockSize)
-                                
+                                ClockHand(angle: .degrees(minuteAngle), color: .black, imageName: viewModel.clockModel.minuteHandImageName, clockSize: viewModel.clockModel.clockSize)
+
+                                ClockHand(angle: .degrees(secondAngle), color: .pink, imageName: viewModel.clockModel.secondHandImageName, clockSize: viewModel.clockModel.clockSize)
+
                                 Circle()
                                     .stroke(lineWidth: 10)
                                     .foregroundColor(.pink)
@@ -166,35 +166,20 @@ struct ClockOutLineSegment: View {
 
 // ClockHand 구조체는 시계의 바늘을 표시하는 View 입니다.
 struct ClockHand: View {
-    // 각도, 바늘의 길이, 두께, 색상, 이미지 이름 및 시계 크기를 저장하는 변수들입니다.
     let angle: Angle
-    let length: CGFloat
-    let thickness: CGFloat
     let color: Color
-    let imageName: String?
+    let imageName: String
     let clockSize: CGSize
 
     // ClockHand View의 본문입니다.
     var body: some View {
         // imageName이 있으면 이미지를 사용하여 바늘을 표시합니다.
-        if let imageName = imageName {
-            GeometryReader { geometry in
-                Image(imageName)
-                    .foregroundColor(color)
-                    .rotationEffect(angle, anchor: .center) // 회전 중심을 조정합니다.
-                    .position(x: clockSize.width / 2, y: clockSize.height / 2) // 바늘을 시계의 중앙에 위치시킵니다.
-            }
-        } else {
-            // imageName이 없으면 RoundedRectangle을 사용하여 바늘을 표시합니다.
-            GeometryReader { geometry in
-                RoundedRectangle(cornerRadius: 5)
-                    .frame(width: thickness, height: length) // 바늘 길이를 1/10만큼 늘립니다.
-                    .foregroundColor(color)
-                    .rotationEffect(angle, anchor: .center) // 회전 중심을 조정합니다.
-                    .position(x: clockSize.width / 2, y: clockSize.height / 2) // 바늘을 시계의 중앙에 위치시킵니다.
-            }
+        GeometryReader { geometry in
+            Image(imageName)
+                .foregroundColor(color)
+                .rotationEffect(angle, anchor: .center) // 회전 중심을 조정합니다.
+                .position(x: clockSize.width / 2, y: clockSize.height / 2) // 바늘을 시계의 중앙에 위치시킵니다.
         }
-
     }
 }
 
