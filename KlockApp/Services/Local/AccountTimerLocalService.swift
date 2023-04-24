@@ -12,7 +12,7 @@ import CoreData
 class AccountTimerLocalService: AccountTimerServiceProtocol {
     private let coreDataManager = CoreDataManager.shared
 
-    func create(account: Account, type: String, active: Bool, createdAt: Date) -> AnyPublisher<AccountTimer, Error> {
+    func create(account: Account, type: String, active: Bool) -> AnyPublisher<AccountTimer, Error> {
         return Future<AccountTimer, Error> { promise in
             let context = self.coreDataManager.persistentContainer.viewContext
             guard let entity = NSEntityDescription.entity(forEntityName: "AccountTimer", in: context) else {
@@ -23,7 +23,7 @@ class AccountTimerLocalService: AccountTimerServiceProtocol {
             accountTimerEntity.account = account
             accountTimerEntity.type = type
             accountTimerEntity.active = active
-            accountTimerEntity.createdAt = createdAt
+            accountTimerEntity.createdAt = Date()
 
             do {
                 try context.save()
