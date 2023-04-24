@@ -24,6 +24,7 @@ class TimeTimerViewModel: ObservableObject {
     private var stopAndSaveCancellable: AnyCancellable?
 
     @Published var isDark: Bool = false
+    @Published var isLoading: Bool = false
 
     private let accountService = Container.shared.resolve(AccountServiceProtocol.self)
     private let accountTimerService = Container.shared.resolve(AccountTimerServiceProtocol.self)
@@ -33,12 +34,7 @@ class TimeTimerViewModel: ObservableObject {
     private var orientationObserver: NSObjectProtocol?
     var cancellables: Set<AnyCancellable> = []
     
-    @Published var timerCardViews: [AnyView] = [
-        AnyView(StudyTimeTimerView()),
-        AnyView(PomodoroTimerView()),
-        AnyView(ExamTimeTimerView()),
-        AnyView(PomodoroTimerView())
-    ]
+    @Published var timerCardViews: [AnyView] = []
 
     init(clockModel: ClockModel) {
         self.clockModel = clockModel
@@ -49,6 +45,7 @@ class TimeTimerViewModel: ObservableObject {
         self.currentStudySession = StudySessionModel(id: 0, accountId: 1, startTime: startTime, endTime: now, syncDate: nil)
         calculateElapsedTime()
         setupSensor()
+        fetchTimer()
     }
 
     private func setupSensor() {
@@ -58,6 +55,72 @@ class TimeTimerViewModel: ObservableObject {
 
     func playVibration() {
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
+    }
+
+    func fetchTimer() {
+        isLoading = true
+
+        accountTimerService.fetch()
+            .sink { [weak self] completion in
+                guard let self = self else { return }
+                switch completion {
+                case .failure(let error):
+                    print("Error fetching study sessions: \(error)")
+                case .finished:
+                    break
+                }
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                }
+            } receiveValue: { [weak self] accountTimers in
+                guard let self = self else { return }
+                DispatchQueue.main.async {
+                    self.timerCardViews = accountTimers.map { accountTimer in
+                        self.viewForTimerType(accountTimer.type)
+                    }
+                }
+            }
+            .store(in: &cancellables)
+    }
+    
+    func viewForTimerType(_ timerType: String?) -> AnyView {
+        if let type = timerType {
+            switch type {
+            case "study":
+                return AnyView(StudyTimeTimerView())
+            case "exam":
+                return AnyView(ExamTimeTimerView())
+            case "pomodoro":
+                return AnyView(PomodoroTimerView())
+            default:
+                break
+            }
+        }
+        return AnyView(EmptyView())
+    }
+    
+    func addTimer(type: String) {
+        // Fetch account and create timer
+        accountService.get(id: 1)
+            .flatMap { account -> AnyPublisher<AccountTimer, Error> in
+                self.accountTimerService.create(account: account, type: type, active: true)
+            }
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .failure(let error):
+                    print("Error: \(error.localizedDescription)")
+                case .finished:
+                    break
+                }
+            }, receiveValue: { accountTimer in
+                print("accountTimer: \(String(describing: accountTimer.type))")
+                let view = self.viewForTimerType(accountTimer.type)
+                DispatchQueue.main.async {
+                    self.timerCardViews.append(view)
+                }
+            })
+            .store(in: &cancellables)
     }
 
     func stopAndSaveStudySession() {

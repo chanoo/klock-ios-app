@@ -8,22 +8,35 @@
 import SwiftUI
 
 struct SelectTimerView: View {
+    @EnvironmentObject var viewModel: TimeTimerViewModel
     @Environment(\.presentationMode) var presentationMode
 
     var body: some View {
         NavigationView {
             List {
                 Section(header: Text("타이머를 선택 하세요.")) {
-                    NavigationLink(destination: StudyTimeTimerView()) {
+                    Button(action: {
+                        viewModel.addTimer(type: "study")
+                        presentationMode.wrappedValue.dismiss()
+                    }) {
                         Text("공부시간 타이머")
                     }
-                    NavigationLink(destination: PomodoroTimerView()) {
+
+                    Button(action: {
+                        viewModel.addTimer(type: "pomodoro")
+                        presentationMode.wrappedValue.dismiss()
+                    }) {
                         Text("뽀모도로 타이머")
                     }
-                    NavigationLink(destination: ExamTimeTimerView()) {
+
+                    Button(action: {
+                        viewModel.addTimer(type: "exam")
+                        presentationMode.wrappedValue.dismiss()
+                    }) {
                         Text("시험시간 타이머")
                     }
                 }
+
             }
             .listStyle(GroupedListStyle())
             .navigationBarTitle("타이머 추가")

@@ -10,6 +10,8 @@ import SwiftUI
 struct HomeView: View {
     @State private var selection = 0
     @State private var title: String = "홈"
+    
+    @ObservedObject private var timeTimerViewModel = Container.shared.resolve(TimeTimerViewModel.self)
 
     private func updateTitle(_ selection: Int) {
         switch selection {
@@ -28,7 +30,10 @@ struct HomeView: View {
 
     var body: some View {
         FancyTabView(selection: $selection, items: [
-            (imageName: "ic_clock", content: AnyView(TimeTimerView())),
+            (imageName: "ic_clock", content: AnyView(
+                TimeTimerView()
+                    .environmentObject(timeTimerViewModel)
+            )),
             (imageName: "ic_bar_graph", content: AnyView(CalendarView())),
             (imageName: "ic_bachelor_cap", content: AnyView(ChatBotListView())),
             (imageName: "ic_person", content: AnyView(FriendsView())),
@@ -48,5 +53,6 @@ struct HomeView: View {
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
+            .environmentObject(Container.shared.resolve(TimeTimerViewModel.self))
     }
 }
