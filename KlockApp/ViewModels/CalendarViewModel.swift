@@ -31,7 +31,7 @@ class CalendarViewModel: ObservableObject {
     func fetchStudySession() {
         isLoading = true
 
-        studySessionService.fetchStudySessions()
+        studySessionService.fetch()
             .sink { [weak self] completion in
                 guard let self = self else { return }
                 switch completion {
@@ -64,7 +64,7 @@ class CalendarViewModel: ObservableObject {
     }
 
     func deleteStudySessionById(id: Int64) {
-        studySessionService.deleteStudySessionById(id: id)
+        studySessionService.delete(id: id)
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .failure(let error):
@@ -82,7 +82,7 @@ class CalendarViewModel: ObservableObject {
     }
     
     func deleteStoredStudySessions() {
-        studySessionService.deleteStoredStudySessions()
+        studySessionService.deleteAll()
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .failure(let error):
@@ -189,11 +189,11 @@ class CalendarViewModel: ObservableObject {
                         let endTime = date
 
                         // Select a random AccountTimerModel instance
-                        let randomAccountTimer = accountTimers.randomElement()
+//                        let randomAccountTimer = accountTimers.randomElement()
 
                         dispatchGroup.enter()
 
-                        self.studySessionService.saveStudySession(accountTimer: randomAccountTimer!, startTime: startTime, endTime: endTime)
+                        self.studySessionService.save(accountID: 1, accountTimerID: 1, startTime: startTime, endTime: endTime)
                             .sink(receiveCompletion: { completion in
                                 if case .failure(let error) = completion {
                                     promise(.failure(error))

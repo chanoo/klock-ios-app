@@ -9,7 +9,7 @@ import Combine
 import CoreData
 
 protocol MessageServiceProtocol {
-    func saveMessage(message: MessageModel) -> AnyPublisher<Bool, Error>
-    func fetchMessages(chatBotID: Int64?) -> AnyPublisher<[MessageModel], Error>
-    func deleteStoredMessages(chatBotID: Int64?) -> AnyPublisher<Bool, Error>
+    func save(message: MessageModel) -> AnyPublisher<Bool, Error>
+    func fetch(chatBotID: Int64?) -> AnyPublisher<[MessageModel], Error>
+    func delete(chatBotID: Int64?) -> AnyPublisher<Bool, Error>
 }

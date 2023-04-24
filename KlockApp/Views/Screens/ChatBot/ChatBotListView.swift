@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct ChatBotListView: View {
-    @ObservedObject var viewModel: ChatBotViewModel = Container.shared.resolve(ChatBotViewModel.self)
+    @EnvironmentObject var viewModel: ChatBotViewModel
 
     var body: some View {
         VStack(spacing: 0) {
-            List(viewModel.chatBots) { chatBot in
+            List(viewModel.chatBots, id: \.id) { chatBot in
                 NavigationLink(destination: ChatBotChatView(viewModel: viewModel, chatBot: chatBot)) {
                     ChatBotRow(chatBot: chatBot)
                 }

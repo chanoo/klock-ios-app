@@ -7,11 +7,20 @@
 
 import Foundation
 
-struct ChatBotModel: Identifiable, Codable {
+struct ChatBotModel: Codable {
     let id: Int64?
     let subject: String
     let title: String
     let name: String
     let chatBotImageUrl: String
     let persona: String
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case subject
+        case title
+        case name
+        case chatBotImageUrl
+        case persona
+    }
 }

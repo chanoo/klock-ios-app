@@ -5,63 +5,66 @@
 //  Created by 성찬우 on 2023/04/23.
 //
 
-import Foundation
 import Combine
 import CoreData
 
-class AccountTimerLocalService: AccountTimerServiceProtocol {
-    private let coreDataManager = CoreDataManager.shared
-
-    func create(account: Account, type: String, active: Bool) -> AnyPublisher<AccountTimer, Error> {
-        return Future<AccountTimer, Error> { promise in
+class AccountTimerLocalService: CoreDataHelper, AccountTimerServiceProtocol {
+    
+    private func mapEntityToModel(_ entity: AccountTimer) -> AccountTimerModel {
+        return AccountTimerModel(id: entity.id, accountId: entity.account?.id, type: AccountTimerType(rawValue: entity.type ?? "") ?? .study, active: entity.active, createdAt: entity.createdAt ?? Date())
+    }
+    
+    func fetch() -> AnyPublisher<[AccountTimerModel], Error> {
+        return executeFuture { promise in
+            do {
+                let fetchedEntities: [AccountTimer] = try self.fetchEntity("AccountTimer", sortDescriptors: [NSSortDescriptor(key: "id", ascending: false)])
+                let accountTimers = fetchedEntities.map { self.mapEntityToModel($0) }
+                promise(.success(accountTimers))
+            } catch {
+                promise(.failure(error))
+            }
+        }
+    }
+    
+    func create(accountID: Int64, type: String, active: Bool) -> AnyPublisher<AccountTimerModel, Error> {
+        return executeFuture { promise in
             let context = self.coreDataManager.persistentContainer.viewContext
             guard let entity = NSEntityDescription.entity(forEntityName: "AccountTimer", in: context) else {
                 return promise(.failure(NSError(domain: "Error in creating entity", code: 1000, userInfo: nil)))
             }
 
             let accountTimerEntity = NSManagedObject(entity: entity, insertInto: context) as! AccountTimer
-            accountTimerEntity.account = account
             accountTimerEntity.type = type
             accountTimerEntity.active = active
             accountTimerEntity.createdAt = Date()
 
             do {
+                let lastEntity: AccountTimer? = try self.fetchEntity("AccountTimer", sortDescriptors: [NSSortDescriptor(key: "id", ascending: false)], fetchLimit: 1).first
+                let id = (lastEntity?.id ?? 0) + 1
+                accountTimerEntity.id = id
+
+                let fetchedAccounts: [Account] = try self.fetchEntity("Account", id: accountID)
+                guard let account = fetchedAccounts.first else {
+                    return promise(.failure(NSError(domain: "Account not found", code: 1001, userInfo: nil)))
+                }
+                accountTimerEntity.account = account
+
                 try context.save()
-                promise(.success(accountTimerEntity))
+                let createdTimer = self.mapEntityToModel(accountTimerEntity)
+                promise(.success(createdTimer))
             } catch {
                 promise(.failure(error))
             }
-        }.eraseToAnyPublisher()
-    }
-
-    func fetch() -> AnyPublisher<[AccountTimer], Error> {
-        return Future<[AccountTimer], Error> { promise in
-            let context = self.coreDataManager.persistentContainer.viewContext
-            let fetchRequest = NSFetchRequest<AccountTimer>(entityName: "AccountTimer")
-            fetchRequest.sortDescriptors = [
-                NSSortDescriptor(key: "id", ascending: false),
-            ]
-
-            do {
-                let fetchedEntities = try context.fetch(fetchRequest)
-                promise(.success(fetchedEntities))
-            } catch {
-                promise(.failure(error))
-            }
-        }.eraseToAnyPublisher()
+        }
     }
 
     func delete(id: Int64) -> AnyPublisher<Bool, Error> {
-        return Future<Bool, Error> { promise in
-            let context = self.coreDataManager.persistentContainer.viewContext
-            let fetchRequest = NSFetchRequest<AccountTimer>(entityName: "AccountTimer")
-            fetchRequest.predicate = NSPredicate(format: "id == %d", id)
-            fetchRequest.fetchLimit = 1
-
+        return executeFuture { promise in
             do {
-                if let accountTimer = try context.fetch(fetchRequest).first {
-                    context.delete(accountTimer)
-                    try context.save()
+                let fetchedAccountTimers: [AccountTimer] = try self.fetchEntity("AccountTimer", id: id)
+                if let accountTimer = fetchedAccountTimers.first {
+                    self.coreDataManager.persistentContainer.viewContext.delete(accountTimer)
+                    try self.coreDataManager.persistentContainer.viewContext.save()
                     promise(.success(true))
                 } else {
                     promise(.failure(NSError(domain: "Account timer with id \(id) not found", code: 1001, userInfo: nil)))
@@ -69,28 +72,24 @@ class AccountTimerLocalService: AccountTimerServiceProtocol {
             } catch {
                 promise(.failure(error))
             }
-        }.eraseToAnyPublisher()
+        }
     }
 
-    func update(id: Int64, active: Bool) -> AnyPublisher<AccountTimer, Error> {
-        return Future<AccountTimer, Error> { promise in
-            let context = self.coreDataManager.persistentContainer.viewContext
-            let fetchRequest = NSFetchRequest<AccountTimer>(entityName: "AccountTimer")
-            fetchRequest.predicate = NSPredicate(format: "id == %d", id)
-            fetchRequest.fetchLimit = 1
-
+    func update(id: Int64, active: Bool) -> AnyPublisher<AccountTimerModel, Error> {
+        return executeFuture { promise in
             do {
-                if let accountTimer = try context.fetch(fetchRequest).first {
-                    accountTimer.active = active
-                    try context.save()
-                    promise(.success(accountTimer))
-                } else {
-                    promise(.failure(NSError(domain: "Account timer with id \(id) not found", code: 1001, userInfo: nil)))
+                let fetchedAccountTimers: [AccountTimer] = try self.fetchEntity("AccountTimer", id: id)
+                guard let accountTimer = fetchedAccountTimers.first else {
+                    return promise(.failure(NSError(domain: "Account timer with id \(id) not found", code: 1001, userInfo: nil)))
                 }
+                accountTimer.active = active
+                try self.coreDataManager.persistentContainer.viewContext.save()
+                let updatedTimer = self.mapEntityToModel(accountTimer)
+                promise(.success(updatedTimer))
             } catch {
                 promise(.failure(error))
             }
-        }.eraseToAnyPublisher()
+        }
     }
 }
 

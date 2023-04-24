@@ -9,22 +9,22 @@ import Combine
 import CoreData
 
 class MessageLocalService: MessageServiceProtocol {
+    
     private let coreDataManager = CoreDataManager.shared
 
-    func saveMessage(message: MessageModel) -> AnyPublisher<Bool, Error> {
+    func save(message: MessageModel) -> AnyPublisher<Bool, Error> {
         return Future<Bool, Error> { promise in
             let context = self.coreDataManager.persistentContainer.viewContext
             guard let entity = NSEntityDescription.entity(forEntityName: "Message", in: context) else {
                 return promise(.failure(NSError(domain: "Error in creating entity", code: 1000, userInfo: nil)))
             }
-            guard let chatBotID = message.chatBotID else {
+            guard message.chatBotID != nil else {
                 return promise(.failure(NSError(domain: "ChatBotID is missing", code: 1001, userInfo: nil)))
             }
             
             let messageEntity = NSManagedObject(entity: entity, insertInto: context) as! Message
             messageEntity.content = message.content
             messageEntity.role = message.role
-            messageEntity.chatBotID = chatBotID
             messageEntity.timeStamp = Date()
 
             do {
@@ -36,7 +36,7 @@ class MessageLocalService: MessageServiceProtocol {
         }.eraseToAnyPublisher()
     }
 
-    func fetchMessages(chatBotID: Int64?) -> AnyPublisher<[MessageModel], Error> {
+    func fetch(chatBotID: Int64?) -> AnyPublisher<[MessageModel], Error> {
         return Future<[MessageModel], Error> { promise in
             guard let chatBotID = chatBotID else {
                 return promise(.failure(NSError(domain: "ChatBotID is missing", code: 1001, userInfo: nil)))
@@ -50,7 +50,7 @@ class MessageLocalService: MessageServiceProtocol {
             do {
                 let fetchedEntities = try context.fetch(fetchRequest)
                 let messages = fetchedEntities.map { entity -> MessageModel in
-                    MessageModel(content: entity.content ?? "", role: entity.role ?? "", chatBotID: entity.chatBotID)
+                    MessageModel(content: entity.content ?? "", role: entity.role ?? "", chatBotID: entity.chatBot?.id)
                 }
                 promise(.success(messages))
             } catch {
@@ -59,15 +59,13 @@ class MessageLocalService: MessageServiceProtocol {
         }.eraseToAnyPublisher()
     }
 
-    func deleteStoredMessages(chatBotID: Int64?) -> AnyPublisher<Bool, Error> {
+    func delete(chatBotID: Int64?) -> AnyPublisher<Bool, Error> {
         return Future<Bool, Error> { promise in
-            guard let chatBotID = chatBotID else {
-                return promise(.failure(NSError(domain: "ChatBot ID is missing", code: 1001, userInfo: nil)))
-            }
-
             let context = self.coreDataManager.persistentContainer.viewContext
             let fetchRequest = NSFetchRequest<Message>(entityName: "Message")
-            fetchRequest.predicate = NSPredicate(format: "chatBotID == %lld", chatBotID)
+            
+            // Update the predicate to use the chatBot's NSManagedObjectID
+            fetchRequest.predicate = NSPredicate(format: "chatBot == %@", chatBotID ?? 0)
 
             do {
                 let storedMessages = try context.fetch(fetchRequest)

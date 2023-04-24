@@ -9,8 +9,8 @@ import Foundation
 import Combine
 
 protocol StudySessionServiceProtocol {
-    func fetchStudySessions() -> AnyPublisher<[StudySessionModel], Error>
-    func saveStudySession(accountTimer: AccountTimer, startTime: Date, endTime: Date) -> AnyPublisher<StudySessionModel, Error>
-    func deleteStudySessionById(id: Int64) -> AnyPublisher<Bool, Error>
-    func deleteStoredStudySessions() -> AnyPublisher<Bool, Error>
+    func fetch() -> AnyPublisher<[StudySessionModel], Error>
+    func save(accountID: Int64, accountTimerID: Int64, startTime: Date, endTime: Date) -> AnyPublisher<StudySessionModel, Error>
+    func delete(id: Int64) -> AnyPublisher<Bool, Error>
+    func deleteAll() -> AnyPublisher<Bool, Error>
 }

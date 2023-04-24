@@ -24,6 +24,7 @@ struct TimeTimerView: View {
                         ForEach(viewModel.timerCardViews.indices, id: \.self) { index in
                             VStack {
                                 viewModel.timerCardViews[index]
+                                    .environmentObject(self.viewModel) // 뷰 모델을 전달합니다.
                                     .frame(width: geometry.size.width - 40, height: geometry.size.height - 40)
                                     .onDrag {
                                         NSItemProvider(object: String(index) as NSString)

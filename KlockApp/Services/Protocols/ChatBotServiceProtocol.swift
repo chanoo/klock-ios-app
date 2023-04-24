@@ -7,8 +7,7 @@
 
 import Foundation
 import Combine
-import Alamofire
 
 protocol ChatBotServiceProtocol {
-    func getActiveChatBots() -> AnyPublisher<[ChatBotModel], AFError>
+    func fetchBy(active: Bool) -> AnyPublisher<[ChatBotModel], Error>
 }

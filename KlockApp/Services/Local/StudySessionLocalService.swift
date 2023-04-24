@@ -1,34 +1,26 @@
 import Combine
 import CoreData
 
-class StudySessionLocalService: StudySessionServiceProtocol {
-
-    private let coreDataManager = CoreDataManager.shared
+class StudySessionLocalService: CoreDataHelper, StudySessionServiceProtocol {
 
     private func mapEntityToModel(_ entity: StudySession) -> StudySessionModel {
-        return StudySessionModel(id: entity.id, accountId: 1, startTime: entity.startTime ?? Date(), endTime: entity.endTime ?? Date(), syncDate: nil)
+        return StudySessionModel(id: entity.id, accountId: entity.account?.id ?? 0, startTime: entity.startTime ?? Date(), endTime: entity.endTime ?? Date(), syncDate: nil)
     }
 
-    func fetchStudySessions() -> AnyPublisher<[StudySessionModel], Error> {
-        return Future<[StudySessionModel], Error> { promise in
-            let context = self.coreDataManager.persistentContainer.viewContext
-            let fetchRequest = NSFetchRequest<StudySession>(entityName: "StudySession")
-            fetchRequest.sortDescriptors = [
-                NSSortDescriptor(key: "id", ascending: false),
-            ]
-
+    func fetch() -> AnyPublisher<[StudySessionModel], Error> {
+        return executeFuture { promise in
             do {
-                let fetchedEntities = try context.fetch(fetchRequest)
-                let studySessions = fetchedEntities.map { self.mapEntityToModel($0) }
+                let fetchedEntities = try self.fetchEntity("StudySession", sortDescriptors: [NSSortDescriptor(key: "id", ascending: false)])
+                let studySessions = fetchedEntities.map { self.mapEntityToModel($0 as! StudySession) }
                 promise(.success(studySessions))
             } catch {
                 promise(.failure(error))
             }
-        }.eraseToAnyPublisher()
+        }
     }
 
-    func saveStudySession(accountTimer: AccountTimer, startTime: Date, endTime: Date) -> AnyPublisher<StudySessionModel, Error> {
-        return Future<StudySessionModel, Error> { promise in
+    func save(accountID: Int64, accountTimerID: Int64, startTime: Date, endTime: Date) -> AnyPublisher<StudySessionModel, Error> {
+        return executeFuture { promise in
             let context = self.coreDataManager.persistentContainer.viewContext
             guard let entity = NSEntityDescription.entity(forEntityName: "StudySession", in: context) else {
                 return promise(.failure(NSError(domain: "Error in creating entity", code: 1000, userInfo: nil)))
@@ -38,39 +30,37 @@ class StudySessionLocalService: StudySessionServiceProtocol {
             studySessionEntity.startTime = startTime
             studySessionEntity.endTime = endTime
 
-            // Assign auto-incrementing ID
-            let fetchRequest = NSFetchRequest<StudySession>(entityName: "StudySession")
-            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: false)]
-            fetchRequest.fetchLimit = 1
-
             do {
-                let lastEntity = try context.fetch(fetchRequest).first
+                let lastEntity = try self.fetchEntity("StudySession", sortDescriptors: [NSSortDescriptor(key: "id", ascending: false)], fetchLimit: 1).first as? StudySession
                 let id = (lastEntity?.id ?? 0) + 1
                 studySessionEntity.id = id
-            } catch {
-                promise(.failure(error))
-                return
-            }
 
-            do {
+                let fetchedAccounts: [Account] = try self.fetchEntity("Account", id: accountID)
+                guard let account = fetchedAccounts.first else {
+                    return promise(.failure(NSError(domain: "Account not found", code: 1001, userInfo: nil)))
+                }
+                studySessionEntity.account = account
+
+                let fetchedAccountTimers: [AccountTimer] = try self.fetchEntity("AccountTimer", id: accountTimerID)
+                guard let accountTimer = fetchedAccountTimers.first else {
+                    return promise(.failure(NSError(domain: "accountTimer not found", code: 1002, userInfo: nil)))
+                }
+                studySessionEntity.accountTimer = accountTimer
+
                 try context.save()
                 let savedSession = self.mapEntityToModel(studySessionEntity)
                 promise(.success(savedSession))
             } catch {
                 promise(.failure(error))
             }
-        }.eraseToAnyPublisher()
+        }
     }
 
-    func deleteStudySessionById(id: Int64) -> AnyPublisher<Bool, Error> {
-        return Future<Bool, Error> { promise in
+    func delete(id: Int64) -> AnyPublisher<Bool, Error> {
+        return executeFuture { promise in
             let context = self.coreDataManager.persistentContainer.viewContext
-            let fetchRequest = NSFetchRequest<StudySession>(entityName: "StudySession")
-            fetchRequest.predicate = NSPredicate(format: "id == %d", id)
-            fetchRequest.fetchLimit = 1
-
             do {
-                if let studySession = try context.fetch(fetchRequest).first {
+                if let studySession = try self.fetchEntity("StudySession", id: id).first {
                     context.delete(studySession)
                     try context.save()
                     promise(.success(true))
@@ -80,16 +70,14 @@ class StudySessionLocalService: StudySessionServiceProtocol {
             } catch {
                 promise(.failure(error))
             }
-        }.eraseToAnyPublisher()
+        }
     }
 
-    func deleteStoredStudySessions() -> AnyPublisher<Bool, Error> {
-        return Future<Bool, Error> { promise in
+    func deleteAll() -> AnyPublisher<Bool, Error> {
+        return executeFuture { promise in
             let context = self.coreDataManager.persistentContainer.viewContext
-            let fetchRequest = NSFetchRequest<StudySession>(entityName: "StudySession")
-
             do {
-                let storedSessions = try context.fetch(fetchRequest)
+                let storedSessions = try self.fetchEntity("StudySession")
 
                 for session in storedSessions {
                     context.delete(session)
@@ -100,6 +88,6 @@ class StudySessionLocalService: StudySessionServiceProtocol {
             } catch {
                 promise(.failure(error))
             }
-        }.eraseToAnyPublisher()
+        }
     }
 }

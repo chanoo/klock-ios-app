@@ -76,8 +76,8 @@ class TimeTimerViewModel: ObservableObject {
                 guard let self = self else { return }
                 DispatchQueue.main.async {
                     self.timerCardViews = accountTimers.map { accountTimer in
-                        self.viewForTimerType(accountTimer.type)
-                    }
+                        self.viewForTimerType(accountTimer.type.rawValue)
+                    }.reversed()
                 }
             }
             .store(in: &cancellables)
@@ -101,10 +101,7 @@ class TimeTimerViewModel: ObservableObject {
     
     func addTimer(type: String) {
         // Fetch account and create timer
-        accountService.get(id: 1)
-            .flatMap { account -> AnyPublisher<AccountTimer, Error> in
-                self.accountTimerService.create(account: account, type: type, active: true)
-            }
+        self.accountTimerService.create(accountID: 1, type: type, active: true)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completion in
                 switch completion {
@@ -115,10 +112,8 @@ class TimeTimerViewModel: ObservableObject {
                 }
             }, receiveValue: { accountTimer in
                 print("accountTimer: \(String(describing: accountTimer.type))")
-                let view = self.viewForTimerType(accountTimer.type)
-                DispatchQueue.main.async {
-                    self.timerCardViews.append(view)
-                }
+                let view = self.viewForTimerType(accountTimer.type.rawValue)
+                self.timerCardViews.insert(view, at: 0)
             })
             .store(in: &cancellables)
     }
@@ -133,18 +128,15 @@ class TimeTimerViewModel: ObservableObject {
         stopAndSaveCancellable = Just(())
             .delay(for: .seconds(10), scheduler: RunLoop.main)
             .sink(receiveValue: { [weak self] _ in
-                
+                                
                 // endTime - startTime이 30초 이하인 경우 저장하지 않음
                 guard endTime.timeIntervalSince(startTime) > 30 else {
                     Foast.show(message: "30초 미만은 기록되지 않습니다.");
                     self?.deleteStudyTime()
                     return
                 }
-            
-                let accountTimer = AccountTimer()
-                accountTimer.id = 1
-                
-                self?.studySessionService.saveStudySession(accountTimer: accountTimer, startTime: startTime, endTime: endTime)
+
+                self?.studySessionService.save(accountID: 1, accountTimerID: 1, startTime: startTime, endTime: endTime)
                     .sink(receiveCompletion: { completion in
                         switch completion {
                         case .failure(let error):
@@ -158,9 +150,13 @@ class TimeTimerViewModel: ObservableObject {
                     .store(in: &self!.cancellables)
             })
     }
-    
+
     func stopAndSaveCancel() {
         // 이미 실행 중인 10초 지연 저장 작업이 있다면 취소
+        guard stopAndSaveCancellable != nil else {
+            return
+        }
+        
         stopAndSaveCancellable?.cancel()
         stopAndSaveCancellable = nil
     }
@@ -262,5 +258,4 @@ class TimeTimerViewModel: ObservableObject {
             return false
         }
     }
-
 }

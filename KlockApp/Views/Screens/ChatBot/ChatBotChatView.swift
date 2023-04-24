@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ChatBotChatView: View {
-    @StateObject var viewModel: ChatBotViewModel = Container.shared.resolve(ChatBotViewModel.self)
+    @StateObject var viewModel: ChatBotViewModel
     @State private var showAlert = false // 추가된 변수
     @Environment(\.colorScheme) var colorScheme
     var chatBot: ChatBotModel
@@ -134,14 +134,5 @@ struct ChatBubble: View {
             .padding(.trailing, messageModel.isUser ? 10 : 0)
         }
         .rotationEffect(.degrees(180), anchor: .center) // VStack을 180도 회전
-    }
-}
-
-struct ChatBotChatView_Previews: PreviewProvider {
-
-    @StateObject var viewModel = ChatBotViewModel()
-
-    static var previews: some View {
-        ChatBotChatView(chatBot: ChatBotModel(id: 1, subject: "국어", title: "Ai 선생님", name: "", chatBotImageUrl: "img_english_teacher", persona: ""))
     }
 }

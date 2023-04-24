@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AnalogClockView: View {
-    @ObservedObject private var viewModel = Container.shared.resolve(TimeTimerViewModel.self)
+    @EnvironmentObject var viewModel: TimeTimerViewModel
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.colorScheme) var colorScheme
 

@@ -1,5 +1,5 @@
 //
-//  AccountService.swift
+//  AccountLocalService.swift
 //  KlockApp
 //
 //  Created by 성찬우 on 2023/04/24.
@@ -9,31 +9,41 @@ import Foundation
 import Combine
 import CoreData
 
-class AccountLocalService: AccountServiceProtocol {
-
-    private let coreDataManager = CoreDataManager.shared
-
-    func get(id: Int64) -> AnyPublisher<Account, Error> {
-        return Future<Account, Error> { promise in
-            let context = self.coreDataManager.persistentContainer.viewContext
-            let fetchRequest = NSFetchRequest<Account>(entityName: "Account")
-            fetchRequest.predicate = NSPredicate(format: "id == %d", id)
-            fetchRequest.fetchLimit = 1
-
+class AccountLocalService: CoreDataHelper, AccountServiceProtocol {
+    
+    private func mapEntityToModel(_ entity: Account) -> AccountModel {
+        return AccountModel(
+            id: entity.id,
+            email: entity.email,
+            hashedPassword: nil,
+            username: entity.username ?? "",
+            totalStudyTime: Int(entity.totalStudyTime),
+            accountLevelId: 1,
+            role: AccountRole(rawValue: entity.role ?? "") ?? .user,
+            active: entity.active,
+            createdAt: entity.createdAt ?? Date(),
+            updatedAt: entity.updatedAt ?? Date()
+        )
+    }
+    
+    func get(id: Int64) -> AnyPublisher<AccountModel, Error> {
+        return executeFuture { promise in
             do {
-                if let account = try context.fetch(fetchRequest).first {
-                    promise(.success(account))
+                let fetchedEntities: [Account] = try self.fetchEntity("Account", id: id)
+                if let account = fetchedEntities.first {
+                    let accountModel = self.mapEntityToModel(account)
+                    promise(.success(accountModel))
                 } else {
                     promise(.failure(NSError(domain: "Account with id \(id) not found", code: 1001, userInfo: nil)))
                 }
             } catch {
                 promise(.failure(error))
             }
-        }.eraseToAnyPublisher()
+        }
     }
 
-    func create(email: String, username: String) -> AnyPublisher<Account, Error> {
-        return Future<Account, Error> { promise in
+    func create(email: String, username: String) -> AnyPublisher<AccountModel, Error> {
+        return executeFuture { promise in
             let context = self.coreDataManager.persistentContainer.viewContext
             guard let entity = NSEntityDescription.entity(forEntityName: "Account", in: context) else {
                 return promise(.failure(NSError(domain: "Error in creating entity", code: 1000, userInfo: nil)))
@@ -49,51 +59,37 @@ class AccountLocalService: AccountServiceProtocol {
             accountEntity.createdAt = now
             accountEntity.updatedAt = now
 
-            // Assign auto-incrementing ID
-            let fetchRequest = NSFetchRequest<Account>(entityName: "Account")
-            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: false)]
-            fetchRequest.fetchLimit = 1
-            
             do {
-                let lastEntity = try context.fetch(fetchRequest).first
+                let lastEntity = try self.fetchEntity("Account", sortDescriptors: [NSSortDescriptor(key: "id", ascending: false)], fetchLimit: 1).first as? Account
                 let id = (lastEntity?.id ?? 0) + 1
                 accountEntity.id = id
                 
                 try context.save()
-                promise(.success(accountEntity))
+                let savedAccount = self.mapEntityToModel(accountEntity)
+                promise(.success(savedAccount))
             } catch {
                 promise(.failure(error))
             }
+        }
+    }
 
-        }.eraseToAnyPublisher()
-    }
-    
-    func fetch() -> AnyPublisher<[Account], Error> {
-        return Future<[Account], Error> { promise in
-            let context = self.coreDataManager.persistentContainer.viewContext
-            let fetchRequest = NSFetchRequest<Account>(entityName: "Account")
-            fetchRequest.sortDescriptors = [
-                NSSortDescriptor(key: "id", ascending: false),
-            ]
-            
+    func fetch() -> AnyPublisher<[AccountModel], Error> {
+        return executeFuture { promise in
             do {
-                let fetchedEntities = try context.fetch(fetchRequest)
-                promise(.success(fetchedEntities))
+                let fetchedEntities = try self.fetchEntity("Account", sortDescriptors: [NSSortDescriptor(key: "id", ascending: false)])
+                let accounts = fetchedEntities.map { self.mapEntityToModel($0 as! Account) }
+                promise(.success(accounts))
             } catch {
                 promise(.failure(error))
             }
-        }.eraseToAnyPublisher()
+        }
     }
-    
-    func update(id: Int64, email: String?, username: String?, totalStudyTime: Int?, active: Bool?) -> AnyPublisher<Account, Error> {
-        return Future<Account, Error> { promise in
-            let context = self.coreDataManager.persistentContainer.viewContext
-            let fetchRequest = NSFetchRequest<Account>(entityName: "Account")
-            fetchRequest.predicate = NSPredicate(format: "id == %d", id)
-            fetchRequest.fetchLimit = 1
-            
+
+    func update(id: Int64, email: String?, username: String?, totalStudyTime: Int?, active: Bool?) -> AnyPublisher<AccountModel, Error> {
+        return executeFuture { promise in
             do {
-                if let account = try context.fetch(fetchRequest).first {
+                let fetchedAccounts: [Account] = try self.fetchEntity("Account", id: id)
+                if let account = fetchedAccounts.first {
                     account.email = email ?? account.email
                     account.username = username ?? account.username
                     account.totalStudyTime = account.totalStudyTime
@@ -101,28 +97,25 @@ class AccountLocalService: AccountServiceProtocol {
                     account.active = active ?? account.active
                     account.updatedAt = Date()
                     
-                    try context.save()
-                    promise(.success(account))
+                    try self.coreDataManager.persistentContainer.viewContext.save()
+                    let updatedAccount = self.mapEntityToModel(account)
+                    promise(.success(updatedAccount))
                 } else {
                     promise(.failure(NSError(domain: "Account with id \(id) not found", code: 1001, userInfo: nil)))
                 }
             } catch {
                 promise(.failure(error))
             }
-        }.eraseToAnyPublisher()
+        }
     }
     
     func delete(id: Int64) -> AnyPublisher<Bool, Error> {
-        return Future<Bool, Error> { promise in
-            let context = self.coreDataManager.persistentContainer.viewContext
-            let fetchRequest = NSFetchRequest<Account>(entityName: "Account")
-            fetchRequest.predicate = NSPredicate(format: "id == %d", id)
-            fetchRequest.fetchLimit = 1
-
+        return executeFuture { promise in
             do {
-                if let account = try context.fetch(fetchRequest).first {
-                    context.delete(account)
-                    try context.save()
+                let fetchedAccounts: [Account] = try self.fetchEntity("Account", id: id)
+                if let account = fetchedAccounts.first {
+                    self.coreDataManager.persistentContainer.viewContext.delete(account)
+                    try self.coreDataManager.persistentContainer.viewContext.save()
                     promise(.success(true))
                 } else {
                     promise(.failure(NSError(domain: "Account with id \(id) not found", code: 1001, userInfo: nil)))
@@ -130,23 +123,6 @@ class AccountLocalService: AccountServiceProtocol {
             } catch {
                 promise(.failure(error))
             }
-        }.eraseToAnyPublisher()
-    }
-}
-
-extension Account {
-    func toModel() -> AccountModel {
-        return AccountModel(
-            id: self.id,
-            email: self.email,
-            hashedPassword: nil,
-            username: self.username ?? "",
-            totalStudyTime: Int(self.totalStudyTime),
-            accountLevelId: 1,
-            role: AccountRole(rawValue: self.role ?? "") ?? .user,
-            active: self.active,
-            createdAt: self.createdAt ?? Date(),
-            updatedAt: self.updatedAt ?? Date()
-        )
+        }
     }
 }

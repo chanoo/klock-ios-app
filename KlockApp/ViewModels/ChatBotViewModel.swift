@@ -1,5 +1,5 @@
 //
-//  ChatGPTViewModel.swift
+//  ChatBotViewModel.swift
 //  KlockApp
 //
 //  Created by 성찬우 on 2023/04/12.
@@ -14,15 +14,32 @@ class ChatBotViewModel: ObservableObject {
     @Published var tempMessage: MessageModel?
     @Published var newMessage: String = ""
     @Published var isPreparingResponse: Bool = false
-
+    
+    private let chatGPTService = Container.shared.resolve(ChatGPTServiceProtocol.self)
+    private let chatBotRemoteService = Container.shared.resolve(ChatBotServiceProtocol.self, name: "remote")
+    private let messageService = Container.shared.resolve(MessageServiceProtocol.self)
+    private let chatBotSync = Container.shared.resolve(ChatBotSyncProtocol.self)
+    
     var cancellables: Set<AnyCancellable> = []
 
-    private let chatGPTService: ChatGPTServiceProtocol = Container.shared.resolve(ChatGPTServiceProtocol.self)
-    private let chatBotService: ChatBotServiceProtocol = Container.shared.resolve(ChatBotServiceProtocol.self)
-    private let messageService: MessageServiceProtocol = Container.shared.resolve(MessageServiceProtocol.self)
-
     init() {
-        getActiveChatBots()
+        syncData()
+        debugPrint("ChatBotViewModel init")
+    }
+
+    private func syncData() {
+        chatBotSync.sync()
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .failure(let error):
+                    print("Error syncing chatbots: \(error)")
+                case .finished:
+                    break
+                }
+            }, receiveValue: { [weak self] in
+                self?.getActiveChatBots()
+            })
+            .store(in: &cancellables)
     }
     
     func initializeAssistant(chatBotID: Int64?, persona: String) {
@@ -34,7 +51,8 @@ class ChatBotViewModel: ObservableObject {
 
     func clearMessages(chatBotID: Int64?) {
         messages[chatBotID]?.removeAll()
-        messageService.deleteStoredMessages(chatBotID: chatBotID)
+        
+        messageService.delete(chatBotID: chatBotID)
             .sink { completion in
                 switch completion {
                 case .failure(let error):
@@ -86,7 +104,7 @@ class ChatBotViewModel: ObservableObject {
 
     private func saveAndAppendMessage(_ message: MessageModel, chatBotID: Int64?) { // 추가: 메서드
         messages[chatBotID, default: []].append(message)
-        messageService.saveMessage(message: message)
+        messageService.save(message: message)
             .sink { completion in
                 switch completion {
                 case .finished:
@@ -100,7 +118,7 @@ class ChatBotViewModel: ObservableObject {
 
     func loadStoredMessages(chatBotID: Int64?) {
         for chatBot in chatBots {
-            messageService.fetchMessages(chatBotID: chatBot.id)
+            messageService.fetch(chatBotID: chatBot.id)
                 .sink { completion in
                     switch completion {
                     case .finished:
@@ -116,7 +134,7 @@ class ChatBotViewModel: ObservableObject {
     }
 
     func deleteStoredMessages(chatBotID: Int64?) {
-        messageService.deleteStoredMessages(chatBotID: chatBotID)
+        messageService.delete(chatBotID: chatBotID)
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .failure(let error):
@@ -134,7 +152,7 @@ class ChatBotViewModel: ObservableObject {
     }
 
     private func getActiveChatBots() {
-        chatBotService.getActiveChatBots()
+        chatBotRemoteService.fetchBy(active: true)
             .sink { _ in
                 // ...
             } receiveValue: { [weak self] chatBots in

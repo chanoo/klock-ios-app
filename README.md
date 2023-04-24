@@ -19,8 +19,9 @@ KlockApp
 │   ├── Models
 │   ├── Services
 │   │   ├── Protocols
-│   │   ├── API
-│   │   └── Local
+│   │   ├── Remote
+│   │   ├── Local
+│   │   └── Sync
 │   ├── ViewModels
 │   ├── Views
 │   │   ├── Screens
