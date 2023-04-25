@@ -9,49 +9,64 @@ import SwiftUI
 
 struct StudyTimeTimerView: View {
     
-    @StateObject private var viewModel = Container.shared.resolve(TimeTimerViewModel.self)
-    @State private var isShowingClockModal = false
+    @EnvironmentObject var viewModel: TimeTimerViewModel
 
     var body: some View {
         GeometryReader { geometry in
-            VStack {
-                HStack {
-                    Spacer()
-                    Button(action: {
-                        withAnimation(.spring()) {
+            ZStack {
+                VStack {
+                    AnalogClockView(
+                        currentTime: Date(),
+                        startTime: Date(),
+                        studySessions: .constant([]),
+                        isStudying: $viewModel.isStudying,
+                        isRunning: true,
+                        clockModel:
+                            ClockModel(
+                                hourHandImageName: "img_watch_hand_hour",
+                                minuteHandImageName: "img_watch_hand_min",
+                                secondHandImageName: "img_watch_hand_sec",
+                                clockBackgroundImageName: "img_watch_face1",
+                                clockSize: CGSize(width: 300, height: 300)
+                            ),
+                        hour: 10,
+                        minute: 20,
+                        second: 35
+                    )
+                    .previewLayout(.sizeThatFits)
+                }
+                .frame(width: geometry.size.width, height: geometry.size.height)
+                
+                VStack {
+                    HStack {
+                        Spacer()
+                        Button(action: {
+                            withAnimation(.spring()) {
+                            }
+                        }) {
+                            Image(systemName: "gearshape")
+                                .resizable()
+                                .frame(width: 20, height: 20)
                         }
-                    }) {
-                        Image(systemName: "gearshape")
-                            .resizable()
-                            .frame(width: 20, height: 20)
-                            .padding(24)
+                        .padding(.top, 16)
+                        .padding(.trailing, 16)
                     }
+                    Spacer()
                 }
-                Spacer()
-                Button(action: {
-                    isShowingClockModal.toggle()
-                }) {
-                    Image(systemName: "play.circle.fill")
-                        .resizable()
-                        .frame(width: 100, height: 100)
-                        .foregroundColor(FancyColor.primary.color)
-                }
-                Spacer()
             }
-            .frame(width: geometry.size.width, height: geometry.size.height)
         }
         .background(FancyColor.background.color)
         .cornerRadius(8)
         .shadow(color: Color.black.opacity(0.2), radius: 8, x: 0, y: 0)
         .onAppear {
-            if viewModel.isDark && !isShowingClockModal {
-                isShowingClockModal.toggle()
+            if viewModel.isDark && !viewModel.isShowingClockModal {
+                viewModel.isShowingClockModal.toggle()
                 viewModel.playVibration()
                 NotificationManager.sendLocalNotification()
             }
         }
-        .sheet(isPresented: $isShowingClockModal) {
-            AnalogClockView()
+        .sheet(isPresented: $viewModel.isShowingClockModal) {
+//            AnalogClockView()
         }
     }
 }

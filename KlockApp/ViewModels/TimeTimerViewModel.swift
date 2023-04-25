@@ -30,11 +30,15 @@ class TimeTimerViewModel: ObservableObject {
     private let accountTimerService = Container.shared.resolve(AccountTimerServiceProtocol.self)
     private let studySessionService = Container.shared.resolve(StudySessionServiceProtocol.self)
     private let proximityAndOrientationService = Container.shared.resolve(ProximityAndOrientationServiceProtocol.self)
+    
+    let toggleIsStudyingSubject = PassthroughSubject<Bool, Never>()
 
     private var orientationObserver: NSObjectProtocol?
     var cancellables: Set<AnyCancellable> = []
     
     @Published var timerCardViews: [AnyView] = []
+    @Published var isShowingClockModal = false
+    @Published var isStudying: Bool = false
 
     init(clockModel: ClockModel) {
         self.clockModel = clockModel
@@ -46,8 +50,17 @@ class TimeTimerViewModel: ObservableObject {
         calculateElapsedTime()
         setupSensor()
         fetchTimer()
+        setupToggleIsStudying()
     }
 
+    private func setupToggleIsStudying() {
+        toggleIsStudyingSubject
+             .sink { [weak self] id in
+                 self?.isStudying.toggle()
+             }
+             .store(in: &cancellables)
+    }
+    
     private func setupSensor() {
         cancellable = proximityAndOrientationService.setupSensor()
             .assign(to: \.isDark, on: self)
@@ -117,52 +130,46 @@ class TimeTimerViewModel: ObservableObject {
             })
             .store(in: &cancellables)
     }
+    
+    func isStudyingNow() -> Bool {
+        let currentTime = UserDefaults.standard.double(forKey: studyStartTimeKey)
+        return currentTime > 0
+    }
+
+    
+    func startStudySession() {
+        // ...
+        self.isStudying = true
+        // ...
+    }
 
     func stopAndSaveStudySession() {
         let startTime = Date().addingTimeInterval(-elapsedTime)
         let endTime = Date()
 
-        Foast.show(message: "10초 후 저장됩니다.", duration: 10);
-
-        // 10초 후 실행되는 코드 블록
-        stopAndSaveCancellable = Just(())
-            .delay(for: .seconds(10), scheduler: RunLoop.main)
-            .sink(receiveValue: { [weak self] _ in
-                                
-                // endTime - startTime이 30초 이하인 경우 저장하지 않음
-                guard endTime.timeIntervalSince(startTime) > 30 else {
-                    Foast.show(message: "30초 미만은 기록되지 않습니다.");
-                    self?.deleteStudyTime()
-                    return
-                }
-
-                self?.studySessionService.save(accountID: 1, accountTimerID: 1, startTime: startTime, endTime: endTime)
-                    .sink(receiveCompletion: { completion in
-                        switch completion {
-                        case .failure(let error):
-                            print("Error saving study session: \(error)")
-                        case .finished:
-                            print("Study session saved successfully")
-                        }
-                    }, receiveValue: { _ in
-                        self?.deleteStudyTime()
-                    })
-                    .store(in: &self!.cancellables)
-            })
-    }
-
-    func stopAndSaveCancel() {
-        // 이미 실행 중인 10초 지연 저장 작업이 있다면 취소
-        guard stopAndSaveCancellable != nil else {
+        // endTime - startTime이 30초 이하인 경우 저장하지 않음
+        guard endTime.timeIntervalSince(startTime) > 10 else {
+            Foast.show(message: "10초 미만은 기록되지 않습니다.")
+            deleteStudyTime()
             return
         }
-        
-        stopAndSaveCancellable?.cancel()
-        stopAndSaveCancellable = nil
+
+        studySessionService.save(accountID: 1, accountTimerID: 1, startTime: startTime, endTime: endTime)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .failure(let error):
+                    print("Error saving study session: \(error)")
+                case .finished:
+                    print("Study session saved successfully")
+                }
+            }, receiveValue: { _ in
+                self.deleteStudyTime()
+            })
+            .store(in: &cancellables)
     }
 
+
     func loadStudyTime() {
-        stopAndSaveCancel()
         let currentTime = UserDefaults.standard.double(forKey: studyStartTimeKey)
         if currentTime == 0 {
             let now = Date()
@@ -201,6 +208,10 @@ class TimeTimerViewModel: ObservableObject {
             syncDate: nil)
     }
     
+    func toggleClockModal() {
+        isShowingClockModal.toggle()
+    }
+    
     func elapsedTimeToString() -> String {
         return TimeUtils.elapsedTimeToString(elapsedTime: elapsedTime)
     }
@@ -219,23 +230,6 @@ class TimeTimerViewModel: ObservableObject {
 
     func insertTimerCard(_ timerCard: AnyView, at index: Int) {
         timerCardViews.insert(timerCard, at: index)
-    }
-
-    func hourAngle(for date: Date) -> Double {
-        let hour = Calendar.current.component(.hour, from: date)
-        let minute = Calendar.current.component(.minute, from: date)
-        return (Double(hour % 12) + Double(minute) / 60) / 12 * 360
-    }
-
-    func minuteAngle(for date: Date) -> Double {
-        let minute = Calendar.current.component(.minute, from: date)
-        let second = Calendar.current.component(.second, from: date)
-        return (Double(minute) + Double(second) / 60) / 60 * 360
-    }
-
-    func secondAngle(for date: Date) -> Double {
-        let second = Calendar.current.component(.second, from: date)
-        return Double(second) / 60 * 360
     }
     
     struct TimerDropDelegate: DropDelegate {

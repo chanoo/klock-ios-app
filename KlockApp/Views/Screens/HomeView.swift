@@ -12,6 +12,7 @@ struct HomeView: View {
     @State private var title: String = "홈"
     
     @ObservedObject private var timeTimerViewModel = Container.shared.resolve(TimeTimerViewModel.self)
+    @ObservedObject private var calendarViewModel = Container.shared.resolve(CalendarViewModel.self)
     @ObservedObject private var chatBotViewModel = Container.shared.resolve(ChatBotViewModel.self)
 
     private func updateTitle(_ selection: Int) {
@@ -35,7 +36,10 @@ struct HomeView: View {
                 TimeTimerView()
                     .environmentObject(timeTimerViewModel)
             )),
-            (imageName: "ic_bar_graph", content: AnyView(CalendarView())),
+            (imageName: "ic_bar_graph", content: AnyView(
+                CalendarView()
+                    .environmentObject(calendarViewModel)
+            )),
             (imageName: "ic_bachelor_cap", content: AnyView(
                 ChatBotListView()
                     .environmentObject(chatBotViewModel)

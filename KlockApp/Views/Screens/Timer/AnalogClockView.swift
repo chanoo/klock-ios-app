@@ -8,68 +8,96 @@
 import SwiftUI
 
 struct AnalogClockView: View {
-    @EnvironmentObject var viewModel: TimeTimerViewModel
-    @Environment(\.presentationMode) var presentationMode
     @Environment(\.colorScheme) var colorScheme
+    @State private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    @State var currentTime: Date
+    @State var startTime: Date
+    @State var elapsedTime: Double?
+    @Binding var studySessions: [StudySessionModel]
+    @Binding var isStudying: Bool
+    @State var isRunning: Bool
+    var clockModel: ClockModel
+    var hour: Int?
+    var minute: Int?
+    var second: Int?
 
-    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-    
     var body: some View {
         ZStack {
-
             Image("img_watch_background4")
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .edgesIgnoringSafeArea(.all)
 
             VStack {
-                
+
                 Spacer()
 
-                Text(viewModel.elapsedTimeToString())
+                Text(elapsedTimeToString())
                     .font(.largeTitle)
                     .padding()
                     .background(.white.opacity(0.5))
                     .foregroundColor(.pink)
                     .clipShape(RoundedRectangle(cornerRadius: 10))
-                
+
                 Spacer(minLength: 30)
 
                 ZStack {
-                    
+
                     Circle()
                         .foregroundColor(colorScheme == .dark ? .pink.opacity(0.2) : .white.opacity(0.5))
-                        .frame(width: viewModel.clockModel.clockSize.width,
-                               height: viewModel.clockModel.clockSize.height)
+                        .frame(
+                            width: clockModel.clockSize.width,
+                            height: clockModel.clockSize.height
+                        )
                         .overlay(
                             ZStack {
-                                if let imageName = viewModel.clockModel.clockBackgroundImageName {
+                                if let imageName = clockModel.clockBackgroundImageName {
                                     Image(imageName)
                                         .foregroundColor(.pink.opacity(0.4))
-                                        .frame(width: viewModel.clockModel.clockSize.width,
-                                               height: viewModel.clockModel.clockSize.height)
+                                        .frame(width: clockModel.clockSize.width,
+                                               height: clockModel.clockSize.height)
                                 }
 
-                                ClockHand(angle: .degrees(hourAngle), color: .black, imageName: viewModel.clockModel.hourHandImageName, clockSize: viewModel.clockModel.clockSize)
+                                ClockHand(
+                                    angle: .degrees(hourAngle),
+                                    color: .black,
+                                    imageName: clockModel.hourHandImageName,
+                                    clockSize: clockModel.clockSize
+                                )
 
-                                ClockHand(angle: .degrees(minuteAngle), color: .black, imageName: viewModel.clockModel.minuteHandImageName, clockSize: viewModel.clockModel.clockSize)
+                                ClockHand(
+                                    angle: .degrees(minuteAngle),
+                                    color: .black,
+                                    imageName: clockModel.minuteHandImageName,
+                                    clockSize: clockModel.clockSize
+                                )
 
-                                ClockHand(angle: .degrees(secondAngle), color: .pink, imageName: viewModel.clockModel.secondHandImageName, clockSize: viewModel.clockModel.clockSize)
+                                ClockHand(
+                                    angle: .degrees(secondAngle),
+                                    color: .pink,
+                                    imageName: clockModel.secondHandImageName,
+                                    clockSize: clockModel.clockSize
+                                )
 
                                 Circle()
                                     .stroke(lineWidth: 10)
                                     .foregroundColor(.pink)
-                                    .frame(width: viewModel.clockModel.clockSize.width - 10, height: viewModel.clockModel.clockSize.height - 10)
+                                    .frame(width: clockModel.clockSize.width - 10, height: clockModel.clockSize.height - 10)
                                     .opacity(0.1)
-                                
+
                                 Circle()
                                     .stroke(lineWidth: 10)
                                     .foregroundColor(.pink)
-                                    .frame(width: viewModel.clockModel.clockSize.width - 30, height: viewModel.clockModel.clockSize.height - 30)
+                                    .frame(width: clockModel.clockSize.width - 30, height: clockModel.clockSize.height - 30)
                                     .opacity(0.3)
-                                
-                                ZStack {
-                                    ClockOutLine(studySession: viewModel.currentStudySession)
+
+                                ForEach(studySessions, id: \.id) { studySession in
+                                    ClockOutLine(
+                                        studySession: studySession,
+                                        clockSize: clockModel.clockSize,
+                                        startTime: studySession.startTime,
+                                        endTime: studySession.endTime
+                                    )
                                 }
                             }
                         )
@@ -77,68 +105,59 @@ struct AnalogClockView: View {
 
                 Spacer(minLength: 30)
 
-                FancyButton(title: "잠시 멈춤", action: {
-                    viewModel.stopAndSaveStudySession()
-                    presentationMode.wrappedValue.dismiss()
-                }, backgroundColor: .pink.opacity(0.8), foregroundColor: .white, isBlock: false)
-                
-                Spacer()
+                FancyButton(
+                    title: isStudying ? "잠시 멈춤" : "공부 시작",
+                    action: {
+                        isRunning = true
+                        isStudying.toggle()
+                        startTime = Date()
+                    },
+                    backgroundColor: .pink.opacity(0.8),
+                    foregroundColor: .white,
+                    isBlock: false
+                )
 
+                Spacer()
             }
         }
         .onReceive(timer) { _ in
-            viewModel.elapsedTime += 1
-            viewModel.currentTime = Date()
-            viewModel.updateTime()
-            let _ = viewModel.objectWillChange
+            if isRunning {
+                currentTime = currentTime.addingTimeInterval(1)
+                if isStudying {
+                    elapsedTime = currentTime.timeIntervalSince(startTime)
+                } else {
+                    elapsedTime = 0
+                }
+            }
         }
-        .onAppear {
-            viewModel.loadStudyTime()
-        }
-
     }
-    
 
     private var hourAngle: Double {
-        viewModel.hourAngle(for: viewModel.currentTime)
+        let hour = Calendar.current.component(.hour, from: currentTime)
+        let minute = Calendar.current.component(.minute, from: currentTime)
+        return (Double(hour % 12) + Double(minute) / 60) / 12 * 360
     }
 
     private var minuteAngle: Double {
-        viewModel.minuteAngle(for: viewModel.currentTime)
+        let minute = Calendar.current.component(.minute, from: currentTime)
+        let second = Calendar.current.component(.second, from: currentTime)
+        return (Double(minute) + Double(second) / 60) / 60 * 360
     }
 
     private var secondAngle: Double {
-        viewModel.secondAngle(for: viewModel.currentTime)
+        let second = Calendar.current.component(.second, from: currentTime)
+        return Double(second) / 60 * 360
+    }
+    
+    private func elapsedTimeToString() -> String {
+        // elapsedTime를 문자열로 변환하는 코드를 여기에 구현하세요.
+        return TimeUtils.elapsedTimeToString(elapsedTime: elapsedTime ?? 0)
     }
 }
 
 struct ClockOutLine: View {
-    @ObservedObject private var viewModel = Container.shared.resolve(TimeTimerViewModel.self)
     let studySession: StudySessionModel
-
-    var body: some View {
-        let morningEndTime = Calendar.current.date(bySettingHour: 11, minute: 59, second: 59, of: studySession.startTime)!
-        let eveningEndTime = Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: studySession.startTime)!
-
-        if studySession.startTime <= morningEndTime && studySession.endTime > morningEndTime {
-            // Session spans across morning and afternoon
-            ClockOutLineSegment(studySession: studySession, startTime: studySession.startTime, endTime: morningEndTime)
-            ClockOutLineSegment(studySession: studySession, startTime: morningEndTime.addingTimeInterval(1), endTime: studySession.endTime)
-        } else if studySession.startTime > morningEndTime && studySession.endTime > eveningEndTime {
-            // Session starts in the afternoon and continues to the next day
-            ClockOutLineSegment(studySession: studySession, startTime: studySession.startTime, endTime: eveningEndTime)
-            ClockOutLineSegment(studySession: studySession, startTime: eveningEndTime.addingTimeInterval(1), endTime: studySession.endTime)
-        } else {
-            // Session is either in the morning or afternoon
-            ClockOutLineSegment(studySession: studySession, startTime: studySession.startTime, endTime: studySession.endTime)
-        }
-    }
-}
-
-
-struct ClockOutLineSegment: View {
-    @ObservedObject private var viewModel = Container.shared.resolve(TimeTimerViewModel.self)
-    let studySession: StudySessionModel
+    let clockSize: CGSize
     let startTime: Date
     let endTime: Date
 
@@ -146,21 +165,21 @@ struct ClockOutLineSegment: View {
         let elapsedTime = endTime.timeIntervalSince(startTime)
         let isAfternoon = Calendar.current.component(.hour, from: startTime) >= 12
         let lineWidth: CGFloat = isAfternoon ? 10 : 10
-        let circleRadius = isAfternoon ? (viewModel.clockModel.clockSize.width / 2) - 5: (viewModel.clockModel.clockSize.width / 2) - 15
-        let startAngle = viewModel.angleForTime(date: startTime)
+        let circleRadius = isAfternoon ? (clockSize.width / 2) - 5: (clockSize.width / 2) - 15
+        let startAngle = TimeUtils.angleForTime(date: startTime)
         let endAngle = startAngle + elapsedTime / (12 * 3600) * 360
 
         Path { path in
-            let startPoint = CGPoint(x: viewModel.clockModel.clockSize.width / 2 + circleRadius * cos(CGFloat(startAngle - 90) * .pi / 180), y: viewModel.clockModel.clockSize.height / 2 + circleRadius * sin(CGFloat(startAngle - 90) * .pi / 180))
-            let endPoint = CGPoint(x: viewModel.clockModel.clockSize.width / 2 + circleRadius * cos(CGFloat(endAngle - 90) * .pi / 180), y: viewModel.clockModel.clockSize.height / 2 + circleRadius * sin(CGFloat(endAngle - 90) * .pi / 180))
+            let startPoint = CGPoint(x: clockSize.width / 2 + circleRadius * cos(CGFloat(startAngle - 90) * .pi / 180), y: clockSize.height / 2 + circleRadius * sin(CGFloat(startAngle - 90) * .pi / 180))
+            let endPoint = CGPoint(x: clockSize.width / 2 + circleRadius * cos(CGFloat(endAngle - 90) * .pi / 180), y: clockSize.height / 2 + circleRadius * sin(CGFloat(endAngle - 90) * .pi / 180))
 
             path.move(to: startPoint)
-            path.addArc(center: CGPoint(x: viewModel.clockModel.clockSize.width / 2, y: viewModel.clockModel.clockSize.height / 2), radius: circleRadius, startAngle: .degrees(startAngle - 90), endAngle: .degrees(endAngle - 90), clockwise: false)
+            path.addArc(center: CGPoint(x: clockSize.width / 2, y: clockSize.height / 2), radius: circleRadius, startAngle: .degrees(startAngle - 90), endAngle: .degrees(endAngle - 90), clockwise: false)
             path.addLine(to: endPoint)
         }
         .stroke(style: StrokeStyle(lineWidth: lineWidth, lineCap: .butt, lineJoin: .round))
         .foregroundColor(isAfternoon ? .pink.opacity(0.5) : .pink.opacity(0.7))
-        .frame(width: viewModel.clockModel.clockSize.width, height: viewModel.clockModel.clockSize.height) // Set the frame size to be the same as the clock size
+        .frame(width: clockSize.width, height: clockSize.height) // Set the frame size to be the same as the clock size
     }
 }
 
@@ -185,9 +204,21 @@ struct ClockHand: View {
 
 struct AnalogClockView_Previews: PreviewProvider {
     static var previews: some View {
-        AnalogClockView()
-            .frame(width: 300, height: 300)
-            .previewLayout(.sizeThatFits)
+        AnalogClockView(
+            currentTime: Date(),
+            startTime: Date(),
+            studySessions: .constant([]),
+            isStudying: .constant(false),
+            isRunning: true,
+            clockModel:
+                ClockModel(
+                    hourHandImageName: "img_watch_hand_hour",
+                    minuteHandImageName: "img_watch_hand_min",
+                    secondHandImageName: "img_watch_hand_sec",
+                    clockBackgroundImageName: "img_watch_face1",
+                    clockSize: CGSize(width: 300, height: 300)
+                )
+        )
+        .previewLayout(.sizeThatFits)
     }
 }
-
