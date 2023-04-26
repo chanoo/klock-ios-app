@@ -18,6 +18,7 @@ struct StudyTimeTimerView: View {
                     AnalogClockView(
                         currentTime: Date(),
                         startTime: Date(),
+                        elapsedTime: $viewModel.elapsedTime,
                         studySessions: .constant([]),
                         isStudying: $viewModel.isStudying,
                         isRunning: true,
@@ -73,6 +74,8 @@ struct StudyTimeTimerView: View {
 
 struct StudyTimeTimerView_Previews: PreviewProvider {
     static var previews: some View {
+        let viewModel = Container.shared.resolve(TimeTimerViewModel.self)
         StudyTimeTimerView()
+            .environmentObject(viewModel)
     }
 }

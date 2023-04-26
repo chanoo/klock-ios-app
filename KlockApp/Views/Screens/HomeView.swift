@@ -14,6 +14,7 @@ struct HomeView: View {
     @ObservedObject private var timeTimerViewModel = Container.shared.resolve(TimeTimerViewModel.self)
     @ObservedObject private var calendarViewModel = Container.shared.resolve(CalendarViewModel.self)
     @ObservedObject private var chatBotViewModel = Container.shared.resolve(ChatBotViewModel.self)
+    @ObservedObject private var taskViewModel = Container.shared.resolve(TaskViewModel.self)
 
     private func updateTitle(_ selection: Int) {
         switch selection {
@@ -24,6 +25,8 @@ struct HomeView: View {
         case 2:
             title = "Ai 선생님"
         case 3:
+            title = "도전 과제"
+        case 4:
             title = "캐릭터"
         default:
             title = ""
@@ -43,6 +46,10 @@ struct HomeView: View {
             (imageName: "ic_bachelor_cap", content: AnyView(
                 ChatBotListView()
                     .environmentObject(chatBotViewModel)
+            )),
+            (imageName: "ic_arrow_target", content: AnyView(
+                TaskListView()
+                    .environmentObject(taskViewModel)
             )),
             (imageName: "ic_person", content: AnyView(FriendsView())),
             (imageName: "ic_gear", content: AnyView(StudySessionsByDateView()))

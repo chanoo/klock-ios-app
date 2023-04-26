@@ -12,7 +12,7 @@ struct AnalogClockView: View {
     @State private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     @State var currentTime: Date
     @State var startTime: Date
-    @State var elapsedTime: Double?
+    @Binding var elapsedTime: TimeInterval
     @Binding var studySessions: [StudySessionModel]
     @Binding var isStudying: Bool
     @State var isRunning: Bool
@@ -207,6 +207,7 @@ struct AnalogClockView_Previews: PreviewProvider {
         AnalogClockView(
             currentTime: Date(),
             startTime: Date(),
+            elapsedTime: .constant(2),
             studySessions: .constant([]),
             isStudying: .constant(false),
             isRunning: true,

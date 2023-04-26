@@ -13,33 +13,24 @@ import Foast
 import UniformTypeIdentifiers
 
 class TimeTimerViewModel: ObservableObject {
-
     private let studyStartTimeKey = "studyStartTime"
+    
     @Published var studySessions: [StudySessionModel] = []
     @Published var currentStudySession: StudySessionModel
-    @Published var currentTime = Date()
     @Published var elapsedTime: TimeInterval = 0
     @Published var clockModel: ClockModel
-    private var cancellable: AnyCancellable?
-    private var stopAndSaveCancellable: AnyCancellable?
-
     @Published var isDark: Bool = false
     @Published var isLoading: Bool = false
+    @Published var timerCardViews: [AnyView] = []
+    @Published var isShowingClockModal = false
+    @Published var isStudying: Bool = false
 
+    private var cancellables: Set<AnyCancellable> = []
     private let accountService = Container.shared.resolve(AccountServiceProtocol.self)
     private let accountTimerService = Container.shared.resolve(AccountTimerServiceProtocol.self)
     private let studySessionService = Container.shared.resolve(StudySessionServiceProtocol.self)
     private let proximityAndOrientationService = Container.shared.resolve(ProximityAndOrientationServiceProtocol.self)
     
-    let toggleIsStudyingSubject = PassthroughSubject<Bool, Never>()
-
-    private var orientationObserver: NSObjectProtocol?
-    var cancellables: Set<AnyCancellable> = []
-    
-    @Published var timerCardViews: [AnyView] = []
-    @Published var isShowingClockModal = false
-    @Published var isStudying: Bool = false
-
     init(clockModel: ClockModel) {
         self.clockModel = clockModel
         self.studySessions = []
@@ -47,32 +38,25 @@ class TimeTimerViewModel: ObservableObject {
         let currentTime = UserDefaults.standard.double(forKey: studyStartTimeKey)
         let startTime = Date(timeIntervalSince1970: currentTime)
         self.currentStudySession = StudySessionModel(id: 0, accountId: 1, startTime: startTime, endTime: now, syncDate: nil)
+        
         calculateElapsedTime()
         setupSensor()
-        fetchTimer()
-        setupToggleIsStudying()
-    }
-
-    private func setupToggleIsStudying() {
-        toggleIsStudyingSubject
-             .sink { [weak self] id in
-                 self?.isStudying.toggle()
-             }
-             .store(in: &cancellables)
+        fetchTimers()
+        observeIsStudyingChanges()
     }
     
     private func setupSensor() {
-        cancellable = proximityAndOrientationService.setupSensor()
+        proximityAndOrientationService.setupSensor()
             .assign(to: \.isDark, on: self)
+            .store(in: &cancellables)
     }
 
     func playVibration() {
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
     }
 
-    func fetchTimer() {
+    func fetchTimers() {
         isLoading = true
-
         accountTimerService.fetch()
             .sink { [weak self] completion in
                 guard let self = self else { return }
@@ -89,14 +73,14 @@ class TimeTimerViewModel: ObservableObject {
                 guard let self = self else { return }
                 DispatchQueue.main.async {
                     self.timerCardViews = accountTimers.map { accountTimer in
-                        self.viewForTimerType(accountTimer.type.rawValue)
+                        self.viewFor(timerType: accountTimer.type.rawValue)
                     }.reversed()
                 }
             }
             .store(in: &cancellables)
     }
     
-    func viewForTimerType(_ timerType: String?) -> AnyView {
+    func viewFor(timerType: String?) -> AnyView {
         if let type = timerType {
             switch type {
             case "study":
@@ -113,7 +97,6 @@ class TimeTimerViewModel: ObservableObject {
     }
     
     func addTimer(type: String) {
-        // Fetch account and create timer
         self.accountTimerService.create(accountID: 1, type: type, active: true)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completion in
@@ -125,51 +108,56 @@ class TimeTimerViewModel: ObservableObject {
                 }
             }, receiveValue: { accountTimer in
                 print("accountTimer: \(String(describing: accountTimer.type))")
-                let view = self.viewForTimerType(accountTimer.type.rawValue)
+                let view = self.viewFor(timerType: accountTimer.type.rawValue)
                 self.timerCardViews.insert(view, at: 0)
             })
             .store(in: &cancellables)
     }
     
-    func isStudyingNow() -> Bool {
-        let currentTime = UserDefaults.standard.double(forKey: studyStartTimeKey)
-        return currentTime > 0
-    }
-
-    
-    func startStudySession() {
-        // ...
-        self.isStudying = true
-        // ...
-    }
-
-    func stopAndSaveStudySession() {
-        let startTime = Date().addingTimeInterval(-elapsedTime)
-        let endTime = Date()
-
-        // endTime - startTime이 30초 이하인 경우 저장하지 않음
-        guard endTime.timeIntervalSince(startTime) > 10 else {
-            Foast.show(message: "10초 미만은 기록되지 않습니다.")
-            deleteStudyTime()
-            return
-        }
-
-        studySessionService.save(accountID: 1, accountTimerID: 1, startTime: startTime, endTime: endTime)
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                case .failure(let error):
-                    print("Error saving study session: \(error)")
-                case .finished:
-                    print("Study session saved successfully")
+    private func observeIsStudyingChanges() {
+        $isStudying
+            .sink { [weak self] isStudying in
+                guard let self = self else { return }
+                print("isStudying 값이 변경되었습니다: \(isStudying)")
+                if isStudying {
+                    self.startStudySession()
+                } else {
+                    self.stopAndSaveStudySessionIfNeeded(shouldSave: !isStudying)
                 }
-            }, receiveValue: { _ in
-                self.deleteStudyTime()
-            })
+            }
             .store(in: &cancellables)
     }
 
+    private func stopAndSaveStudySessionIfNeeded(shouldSave: Bool) {
+        updateElapsedTime()
+        let startTime = Date().addingTimeInterval(-elapsedTime)
+        let endTime = Date()
 
-    func loadStudyTime() {
+        if shouldSave {
+            guard endTime.timeIntervalSince(startTime) > 10 else {
+                Foast.show(message: "10초 미만은 기록되지 않습니다.")
+                removeStudyStartTime()
+                return
+            }
+
+            studySessionService.save(accountID: 1, accountTimerID: 1, startTime: startTime, endTime: endTime)
+                .sink(receiveCompletion: { completion in
+                    switch completion {
+                    case .failure(let error):
+                        print("Error saving study session: \(error)")
+                    case .finished:
+                        print("Study session saved successfully")
+                    }
+                }, receiveValue: { [weak self] _ in
+                    self?.removeStudyStartTime()
+                })
+                .store(in: &cancellables)
+        } else {
+            removeStudyStartTime()
+        }
+    }
+
+    private func startStudySession() {
         let currentTime = UserDefaults.standard.double(forKey: studyStartTimeKey)
         if currentTime == 0 {
             let now = Date()
@@ -181,7 +169,15 @@ class TimeTimerViewModel: ObservableObject {
             currentStudySession = StudySessionModel(id: 0, accountId: 1, startTime: startTime, endTime: endTime, syncDate: nil)
         }
         elapsedTime = 0
-        calculateElapsedTime()
+        updateElapsedTime()
+    }
+
+    private func updateElapsedTime() {
+        elapsedTime = Date().timeIntervalSince(currentStudySession.startTime)
+    }
+
+    private func removeStudyStartTime() {
+        UserDefaults.standard.removeObject(forKey: studyStartTimeKey)
     }
 
     func deleteStudyTime() {
@@ -207,7 +203,7 @@ class TimeTimerViewModel: ObservableObject {
             endTime: now,
             syncDate: nil)
     }
-    
+
     func toggleClockModal() {
         isShowingClockModal.toggle()
     }
