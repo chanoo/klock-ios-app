@@ -126,7 +126,10 @@
 		98EBFBE629F783BA004E95F3 /* ChatBotSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EBFBE529F783BA004E95F3 /* ChatBotSync.swift */; };
 		98EBFBE829F968E8004E95F3 /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EBFBE729F968E8004E95F3 /* TaskModel.swift */; };
 		98EBFBEA29F968FF004E95F3 /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EBFBE929F968FF004E95F3 /* TaskViewModel.swift */; };
-		98EBFBEC29F9694E004E95F3 /* TaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EBFBEB29F9694E004E95F3 /* TaskView.swift */; };
+		98EBFBEC29F9694E004E95F3 /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EBFBEB29F9694E004E95F3 /* TaskListView.swift */; };
+		98EBFBEF29F97B85004E95F3 /* TaskDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EBFBEE29F97B85004E95F3 /* TaskDetailView.swift */; };
+		98EBFBF229F98A86004E95F3 /* CharacterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EBFBF129F98A86004E95F3 /* CharacterViewModel.swift */; };
+		98EBFBF429F98AA2004E95F3 /* AchievementModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EBFBF329F98AA2004E95F3 /* AchievementModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -274,7 +277,10 @@
 		98EBFBE529F783BA004E95F3 /* ChatBotSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotSync.swift; sourceTree = "<group>"; };
 		98EBFBE729F968E8004E95F3 /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
 		98EBFBE929F968FF004E95F3 /* TaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
-		98EBFBEB29F9694E004E95F3 /* TaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskView.swift; sourceTree = "<group>"; };
+		98EBFBEB29F9694E004E95F3 /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
+		98EBFBEE29F97B85004E95F3 /* TaskDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailView.swift; sourceTree = "<group>"; };
+		98EBFBF129F98A86004E95F3 /* CharacterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterViewModel.swift; sourceTree = "<group>"; };
+		98EBFBF329F98AA2004E95F3 /* AchievementModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -511,6 +517,7 @@
 				981B389229F44B0600AB0EF8 /* PomodoroTimerModel.swift */,
 				981B389629F44B1C00AB0EF8 /* ExamTimerModel.swift */,
 				98EBFBE729F968E8004E95F3 /* TaskModel.swift */,
+				98EBFBF329F98AA2004E95F3 /* AchievementModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -519,6 +526,7 @@
 			isa = PBXGroup;
 			children = (
 				98D7C95629E510990075D201 /* ContentViewModel.swift */,
+				98EBFBF129F98A86004E95F3 /* CharacterViewModel.swift */,
 				98CE662029D55B730009916F /* SignInViewModel.swift */,
 				98B21B6D29D9D21A004EFE0E /* SignUpViewModel.swift */,
 				984D2C9029E0728C008D3EA9 /* SplashViewModel.swift */,
@@ -599,6 +607,8 @@
 		98CE661329D553F10009916F /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				98EBFBF029F98A74004E95F3 /* Character */,
+				98EBFBED29F97B78004E95F3 /* Task */,
 				980C623029EBDDE800D0A7B5 /* Calendar */,
 				98E9385D29EA5844009CBF32 /* Timer */,
 				98E9385B29EA54B1009CBF32 /* Friends */,
@@ -609,10 +619,8 @@
 				984D2C8E29E067FE008D3EA9 /* SplashView.swift */,
 				985BE88D29E6DC3E008582A3 /* MissionView.swift */,
 				985BE88F29E6DC49008582A3 /* SettingsView.swift */,
-				985BE89129E6E0CD008582A3 /* CharacterView.swift */,
 				985BE89529E6E359008582A3 /* ClockModalView.swift */,
 				9843B7E629EFBF8200F91DAD /* StudySessionsByDateView.swift */,
-				98EBFBEB29F9694E004E95F3 /* TaskView.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -672,6 +680,23 @@
 				98EBFBE529F783BA004E95F3 /* ChatBotSync.swift */,
 			);
 			path = Sync;
+			sourceTree = "<group>";
+		};
+		98EBFBED29F97B78004E95F3 /* Task */ = {
+			isa = PBXGroup;
+			children = (
+				98EBFBEB29F9694E004E95F3 /* TaskListView.swift */,
+				98EBFBEE29F97B85004E95F3 /* TaskDetailView.swift */,
+			);
+			path = Task;
+			sourceTree = "<group>";
+		};
+		98EBFBF029F98A74004E95F3 /* Character */ = {
+			isa = PBXGroup;
+			children = (
+				985BE89129E6E0CD008582A3 /* CharacterView.swift */,
+			);
+			path = Character;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -858,6 +883,7 @@
 				98E9386129EA5871009CBF32 /* TimeTimerViewModel.swift in Sources */,
 				985BE89E29E6E5D0008582A3 /* FriendDetailView.swift in Sources */,
 				98E9386729EAD173009CBF32 /* StudySessionServiceProtocol.swift in Sources */,
+				98EBFBF429F98AA2004E95F3 /* AchievementModel.swift in Sources */,
 				98B21B5929D6F4AE004EFE0E /* StudySessionModel.swift in Sources */,
 				98B21B7629DA6288004EFE0E /* Destination.swift in Sources */,
 				98E314B529DEE67B00EA1617 /* TagServiceProtocol.swift in Sources */,
@@ -866,6 +892,7 @@
 				98B21B2129D56BDF004EFE0E /* RegexConstants.swift in Sources */,
 				985BE88A29E6DC2C008582A3 /* ChatBotChatView.swift in Sources */,
 				98B21B5729D6F492004EFE0E /* SocialLoginModel.swift in Sources */,
+				98EBFBF229F98A86004E95F3 /* CharacterViewModel.swift in Sources */,
 				98B21B5B29D6F4BF004EFE0E /* TagModel.swift in Sources */,
 				985BE89029E6DC49008582A3 /* SettingsView.swift in Sources */,
 				981881CA29F27316002A4395 /* PageControl.swift in Sources */,
@@ -898,7 +925,7 @@
 				981B389529F44B1200AB0EF8 /* StudyTimerModel.swift in Sources */,
 				98B21B5229D6F404004EFE0E /* FriendRelationModel.swift in Sources */,
 				985BE89C29E6E595008582A3 /* FriendModel.swift in Sources */,
-				98EBFBEC29F9694E004E95F3 /* TaskView.swift in Sources */,
+				98EBFBEC29F9694E004E95F3 /* TaskListView.swift in Sources */,
 				98B21B6C29D9A7A5004EFE0E /* HomeView.swift in Sources */,
 				9833FFC029F54DE700CC33F7 /* PomodoroTimerViewModel.swift in Sources */,
 				9833FFC629F58F5C00CC33F7 /* AccountServiceProtocol.swift in Sources */,
@@ -927,6 +954,7 @@
 				985BE89829E6E559008582A3 /* HomeViewModel.swift in Sources */,
 				981B389729F44B1C00AB0EF8 /* ExamTimerModel.swift in Sources */,
 				9833FFC829F58F8A00CC33F7 /* AccountLocalService.swift in Sources */,
+				98EBFBEF29F97B85004E95F3 /* TaskDetailView.swift in Sources */,
 				985BE88E29E6DC3E008582A3 /* MissionView.swift in Sources */,
 				98EBFBEA29F968FF004E95F3 /* TaskViewModel.swift in Sources */,
 				981881C829F26F07002A4395 /* ExamTimeTimerView.swift in Sources */,

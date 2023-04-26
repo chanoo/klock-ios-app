@@ -15,6 +15,7 @@ struct HomeView: View {
     @ObservedObject private var calendarViewModel = Container.shared.resolve(CalendarViewModel.self)
     @ObservedObject private var chatBotViewModel = Container.shared.resolve(ChatBotViewModel.self)
     @ObservedObject private var taskViewModel = Container.shared.resolve(TaskViewModel.self)
+    @ObservedObject private var characterViewModel = Container.shared.resolve(CharacterViewModel.self)
 
     private func updateTitle(_ selection: Int) {
         switch selection {
@@ -51,10 +52,12 @@ struct HomeView: View {
                 TaskListView()
                     .environmentObject(taskViewModel)
             )),
-            (imageName: "ic_person", content: AnyView(FriendsView())),
-            (imageName: "ic_gear", content: AnyView(StudySessionsByDateView()))
+            (imageName: "ic_person", content: AnyView(
+                CharacterView()
+                    .environmentObject(characterViewModel)
+            )),
         ])
-        .navigationBarTitle(title)
+        .navigationBarTitle(title, displayMode: .large)
         .onChange(of: selection) { newSelection in
             updateTitle(newSelection)
         }

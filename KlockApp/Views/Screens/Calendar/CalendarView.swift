@@ -12,6 +12,7 @@ struct CalendarView: View {
     @State private var spacing: CGFloat = 5
     @StateObject var viewModel = Container.shared.resolve(CalendarViewModel.self)
     let weeks = 14
+    @State private var isShowingSelectTimer = false
 
     private var startDate: Date {
         let today = Date()
@@ -64,7 +65,14 @@ struct CalendarView: View {
 
             }
         }
-        .navigationBarTitle("공부 시간")        
+        .navigationBarTitle("공부 시간")
+        .navigationBarItems(
+            trailing: NavigationLink(destination: StudySessionsByDateView().environmentObject(self.viewModel), isActive: $isShowingSelectTimer) {
+                Button(action: { isShowingSelectTimer.toggle() }) {
+                    Image(systemName: "gear")
+                }
+            }
+        )
     }
 
     private var calendarBody: some View {

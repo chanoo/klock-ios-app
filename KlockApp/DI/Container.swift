@@ -23,7 +23,6 @@ class Container {
         container.register(AppFlowManager.self) { _ in AppFlowManager() }
 
         // Models
-        container.register(TaskModel.self) { _ in TaskModel(id: UUID(), title: "공부하자", participants: ["차누", "영수"], progress: 0.2) }
         container.register(SignUpUserModel.self) { _ in SignUpUserModel() }
         container.register(ClockModel.self) { _ in
              ClockModel(
@@ -77,10 +76,8 @@ class Container {
             let clockModel = resolver.resolve(ClockModel.self)!
             return TimeTimerViewModel(clockModel: clockModel)
         }
-        container.register(TaskViewModel.self) { resolver in
-            let taskModel = resolver.resolve(TaskModel.self)!
-            return TaskViewModel(taskModel: taskModel)
-        }
+        container.register(TaskViewModel.self) { _ in TaskViewModel() }
+        container.register(CharacterViewModel.self) { _ in CharacterViewModel() }
         container.register(CalendarViewModel.self) { _ in CalendarViewModel() }
         container.register(PomodoroTimerViewModel.self) { _ in PomodoroTimerViewModel() }
    }
