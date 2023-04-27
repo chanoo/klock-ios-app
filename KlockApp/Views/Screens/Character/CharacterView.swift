@@ -11,8 +11,8 @@ struct CharacterView: View {
     @EnvironmentObject var viewModel: CharacterViewModel
 
     var body: some View {
-        ScrollView {
-            VStack(spacing: 0) {
+        VStack(spacing: 0) {
+            ScrollView {
                 Image("character_level_\(viewModel.level)")
                     .resizable()
                     .scaledToFit()
@@ -36,7 +36,6 @@ struct CharacterView: View {
                         .cornerRadius(8)
                 }
             }
-            .padding()
         }
     }
 }
