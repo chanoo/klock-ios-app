@@ -15,10 +15,10 @@ struct CommonViewModifier: ViewModifier {
             .navigationBarTitle(title, displayMode: .inline)
             .navigationBarBackButtonHidden(true)
             .onAppear {
-                AppState.shared.swipeEnabled = false
+                AppState.shared.swipeEnabled = true
             }
             .onDisappear {
-                AppState.shared.swipeEnabled = true
+                AppState.shared.swipeEnabled = false
             }
     }
 }
