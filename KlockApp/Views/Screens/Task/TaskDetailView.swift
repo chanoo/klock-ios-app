@@ -8,10 +8,10 @@
 import Foundation
 import SwiftUI
 import Combine
+import Foast
 
 struct TaskDetailView: View {
     @State private var taskModel: TaskModel
-    @State private var showAlert = false
 
     let dateFormatter: DateFormatter
     init(taskModel: TaskModel) {
@@ -79,23 +79,18 @@ struct TaskDetailView: View {
                         }
                     }
                 }
-
-                Button(action: {
-                    // 찌르기 기능을 여기에 구현하세요.
-                    self.pokeAllParticipants()
-                    showAlert = true
-                }) {
-                    Text("찌르기")
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(8)
-                }
+                
+                FancyButton(
+                    title: "찌르기",
+                    action: {
+                        // 찌르기 기능을 여기에 구현하세요.
+                        self.pokeAllParticipants()
+                        Foast.show(message: "참여자들을 모두 찌르기했습니다.")
+                    },
+                    backgroundColor: FancyColor.primary.color,
+                    foregroundColor: .white
+                )
                 .padding(.top, 16)
-                .alert(isPresented: $showAlert) {
-                    Alert(title: Text("찌르기 성공"), message: Text("참여자들을 모두 찌르기했습니다."), dismissButton: .default(Text("확인")))
-                }
             }
             .padding()
         }

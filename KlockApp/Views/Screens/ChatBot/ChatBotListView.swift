@@ -13,7 +13,7 @@ struct ChatBotListView: View {
     var body: some View {
         VStack(spacing: 0) {
             List(viewModel.chatBots, id: \.id) { chatBot in
-                NavigationLink(destination: ChatBotChatView(viewModel: viewModel, chatBot: chatBot)) {
+                NavigationLink(destination:ChatBotChatView(chatBot: chatBot).environmentObject(viewModel)) {
                     ChatBotRow(chatBot: chatBot)
                 }
             }

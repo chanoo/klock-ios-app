@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ChatBotChatView: View {
-    @StateObject var viewModel: ChatBotViewModel
+    @EnvironmentObject var viewModel: ChatBotViewModel
     @State private var showAlert = false // 추가된 변수
     @Environment(\.colorScheme) var colorScheme
     var chatBot: ChatBotModel

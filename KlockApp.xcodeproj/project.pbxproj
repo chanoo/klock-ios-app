@@ -130,6 +130,7 @@
 		98EBFBEF29F97B85004E95F3 /* TaskDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EBFBEE29F97B85004E95F3 /* TaskDetailView.swift */; };
 		98EBFBF229F98A86004E95F3 /* CharacterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EBFBF129F98A86004E95F3 /* CharacterViewModel.swift */; };
 		98EBFBF429F98AA2004E95F3 /* AchievementModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EBFBF329F98AA2004E95F3 /* AchievementModel.swift */; };
+		98EBFBF629FA54F6004E95F3 /* ClearListBackground+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EBFBF529FA54F6004E95F3 /* ClearListBackground+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -281,6 +282,7 @@
 		98EBFBEE29F97B85004E95F3 /* TaskDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailView.swift; sourceTree = "<group>"; };
 		98EBFBF129F98A86004E95F3 /* CharacterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterViewModel.swift; sourceTree = "<group>"; };
 		98EBFBF329F98AA2004E95F3 /* AchievementModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementModel.swift; sourceTree = "<group>"; };
+		98EBFBF529FA54F6004E95F3 /* ClearListBackground+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ClearListBackground+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -490,6 +492,7 @@
 			children = (
 				98B21B4A29D617F6004EFE0E /* Encodable+Extensions.swift */,
 				984D2C8329DFC311008D3EA9 /* UINavigationController+UIGestureRecognizerDelegate.swift */,
+				98EBFBF529FA54F6004E95F3 /* ClearListBackground+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -977,6 +980,7 @@
 				984D2C8429DFC311008D3EA9 /* UINavigationController+UIGestureRecognizerDelegate.swift in Sources */,
 				98CE661D29D55AE00009916F /* AccountModel.swift in Sources */,
 				98D7C94929E1AB450075D201 /* SignUpUserModel.swift in Sources */,
+				98EBFBF629FA54F6004E95F3 /* ClearListBackground+Extensions.swift in Sources */,
 				98E9386529EA5899009CBF32 /* AnalogClockView.swift in Sources */,
 				98BDD22029DD0FA800B0440F /* EmailValidator.swift in Sources */,
 				98E314B729DEE6BB00EA1617 /* TagServiceDTO.swift in Sources */,

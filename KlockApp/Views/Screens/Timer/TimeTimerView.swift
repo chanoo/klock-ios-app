@@ -36,11 +36,11 @@ struct TimeTimerView: View {
                             isShowingSelectTimer.toggle()
                         }) {
                             ZStack {
-                                RoundedRectangle(cornerRadius: 8)
+                                RoundedRectangle(cornerRadius: 10)
                                     .fill(FancyColor.background.color)
                                     .frame(width: geometry.size.width - 40, height: geometry.size.height - 40)
-                                    .shadow(color: Color.black.opacity(0.2), radius: 8, x: 0, y: 0)
-                                
+                                    .shadow(color: Color(.systemGray).opacity(0.2), radius: 5, x: 0, y: 0)
+
                                 LottieView(name: "lottie-plus")
                                     .frame(width: 128, height: 128)
                             }

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Foast
 
 struct PomodoroTimerView: View {
     @State private var isFlipped: Bool = false
@@ -42,8 +43,8 @@ struct PomodoroTimerView: View {
                 Spacer()
             }
             .background(FancyColor.background.color)
-            .cornerRadius(8)
-            .shadow(color: Color.black.opacity(0.2), radius: 8, x: 0, y: 0)
+            .cornerRadius(10)
+            .shadow(color: Color(.systemGray).opacity(0.2), radius: 5, x: 0, y: 0)
             .rotation3DEffect(
                 .degrees(isFlipped ? 180 : 0),
                 axis: (x: 0.0, y: 1.0, z: 0.0)
@@ -104,35 +105,32 @@ struct PomodoroTimerView: View {
                                 .frame(maxWidth: .infinity, alignment: .center)
                         }
                     }
+                    
+                    Section {
+                        Button(action: {
+                            withAnimation(.spring()) {
+                                isFlipped.toggle()
+                                Foast.show(message: "삭제 되었습니다.")
+                            }
+                        }) {
+                            Text("삭제")
+                                .frame(maxWidth: .infinity, alignment: .center)
+                                .foregroundColor(FancyColor.secondary.color)
+                        }
+                    }
                 }
 //                .listStyle(GroupedListStyle())
                 .clearListBackground()
             }
             .background(FancyColor.background.color)
-            .cornerRadius(8)
-            .shadow(color: Color.black.opacity(0.2), radius: 8, x: 0, y: 0)
+            .cornerRadius(10)
+            .shadow(color: Color(.systemGray).opacity(0.2), radius: 5, x: 0, y: 0)
             .rotation3DEffect(
                 .degrees(isFlipped ? 0 : 180),
                 axis: (x: 0.0, y: 1.0, z: 0.0)
             )
             .opacity(isFlipped ? 1 : 0)
         }
-    }
-}
-
-struct ClearListBackgroundModifier: ViewModifier {
-    func body(content: Content) -> some View {
-        if #available(iOS 16.0, *) {
-            content.scrollContentBackground(.hidden)
-        } else {
-            content
-        }
-    }
-}
-
-extension View {
-    func clearListBackground() -> some View {
-        modifier(ClearListBackgroundModifier())
     }
 }
 
