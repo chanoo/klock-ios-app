@@ -51,6 +51,7 @@ struct TimeTimerView: View {
                     Spacer()
                 }
                 .frame(width: geometry.size.width, height: geometry.size.height)
+                .navigationBarTitle("타임 타이머", displayMode: .inline)
                 .navigationBarItems(
                     trailing: Button(action: { isShowingSelectTimer.toggle() }) {
                         Image(systemName: "plus")

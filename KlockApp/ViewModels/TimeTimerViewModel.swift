@@ -26,7 +26,7 @@ class TimeTimerViewModel: ObservableObject {
     @Published var isStudying: Bool = false
 
     private var cancellables: Set<AnyCancellable> = []
-    private let accountService = Container.shared.resolve(AccountServiceProtocol.self)
+    private let accountService = Container.shared.resolve(AccountLocalServiceProtocol.self)
     private let accountTimerService = Container.shared.resolve(AccountTimerServiceProtocol.self)
     private let studySessionService = Container.shared.resolve(StudySessionServiceProtocol.self)
     private let proximityAndOrientationService = Container.shared.resolve(ProximityAndOrientationServiceProtocol.self)

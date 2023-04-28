@@ -34,9 +34,12 @@
         <relationship name="message" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Message" inverseName="chatBot" inverseEntity="Message"/>
     </entity>
     <entity name="ExamTimer" representedClassName="ExamTimer" syncable="YES" codeGenerationType="class">
+        <attribute name="duration" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="markingTime" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="questionCount" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="startTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="title" optional="YES" attributeType="String"/>
         <relationship name="accountTimer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AccountTimer" inverseName="examTimer" inverseEntity="AccountTimer"/>
     </entity>
     <entity name="Message" representedClassName="Message" syncable="YES" codeGenerationType="class">
@@ -49,9 +52,9 @@
     <entity name="PomodoroTimer" representedClassName="PomodoroTimer" syncable="YES" codeGenerationType="class">
         <attribute name="cycleCount" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="restTime" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="studyTime" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="title" optional="YES" attributeType="String"/>
         <relationship name="accountTimer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AccountTimer" inverseName="pomodoroTimer" inverseEntity="AccountTimer"/>
     </entity>
     <entity name="StudySession" representedClassName="StudySession" syncable="YES" codeGenerationType="class">
@@ -64,7 +67,8 @@
     </entity>
     <entity name="StudyTimer" representedClassName="StudyTimer" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="startTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="accountTimer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AccountTimer" inverseName="studyTimer" inverseEntity="AccountTimer"/>
     </entity>
 </model>

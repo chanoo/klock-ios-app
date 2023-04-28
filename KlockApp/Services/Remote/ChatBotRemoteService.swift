@@ -9,7 +9,7 @@ import Foundation
 import Alamofire
 import Combine
 
-class ChatBotRemoteService: ChatBotServiceProtocol {
+class ChatBotRemoteService: ChatBotRemoteServiceProtocol {
 
     private let baseURL = "https://api.klock.app/api/chatbots"
 

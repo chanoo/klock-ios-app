@@ -13,12 +13,16 @@ struct ExamTimerModel: Identifiable, Codable {
     let title: String
     let startTime: Date
     let duration: Int
+    let questionCount: Int
+    let markingTime: Int
 
     enum CodingKeys: String, CodingKey {
         case id
-        case accountTimerId = "account_timer_id"
+        case accountTimerId
         case title
-        case startTime = "start_time"
-        case duration = "duration"
+        case startTime
+        case duration
+        case questionCount
+        case markingTime
     }
 }

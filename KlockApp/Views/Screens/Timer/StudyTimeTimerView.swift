@@ -57,7 +57,10 @@ struct StudyTimeTimerView: View {
                         minuteHandImageName: "img_watch_hand_min",
                         secondHandImageName: "img_watch_hand_sec",
                         clockBackgroundImageName: "img_watch_face1",
-                        clockSize: CGSize(width: 300, height: 300)
+                        clockSize: CGSize(width: 300, height: 300),
+                        hourHandColor: .black,
+                        minuteHandColor: .black,
+                        secondHandColor: .white.opacity(0.5)
                     ),
                     hour: 10,
                     minute: 20,

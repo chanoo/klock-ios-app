@@ -30,13 +30,16 @@ class Container {
                  minuteHandImageName: "img_watch_hand_min",
                  secondHandImageName: "img_watch_hand_sec",
                  clockBackgroundImageName: "img_watch_face1",
-                 clockSize: CGSize(width: 300, height: 300)
+                 clockSize: CGSize(width: 300, height: 300),
+                 hourHandColor: .black,
+                 minuteHandColor: .black,
+                 secondHandColor: .pink
              )
          }
 
         // Services
         // Local
-        container.register(AccountServiceProtocol.self) { _ in AccountLocalService() }
+        container.register(AccountLocalServiceProtocol.self) { _ in AccountLocalService() }
         container.register(AccountTimerServiceProtocol.self) { _ in AccountTimerLocalService() }
         container.register(MessageServiceProtocol.self) { _ in MessageLocalService() }
         container.register(StudySessionServiceProtocol.self) { _ in StudySessionLocalService() }
@@ -48,11 +51,11 @@ class Container {
         container.register(ProximityAndOrientationServiceProtocol.self) { _ in ProximityAndOrientationService() }
 
         // CharBot Service
-        container.register(ChatBotServiceProtocol.self, name: "remote") { _ in ChatBotRemoteService() }
-        container.register(ChatBotServiceProtocol.self, name: "local") { _ in ChatBotLocalService() }
+        container.register(ChatBotRemoteServiceProtocol.self) { _ in ChatBotRemoteService() }
+        container.register(ChatBotLocalServiceProtocol.self) { _ in ChatBotLocalService() }
         container.register(ChatBotSyncProtocol.self) { resolver in
-            guard let chatBotRemoteService = resolver.resolve(ChatBotServiceProtocol.self, name: "remote") as? ChatBotRemoteService,
-                  let chatBotLocalService = resolver.resolve(ChatBotServiceProtocol.self, name: "local") as? ChatBotLocalService else {
+            guard let chatBotRemoteService = resolver.resolve(ChatBotRemoteServiceProtocol.self) as? ChatBotRemoteService,
+                  let chatBotLocalService = resolver.resolve(ChatBotLocalServiceProtocol.self) as? ChatBotLocalService else {
                 fatalError("Failed to resolve ChatBotServiceProtocol instances")
             }
 

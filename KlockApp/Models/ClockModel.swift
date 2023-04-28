@@ -13,4 +13,7 @@ struct ClockModel {
     var secondHandImageName: String
     var clockBackgroundImageName: String?
     var clockSize: CGSize
+    var hourHandColor: Color
+    var minuteHandColor: Color
+    var secondHandColor: Color
 }

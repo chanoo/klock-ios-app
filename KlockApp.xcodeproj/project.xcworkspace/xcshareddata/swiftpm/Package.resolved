@@ -10,6 +10,15 @@
       }
     },
     {
+      "identity" : "corestore",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/JohnEstropia/CoreStore",
+      "state" : {
+        "revision" : "25593754913d228777f14634bc6f493dbeb4e9fb",
+        "version" : "9.0.0"
+      }
+    },
+    {
       "identity" : "facebook-ios-sdk",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/facebook/facebook-ios-sdk",

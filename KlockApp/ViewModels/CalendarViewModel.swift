@@ -13,7 +13,7 @@ class CalendarViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     private let studySessionService = Container.shared.resolve(StudySessionServiceProtocol.self)
     private let accountTimerService = Container.shared.resolve(AccountTimerServiceProtocol.self)
-    private let accountService = Container.shared.resolve(AccountServiceProtocol.self)
+    private let accountService = Container.shared.resolve(AccountLocalServiceProtocol.self)
     private var cancellables = Set<AnyCancellable>()
     // DateFormatter를 프로퍼티로 추가합니다.
     lazy var timeFormatter: DateFormatter = {

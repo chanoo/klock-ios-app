@@ -9,7 +9,7 @@ import Foundation
 import Combine
 import CoreData
 
-class AccountLocalService: CoreDataHelper, AccountServiceProtocol {
+class AccountLocalService: CoreDataHelper, AccountLocalServiceProtocol {
     
     private func mapEntityToModel(_ entity: Account) -> AccountModel {
         return AccountModel(

@@ -23,7 +23,7 @@ struct AnalogClockView: View {
 
     var body: some View {
         ZStack {
-            Image("img_watch_background4")
+            Image("img_watch_background5")
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .edgesIgnoringSafeArea(.all)
@@ -35,8 +35,8 @@ struct AnalogClockView: View {
                 Text(elapsedTimeToString())
                     .font(.largeTitle)
                     .padding()
-                    .background(.white.opacity(0.5))
-                    .foregroundColor(.pink)
+                    .background(.black.opacity(0.5))
+                    .foregroundColor(.white.opacity(0.5))
                     .clipShape(RoundedRectangle(cornerRadius: 10))
 
                 Spacer(minLength: 30)
@@ -44,7 +44,7 @@ struct AnalogClockView: View {
                 ZStack {
 
                     Circle()
-                        .foregroundColor(colorScheme == .dark ? .pink.opacity(0.2) : .white.opacity(0.5))
+                        .foregroundColor(colorScheme == .dark ? .black.opacity(0.2) : .white.opacity(0.5))
                         .frame(
                             width: clockModel.clockSize.width,
                             height: clockModel.clockSize.height
@@ -53,41 +53,41 @@ struct AnalogClockView: View {
                             ZStack {
                                 if let imageName = clockModel.clockBackgroundImageName {
                                     Image(imageName)
-                                        .foregroundColor(.pink.opacity(0.4))
+                                        .foregroundColor(.white.opacity(0.4))
                                         .frame(width: clockModel.clockSize.width,
                                                height: clockModel.clockSize.height)
                                 }
 
                                 ClockHand(
                                     angle: .degrees(hourAngle),
-                                    color: .black,
+                                    color: clockModel.hourHandColor,
                                     imageName: clockModel.hourHandImageName,
                                     clockSize: clockModel.clockSize
                                 )
 
                                 ClockHand(
                                     angle: .degrees(minuteAngle),
-                                    color: .black,
+                                    color: clockModel.minuteHandColor,
                                     imageName: clockModel.minuteHandImageName,
                                     clockSize: clockModel.clockSize
                                 )
 
                                 ClockHand(
                                     angle: .degrees(secondAngle),
-                                    color: .pink,
+                                    color: clockModel.secondHandColor,
                                     imageName: clockModel.secondHandImageName,
                                     clockSize: clockModel.clockSize
                                 )
 
                                 Circle()
                                     .stroke(lineWidth: 10)
-                                    .foregroundColor(.pink)
+                                    .foregroundColor(.white)
                                     .frame(width: clockModel.clockSize.width - 10, height: clockModel.clockSize.height - 10)
                                     .opacity(0.1)
 
                                 Circle()
                                     .stroke(lineWidth: 10)
-                                    .foregroundColor(.pink)
+                                    .foregroundColor(.black)
                                     .frame(width: clockModel.clockSize.width - 30, height: clockModel.clockSize.height - 30)
                                     .opacity(0.3)
 
@@ -112,7 +112,7 @@ struct AnalogClockView: View {
                         isStudying.toggle()
                         startTime = Date()
                     },
-                    backgroundColor: .pink.opacity(0.8),
+                    backgroundColor: .black.opacity(0.8),
                     foregroundColor: .white,
                     isBlock: false
                 )
@@ -151,7 +151,7 @@ struct AnalogClockView: View {
     
     private func elapsedTimeToString() -> String {
         // elapsedTime를 문자열로 변환하는 코드를 여기에 구현하세요.
-        return TimeUtils.elapsedTimeToString(elapsedTime: elapsedTime ?? 0)
+        return TimeUtils.elapsedTimeToString(elapsedTime: elapsedTime)
     }
 }
 
@@ -178,7 +178,7 @@ struct ClockOutLine: View {
             path.addLine(to: endPoint)
         }
         .stroke(style: StrokeStyle(lineWidth: lineWidth, lineCap: .butt, lineJoin: .round))
-        .foregroundColor(isAfternoon ? .pink.opacity(0.5) : .pink.opacity(0.7))
+        .foregroundColor(isAfternoon ? .black.opacity(0.5) : .black.opacity(0.7))
         .frame(width: clockSize.width, height: clockSize.height) // Set the frame size to be the same as the clock size
     }
 }
@@ -217,7 +217,10 @@ struct AnalogClockView_Previews: PreviewProvider {
                     minuteHandImageName: "img_watch_hand_min",
                     secondHandImageName: "img_watch_hand_sec",
                     clockBackgroundImageName: "img_watch_face1",
-                    clockSize: CGSize(width: 300, height: 300)
+                    clockSize: CGSize(width: 300, height: 300),
+                    hourHandColor: .black,
+                    minuteHandColor: .black,
+                    secondHandColor: .pink
                 )
         )
         .previewLayout(.sizeThatFits)

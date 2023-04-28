@@ -10,7 +10,7 @@ import Combine
 import Alamofire
 import CoreData
 
-class ChatBotLocalService: CoreDataHelper, ChatBotServiceProtocol {
+class ChatBotLocalService: CoreDataHelper, ChatBotLocalServiceProtocol {
     
     private func mapEntityToModel(_ entity: ChatBot) -> ChatBotModel {
         return ChatBotModel(

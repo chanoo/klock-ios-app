@@ -16,7 +16,7 @@ class ChatBotViewModel: ObservableObject {
     @Published var isPreparingResponse: Bool = false
     
     private let chatGPTService = Container.shared.resolve(ChatGPTServiceProtocol.self)
-    private let chatBotRemoteService = Container.shared.resolve(ChatBotServiceProtocol.self, name: "remote")
+    private let chatBotRemoteService = Container.shared.resolve(ChatBotRemoteServiceProtocol.self)
     private let messageService = Container.shared.resolve(MessageServiceProtocol.self)
     private let chatBotSync = Container.shared.resolve(ChatBotSyncProtocol.self)
     
