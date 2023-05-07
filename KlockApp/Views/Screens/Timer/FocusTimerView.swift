@@ -8,7 +8,7 @@
 import SwiftUI
 import Foast
 
-struct StudyTimeTimerView: View {
+struct FocusTimerView: View {
     @EnvironmentObject var viewModel: TimeTimerViewModel
     @State private var isFlipped: Bool = false
     @State private var title: String = ""
@@ -141,7 +141,7 @@ struct StudyTimeTimerView: View {
 struct StudyTimeTimerView_Previews: PreviewProvider {
     static var previews: some View {
         let viewModel = Container.shared.resolve(TimeTimerViewModel.self)
-        StudyTimeTimerView()
+        FocusTimerView()
             .environmentObject(viewModel)
     }
 }
