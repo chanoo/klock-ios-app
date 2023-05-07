@@ -47,6 +47,7 @@ class Container {
         container.register(AuthenticationServiceProtocol.self) { _ in AuthenticationService() }
         container.register(ChatGPTServiceProtocol.self) { _ in ChatGPTService() }
         container.register(TagServiceProtocol.self) { _ in TagService() }
+        container.register(TimerRemoteServiceProtocol.self) { _ in TimerRemoteService() }
         // ETC
         container.register(ProximityAndOrientationServiceProtocol.self) { _ in ProximityAndOrientationService() }
 

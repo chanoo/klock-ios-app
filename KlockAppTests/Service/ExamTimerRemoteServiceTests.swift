@@ -1,5 +1,5 @@
 //
-//  FocusTimerRemoteServiceTests.swift
+//  ExamTimerRemoteServiceTests.swift
 //  KlockAppTests
 //
 //  Created by 성찬우 on 2023/05/07.
@@ -9,14 +9,13 @@ import XCTest
 import Combine
 @testable import KlockApp
 
-class FocusTimerRemoteServiceTests: XCTestCase {
-    var sut: FocusTimerRemoteService!
+class ExamTimerRemoteServiceTests: XCTestCase {
+    var sut: ExamTimerRemoteService!
     var subscriptions = Set<AnyCancellable>()
-    var timerId: Int64?
 
     override func setUp() {
         super.setUp()
-        sut = FocusTimerRemoteService()
+        sut = ExamTimerRemoteService()
     }
 
     override func tearDown() {
@@ -24,61 +23,60 @@ class FocusTimerRemoteServiceTests: XCTestCase {
         super.tearDown()
     }
 
-    func testCreateFocusTimer() {
-        let expectation = XCTestExpectation(description: "Create Focus Timer")
+    func testCreateExamTimer() {
+        let expectation = XCTestExpectation(description: "Create Exam Timer")
 
-        let focusTimer = FocusTimerDTO(id: nil, userId: 2, seq: 1, type: "focus", name: "Focus Timer")
+        let examTimer = ExamTimerDTO(id: nil, userId: 2, seq: 1, type: nil, name: "Test Exam Timer", startTime: "2023-04-30T01:22:41.171737", duration: 90, questionCount: 30)
 
-        sut.create(data: focusTimer)
+        sut.create(data: examTimer)
             .sink(receiveCompletion: { result in
                 switch result {
                 case .failure(let error):
-                    XCTFail("Create Focus Timer failed with error: \(error)")
+                    XCTFail("Create Exam Timer failed with error: \(error)")
                 case .finished:
                     break
                 }
                 expectation.fulfill()
             }, receiveValue: { timer in
-                self.timerId = timer.id
-                XCTAssertEqual(timer.name, focusTimer.name)
+                XCTAssertEqual(timer.name, examTimer.name)
             })
             .store(in: &subscriptions)
 
         wait(for: [expectation], timeout: 10)
     }
 
-    func testUpdateFocusTimer() {
-        let expectation = XCTestExpectation(description: "Update Focus Timer")
+    func testUpdateExamTimer() {
+        let expectation = XCTestExpectation(description: "Update Exam Timer")
+        
+        let examTimer = ExamTimerDTO(id: 9, userId: 2, seq: 1, type: nil, name: "Update Exam Timer", startTime: "2023-04-30T01:22:41.171737", duration: 90, questionCount: 30)
 
-        let focusTimer = FocusTimerDTO(id: 28, userId: 1, seq: 1, type: "focus", name: "Updated Timer")
-
-        sut.update(id: focusTimer.id ?? 0, data: focusTimer)
+        sut.update(id: examTimer.id ?? 0, data: examTimer)
             .sink(receiveCompletion: { result in
                 switch result {
                 case .failure(let error):
-                    XCTFail("Update Focus Timer failed with error: \(error)")
+                    XCTFail("Update Exam Timer failed with error: \(error)")
                 case .finished:
                     break
                 }
                 expectation.fulfill()
             }, receiveValue: { timer in
-                XCTAssertEqual(timer.name, focusTimer.name)
+                XCTAssertEqual(timer.name, examTimer.name)
             })
             .store(in: &subscriptions)
 
         wait(for: [expectation], timeout: 10)
     }
 
-    func testDeleteFocusTimer() {
-        let expectation = XCTestExpectation(description: "Delete Focus Timer")
+    func testDeleteTimer() {
+        let expectation = XCTestExpectation(description: "Delete Exam Timer")
 
-        let focusTimerId: Int64 = 31
+        let examTimerId: Int64 = 30
 
-        sut.delete(id: focusTimerId)
+        sut.delete(id: examTimerId)
             .sink(receiveCompletion: { result in
                 switch result {
                 case .failure(let error):
-                    XCTFail("Delete Focus Timer failed with error: \(error)")
+                    XCTFail("Delete Exam Timer failed with error: \(error)")
                 case .finished:
                     break
                 }

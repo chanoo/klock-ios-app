@@ -26,6 +26,7 @@ class TimeTimerViewModel: ObservableObject {
     @Published var isStudying: Bool = false
 
     private var cancellables: Set<AnyCancellable> = []
+    private let timerRemoteService = Container.shared.resolve(TimerRemoteServiceProtocol.self)
     private let accountService = Container.shared.resolve(AccountLocalServiceProtocol.self)
     private let accountTimerService = Container.shared.resolve(AccountTimerServiceProtocol.self)
     private let studySessionService = Container.shared.resolve(StudySessionServiceProtocol.self)
@@ -84,7 +85,7 @@ class TimeTimerViewModel: ObservableObject {
         if let type = timerType {
             switch type {
             case "study":
-                return AnyView(StudyTimeTimerView())
+                return AnyView(FocusTimerView())
             case "exam":
                 return AnyView(ExamTimeTimerView())
             case "pomodoro":

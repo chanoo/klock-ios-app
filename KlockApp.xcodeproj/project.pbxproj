@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		980C623629EE760100D0A7B5 /* FancyTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980C623529EE760100D0A7B5 /* FancyTabView.swift */; };
 		981881C229F26879002A4395 /* SelectTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981881C129F26879002A4395 /* SelectTimerView.swift */; };
-		981881C429F26EF9002A4395 /* StudyTimeTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981881C329F26EF9002A4395 /* StudyTimeTimerView.swift */; };
+		981881C429F26EF9002A4395 /* FocusTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981881C329F26EF9002A4395 /* FocusTimerView.swift */; };
 		981881C629F26F00002A4395 /* PomodoroTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981881C529F26F00002A4395 /* PomodoroTimerView.swift */; };
 		981881C829F26F07002A4395 /* ExamTimeTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981881C729F26F07002A4395 /* ExamTimeTimerView.swift */; };
 		981881CA29F27316002A4395 /* PageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981881C929F27316002A4395 /* PageControl.swift */; };
@@ -21,6 +21,10 @@
 		981B389529F44B1200AB0EF8 /* StudyTimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981B389429F44B1200AB0EF8 /* StudyTimerModel.swift */; };
 		981B389729F44B1C00AB0EF8 /* ExamTimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981B389629F44B1C00AB0EF8 /* ExamTimerModel.swift */; };
 		9820035029F1A6DA0056CA03 /* Foast in Frameworks */ = {isa = PBXBuildFile; productRef = 9820034F29F1A6DA0056CA03 /* Foast */; };
+		9821409B2A078C6900C68EB9 /* FocusTimerRemoteServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9821409A2A078C6900C68EB9 /* FocusTimerRemoteServiceTests.swift */; };
+		9821409D2A07AC3100C68EB9 /* PomodoroTimerRemoteServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9821409C2A07AC3100C68EB9 /* PomodoroTimerRemoteServiceTests.swift */; };
+		9821409F2A07AFB800C68EB9 /* ExamTimerRemoteServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9821409E2A07AFB800C68EB9 /* ExamTimerRemoteServiceTests.swift */; };
+		982140A32A07EFBE00C68EB9 /* APIServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982140A22A07EFBE00C68EB9 /* APIServiceProtocol.swift */; };
 		9833FFC029F54DE700CC33F7 /* PomodoroTimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9833FFBF29F54DE700CC33F7 /* PomodoroTimerViewModel.swift */; };
 		9833FFC229F5759E00CC33F7 /* AccountTimerLocalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9833FFC129F5759E00CC33F7 /* AccountTimerLocalService.swift */; };
 		9833FFC429F5769700CC33F7 /* AccountTimerServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9833FFC329F5769700CC33F7 /* AccountTimerServiceProtocol.swift */; };
@@ -74,6 +78,15 @@
 		987E545129D552540007E156 /* KlockAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E545029D552540007E156 /* KlockAppTests.swift */; };
 		987E545B29D552540007E156 /* KlockAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E545A29D552540007E156 /* KlockAppUITests.swift */; };
 		987E545D29D552540007E156 /* KlockAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E545C29D552540007E156 /* KlockAppUITestsLaunchTests.swift */; };
+		98976AFB2A00EC4800F1CEAE /* TimerRemoteServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98976AFA2A00EC4800F1CEAE /* TimerRemoteServiceProtocol.swift */; };
+		98976AFD2A00ED0200F1CEAE /* TimerRemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98976AFC2A00ED0200F1CEAE /* TimerRemoteService.swift */; };
+		98976AFF2A00ED8500F1CEAE /* ResTimerDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98976AFE2A00ED8500F1CEAE /* ResTimerDTO.swift */; };
+		98976B012A077F7400F1CEAE /* FocusTimerRemoteServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98976B002A077F7400F1CEAE /* FocusTimerRemoteServiceProtocol.swift */; };
+		98976B032A077F7F00F1CEAE /* PomodoroTimerRemoteServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98976B022A077F7F00F1CEAE /* PomodoroTimerRemoteServiceProtocol.swift */; };
+		98976B052A077F8F00F1CEAE /* ExamTimerRemoteServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98976B042A077F8F00F1CEAE /* ExamTimerRemoteServiceProtocol.swift */; };
+		98976B072A07818800F1CEAE /* FocusTimerRemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98976B062A07818800F1CEAE /* FocusTimerRemoteService.swift */; };
+		98976B092A07819100F1CEAE /* PomodoroTimerRemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98976B082A07819100F1CEAE /* PomodoroTimerRemoteService.swift */; };
+		98976B0B2A07819E00F1CEAE /* ExamTimerRemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98976B0A2A07819E00F1CEAE /* ExamTimerRemoteService.swift */; };
 		98B21B1829D55DE0004EFE0E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 98B21B1729D55DE0004EFE0E /* README.md */; };
 		98B21B1B29D55F6C004EFE0E /* AuthenticationRemoteServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B1A29D55F6C004EFE0E /* AuthenticationRemoteServiceProtocol.swift */; };
 		98B21B2129D56BDF004EFE0E /* RegexConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B2029D56BDF004EFE0E /* RegexConstants.swift */; };
@@ -161,7 +174,7 @@
 		980C623429ED32E000D0A7B5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		980C623529EE760100D0A7B5 /* FancyTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyTabView.swift; sourceTree = "<group>"; };
 		981881C129F26879002A4395 /* SelectTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTimerView.swift; sourceTree = "<group>"; };
-		981881C329F26EF9002A4395 /* StudyTimeTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyTimeTimerView.swift; sourceTree = "<group>"; };
+		981881C329F26EF9002A4395 /* FocusTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTimerView.swift; sourceTree = "<group>"; };
 		981881C529F26F00002A4395 /* PomodoroTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroTimerView.swift; sourceTree = "<group>"; };
 		981881C729F26F07002A4395 /* ExamTimeTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamTimeTimerView.swift; sourceTree = "<group>"; };
 		981881C929F27316002A4395 /* PageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageControl.swift; sourceTree = "<group>"; };
@@ -171,6 +184,10 @@
 		981B389229F44B0600AB0EF8 /* PomodoroTimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroTimerModel.swift; sourceTree = "<group>"; };
 		981B389429F44B1200AB0EF8 /* StudyTimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyTimerModel.swift; sourceTree = "<group>"; };
 		981B389629F44B1C00AB0EF8 /* ExamTimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamTimerModel.swift; sourceTree = "<group>"; };
+		9821409A2A078C6900C68EB9 /* FocusTimerRemoteServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTimerRemoteServiceTests.swift; sourceTree = "<group>"; };
+		9821409C2A07AC3100C68EB9 /* PomodoroTimerRemoteServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroTimerRemoteServiceTests.swift; sourceTree = "<group>"; };
+		9821409E2A07AFB800C68EB9 /* ExamTimerRemoteServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamTimerRemoteServiceTests.swift; sourceTree = "<group>"; };
+		982140A22A07EFBE00C68EB9 /* APIServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServiceProtocol.swift; sourceTree = "<group>"; };
 		9833FFBF29F54DE700CC33F7 /* PomodoroTimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroTimerViewModel.swift; sourceTree = "<group>"; };
 		9833FFC129F5759E00CC33F7 /* AccountTimerLocalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTimerLocalService.swift; sourceTree = "<group>"; };
 		9833FFC329F5769700CC33F7 /* AccountTimerServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTimerServiceProtocol.swift; sourceTree = "<group>"; };
@@ -231,6 +248,15 @@
 		987E545629D552540007E156 /* KlockAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KlockAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		987E545A29D552540007E156 /* KlockAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlockAppUITests.swift; sourceTree = "<group>"; };
 		987E545C29D552540007E156 /* KlockAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlockAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		98976AFA2A00EC4800F1CEAE /* TimerRemoteServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerRemoteServiceProtocol.swift; sourceTree = "<group>"; };
+		98976AFC2A00ED0200F1CEAE /* TimerRemoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerRemoteService.swift; sourceTree = "<group>"; };
+		98976AFE2A00ED8500F1CEAE /* ResTimerDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResTimerDTO.swift; sourceTree = "<group>"; };
+		98976B002A077F7400F1CEAE /* FocusTimerRemoteServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTimerRemoteServiceProtocol.swift; sourceTree = "<group>"; };
+		98976B022A077F7F00F1CEAE /* PomodoroTimerRemoteServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroTimerRemoteServiceProtocol.swift; sourceTree = "<group>"; };
+		98976B042A077F8F00F1CEAE /* ExamTimerRemoteServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamTimerRemoteServiceProtocol.swift; sourceTree = "<group>"; };
+		98976B062A07818800F1CEAE /* FocusTimerRemoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTimerRemoteService.swift; sourceTree = "<group>"; };
+		98976B082A07819100F1CEAE /* PomodoroTimerRemoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroTimerRemoteService.swift; sourceTree = "<group>"; };
+		98976B0A2A07819E00F1CEAE /* ExamTimerRemoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamTimerRemoteService.swift; sourceTree = "<group>"; };
 		98A30CBE29DE8E1A002E42A2 /* KlockAppPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = KlockAppPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		98B21B1729D55DE0004EFE0E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		98B21B1A29D55F6C004EFE0E /* AuthenticationRemoteServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationRemoteServiceProtocol.swift; sourceTree = "<group>"; };
@@ -344,11 +370,21 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		982140992A078C4E00C68EB9 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				9821409A2A078C6900C68EB9 /* FocusTimerRemoteServiceTests.swift */,
+				9821409C2A07AC3100C68EB9 /* PomodoroTimerRemoteServiceTests.swift */,
+				9821409E2A07AFB800C68EB9 /* ExamTimerRemoteServiceTests.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		9833FFC929F59CA700CC33F7 /* Local */ = {
 			isa = PBXGroup;
 			children = (
-				9833FFC729F58F8A00CC33F7 /* AccountLocalService.swift */,
 				983B59E229FB99F900F0EACD /* AccountLocalServiceProtocol.swift */,
+				9833FFC729F58F8A00CC33F7 /* AccountLocalService.swift */,
 				9833FFC129F5759E00CC33F7 /* AccountTimerLocalService.swift */,
 				98D2826829E988D00039E6E6 /* MessageLocalService.swift */,
 				98E9386829EAD199009CBF32 /* StudySessionLocalService.swift */,
@@ -362,14 +398,23 @@
 			isa = PBXGroup;
 			children = (
 				98B21B1A29D55F6C004EFE0E /* AuthenticationRemoteServiceProtocol.swift */,
-				9833FFC529F58F5C00CC33F7 /* AccountRemoteServiceProtocol.swift */,
 				98CE661A29D55AA40009916F /* AuthenticationService.swift */,
+				9833FFC529F58F5C00CC33F7 /* AccountRemoteServiceProtocol.swift */,
 				98DC292E29E9383900882E36 /* ChatBotRemoteServiceProtocol.swift */,
 				98DC292A29E9373D00882E36 /* ChatBotRemoteService.swift */,
 				98E314B429DEE67B00EA1617 /* TagRemoteServiceProtocol.swift */,
 				98E314B229DEE65E00EA1617 /* TagRemoteService.swift */,
 				985BE8A529E6EA60008582A3 /* ChatGPTServiceProtocol.swift */,
 				985BE8A329E6EA3E008582A3 /* ChatGPTService.swift */,
+				98976AFA2A00EC4800F1CEAE /* TimerRemoteServiceProtocol.swift */,
+				98976AFC2A00ED0200F1CEAE /* TimerRemoteService.swift */,
+				98976B002A077F7400F1CEAE /* FocusTimerRemoteServiceProtocol.swift */,
+				98976B062A07818800F1CEAE /* FocusTimerRemoteService.swift */,
+				98976B022A077F7F00F1CEAE /* PomodoroTimerRemoteServiceProtocol.swift */,
+				98976B082A07819100F1CEAE /* PomodoroTimerRemoteService.swift */,
+				98976B042A077F8F00F1CEAE /* ExamTimerRemoteServiceProtocol.swift */,
+				98976B0A2A07819E00F1CEAE /* ExamTimerRemoteService.swift */,
+				982140A22A07EFBE00C68EB9 /* APIServiceProtocol.swift */,
 			);
 			path = Remote;
 			sourceTree = "<group>";
@@ -383,6 +428,7 @@
 				98E9384F29EA39A8009CBF32 /* ChatGPTServiceDTO.swift */,
 				98DC292C29E9380200882E36 /* ChatBotServiceDTO.swift */,
 				98E314B629DEE6BB00EA1617 /* TagServiceDTO.swift */,
+				98976AFE2A00ED8500F1CEAE /* ResTimerDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -458,6 +504,7 @@
 		987E544F29D552540007E156 /* KlockAppTests */ = {
 			isa = PBXGroup;
 			children = (
+				982140992A078C4E00C68EB9 /* Service */,
 				987E545029D552540007E156 /* KlockAppTests.swift */,
 			);
 			path = KlockAppTests;
@@ -551,9 +598,9 @@
 				985BE89729E6E559008582A3 /* HomeViewModel.swift */,
 				985BE89929E6E579008582A3 /* FriendsViewModel.swift */,
 				985BE89F29E6E836008582A3 /* ChatBotViewModel.swift */,
-				98E9386029EA5871009CBF32 /* TimeTimerViewModel.swift */,
 				98EBFBE929F968FF004E95F3 /* TaskViewModel.swift */,
 				986E5DB129EAEF5600FF7047 /* CalendarViewModel.swift */,
+				98E9386029EA5871009CBF32 /* TimeTimerViewModel.swift */,
 				9833FFBF29F54DE700CC33F7 /* PomodoroTimerViewModel.swift */,
 				985BE88329E652CE008582A3 /* README.md */,
 			);
@@ -687,7 +734,7 @@
 				985BE88B29E6DC35008582A3 /* TimeTimerView.swift */,
 				98E9386429EA5899009CBF32 /* AnalogClockView.swift */,
 				981881C129F26879002A4395 /* SelectTimerView.swift */,
-				981881C329F26EF9002A4395 /* StudyTimeTimerView.swift */,
+				981881C329F26EF9002A4395 /* FocusTimerView.swift */,
 				981881C529F26F00002A4395 /* PomodoroTimerView.swift */,
 				981881C729F26F07002A4395 /* ExamTimeTimerView.swift */,
 			);
@@ -912,25 +959,30 @@
 				98B21B7629DA6288004EFE0E /* Destination.swift in Sources */,
 				98E314B529DEE67B00EA1617 /* TagRemoteServiceProtocol.swift in Sources */,
 				981881C629F26F00002A4395 /* PomodoroTimerView.swift in Sources */,
+				98976B052A077F8F00F1CEAE /* ExamTimerRemoteServiceProtocol.swift in Sources */,
 				98B21B1B29D55F6C004EFE0E /* AuthenticationRemoteServiceProtocol.swift in Sources */,
 				98B21B2129D56BDF004EFE0E /* RegexConstants.swift in Sources */,
 				985BE88A29E6DC2C008582A3 /* ChatBotChatView.swift in Sources */,
 				98B21B5729D6F492004EFE0E /* SocialLoginModel.swift in Sources */,
 				98EBFBF229F98A86004E95F3 /* CharacterViewModel.swift in Sources */,
 				98B21B5B29D6F4BF004EFE0E /* TagModel.swift in Sources */,
+				98976B0B2A07819E00F1CEAE /* ExamTimerRemoteService.swift in Sources */,
 				985BE89029E6DC49008582A3 /* SettingsView.swift in Sources */,
 				981881CA29F27316002A4395 /* PageControl.swift in Sources */,
 				9843B7DD29EEE0EB00F91DAD /* NotificationManager.swift in Sources */,
+				98976AFF2A00ED8500F1CEAE /* ResTimerDTO.swift in Sources */,
 				9843B7E529EF086600F91DAD /* ProximityAndOrientationServiceProtocol.swift in Sources */,
 				981B389129F44A2700AB0EF8 /* AccountTimerModel.swift in Sources */,
 				984D2C8F29E067FE008D3EA9 /* SplashView.swift in Sources */,
 				98DC292B29E9373D00882E36 /* ChatBotRemoteService.swift in Sources */,
 				98EBFBE829F968E8004E95F3 /* TaskModel.swift in Sources */,
+				98976B012A077F7400F1CEAE /* FocusTimerRemoteServiceProtocol.swift in Sources */,
 				98D7C95329E460470075D201 /* AppFlowManager.swift in Sources */,
+				982140A32A07EFBE00C68EB9 /* APIServiceProtocol.swift in Sources */,
 				985BE8A429E6EA3E008582A3 /* ChatGPTService.swift in Sources */,
 				985BE8B229E7D510008582A3 /* ChatBotListView.swift in Sources */,
 				98B21B3A29D5EBC3004EFE0E /* AppDelegate.swift in Sources */,
-				981881C429F26EF9002A4395 /* StudyTimeTimerView.swift in Sources */,
+				981881C429F26EF9002A4395 /* FocusTimerView.swift in Sources */,
 				985BE8A029E6E836008582A3 /* ChatBotViewModel.swift in Sources */,
 				984D2C8029DFB197008D3EA9 /* FlowLayout.swift in Sources */,
 				98D7C95729E510990075D201 /* ContentViewModel.swift in Sources */,
@@ -952,10 +1004,12 @@
 				98EBFBEC29F9694E004E95F3 /* TaskListView.swift in Sources */,
 				98B21B6C29D9A7A5004EFE0E /* HomeView.swift in Sources */,
 				9833FFC029F54DE700CC33F7 /* PomodoroTimerViewModel.swift in Sources */,
+				98976B092A07819100F1CEAE /* PomodoroTimerRemoteService.swift in Sources */,
 				9833FFC629F58F5C00CC33F7 /* AccountRemoteServiceProtocol.swift in Sources */,
 				98B21B5429D6F424004EFE0E /* DDayEventModel.swift in Sources */,
 				98B21B7229D9DC25004EFE0E /* SignUpTagsView.swift in Sources */,
 				98E9386B29EAD1C3009CBF32 /* StudySessionServiceDTO.swift in Sources */,
+				98976B072A07818800F1CEAE /* FocusTimerRemoteService.swift in Sources */,
 				981881C229F26879002A4395 /* SelectTimerView.swift in Sources */,
 				98E314B329DEE65E00EA1617 /* TagRemoteService.swift in Sources */,
 				98E9384E29EA3935009CBF32 /* RoundedCorners.swift in Sources */,
@@ -965,6 +1019,7 @@
 				98EBFBE629F783BA004E95F3 /* ChatBotSync.swift in Sources */,
 				98E9386929EAD199009CBF32 /* StudySessionLocalService.swift in Sources */,
 				983B59E529FB9FD800F0EACD /* ChatBotLocalServiceProtocol.swift in Sources */,
+				98976AFD2A00ED0200F1CEAE /* TimerRemoteService.swift in Sources */,
 				98D7C94F29E332790075D201 /* APIErrorModel.swift in Sources */,
 				98B21B4F29D6F3E1004EFE0E /* AccountTagModel.swift in Sources */,
 				986E5DB429EAEF9200FF7047 /* CalendarView.swift in Sources */,
@@ -984,6 +1039,7 @@
 				985BE88E29E6DC3E008582A3 /* MissionView.swift in Sources */,
 				983B59DF29FB7B1E00F0EACD /* AccountEntity.swift in Sources */,
 				98EBFBEA29F968FF004E95F3 /* TaskViewModel.swift in Sources */,
+				98976AFB2A00EC4800F1CEAE /* TimerRemoteServiceProtocol.swift in Sources */,
 				981881C829F26F07002A4395 /* ExamTimeTimerView.swift in Sources */,
 				985BE89429E6E0DB008582A3 /* FriendsView.swift in Sources */,
 				98E9385029EA39A8009CBF32 /* ChatGPTServiceDTO.swift in Sources */,
@@ -1005,6 +1061,7 @@
 				98CE661D29D55AE00009916F /* AccountModel.swift in Sources */,
 				98D7C94929E1AB450075D201 /* SignUpUserModel.swift in Sources */,
 				98EBFBF629FA54F6004E95F3 /* ClearListBackground+Extensions.swift in Sources */,
+				98976B032A077F7F00F1CEAE /* PomodoroTimerRemoteServiceProtocol.swift in Sources */,
 				98E9386529EA5899009CBF32 /* AnalogClockView.swift in Sources */,
 				98BDD22029DD0FA800B0440F /* EmailValidator.swift in Sources */,
 				98E314B729DEE6BB00EA1617 /* TagServiceDTO.swift in Sources */,
@@ -1017,6 +1074,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9821409F2A07AFB800C68EB9 /* ExamTimerRemoteServiceTests.swift in Sources */,
+				9821409D2A07AC3100C68EB9 /* PomodoroTimerRemoteServiceTests.swift in Sources */,
+				9821409B2A078C6900C68EB9 /* FocusTimerRemoteServiceTests.swift in Sources */,
 				987E545129D552540007E156 /* KlockAppTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1180,7 +1240,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = KlockApp/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "클라크 Ai";
+				INFOPLIST_KEY_CFBundleDisplayName = "클라크";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1221,7 +1281,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = KlockApp/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "클라크 Ai";
+				INFOPLIST_KEY_CFBundleDisplayName = "클라크";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

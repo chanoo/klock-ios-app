@@ -12,7 +12,6 @@ import Combine
 class PomodoroTimerRemoteServiceTests: XCTestCase {
     var sut: PomodoroTimerRemoteService!
     var subscriptions = Set<AnyCancellable>()
-    var timerId: Int64?
 
     override func setUp() {
         super.setUp()
@@ -39,7 +38,6 @@ class PomodoroTimerRemoteServiceTests: XCTestCase {
                 }
                 expectation.fulfill()
             }, receiveValue: { timer in
-                self.timerId = timer.id
                 XCTAssertEqual(timer.name, pomodoroTimer.name)
             })
             .store(in: &subscriptions)

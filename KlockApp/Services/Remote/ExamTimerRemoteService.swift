@@ -1,5 +1,5 @@
 //
-//  PomodoroTimerRemoteService.swift
+//  ExamTimerRemoteService.swift
 //  KlockApp
 //
 //  Created by 성찬우 on 2023/05/07.
@@ -9,25 +9,40 @@ import Foundation
 import Alamofire
 import Combine
 
-class PomodoroTimerRemoteService: PomodoroTimerRemoteServiceProtocol, APIServiceProtocol {
-    private let baseURL = "https://api.klock.app/api/pomodoro-timers"
+class AlamofireLogger: EventMonitor {
+    let queue = DispatchQueue(label: "AlamofireLogger")
     
-    func create(data: PomodoroTimerDTO) -> AnyPublisher<PomodoroTimerDTO, AFError> {
-        let url = "\(baseURL)"
+    func request<Value>(_ request: DataRequest, didParseResponse response: DataResponse<Value, AFError>) {
+        print("Request: \(request.cURLDescription())")
+        print("Response: \(response.debugDescription)")
+    }
+}
 
-        return AF.request(url, method: .post, parameters: data, encoder: JSONParameterEncoder.default, headers: self.headers())
-            .validate()
-            .publishDecodable(type: PomodoroTimerDTO.self)
+class ExamTimerRemoteService: ExamTimerRemoteServiceProtocol, APIServiceProtocol {
+    private let baseURL = "http:/192.168.68.69:8080/api/exam-timers"
+    private let logger = AlamofireLogger()
+    private let session: Session
+
+    init() {
+        session = Session(eventMonitors: [logger])
+    }
+    
+    func create(data: ExamTimerDTO) -> AnyPublisher<ExamTimerDTO, AFError> {
+        let url = "\(baseURL)"
+        
+        return session.request(url, method: .post, parameters: data, encoder: JSONParameterEncoder.default, headers: self.headers())
+            .validate(statusCode: 200..<300)
+            .publishDecodable(type: ExamTimerDTO.self)
             .value()
             .eraseToAnyPublisher()
     }
 
-    func update(id: Int64, data: PomodoroTimerDTO) -> AnyPublisher<PomodoroTimerDTO, AFError> {
+    func update(id: Int64, data: ExamTimerDTO) -> AnyPublisher<ExamTimerDTO, AFError> {
         let url = "\(baseURL)/\(id)"
 
         return AF.request(url, method: .post, parameters: data, encoder: JSONParameterEncoder.default, headers: self.headers())
-            .validate()
-            .publishDecodable(type: PomodoroTimerDTO.self)
+            .validate(statusCode: 200..<300)
+            .publishDecodable(type: ExamTimerDTO.self)
             .value()
             .eraseToAnyPublisher()
     }
@@ -36,7 +51,7 @@ class PomodoroTimerRemoteService: PomodoroTimerRemoteServiceProtocol, APIService
         let url = "\(baseURL)/\(id)"
 
         return AF.request(url, method: .delete, headers: self.headers())
-            .validate()
+            .validate(statusCode: 200..<300)
             .publishData()
             .tryMap { dataResponse -> Void in
                 if let statusCode = dataResponse.response?.statusCode, statusCode >= 200, statusCode < 300 {
