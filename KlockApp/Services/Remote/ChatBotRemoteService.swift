@@ -11,7 +11,7 @@ import Combine
 
 class ChatBotRemoteService: ChatBotRemoteServiceProtocol {
 
-    private let baseURL = "https://api.klock.app/api/chatbots"
+    private let baseURL = "https://api.klock.app/api/chat-bots"
 
     func fetchBy(active: Bool) -> AnyPublisher<[ChatBotModel], Error> {
         let url = "\(baseURL)?active=\(active)"
