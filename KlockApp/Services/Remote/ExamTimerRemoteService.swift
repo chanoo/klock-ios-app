@@ -9,17 +9,9 @@ import Foundation
 import Alamofire
 import Combine
 
-class AlamofireLogger: EventMonitor {
-    let queue = DispatchQueue(label: "AlamofireLogger")
-    
-    func request<Value>(_ request: DataRequest, didParseResponse response: DataResponse<Value, AFError>) {
-        print("Request: \(request.cURLDescription())")
-        print("Response: \(response.debugDescription)")
-    }
-}
-
 class ExamTimerRemoteService: ExamTimerRemoteServiceProtocol, APIServiceProtocol {
-    private let baseURL = "http:/192.168.68.69:8080/api/exam-timers"
+    private let baseURL = "https://api.klock.app/api/exam-timers"
+
     private let logger = AlamofireLogger()
     private let session: Session
 
