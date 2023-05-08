@@ -88,6 +88,7 @@
 		98976B072A07818800F1CEAE /* FocusTimerRemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98976B062A07818800F1CEAE /* FocusTimerRemoteService.swift */; };
 		98976B092A07819100F1CEAE /* PomodoroTimerRemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98976B082A07819100F1CEAE /* PomodoroTimerRemoteService.swift */; };
 		98976B0B2A07819E00F1CEAE /* ExamTimerRemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98976B0A2A07819E00F1CEAE /* ExamTimerRemoteService.swift */; };
+		98AC75C42A094D5600EE95D4 /* TimerRemoteServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AC75C32A094D5600EE95D4 /* TimerRemoteServiceTests.swift */; };
 		98B21B1829D55DE0004EFE0E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 98B21B1729D55DE0004EFE0E /* README.md */; };
 		98B21B1B29D55F6C004EFE0E /* AuthenticationRemoteServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B1A29D55F6C004EFE0E /* AuthenticationRemoteServiceProtocol.swift */; };
 		98B21B2129D56BDF004EFE0E /* RegexConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B2029D56BDF004EFE0E /* RegexConstants.swift */; };
@@ -260,6 +261,7 @@
 		98976B082A07819100F1CEAE /* PomodoroTimerRemoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroTimerRemoteService.swift; sourceTree = "<group>"; };
 		98976B0A2A07819E00F1CEAE /* ExamTimerRemoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamTimerRemoteService.swift; sourceTree = "<group>"; };
 		98A30CBE29DE8E1A002E42A2 /* KlockAppPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = KlockAppPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		98AC75C32A094D5600EE95D4 /* TimerRemoteServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerRemoteServiceTests.swift; sourceTree = "<group>"; };
 		98B21B1729D55DE0004EFE0E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		98B21B1A29D55F6C004EFE0E /* AuthenticationRemoteServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationRemoteServiceProtocol.swift; sourceTree = "<group>"; };
 		98B21B2029D56BDF004EFE0E /* RegexConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegexConstants.swift; sourceTree = "<group>"; };
@@ -378,6 +380,7 @@
 				9821409A2A078C6900C68EB9 /* FocusTimerRemoteServiceTests.swift */,
 				9821409C2A07AC3100C68EB9 /* PomodoroTimerRemoteServiceTests.swift */,
 				9821409E2A07AFB800C68EB9 /* ExamTimerRemoteServiceTests.swift */,
+				98AC75C32A094D5600EE95D4 /* TimerRemoteServiceTests.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -1078,6 +1081,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				98AC75C42A094D5600EE95D4 /* TimerRemoteServiceTests.swift in Sources */,
 				9821409F2A07AFB800C68EB9 /* ExamTimerRemoteServiceTests.swift in Sources */,
 				9821409D2A07AC3100C68EB9 /* PomodoroTimerRemoteServiceTests.swift in Sources */,
 				9821409B2A078C6900C68EB9 /* FocusTimerRemoteServiceTests.swift in Sources */,

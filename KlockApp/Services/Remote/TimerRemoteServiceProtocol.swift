@@ -10,5 +10,5 @@ import Combine
 import Alamofire
 
 protocol TimerRemoteServiceProtocol {
-    func fetch() -> AnyPublisher<[TimerDTO], Error>
+    func fetch() -> AnyPublisher<[TimerDTO], AFError>
 }

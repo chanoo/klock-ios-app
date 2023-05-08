@@ -9,23 +9,14 @@ import Foundation
 import Alamofire
 import Combine
 
-class TimerRemoteService: TimerRemoteServiceProtocol {
-    
+class TimerRemoteService: TimerRemoteServiceProtocol, APIServiceProtocol {
     private let baseURL = "https://api.klock.app/api/timers"
 
-    func fetch() -> AnyPublisher<[TimerDTO], Error> {
+    func fetch() -> AnyPublisher<[TimerDTO], AFError> {
         let url = "\(baseURL)"
-        
-        // JWT 값을 꺼냅니다.
-        let jwtToken = UserDefaults.standard.string(forKey: "access.token") ?? ""
 
-        // Alamofire의 request에 Authorization 헤더를 추가합니다.
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(jwtToken)"
-        ]
-
-        return Future { promise in
-            AF.request(url, method: .get, headers: headers)
+        return Future<[TimerDTO], AFError> { promise in
+            AF.request(url, method: .get, headers: self.headers())
                 .validate()
                 .response { response in
                     switch response.result {
@@ -34,7 +25,7 @@ class TimerRemoteService: TimerRemoteServiceProtocol {
                             let timerItems = try decodeTimerItems(from: data!)
                             promise(.success(timerItems))
                         } catch {
-                            promise(.failure(error))
+                            promise(.failure(AFError.responseSerializationFailed(reason: .decodingFailed(error: error))))
                         }
                     case .failure(let error):
                         promise(.failure(error))
@@ -43,4 +34,5 @@ class TimerRemoteService: TimerRemoteServiceProtocol {
         }
         .eraseToAnyPublisher()
     }
+
 }
