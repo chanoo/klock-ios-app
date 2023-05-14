@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct SplashView: View {
-    @StateObject var viewModel: SplashViewModel
+    @StateObject var viewModel: SplashViewModel = Container.shared.resolve(SplashViewModel.self)
+    @EnvironmentObject var appFlowManager: AppFlowManager
 
     @ViewBuilder
     var destinationView: some View {
@@ -34,13 +35,13 @@ struct SplashView: View {
                     .foregroundColor(Color.white)
             }
         }
-        NavigationLink(
-            destination: destinationView,
-            isActive: .constant(viewModel.destination != nil),
-            label: {
-                EmptyView()
+        .onReceive(viewModel.$navigateToHome) { navigate in
+            if navigate {
+                appFlowManager.navigateToDestination.send(.home)
+                viewModel.resetDestination()
             }
-        )
+        }
+        .navigationBarBackButtonHidden(true)
         .onAppear {
             viewModel.resetDestination()
         }

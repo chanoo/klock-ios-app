@@ -19,8 +19,8 @@ class SignUpViewModel: NSObject, ObservableObject {
     @Published var selectedTagId: Int64?
     @Published var tags: [TagModel] = []
 
-    private let authenticationService: AuthenticationServiceProtocol
-    private let tagService: TagServiceProtocol
+    private let authenticationService: AuthenticationServiceProtocol = Container.shared.resolve(AuthenticationServiceProtocol.self)
+    private let tagService: TagServiceProtocol = Container.shared.resolve(TagServiceProtocol.self)
 
     var cancellables: Set<AnyCancellable> = []
     var isNextButtonEnabledCancellable: AnyCancellable?
@@ -35,12 +35,8 @@ class SignUpViewModel: NSObject, ObservableObject {
     var onTagsNextButtonTapped: (() -> Void)?
     var onSignUpSuccess: (() -> Void)?
 
-    init(signUpUserModel: SignUpUserModel,
-         authenticationService: AuthenticationServiceProtocol = Container.shared.resolve(AuthenticationServiceProtocol.self),
-         tagService: TagServiceProtocol = Container.shared.resolve(TagServiceProtocol.self)) {
+    init(signUpUserModel: SignUpUserModel) {
         self.signUpUserModel = signUpUserModel
-        self.authenticationService = authenticationService
-        self.tagService = tagService
         super.init()
         setupBindings()
 
@@ -129,17 +125,18 @@ class SignUpViewModel: NSObject, ObservableObject {
             provider: signUpUserModel.provider,
             providerUserId: signUpUserModel.providerUserId,
             tagId: signUpUserModel.tagId)
-            .sink { [weak self] completion in
+            .sink { completion in
                 switch completion {
                 case .failure(let error):
                     print("Error signing up: \(error)")
                 case .finished:
                     break
                 }
-                DispatchQueue.main.async {
-                    self?.onSignUpSuccess?()
-                }
             } receiveValue: { user in
+                UserDefaults.standard.set(user.accessToken, forKey: "access.token")
+                DispatchQueue.main.async {
+                    self.onSignUpSuccess?()
+                }
                 print("User signed up: \(user)")
             }
             .store(in: &cancellables)

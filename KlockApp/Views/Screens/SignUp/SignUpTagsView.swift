@@ -9,9 +9,9 @@ import SwiftUI
 
 struct SignUpTagsView: View {
 
-    @StateObject var viewModel: SignUpViewModel
-    @State private var activeDestination: Destination?
+    @EnvironmentObject var viewModel: SignUpViewModel
     @EnvironmentObject var signUpUserModel: SignUpUserModel
+    @State private var activeDestination: Destination?
 
     var body: some View {
         VStack {
@@ -59,17 +59,49 @@ struct SignUpTagsView: View {
         .navigationBarItems(leading: BackButtonView())
         .onAppear {
             viewModel.fetchTagsSubject.send()
+            viewModel.onSignUpSuccess = signUpSuccess
+        }
+        .onReceive(viewModel.signUpSuccess, perform: { _ in
+            activeDestination = .splash
+        })
+        .background(
+            NavigationLink(
+                destination: viewForDestination(activeDestination),
+                isActive: Binding<Bool>(
+                    get: { activeDestination != nil },
+                    set: { newValue in
+                        if !newValue {
+                            activeDestination = nil
+                        }
+                    }
+                ),
+                label: {
+                    EmptyView()
+                }
+            )
+            .opacity(0)
+        )
+    }
+    
+    private func viewForDestination(_ destination: Destination?) -> AnyView {
+        switch destination {
+        case .splash:
+            return AnyView(SplashView())
+        case .none, _:
+            return AnyView(EmptyView())
         }
     }
 
-    private func signUpSuccessful() {
+    private func signUpSuccess() {
         viewModel.signUpSuccess.send()
     }
 }
 
 struct SignUpTagsView_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpTagsView(viewModel: Container.shared.resolve(SignUpViewModel.self))
+        let viewModel = Container.shared.resolve(SignUpViewModel.self)
+        SignUpTagsView()
+            .environmentObject(viewModel)
             .environmentObject(AppFlowManager())
     }
 }

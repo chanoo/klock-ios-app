@@ -9,9 +9,8 @@ import SwiftUI
 
 struct SignUpUsernameView: View {
 
-    @StateObject var viewModel: SignUpViewModel
+    @EnvironmentObject var viewModel: SignUpViewModel
     @State private var activeDestination: Destination?
-    @EnvironmentObject var signUpUserModel: SignUpUserModel
 
     var body: some View {
         ZStack {
@@ -48,7 +47,7 @@ struct SignUpUsernameView: View {
     private func viewForDestination(_ destination: Destination?) -> AnyView {
          switch destination {
          case .signUpTags:
-             return AnyView(SignUpTagsView(viewModel: viewModel))
+             return AnyView(SignUpTagsView().environmentObject(viewModel))
          case .none, _:
              return AnyView(EmptyView())
          }
@@ -113,7 +112,9 @@ struct NicknameView: View {
 
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpUsernameView(viewModel: Container.shared.resolve(SignUpViewModel.self))
+        let viewModel = Container.shared.resolve(SignUpViewModel.self)
+        SignUpUsernameView()
+            .environmentObject(viewModel)
             .environmentObject(AppFlowManager())
     }
 }
