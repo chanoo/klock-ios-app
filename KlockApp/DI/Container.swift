@@ -21,22 +21,23 @@ class Container {
     private func setupDependencies() {
         // Managers
         container.register(AppFlowManager.self) { _ in AppFlowManager() }
+        container.register(TimerManager.self) { _ in TimerManager() }
 
         // Models
         container.register(SignUpUserModel.self) { _ in SignUpUserModel() }
         container.register(ClockModel.self) { _ in
              ClockModel(
-                 hourHandImageName: "img_watch_hand_hour",
-                 minuteHandImageName: "img_watch_hand_min",
-                 secondHandImageName: "img_watch_hand_sec",
-                 clockBackgroundImageName: "img_watch_face1",
-                 clockSize: CGSize(width: 300, height: 300),
-                 hourHandColor: .black,
-                 minuteHandColor: .black,
-                 secondHandColor: .pink
-             )
-         }
-
+                hourHandImageName: "img_watch_hand_hour",
+                minuteHandImageName: "img_watch_hand_min",
+                secondHandImageName: "img_watch_hand_sec",
+                clockBackgroundImageName: "img_watch_face1",
+                clockSize: CGSize(width: 300, height: 300),
+                hourHandColor: .black,
+                minuteHandColor: .black,
+                secondHandColor: .pink
+            )
+        }
+        
         // Services
         // Local
         container.register(AccountLocalServiceProtocol.self) { _ in AccountLocalService() }
@@ -48,6 +49,10 @@ class Container {
         container.register(ChatGPTServiceProtocol.self) { _ in ChatGPTService() }
         container.register(TagServiceProtocol.self) { _ in TagService() }
         container.register(TimerRemoteServiceProtocol.self) { _ in TimerRemoteService() }
+        container.register(FocusTimerRemoteServiceProtocol.self) { _ in FocusTimerRemoteService() }
+        container.register(PomodoroTimerRemoteServiceProtocol.self) { _ in PomodoroTimerRemoteService() }
+        container.register(ExamTimerRemoteServiceProtocol.self) { _ in ExamTimerRemoteService() }
+        
         // ETC
         container.register(ProximityAndOrientationServiceProtocol.self) { _ in ProximityAndOrientationService() }
 
@@ -76,14 +81,14 @@ class Container {
         container.register(ChatBotViewModel.self) { resolver in
             return ChatBotViewModel()
         }
-        container.register(TimeTimerViewModel.self) { resolver in
-            let clockModel = resolver.resolve(ClockModel.self)!
-            return TimeTimerViewModel(clockModel: clockModel)
-        }
+        
+        
+        
+        container.register(TimeTimerViewModel.self) { _ in TimeTimerViewModel() }
+
         container.register(TaskViewModel.self) { _ in TaskViewModel() }
         container.register(CharacterViewModel.self) { _ in CharacterViewModel() }
         container.register(CalendarViewModel.self) { _ in CalendarViewModel() }
-        container.register(PomodoroTimerViewModel.self) { _ in PomodoroTimerViewModel() }
    }
 
     func resolve<Service>(_ serviceType: Service.Type, name: String? = nil) -> Service {

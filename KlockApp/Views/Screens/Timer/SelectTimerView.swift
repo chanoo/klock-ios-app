@@ -16,7 +16,7 @@ struct SelectTimerView: View {
             List {
                 Section(header: Text("타이머를 선택 하세요.")) {
                     Button(action: {
-                        viewModel.addTimer(type: "study")
+                        viewModel.addTimer(type: "focus")
                         presentationMode.wrappedValue.dismiss()
                     }) {
                         Text("공부시간 타이머")

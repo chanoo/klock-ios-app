@@ -10,7 +10,9 @@ import UniformTypeIdentifiers
 import Lottie
 
 struct TimeTimerView: View {
+    
     @EnvironmentObject var viewModel: TimeTimerViewModel
+    
     @State private var isShowingSelectTimer = false
 
     var body: some View {

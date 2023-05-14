@@ -13,172 +13,149 @@ import Foast
 import UniformTypeIdentifiers
 
 class TimeTimerViewModel: ObservableObject {
+    // Constants
     private let studyStartTimeKey = "studyStartTime"
     
+    // Managers
+    private let timerManager = Container.shared.resolve(TimerManager.self)
+    
+    // Published properties
     @Published var studySessions: [StudySessionModel] = []
     @Published var currentStudySession: StudySessionModel
     @Published var elapsedTime: TimeInterval = 0
-    @Published var clockModel: ClockModel
     @Published var isDark: Bool = false
     @Published var isLoading: Bool = false
     @Published var timerCardViews: [AnyView] = []
-    @Published var isShowingClockModal = false
     @Published var isStudying: Bool = false
-
-    private var cancellables: Set<AnyCancellable> = []
-    private let timerRemoteService = Container.shared.resolve(TimerRemoteServiceProtocol.self)
-    private let accountService = Container.shared.resolve(AccountLocalServiceProtocol.self)
-    private let accountTimerService = Container.shared.resolve(AccountTimerServiceProtocol.self)
-    private let studySessionService = Container.shared.resolve(StudySessionServiceProtocol.self)
-    private let proximityAndOrientationService = Container.shared.resolve(ProximityAndOrientationServiceProtocol.self)
+    @Published var isShowingClockModal = false
     
-    init(clockModel: ClockModel) {
-        self.clockModel = clockModel
-        self.studySessions = []
+    // Service objects
+    private let timerRemoteService = Container.shared.resolve(TimerRemoteServiceProtocol.self)
+    private let focusTimerRemoteService = Container.shared.resolve(FocusTimerRemoteServiceProtocol.self)
+    private let pomodoroTimerRemoteService = Container.shared.resolve(PomodoroTimerRemoteServiceProtocol.self)
+    private let examTimerRemoteService = Container.shared.resolve(ExamTimerRemoteServiceProtocol.self)
+    private let proximityAndOrientationService = Container.shared.resolve(ProximityAndOrientationServiceProtocol.self)
+    private let studySessionService = Container.shared.resolve(StudySessionServiceProtocol.self)
+    
+    // Other properties
+    var timerModels: [TimerModel] = []
+    private var cancellables: Set<AnyCancellable> = []
+
+    init() {
         let now = Date()
         let currentTime = UserDefaults.standard.double(forKey: studyStartTimeKey)
         let startTime = Date(timeIntervalSince1970: currentTime)
         self.currentStudySession = StudySessionModel(id: 0, accountId: 1, startTime: startTime, endTime: now, syncDate: nil)
-        
-        calculateElapsedTime()
         setupSensor()
-        fetchTimers()
+        timerManager.fetchTimers { [weak self] timerModels in
+            guard let self = self else { return }
+            self.timerModels = timerModels
+            self.timerCardViews = self.timerModels.map { self.viewFor(timer: $0) }
+        }
         observeIsStudyingChanges()
+        calculateElapsedTime()
     }
-    
+
+    // MARK: - Sensor setup
     private func setupSensor() {
         proximityAndOrientationService.setupSensor()
             .assign(to: \.isDark, on: self)
             .store(in: &cancellables)
     }
-
-    func playVibration() {
-        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
-    }
-
-    func fetchTimers() {
-        isLoading = true
-        accountTimerService.fetch()
-            .sink { [weak self] completion in
-                guard let self = self else { return }
-                switch completion {
-                case .failure(let error):
-                    print("Error fetching study sessions: \(error)")
-                case .finished:
-                    break
-                }
-                DispatchQueue.main.async {
-                    self.isLoading = false
-                }
-            } receiveValue: { [weak self] accountTimers in
-                guard let self = self else { return }
-                DispatchQueue.main.async {
-                    self.timerCardViews = accountTimers.map { accountTimer in
-                        self.viewFor(timerType: accountTimer.type.rawValue)
-                    }.reversed()
-                }
-            }
-            .store(in: &cancellables)
-    }
     
-    func viewFor(timerType: String?) -> AnyView {
-        if let type = timerType {
-            switch type {
-            case "study":
-                return AnyView(FocusTimerView())
-            case "exam":
-                return AnyView(ExamTimeTimerView())
-            case "pomodoro":
-                return AnyView(PomodoroTimerView())
-            default:
-                break
-            }
+    // MARK: - Timer view creation
+    func viewFor(timer: TimerModel) -> AnyView {
+        switch timer {
+        case let focusTimer as FocusTimerModel:
+            return AnyView(FocusTimerView(model: focusTimer))
+        case let pomodoroTimer as PomodoroTimerModel:
+            return AnyView(PomodoroTimerView(model: pomodoroTimer))
+        case let examTimer as ExamTimerModel:
+            return AnyView(ExamTimeTimerView(model: examTimer))
+        default:
+            return AnyView(EmptyView())
         }
-        return AnyView(EmptyView())
     }
-    
-    func addTimer(type: String) {
-        self.accountTimerService.create(accountID: 1, type: type, active: true)
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                case .failure(let error):
-                    print("Error: \(error.localizedDescription)")
-                case .finished:
-                    break
-                }
-            }, receiveValue: { accountTimer in
-                print("accountTimer: \(String(describing: accountTimer.type))")
-                let view = self.viewFor(timerType: accountTimer.type.rawValue)
-                self.timerCardViews.insert(view, at: 0)
-            })
-            .store(in: &cancellables)
-    }
-    
+
+    // MARK: - Study Session Management
     private func observeIsStudyingChanges() {
         $isStudying
             .sink { [weak self] isStudying in
-                guard let self = self else { return }
-                print("isStudying 값이 변경되었습니다: \(isStudying)")
-                if isStudying {
-                    self.startStudySession()
-                } else {
-                    self.stopAndSaveStudySessionIfNeeded(shouldSave: !isStudying)
-                }
+                isStudying ? self?.startStudySession() : self?.stopAndSaveStudySessionIfNeeded()
             }
             .store(in: &cancellables)
     }
 
-    private func stopAndSaveStudySessionIfNeeded(shouldSave: Bool) {
-        updateElapsedTime()
-        let startTime = Date().addingTimeInterval(-elapsedTime)
-        let endTime = Date()
-
-        if shouldSave {
-            guard endTime.timeIntervalSince(startTime) > 10 else {
-                Foast.show(message: "10초 미만은 기록되지 않습니다.")
-                removeStudyStartTime()
-                return
-            }
-
-            studySessionService.save(accountID: 1, accountTimerID: 1, startTime: startTime, endTime: endTime)
-                .sink(receiveCompletion: { completion in
-                    switch completion {
-                    case .failure(let error):
-                        print("Error saving study session: \(error)")
-                    case .finished:
-                        print("Study session saved successfully")
-                    }
-                }, receiveValue: { [weak self] _ in
-                    self?.removeStudyStartTime()
-                })
-                .store(in: &cancellables)
-        } else {
-            removeStudyStartTime()
-        }
+    func calculateElapsedTime() {
+        guard let startTime = UserDefaults.standard.object(forKey: studyStartTimeKey) as? Date else { return }
+        elapsedTime += Date().timeIntervalSince(startTime)
     }
-
+    
     private func startStudySession() {
         let currentTime = UserDefaults.standard.double(forKey: studyStartTimeKey)
-        if currentTime == 0 {
-            let now = Date()
-            UserDefaults.standard.set(now.timeIntervalSince1970, forKey: studyStartTimeKey)
-            currentStudySession = StudySessionModel(id: 0, accountId: 1, startTime: now, endTime: now, syncDate: nil)
-        } else {
-            let startTime = Date(timeIntervalSince1970: currentTime)
-            let endTime = Date()
-            currentStudySession = StudySessionModel(id: 0, accountId: 1, startTime: startTime, endTime: endTime, syncDate: nil)
-        }
+        let now = Date()
+        let startTime = currentTime == 0 ? now : Date(timeIntervalSince1970: currentTime)
+        currentStudySession = StudySessionModel(id: 0, accountId: 1, startTime: startTime, endTime: now, syncDate: nil)
         elapsedTime = 0
         updateElapsedTime()
     }
 
-    private func updateElapsedTime() {
-        elapsedTime = Date().timeIntervalSince(currentStudySession.startTime)
+    private func stopAndSaveStudySessionIfNeeded() {
+        updateElapsedTime()
+        let startTime = Date().addingTimeInterval(-elapsedTime)
+        let endTime = Date()
+        let sessionDuration = endTime.timeIntervalSince(startTime)
+
+        guard sessionDuration > 10 else {
+            Foast.show(message: "10초 미만은 기록되지 않습니다.")
+            removeStudyStartTime()
+            return
+        }
+        
+        saveStudySession(accountID: 1, accountTimerID: 1, startTime: startTime, endTime: endTime)
     }
 
+    private func saveStudySession(accountID: Int64, accountTimerID: Int64, startTime: Date, endTime: Date) {
+        studySessionService.save(accountID: accountID, accountTimerID: accountTimerID, startTime: startTime, endTime: endTime)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .failure(let error):
+                    print("Error saving study session: \(error)")
+                case .finished:
+                    print("Study session saved successfully")
+                    self.removeStudyStartTime()
+                }
+            }, receiveValue: { _ in })
+            .store(in: &cancellables)
+    }
+
+    // MARK: - Study Session Helpers
     private func removeStudyStartTime() {
         UserDefaults.standard.removeObject(forKey: studyStartTimeKey)
+    }
+    
+    func delete(model: TimerModel) {
+        timerManager.deleteTimer(model: model) { success in
+            if let index = self.timerModels.firstIndex(where: { $0.type == model.type && $0.id == model.id }) {
+                self.timerModels.remove(at: index)
+                self.timerCardViews.remove(at: index)
+                Foast.show(message: "삭제 되었습니다.")
+            }
+        }
+    }
+
+    func addTimer(type: String) {
+        timerManager.addTimer(type: type) { optionalModel in
+            DispatchQueue.main.async {
+                guard let model = optionalModel else {
+                    print("Error: Timer model is nil.")
+                    return
+                }
+                let view = self.viewFor(timer: model)
+                self.timerModels.insert(model, at: 0)
+                self.timerCardViews.insert(view, at: 0)
+            }
+        }
     }
 
     func deleteStudyTime() {
@@ -186,15 +163,7 @@ class TimeTimerViewModel: ObservableObject {
         UserDefaults.standard.removeObject(forKey: studyStartTimeKey)
     }
 
-    func calculateElapsedTime() {
-        let startTimeKey = UserDefaults.standard.double(forKey: studyStartTimeKey)
-        if startTimeKey != 0 {
-            let currentTime = Date().timeIntervalSince1970
-            let timeDifference = currentTime - startTimeKey
-            elapsedTime += timeDifference
-        }
-    }
-    
+    // MARK: - Other methods
     func updateTime() {
         let now = Date()
         currentStudySession = StudySessionModel(
@@ -204,9 +173,13 @@ class TimeTimerViewModel: ObservableObject {
             endTime: now,
             syncDate: nil)
     }
-
-    func toggleClockModal() {
-        isShowingClockModal.toggle()
+    
+    private func updateElapsedTime() {
+        elapsedTime = Date().timeIntervalSince(currentStudySession.startTime)
+    }
+    
+    func playVibration() {
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
     }
     
     func elapsedTimeToString() -> String {
@@ -221,6 +194,7 @@ class TimeTimerViewModel: ObservableObject {
         TimerDropDelegate(viewModel: self, index: index)
     }
 
+    // MARK: - Timer Card Management
     func removeTimerCard(at index: Int) {
         timerCardViews.remove(at: index)
     }
@@ -238,9 +212,7 @@ class TimeTimerViewModel: ObservableObject {
                 source.loadItem(forTypeIdentifier: UTType.text.identifier, options: nil) { (data, error) in
                     if let data = data as? Data, let sourceIndex = Int(String(data: data, encoding: .utf8) ?? "") {
                         DispatchQueue.main.async {
-                            viewModel.removeTimerCard(at: sourceIndex)
-                            let sourceView = viewModel.timerCardViews.remove(at: sourceIndex)
-                            viewModel.insertTimerCard(sourceView, at: index)
+                            self.viewModel.handleDrop(sourceIndex: sourceIndex, destinationIndex: self.index)
                         }
                     }
                 }
@@ -248,5 +220,11 @@ class TimeTimerViewModel: ObservableObject {
             }
             return false
         }
+    }
+    
+    func handleDrop(sourceIndex: Int, destinationIndex: Int) {
+        guard sourceIndex != destinationIndex else { return }
+        let sourceView = timerCardViews.remove(at: sourceIndex)
+        timerCardViews.insert(sourceView, at: destinationIndex)
     }
 }

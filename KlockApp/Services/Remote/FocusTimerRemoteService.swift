@@ -5,17 +5,24 @@ import Combine
 class FocusTimerRemoteService: FocusTimerRemoteServiceProtocol, APIServiceProtocol {
     private let baseURL = "https://api.klock.app/api/focus-timers"
 
-    func create(data: FocusTimerDTO) -> AnyPublisher<FocusTimerDTO, AFError> {
+    private let logger = AlamofireLogger()
+    private let session: Session
+
+    init() {
+        session = Session(eventMonitors: [logger])
+    }
+    
+    func create(data: ReqFocusTimer) -> AnyPublisher<FocusTimerDTO, AFError> {
         let url = "\(baseURL)"
 
-        return AF.request(url, method: .post, parameters: data, encoder: JSONParameterEncoder.default, headers: self.headers())
+        return session.request(url, method: .post, parameters: data, encoder: JSONParameterEncoder.default, headers: self.headers())
             .validate()
             .publishDecodable(type: FocusTimerDTO.self)
             .value()
             .eraseToAnyPublisher()
     }
 
-    func update(id: Int64, data: FocusTimerDTO) -> AnyPublisher<FocusTimerDTO, AFError> {
+    func update(id: Int64, data: ReqFocusTimer) -> AnyPublisher<FocusTimerDTO, AFError> {
         let url = "\(baseURL)/\(id)"
 
         return AF.request(url, method: .post, parameters: data, encoder: JSONParameterEncoder.default, headers: self.headers())

@@ -26,7 +26,7 @@ class PomodoroTimerRemoteServiceTests: XCTestCase {
     func testCreatePomodoroTimer() {
         let expectation = XCTestExpectation(description: "Create Pomodoro Timer")
 
-        let pomodoroTimer = PomodoroTimerDTO(id: nil, userId: 2, seq: 1, type: "pomodoro", name: "Pomodoro Timer", focusTime: 30, restTime: 5, cycleCount: 4)
+        let pomodoroTimer = ReqPomodoroTimer(seq: 1, name: "Pomodoro Timer", focusTime: 30, restTime: 5, cycleCount: 4)
 
         sut.create(data: pomodoroTimer)
             .sink(receiveCompletion: { result in
@@ -48,9 +48,9 @@ class PomodoroTimerRemoteServiceTests: XCTestCase {
     func testUpdatePomodoroTimer() {
         let expectation = XCTestExpectation(description: "Update Pomodoro Timer")
 
-        let pomodoroTimer = PomodoroTimerDTO(id: 13, userId: 2, seq: 1, type: "pomodoro", name: "Pomodoro Timer", focusTime: 30, restTime: 5, cycleCount: 4)
+        let pomodoroTimer = ReqPomodoroTimer(seq: 1, name: "Pomodoro Timer", focusTime: 30, restTime: 5, cycleCount: 4)
 
-        sut.update(id: pomodoroTimer.id ?? 0, data: pomodoroTimer)
+        sut.update(id: 49, data: pomodoroTimer)
             .sink(receiveCompletion: { result in
                 switch result {
                 case .failure(let error):
@@ -70,7 +70,7 @@ class PomodoroTimerRemoteServiceTests: XCTestCase {
     func testDeletePomodoroTimer() {
         let expectation = XCTestExpectation(description: "Delete Pomodoro Timer")
 
-        let pomodoroTimerId: Int64 = 14
+        let pomodoroTimerId: Int64 = 52
 
         sut.delete(id: pomodoroTimerId)
             .sink(receiveCompletion: { result in

@@ -10,7 +10,7 @@ import Combine
 import Alamofire
 
 protocol PomodoroTimerRemoteServiceProtocol {
-    func create(data: PomodoroTimerDTO) -> AnyPublisher<PomodoroTimerDTO, AFError>
-    func update(id: Int64, data: PomodoroTimerDTO) -> AnyPublisher<PomodoroTimerDTO, AFError>
+    func create(data: ReqPomodoroTimer) -> AnyPublisher<PomodoroTimerDTO, AFError>
+    func update(id: Int64, data: ReqPomodoroTimer) -> AnyPublisher<PomodoroTimerDTO, AFError>
     func delete(id: Int64) -> AnyPublisher<Void, AFError>
 }

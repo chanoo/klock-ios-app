@@ -9,17 +9,15 @@ import SwiftUI
 import Foast
 
 struct ExamTimeTimerView: View {
-    @State private var isFlipped: Bool = false
-    @State private var title: String = ""
-    @State private var workTime: Int = 90
-    @State private var breakTime: Int = 5
-    @State private var questionsCount: Int = 30
-    @State private var repeatCount: Int = 4
+    @ObservedObject var model: ExamTimerModel
+    @EnvironmentObject var viewModel: TimeTimerViewModel
+    @Environment(\.presentationMode) var presentationMode
 
-    init() {
-        if #unavailable(iOS 16.0) {
-            print("### setting backgroundColor to .clear")
-            UITableView.appearance().backgroundColor = .clear
+    @State private var isFlipped: Bool = false
+    
+    private func flipAnimation() {
+        withAnimation(.spring()) {
+            isFlipped.toggle()
         }
     }
 
@@ -62,33 +60,33 @@ struct ExamTimeTimerView: View {
                             Text("시험명")
                                 .font(.headline)
                                 .foregroundColor(.gray)
-                            TextField("시험명을 입력해요.", text: $title)
+                            TextField("시험명을 입력해요.", text: $model.name)
                         }
                         
                         VStack(alignment: .leading) {
                             Text("시험 시간")
                                 .font(.headline)
                                 .foregroundColor(.gray)
-                            Stepper(value: $workTime, in: 5...240, step: 5) {
-                                Text("\(workTime)분")
+                            Stepper(value: $model.duration, in: 5...240, step: 5) {
+                                Text("\(model.duration)분")
                             }
                         }
                         
-                        VStack(alignment: .leading) {
-                            Text("마킹 시간")
-                                .font(.headline)
-                                .foregroundColor(.gray)
-                            Stepper(value: $breakTime, in: 0...60, step: 5) {
-                                Text("\(breakTime)분")
-                            }
-                        }
+//                        VStack(alignment: .leading) {
+//                            Text("마킹 시간")
+//                                .font(.headline)
+//                                .foregroundColor(.gray)
+//                            Stepper(value: $model.markingTime, in: 0...60, step: 5) {
+//                                Text("\(model.markingTime)분")
+//                            }
+//                        }
                         
                         VStack(alignment: .leading) {
                             Text("시험 문항수")
                                 .font(.headline)
                                 .foregroundColor(.gray)
-                            Stepper(value: $questionsCount, in: 1...120) {
-                                Text("\(questionsCount)개")
+                            Stepper(value: $model.questionCount, in: 1...120) {
+                                Text("\(model.questionCount)개")
                             }
                         }
                     }
@@ -119,8 +117,8 @@ struct ExamTimeTimerView: View {
                     Section {
                         Button(action: {
                             withAnimation(.spring()) {
-                                isFlipped.toggle()
-                                Foast.show(message: "삭제 되었습니다.")
+                                flipAnimation()
+                                viewModel.delete(model: model)
                             }
                         }) {
                             Text("삭제")
@@ -145,8 +143,8 @@ struct ExamTimeTimerView: View {
     }
 }
 
-struct ExamTimeTimerView_Previews: PreviewProvider {
-    static var previews: some View {
-        ExamTimeTimerView()
-    }
-}
+//struct ExamTimeTimerView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ExamTimeTimerView(model: <#T##ExamTimerModel#>)
+//    }
+//}
