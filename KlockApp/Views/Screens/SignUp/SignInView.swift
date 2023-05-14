@@ -73,7 +73,10 @@ struct SignInView: View {
         case .home:
             return AnyView(HomeView())
         case .signUpUsername:
-            return AnyView(SignUpUsernameView(viewModel: Container.shared.resolve(SignUpViewModel.self)).environmentObject(signUpUserModel))
+            let viewModel = Container.shared.resolve(SignUpViewModel.self)
+            return AnyView(SignUpUsernameView()
+                .environmentObject(viewModel)
+                .environmentObject(signUpUserModel))
         case .none, _:
             return AnyView(EmptyView())
         }

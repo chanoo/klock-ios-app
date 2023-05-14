@@ -13,10 +13,9 @@ import Swinject
 
 class SplashViewModel: NSObject, ObservableObject {
     @Published var destination: Destination?
+    @Published var navigateToHome = false
 
     var cancellables: Set<AnyCancellable> = []
-
-    let nextButtonTapped = PassthroughSubject<Void, Never>()
 
     override init() {
         super.init()
@@ -24,12 +23,13 @@ class SplashViewModel: NSObject, ObservableObject {
     }
 
     private func setupBindings() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-             self.destination = .home
-         }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+            self.navigateToHome = true
+        }
     }
 
     func resetDestination() {
         destination = nil
+        navigateToHome = false
     }
 }
