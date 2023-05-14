@@ -9,15 +9,14 @@ import SwiftUI
 import Foast
 
 struct PomodoroTimerView: View {
+    @ObservedObject var model: PomodoroTimerModel
+    @EnvironmentObject var viewModel: TimeTimerViewModel
+    
     @State private var isFlipped: Bool = false
-    @State private var workTime: Int = 25
-    @State private var breakTime: Int = 5
-    @State private var repeatCount: Int = 4
-
-    init() {
-        if #unavailable(iOS 16.0) {
-            print("### setting backgroundColor to .clear")
-            UITableView.appearance().backgroundColor = .clear
+    
+    private func flipAnimation() {
+        withAnimation(.spring()) {
+            isFlipped.toggle()
         }
     }
     
@@ -62,11 +61,18 @@ struct PomodoroTimerView: View {
             List {
                 Section(header: Text("뽀모도로 설정")) {
                     VStack(alignment: .leading) {
+                        Text("공부")
+                            .font(.headline)
+                            .foregroundColor(.gray)
+                        TextField("어떤 공부를 할건가요?", text: $model.name)
+                    }
+
+                    VStack(alignment: .leading) {
                         Text("공부 시간")
                             .font(.headline)
                             .foregroundColor(.gray)
-                        Stepper(value: $workTime, in: 5...60, step: 5) {
-                            Text("\(workTime)분")
+                        Stepper(value: $model.focusTime, in: 5...60, step: 5) {
+                            Text("\(model.focusTime)분")
                         }
                     }
                     
@@ -74,8 +80,8 @@ struct PomodoroTimerView: View {
                         Text("쉬는 시간")
                             .font(.headline)
                             .foregroundColor(.gray)
-                        Stepper(value: $breakTime, in: 5...60, step: 5) {
-                            Text("\(breakTime)분")
+                        Stepper(value: $model.restTime, in: 5...60, step: 5) {
+                            Text("\(model.restTime)분")
                         }
                     }
                     
@@ -83,8 +89,8 @@ struct PomodoroTimerView: View {
                         Text("반복 횟수")
                             .font(.headline)
                             .foregroundColor(.gray)
-                        Stepper(value: $repeatCount, in: 1...10) {
-                            Text("\(repeatCount)회")
+                        Stepper(value: $model.cycleCount, in: 1...10) {
+                            Text("\(model.cycleCount)회")
                         }
                     }
                 }
@@ -115,8 +121,8 @@ struct PomodoroTimerView: View {
                 Section {
                     Button(action: {
                         withAnimation(.spring()) {
-                            isFlipped.toggle()
-                            Foast.show(message: "삭제 되었습니다.")
+                            flipAnimation()
+                            viewModel.delete(model: model)
                         }
                     }) {
                         Text("삭제")
@@ -131,8 +137,8 @@ struct PomodoroTimerView: View {
     }
 }
 
-struct PomodoroTimerView_Previews: PreviewProvider {
-    static var previews: some View {
-        PomodoroTimerView()
-    }
-}
+//struct PomodoroTimerView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        PomodoroTimerView()
+//    }
+//}

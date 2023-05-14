@@ -10,7 +10,7 @@ import Combine
 import Alamofire
 
 protocol FocusTimerRemoteServiceProtocol {
-    func create(data: FocusTimerDTO) -> AnyPublisher<FocusTimerDTO, AFError>
-    func update(id: Int64, data: FocusTimerDTO) -> AnyPublisher<FocusTimerDTO, AFError>
+    func create(data: ReqFocusTimer) -> AnyPublisher<FocusTimerDTO, AFError>
+    func update(id: Int64, data: ReqFocusTimer) -> AnyPublisher<FocusTimerDTO, AFError>
     func delete(id: Int64) -> AnyPublisher<Void, AFError>
 }

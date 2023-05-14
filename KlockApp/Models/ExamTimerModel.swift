@@ -7,22 +7,23 @@
 
 import Foundation
 
-struct ExamTimerModel: Identifiable, Codable {
-    let id: Int64?
-    let accountTimerId: Int64
-    let title: String
-    let startTime: Date
-    let duration: Int
-    let questionCount: Int
-    let markingTime: Int
+class ExamTimerModel: TimerModel {
+    @Published var startTime: String
+    @Published var duration: Int
+    @Published var questionCount: Int
 
-    enum CodingKeys: String, CodingKey {
-        case id
-        case accountTimerId
-        case title
-        case startTime
-        case duration
-        case questionCount
-        case markingTime
+    init(id: Int64?, userId: Int64?, seq: Int, type: String?, name: String, startTime: String, duration: Int, questionCount: Int) {
+        self.startTime = startTime
+        self.duration = duration
+        self.questionCount = questionCount
+        super.init(id: id, userId: userId, seq: seq, type: type, name: name)
+    }
+    
+    static func toDTO(model: ExamTimerModel) -> ExamTimerDTO {
+        return ExamTimerDTO(id: model.id, userId: model.userId, seq: model.seq, type: model.type, name: model.name, startTime: model.startTime, duration: model.duration, questionCount: model.questionCount)
+    }
+    
+    static func from(dto: ExamTimerDTO) -> ExamTimerModel {
+        return ExamTimerModel(id: dto.id, userId: dto.userId, seq: dto.seq, type: dto.type, name: dto.name, startTime: dto.startTime, duration: dto.duration, questionCount: dto.questionCount)
     }
 }

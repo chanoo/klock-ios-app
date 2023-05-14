@@ -12,20 +12,27 @@ import Combine
 class PomodoroTimerRemoteService: PomodoroTimerRemoteServiceProtocol, APIServiceProtocol {
     private let baseURL = "https://api.klock.app/api/pomodoro-timers"
     
-    func create(data: PomodoroTimerDTO) -> AnyPublisher<PomodoroTimerDTO, AFError> {
+    private let logger = AlamofireLogger()
+    private let session: Session
+
+    init() {
+        session = Session(eventMonitors: [logger])
+    }
+    
+    func create(data: ReqPomodoroTimer) -> AnyPublisher<PomodoroTimerDTO, AFError> {
         let url = "\(baseURL)"
 
-        return AF.request(url, method: .post, parameters: data, encoder: JSONParameterEncoder.default, headers: self.headers())
+        return session.request(url, method: .post, parameters: data, encoder: JSONParameterEncoder.default, headers: self.headers())
             .validate()
             .publishDecodable(type: PomodoroTimerDTO.self)
             .value()
             .eraseToAnyPublisher()
     }
 
-    func update(id: Int64, data: PomodoroTimerDTO) -> AnyPublisher<PomodoroTimerDTO, AFError> {
+    func update(id: Int64, data: ReqPomodoroTimer) -> AnyPublisher<PomodoroTimerDTO, AFError> {
         let url = "\(baseURL)/\(id)"
 
-        return AF.request(url, method: .post, parameters: data, encoder: JSONParameterEncoder.default, headers: self.headers())
+        return AF.request(url, method: .put, parameters: data, encoder: JSONParameterEncoder.default, headers: self.headers())
             .validate()
             .publishDecodable(type: PomodoroTimerDTO.self)
             .value()

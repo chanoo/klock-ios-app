@@ -6,14 +6,24 @@
 import Foundation
 
 // TimerDTO 프로토콜 정의
-protocol TimerDTO: Codable {}
+protocol TimerDTO: Codable {
+    var type: String? { get }
+}
 
 // 시험 타이머 구조체 정의
-struct ExamTimerDTO: Codable, TimerDTO {
-    let id: Int64?
-    let userId: Int
+struct ReqExamTimer: Codable {
     let seq: Int
-    let type: String?
+    let name: String
+    let startTime: String
+    let duration: Int
+    let questionCount: Int
+}
+
+struct ExamTimerDTO: Codable, TimerDTO {
+    var id: Int64? = nil
+    var userId: Int64? = nil
+    let seq: Int
+    var type: String? = "exam"
     let name: String
     let startTime: String
     let duration: Int
@@ -21,9 +31,17 @@ struct ExamTimerDTO: Codable, TimerDTO {
 }
 
 // 포모도로 타이머 구조체 정의
+struct ReqPomodoroTimer: Codable {
+    let seq: Int
+    let name: String
+    let focusTime: Int
+    let restTime: Int
+    let cycleCount: Int
+}
+
 struct PomodoroTimerDTO: Codable, TimerDTO {
     let id: Int64?
-    let userId: Int
+    let userId: Int64?
     let seq: Int
     let type: String?
     let name: String
@@ -33,9 +51,14 @@ struct PomodoroTimerDTO: Codable, TimerDTO {
 }
 
 // 집중력 타이머 구조체 정의
+struct ReqFocusTimer: Codable {
+    let seq: Int
+    let name: String
+}
+
 struct FocusTimerDTO: Codable, TimerDTO {
     let id: Int64?
-    let userId: Int
+    let userId: Int64?
     let seq: Int
     let type: String?
     let name: String

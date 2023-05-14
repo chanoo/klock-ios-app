@@ -19,7 +19,7 @@ class ExamTimerRemoteService: ExamTimerRemoteServiceProtocol, APIServiceProtocol
         session = Session(eventMonitors: [logger])
     }
     
-    func create(data: ExamTimerDTO) -> AnyPublisher<ExamTimerDTO, AFError> {
+    func create(data: ReqExamTimer) -> AnyPublisher<ExamTimerDTO, AFError> {
         let url = "\(baseURL)"
         
         return session.request(url, method: .post, parameters: data, encoder: JSONParameterEncoder.default, headers: self.headers())
@@ -29,7 +29,7 @@ class ExamTimerRemoteService: ExamTimerRemoteServiceProtocol, APIServiceProtocol
             .eraseToAnyPublisher()
     }
 
-    func update(id: Int64, data: ExamTimerDTO) -> AnyPublisher<ExamTimerDTO, AFError> {
+    func update(id: Int64, data: ReqExamTimer) -> AnyPublisher<ExamTimerDTO, AFError> {
         let url = "\(baseURL)/\(id)"
 
         return AF.request(url, method: .post, parameters: data, encoder: JSONParameterEncoder.default, headers: self.headers())

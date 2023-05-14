@@ -9,9 +9,10 @@ import SwiftUI
 import Foast
 
 struct FocusTimerView: View {
+    @ObservedObject var model: FocusTimerModel
     @EnvironmentObject var viewModel: TimeTimerViewModel
+
     @State private var isFlipped: Bool = false
-    @State private var title: String = ""
 
     private func flipAnimation() {
         withAnimation(.spring()) {
@@ -19,7 +20,7 @@ struct FocusTimerView: View {
         }
     }
 
-    var body: some View {   
+    var body: some View {
         GeometryReader { geometry in
             frontView(geometry: geometry)
                 .rotation3DEffect(.degrees(isFlipped ? 180 : 0), axis: (x: 0.0, y: 1.0, z: 0.0))
@@ -97,10 +98,10 @@ struct FocusTimerView: View {
                         Text("공부")
                             .font(.headline)
                             .foregroundColor(.gray)
-                        TextField("어떤 공부를 할건가요?", text: $title)
+                        TextField("어떤 공부를 할건가요?", text: $model.name)
                     }
                 }
-                
+
                 Section {
                     Button(action: {
                         flipAnimation()
@@ -122,7 +123,7 @@ struct FocusTimerView: View {
                 Section {
                     Button(action: {
                         flipAnimation()
-                        Foast.show(message: "삭제 되었습니다.")
+                        viewModel.delete(model: model)
                     }) {
                         Text("삭제")
                             .frame(maxWidth: .infinity, alignment: .center)
@@ -137,11 +138,9 @@ struct FocusTimerView: View {
         .shadow(color: Color(.systemGray).opacity(0.2), radius: 5, x: 0, y: 0)
     }
 }
-
-struct StudyTimeTimerView_Previews: PreviewProvider {
-    static var previews: some View {
-        let viewModel = Container.shared.resolve(TimeTimerViewModel.self)
-        FocusTimerView()
-            .environmentObject(viewModel)
-    }
-}
+//
+//struct StudyTimeTimerView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        FocusTimerView(timer: <#FocusTimerModel#>)
+//    }
+//}

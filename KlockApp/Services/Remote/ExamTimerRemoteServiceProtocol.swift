@@ -10,7 +10,7 @@ import Combine
 import Alamofire
 
 protocol ExamTimerRemoteServiceProtocol {
-    func create(data: ExamTimerDTO) -> AnyPublisher<ExamTimerDTO, AFError>
-    func update(id: Int64, data: ExamTimerDTO) -> AnyPublisher<ExamTimerDTO, AFError>
+    func create(data: ReqExamTimer) -> AnyPublisher<ExamTimerDTO, AFError>
+    func update(id: Int64, data: ReqExamTimer) -> AnyPublisher<ExamTimerDTO, AFError>
     func delete(id: Int64) -> AnyPublisher<Void, AFError>
 }
