@@ -18,21 +18,22 @@ struct SplashView: View {
 
     var body: some View {
         ZStack {
-            FancyColor.primary.color.edgesIgnoringSafeArea(.all)
+            FancyColor.launchBackground.color.edgesIgnoringSafeArea(.all)
 
             VStack {
                 Image("ic_klock_3dot")
+                    .foregroundColor(FancyColor.launchSymbol.color)
                     .padding(.bottom, 32)
 
                 Text("남과의 경쟁이 아닌")
                     .font(.system(size: 22))
-                    .foregroundColor(Color.white)
+                    .foregroundColor(FancyColor.launchSymbol.color)
                     .padding(.bottom, 2)
 
                 Text("나의 성장을 위해")
                     .font(.system(size: 22))
                     .fontWeight(.bold)
-                    .foregroundColor(Color.white)
+                    .foregroundColor(FancyColor.launchSymbol.color)
             }
         }
         .onReceive(viewModel.$navigateToHome) { navigate in
@@ -50,6 +51,9 @@ struct SplashView: View {
 
 struct SplashView_Previews: PreviewProvider {
     static var previews: some View {
-        SplashView(viewModel: SplashViewModel())
+        let viewModel: SplashViewModel = Container.shared.resolve(SplashViewModel.self)
+        let manager = Container.shared.resolve(AppFlowManager.self)
+        SplashView(viewModel: viewModel)
+            .environmentObject(manager)
     }
 }
