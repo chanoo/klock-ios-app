@@ -27,6 +27,16 @@ struct CharacterView: View {
                 
                 Text("경험치: \(viewModel.experience)")
                     .font(.headline)
+                
+                Button(action: {
+                    viewModel.copyToken()
+                }) {
+                    Text("토큰 복사")
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(8)
+                }
 
                 NavigationLink(destination: AchievementsView(characterViewModel: viewModel)) {
                     Text("업적 목록")

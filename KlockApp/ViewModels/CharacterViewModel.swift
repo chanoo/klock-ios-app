@@ -30,4 +30,9 @@ class CharacterViewModel: ObservableObject {
     func unlockAchievements() {
         // 캐릭터 레벨에 따른 업적을 추가하는 로직을 구현합니다.
     }
+    
+    func copyToken() {
+        let jwtToken = UserDefaults.standard.string(forKey: "access.token") ?? ""
+        UIPasteboard.general.string = jwtToken
+    }
 }
