@@ -7,6 +7,7 @@
 import SwiftUI
 
 struct FancyTabView: View {
+    @EnvironmentObject var tabBarManager: TabBarManager
     @Binding var selection: Int
     let items: [(imageName: String, content: AnyView)]
 
@@ -31,9 +32,12 @@ struct FancyTabView: View {
                     }
                 }
                 .padding(.horizontal)
+                .background(FancyColor.background.color)
                 .frame(height: 60)
             }
-            .background(FancyColor.background.color)
+            .offset(y: tabBarManager.isTabBarVisible ? 0 : 100) // offset modifier를 사용하여 탭바 위치 이동
+            .opacity(tabBarManager.isTabBarVisible ? 1.0 : 0)
+            .animation(.easeInOut(duration: 0.5), value: tabBarManager.isTabBarVisible) // 애니메이션 속도를 조절
         }
     }
 }

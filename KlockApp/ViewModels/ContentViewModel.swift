@@ -27,6 +27,7 @@ class ContentViewModel: ObservableObject {
     func updateCurrentView(appFlowManager: AppFlowManager) {
         if authService.isLoggedIn() {
             self.currentView = AnyView(HomeView()
+                .environmentObject(TabBarManager())
                 .environmentObject(appFlowManager))
         } else {
             let signInViewModel = Container.shared.resolve(SignInViewModel.self)

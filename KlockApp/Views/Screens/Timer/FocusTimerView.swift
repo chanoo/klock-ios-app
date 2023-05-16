@@ -138,9 +138,12 @@ struct FocusTimerView: View {
         .shadow(color: Color(.systemGray).opacity(0.2), radius: 5, x: 0, y: 0)
     }
 }
-//
-//struct StudyTimeTimerView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        FocusTimerView(timer: <#FocusTimerModel#>)
-//    }
-//}
+
+struct StudyTimeTimerView_Previews: PreviewProvider {
+    static var previews: some View {
+        let viewModel = Container.shared.resolve(TimeTimerViewModel.self)
+        let model = FocusTimerModel(id: 1, userId: 2, seq: 1, type: "FOCUS", name: "집중시간 타이머")
+        FocusTimerView(model: model)
+            .environmentObject(viewModel)
+    }
+}

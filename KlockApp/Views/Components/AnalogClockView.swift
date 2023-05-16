@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AnalogClockView: View {
     @Environment(\.colorScheme) var colorScheme
+    @EnvironmentObject var tabBarManager: TabBarManager
     @State private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     @State var currentTime: Date
     @State var startTime: Date
@@ -108,6 +109,7 @@ struct AnalogClockView: View {
                 FancyButton(
                     title: isStudying ? "잠시 멈춤" : "공부 시작",
                     action: {
+                        tabBarManager.isTabBarVisible = isStudying
                         isRunning = true
                         isStudying.toggle()
                         startTime = Date()

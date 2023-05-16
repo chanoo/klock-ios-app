@@ -22,6 +22,7 @@ class Container {
         // Managers
         container.register(AppFlowManager.self) { _ in AppFlowManager() }
         container.register(TimerManager.self) { _ in TimerManager() }
+        container.register(TabBarManager.self) { _ in TabBarManager() }
 
         // Models
         container.register(SignUpUserModel.self) { _ in SignUpUserModel() }
