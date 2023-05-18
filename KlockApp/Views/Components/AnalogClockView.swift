@@ -23,104 +23,67 @@ struct AnalogClockView: View {
     var second: Int?
 
     var body: some View {
-        ZStack {
-            Image("img_watch_background5")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .edgesIgnoringSafeArea(.all)
+        VStack {
+            Circle()
+                .frame(
+                    width: clockModel.clockSize.width,
+                    height: clockModel.clockSize.height
+                )
+                .overlay(
+                    ZStack {
+                        if let imageName = clockModel.clockBackgroundImageName {
+                            Image(imageName)
+                                .foregroundColor(.white.opacity(0.4))
+                                .frame(width: clockModel.clockSize.width,
+                                       height: clockModel.clockSize.height)
+                        }
 
-            VStack {
-
-                Spacer()
-
-                Text(elapsedTimeToString())
-                    .font(.largeTitle)
-                    .padding()
-                    .background(.black.opacity(0.5))
-                    .foregroundColor(.white.opacity(0.5))
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-
-                Spacer(minLength: 30)
-
-                ZStack {
-
-                    Circle()
-                        .foregroundColor(colorScheme == .dark ? .black.opacity(0.2) : .white.opacity(0.5))
-                        .frame(
-                            width: clockModel.clockSize.width,
-                            height: clockModel.clockSize.height
+                        ClockHand(
+                            angle: .degrees(hourAngle),
+                            color: clockModel.hourHandColor,
+                            imageName: clockModel.hourHandImageName,
+                            clockSize: clockModel.clockSize
                         )
-                        .overlay(
-                            ZStack {
-                                if let imageName = clockModel.clockBackgroundImageName {
-                                    Image(imageName)
-                                        .foregroundColor(.white.opacity(0.4))
-                                        .frame(width: clockModel.clockSize.width,
-                                               height: clockModel.clockSize.height)
-                                }
 
-                                ClockHand(
-                                    angle: .degrees(hourAngle),
-                                    color: clockModel.hourHandColor,
-                                    imageName: clockModel.hourHandImageName,
-                                    clockSize: clockModel.clockSize
-                                )
-
-                                ClockHand(
-                                    angle: .degrees(minuteAngle),
-                                    color: clockModel.minuteHandColor,
-                                    imageName: clockModel.minuteHandImageName,
-                                    clockSize: clockModel.clockSize
-                                )
-
-                                ClockHand(
-                                    angle: .degrees(secondAngle),
-                                    color: clockModel.secondHandColor,
-                                    imageName: clockModel.secondHandImageName,
-                                    clockSize: clockModel.clockSize
-                                )
-
-                                Circle()
-                                    .stroke(lineWidth: 10)
-                                    .foregroundColor(.white)
-                                    .frame(width: clockModel.clockSize.width - 10, height: clockModel.clockSize.height - 10)
-                                    .opacity(0.1)
-
-                                Circle()
-                                    .stroke(lineWidth: 10)
-                                    .foregroundColor(.black)
-                                    .frame(width: clockModel.clockSize.width - 30, height: clockModel.clockSize.height - 30)
-                                    .opacity(0.3)
-
-                                ForEach(studySessions, id: \.id) { studySession in
-                                    ClockOutLine(
-                                        studySession: studySession,
-                                        clockSize: clockModel.clockSize,
-                                        startTime: studySession.startTime,
-                                        endTime: studySession.endTime
-                                    )
-                                }
-                            }
+                        ClockHand(
+                            angle: .degrees(minuteAngle),
+                            color: clockModel.minuteHandColor,
+                            imageName: clockModel.minuteHandImageName,
+                            clockSize: clockModel.clockSize
                         )
-                }
 
-                Spacer(minLength: 30)
+                        ClockHand(
+                            angle: .degrees(secondAngle),
+                            color: clockModel.secondHandColor,
+                            imageName: clockModel.secondHandImageName,
+                            clockSize: clockModel.clockSize
+                        )
 
-                FancyButton(
-                    title: isStudying ? "잠시 멈춤" : "공부 시작",
-                    action: {
-                        tabBarManager.isTabBarVisible = isStudying
-                        isRunning = true
-                        isStudying.toggle()
-                        startTime = Date()
-                    },
-                    backgroundColor: .black.opacity(0.8),
-                    foregroundColor: .white,
-                    isBlock: false
+                        Circle()
+                            .stroke(lineWidth: 10)
+                            .foregroundColor(clockModel.outlineOutColor)
+                            .frame(width: clockModel.clockSize.width - 10, height: clockModel.clockSize.height - 10)
+                            .opacity(0.1)
+
+                        Circle()
+                            .stroke(lineWidth: 10)
+                            .foregroundColor(clockModel.outlineOutColor)
+                            .frame(width: clockModel.clockSize.width - 30, height: clockModel.clockSize.height - 30)
+                            .opacity(0.3)
+
+                        ForEach(studySessions, id: \.id) { studySession in
+                            ClockOutLine(
+                                studySession: studySession,
+                                clockSize: clockModel.clockSize,
+                                startTime: studySession.startTime,
+                                endTime: studySession.endTime,
+                                outlineInColor: clockModel.outlineInColor,
+                                outlineOutColor: clockModel.outlineOutColor
+                            )
+                        }
+                    }
                 )
 
-                Spacer()
-            }
         }
         .onReceive(timer) { _ in
             if isRunning {
@@ -150,11 +113,7 @@ struct AnalogClockView: View {
         let second = Calendar.current.component(.second, from: currentTime)
         return Double(second) / 60 * 360
     }
-    
-    private func elapsedTimeToString() -> String {
-        // elapsedTime를 문자열로 변환하는 코드를 여기에 구현하세요.
-        return TimeUtils.elapsedTimeToString(elapsedTime: elapsedTime)
-    }
+
 }
 
 struct ClockOutLine: View {
@@ -162,6 +121,8 @@ struct ClockOutLine: View {
     let clockSize: CGSize
     let startTime: Date
     let endTime: Date
+    let outlineInColor: Color
+    let outlineOutColor: Color
 
     var body: some View {
         let elapsedTime = endTime.timeIntervalSince(startTime)
@@ -180,7 +141,7 @@ struct ClockOutLine: View {
             path.addLine(to: endPoint)
         }
         .stroke(style: StrokeStyle(lineWidth: lineWidth, lineCap: .butt, lineJoin: .round))
-        .foregroundColor(isAfternoon ? .black.opacity(0.5) : .black.opacity(0.7))
+        .foregroundColor(isAfternoon ? outlineOutColor : outlineInColor)
         .frame(width: clockSize.width, height: clockSize.height) // Set the frame size to be the same as the clock size
     }
 }
@@ -222,9 +183,11 @@ struct AnalogClockView_Previews: PreviewProvider {
                     clockSize: CGSize(width: 300, height: 300),
                     hourHandColor: .black,
                     minuteHandColor: .black,
-                    secondHandColor: .pink
+                    secondHandColor: .pink,
+                    outlineInColor: .white.opacity(0.8),
+                    outlineOutColor: .white.opacity(0.5)
                 )
         )
-        .previewLayout(.sizeThatFits)
+        .background(FancyColor.background.color)
     }
 }

@@ -16,4 +16,6 @@ struct ClockModel {
     var hourHandColor: Color
     var minuteHandColor: Color
     var secondHandColor: Color
+    var outlineInColor: Color
+    var outlineOutColor: Color
 }

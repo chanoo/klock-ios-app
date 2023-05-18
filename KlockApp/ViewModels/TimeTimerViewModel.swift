@@ -18,7 +18,9 @@ class TimeTimerViewModel: ObservableObject {
     
     // Managers
     private let timerManager = Container.shared.resolve(TimerManager.self)
-    
+
+    @Namespace var animation
+
     // Published properties
     @Published var studySessions: [StudySessionModel] = []
     @Published var currentStudySession: StudySessionModel
@@ -28,7 +30,8 @@ class TimeTimerViewModel: ObservableObject {
     @Published var timerCardViews: [AnyView] = []
     @Published var isStudying: Bool = false
     @Published var isShowingClockModal = false
-    
+    @Published var focusTimerModel: FocusTimerModel? = nil
+
     // Service objects
     private let timerRemoteService = Container.shared.resolve(TimerRemoteServiceProtocol.self)
     private let focusTimerRemoteService = Container.shared.resolve(FocusTimerRemoteServiceProtocol.self)
@@ -67,7 +70,8 @@ class TimeTimerViewModel: ObservableObject {
     func viewFor(timer: TimerModel) -> AnyView {
         switch timer {
         case let focusTimer as FocusTimerModel:
-            return AnyView(FocusTimerView(model: focusTimer))
+            let focusTimerViewModel = FocusTimerViewModel(model: focusTimer)
+            return AnyView(FocusTimerCardView().environmentObject(focusTimerViewModel))
         case let pomodoroTimer as PomodoroTimerModel:
             return AnyView(PomodoroTimerView(model: pomodoroTimer))
         case let examTimer as ExamTimerModel:
@@ -91,7 +95,7 @@ class TimeTimerViewModel: ObservableObject {
         elapsedTime += Date().timeIntervalSince(startTime)
     }
     
-    private func startStudySession() {
+    func startStudySession() {
         let currentTime = UserDefaults.standard.double(forKey: studyStartTimeKey)
         let now = Date()
         let startTime = currentTime == 0 ? now : Date(timeIntervalSince1970: currentTime)

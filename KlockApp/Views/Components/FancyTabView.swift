@@ -17,27 +17,31 @@ struct FancyTabView: View {
     }
 
     var body: some View {
-        VStack(spacing: 0) {
-            items[selection].content
-                .frame(maxHeight: .infinity) // 추가
-
-            HStack(spacing: 0) {
-                HStack(spacing: 0) {
-                    ForEach(0..<items.count, id: \.self) { index in
-                        Button(action: {
-                            selection = index
-                        }) {
-                            FancyTabItem(imageName: items[index].imageName, isSelected: selection == index)
+        GeometryReader { geometry in
+            VStack(spacing: 0) {
+                items[selection].content
+                    .frame(height: .infinity) // 추가
+                
+                ZStack {
+                    HStack(spacing: 0) {
+                        HStack(spacing: 0) {
+                            ForEach(0..<items.count, id: \.self) { index in
+                                Button(action: {
+                                    selection = index
+                                }) {
+                                    FancyTabItem(imageName: items[index].imageName, isSelected: selection == index)
+                                }
+                            }
                         }
+                        .padding(.horizontal)
+                        .background(FancyColor.background.color)
+                        .frame(height: tabBarManager.isTabBarVisible ? 60 : 0)
                     }
+                    .offset(y: tabBarManager.isTabBarVisible ? 0 : 100) // offset modifier를 사용하여 탭바 위치 이동
+                    .opacity(tabBarManager.isTabBarVisible ? 1.0 : 0)
+                    .animation(.easeInOut(duration: 0.5), value: tabBarManager.isTabBarVisible) // 애니메이션 속도를 조절
                 }
-                .padding(.horizontal)
-                .background(FancyColor.background.color)
-                .frame(height: 60)
             }
-            .offset(y: tabBarManager.isTabBarVisible ? 0 : 100) // offset modifier를 사용하여 탭바 위치 이동
-            .opacity(tabBarManager.isTabBarVisible ? 1.0 : 0)
-            .animation(.easeInOut(duration: 0.5), value: tabBarManager.isTabBarVisible) // 애니메이션 속도를 조절
         }
     }
 }

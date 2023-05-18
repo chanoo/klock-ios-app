@@ -35,7 +35,9 @@ class Container {
                 clockSize: CGSize(width: 300, height: 300),
                 hourHandColor: .black,
                 minuteHandColor: .black,
-                secondHandColor: .pink
+                secondHandColor: .pink,
+                outlineInColor: .white.opacity(0.8),
+                outlineOutColor: .white.opacity(0.6)
             )
         }
         
