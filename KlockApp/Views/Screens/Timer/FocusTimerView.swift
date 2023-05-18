@@ -68,7 +68,6 @@ struct FocusTimerView: View {
                         withAnimation {
                             tabBarManager.isTabBarVisible.toggle()
                             timeTimerViewModel.isStudying.toggle()
-                            timeTimerViewModel.startStudySession()
                             timeTimerViewModel.focusTimerModel = nil
                         }
                     },

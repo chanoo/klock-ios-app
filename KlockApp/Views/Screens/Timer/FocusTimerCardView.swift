@@ -83,6 +83,7 @@ struct FocusTimerCardView: View {
                         withAnimation {
                             timeTimerViewModel.isStudying.toggle()
                             tabBarManager.isTabBarVisible.toggle()
+                            timeTimerViewModel.startStudySession()
                             timeTimerViewModel.focusTimerModel = focusTimerViewModel.model
                         }
                     },

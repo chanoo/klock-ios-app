@@ -81,6 +81,7 @@ struct PomodoroTimerCardView: View {
                     title: "공부 시작",
                     action: {
                         withAnimation {
+                            timeTimerViewModel.startStudySession()
                             timeTimerViewModel.pomodoroTimerModel = pomodoroTimerViewModel.model
                             timeTimerViewModel.isStudying.toggle()
                             tabBarManager.isTabBarVisible.toggle()

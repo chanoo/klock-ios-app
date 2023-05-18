@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+
 struct PomodoroTimerView: View {
 
     @EnvironmentObject var pomodoroTimerViewModel: PomodoroTimerViewModel
@@ -67,7 +68,6 @@ struct PomodoroTimerView: View {
                         withAnimation {
                             tabBarManager.isTabBarVisible.toggle()
                             timeTimerViewModel.isStudying.toggle()
-                            timeTimerViewModel.startStudySession()
                             timeTimerViewModel.pomodoroTimerModel = nil
                         }
                     },
