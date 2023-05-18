@@ -44,7 +44,7 @@ struct PomodoroTimerCardView: View {
             
             VStack {
                 
-                Text(timeTimerViewModel.elapsedTimeToString())
+                Text(pomodoroTimerViewModel.elapsedTimeToString())
                     .font(.largeTitle)
                     .padding()
                     .background(.white.opacity(0.5))
@@ -56,8 +56,8 @@ struct PomodoroTimerCardView: View {
                     startTime: Date(),
                     elapsedTime: $pomodoroTimerViewModel.elapsedTime,
                     studySessions: .constant([]),
-                    isStudying: $timeTimerViewModel.isStudying,
-                    isRunning: true,
+                    isStudying: $pomodoroTimerViewModel.isStudying,
+                    isRunning: false,
                     clockModel: ClockModel(
                         hourHandImageName: "img_watch_hand_hour",
                         minuteHandImageName: "img_watch_hand_min",
@@ -81,10 +81,10 @@ struct PomodoroTimerCardView: View {
                     title: "공부 시작",
                     action: {
                         withAnimation {
+                            tabBarManager.isTabBarVisible = false
+                            pomodoroTimerViewModel.isStudying = true
                             timeTimerViewModel.startStudySession()
-                            timeTimerViewModel.pomodoroTimerModel = pomodoroTimerViewModel.model
-                            timeTimerViewModel.isStudying.toggle()
-                            tabBarManager.isTabBarVisible.toggle()
+                            timeTimerViewModel.pomodoroTimerViewModel = pomodoroTimerViewModel
                         }
                     },
                     backgroundColor: .white.opacity(0.4),

@@ -29,7 +29,13 @@ struct FocusTimerView: View {
             
             VStack {
                 
-                Text(timeTimerViewModel.elapsedTimeToString())
+                Text("\(focusTimerViewModel.model.name)")
+                    .font(.title)
+                    .foregroundColor(.white)
+                    .padding(.top, 20)
+                
+                
+                Text(focusTimerViewModel.elapsedTimeToString())
                     .font(.largeTitle)
                     .padding()
                     .background(.white.opacity(0.5))
@@ -41,7 +47,7 @@ struct FocusTimerView: View {
                     startTime: Date(),
                     elapsedTime: $focusTimerViewModel.elapsedTime,
                     studySessions: .constant([]),
-                    isStudying: $timeTimerViewModel.isStudying,
+                    isStudying: $focusTimerViewModel.isStudying,
                     isRunning: true,
                     clockModel: ClockModel(
                         hourHandImageName: "img_watch_hand_hour",
@@ -66,9 +72,9 @@ struct FocusTimerView: View {
                     title: "잠시 멈춤",
                     action: {
                         withAnimation {
-                            tabBarManager.isTabBarVisible.toggle()
-                            timeTimerViewModel.isStudying.toggle()
-                            timeTimerViewModel.focusTimerModel = nil
+                            tabBarManager.isTabBarVisible = true
+                            focusTimerViewModel.isStudying = false
+                            timeTimerViewModel.focusTimerViewModel = nil
                         }
                     },
                     backgroundColor: .white.opacity(0.4),

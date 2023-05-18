@@ -41,7 +41,7 @@ struct PomodoroTimerView: View {
                     startTime: Date(),
                     elapsedTime: $pomodoroTimerViewModel.elapsedTime,
                     studySessions: .constant([]),
-                    isStudying: $timeTimerViewModel.isStudying,
+                    isStudying: $pomodoroTimerViewModel.isStudying,
                     isRunning: true,
                     clockModel: ClockModel(
                         hourHandImageName: "img_watch_hand_hour",
@@ -66,9 +66,9 @@ struct PomodoroTimerView: View {
                     title: "잠시 멈춤",
                     action: {
                         withAnimation {
-                            tabBarManager.isTabBarVisible.toggle()
-                            timeTimerViewModel.isStudying.toggle()
-                            timeTimerViewModel.pomodoroTimerModel = nil
+                            tabBarManager.isTabBarVisible = true
+                            pomodoroTimerViewModel.isStudying = false
+                            timeTimerViewModel.pomodoroTimerViewModel = nil
                         }
                     },
                     backgroundColor: .white.opacity(0.4),

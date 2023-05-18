@@ -28,11 +28,14 @@ class TimeTimerViewModel: ObservableObject {
     @Published var isDark: Bool = false
     @Published var isLoading: Bool = false
     @Published var timerCardViews: [AnyView] = []
-    @Published var isStudying: Bool = false
     @Published var isShowingClockModal = false
     @Published var focusTimerModel: FocusTimerModel? = nil
     @Published var pomodoroTimerModel: PomodoroTimerModel? = nil
     @Published var examTimerModel: ExamTimerModel? = nil
+    
+    @Published var focusTimerViewModel: FocusTimerViewModel?
+    @Published var pomodoroTimerViewModel: PomodoroTimerViewModel?
+    @Published var examTimerViewModel: ExamTimerViewModel?
 
     // Service objects
     private let timerRemoteService = Container.shared.resolve(TimerRemoteServiceProtocol.self)
@@ -47,6 +50,7 @@ class TimeTimerViewModel: ObservableObject {
     private var cancellables: Set<AnyCancellable> = []
 
     init() {
+        debugPrint("TimeTimerViewModel init")
         let now = Date()
         let currentTime = UserDefaults.standard.double(forKey: studyStartTimeKey)
         let startTime = Date(timeIntervalSince1970: currentTime)
@@ -57,8 +61,18 @@ class TimeTimerViewModel: ObservableObject {
             self.timerModels = timerModels
             self.timerCardViews = self.timerModels.map { self.viewFor(timer: $0) }
         }
-        observeIsStudyingChanges()
+//        observeIsStudyingChanges()
         calculateElapsedTime()
+        
+        if let focusTimerModel = self.focusTimerModel {
+            self.focusTimerViewModel = FocusTimerViewModel(model: focusTimerModel)
+        }
+        if let pomodoroTimerModel = self.pomodoroTimerModel {
+            self.pomodoroTimerViewModel = PomodoroTimerViewModel(model: pomodoroTimerModel)
+        }
+        if let examTimerViewModel = self.examTimerModel {
+            self.examTimerViewModel = ExamTimerViewModel(model: examTimerViewModel)
+        }
     }
 
     // MARK: - Sensor setup
@@ -74,8 +88,7 @@ class TimeTimerViewModel: ObservableObject {
         case let focusTimer as FocusTimerModel:
             let viewModel = FocusTimerViewModel(model: focusTimer)
             return AnyView(
-                FocusTimerCardView()
-                    .environmentObject(viewModel)
+                FocusTimerCardView(focusTimerViewModel: viewModel, timeTimerViewModel: self)
             )
         case let pomodoroTimer as PomodoroTimerModel:
             let viewModel = PomodoroTimerViewModel(model: pomodoroTimer)
@@ -95,13 +108,13 @@ class TimeTimerViewModel: ObservableObject {
     }
 
     // MARK: - Study Session Management
-    private func observeIsStudyingChanges() {
-        $isStudying
-            .sink { [weak self] isStudying in
-                isStudying ? self?.startStudySession() : self?.stopAndSaveStudySessionIfNeeded()
-            }
-            .store(in: &cancellables)
-    }
+//    private func observeIsStudyingChanges() {
+//        $isStudying
+//            .sink { [weak self] isStudying in
+//                isStudying ? self?.startStudySession() : self?.stopAndSaveStudySessionIfNeeded()
+//            }
+//            .store(in: &cancellables)
+//    }
 
     func calculateElapsedTime() {
         guard let startTime = UserDefaults.standard.object(forKey: studyStartTimeKey) as? Date else { return }
@@ -197,10 +210,6 @@ class TimeTimerViewModel: ObservableObject {
     
     func playVibration() {
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
-    }
-    
-    func elapsedTimeToString() -> String {
-        return TimeUtils.elapsedTimeToString(elapsedTime: elapsedTime)
     }
     
     func angleForTime(date: Date) -> Double {

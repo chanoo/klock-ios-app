@@ -46,7 +46,7 @@ struct ExamTimerCardView: View {
 
             VStack {
                 
-                Text(timeTimerViewModel.elapsedTimeToString())
+                Text(examTimerViewModel.elapsedTimeToString())
                     .font(.largeTitle)
                     .padding()
                     .background(.white.opacity(0.5))
@@ -58,8 +58,8 @@ struct ExamTimerCardView: View {
                     startTime: Date(),
                     elapsedTime: $examTimerViewModel.elapsedTime,
                     studySessions: .constant([]),
-                    isStudying: $timeTimerViewModel.isStudying,
-                    isRunning: true,
+                    isStudying: $examTimerViewModel.isStudying,
+                    isRunning: false,
                     clockModel: ClockModel(
                         hourHandImageName: "img_watch_hand_hour",
                         minuteHandImageName: "img_watch_hand_min",
@@ -83,10 +83,10 @@ struct ExamTimerCardView: View {
                     title: "공부 시작",
                     action: {
                         withAnimation {
+                            tabBarManager.isTabBarVisible = false
+                            examTimerViewModel.isStudying = true
                             timeTimerViewModel.startStudySession()
-                            timeTimerViewModel.examTimerModel = examTimerViewModel.model
-                            timeTimerViewModel.isStudying.toggle()
-                            tabBarManager.isTabBarVisible.toggle()
+                            timeTimerViewModel.examTimerViewModel = examTimerViewModel
                         }
                     },
                     backgroundColor: .white.opacity(0.4),

@@ -38,7 +38,7 @@ struct ExamTimerView: View {
             
             VStack {
                 
-                Text(timeTimerViewModel.elapsedTimeToString())
+                Text(examTimerViewModel.elapsedTimeToString())
                     .font(.largeTitle)
                     .padding()
                     .background(.white.opacity(0.5))
@@ -50,7 +50,7 @@ struct ExamTimerView: View {
                     startTime: Date(),
                     elapsedTime: $examTimerViewModel.elapsedTime,
                     studySessions: .constant([]),
-                    isStudying: $timeTimerViewModel.isStudying,
+                    isStudying: $examTimerViewModel.isStudying,
                     isRunning: true,
                     clockModel: ClockModel(
                         hourHandImageName: "img_watch_hand_hour",
@@ -75,9 +75,9 @@ struct ExamTimerView: View {
                     title: "잠시 멈춤",
                     action: {
                         withAnimation {
-                            tabBarManager.isTabBarVisible.toggle()
-                            timeTimerViewModel.isStudying.toggle()
-                            timeTimerViewModel.examTimerModel = nil
+                            tabBarManager.isTabBarVisible = true
+                            examTimerViewModel.isStudying = false
+                            timeTimerViewModel.examTimerViewModel = nil
                         }
                     },
                     backgroundColor: .white.opacity(0.4),

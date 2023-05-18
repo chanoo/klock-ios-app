@@ -11,6 +11,7 @@ import Combine
 class PomodoroTimerViewModel: ObservableObject {
     
     @Published var elapsedTime: TimeInterval = 0
+    @Published var isStudying: Bool = false
 
     var model: PomodoroTimerModel
     

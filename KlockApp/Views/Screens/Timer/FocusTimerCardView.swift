@@ -9,8 +9,8 @@ import SwiftUI
 
 struct FocusTimerCardView: View {
     
-    @EnvironmentObject var focusTimerViewModel: FocusTimerViewModel
-    @EnvironmentObject var timeTimerViewModel: TimeTimerViewModel
+    @ObservedObject var focusTimerViewModel: FocusTimerViewModel
+    @ObservedObject var timeTimerViewModel: TimeTimerViewModel
     @EnvironmentObject var tabBarManager: TabBarManager
 
     @State private var isFlipped: Bool = false
@@ -56,7 +56,7 @@ struct FocusTimerCardView: View {
             
             VStack {
                 
-                Text(timeTimerViewModel.elapsedTimeToString())
+                Text(focusTimerViewModel.elapsedTimeToString())
                     .font(.largeTitle)
                     .padding()
                     .background(.white.opacity(0.5))
@@ -68,8 +68,8 @@ struct FocusTimerCardView: View {
                     startTime: Date(),
                     elapsedTime: $focusTimerViewModel.elapsedTime,
                     studySessions: .constant([]),
-                    isStudying: $timeTimerViewModel.isStudying,
-                    isRunning: true,
+                    isStudying: $focusTimerViewModel.isStudying,
+                    isRunning: false,
                     clockModel: ClockModel(
                         hourHandImageName: "img_watch_hand_hour",
                         minuteHandImageName: "img_watch_hand_min",
@@ -93,10 +93,10 @@ struct FocusTimerCardView: View {
                     title: "공부 시작",
                     action: {
                         withAnimation {
-                            timeTimerViewModel.isStudying.toggle()
-                            tabBarManager.isTabBarVisible.toggle()
+                            tabBarManager.isTabBarVisible = false
+                            focusTimerViewModel.isStudying = true
                             timeTimerViewModel.startStudySession()
-                            timeTimerViewModel.focusTimerModel = focusTimerViewModel.model
+                            timeTimerViewModel.focusTimerViewModel = focusTimerViewModel
                         }
                     },
                     backgroundColor: .white.opacity(0.4),
@@ -164,7 +164,6 @@ struct FocusTimerCardView_Previews: PreviewProvider {
         let model = FocusTimerModel(id: 1, userId: 1, seq: 1, type: "FOCUS", name: "집중시간 타이머")
         let viewModel = FocusTimerViewModel(model: model)
         
-        FocusTimerCardView()
-            .environmentObject(viewModel)
+//        FocusTimerCardView(focusTimerViewModel: viewModel)
     }
 }

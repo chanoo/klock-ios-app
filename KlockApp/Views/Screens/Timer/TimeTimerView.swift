@@ -36,22 +36,19 @@ struct TimeTimerView: View {
                 
                 // FocusTimerView, PomodoroTimerView, ExamTimerView에 대한 조건문입니다.
                 // 해당 타이머 모델이 nil이 아니라면 해당 타이머 뷰를 표시합니다.
-                if let model = viewModel.focusTimerModel {
-                    let focusTimerViewModel = FocusTimerViewModel(model: model)
+                if let focusTimerViewModel = viewModel.focusTimerViewModel {
                     FocusTimerView()
                         .environmentObject(focusTimerViewModel)
                         .defaultTimerViewSettings(geometry: geometry, animation: viewModel.animation)
                 }
                 
-                if let model = viewModel.pomodoroTimerModel {
-                    let pomodoroTimerViewModel = PomodoroTimerViewModel(model: model)
+                if let pomodoroTimerViewModel = viewModel.pomodoroTimerViewModel {
                     PomodoroTimerView()
                         .environmentObject(pomodoroTimerViewModel)
                         .defaultTimerViewSettings(geometry: geometry, animation: viewModel.animation)
                 }
-
-                if let model = viewModel.examTimerModel {
-                    let examTimerViewModel = ExamTimerViewModel(model: model)
+                
+                if let examTimerViewModel = viewModel.examTimerViewModel {
                     ExamTimerView()
                         .environmentObject(examTimerViewModel)
                         .defaultTimerViewSettings(geometry: geometry, animation: viewModel.animation)
@@ -138,3 +135,4 @@ struct TimeTimerView_Previews: PreviewProvider {
             .environmentObject(Container.shared.resolve(TimeTimerViewModel.self))
     }
 }
+
