@@ -18,7 +18,6 @@ struct FocusTimerView: View {
             frontView(geometry: geometry)
         }
         .background(FancyColor.background.color)
-        .cornerRadius(10)
         .shadow(color: Color(.systemGray).opacity(0.2), radius: 5, x: 0, y: 0)
     }
     
@@ -42,7 +41,7 @@ struct FocusTimerView: View {
                     startTime: Date(),
                     elapsedTime: $focusTimerViewModel.elapsedTime,
                     studySessions: .constant([]),
-                    isStudying: $focusTimerViewModel.isStudying,
+                    isStudying: $timeTimerViewModel.isStudying,
                     isRunning: true,
                     clockModel: ClockModel(
                         hourHandImageName: "img_watch_hand_hour",
@@ -67,21 +66,20 @@ struct FocusTimerView: View {
                     title: "잠시 멈춤",
                     action: {
                         withAnimation {
-                            $timeTimerViewModel.focusTimerModel.wrappedValue = nil
                             tabBarManager.isTabBarVisible.toggle()
-                            focusTimerViewModel.isStudying.toggle()
+                            timeTimerViewModel.isStudying.toggle()
                             timeTimerViewModel.startStudySession()
+                            timeTimerViewModel.focusTimerModel = nil
                         }
                     },
-                    backgroundColor: .white.opacity(0.6),
-                    foregroundColor: .gray,
+                    backgroundColor: .white.opacity(0.4),
+                    foregroundColor: .pink.opacity(0.5),
                     isBlock: false
                 )
             }
 
         }
         .background(FancyColor.background.color)
-        .matchedGeometryEffect(id: "FocusTimerView", in: timeTimerViewModel.animation)
         .frame(width: geometry.size.width, height: geometry.size.height)
     }
 }

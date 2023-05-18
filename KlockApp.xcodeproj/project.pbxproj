@@ -10,9 +10,8 @@
 		980C623629EE760100D0A7B5 /* FancyTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980C623529EE760100D0A7B5 /* FancyTabView.swift */; };
 		980CD5492A09485F00B203AC /* AlamofireLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980CD5482A09485F00B203AC /* AlamofireLogger.swift */; };
 		981881C229F26879002A4395 /* SelectTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981881C129F26879002A4395 /* SelectTimerView.swift */; };
-		981881C429F26EF9002A4395 /* FocusTimerView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981881C329F26EF9002A4395 /* FocusTimerView2.swift */; };
 		981881C629F26F00002A4395 /* PomodoroTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981881C529F26F00002A4395 /* PomodoroTimerView.swift */; };
-		981881C829F26F07002A4395 /* ExamTimeTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981881C729F26F07002A4395 /* ExamTimeTimerView.swift */; };
+		981881C829F26F07002A4395 /* ExamTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981881C729F26F07002A4395 /* ExamTimerView.swift */; };
 		981881CA29F27316002A4395 /* PageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981881C929F27316002A4395 /* PageControl.swift */; };
 		981881CD29F3847A002A4395 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 981881CC29F3847A002A4395 /* Lottie */; };
 		981881CF29F386A4002A4395 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981881CE29F386A4002A4395 /* LottieView.swift */; };
@@ -93,6 +92,10 @@
 		98AC30712A136198006DC48D /* FocusTimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AC30702A136198006DC48D /* FocusTimerViewModel.swift */; };
 		98AC30732A13637C006DC48D /* FocusTimerCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AC30722A13637C006DC48D /* FocusTimerCardView.swift */; };
 		98AC30752A1363A3006DC48D /* FocusTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AC30742A1363A3006DC48D /* FocusTimerView.swift */; };
+		98AC30812A15CABB006DC48D /* PomodoroTimerCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AC30802A15CABB006DC48D /* PomodoroTimerCardView.swift */; };
+		98AC30832A15CB77006DC48D /* PomodoroTimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AC30822A15CB77006DC48D /* PomodoroTimerViewModel.swift */; };
+		98AC30852A15CBA8006DC48D /* ExamTimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AC30842A15CBA8006DC48D /* ExamTimerViewModel.swift */; };
+		98AC30872A15CCA9006DC48D /* ExamTimerCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AC30862A15CCA9006DC48D /* ExamTimerCardView.swift */; };
 		98AC75C42A094D5600EE95D4 /* TimerRemoteServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AC75C32A094D5600EE95D4 /* TimerRemoteServiceTests.swift */; };
 		98B21B1829D55DE0004EFE0E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 98B21B1729D55DE0004EFE0E /* README.md */; };
 		98B21B1B29D55F6C004EFE0E /* AuthenticationRemoteServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B1A29D55F6C004EFE0E /* AuthenticationRemoteServiceProtocol.swift */; };
@@ -182,9 +185,8 @@
 		980C623529EE760100D0A7B5 /* FancyTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyTabView.swift; sourceTree = "<group>"; };
 		980CD5482A09485F00B203AC /* AlamofireLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireLogger.swift; sourceTree = "<group>"; };
 		981881C129F26879002A4395 /* SelectTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTimerView.swift; sourceTree = "<group>"; };
-		981881C329F26EF9002A4395 /* FocusTimerView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTimerView2.swift; sourceTree = "<group>"; };
 		981881C529F26F00002A4395 /* PomodoroTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroTimerView.swift; sourceTree = "<group>"; };
-		981881C729F26F07002A4395 /* ExamTimeTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamTimeTimerView.swift; sourceTree = "<group>"; };
+		981881C729F26F07002A4395 /* ExamTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamTimerView.swift; sourceTree = "<group>"; };
 		981881C929F27316002A4395 /* PageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageControl.swift; sourceTree = "<group>"; };
 		981881CE29F386A4002A4395 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		981881D629F426FC002A4395 /* lottie-plus.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "lottie-plus.json"; sourceTree = "<group>"; };
@@ -271,6 +273,10 @@
 		98AC30702A136198006DC48D /* FocusTimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTimerViewModel.swift; sourceTree = "<group>"; };
 		98AC30722A13637C006DC48D /* FocusTimerCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTimerCardView.swift; sourceTree = "<group>"; };
 		98AC30742A1363A3006DC48D /* FocusTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTimerView.swift; sourceTree = "<group>"; };
+		98AC30802A15CABB006DC48D /* PomodoroTimerCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroTimerCardView.swift; sourceTree = "<group>"; };
+		98AC30822A15CB77006DC48D /* PomodoroTimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroTimerViewModel.swift; sourceTree = "<group>"; };
+		98AC30842A15CBA8006DC48D /* ExamTimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamTimerViewModel.swift; sourceTree = "<group>"; };
+		98AC30862A15CCA9006DC48D /* ExamTimerCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamTimerCardView.swift; sourceTree = "<group>"; };
 		98AC75C32A094D5600EE95D4 /* TimerRemoteServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerRemoteServiceTests.swift; sourceTree = "<group>"; };
 		98B21B1729D55DE0004EFE0E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		98B21B1A29D55F6C004EFE0E /* AuthenticationRemoteServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationRemoteServiceProtocol.swift; sourceTree = "<group>"; };
@@ -620,6 +626,8 @@
 				986E5DB129EAEF5600FF7047 /* CalendarViewModel.swift */,
 				98E9386029EA5871009CBF32 /* TimeTimerViewModel.swift */,
 				98AC30702A136198006DC48D /* FocusTimerViewModel.swift */,
+				98AC30822A15CB77006DC48D /* PomodoroTimerViewModel.swift */,
+				98AC30842A15CBA8006DC48D /* ExamTimerViewModel.swift */,
 				985BE88329E652CE008582A3 /* README.md */,
 			);
 			path = ViewModels;
@@ -753,11 +761,12 @@
 			children = (
 				985BE88B29E6DC35008582A3 /* TimeTimerView.swift */,
 				981881C129F26879002A4395 /* SelectTimerView.swift */,
-				981881C329F26EF9002A4395 /* FocusTimerView2.swift */,
-				98AC30742A1363A3006DC48D /* FocusTimerView.swift */,
 				98AC30722A13637C006DC48D /* FocusTimerCardView.swift */,
+				98AC30742A1363A3006DC48D /* FocusTimerView.swift */,
+				98AC30802A15CABB006DC48D /* PomodoroTimerCardView.swift */,
 				981881C529F26F00002A4395 /* PomodoroTimerView.swift */,
-				981881C729F26F07002A4395 /* ExamTimeTimerView.swift */,
+				98AC30862A15CCA9006DC48D /* ExamTimerCardView.swift */,
+				981881C729F26F07002A4395 /* ExamTimerView.swift */,
 			);
 			path = Timer;
 			sourceTree = "<group>";
@@ -1007,7 +1016,6 @@
 				985BE8B229E7D510008582A3 /* ChatBotListView.swift in Sources */,
 				98AC306D2A134D23006DC48D /* TabBarManager.swift in Sources */,
 				98B21B3A29D5EBC3004EFE0E /* AppDelegate.swift in Sources */,
-				981881C429F26EF9002A4395 /* FocusTimerView2.swift in Sources */,
 				985BE8A029E6E836008582A3 /* ChatBotViewModel.swift in Sources */,
 				984D2C8029DFB197008D3EA9 /* FlowLayout.swift in Sources */,
 				98D7C95729E510990075D201 /* ContentViewModel.swift in Sources */,
@@ -1046,6 +1054,8 @@
 				983B59E529FB9FD800F0EACD /* ChatBotLocalServiceProtocol.swift in Sources */,
 				98976AFD2A00ED0200F1CEAE /* TimerRemoteService.swift in Sources */,
 				98D7C94F29E332790075D201 /* APIErrorModel.swift in Sources */,
+				98AC30852A15CBA8006DC48D /* ExamTimerViewModel.swift in Sources */,
+				98AC30812A15CABB006DC48D /* PomodoroTimerCardView.swift in Sources */,
 				98B21B4F29D6F3E1004EFE0E /* AccountTagModel.swift in Sources */,
 				986E5DB429EAEF9200FF7047 /* CalendarView.swift in Sources */,
 				981881CF29F386A4002A4395 /* LottieView.swift in Sources */,
@@ -1065,7 +1075,8 @@
 				983B59DF29FB7B1E00F0EACD /* AccountEntity.swift in Sources */,
 				98EBFBEA29F968FF004E95F3 /* TaskViewModel.swift in Sources */,
 				98976AFB2A00EC4800F1CEAE /* TimerRemoteServiceProtocol.swift in Sources */,
-				981881C829F26F07002A4395 /* ExamTimeTimerView.swift in Sources */,
+				98AC30872A15CCA9006DC48D /* ExamTimerCardView.swift in Sources */,
+				981881C829F26F07002A4395 /* ExamTimerView.swift in Sources */,
 				985BE89429E6E0DB008582A3 /* FriendsView.swift in Sources */,
 				98E9385029EA39A8009CBF32 /* ChatGPTServiceDTO.swift in Sources */,
 				987E543A29D552520007E156 /* KlockAppApp.swift in Sources */,
@@ -1078,6 +1089,7 @@
 				98AC30732A13637C006DC48D /* FocusTimerCardView.swift in Sources */,
 				98D7C95129E45C550075D201 /* ContentView.swift in Sources */,
 				986E5DB229EAEF5600FF7047 /* CalendarViewModel.swift in Sources */,
+				98AC30832A15CB77006DC48D /* PomodoroTimerViewModel.swift in Sources */,
 				985BE89A29E6E579008582A3 /* FriendsViewModel.swift in Sources */,
 				98AC30712A136198006DC48D /* FocusTimerViewModel.swift in Sources */,
 				984D2C8229DFC2B3008D3EA9 /* AppState.swift in Sources */,

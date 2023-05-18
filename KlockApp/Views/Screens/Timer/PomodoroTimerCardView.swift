@@ -1,20 +1,20 @@
 //
-//  FocusTimerCardView.swift
+//  PomodoroTimerCardView.swift
 //  KlockApp
 //
-//  Created by 성찬우 on 2023/05/16.
+//  Created by 성찬우 on 2023/05/18.
 //
 
 import SwiftUI
 
-struct FocusTimerCardView: View {
+struct PomodoroTimerCardView: View {
     
-    @EnvironmentObject var focusTimerViewModel: FocusTimerViewModel
+    @EnvironmentObject var pomodoroTimerViewModel: PomodoroTimerViewModel
     @EnvironmentObject var timeTimerViewModel: TimeTimerViewModel
     @EnvironmentObject var tabBarManager: TabBarManager
-
+    
     @State private var isFlipped: Bool = false
-
+    
     private func flipAnimation() {
         withAnimation(.spring()) {
             isFlipped.toggle()
@@ -54,7 +54,7 @@ struct FocusTimerCardView: View {
                 AnalogClockView(
                     currentTime: Date(),
                     startTime: Date(),
-                    elapsedTime: $focusTimerViewModel.elapsedTime,
+                    elapsedTime: $pomodoroTimerViewModel.elapsedTime,
                     studySessions: .constant([]),
                     isStudying: $timeTimerViewModel.isStudying,
                     isRunning: true,
@@ -66,7 +66,7 @@ struct FocusTimerCardView: View {
                         clockSize: CGSize(width: 300, height: 300),
                         hourHandColor: .black,
                         minuteHandColor: .black,
-                        secondHandColor: .pink,
+                        secondHandColor: .cyan,
                         outlineInColor: .white,
                         outlineOutColor: .white
                     ),
@@ -81,9 +81,9 @@ struct FocusTimerCardView: View {
                     title: "공부 시작",
                     action: {
                         withAnimation {
+                            timeTimerViewModel.pomodoroTimerModel = pomodoroTimerViewModel.model
                             timeTimerViewModel.isStudying.toggle()
                             tabBarManager.isTabBarVisible.toggle()
-                            timeTimerViewModel.focusTimerModel = focusTimerViewModel.model
                         }
                     },
                     backgroundColor: .white.opacity(0.4),
@@ -105,44 +105,76 @@ struct FocusTimerCardView: View {
             .position(x: geometry.size.width / 2, y: 16)
         }
         .background(FancyColor.background.color)
-        .matchedGeometryEffect(id: "TimerView", in: timeTimerViewModel.animation)
         .frame(width: geometry.size.width, height: geometry.size.height)
     }
 
     private func backView(geometry: GeometryProxy) -> some View {
         VStack {
             List {
-                Section(header: Text("공부시간 설정")) {
+                Section(header: Text("뽀모도로 설정")) {
                     VStack(alignment: .leading) {
                         Text("공부")
                             .font(.headline)
                             .foregroundColor(.gray)
-                        TextField("어떤 공부를 할건가요?", text: $focusTimerViewModel.model.name)
+                        TextField("어떤 공부를 할건가요?", text: $pomodoroTimerViewModel.model.name)
+                    }
+
+                    VStack(alignment: .leading) {
+                        Text("공부 시간")
+                            .font(.headline)
+                            .foregroundColor(.gray)
+                        Stepper(value: $pomodoroTimerViewModel.model.focusTime, in: 5...60, step: 5) {
+                            Text("\(pomodoroTimerViewModel.model.focusTime)분")
+                        }
+                    }
+                    
+                    VStack(alignment: .leading) {
+                        Text("쉬는 시간")
+                            .font(.headline)
+                            .foregroundColor(.gray)
+                        Stepper(value: $pomodoroTimerViewModel.model.restTime, in: 5...60, step: 5) {
+                            Text("\(pomodoroTimerViewModel.model.restTime)분")
+                        }
+                    }
+                    
+                    VStack(alignment: .leading) {
+                        Text("반복 횟수")
+                            .font(.headline)
+                            .foregroundColor(.gray)
+                        Stepper(value: $pomodoroTimerViewModel.model.cycleCount, in: 1...10) {
+                            Text("\(pomodoroTimerViewModel.model.cycleCount)회")
+                        }
                     }
                 }
-
+                
                 Section {
                     Button(action: {
-                        flipAnimation()
+                        // Save settings
+                        withAnimation(.spring()) {
+                            isFlipped.toggle()
+                        }
                     }) {
                         Text("저장")
                             .frame(maxWidth: .infinity, alignment: .center)
                     }
                 }
-
+                
                 Section {
                     Button(action: {
-                        flipAnimation()
+                        withAnimation(.spring()) {
+                            isFlipped.toggle()
+                        }
                     }) {
                         Text("취소")
                             .frame(maxWidth: .infinity, alignment: .center)
                     }
                 }
-
+                
                 Section {
                     Button(action: {
-                        flipAnimation()
-//                        viewModel.delete(model: viewModel.model)
+                        withAnimation(.spring()) {
+                            flipAnimation()
+                        }
                     }) {
                         Text("삭제")
                             .frame(maxWidth: .infinity, alignment: .center)
@@ -150,20 +182,14 @@ struct FocusTimerCardView: View {
                     }
                 }
             }
+    //                .listStyle(GroupedListStyle())
             .clearListBackground()
         }
-        .background(FancyColor.background.color)
-        .cornerRadius(10)
-        .shadow(color: Color(.systemGray).opacity(0.2), radius: 5, x: 0, y: 0)
     }
 }
 
-struct FocusTimerCardView_Previews: PreviewProvider {
-    static var previews: some View {
-        let model = FocusTimerModel(id: 1, userId: 1, seq: 1, type: "focus", name: "집중시간 타이머")
-        let viewModel = FocusTimerViewModel(model: model)
-        
-        FocusTimerCardView()
-            .environmentObject(viewModel)
-    }
-}
+//struct PomodoroTimerView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        PomodoroTimerView()
+//    }
+//}

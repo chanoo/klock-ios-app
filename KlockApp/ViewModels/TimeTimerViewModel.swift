@@ -31,6 +31,8 @@ class TimeTimerViewModel: ObservableObject {
     @Published var isStudying: Bool = false
     @Published var isShowingClockModal = false
     @Published var focusTimerModel: FocusTimerModel? = nil
+    @Published var pomodoroTimerModel: PomodoroTimerModel? = nil
+    @Published var examTimerModel: ExamTimerModel? = nil
 
     // Service objects
     private let timerRemoteService = Container.shared.resolve(TimerRemoteServiceProtocol.self)
@@ -70,12 +72,23 @@ class TimeTimerViewModel: ObservableObject {
     func viewFor(timer: TimerModel) -> AnyView {
         switch timer {
         case let focusTimer as FocusTimerModel:
-            let focusTimerViewModel = FocusTimerViewModel(model: focusTimer)
-            return AnyView(FocusTimerCardView().environmentObject(focusTimerViewModel))
+            let viewModel = FocusTimerViewModel(model: focusTimer)
+            return AnyView(
+                FocusTimerCardView()
+                    .environmentObject(viewModel)
+            )
         case let pomodoroTimer as PomodoroTimerModel:
-            return AnyView(PomodoroTimerView(model: pomodoroTimer))
+            let viewModel = PomodoroTimerViewModel(model: pomodoroTimer)
+            return AnyView(
+                PomodoroTimerCardView()
+                    .environmentObject(viewModel)
+            )
         case let examTimer as ExamTimerModel:
-            return AnyView(ExamTimeTimerView(model: examTimer))
+            let viewModel = ExamTimerViewModel(model: examTimer)
+            return AnyView(
+                ExamTimerCardView()
+                    .environmentObject(viewModel)
+            )
         default:
             return AnyView(EmptyView())
         }

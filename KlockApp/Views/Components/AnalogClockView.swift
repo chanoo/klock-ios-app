@@ -25,6 +25,7 @@ struct AnalogClockView: View {
     var body: some View {
         VStack {
             Circle()
+                .foregroundColor(.clear)
                 .frame(
                     width: clockModel.clockSize.width,
                     height: clockModel.clockSize.height

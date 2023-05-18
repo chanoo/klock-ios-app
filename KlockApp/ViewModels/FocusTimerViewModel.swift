@@ -11,7 +11,6 @@ import Combine
 class FocusTimerViewModel: ObservableObject {
     
     @Published var elapsedTime: TimeInterval = 0
-    @Published var isStudying: Bool = false
 
     var model: FocusTimerModel
     

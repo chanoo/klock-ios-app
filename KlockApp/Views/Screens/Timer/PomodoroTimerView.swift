@@ -6,139 +6,88 @@
 //
 
 import SwiftUI
-import Foast
-
 struct PomodoroTimerView: View {
-    @ObservedObject var model: PomodoroTimerModel
-    @EnvironmentObject var viewModel: TimeTimerViewModel
-    
-    @State private var isFlipped: Bool = false
-    
-    private func flipAnimation() {
-        withAnimation(.spring()) {
-            isFlipped.toggle()
-        }
-    }
+
+    @EnvironmentObject var pomodoroTimerViewModel: PomodoroTimerViewModel
+    @EnvironmentObject var timeTimerViewModel: TimeTimerViewModel
+    @EnvironmentObject var tabBarManager: TabBarManager
     
     var body: some View {
         GeometryReader { geometry in
             frontView(geometry: geometry)
-                .rotation3DEffect(.degrees(isFlipped ? 180 : 0), axis: (x: 0.0, y: 1.0, z: 0.0))
-                .opacity(isFlipped ? 0 : 1)
-            
-            backView(geometry: geometry)
-                .rotation3DEffect(.degrees(isFlipped ? 0 : 180), axis: (x: 0.0, y: 1.0, z: 0.0))
-                .opacity(isFlipped ? 1 : 0)
         }
         .background(FancyColor.background.color)
-        .cornerRadius(10)
         .shadow(color: Color(.systemGray).opacity(0.2), radius: 5, x: 0, y: 0)
     }
     
     private func frontView(geometry: GeometryProxy) -> some View {
-        VStack {
-            HStack {
-                Spacer()
-                Button(action: {
-                    withAnimation(.spring()) {
-                        isFlipped.toggle()
-                    }
-                }) {
-                    Image(systemName: "gearshape")
-                        .resizable()
-                        .frame(width: 20, height: 20)
-                        .padding(24)
-                }
-            }
-            Spacer()
-            Text("뽀모도로 타이머")
-            Spacer()
-        }
-    }
-    
-    private func backView(geometry: GeometryProxy) -> some View {
-        VStack {
-            List {
-                Section(header: Text("뽀모도로 설정")) {
-                    VStack(alignment: .leading) {
-                        Text("공부")
-                            .font(.headline)
-                            .foregroundColor(.gray)
-                        TextField("어떤 공부를 할건가요?", text: $model.name)
-                    }
+        ZStack {
+            Image("img_watch_background3")
+                .aspectRatio(contentMode: .fill)
+                .edgesIgnoringSafeArea(.all)
+            
+            VStack {
+                
+                Text(pomodoroTimerViewModel.elapsedTimeToString())
+                    .font(.largeTitle)
+                    .padding()
+                    .background(.white.opacity(0.5))
+                    .foregroundColor(.gray.opacity(0.8))
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
 
-                    VStack(alignment: .leading) {
-                        Text("공부 시간")
-                            .font(.headline)
-                            .foregroundColor(.gray)
-                        Stepper(value: $model.focusTime, in: 5...60, step: 5) {
-                            Text("\(model.focusTime)분")
+                AnalogClockView(
+                    currentTime: Date(),
+                    startTime: Date(),
+                    elapsedTime: $pomodoroTimerViewModel.elapsedTime,
+                    studySessions: .constant([]),
+                    isStudying: $timeTimerViewModel.isStudying,
+                    isRunning: true,
+                    clockModel: ClockModel(
+                        hourHandImageName: "img_watch_hand_hour",
+                        minuteHandImageName: "img_watch_hand_min",
+                        secondHandImageName: "img_watch_hand_sec",
+                        clockBackgroundImageName: "img_watch_face1",
+                        clockSize: CGSize(width: 300, height: 300),
+                        hourHandColor: .black,
+                        minuteHandColor: .black,
+                        secondHandColor: .cyan,
+                        outlineInColor: .white,
+                        outlineOutColor: .white
+                    ),
+                    hour: 10,
+                    minute: 20,
+                    second: 35
+                )
+                .padding(.top, 20)
+                .padding(.bottom, 20)
+
+                FancyButton(
+                    title: "잠시 멈춤",
+                    action: {
+                        withAnimation {
+                            tabBarManager.isTabBarVisible.toggle()
+                            timeTimerViewModel.isStudying.toggle()
+                            timeTimerViewModel.startStudySession()
+                            timeTimerViewModel.pomodoroTimerModel = nil
                         }
-                    }
-                    
-                    VStack(alignment: .leading) {
-                        Text("쉬는 시간")
-                            .font(.headline)
-                            .foregroundColor(.gray)
-                        Stepper(value: $model.restTime, in: 5...60, step: 5) {
-                            Text("\(model.restTime)분")
-                        }
-                    }
-                    
-                    VStack(alignment: .leading) {
-                        Text("반복 횟수")
-                            .font(.headline)
-                            .foregroundColor(.gray)
-                        Stepper(value: $model.cycleCount, in: 1...10) {
-                            Text("\(model.cycleCount)회")
-                        }
-                    }
-                }
-                
-                Section {
-                    Button(action: {
-                        // Save settings
-                        withAnimation(.spring()) {
-                            isFlipped.toggle()
-                        }
-                    }) {
-                        Text("저장")
-                            .frame(maxWidth: .infinity, alignment: .center)
-                    }
-                }
-                
-                Section {
-                    Button(action: {
-                        withAnimation(.spring()) {
-                            isFlipped.toggle()
-                        }
-                    }) {
-                        Text("취소")
-                            .frame(maxWidth: .infinity, alignment: .center)
-                    }
-                }
-                
-                Section {
-                    Button(action: {
-                        withAnimation(.spring()) {
-                            flipAnimation()
-                            viewModel.delete(model: model)
-                        }
-                    }) {
-                        Text("삭제")
-                            .frame(maxWidth: .infinity, alignment: .center)
-                            .foregroundColor(FancyColor.secondary.color)
-                    }
-                }
+                    },
+                    backgroundColor: .white.opacity(0.4),
+                    foregroundColor: .pink.opacity(0.5),
+                    isBlock: false
+                )
             }
-    //                .listStyle(GroupedListStyle())
-            .clearListBackground()
+
         }
+        .background(FancyColor.background.color)
+        .frame(width: geometry.size.width, height: geometry.size.height)
     }
 }
 
-//struct PomodoroTimerView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        PomodoroTimerView()
-//    }
-//}
+struct PomodoroTimerView_Previews: PreviewProvider {
+    static var previews: some View {
+        let model = PomodoroTimerModel(id: 1, userId: 1, seq: 1, type: "pomodoro", name: "뽀모도로 타이머", focusTime: 25, restTime: 5, cycleCount: 4)
+        let viewModel = PomodoroTimerViewModel(model: model)
+        PomodoroTimerView()
+            .environmentObject(viewModel)
+    }
+}

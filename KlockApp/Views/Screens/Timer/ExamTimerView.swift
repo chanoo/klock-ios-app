@@ -1,5 +1,5 @@
 //
-//  ExamTimeTimerView.swift
+//  ExamTimerView.swift
 //  KlockApp
 //
 //  Created by 성찬우 on 2023/04/21.
@@ -8,10 +8,11 @@
 import SwiftUI
 import Foast
 
-struct ExamTimeTimerView: View {
-    @ObservedObject var model: ExamTimerModel
-    @EnvironmentObject var viewModel: TimeTimerViewModel
-    @Environment(\.presentationMode) var presentationMode
+struct ExamTimerView: View {
+    
+    @EnvironmentObject var examTimerViewModel: ExamTimerViewModel
+    @EnvironmentObject var timeTimerViewModel: TimeTimerViewModel
+    @EnvironmentObject var tabBarManager: TabBarManager
 
     @State private var isFlipped: Bool = false
     
@@ -60,33 +61,33 @@ struct ExamTimeTimerView: View {
                             Text("시험명")
                                 .font(.headline)
                                 .foregroundColor(.gray)
-                            TextField("시험명을 입력해요.", text: $model.name)
+                            TextField("시험명을 입력해요.", text: $examTimerViewModel.model.name)
                         }
                         
                         VStack(alignment: .leading) {
                             Text("시험 시간")
                                 .font(.headline)
                                 .foregroundColor(.gray)
-                            Stepper(value: $model.duration, in: 5...240, step: 5) {
-                                Text("\(model.duration)분")
+                            Stepper(value: $examTimerViewModel.model.duration, in: 5...240, step: 5) {
+                                Text("\($examTimerViewModel.model.duration.wrappedValue)분")
                             }
                         }
                         
-//                        VStack(alignment: .leading) {
-//                            Text("마킹 시간")
-//                                .font(.headline)
-//                                .foregroundColor(.gray)
-//                            Stepper(value: $model.markingTime, in: 0...60, step: 5) {
-//                                Text("\(model.markingTime)분")
-//                            }
-//                        }
+                        VStack(alignment: .leading) {
+                            Text("마킹 시간")
+                                .font(.headline)
+                                .foregroundColor(.gray)
+                            Stepper(value: $examTimerViewModel.model.markingTime, in: 0...60, step: 5) {
+                                Text("\($examTimerViewModel.model.markingTime.wrappedValue)분")
+                            }
+                        }
                         
                         VStack(alignment: .leading) {
                             Text("시험 문항수")
                                 .font(.headline)
                                 .foregroundColor(.gray)
-                            Stepper(value: $model.questionCount, in: 1...120) {
-                                Text("\(model.questionCount)개")
+                            Stepper(value: $examTimerViewModel.model.questionCount, in: 1...120) {
+                                Text("\($examTimerViewModel.model.questionCount.wrappedValue)개")
                             }
                         }
                     }
@@ -118,7 +119,6 @@ struct ExamTimeTimerView: View {
                         Button(action: {
                             withAnimation(.spring()) {
                                 flipAnimation()
-                                viewModel.delete(model: model)
                             }
                         }) {
                             Text("삭제")
