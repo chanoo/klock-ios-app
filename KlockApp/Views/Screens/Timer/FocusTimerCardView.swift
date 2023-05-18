@@ -38,6 +38,18 @@ struct FocusTimerCardView: View {
     
     private func frontView(geometry: GeometryProxy) -> some View {
         ZStack {
+            
+            HStack {
+                Spacer()
+                Button(action: flipAnimation) {
+                    Image(systemName: "gearshape")
+                        .resizable()
+                        .frame(width: 20, height: 20)
+                }
+                .padding(.top, 16)
+                .padding(.trailing, 16)
+            }
+            
             Image("img_watch_background3")
                 .aspectRatio(contentMode: .fill)
                 .edgesIgnoringSafeArea(.all)
@@ -92,18 +104,6 @@ struct FocusTimerCardView: View {
                     isBlock: false
                 )
             }
-
-            HStack {
-                Spacer()
-                Button(action: flipAnimation) {
-                    Image(systemName: "gearshape")
-                        .resizable()
-                        .frame(width: 20, height: 20)
-                }
-                .padding(.top, 16)
-                .padding(.trailing, 16)
-            }
-            .position(x: geometry.size.width / 2, y: 16)
         }
         .background(FancyColor.background.color)
         .matchedGeometryEffect(id: "TimerView", in: timeTimerViewModel.animation)
@@ -161,7 +161,7 @@ struct FocusTimerCardView: View {
 
 struct FocusTimerCardView_Previews: PreviewProvider {
     static var previews: some View {
-        let model = FocusTimerModel(id: 1, userId: 1, seq: 1, type: "focus", name: "집중시간 타이머")
+        let model = FocusTimerModel(id: 1, userId: 1, seq: 1, type: "FOCUS", name: "집중시간 타이머")
         let viewModel = FocusTimerViewModel(model: model)
         
         FocusTimerCardView()

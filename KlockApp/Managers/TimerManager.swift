@@ -32,11 +32,11 @@ class TimerManager {
                 guard let self = self else { return }
                 self.timerModels = userTimers.compactMap { dto in
                     switch dto.type {
-                    case "focus":
+                    case "FOCUS":
                         return FocusTimerModel.from(dto: dto as! FocusTimerDTO)
-                    case "pomodoro":
+                    case "POMODORO":
                         return PomodoroTimerModel.from(dto: dto as! PomodoroTimerDTO)
-                    case "exam":
+                    case "EXAM":
                         return ExamTimerModel.from(dto: dto as! ExamTimerDTO)
                     default:
                         return nil
@@ -50,7 +50,7 @@ class TimerManager {
     // Add Timer related functions
     func deleteTimer(model: TimerModel, completion: @escaping (Bool) -> Void) {
         switch model.type {
-        case "focus":
+        case "FOCUS":
             self.focusTimerRemoteService.delete(id: model.id!)
                 .sink(receiveCompletion: { completion in
                     switch completion {
@@ -64,7 +64,7 @@ class TimerManager {
                 })
                 .store(in: &self.cancellables)
             break
-        case "pomodoro":
+        case "POMODORO":
             self.pomodoroTimerRemoteService.delete(id: model.id!)
                 .sink(receiveCompletion: { completion in
                     switch completion {
@@ -78,7 +78,7 @@ class TimerManager {
                 })
                 .store(in: &self.cancellables)
             break
-        case "exam":
+        case "EXAM":
             self.examTimerRemoteService.delete(id: model.id!)
                 .sink(receiveCompletion: { completion in
                     switch completion {
@@ -100,7 +100,7 @@ class TimerManager {
     func addTimer(type: String, completion: @escaping (TimerModel?) -> Void) {
         let seq = 1
         switch type {
-        case "focus":
+        case "FOCUS":
             let req = ReqFocusTimer(seq: seq, name: "Focus Timer")
             focusTimerRemoteService.create(data: req)
                 .sink(receiveCompletion: { completion in
@@ -115,8 +115,8 @@ class TimerManager {
                     completion(model)
                 })
                 .store(in: &cancellables)
-        case "pomodoro":
-            let req = ReqPomodoroTimer(seq: seq, name: "Pomodoro Timer", focusTime: 25, restTime: 5, cycleCount: 4)
+        case "POMODORO":
+            let req = ReqPomodoroTimer(seq: seq, name: "Pomodoro Timer", focusTime: 25, breakTime: 5, cycleCount: 4)
             pomodoroTimerRemoteService.create(data: req)
                 .sink(receiveCompletion: { completion in
                     switch completion {
@@ -130,8 +130,7 @@ class TimerManager {
                     completion(model)
                 })
                 .store(in: &cancellables)
-        case "exam":
-            
+        case "EXAM":
             let req = ReqExamTimer(seq: seq, name: "국어", startTime: "2023-01-01T01:08:40.000000", duration: 80, questionCount: 45)
             examTimerRemoteService.create(data: req)
                 .sink(receiveCompletion: { completion in

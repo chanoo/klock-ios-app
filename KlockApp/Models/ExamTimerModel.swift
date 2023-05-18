@@ -22,7 +22,7 @@ class ExamTimerModel: TimerModel {
     }
     
     static func toDTO(model: ExamTimerModel) -> ExamTimerDTO {
-        return ExamTimerDTO(id: model.id, userId: model.userId, seq: model.seq, type: model.type, name: model.name, startTime: model.startTime, duration: model.duration, questionCount: model.questionCount)
+        return ExamTimerDTO(id: model.id, userId: model.userId, seq: model.seq, type: model.type, name: model.name, startTime: model.startTime, duration: model.duration, questionCount: model.questionCount, markingTime: model.markingTime)
     }
     
     static func from(dto: ExamTimerDTO) -> ExamTimerModel {

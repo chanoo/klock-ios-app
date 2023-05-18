@@ -133,8 +133,8 @@ struct PomodoroTimerCardView: View {
                         Text("쉬는 시간")
                             .font(.headline)
                             .foregroundColor(.gray)
-                        Stepper(value: $pomodoroTimerViewModel.model.restTime, in: 5...60, step: 5) {
-                            Text("\(pomodoroTimerViewModel.model.restTime)분")
+                        Stepper(value: $pomodoroTimerViewModel.model.breakTime, in: 5...60, step: 5) {
+                            Text("\(pomodoroTimerViewModel.model.breakTime)분")
                         }
                     }
                     

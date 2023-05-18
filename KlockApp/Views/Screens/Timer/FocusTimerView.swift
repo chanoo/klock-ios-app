@@ -85,7 +85,7 @@ struct FocusTimerView: View {
 
 struct FocusTimerView_Previews: PreviewProvider {
     static var previews: some View {
-        let model = FocusTimerModel(id: 1, userId: 1, seq: 1, type: "focus", name: "집중시간 타이머")
+        let model = FocusTimerModel(id: 1, userId: 1, seq: 1, type: "FOCUS", name: "집중시간 타이머")
         let viewModel = FocusTimerViewModel(model: model)
         FocusTimerView()
             .environmentObject(viewModel)

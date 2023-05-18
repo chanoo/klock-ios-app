@@ -39,22 +39,11 @@ struct ExamTimerCardView: View {
     
     private func frontView(geometry: GeometryProxy) -> some View {
         ZStack {
+            
             Image("img_watch_background3")
                 .aspectRatio(contentMode: .fill)
                 .edgesIgnoringSafeArea(.all)
-            
-            HStack {
-                Spacer()
-                Button(action: flipAnimation) {
-                    Image(systemName: "gearshape")
-                        .resizable()
-                        .frame(width: 20, height: 20)
-                }
-                .padding(.top, 16)
-                .padding(.trailing, 16)
-            }
-            .position(x: geometry.size.width / 2, y: 16)
-            
+
             VStack {
                 
                 Text(timeTimerViewModel.elapsedTimeToString())
@@ -105,6 +94,17 @@ struct ExamTimerCardView: View {
                     isBlock: false
                 )
             }
+            .overlay(
+                Button(action: flipAnimation) {
+                    Image(systemName: "gearshape")
+                        .resizable()
+                        .frame(width: 20, height: 20)
+                }
+                .padding(.top, 16)
+                .padding(.trailing, 16),
+                alignment: .topTrailing // topTrailing은 오른쪽 상단을 의미합니다.
+            )
+
         }
         .background(FancyColor.background.color)
         .matchedGeometryEffect(id: "TimerView", in: timeTimerViewModel.animation)
@@ -160,7 +160,7 @@ struct ExamTimerCardView: View {
 
 struct ExamTimerCardView_Previews: PreviewProvider {
     static var previews: some View {
-        let model = ExamTimerModel(id: 1, userId: 1, seq: 1, type: "exam", name: "시험시간 타이머", startTime: "", duration: 80, questionCount: 45, markingTime: 5)
+        let model = ExamTimerModel(id: 1, userId: 1, seq: 1, type: "EXAM", name: "시험시간 타이머", startTime: "", duration: 80, questionCount: 45, markingTime: 5)
         let viewModel = ExamTimerViewModel(model: model)
         ExamTimerCardView()
             .environmentObject(viewModel)

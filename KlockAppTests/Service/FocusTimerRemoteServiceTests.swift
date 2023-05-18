@@ -27,9 +27,9 @@ class FocusTimerRemoteServiceTests: XCTestCase {
     func testCreateFocusTimer() {
         let expectation = XCTestExpectation(description: "Create Focus Timer")
 
-        let focusTimer = FocusTimerDTO(id: nil, userId: 2, seq: 1, type: "focus", name: "Focus Timer")
+        let reqFocusTimer = ReqFocusTimer(seq: 1, name: "집중 시간 타이머")
 
-        sut.create(data: focusTimer)
+        sut.create(data: reqFocusTimer)
             .sink(receiveCompletion: { result in
                 switch result {
                 case .failure(let error):
@@ -40,7 +40,7 @@ class FocusTimerRemoteServiceTests: XCTestCase {
                 expectation.fulfill()
             }, receiveValue: { timer in
                 self.timerId = timer.id
-                XCTAssertEqual(timer.name, focusTimer.name)
+                XCTAssertEqual(timer.name, reqFocusTimer.name)
             })
             .store(in: &subscriptions)
 
@@ -50,9 +50,10 @@ class FocusTimerRemoteServiceTests: XCTestCase {
     func testUpdateFocusTimer() {
         let expectation = XCTestExpectation(description: "Update Focus Timer")
 
-        let focusTimer = FocusTimerDTO(id: 28, userId: 1, seq: 1, type: "focus", name: "Updated Timer")
+        let id: Int64 = 19
+        let reqFocusTimer = ReqFocusTimer(seq: 1, name: "수정된 집중 시간 타이머")
 
-        sut.update(id: focusTimer.id ?? 0, data: focusTimer)
+        sut.update(id: id, data: reqFocusTimer)
             .sink(receiveCompletion: { result in
                 switch result {
                 case .failure(let error):
@@ -62,7 +63,7 @@ class FocusTimerRemoteServiceTests: XCTestCase {
                 }
                 expectation.fulfill()
             }, receiveValue: { timer in
-                XCTAssertEqual(timer.name, focusTimer.name)
+                XCTAssertEqual(timer.name, reqFocusTimer.name)
             })
             .store(in: &subscriptions)
 

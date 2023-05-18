@@ -16,21 +16,21 @@ struct SelectTimerView: View {
             List {
                 Section(header: Text("타이머를 선택 하세요.")) {
                     Button(action: {
-                        viewModel.addTimer(type: "focus")
+                        viewModel.addTimer(type: "FOCUS")
                         presentationMode.wrappedValue.dismiss()
                     }) {
                         Text("공부시간 타이머")
                     }
 
                     Button(action: {
-                        viewModel.addTimer(type: "pomodoro")
+                        viewModel.addTimer(type: "POMODORO")
                         presentationMode.wrappedValue.dismiss()
                     }) {
                         Text("뽀모도로 타이머")
                     }
 
                     Button(action: {
-                        viewModel.addTimer(type: "exam")
+                        viewModel.addTimer(type: "EXAM")
                         presentationMode.wrappedValue.dismiss()
                     }) {
                         Text("시험시간 타이머")

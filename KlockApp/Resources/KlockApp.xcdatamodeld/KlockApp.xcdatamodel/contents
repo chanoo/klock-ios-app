@@ -50,10 +50,10 @@
         <relationship name="chatBot" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChatBot" inverseName="message" inverseEntity="ChatBot"/>
     </entity>
     <entity name="PomodoroTimer" representedClassName="PomodoroTimer" syncable="YES" codeGenerationType="class">
+        <attribute name="breakTime" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="cycleCount" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
-        <attribute name="restTime" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="studyTime" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="accountTimer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AccountTimer" inverseName="pomodoroTimer" inverseEntity="AccountTimer"/>
     </entity>

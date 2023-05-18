@@ -26,7 +26,7 @@ class PomodoroTimerRemoteServiceTests: XCTestCase {
     func testCreatePomodoroTimer() {
         let expectation = XCTestExpectation(description: "Create Pomodoro Timer")
 
-        let pomodoroTimer = ReqPomodoroTimer(seq: 1, name: "Pomodoro Timer", focusTime: 30, restTime: 5, cycleCount: 4)
+        let pomodoroTimer = ReqPomodoroTimer(seq: 1, name: "Pomodoro Timer", focusTime: 30, breakTime: 5, cycleCount: 4)
 
         sut.create(data: pomodoroTimer)
             .sink(receiveCompletion: { result in
@@ -48,7 +48,7 @@ class PomodoroTimerRemoteServiceTests: XCTestCase {
     func testUpdatePomodoroTimer() {
         let expectation = XCTestExpectation(description: "Update Pomodoro Timer")
 
-        let pomodoroTimer = ReqPomodoroTimer(seq: 1, name: "Pomodoro Timer", focusTime: 30, restTime: 5, cycleCount: 4)
+        let pomodoroTimer = ReqPomodoroTimer(seq: 1, name: "Pomodoro Timer", focusTime: 30, breakTime: 5, cycleCount: 4)
 
         sut.update(id: 49, data: pomodoroTimer)
             .sink(receiveCompletion: { result in
