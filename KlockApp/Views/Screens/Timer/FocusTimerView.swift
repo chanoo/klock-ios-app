@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Foast
 
 struct FocusTimerView: View {
     
@@ -33,7 +34,6 @@ struct FocusTimerView: View {
                     .font(.title)
                     .foregroundColor(.white)
                     .padding(.top, 20)
-                
                 
                 Text(focusTimerViewModel.elapsedTimeToString())
                     .font(.largeTitle)
@@ -71,16 +71,21 @@ struct FocusTimerView: View {
                 FancyButton(
                     title: "잠시 멈춤",
                     action: {
+                        Foast.show(message: "정지하려면 길게 누르세요.")
+                    },
+                    longPressAction: {
                         withAnimation {
                             tabBarManager.isTabBarVisible = true
                             focusTimerViewModel.isStudying = false
                             timeTimerViewModel.focusTimerViewModel = nil
+                            timeTimerViewModel.stopAndSaveStudySessionIfNeeded()
                         }
                     },
                     backgroundColor: .white.opacity(0.4),
                     foregroundColor: .pink.opacity(0.5),
                     isBlock: false
                 )
+
             }
 
         }

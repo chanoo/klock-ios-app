@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import Foast
 
 struct FancyButton: View {
     let title: String
-    let action: () -> Void
+    let action: (() -> Void)?
+    let longPressAction: (() -> Void)?
     let backgroundColor: Color
     let foregroundColor: Color
     let icon: Image?
@@ -17,7 +19,8 @@ struct FancyButton: View {
     let height: CGFloat
 
     init(title: String,
-         action: @escaping () -> Void,
+         action: (() -> Void)? = nil,
+         longPressAction: (() -> Void)? = nil,
          backgroundColor: Color,
          foregroundColor: Color,
          icon: Image? = nil,
@@ -25,6 +28,7 @@ struct FancyButton: View {
          height: CGFloat = 60) {
         self.title = title
         self.action = action
+        self.longPressAction = longPressAction
         self.backgroundColor = backgroundColor
         self.foregroundColor = foregroundColor
         self.icon = icon
@@ -33,22 +37,32 @@ struct FancyButton: View {
     }
 
     var body: some View {
-        Button(action: action) {
-            HStack {
-                if let icon = icon {
-                    icon
-                        .foregroundColor(foregroundColor)
-                        .padding(.trailing, 12)
-                }
-                Text(title)
-                    .foregroundColor(foregroundColor)
-                    .fontWeight(.bold)
-            }
-            .padding(.leading, 30)
-            .padding(.trailing, 30)
-            .frame(maxWidth: isBlock ? .infinity : nil, minHeight: height)
-            .background(backgroundColor)
-            .cornerRadius(height / 2)
+        Button(action: {
+            action?()
+        }) {
+            buttonContent
         }
+        .simultaneousGesture(LongPressGesture().onEnded { _ in
+            longPressAction?()
+            print("Button was long pressed")
+        })
+    }
+
+    var buttonContent: some View {
+        HStack {
+            if let icon = icon {
+                icon
+                    .foregroundColor(foregroundColor)
+                    .padding(.trailing, 12)
+            }
+            Text(title)
+                .foregroundColor(foregroundColor)
+                .fontWeight(.bold)
+        }
+        .padding(.leading, 30)
+        .padding(.trailing, 30)
+        .frame(maxWidth: isBlock ? .infinity : nil, minHeight: height)
+        .background(backgroundColor)
+        .cornerRadius(height / 2)
     }
 }

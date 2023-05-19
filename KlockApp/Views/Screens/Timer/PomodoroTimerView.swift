@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Foast
 
 struct PomodoroTimerView: View {
 
@@ -65,10 +66,14 @@ struct PomodoroTimerView: View {
                 FancyButton(
                     title: "잠시 멈춤",
                     action: {
+                        Foast.show(message: "정지하려면 길게 누르세요.")
+                    },
+                    longPressAction: {
                         withAnimation {
                             tabBarManager.isTabBarVisible = true
                             pomodoroTimerViewModel.isStudying = false
                             timeTimerViewModel.pomodoroTimerViewModel = nil
+                            timeTimerViewModel.stopAndSaveStudySessionIfNeeded()
                         }
                     },
                     backgroundColor: .white.opacity(0.4),

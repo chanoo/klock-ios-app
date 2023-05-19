@@ -130,7 +130,7 @@ class TimeTimerViewModel: ObservableObject {
         updateElapsedTime()
     }
 
-    private func stopAndSaveStudySessionIfNeeded() {
+    func stopAndSaveStudySessionIfNeeded() {
         updateElapsedTime()
         let startTime = Date().addingTimeInterval(-elapsedTime)
         let endTime = Date()

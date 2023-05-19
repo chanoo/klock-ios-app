@@ -149,6 +149,42 @@ struct ExamTimerCardView: View {
                         }
                     }
                 }
+                
+                Section {
+                    Button(action: {
+                        // Save settings
+                        withAnimation(.spring()) {
+                            isFlipped.toggle()
+                        }
+                    }) {
+                        Text("저장")
+                            .frame(maxWidth: .infinity, alignment: .center)
+                    }
+                }
+                
+                Section {
+                    Button(action: {
+                        withAnimation(.spring()) {
+                            isFlipped.toggle()
+                        }
+                    }) {
+                        Text("취소")
+                            .frame(maxWidth: .infinity, alignment: .center)
+                    }
+                }
+                
+                Section {
+                    Button(action: {
+                        withAnimation(.spring()) {
+                            flipAnimation()
+                        }
+                    }) {
+                        Text("삭제")
+                            .frame(maxWidth: .infinity, alignment: .center)
+                            .foregroundColor(FancyColor.secondary.color)
+                    }
+                }
+
             }
             .clearListBackground()
         }
