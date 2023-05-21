@@ -131,7 +131,7 @@ class TimerManager {
                 })
                 .store(in: &cancellables)
         case "EXAM":
-            let req = ReqExamTimer(seq: seq, name: "국어", startTime: "2023-01-01T01:08:40.000000", duration: 80, questionCount: 45)
+            let req = ReqExamTimer(seq: seq, name: "국어", startTime: "2023-01-01T08:40:00.000000", duration: 80, questionCount: 45)
             examTimerRemoteService.create(data: req)
                 .sink(receiveCompletion: { completion in
                     switch completion {

@@ -641,8 +641,8 @@
 				98AC30702A136198006DC48D /* FocusTimerViewModel.swift */,
 				98AC30822A15CB77006DC48D /* PomodoroTimerViewModel.swift */,
 				98AC30842A15CBA8006DC48D /* ExamTimerViewModel.swift */,
-				985BE88329E652CE008582A3 /* README.md */,
 				981D73172A1A49E0000C8F3D /* ClockViewModel.swift */,
+				985BE88329E652CE008582A3 /* README.md */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";

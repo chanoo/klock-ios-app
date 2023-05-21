@@ -84,7 +84,7 @@ struct ExamTimerCardView: View {
                 .padding(.bottom, 20)
 
                 FancyButton(
-                    title: "공부 시작",
+                    title: "시험 시작",
                     action: {
                         withAnimation {
                             tabBarManager.isTabBarVisible = false
@@ -121,6 +121,17 @@ struct ExamTimerCardView: View {
                             Text("\($examTimerViewModel.model.duration.wrappedValue)분")
                         }
                     }
+
+                    VStack(alignment: .leading) {
+                        Text("시험 시작시간")
+                            .font(.headline)
+                            .foregroundColor(.gray)
+                        DatePicker("시험 시작 시간을 선택해주세요", selection: $examTimerViewModel.model.startTime, displayedComponents: .hourAndMinute)
+                            .datePickerStyle(WheelDatePickerStyle())
+                            .labelsHidden()
+                    }
+
+
                     
                     VStack(alignment: .leading) {
                         Text("마킹 시간")
@@ -188,7 +199,7 @@ struct ExamTimerCardView: View {
 
 struct ExamTimerCardView_Previews: PreviewProvider {
     static var previews: some View {
-        let model = ExamTimerModel(id: 1, userId: 1, seq: 1, type: "EXAM", name: "시험시간 타이머", startTime: "", duration: 80, questionCount: 45, markingTime: 5)
+        let model = ExamTimerModel(id: 1, userId: 1, seq: 1, type: "EXAM", name: "시험시간 타이머", startTime: Date(), duration: 80, questionCount: 45, markingTime: 5)
         let viewModel = ExamTimerViewModel(model: model)
         ExamTimerCardView()
             .environmentObject(viewModel)
