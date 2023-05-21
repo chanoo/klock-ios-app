@@ -39,10 +39,15 @@ struct ExamTimerCardView: View {
     
     private func frontView(geometry: GeometryProxy) -> some View {
         ZStack {
-            
             Image("img_watch_background3")
                 .aspectRatio(contentMode: .fill)
-                .edgesIgnoringSafeArea(.all)
+                .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
+
+            Button(action: flipAnimation) {
+                Image(systemName: "gearshape")
+                    .frame(width: 20, height: 20)
+            }
+            .position(x: geometry.size.width - 25, y: 25)
 
             VStack {
                 
@@ -54,12 +59,14 @@ struct ExamTimerCardView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 10))
 
                 AnalogClockView(
-                    currentTime: Date(),
-                    startTime: Date(),
-                    elapsedTime: $examTimerViewModel.elapsedTime,
-                    studySessions: .constant([]),
-                    isStudying: $examTimerViewModel.isStudying,
-                    isRunning: false,
+                    clockViewModel: ClockViewModel(
+                        currentTime: Date(),
+                        startTime: Date(),
+                        elapsedTime: 2,
+                        studySessions: [],
+                        isStudying: false,
+                        isRunning: true
+                    ),
                     clockModel: ClockModel(
                         hourHandImageName: "img_watch_hand_hour",
                         minuteHandImageName: "img_watch_hand_min",
@@ -68,13 +75,10 @@ struct ExamTimerCardView: View {
                         clockSize: CGSize(width: 300, height: 300),
                         hourHandColor: .black,
                         minuteHandColor: .black,
-                        secondHandColor: .orange,
-                        outlineInColor: .white,
-                        outlineOutColor: .white
-                    ),
-                    hour: 10,
-                    minute: 20,
-                    second: 35
+                        secondHandColor: .cyan,
+                        outlineInColor: .white.opacity(0.8),
+                        outlineOutColor: .white.opacity(0.5)
+                    )
                 )
                 .padding(.top, 20)
                 .padding(.bottom, 20)
@@ -94,21 +98,8 @@ struct ExamTimerCardView: View {
                     isBlock: false
                 )
             }
-            .overlay(
-                Button(action: flipAnimation) {
-                    Image(systemName: "gearshape")
-                        .resizable()
-                        .frame(width: 20, height: 20)
-                }
-                .padding(.top, 16)
-                .padding(.trailing, 16),
-                alignment: .topTrailing // topTrailing은 오른쪽 상단을 의미합니다.
-            )
-
         }
         .background(FancyColor.background.color)
-        .matchedGeometryEffect(id: "TimerView", in: timeTimerViewModel.animation)
-        .frame(width: geometry.size.width, height: geometry.size.height)
     }
 
     private func backView(geometry: GeometryProxy) -> some View {
@@ -177,6 +168,7 @@ struct ExamTimerCardView: View {
                     Button(action: {
                         withAnimation(.spring()) {
                             flipAnimation()
+                            timeTimerViewModel.delete(model: examTimerViewModel.model)
                         }
                     }) {
                         Text("삭제")

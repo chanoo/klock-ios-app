@@ -10,17 +10,9 @@ import SwiftUI
 struct AnalogClockView: View {
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var tabBarManager: TabBarManager
-    @State private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-    @State var currentTime: Date
-    @State var startTime: Date
-    @Binding var elapsedTime: TimeInterval
-    @Binding var studySessions: [StudySessionModel]
-    @Binding var isStudying: Bool
-    @State var isRunning: Bool
+    @StateObject var clockViewModel: ClockViewModel
+    var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     var clockModel: ClockModel
-    var hour: Int?
-    var minute: Int?
-    var second: Int?
 
     var body: some View {
         VStack {
@@ -72,7 +64,7 @@ struct AnalogClockView: View {
                             .frame(width: clockModel.clockSize.width - 30, height: clockModel.clockSize.height - 30)
                             .opacity(0.3)
 
-                        ForEach(studySessions, id: \.id) { studySession in
+                        ForEach(clockViewModel.studySessions, id: \.id) { studySession in
                             ClockOutLine(
                                 studySession: studySession,
                                 clockSize: clockModel.clockSize,
@@ -87,34 +79,33 @@ struct AnalogClockView: View {
 
         }
         .onReceive(timer) { _ in
-            if isRunning {
-                currentTime = currentTime.addingTimeInterval(1)
-                if isStudying {
-                    elapsedTime = currentTime.timeIntervalSince(startTime)
+            if clockViewModel.isRunning {
+                clockViewModel.currentTime = clockViewModel.currentTime.addingTimeInterval(1)
+                if clockViewModel.isStudying {
+                    clockViewModel.elapsedTime = clockViewModel.currentTime.timeIntervalSince(clockViewModel.startTime)
                 } else {
-                    elapsedTime = 0
+                    clockViewModel.elapsedTime = 0
                 }
             }
         }
     }
 
     private var hourAngle: Double {
-        let hour = Calendar.current.component(.hour, from: currentTime)
-        let minute = Calendar.current.component(.minute, from: currentTime)
+        let hour = Calendar.current.component(.hour, from: clockViewModel.currentTime)
+        let minute = Calendar.current.component(.minute, from: clockViewModel.currentTime)
         return (Double(hour % 12) + Double(minute) / 60) / 12 * 360
     }
 
     private var minuteAngle: Double {
-        let minute = Calendar.current.component(.minute, from: currentTime)
-        let second = Calendar.current.component(.second, from: currentTime)
+        let minute = Calendar.current.component(.minute, from: clockViewModel.currentTime)
+        let second = Calendar.current.component(.second, from: clockViewModel.currentTime)
         return (Double(minute) + Double(second) / 60) / 60 * 360
     }
 
     private var secondAngle: Double {
-        let second = Calendar.current.component(.second, from: currentTime)
+        let second = Calendar.current.component(.second, from: clockViewModel.currentTime)
         return Double(second) / 60 * 360
     }
-
 }
 
 struct ClockOutLine: View {
@@ -169,25 +160,26 @@ struct ClockHand: View {
 struct AnalogClockView_Previews: PreviewProvider {
     static var previews: some View {
         AnalogClockView(
-            currentTime: Date(),
-            startTime: Date(),
-            elapsedTime: .constant(2),
-            studySessions: .constant([]),
-            isStudying: .constant(false),
-            isRunning: true,
-            clockModel:
-                ClockModel(
-                    hourHandImageName: "img_watch_hand_hour",
-                    minuteHandImageName: "img_watch_hand_min",
-                    secondHandImageName: "img_watch_hand_sec",
-                    clockBackgroundImageName: "img_watch_face1",
-                    clockSize: CGSize(width: 300, height: 300),
-                    hourHandColor: .black,
-                    minuteHandColor: .black,
-                    secondHandColor: .pink,
-                    outlineInColor: .white.opacity(0.8),
-                    outlineOutColor: .white.opacity(0.5)
-                )
+            clockViewModel: ClockViewModel(
+                currentTime: Date(),
+                startTime: Date(),
+                elapsedTime: 2,
+                studySessions: [],
+                isStudying: false,
+                isRunning: true
+            ),
+            clockModel: ClockModel(
+                hourHandImageName: "img_watch_hand_hour",
+                minuteHandImageName: "img_watch_hand_min",
+                secondHandImageName: "img_watch_hand_sec",
+                clockBackgroundImageName: "img_watch_face1",
+                clockSize: CGSize(width: 300, height: 300),
+                hourHandColor: .black,
+                minuteHandColor: .black,
+                secondHandColor: .pink,
+                outlineInColor: .white.opacity(0.8),
+                outlineOutColor: .white.opacity(0.5)
+            )
         )
         .background(FancyColor.background.color)
     }

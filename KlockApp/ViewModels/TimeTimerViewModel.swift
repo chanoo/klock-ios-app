@@ -44,7 +44,8 @@ class TimeTimerViewModel: ObservableObject {
     private let examTimerRemoteService = Container.shared.resolve(ExamTimerRemoteServiceProtocol.self)
     private let proximityAndOrientationService = Container.shared.resolve(ProximityAndOrientationServiceProtocol.self)
     private let studySessionService = Container.shared.resolve(StudySessionServiceProtocol.self)
-    
+    private let studySessionRemoteService = Container.shared.resolve(StudySessionRemoteServiceProtocol.self)
+
     // Other properties
     var timerModels: [TimerModel] = []
     private var cancellables: Set<AnyCancellable> = []
@@ -146,7 +147,19 @@ class TimeTimerViewModel: ObservableObject {
     }
 
     private func saveStudySession(accountID: Int64, accountTimerID: Int64, startTime: Date, endTime: Date) {
-        studySessionService.save(accountID: accountID, accountTimerID: accountTimerID, startTime: startTime, endTime: endTime)
+
+        // 공부 시작 시간
+//        let startTimeDouble = UserDefaults.standard.double(forKey: studyStartTimeKey)
+//        let startTimeDate = DateUtils.doubleToDate(startTimeDouble)
+        let startTimeDate = currentStudySession.startTime
+        let startTime = DateUtils.dateToString(startTimeDate)
+        
+        // 공부 종료 시간
+        let endTimeDate = Date()
+        let endTime = DateUtils.dateToString(endTimeDate)
+
+        let req = ReqStudySession(startTime: startTime, endTime: endTime)
+        studySessionRemoteService.create(data: req)
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .failure(let error):
@@ -157,6 +170,18 @@ class TimeTimerViewModel: ObservableObject {
                 }
             }, receiveValue: { _ in })
             .store(in: &cancellables)
+
+//        studySessionService.save(accountID: accountID, accountTimerID: accountTimerID, startTime: startTime, endTime: endTime)
+//            .sink(receiveCompletion: { completion in
+//                switch completion {
+//                case .failure(let error):
+//                    print("Error saving study session: \(error)")
+//                case .finished:
+//                    print("Study session saved successfully")
+//                    self.removeStudyStartTime()
+//                }
+//            }, receiveValue: { _ in })
+//            .store(in: &cancellables)
     }
 
     // MARK: - Study Session Helpers

@@ -38,12 +38,14 @@ struct PomodoroTimerView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 10))
 
                 AnalogClockView(
-                    currentTime: Date(),
-                    startTime: Date(),
-                    elapsedTime: $pomodoroTimerViewModel.elapsedTime,
-                    studySessions: .constant([]),
-                    isStudying: $pomodoroTimerViewModel.isStudying,
-                    isRunning: true,
+                    clockViewModel: ClockViewModel(
+                        currentTime: Date(),
+                        startTime: Date(),
+                        elapsedTime: 2,
+                        studySessions: [],
+                        isStudying: false,
+                        isRunning: true
+                    ),
                     clockModel: ClockModel(
                         hourHandImageName: "img_watch_hand_hour",
                         minuteHandImageName: "img_watch_hand_min",
@@ -52,13 +54,10 @@ struct PomodoroTimerView: View {
                         clockSize: CGSize(width: 300, height: 300),
                         hourHandColor: .black,
                         minuteHandColor: .black,
-                        secondHandColor: .cyan,
-                        outlineInColor: .white,
-                        outlineOutColor: .white
-                    ),
-                    hour: 10,
-                    minute: 20,
-                    second: 35
+                        secondHandColor: .pink,
+                        outlineInColor: .white.opacity(0.8),
+                        outlineOutColor: .white.opacity(0.5)
+                    )
                 )
                 .padding(.top, 20)
                 .padding(.bottom, 20)

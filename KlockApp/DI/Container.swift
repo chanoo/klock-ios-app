@@ -55,7 +55,8 @@ class Container {
         container.register(FocusTimerRemoteServiceProtocol.self) { _ in FocusTimerRemoteService() }
         container.register(PomodoroTimerRemoteServiceProtocol.self) { _ in PomodoroTimerRemoteService() }
         container.register(ExamTimerRemoteServiceProtocol.self) { _ in ExamTimerRemoteService() }
-        
+        container.register(StudySessionRemoteServiceProtocol.self) { _ in StudySessionRemoteService() }
+
         // ETC
         container.register(ProximityAndOrientationServiceProtocol.self) { _ in ProximityAndOrientationService() }
 

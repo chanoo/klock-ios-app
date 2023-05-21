@@ -43,12 +43,14 @@ struct FocusTimerView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 10))
 
                 AnalogClockView(
-                    currentTime: Date(),
-                    startTime: Date(),
-                    elapsedTime: $focusTimerViewModel.elapsedTime,
-                    studySessions: .constant([]),
-                    isStudying: $focusTimerViewModel.isStudying,
-                    isRunning: true,
+                    clockViewModel: ClockViewModel(
+                        currentTime: Date(),
+                        startTime: Date(),
+                        elapsedTime: 2,
+                        studySessions: [],
+                        isStudying: false,
+                        isRunning: true
+                    ),
                     clockModel: ClockModel(
                         hourHandImageName: "img_watch_hand_hour",
                         minuteHandImageName: "img_watch_hand_min",
@@ -58,12 +60,9 @@ struct FocusTimerView: View {
                         hourHandColor: .black,
                         minuteHandColor: .black,
                         secondHandColor: .pink,
-                        outlineInColor: .white,
-                        outlineOutColor: .white
-                    ),
-                    hour: 10,
-                    minute: 20,
-                    second: 35
+                        outlineInColor: .white.opacity(0.8),
+                        outlineOutColor: .white.opacity(0.5)
+                    )
                 )
                 .padding(.top, 20)
                 .padding(.bottom, 20)
@@ -91,6 +90,10 @@ struct FocusTimerView: View {
         }
         .background(FancyColor.background.color)
         .frame(width: geometry.size.width, height: geometry.size.height)
+        .onAppear {
+            timeTimerViewModel.startStudySession()
+            timeTimerViewModel.playVibration()
+        }
     }
 }
 

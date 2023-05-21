@@ -38,24 +38,17 @@ struct FocusTimerCardView: View {
     
     private func frontView(geometry: GeometryProxy) -> some View {
         ZStack {
-            
-            HStack {
-                Spacer()
-                Button(action: flipAnimation) {
-                    Image(systemName: "gearshape")
-                        .resizable()
-                        .frame(width: 20, height: 20)
-                }
-                .padding(.top, 16)
-                .padding(.trailing, 16)
-            }
-            
             Image("img_watch_background3")
                 .aspectRatio(contentMode: .fill)
-                .edgesIgnoringSafeArea(.all)
+                .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
+
+            Button(action: flipAnimation) {
+                Image(systemName: "gearshape")
+                    .frame(width: 20, height: 20)
+            }
+            .position(x: geometry.size.width - 25, y: 25)
             
             VStack {
-                
                 Text(focusTimerViewModel.elapsedTimeToString())
                     .font(.largeTitle)
                     .padding()
@@ -64,12 +57,14 @@ struct FocusTimerCardView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 10))
 
                 AnalogClockView(
-                    currentTime: Date(),
-                    startTime: Date(),
-                    elapsedTime: $focusTimerViewModel.elapsedTime,
-                    studySessions: .constant([]),
-                    isStudying: $focusTimerViewModel.isStudying,
-                    isRunning: false,
+                    clockViewModel: ClockViewModel(
+                        currentTime: Date(),
+                        startTime: Date(),
+                        elapsedTime: 2,
+                        studySessions: [],
+                        isStudying: false,
+                        isRunning: true
+                    ),
                     clockModel: ClockModel(
                         hourHandImageName: "img_watch_hand_hour",
                         minuteHandImageName: "img_watch_hand_min",
@@ -78,13 +73,10 @@ struct FocusTimerCardView: View {
                         clockSize: CGSize(width: 300, height: 300),
                         hourHandColor: .black,
                         minuteHandColor: .black,
-                        secondHandColor: .pink,
-                        outlineInColor: .white,
-                        outlineOutColor: .white
-                    ),
-                    hour: 10,
-                    minute: 20,
-                    second: 35
+                        secondHandColor: .mint,
+                        outlineInColor: .white.opacity(0.8),
+                        outlineOutColor: .white.opacity(0.5)
+                    )
                 )
                 .padding(.top, 20)
                 .padding(.bottom, 20)
@@ -106,8 +98,6 @@ struct FocusTimerCardView: View {
             }
         }
         .background(FancyColor.background.color)
-        .matchedGeometryEffect(id: "TimerView", in: timeTimerViewModel.animation)
-        .frame(width: geometry.size.width, height: geometry.size.height)
     }
 
     private func backView(geometry: GeometryProxy) -> some View {
@@ -143,7 +133,7 @@ struct FocusTimerCardView: View {
                 Section {
                     Button(action: {
                         flipAnimation()
-//                        viewModel.delete(model: viewModel.model)
+                        timeTimerViewModel.delete(model: focusTimerViewModel.model)
                     }) {
                         Text("삭제")
                             .frame(maxWidth: .infinity, alignment: .center)

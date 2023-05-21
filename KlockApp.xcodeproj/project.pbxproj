@@ -20,6 +20,8 @@
 		981B389329F44B0600AB0EF8 /* PomodoroTimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981B389229F44B0600AB0EF8 /* PomodoroTimerModel.swift */; };
 		981B389529F44B1200AB0EF8 /* FocusTimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981B389429F44B1200AB0EF8 /* FocusTimerModel.swift */; };
 		981B389729F44B1C00AB0EF8 /* ExamTimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981B389629F44B1C00AB0EF8 /* ExamTimerModel.swift */; };
+		981D73162A191C96000C8F3D /* DateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981D73152A191C96000C8F3D /* DateUtils.swift */; };
+		981D73182A1A49E0000C8F3D /* ClockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981D73172A1A49E0000C8F3D /* ClockViewModel.swift */; };
 		9820035029F1A6DA0056CA03 /* Foast in Frameworks */ = {isa = PBXBuildFile; productRef = 9820034F29F1A6DA0056CA03 /* Foast */; };
 		9821409B2A078C6900C68EB9 /* FocusTimerRemoteServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9821409A2A078C6900C68EB9 /* FocusTimerRemoteServiceTests.swift */; };
 		9821409D2A07AC3100C68EB9 /* PomodoroTimerRemoteServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9821409C2A07AC3100C68EB9 /* PomodoroTimerRemoteServiceTests.swift */; };
@@ -197,6 +199,8 @@
 		981B389229F44B0600AB0EF8 /* PomodoroTimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroTimerModel.swift; sourceTree = "<group>"; };
 		981B389429F44B1200AB0EF8 /* FocusTimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTimerModel.swift; sourceTree = "<group>"; };
 		981B389629F44B1C00AB0EF8 /* ExamTimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamTimerModel.swift; sourceTree = "<group>"; };
+		981D73152A191C96000C8F3D /* DateUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtils.swift; sourceTree = "<group>"; };
+		981D73172A1A49E0000C8F3D /* ClockViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockViewModel.swift; sourceTree = "<group>"; };
 		9821409A2A078C6900C68EB9 /* FocusTimerRemoteServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTimerRemoteServiceTests.swift; sourceTree = "<group>"; };
 		9821409C2A07AC3100C68EB9 /* PomodoroTimerRemoteServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroTimerRemoteServiceTests.swift; sourceTree = "<group>"; };
 		9821409E2A07AFB800C68EB9 /* ExamTimerRemoteServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamTimerRemoteServiceTests.swift; sourceTree = "<group>"; };
@@ -638,6 +642,7 @@
 				98AC30822A15CB77006DC48D /* PomodoroTimerViewModel.swift */,
 				98AC30842A15CBA8006DC48D /* ExamTimerViewModel.swift */,
 				985BE88329E652CE008582A3 /* README.md */,
+				981D73172A1A49E0000C8F3D /* ClockViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -672,6 +677,7 @@
 				98B21B1F29D56BD2004EFE0E /* Constants */,
 				98B21B1C29D56B3C004EFE0E /* Validators */,
 				9843B7E829F0EB5200F91DAD /* TimeUtils.swift */,
+				981D73152A191C96000C8F3D /* DateUtils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -992,6 +998,7 @@
 				9843B7D929EEE09400F91DAD /* ProximityAndOrientationService.swift in Sources */,
 				98E9386129EA5871009CBF32 /* TimeTimerViewModel.swift in Sources */,
 				985BE89E29E6E5D0008582A3 /* FriendDetailView.swift in Sources */,
+				981D73182A1A49E0000C8F3D /* ClockViewModel.swift in Sources */,
 				983B59D329FB331400F0EACD /* DataStack.swift in Sources */,
 				98E9386729EAD173009CBF32 /* StudySessionServiceProtocol.swift in Sources */,
 				98EBFBF429F98AA2004E95F3 /* AchievementModel.swift in Sources */,
@@ -1002,6 +1009,7 @@
 				98976B052A077F8F00F1CEAE /* ExamTimerRemoteServiceProtocol.swift in Sources */,
 				98B21B1B29D55F6C004EFE0E /* AuthenticationRemoteServiceProtocol.swift in Sources */,
 				98B21B2129D56BDF004EFE0E /* RegexConstants.swift in Sources */,
+				981D73162A191C96000C8F3D /* DateUtils.swift in Sources */,
 				985BE88A29E6DC2C008582A3 /* ChatBotChatView.swift in Sources */,
 				98B21B5729D6F492004EFE0E /* SocialLoginModel.swift in Sources */,
 				98EBFBF229F98A86004E95F3 /* CharacterViewModel.swift in Sources */,

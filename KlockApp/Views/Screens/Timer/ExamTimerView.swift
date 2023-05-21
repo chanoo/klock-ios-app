@@ -46,12 +46,14 @@ struct ExamTimerView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 10))
 
                 AnalogClockView(
-                    currentTime: Date(),
-                    startTime: Date(),
-                    elapsedTime: $examTimerViewModel.elapsedTime,
-                    studySessions: .constant([]),
-                    isStudying: $examTimerViewModel.isStudying,
-                    isRunning: true,
+                    clockViewModel: ClockViewModel(
+                        currentTime: Date(),
+                        startTime: Date(),
+                        elapsedTime: 2,
+                        studySessions: [],
+                        isStudying: false,
+                        isRunning: true
+                    ),
                     clockModel: ClockModel(
                         hourHandImageName: "img_watch_hand_hour",
                         minuteHandImageName: "img_watch_hand_min",
@@ -60,13 +62,10 @@ struct ExamTimerView: View {
                         clockSize: CGSize(width: 300, height: 300),
                         hourHandColor: .black,
                         minuteHandColor: .black,
-                        secondHandColor: .orange,
-                        outlineInColor: .white,
-                        outlineOutColor: .white
-                    ),
-                    hour: 10,
-                    minute: 20,
-                    second: 35
+                        secondHandColor: .cyan,
+                        outlineInColor: .white.opacity(0.8),
+                        outlineOutColor: .white.opacity(0.5)
+                    )
                 )
                 .padding(.top, 20)
                 .padding(.bottom, 20)

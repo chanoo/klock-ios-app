@@ -40,7 +40,13 @@ struct PomodoroTimerCardView: View {
         ZStack {
             Image("img_watch_background3")
                 .aspectRatio(contentMode: .fill)
-                .edgesIgnoringSafeArea(.all)
+                .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
+
+            Button(action: flipAnimation) {
+                Image(systemName: "gearshape")
+                    .frame(width: 20, height: 20)
+            }
+            .position(x: geometry.size.width - 25, y: 25)
             
             VStack {
                 
@@ -52,12 +58,14 @@ struct PomodoroTimerCardView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 10))
 
                 AnalogClockView(
-                    currentTime: Date(),
-                    startTime: Date(),
-                    elapsedTime: $pomodoroTimerViewModel.elapsedTime,
-                    studySessions: .constant([]),
-                    isStudying: $pomodoroTimerViewModel.isStudying,
-                    isRunning: false,
+                    clockViewModel: ClockViewModel(
+                        currentTime: Date(),
+                        startTime: Date(),
+                        elapsedTime: 2,
+                        studySessions: [],
+                        isStudying: false,
+                        isRunning: true
+                    ),
                     clockModel: ClockModel(
                         hourHandImageName: "img_watch_hand_hour",
                         minuteHandImageName: "img_watch_hand_min",
@@ -66,13 +74,10 @@ struct PomodoroTimerCardView: View {
                         clockSize: CGSize(width: 300, height: 300),
                         hourHandColor: .black,
                         minuteHandColor: .black,
-                        secondHandColor: .cyan,
-                        outlineInColor: .white,
-                        outlineOutColor: .white
-                    ),
-                    hour: 10,
-                    minute: 20,
-                    second: 35
+                        secondHandColor: .pink,
+                        outlineInColor: .white.opacity(0.8),
+                        outlineOutColor: .white.opacity(0.5)
+                    )
                 )
                 .padding(.top, 20)
                 .padding(.bottom, 20)
@@ -92,21 +97,8 @@ struct PomodoroTimerCardView: View {
                     isBlock: false
                 )
             }
-
-            HStack {
-                Spacer()
-                Button(action: flipAnimation) {
-                    Image(systemName: "gearshape")
-                        .resizable()
-                        .frame(width: 20, height: 20)
-                }
-                .padding(.top, 16)
-                .padding(.trailing, 16)
-            }
-            .position(x: geometry.size.width / 2, y: 16)
         }
         .background(FancyColor.background.color)
-        .frame(width: geometry.size.width, height: geometry.size.height)
     }
 
     private func backView(geometry: GeometryProxy) -> some View {
@@ -175,6 +167,7 @@ struct PomodoroTimerCardView: View {
                     Button(action: {
                         withAnimation(.spring()) {
                             flipAnimation()
+                            timeTimerViewModel.delete(model: pomodoroTimerViewModel.model)
                         }
                     }) {
                         Text("삭제")
