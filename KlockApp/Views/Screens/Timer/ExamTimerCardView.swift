@@ -114,6 +114,15 @@ struct ExamTimerCardView: View {
                     }
                     
                     VStack(alignment: .leading) {
+                        Text("시험 시작시간")
+                            .font(.headline)
+                            .foregroundColor(.gray)
+                        DatePicker("", selection: $examTimerViewModel.model.startTime, displayedComponents: .hourAndMinute)
+                            .datePickerStyle(WheelDatePickerStyle())
+                            .labelsHidden()
+                    }
+                    
+                    VStack(alignment: .leading) {
                         Text("시험 시간")
                             .font(.headline)
                             .foregroundColor(.gray)
@@ -121,17 +130,6 @@ struct ExamTimerCardView: View {
                             Text("\($examTimerViewModel.model.duration.wrappedValue)분")
                         }
                     }
-
-                    VStack(alignment: .leading) {
-                        Text("시험 시작시간")
-                            .font(.headline)
-                            .foregroundColor(.gray)
-                        DatePicker("시험 시작 시간을 선택해주세요", selection: $examTimerViewModel.model.startTime, displayedComponents: .hourAndMinute)
-                            .datePickerStyle(WheelDatePickerStyle())
-                            .labelsHidden()
-                    }
-
-
                     
                     VStack(alignment: .leading) {
                         Text("마킹 시간")
@@ -156,7 +154,8 @@ struct ExamTimerCardView: View {
                     Button(action: {
                         // Save settings
                         withAnimation(.spring()) {
-                            isFlipped.toggle()
+                            flipAnimation()
+                            timeTimerViewModel.update(type: "EXAM", model: examTimerViewModel.model)
                         }
                     }) {
                         Text("저장")

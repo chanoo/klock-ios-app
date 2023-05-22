@@ -26,7 +26,7 @@ class ExamTimerRemoteServiceTests: XCTestCase {
     func testCreateExamTimer() {
         let expectation = XCTestExpectation(description: "Create Exam Timer")
 
-        let examTimer = ReqExamTimer(seq: 1, name: "Test Exam Timer", startTime: "2023-04-30T01:22:41.171737", duration: 90, questionCount: 30)
+        let examTimer = ReqExamTimer(seq: 1, name: "Test Exam Timer", startTime: "2023-04-30T01:22:41", duration: 90, questionCount: 30)
 
         sut.create(data: examTimer)
             .sink(receiveCompletion: { result in
@@ -48,9 +48,9 @@ class ExamTimerRemoteServiceTests: XCTestCase {
     func testUpdateExamTimer() {
         let expectation = XCTestExpectation(description: "Update Exam Timer")
         
-        let examTimer = ReqExamTimer(seq: 1, name: "Update Exam Timer", startTime: "2023-04-30T01:22:41.171737", duration: 90, questionCount: 30)
+        let examTimer = ReqExamTimer(seq: 1, name: "Update Exam Timer", startTime: "2023-04-30T01:22:41", duration: 90, questionCount: 30)
 
-        sut.update(id: 50, data: examTimer)
+        sut.update(id: 74, data: examTimer)
             .sink(receiveCompletion: { result in
                 switch result {
                 case .failure(let error):
@@ -70,7 +70,7 @@ class ExamTimerRemoteServiceTests: XCTestCase {
     func testDeleteTimer() {
         let expectation = XCTestExpectation(description: "Delete Exam Timer")
 
-        let examTimerId: Int64 = 51
+        let examTimerId: Int64 = 75
 
         sut.delete(id: examTimerId)
             .sink(receiveCompletion: { result in

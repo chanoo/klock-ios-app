@@ -150,4 +150,60 @@ class TimerManager {
         }
 
     }
+    
+    func updateTimer(type: String, id: Int64, model: TimerModel, completion: @escaping (TimerModel?) -> Void) {
+        let seq = 1
+        switch type {
+        case "FOCUS":
+            let req = ReqFocusTimer(seq: seq, name: "Focus Timer")
+            focusTimerRemoteService.update(id: id, data: req)
+                .sink(receiveCompletion: { completion in
+                    switch completion {
+                    case .failure(let error):
+                        print("Error creating focus timer: \(error)")
+                    case .finished:
+                        break
+                    }
+                }, receiveValue: { createdTimer in
+                    let model = FocusTimerModel.from(dto: createdTimer)
+                    completion(model)
+                })
+                .store(in: &cancellables)
+        case "POMODORO":
+            let dto = PomodoroTimerModel.toDTO(model: model as! PomodoroTimerModel)
+            let req = ReqPomodoroTimer(seq: dto.seq, name: dto.name, focusTime: dto.focusTime, breakTime: dto.breakTime, cycleCount: dto.cycleCount)
+            pomodoroTimerRemoteService.update(id: id, data: req)
+                .sink(receiveCompletion: { completion in
+                    switch completion {
+                    case .failure(let error):
+                        print("Error creating pomodoro timer: \(error)")
+                    case .finished:
+                        break
+                    }
+                }, receiveValue: { createdTimer in
+                    let model = PomodoroTimerModel.from(dto: createdTimer)
+                    completion(model)
+                })
+                .store(in: &cancellables)
+        case "EXAM":
+            let req = ReqExamTimer(seq: seq, name: "국어", startTime: "2023-01-01T08:40:00.000000", duration: 80, questionCount: 45)
+            examTimerRemoteService.update(id: id, data: req)
+                .sink(receiveCompletion: { completion in
+                    switch completion {
+                    case .failure(let error):
+                        print("Error creating exam timer: \(error)")
+                    case .finished:
+                        break
+                    }
+                }, receiveValue: { createdTimer in
+                    let model = ExamTimerModel.from(dto: createdTimer)
+                    completion(model)
+                })
+                .store(in: &cancellables)
+        default:
+            break
+        }
+
+    }
+
 }

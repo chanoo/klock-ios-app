@@ -189,6 +189,17 @@ class TimeTimerViewModel: ObservableObject {
         UserDefaults.standard.removeObject(forKey: studyStartTimeKey)
     }
     
+    func update(type: String, model: TimerModel) {
+        guard let id = model.id else {
+             print("Error: model.id is nil")
+             return
+         }
+
+        timerManager.updateTimer(type: type, id: id, model: model) { success in
+            Foast.show(message: "수정 되었습니다.")
+        }
+    }
+    
     func delete(model: TimerModel) {
         timerManager.deleteTimer(model: model) { success in
             if let index = self.timerModels.firstIndex(where: { $0.type == model.type && $0.id == model.id }) {
