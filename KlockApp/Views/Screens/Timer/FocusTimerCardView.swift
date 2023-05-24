@@ -114,6 +114,7 @@ struct FocusTimerCardView: View {
 
                 Section {
                     Button(action: {
+                        timeTimerViewModel.update(type: "FOCUS", model: focusTimerViewModel.model)
                         flipAnimation()
                     }) {
                         Text("저장")

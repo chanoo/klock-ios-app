@@ -25,7 +25,7 @@ class FocusTimerRemoteService: FocusTimerRemoteServiceProtocol, APIServiceProtoc
     func update(id: Int64, data: ReqFocusTimer) -> AnyPublisher<FocusTimerDTO, AFError> {
         let url = "\(baseURL)/\(id)"
 
-        return AF.request(url, method: .post, parameters: data, encoder: JSONParameterEncoder.default, headers: self.headers())
+        return AF.request(url, method: .put, parameters: data, encoder: JSONParameterEncoder.default, headers: self.headers())
             .validate()
             .publishDecodable(type: FocusTimerDTO.self)
             .value()

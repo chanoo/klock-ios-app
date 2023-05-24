@@ -155,7 +155,8 @@ class TimerManager {
         let seq = 1
         switch type {
         case "FOCUS":
-            let req = ReqFocusTimer(seq: seq, name: "Focus Timer")
+            let dto = FocusTimerModel.toDTO(model: model as! FocusTimerModel)
+            let req = ReqFocusTimer(seq: dto.seq, name: dto.name)
             focusTimerRemoteService.update(id: id, data: req)
                 .sink(receiveCompletion: { completion in
                     switch completion {
