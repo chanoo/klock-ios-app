@@ -83,12 +83,10 @@ struct TaskDetailView: View {
                 FancyButton(
                     title: "찌르기",
                     action: {
-                        // 찌르기 기능을 여기에 구현하세요.
                         self.pokeAllParticipants()
                         Foast.show(message: "참여자들을 모두 찌르기했습니다.")
                     },
-                    backgroundColor: FancyColor.primary.color,
-                    foregroundColor: .white
+                    style: .constant(.primary)
                 )
                 .padding(.top, 16)
             }

@@ -9,6 +9,9 @@ enum Destination {
     case home
     case signIn
     case signUpUsername
+    case signUpNickname
+    case signUpStartOfWeek
+    case signUpStartOfDay
     case signUpTags
     case splash
 }

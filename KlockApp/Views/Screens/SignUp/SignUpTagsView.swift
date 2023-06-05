@@ -32,9 +32,7 @@ struct SignUpTagsView: View {
                             action: {
                                 viewModel.toggleTagSelectionSubject.send(tag.id!)
                             },
-                            backgroundColor: viewModel.signUpUserModel.tagId == tag.id ? FancyColor.primary.color : Color.white,
-                            foregroundColor: viewModel.signUpUserModel.tagId == tag.id ? Color.white : FancyColor.primary.color,
-                            isBlock: false
+                            style: .constant(.secondary)
                         )
                     }
 
@@ -43,8 +41,7 @@ struct SignUpTagsView: View {
                         action: {
                             viewModel.confirmButtonTapped.send()
                         },
-                        backgroundColor: FancyColor.primary.color,
-                        foregroundColor: Color.white
+                        style: .constant(.primary)
                     )
                     .disabled(viewModel.selectedTagId == nil)
                     .opacity(viewModel.selectedTagId == nil ? 0.5 : 1)

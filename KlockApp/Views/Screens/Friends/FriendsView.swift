@@ -7,27 +7,24 @@
 
 import SwiftUI
 
-// 친구 목록 화면
+// 친구 목록 화
 struct FriendsView: View {
-    @StateObject var friendsViewModel = FriendsViewModel()
-
+    @ObservedObject var beaconManager = BeaconManager()
+    
+    let uuid = UUID(uuidString: "E621E1F8-C36C-495A-93FC-0C247A3E6E5F")!
+    let major: UInt16 = 1
+    let minor: UInt16 = 456
+    let identifier = "성찬우"
+    
     var body: some View {
-        List(friendsViewModel.friends) { friend in
-            NavigationLink(destination: FriendDetailView(friendModel: friend)) {
-                HStack {
-                    Text(friend.name)
-                    Spacer()
-                    if friend.isOnline {
-                        Circle()
-                            .fill(Color.green)
-                            .frame(width: 10, height: 10)
-                    } else {
-                        Circle()
-                            .fill(Color.red)
-                            .frame(width: 10, height: 10)
-                    }
-                }
-            }
+        List(beaconManager.nearbyBeacons, id: \.uuid) { beacon in
+            Text(beacon.uuid.uuidString)
+        }
+        .onAppear {
+            beaconManager.start(uuid: uuid, major: major, minor: minor, identifier: identifier)
+        }
+        .onDisappear {
+            beaconManager.stop()
         }
     }
 }

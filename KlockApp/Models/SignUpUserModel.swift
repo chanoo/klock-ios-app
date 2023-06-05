@@ -7,12 +7,19 @@
 
 import Foundation
 
+enum FirstDayOfWeek {
+    case sunday
+    case monday
+}
+
 class SignUpUserModel: ObservableObject {
     @Published var provider: String = ""
     @Published var providerUserId: String = ""
     @Published var firstName: String = ""
     @Published var lastName: String = ""
     @Published var username: String = ""
+    @Published var startDay: FirstDayOfWeek = .sunday
+    @Published var startTime: Int = 9
     @Published var email: String = ""
     @Published var tagId: Int64 = 0
 }

@@ -66,7 +66,7 @@ struct FocusTimerView: View {
                 )
                 .padding(.top, 20)
                 .padding(.bottom, 20)
-
+                
                 FancyButton(
                     title: "잠시 멈춤",
                     action: {
@@ -80,11 +80,8 @@ struct FocusTimerView: View {
                             timeTimerViewModel.stopAndSaveStudySessionIfNeeded()
                         }
                     },
-                    backgroundColor: .white.opacity(0.4),
-                    foregroundColor: .pink.opacity(0.5),
-                    isBlock: false
+                    style: .constant(.primary)
                 )
-
             }
 
         }

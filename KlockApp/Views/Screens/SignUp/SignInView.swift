@@ -7,36 +7,54 @@ struct SignInView: View {
     @State private var activeDestination: Destination?
 
     var body: some View {
-        VStack {
-            ScrollView {
-                VStack {
-                    Image("ic_klock")
-                        .padding(.top, 130)
-                        .padding(.bottom, 32)
+        ZStack {
+            Image("img_characters")
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .edgesIgnoringSafeArea(.all)
 
-                    Text("여기까지 온 당신, 이미 반은 성공!")
-                        .foregroundColor(FancyColor.primary.color)
-                        .font(.system(size: 16))
-                        .padding(.bottom, 4)
+            VStack(alignment: .leading) { // Add alignment here
+                Text("평생 지켜질 공부습관\n평생 친구와 함께")
+                    .foregroundColor(FancyColor.black.color)
+                    .font(.system(size: 24, weight: .semibold))
+                    .lineSpacing(6)
+                    .padding(.top, 150)
 
-                    Text("제대로 성공하러 가볼까요?")
-                        .foregroundColor(FancyColor.primary.color)
-                        .font(.system(size: 24))
-                        .padding(.bottom, 80)
+                Image("ic_logo")
+                    .padding(.top, 10)
 
-                    FancyButton(title: "페이스북으로 시작하기", action: {
-                        viewModel.signInWithFacebookTapped.send()
-                    }, backgroundColor: FancyColor.facebook.color, foregroundColor: .white, icon: Image("ic_facebook"))
-                    .padding(.bottom, 18)
+                Spacer()
 
-                    FancyButton(title: "애플로 시작하기", action: {
+                FancyButton(
+                    title: "애플로 시작하기",
+                    action: {
                         viewModel.signInWithAppleTapped.send()
-                    }, backgroundColor: .black, foregroundColor: .white, icon: Image("ic_apple"))
-                }
-                .padding()
+                    },
+                    icon: Image("ic_apple"),
+                    style: .constant(.apple)
+                )
+
+                FancyButton(
+                    title: "카카오로 시작하기",
+                    action: {
+                        viewModel.signInWithAppleTapped.send()
+                    },
+                    icon: Image("ic_kakao"),
+                    style: .constant(.kakao)
+                )
+
+                FancyButton(
+                    title: "페이스북으로 시작하기",
+                    action: {
+                        viewModel.signInWithFacebookTapped.send()
+                    },
+                    icon: Image("ic_facebook"),
+                    style: .constant(.facebook)
+                )
             }
+            .padding(.bottom, 40)
+            .padding(40)
         }
-        .background(FancyColor.background.color.edgesIgnoringSafeArea(.all))
         .onAppear {
             viewModel.onSignInWithFacebook = signInSuccessful
             viewModel.onSignUpProcess = signUpProcess
@@ -46,7 +64,7 @@ struct SignInView: View {
             appFlowManager.navigateToDestination.send(.home)
         })
         .onReceive(viewModel.signUpProcess, perform: { _ in
-            activeDestination = .signUpUsername
+            activeDestination = .signUpNickname
         })
         .background(
             NavigationLink(
@@ -77,6 +95,11 @@ struct SignInView: View {
             return AnyView(SignUpUsernameView()
                 .environmentObject(viewModel)
                 .environmentObject(signUpUserModel))
+        case .signUpNickname:
+            let viewModel = Container.shared.resolve(SignUpViewModel.self)
+            return AnyView(SignUpNicknameView()
+                .environmentObject(viewModel)
+                .environmentObject(signUpUserModel))
         case .none, _:
             return AnyView(EmptyView())
         }
@@ -93,6 +116,9 @@ struct SignInView: View {
 
 struct SignInView_Previews: PreviewProvider {
     static var previews: some View {
+        
+        let viewModel = Container.shared.resolve(SignInViewModel.self)
         SignInView()
+            .environmentObject(viewModel)
     }
 }

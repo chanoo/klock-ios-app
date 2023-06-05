@@ -77,6 +77,7 @@ class Container {
 
         // View Models
         container.register(ContentViewModel.self) { _ in ContentViewModel() }
+        container.register(FriendsViewModel.self) { _ in FriendsViewModel() }
         container.register(SignInViewModel.self) { _ in SignInViewModel() }
         container.register(SignUpViewModel.self) { resolver in
             SignUpViewModel(signUpUserModel: resolver.resolve(SignUpUserModel.self) ?? SignUpUserModel() )
@@ -85,8 +86,6 @@ class Container {
         container.register(ChatBotViewModel.self) { resolver in
             return ChatBotViewModel()
         }
-        
-        
         
         container.register(TimeTimerViewModel.self) { _ in TimeTimerViewModel() }
 

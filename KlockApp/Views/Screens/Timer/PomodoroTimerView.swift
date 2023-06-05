@@ -61,7 +61,7 @@ struct PomodoroTimerView: View {
                 )
                 .padding(.top, 20)
                 .padding(.bottom, 20)
-
+                
                 FancyButton(
                     title: "잠시 멈춤",
                     action: {
@@ -75,12 +75,9 @@ struct PomodoroTimerView: View {
                             timeTimerViewModel.stopAndSaveStudySessionIfNeeded()
                         }
                     },
-                    backgroundColor: .white.opacity(0.4),
-                    foregroundColor: .pink.opacity(0.5),
-                    isBlock: false
+                    style: .constant(.primary)
                 )
             }
-
         }
         .background(FancyColor.background.color)
         .frame(width: geometry.size.width, height: geometry.size.height)

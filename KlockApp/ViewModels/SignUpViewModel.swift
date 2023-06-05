@@ -18,6 +18,7 @@ class SignUpViewModel: NSObject, ObservableObject {
     @Published var nicknameTextFieldShouldBecomeFirstResponder: Bool = false
     @Published var selectedTagId: Int64?
     @Published var tags: [TagModel] = []
+    @Published var error: String?
 
     private let authenticationService: AuthenticationServiceProtocol = Container.shared.resolve(AuthenticationServiceProtocol.self)
     private let tagService: TagServiceProtocol = Container.shared.resolve(TagServiceProtocol.self)
@@ -32,6 +33,7 @@ class SignUpViewModel: NSObject, ObservableObject {
     let signUpSuccess = PassthroughSubject<Void, Never>()
 
     var onUsernameNextButtonTapped: (() -> Void)?
+    var onNicknameNextButtonTapped: (() -> Void)?
     var onTagsNextButtonTapped: (() -> Void)?
     var onSignUpSuccess: (() -> Void)?
 
@@ -60,9 +62,13 @@ class SignUpViewModel: NSObject, ObservableObject {
     private func setupNextButtonTapped() {
         nextButtonTapped
             .sink { [weak self] _ in
-                self?.onUsernameNextButtonTapped?()
+                self?.onNicknameNextButtonTapped?()
             }
             .store(in: &cancellables)
+    }
+    
+    func setStartDay(day: FirstDayOfWeek) {
+        signUpUserModel.startDay = day
     }
 
     private func setupToggleTagSelection() {

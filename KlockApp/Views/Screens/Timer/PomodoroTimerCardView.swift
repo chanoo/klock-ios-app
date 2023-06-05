@@ -92,9 +92,7 @@ struct PomodoroTimerCardView: View {
                             timeTimerViewModel.pomodoroTimerViewModel = pomodoroTimerViewModel
                         }
                     },
-                    backgroundColor: .white.opacity(0.4),
-                    foregroundColor: .pink.opacity(0.5),
-                    isBlock: false
+                    style: .constant(.primary)
                 )
             }
         }

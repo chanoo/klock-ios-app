@@ -16,6 +16,7 @@ struct HomeView: View {
     @ObservedObject private var chatBotViewModel = Container.shared.resolve(ChatBotViewModel.self)
     @ObservedObject private var taskViewModel = Container.shared.resolve(TaskViewModel.self)
     @ObservedObject private var characterViewModel = Container.shared.resolve(CharacterViewModel.self)
+    @ObservedObject private var friendsViewModel = Container.shared.resolve(FriendsViewModel.self)
 
     private func updateTitle(_ selection: Int) {
         switch selection {
@@ -53,8 +54,8 @@ struct HomeView: View {
                     .environmentObject(taskViewModel)
             )),
             (imageName: "ic_person", content: AnyView(
-                CharacterView()
-                    .environmentObject(characterViewModel)
+                FriendsView()
+                    .environmentObject(friendsViewModel)
             )),
         ])
         .navigationBarTitle(title, displayMode: .large)

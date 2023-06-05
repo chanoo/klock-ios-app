@@ -98,7 +98,7 @@ struct NicknameView: View {
                         viewModel.nicknameTextFieldShouldBecomeFirstResponder = false
                     }
                     viewModel.nextButtonTapped.send()
-                }, backgroundColor: FancyColor.primary.color, foregroundColor: .white)
+                }, style: .constant(.primary))
                 .disabled(!viewModel.isNextButtonEnabled)
                 .opacity(viewModel.isNextButtonEnabled ? 1 : 0.5)
                 .padding(.bottom, 20)

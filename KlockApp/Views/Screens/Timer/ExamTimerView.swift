@@ -70,23 +70,18 @@ struct ExamTimerView: View {
                 .padding(.top, 20)
                 .padding(.bottom, 20)
 
-                FancyButton(
-                    title: "잠시 멈춤",
-                    action: {
-                        Foast.show(message: "정지하려면 길게 누르세요.")
-                    },
-                    longPressAction: {
-                        withAnimation {
-                            tabBarManager.isTabBarVisible = true
-                            examTimerViewModel.isStudying = false
-                            timeTimerViewModel.examTimerViewModel = nil
-                            timeTimerViewModel.stopAndSaveStudySessionIfNeeded()
-                        }
-                    },
-                    backgroundColor: .white.opacity(0.4),
-                    foregroundColor: .pink.opacity(0.5),
-                    isBlock: false
-                )
+                FancyButton(title: "잠시 멈춤", action: {
+                    Foast.show(message: "정지하려면 길게 누르세요.")
+                },
+                longPressAction: {
+                    withAnimation {
+                        tabBarManager.isTabBarVisible = true
+                        examTimerViewModel.isStudying = false
+                        timeTimerViewModel.examTimerViewModel = nil
+                        timeTimerViewModel.stopAndSaveStudySessionIfNeeded()
+                    }
+                },
+                style: .constant(.primary))
             }
         }
         .background(FancyColor.background.color)

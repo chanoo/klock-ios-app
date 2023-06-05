@@ -83,20 +83,14 @@ struct ExamTimerCardView: View {
                 .padding(.top, 20)
                 .padding(.bottom, 20)
 
-                FancyButton(
-                    title: "시험 시작",
-                    action: {
-                        withAnimation {
-                            tabBarManager.isTabBarVisible = false
-                            examTimerViewModel.isStudying = true
-                            timeTimerViewModel.startStudySession()
-                            timeTimerViewModel.examTimerViewModel = examTimerViewModel
-                        }
-                    },
-                    backgroundColor: .white.opacity(0.4),
-                    foregroundColor: .pink.opacity(0.5),
-                    isBlock: false
-                )
+                FancyButton(title: "시험 시작", action: {
+                    withAnimation {
+                        tabBarManager.isTabBarVisible = false
+                        examTimerViewModel.isStudying = true
+                        timeTimerViewModel.startStudySession()
+                        timeTimerViewModel.examTimerViewModel = examTimerViewModel
+                    }
+                }, style: .constant(.primary))
             }
         }
         .background(FancyColor.background.color)

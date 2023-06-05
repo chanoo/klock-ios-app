@@ -18,38 +18,53 @@ struct FancyTextField: View {
     @FocusState private var isFocused: Bool
 
     var body: some View {
-        if isSecureField == true {
-            SecureField(placeholder, text: $text, onCommit: {
-                onCommit?()
-            })
-            .keyboardType(keyboardType ?? .default)
-            .focused($isFocused)
-            .padding()
-            .background(Color.white)
-            .cornerRadius(22)
-            .onChange(of: firstResponder) { value in
-                if value {
-                    isFocused = true
-                } else {
-                    isFocused = false
+        VStack {
+            if isSecureField == true {
+                HStack {
+                    SecureField(placeholder, text: $text, onCommit: {
+                        onCommit?()
+                    })
+                    .keyboardType(keyboardType ?? .default)
+                    .focused($isFocused)
+                    
+                    Image("ic_check_o")
+                        .foregroundColor(.black)
+                }
+            } else {
+                HStack {
+                    TextField(placeholder, text: $text, onCommit: {
+                        onCommit?()
+                    })
+                    .keyboardType(keyboardType ?? .default)
+                    .focused($isFocused)
+                    
+                    Image("ic_check_o")
+                        .foregroundColor(.black)
                 }
             }
-        } else {
-            TextField(placeholder, text: $text, onCommit: {
-                onCommit?()
-            })
-            .keyboardType(keyboardType ?? .default)
-            .focused($isFocused)
-            .padding()
-            .background(FancyColor.background.color)
-            .cornerRadius(22)
-            .onChange(of: firstResponder) { value in
-                if value {
-                    isFocused = true
-                } else {
-                    isFocused = false
-                }
+            Rectangle()
+                .frame(height: 1)
+                .foregroundColor(.black)
+        }
+        .background(Color.white)
+        .onChange(of: firstResponder) { value in
+            if value {
+                isFocused = true
+            } else {
+                isFocused = false
             }
         }
+    }
+}
+
+struct FancyTextField_Previews: PreviewProvider {
+    static var previews: some View {
+        FancyTextField(
+            placeholder: "닉네임",
+            text: .constant(""),
+            keyboardType: .default,
+            isSecureField: false,
+            firstResponder: .constant(false)
+        )
     }
 }

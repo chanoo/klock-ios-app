@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		98099DB92A287E340096AA27 /* SignUpStartWeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98099DB82A287E340096AA27 /* SignUpStartWeekView.swift */; };
+		98099DBB2A287E560096AA27 /* SignUpStartTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98099DBA2A287E560096AA27 /* SignUpStartTimeView.swift */; };
+		98099DBD2A287E920096AA27 /* SignUpNicknameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98099DBC2A287E920096AA27 /* SignUpNicknameView.swift */; };
+		98099DBF2A29C43F0096AA27 /* SignUpTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98099DBE2A29C43F0096AA27 /* SignUpTagView.swift */; };
 		980C623629EE760100D0A7B5 /* FancyTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980C623529EE760100D0A7B5 /* FancyTabView.swift */; };
 		980CD5492A09485F00B203AC /* AlamofireLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980CD5482A09485F00B203AC /* AlamofireLogger.swift */; };
 		981881C229F26879002A4395 /* SelectTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981881C129F26879002A4395 /* SelectTimerView.swift */; };
@@ -81,6 +85,7 @@
 		987E545129D552540007E156 /* KlockAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E545029D552540007E156 /* KlockAppTests.swift */; };
 		987E545B29D552540007E156 /* KlockAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E545A29D552540007E156 /* KlockAppUITests.swift */; };
 		987E545D29D552540007E156 /* KlockAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E545C29D552540007E156 /* KlockAppUITestsLaunchTests.swift */; };
+		9881FC0B2A1F455200497937 /* BeaconManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9881FC0A2A1F455200497937 /* BeaconManager.swift */; };
 		98976AFB2A00EC4800F1CEAE /* TimerRemoteServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98976AFA2A00EC4800F1CEAE /* TimerRemoteServiceProtocol.swift */; };
 		98976AFD2A00ED0200F1CEAE /* TimerRemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98976AFC2A00ED0200F1CEAE /* TimerRemoteService.swift */; };
 		98976AFF2A00ED8500F1CEAE /* TimeTimerDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98976AFE2A00ED8500F1CEAE /* TimeTimerDTO.swift */; };
@@ -185,6 +190,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		98099DB82A287E340096AA27 /* SignUpStartWeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpStartWeekView.swift; sourceTree = "<group>"; };
+		98099DBA2A287E560096AA27 /* SignUpStartTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpStartTimeView.swift; sourceTree = "<group>"; };
+		98099DBC2A287E920096AA27 /* SignUpNicknameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpNicknameView.swift; sourceTree = "<group>"; };
+		98099DBE2A29C43F0096AA27 /* SignUpTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTagView.swift; sourceTree = "<group>"; };
 		980C623229EC621C00D0A7B5 /* FamilyControls.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FamilyControls.framework; path = System/Library/Frameworks/FamilyControls.framework; sourceTree = SDKROOT; };
 		980C623429ED32E000D0A7B5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		980C623529EE760100D0A7B5 /* FancyTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyTabView.swift; sourceTree = "<group>"; };
@@ -266,6 +275,7 @@
 		987E545629D552540007E156 /* KlockAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KlockAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		987E545A29D552540007E156 /* KlockAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlockAppUITests.swift; sourceTree = "<group>"; };
 		987E545C29D552540007E156 /* KlockAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlockAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		9881FC0A2A1F455200497937 /* BeaconManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconManager.swift; sourceTree = "<group>"; };
 		98976AFA2A00EC4800F1CEAE /* TimerRemoteServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerRemoteServiceProtocol.swift; sourceTree = "<group>"; };
 		98976AFC2A00ED0200F1CEAE /* TimerRemoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerRemoteService.swift; sourceTree = "<group>"; };
 		98976AFE2A00ED8500F1CEAE /* TimeTimerDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTimerDTO.swift; sourceTree = "<group>"; };
@@ -477,6 +487,7 @@
 				98D2826629E988100039E6E6 /* CoreDataManager.swift */,
 				9843B7DC29EEE0EB00F91DAD /* NotificationManager.swift */,
 				980C623429ED32E000D0A7B5 /* README.md */,
+				9881FC0A2A1F455200497937 /* BeaconManager.swift */,
 				98AC306C2A134D23006DC48D /* TabBarManager.swift */,
 			);
 			path = Managers;
@@ -748,6 +759,10 @@
 			children = (
 				98CE662229D55BB10009916F /* SignInView.swift */,
 				98B21B6F29D9D390004EFE0E /* SignUpUsernameView.swift */,
+				98099DBC2A287E920096AA27 /* SignUpNicknameView.swift */,
+				98099DB82A287E340096AA27 /* SignUpStartWeekView.swift */,
+				98099DBA2A287E560096AA27 /* SignUpStartTimeView.swift */,
+				98099DBE2A29C43F0096AA27 /* SignUpTagView.swift */,
 				98B21B7129D9DC25004EFE0E /* SignUpTagsView.swift */,
 			);
 			path = SignUp;
@@ -1014,10 +1029,12 @@
 				98B21B5729D6F492004EFE0E /* SocialLoginModel.swift in Sources */,
 				98EBFBF229F98A86004E95F3 /* CharacterViewModel.swift in Sources */,
 				98B21B5B29D6F4BF004EFE0E /* TagModel.swift in Sources */,
+				9881FC0B2A1F455200497937 /* BeaconManager.swift in Sources */,
 				98976B0B2A07819E00F1CEAE /* ExamTimerRemoteService.swift in Sources */,
 				985BE89029E6DC49008582A3 /* SettingsView.swift in Sources */,
 				981881CA29F27316002A4395 /* PageControl.swift in Sources */,
 				9843B7DD29EEE0EB00F91DAD /* NotificationManager.swift in Sources */,
+				98099DBD2A287E920096AA27 /* SignUpNicknameView.swift in Sources */,
 				98976AFF2A00ED8500F1CEAE /* TimeTimerDTO.swift in Sources */,
 				9878FF0D2A0EA17100D38BB4 /* TimerManager.swift in Sources */,
 				9843B7E529EF086600F91DAD /* ProximityAndOrientationServiceProtocol.swift in Sources */,
@@ -1049,6 +1066,7 @@
 				98D2826929E988D00039E6E6 /* MessageLocalService.swift in Sources */,
 				985BE8AE29E73A76008582A3 /* EnvironmentValuesProvider.swift in Sources */,
 				981B389529F44B1200AB0EF8 /* FocusTimerModel.swift in Sources */,
+				98099DBF2A29C43F0096AA27 /* SignUpTagView.swift in Sources */,
 				98AC30752A1363A3006DC48D /* FocusTimerView.swift in Sources */,
 				98B21B5229D6F404004EFE0E /* FriendRelationModel.swift in Sources */,
 				985BE89C29E6E595008582A3 /* FriendModel.swift in Sources */,
@@ -1065,6 +1083,7 @@
 				98E9384E29EA3935009CBF32 /* RoundedCorners.swift in Sources */,
 				9843B7E729EFBF8200F91DAD /* StudySessionsByDateView.swift in Sources */,
 				9833FFC429F5769700CC33F7 /* AccountTimerServiceProtocol.swift in Sources */,
+				98099DB92A287E340096AA27 /* SignUpStartWeekView.swift in Sources */,
 				98B21B4429D60D25004EFE0E /* FancyButton.swift in Sources */,
 				98EBFBE629F783BA004E95F3 /* ChatBotSync.swift in Sources */,
 				98E9386929EAD199009CBF32 /* StudySessionLocalService.swift in Sources */,
@@ -1110,6 +1129,7 @@
 				98AC30832A15CB77006DC48D /* PomodoroTimerViewModel.swift in Sources */,
 				985BE89A29E6E579008582A3 /* FriendsViewModel.swift in Sources */,
 				98AC30712A136198006DC48D /* FocusTimerViewModel.swift in Sources */,
+				98099DBB2A287E560096AA27 /* SignUpStartTimeView.swift in Sources */,
 				984D2C8229DFC2B3008D3EA9 /* AppState.swift in Sources */,
 				98BDD21D29DAD1D400B0440F /* FancyColor.swift in Sources */,
 				980C623629EE760100D0A7B5 /* FancyTabView.swift in Sources */,
@@ -1302,6 +1322,9 @@
 				INFOPLIST_FILE = KlockApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "클라크";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "친구가 나를 찾을때 사용 됩니다.";
+				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "친구가 나를 찾을때 사용 됩니다.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "친구가 나를 찾을때 사용 됩니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
@@ -1343,6 +1366,9 @@
 				INFOPLIST_FILE = KlockApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "클라크";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "친구가 나를 찾을때 사용 됩니다.";
+				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "친구가 나를 찾을때 사용 됩니다.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "친구가 나를 찾을때 사용 됩니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
