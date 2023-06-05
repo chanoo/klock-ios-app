@@ -15,6 +15,7 @@ enum FancyButtonStyle {
     case facebook
     case apple
     case kakao
+    case button
 
     var backgroundColor: Color {
         switch self {
@@ -30,6 +31,8 @@ enum FancyButtonStyle {
             return FancyColor.apple.color
         case .kakao:
             return FancyColor.kakao.color
+        case .button:
+            return FancyColor.black.color
         }
     }
 
@@ -40,13 +43,15 @@ enum FancyButtonStyle {
         case .secondary:
             return FancyColor.primary.color
         case .outline:
-            return FancyColor.primary.color
+            return FancyColor.black.color
         case .facebook:
             return FancyColor.white.color
         case .apple:
             return FancyColor.white.color
         case .kakao:
             return FancyColor.kakao_brown.color
+        case .button:
+            return FancyColor.white.color
         }
     }
     
@@ -57,13 +62,34 @@ enum FancyButtonStyle {
         case .secondary:
             return FancyColor.white.color
         case .outline:
-            return FancyColor.primary.color
+            return FancyColor.black.color
         case .facebook:
             return FancyColor.facebook.color
         case .apple:
             return FancyColor.black.color
         case .kakao:
             return FancyColor.kakao.color
+        case .button:
+            return FancyColor.black.color
+        }
+    }
+    
+    var disableColor: Color {
+        switch self {
+        case .primary:
+            return FancyColor.primary.color
+        case .secondary:
+            return FancyColor.white.color
+        case .outline:
+            return FancyColor.white.color
+        case .facebook:
+            return FancyColor.facebook.color
+        case .apple:
+            return FancyColor.apple.color
+        case .kakao:
+            return FancyColor.kakao.color
+        case .button:
+            return FancyColor.gray2.color
         }
     }
 
@@ -73,33 +99,27 @@ struct FancyButton: View {
     let title: String
     let action: (() -> Void)?
     let longPressAction: (() -> Void)?
-    let disableColor: Color
     let bordered: Bool
     let icon: Image?
     let isBlock: Bool
     let disabled: Bool?
-    let height: CGFloat
     @Binding var style: FancyButtonStyle
 
     init(title: String,
          action: (() -> Void)? = nil,
          longPressAction: (() -> Void)? = nil,
-         disableColor: Color = FancyColor.gray9.color,
          bordered: Bool = false,
          icon: Image? = nil,
          isBlock: Bool = true,
          disabled: Bool = false,
-         height: CGFloat = 52,
          style: Binding<FancyButtonStyle>) {
         self.title = title
         self.action = action
         self.longPressAction = longPressAction
-        self.disableColor = disableColor
         self.bordered = bordered
         self.icon = icon
         self.isBlock = isBlock
         self.disabled = disabled
-        self.height = height
         self._style = style
     }
 
@@ -128,8 +148,8 @@ struct FancyButton: View {
         }
         .padding(.leading, 30)
         .padding(.trailing, 30)
-        .frame(maxWidth: isBlock ? .infinity : nil, minHeight: height)
-        .background(disabled ?? false ? disableColor : style.backgroundColor)
+        .frame(maxWidth: isBlock ? .infinity : nil, minHeight: 52)
+        .background(disabled ?? false ? style.disableColor : style.backgroundColor)
         .cornerRadius(4)
         .overlay(
             RoundedRectangle(cornerRadius: 4)

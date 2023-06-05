@@ -9,7 +9,8 @@ import SwiftUI
 
 struct SignUpStartWeekView: View {
     @EnvironmentObject var viewModel: SignUpViewModel
-    @State private var selectedDay: FirstDayOfWeek?
+    @State private var selectedDay: FirstDayOfWeek = .sunday
+    @State private var activeDestination: Destination?
 
     var body: some View {
         VStack {
@@ -38,7 +39,7 @@ struct SignUpStartWeekView: View {
                         selectedDay = .sunday
                     },
                     bordered: true,
-                    style: .constant(selectedDay == .sunday ? .primary : .outline)
+                    style: .constant(selectedDay == .sunday ? .button : .outline)
                 )
                 FancyButton(
                     title: "월요일",
@@ -47,17 +48,49 @@ struct SignUpStartWeekView: View {
                         selectedDay = .monday
                     },
                     bordered: true,
-                    style: .constant(selectedDay == .monday ? .primary : .outline)
+                    style: .constant(selectedDay == .monday ? .button : .outline)
                 )
             }
             
             Spacer()
             
-            FancyButton(title: "다음", style: .constant(.primary))
+            FancyButton(
+                title: "다음",
+                action: {
+                    activeDestination = .signUpStartOfDay
+                },
+                disabled: !viewModel.isStartOfWeekNextButtonEnabled,
+                style: .constant(.button)
+            )
+            
+            NavigationLink(
+                destination: viewForDestination(activeDestination),
+                isActive: Binding<Bool>(
+                    get: { activeDestination == .signUpStartOfDay },
+                    set: { newValue in
+                        if !newValue {
+                            activeDestination = nil
+                        }
+                    }
+                ),
+                label: {
+                    EmptyView()
+                }
+            )
+            .hidden()
         }
         .frame(maxHeight: .infinity, alignment: .topLeading)
         .padding(.all, 40)
     }
+    
+    private func viewForDestination(_ destination: Destination?) -> AnyView {
+         switch destination {
+         case .signUpStartOfDay:
+             return AnyView(SignUpStartTimeView().environmentObject(viewModel))
+         case .none, _:
+             return AnyView(EmptyView())
+         }
+     }
 }
 
 struct SignUpStartWeekView_Previews: PreviewProvider {

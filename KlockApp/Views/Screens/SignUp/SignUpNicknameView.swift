@@ -37,8 +37,7 @@ struct SignUpNicknameView: View {
             FancyTextField(
                 placeholder: "닉네임을 입력해주세요",
                 text: $viewModel.signUpUserModel.username,
-                keyboardType: .default,
-                isSecureField: false,
+                isValid: viewModel.isNextButtonEnabled,
                 firstResponder: $viewModel.nicknameTextFieldShouldBecomeFirstResponder
             )
 
@@ -48,14 +47,18 @@ struct SignUpNicknameView: View {
             
             Spacer()
 
-            FancyButton(title: "다음", action: {
-                DispatchQueue.main.async {
-                    viewModel.nicknameTextFieldShouldBecomeFirstResponder = false
-                }
-                activeDestination = .signUpStartOfWeek
-            }, style: .constant(.primary))
-            .disabled(!viewModel.isNextButtonEnabled)
-            
+            FancyButton(
+                title: "다음",
+                action: {
+                    DispatchQueue.main.async {
+                        viewModel.nicknameTextFieldShouldBecomeFirstResponder = false
+                    }
+                    activeDestination = .signUpStartOfWeek
+                },
+                disabled: !viewModel.isNextButtonEnabled,
+                style: .constant(.button)
+            )
+
             NavigationLink(
                 destination: viewForDestination(activeDestination),
                 isActive: Binding<Bool>(
