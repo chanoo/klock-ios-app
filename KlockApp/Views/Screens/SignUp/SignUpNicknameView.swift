@@ -37,7 +37,7 @@ struct SignUpNicknameView: View {
             FancyTextField(
                 placeholder: "닉네임을 입력해주세요",
                 text: $viewModel.signUpUserModel.username,
-                isValid: viewModel.isNextButtonEnabled,
+                isValid: viewModel.isStartOfWeekNextButtonEnabled,
                 firstResponder: $viewModel.nicknameTextFieldShouldBecomeFirstResponder
             )
 
@@ -55,7 +55,7 @@ struct SignUpNicknameView: View {
                     }
                     activeDestination = .signUpStartOfWeek
                 },
-                disabled: !viewModel.isNextButtonEnabled,
+                disabled: .constant(!viewModel.isStartOfWeekNextButtonEnabled),
                 style: .constant(.button)
             )
 
@@ -77,14 +77,15 @@ struct SignUpNicknameView: View {
         }
         // 왼쪽 정렬
         .frame(maxHeight: .infinity, alignment: .topLeading)
-        .padding(.all, 40)
+        .navigationBarBackButtonHidden()
+        .padding(.all, 30)
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 viewModel.nicknameTextFieldShouldBecomeFirstResponder = true
             }
         }
         .onChange(of: viewModel.signUpUserModel.username) { newValue in
-            viewModel.isNextButtonEnabled = newValue.count >= 2
+            viewModel.isStartOfWeekNextButtonEnabled = newValue.count >= 2
         }
     }
     

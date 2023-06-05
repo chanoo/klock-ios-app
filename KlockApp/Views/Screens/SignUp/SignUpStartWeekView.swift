@@ -59,7 +59,7 @@ struct SignUpStartWeekView: View {
                 action: {
                     activeDestination = .signUpStartOfDay
                 },
-                disabled: !viewModel.isStartOfWeekNextButtonEnabled,
+                disabled: .constant(!viewModel.isStartOfWeekNextButtonEnabled),
                 style: .constant(.button)
             )
             
@@ -80,7 +80,8 @@ struct SignUpStartWeekView: View {
             .hidden()
         }
         .frame(maxHeight: .infinity, alignment: .topLeading)
-        .padding(.all, 40)
+        .navigationBarBackButtonHidden()
+        .padding(.all, 30)
     }
     
     private func viewForDestination(_ destination: Destination?) -> AnyView {

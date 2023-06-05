@@ -62,7 +62,7 @@ enum FancyButtonStyle {
         case .secondary:
             return FancyColor.white.color
         case .outline:
-            return FancyColor.black.color
+            return FancyColor.gray1.color
         case .facebook:
             return FancyColor.facebook.color
         case .apple:
@@ -102,7 +102,7 @@ struct FancyButton: View {
     let bordered: Bool
     let icon: Image?
     let isBlock: Bool
-    let disabled: Bool?
+    @Binding var disabled: Bool?
     @Binding var style: FancyButtonStyle
 
     init(title: String,
@@ -111,7 +111,7 @@ struct FancyButton: View {
          bordered: Bool = false,
          icon: Image? = nil,
          isBlock: Bool = true,
-         disabled: Bool = false,
+         disabled: Binding<Bool?> = .constant(false),
          style: Binding<FancyButtonStyle>) {
         self.title = title
         self.action = action
@@ -119,7 +119,7 @@ struct FancyButton: View {
         self.bordered = bordered
         self.icon = icon
         self.isBlock = isBlock
-        self.disabled = disabled
+        self._disabled = disabled
         self._style = style
     }
 
@@ -146,14 +146,14 @@ struct FancyButton: View {
                 .foregroundColor(style.foregroundColor)
                 .fontWeight(.bold)
         }
-        .padding(.leading, 30)
-        .padding(.trailing, 30)
+        .padding(.leading, 15)
+        .padding(.trailing, 15)
         .frame(maxWidth: isBlock ? .infinity : nil, minHeight: 52)
         .background(disabled ?? false ? style.disableColor : style.backgroundColor)
         .cornerRadius(4)
         .overlay(
             RoundedRectangle(cornerRadius: 4)
-                .stroke(style.outlineColor.opacity(0.3), lineWidth: bordered ? 1 : 0)
+                .stroke(style.outlineColor, lineWidth: bordered ? 1 : 0)
         )
     }
 }

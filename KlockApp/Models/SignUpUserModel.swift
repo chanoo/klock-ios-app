@@ -19,7 +19,7 @@ class SignUpUserModel: ObservableObject {
     @Published var lastName: String = ""
     @Published var username: String = ""
     @Published var startDay: FirstDayOfWeek = .sunday
-    @Published var startTime: Int = 9
+    @Published var startTime: Int = 5
     @Published var email: String = ""
     @Published var tagId: Int64 = 0
 }

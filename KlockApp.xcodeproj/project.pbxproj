@@ -123,9 +123,9 @@
 		98B21B5B29D6F4BF004EFE0E /* TagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B5A29D6F4BF004EFE0E /* TagModel.swift */; };
 		98B21B6C29D9A7A5004EFE0E /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B6B29D9A7A5004EFE0E /* HomeView.swift */; };
 		98B21B6E29D9D21A004EFE0E /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B6D29D9D21A004EFE0E /* SignUpViewModel.swift */; };
-		98B21B7029D9D390004EFE0E /* SignUpUsernameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B6F29D9D390004EFE0E /* SignUpUsernameView.swift */; };
 		98B21B7229D9DC25004EFE0E /* SignUpTagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B7129D9DC25004EFE0E /* SignUpTagsView.swift */; };
 		98B21B7629DA6288004EFE0E /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B7529DA6288004EFE0E /* Destination.swift */; };
+		98B387B02A2DDFB500F18AD2 /* SignUpProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B387AF2A2DDFB500F18AD2 /* SignUpProfileImageView.swift */; };
 		98BDD21D29DAD1D400B0440F /* FancyColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BDD21C29DAD1D400B0440F /* FancyColor.swift */; };
 		98BDD22029DD0FA800B0440F /* EmailValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BDD21F29DD0FA800B0440F /* EmailValidator.swift */; };
 		98CE661629D55A370009916F /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 98CE661529D55A370009916F /* Swinject */; };
@@ -313,9 +313,9 @@
 		98B21B5A29D6F4BF004EFE0E /* TagModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagModel.swift; sourceTree = "<group>"; };
 		98B21B6B29D9A7A5004EFE0E /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		98B21B6D29D9D21A004EFE0E /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
-		98B21B6F29D9D390004EFE0E /* SignUpUsernameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpUsernameView.swift; sourceTree = "<group>"; };
 		98B21B7129D9DC25004EFE0E /* SignUpTagsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTagsView.swift; sourceTree = "<group>"; };
 		98B21B7529DA6288004EFE0E /* Destination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Destination.swift; sourceTree = "<group>"; };
+		98B387AF2A2DDFB500F18AD2 /* SignUpProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpProfileImageView.swift; sourceTree = "<group>"; };
 		98BDD21C29DAD1D400B0440F /* FancyColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyColor.swift; sourceTree = "<group>"; };
 		98BDD21F29DD0FA800B0440F /* EmailValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailValidator.swift; sourceTree = "<group>"; };
 		98CE661829D55A650009916F /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
@@ -758,12 +758,12 @@
 			isa = PBXGroup;
 			children = (
 				98CE662229D55BB10009916F /* SignInView.swift */,
-				98B21B6F29D9D390004EFE0E /* SignUpUsernameView.swift */,
 				98099DBC2A287E920096AA27 /* SignUpNicknameView.swift */,
 				98099DB82A287E340096AA27 /* SignUpStartWeekView.swift */,
 				98099DBA2A287E560096AA27 /* SignUpStartTimeView.swift */,
 				98099DBE2A29C43F0096AA27 /* SignUpTagView.swift */,
 				98B21B7129D9DC25004EFE0E /* SignUpTagsView.swift */,
+				98B387AF2A2DDFB500F18AD2 /* SignUpProfileImageView.swift */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -1046,6 +1046,7 @@
 				98D7C95329E460470075D201 /* AppFlowManager.swift in Sources */,
 				980CD5492A09485F00B203AC /* AlamofireLogger.swift in Sources */,
 				982140A32A07EFBE00C68EB9 /* APIServiceProtocol.swift in Sources */,
+				98B387B02A2DDFB500F18AD2 /* SignUpProfileImageView.swift in Sources */,
 				985BE8A429E6EA3E008582A3 /* ChatGPTService.swift in Sources */,
 				985BE8B229E7D510008582A3 /* ChatBotListView.swift in Sources */,
 				98AC306D2A134D23006DC48D /* TabBarManager.swift in Sources */,
@@ -1120,7 +1121,6 @@
 				985BE8A629E6EA60008582A3 /* ChatGPTServiceProtocol.swift in Sources */,
 				98D2826729E988100039E6E6 /* CoreDataManager.swift in Sources */,
 				984D2C8B29DFDBAA008D3EA9 /* CommonViewModifier.swift in Sources */,
-				98B21B7029D9D390004EFE0E /* SignUpUsernameView.swift in Sources */,
 				985BE89629E6E359008582A3 /* ClockModalView.swift in Sources */,
 				98AC30732A13637C006DC48D /* FocusTimerCardView.swift in Sources */,
 				98D7C95129E45C550075D201 /* ContentView.swift in Sources */,

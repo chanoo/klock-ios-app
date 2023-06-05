@@ -90,11 +90,6 @@ struct SignInView: View {
         switch destination {
         case .home:
             return AnyView(HomeView())
-        case .signUpUsername:
-            let viewModel = Container.shared.resolve(SignUpViewModel.self)
-            return AnyView(SignUpUsernameView()
-                .environmentObject(viewModel)
-                .environmentObject(signUpUserModel))
         case .signUpNickname:
             let viewModel = Container.shared.resolve(SignUpViewModel.self)
             return AnyView(SignUpNicknameView()

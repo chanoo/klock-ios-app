@@ -14,9 +14,9 @@ import Swinject
 class SignUpViewModel: NSObject, ObservableObject {
 
     @Published var signUpUserModel: SignUpUserModel
-    @Published var isNextButtonEnabled = false
     @Published var isStartOfWeekNextButtonEnabled = false
     @Published var isStartOfDayNextButtonEnabled = false
+    @Published var isTagNextButtonEnabled = false
     @Published var nicknameTextFieldShouldBecomeFirstResponder: Bool = false
     @Published var selectedTagId: Int64?
     @Published var tags: [TagModel] = []
@@ -26,19 +26,15 @@ class SignUpViewModel: NSObject, ObservableObject {
     private let tagService: TagServiceProtocol = Container.shared.resolve(TagServiceProtocol.self)
 
     var cancellables: Set<AnyCancellable> = []
-    var isNextButtonEnabledCancellable: AnyCancellable?
     var isStartOfWeekNextButtonEnabledCancellable: AnyCancellable?
     var isStartOfDayNextButtonEnabledCancellable: AnyCancellable?
+    var isTagNextButtonEnabledCancellable: AnyCancellable?
 
-    let nextButtonTapped = PassthroughSubject<Void, Never>()
     let toggleTagSelectionSubject = PassthroughSubject<Int64, Never>()
     let confirmButtonTapped = PassthroughSubject<Void, Never>()
     let fetchTagsSubject = PassthroughSubject<Void, Never>()
     let signUpSuccess = PassthroughSubject<Void, Never>()
 
-    var onUsernameNextButtonTapped: (() -> Void)?
-    var onNicknameNextButtonTapped: (() -> Void)?
-    var onTagsNextButtonTapped: (() -> Void)?
     var onSignUpSuccess: (() -> Void)?
 
     init(signUpUserModel: SignUpUserModel) {
@@ -50,7 +46,6 @@ class SignUpViewModel: NSObject, ObservableObject {
     }
 
     private func setupBindings() {
-        setupNextButtonTapped()
         setupIsNextButtonEnabled()
         setupToggleTagSelection()
         setupSignUpButtonTapped()
@@ -58,10 +53,6 @@ class SignUpViewModel: NSObject, ObservableObject {
     }
 
     private func setupIsNextButtonEnabled() {
-        isNextButtonEnabledCancellable = $signUpUserModel
-            .map { $0.username.count >= 2 }
-            .assign(to: \.isNextButtonEnabled, on: self)
-        
         isStartOfWeekNextButtonEnabledCancellable = $signUpUserModel
             .map { $0.username.count >= 2 }
             .assign(to: \.isStartOfWeekNextButtonEnabled, on: self)
@@ -69,14 +60,10 @@ class SignUpViewModel: NSObject, ObservableObject {
         isStartOfDayNextButtonEnabledCancellable = $signUpUserModel
             .map { $0.startDay == .sunday || $0.startDay == .monday }
             .assign(to: \.isStartOfDayNextButtonEnabled, on: self)
-    }
 
-    private func setupNextButtonTapped() {
-        nextButtonTapped
-            .sink { [weak self] _ in
-                self?.onNicknameNextButtonTapped?()
-            }
-            .store(in: &cancellables)
+        isTagNextButtonEnabledCancellable = $signUpUserModel
+            .map { $0.tagId > 0 }
+            .assign(to: \.isTagNextButtonEnabled, on: self)
     }
     
     func setStartDay(day: FirstDayOfWeek) {

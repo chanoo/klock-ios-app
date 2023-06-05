@@ -25,8 +25,8 @@
                                 <color key="tintColor" name="color_launch_symbol"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="함께 지켜가는 공부습관" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="guc-PH-Ftv">
-                                <rect key="frame" x="132.33333333333331" y="390" width="128.33333333333331" height="17"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                <rect key="frame" x="119.00000000000001" y="386.66666666666669" width="155.33333333333337" height="20.333333333333314"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <color key="textColor" name="color_launch_symbol"/>
                                 <nil key="highlightedColor"/>
                             </label>
