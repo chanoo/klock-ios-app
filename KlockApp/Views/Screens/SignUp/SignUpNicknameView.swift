@@ -77,6 +77,7 @@ struct SignUpNicknameView: View {
         }
         // 왼쪽 정렬
         .frame(maxHeight: .infinity, alignment: .topLeading)
+//        .navigationBarItems(leading: BackButtonView())
         .navigationBarBackButtonHidden()
         .padding(.all, 30)
         .onAppear {

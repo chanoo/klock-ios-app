@@ -80,6 +80,7 @@ struct SignUpStartWeekView: View {
             .hidden()
         }
         .frame(maxHeight: .infinity, alignment: .topLeading)
+//        .navigationBarItems(leading: BackButtonView())
         .navigationBarBackButtonHidden()
         .padding(.all, 30)
     }

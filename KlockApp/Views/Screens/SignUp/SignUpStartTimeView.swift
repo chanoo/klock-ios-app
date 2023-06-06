@@ -87,6 +87,7 @@ struct SignUpStartTimeView: View {
         }
         // 왼쪽 정렬
         .frame(maxHeight: .infinity, alignment: .topLeading)
+//        .navigationBarItems(leading: BackButtonView())ㄴ
         .navigationBarBackButtonHidden()
         .padding(.all, 30)
     }

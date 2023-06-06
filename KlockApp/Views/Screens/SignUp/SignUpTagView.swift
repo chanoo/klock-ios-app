@@ -67,6 +67,7 @@ struct SignUpTagView: View {
                     style: .constant(.button)
                 )
             }
+//            .navigationBarItems(leading: BackButtonView())
             .navigationBarBackButtonHidden()
             .padding(.all, 30)
             .onChange(of: viewModel.signUpUserModel.tagId > 0) { newValue in
