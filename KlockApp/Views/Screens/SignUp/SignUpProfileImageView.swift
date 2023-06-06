@@ -64,7 +64,7 @@ struct SignUpProfileImageView: View {
             NavigationLink(
                 destination: viewForDestination(activeDestination),
                 isActive: Binding<Bool>(
-                    get: { activeDestination == .signUpStartOfDay },
+                    get: { activeDestination != nil },
                     set: { newValue in
                         if !newValue {
                             activeDestination = nil
@@ -81,17 +81,26 @@ struct SignUpProfileImageView: View {
 //        .navigationBarItems(leading: BackButtonView())
         .navigationBarBackButtonHidden()
         .padding(.all, 30)
+        .onAppear {
+            viewModel.onSignUpSuccess = signUpSuccess
+        }
+        .onReceive(viewModel.signUpSuccess, perform: { _ in
+            activeDestination = .splash
+        })
     }
     
     private func viewForDestination(_ destination: Destination?) -> AnyView {
-         switch destination {
-         case .signUpStartOfDay:
-             return AnyView(SignUpStartTimeView().environmentObject(viewModel))
-         case .none, _:
-             return AnyView(EmptyView())
-         }
-     }
+        switch destination {
+        case .splash:
+            return AnyView(SplashView())
+        case .none, _:
+            return AnyView(EmptyView())
+        }
+    }
 
+    private func signUpSuccess() {
+        viewModel.signUpSuccess.send()
+    }
 }
 
 struct SignUpProfileImageView_Previews: PreviewProvider {

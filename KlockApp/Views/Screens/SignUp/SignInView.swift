@@ -92,6 +92,7 @@ struct SignInView: View {
             return AnyView(HomeView())
         case .signUpNickname:
             let viewModel = Container.shared.resolve(SignUpViewModel.self)
+            viewModel.signUpUserModel = signUpUserModel
             return AnyView(SignUpNicknameView()
                 .environmentObject(viewModel)
                 .environmentObject(signUpUserModel))
