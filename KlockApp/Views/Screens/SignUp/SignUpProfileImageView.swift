@@ -6,11 +6,56 @@
 //
 
 import SwiftUI
+import UIKit
+
+struct ImagePicker: UIViewControllerRepresentable {
+    @Environment(\.presentationMode) private var presentationMode
+    @Binding var selectedImage: UIImage?
+    var sourceType: UIImagePickerController.SourceType
+
+    class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+        @Binding var selectedImage: UIImage?
+        @Environment(\.presentationMode) var presentationMode
+
+        init(selectedImage: Binding<UIImage?>) {
+            _selectedImage = selectedImage
+        }
+
+        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+            if let uiImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+                selectedImage = uiImage
+            }
+            presentationMode.wrappedValue.dismiss()
+        }
+        
+        func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+            presentationMode.wrappedValue.dismiss()
+        }
+    }
+
+    func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> UIImagePickerController {
+        let picker = UIImagePickerController()
+        picker.sourceType = sourceType
+        picker.delegate = context.coordinator
+        return picker
+    }
+    
+    func makeCoordinator() -> Coordinator {
+        return Coordinator(selectedImage: $selectedImage)
+    }
+    
+    func updateUIViewController(_ uiViewController: UIImagePickerController, context: UIViewControllerRepresentableContext<ImagePicker>) {
+    }
+}
+
 
 struct SignUpProfileImageView: View {
     @EnvironmentObject var viewModel: SignUpViewModel
     @State private var selectedDay: FirstDayOfWeek = .sunday
     @State private var activeDestination: Destination?
+    @State private var isShowingImagePicker = false
+    @State private var selectedImage: UIImage?
+    @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
 
     var body: some View {
         VStack {
@@ -33,15 +78,15 @@ struct SignUpProfileImageView: View {
 
 
             ZStack {
-                Button {
-                    
-                } label: {
+                if let image = selectedImage {
+                    Image(uiImage: image)
+                        .resizable()
+                } else {
                     Image("img_profile")
                 }
                 
-                
                 Button {
-                    
+                    showActionSheet()
                 } label: {
                     Image("ic_plus")
                 }
@@ -95,6 +140,23 @@ struct SignUpProfileImageView: View {
             return AnyView(SplashView())
         case .none, _:
             return AnyView(EmptyView())
+        }
+    }
+    
+    func showActionSheet() {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        actionSheet.addAction(UIAlertAction(title: "Camera", style: .default) { _ in
+            self.sourceType = .camera
+            self.isShowingImagePicker = true
+        })
+        actionSheet.addAction(UIAlertAction(title: "Photo Library", style: .default) { _ in
+            self.sourceType = .photoLibrary
+            self.isShowingImagePicker = true
+        })
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+
+        if let controller = UIApplication.shared.windows.first?.rootViewController {
+            controller.present(actionSheet, animated: true)
         }
     }
 

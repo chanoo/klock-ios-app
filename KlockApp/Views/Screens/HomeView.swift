@@ -37,41 +37,62 @@ struct HomeView: View {
 
     var body: some View {
         FancyTabView(selection: $selection, items: [
-            (imageName: "ic_clock", content: AnyView(
-                TimeTimerView()
-                    .environmentObject(timeTimerViewModel)
-            )),
-            (imageName: "ic_bar_graph", content: AnyView(
-                CalendarView()
-                    .environmentObject(calendarViewModel)
-            )),
-            (imageName: "ic_bachelor_cap", content: AnyView(
-                ChatBotListView()
-                    .environmentObject(chatBotViewModel)
-            )),
-            (imageName: "ic_arrow_target", content: AnyView(
-                TaskListView()
-                    .environmentObject(taskViewModel)
-            )),
-            (imageName: "ic_person", content: AnyView(
-                FriendsView()
-                    .environmentObject(friendsViewModel)
-            )),
+            (
+                selectedImageName: "ic_calendar",
+                deselectedImageName: "ic_calendar_o",
+                content: AnyView(
+                    CalendarView()
+                        .environmentObject(calendarViewModel)
+                )
+            ),
+            (
+                selectedImageName: "ic_balloon",
+                deselectedImageName: "ic_balloon_o",
+                content: AnyView(
+                    ChatBotListView()
+                        .environmentObject(chatBotViewModel)
+                )
+            ),
+            (
+                selectedImageName: "ic_timer",
+                deselectedImageName: "ic_timer",
+                content: AnyView(
+                    TimeTimerView()
+                        .environmentObject(timeTimerViewModel)
+                )
+            ),
+            (
+                selectedImageName: "ic_peaple",
+                deselectedImageName: "ic_peaple_o",
+                content: AnyView(
+                    FriendsView()
+                        .environmentObject(friendsViewModel)
+                )
+            ),
+            (
+                selectedImageName: "ic_smile",
+                deselectedImageName: "ic_smile_o",
+                content: AnyView(
+                    TaskListView()
+                        .environmentObject(taskViewModel)
+                )
+            ),
         ])
-        .navigationBarTitle(title, displayMode: .large)
+        .navigationBarHidden(true)
         .onChange(of: selection) { newSelection in
             updateTitle(newSelection)
         }
         .onAppear {
             updateTitle(selection)
         }
+        .background(FancyColor.facebook.color)
     }
 }
 
-
-struct HomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeView()
-            .environmentObject(Container.shared.resolve(TimeTimerViewModel.self))
-    }
-}
+//
+//struct HomeView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        HomeView()
+//            .environmentObject(Container.shared.resolve(TimeTimerViewModel.self))
+//    }
+//}

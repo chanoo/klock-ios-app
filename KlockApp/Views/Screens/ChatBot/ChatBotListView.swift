@@ -12,11 +12,25 @@ struct ChatBotListView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            List(viewModel.chatBots, id: \.id) { chatBot in
-                NavigationLink(destination:ChatBotChatView(chatBot: chatBot).environmentObject(viewModel)) {
-                    ChatBotRow(chatBot: chatBot)
+            List {
+                Section(
+                    header: Text("AI 선생님에게\n언제든 질문해보세요")
+                        .font(.system(size: 24, weight: .bold))
+                        .lineSpacing(4)
+                        .padding(.top)
+                        .padding(.bottom)
+                        .foregroundColor(FancyColor.black.color)
+                ) {
+                    ForEach(viewModel.chatBots, id: \.id) { chatBot in
+                        NavigationLink(destination:ChatBotChatView(chatBot: chatBot).environmentObject(viewModel)) {
+                            ChatBotRow(chatBot: chatBot)
+                        }
+                        .listRowBackground(FancyColor.white.color)
+                    }
                 }
             }
+            .listStyle(.plain)
+            .background(FancyColor.background.color.ignoresSafeArea())
         }
     }
 }
@@ -51,6 +65,8 @@ struct ChatBotRow: View {
 
 struct ChatBotListView_Previews: PreviewProvider {
     static var previews: some View {
+        let viewModel = Container.shared.resolve(ChatBotViewModel.self)
         ChatBotListView()
+            .environmentObject(viewModel)
     }
 }
