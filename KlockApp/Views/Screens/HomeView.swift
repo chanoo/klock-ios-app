@@ -85,7 +85,7 @@ struct HomeView: View {
         .onAppear {
             updateTitle(selection)
         }
-        .background(FancyColor.facebook.color)
+        .background(FancyColor.background.color)
     }
 }
 

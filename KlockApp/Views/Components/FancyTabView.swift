@@ -7,6 +7,7 @@
 import SwiftUI
 
 struct FancyTabView: View {
+    @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var tabBarManager: TabBarManager
     @Binding var selection: Int
     let items: [(selectedImageName: String?, deselectedImageName: String, content: AnyView)]
@@ -36,7 +37,7 @@ struct FancyTabView: View {
                             }
                         }
                         .padding(.horizontal)
-                        .background(FancyColor.white.color)
+                        .background(FancyColor.navigationBar.color)
                         .frame(height: tabBarManager.isTabBarVisible ? 60 : 0)
                     }
                     .offset(y: tabBarManager.isTabBarVisible ? 0 : 100)
@@ -62,7 +63,7 @@ struct FancyTabItem: View {
                     .frame(height: 2)
             } else {
                 Rectangle()
-                    .fill(FancyColor.gray2.color)
+                    .fill(FancyColor.black.color)
                     .frame(height: 1)
             }
             
@@ -72,7 +73,7 @@ struct FancyTabItem: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(maxWidth: 28, maxHeight: 28)
-                .foregroundColor(isSelected ? FancyColor.black.color : colorScheme == .dark ? .white.opacity(0.8) : FancyColor.gray2.color )
+                .foregroundColor(isSelected ? (colorScheme == .dark ? FancyColor.primary.color : FancyColor.black.color) : colorScheme == .dark ? FancyColor.gray2.color : FancyColor.gray2.color )
             
             Spacer()
         }

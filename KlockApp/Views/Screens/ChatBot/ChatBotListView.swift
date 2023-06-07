@@ -19,18 +19,25 @@ struct ChatBotListView: View {
                         .lineSpacing(4)
                         .padding(.top)
                         .padding(.bottom)
-                        .foregroundColor(FancyColor.black.color)
+                        .foregroundColor(FancyColor.header.color)
                 ) {
                     ForEach(viewModel.chatBots, id: \.id) { chatBot in
-                        NavigationLink(destination:ChatBotChatView(chatBot: chatBot).environmentObject(viewModel)) {
-                            ChatBotRow(chatBot: chatBot)
-                        }
-                        .listRowBackground(FancyColor.white.color)
+                        ChatBotRow(chatBot: chatBot)
+                            .background{
+                                NavigationLink(destination:ChatBotChatView(chatBot: chatBot).environmentObject(viewModel)) {
+                                }
+                                .hidden()
+                            }
+                            .listRowSeparator(.hidden)
+                            .listRowInsets(EdgeInsets())
+                            .padding(.leading, 15)
+                            .padding(.trailing, 15)
+                            .padding(.bottom, 10)
+                            .background(FancyColor.background.color)
                     }
                 }
             }
             .listStyle(.plain)
-            .background(FancyColor.background.color.ignoresSafeArea())
         }
     }
 }
@@ -50,6 +57,7 @@ struct ChatBotRow: View {
                 Spacer()
                 Text("\(chatBot.subject) \(chatBot.name)")
                     .font(.headline)
+                    .foregroundColor(FancyColor.text.color)
                 
                 Spacer()
                 
@@ -60,6 +68,10 @@ struct ChatBotRow: View {
             }
             .padding(.leading, 10)
         }
+        .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+        .padding(10)
+        .background(FancyColor.listCell.color)
+        .cornerRadius(4)
     }
 }
 
@@ -68,5 +80,6 @@ struct ChatBotListView_Previews: PreviewProvider {
         let viewModel = Container.shared.resolve(ChatBotViewModel.self)
         ChatBotListView()
             .environmentObject(viewModel)
+            .background(FancyColor.background.color)
     }
 }

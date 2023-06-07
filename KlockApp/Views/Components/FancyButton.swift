@@ -49,7 +49,7 @@ enum FancyButtonStyle {
         case .apple:
             return FancyColor.white.color
         case .kakao:
-            return FancyColor.kakao_brown.color
+            return FancyColor.kakaoBrown.color
         case .button:
             return FancyColor.white.color
         }
