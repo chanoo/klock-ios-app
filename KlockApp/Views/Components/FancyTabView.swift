@@ -59,11 +59,11 @@ struct FancyTabItem: View {
         VStack {
             if isSelected {
                 Rectangle()
-                    .fill(FancyColor.black.color)
+                    .fill(.clear)
                     .frame(height: 2)
             } else {
                 Rectangle()
-                    .fill(FancyColor.black.color)
+                    .fill(.clear)
                     .frame(height: 1)
             }
             
@@ -73,7 +73,7 @@ struct FancyTabItem: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(maxWidth: 28, maxHeight: 28)
-                .foregroundColor(isSelected ? (colorScheme == .dark ? FancyColor.primary.color : FancyColor.black.color) : colorScheme == .dark ? FancyColor.gray2.color : FancyColor.gray2.color )
+                .foregroundColor(isSelected ? (colorScheme == .dark ? FancyColor.primary.color : FancyColor.black.color) : colorScheme == .dark ? FancyColor.gray8.color : FancyColor.gray2.color )
             
             Spacer()
         }

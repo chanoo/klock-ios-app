@@ -25,7 +25,7 @@ struct ChatBotChatView: View {
                                 Spacer()
                                 ProgressView()
                                     .padding()
-                                    .background(FancyColor.primary.color.opacity(0.2))
+                                    .background(FancyColor.chatBubble.color)
                                     .clipShape(RoundedCorners(tl: 10, tr: 0, bl: 10, br: 10))
                                     .foregroundColor(colorScheme == .dark ? Color.white : FancyColor.primary.color)
                             }
@@ -116,13 +116,13 @@ struct ChatBubble: View {
                     Spacer()
                     Text(messageModel.content)
                         .padding()
-                        .background(colorScheme == .dark ? FancyColor.primary.color.opacity(0.5) : FancyColor.primary.color)
+                        .background(FancyColor.chatBubbleMe.color)
                         .clipShape(RoundedCorners(tl: 10, tr: 10, bl: 10, br: 0))
                         .foregroundColor(.white)
                 } else {
                     Text(messageModel.content)
                         .padding()
-                        .background(FancyColor.primary.color.opacity(0.2))
+                        .background(FancyColor.chatBubble.color)
                         .clipShape(RoundedCorners(tl: 10, tr: 10, bl: 0, br: 10))
                         .foregroundColor(colorScheme == .dark ? Color.white : FancyColor.primary.color)
                     Spacer()
@@ -134,5 +134,16 @@ struct ChatBubble: View {
             .padding(.trailing, messageModel.isUser ? 10 : 0)
         }
         .rotationEffect(.degrees(180), anchor: .center) // VStack을 180도 회전
+    }
+}
+
+struct ChatBotChatView_Previews: PreviewProvider {
+    static var previews: some View {
+        let chatBotModel = ChatBotModel(id: 1, subject: "챗봇", title: "수학", name: "필즈", chatBotImageUrl: "", persona: "챗봇")
+        
+        let viewModel = Container.shared.resolve(ChatBotViewModel.self)
+        ChatBotChatView( chatBot: chatBotModel)
+            .environmentObject(viewModel)
+            .background(FancyColor.background.color)
     }
 }

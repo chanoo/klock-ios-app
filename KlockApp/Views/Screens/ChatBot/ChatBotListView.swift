@@ -26,7 +26,7 @@ struct ChatBotListView: View {
                             .background{
                                 NavigationLink(destination:ChatBotChatView(chatBot: chatBot).environmentObject(viewModel)) {
                                 }
-                                .hidden()
+                                .opacity(0)
                             }
                             .listRowSeparator(.hidden)
                             .listRowInsets(EdgeInsets())

@@ -6,11 +6,18 @@
 
 import Foundation
 import Alamofire
+import Combine
 
-class ChatGPTService: NSObject, ChatGPTServiceProtocol {
+class ChatGPTService: ChatGPTServiceProtocol, APIServiceProtocol {
 
     private let apiKey = EnvironmentValuesProvider.shared.openaiAPIKey
+    private let session: Session
+    private let logger = AlamofireLogger()
 
+    init() {
+        session = Session(eventMonitors: [logger])
+    }
+    
     func send(messages: [MessageModel], onReceived: @escaping (String) -> Void, completion: @escaping (Result<String, Error>) -> Void) {
         let urlString = "https://api.openai.com/v1/chat/completions"
         guard let url = URL(string: urlString) else {
@@ -25,7 +32,7 @@ class ChatGPTService: NSObject, ChatGPTServiceProtocol {
         ]
 
         let parameters = ChatCompletionsReqDTO(messages: messages)
-        let request = AF.streamRequest(url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers)
+        let request = session.streamRequest(url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers)
         request.responseStreamString { stream in
             switch stream.event {
             case let .stream(result):
