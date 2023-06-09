@@ -9,37 +9,38 @@ import SwiftUI
 
 struct ChatBotChatView: View {
     @EnvironmentObject var viewModel: ChatBotViewModel
-    @State private var showAlert = false // 추가된 변수
+    @State private var showAlert = false
     @Environment(\.colorScheme) var colorScheme
     var chatBot: ChatBotModel
     @FocusState private var isFocused: Bool
+    @State private var dynamicHeight: CGFloat = 20 // 높이 초기값
+    let maxHeight: CGFloat = 70 // 최대 높이 (1줄당 대략 20~25 정도를 예상하고 세팅)
 
     var body: some View {
         VStack(spacing: 0) {
             ScrollView(showsIndicators: false) { // 스크롤바 숨김
                 ScrollViewReader { _ in
                     LazyVStack {
-
+                        ForEach(viewModel.messages[chatBot.id, default: []].reversed()) { messageModel in
+                            ChatBubble(messageModel: messageModel, isPreparingResponse: $viewModel.isPreparingResponse)
+                        }
+                        
                         if viewModel.isPreparingResponse && viewModel.tempMessage == nil {
-                            HStack {
+                            HStack(spacing: 0) {
                                 Spacer()
                                 ProgressView()
                                     .padding()
-                                    .background(FancyColor.chatBubble.color)
+                                    .background(FancyColor.chatBotBubble.color)
                                     .clipShape(RoundedCorners(tl: 10, tr: 0, bl: 10, br: 10))
                                     .foregroundColor(colorScheme == .dark ? Color.white : FancyColor.primary.color)
                             }
-                            .padding(.leading, 0)
-                            .padding(.trailing, 10)
+                            .padding(.leading, 10)
+                            .padding(.trailing, 24)
                             .padding(.top, 10)
                         }
 
                         if let tempMessage = viewModel.tempMessage {
                             ChatBubble(messageModel: tempMessage, isPreparingResponse: $viewModel.isPreparingResponse)
-                        }
-
-                        ForEach(viewModel.messages[chatBot.id, default: []].reversed()) { messageModel in
-                            ChatBubble(messageModel: messageModel, isPreparingResponse: $viewModel.isPreparingResponse)
                         }
                     }
                 }
@@ -48,16 +49,18 @@ struct ChatBotChatView: View {
 
             // ChatGPTView의 body 내에서 HStack 부분
             HStack(spacing: 0) {
-                HStack(spacing: 0) {
-                    ZStack {
-                        TextField("메시지 입력", text: $viewModel.newMessage)
-                            .textFieldStyle(PlainTextFieldStyle()) // 기본 border 제거
-                            .padding(.leading, 12) // 이 부분에서 padding값을 변경하세요.
-                            .padding(.trailing, 12)
-                            .frame(height: 38)
+                HStack(alignment: .bottom, spacing: 0) {
+                    ZStack(alignment: .bottom) {
+                        TextView(text: $viewModel.newMessage, dynamicHeight: $dynamicHeight, maxHeight: maxHeight)
+                            .frame(height: dynamicHeight)
+                            .textFieldStyle(PlainTextFieldStyle())
+                            .padding(0)
+                            .padding(.leading, 6)
+                            .padding(.trailing, 6)
                             .focused($isFocused)
                             .foregroundColor(colorScheme == .dark ? .gray : FancyColor.primary.color)
-                            .background(FancyColor.background.color)
+                            .background(FancyColor.chatBotInput.color)
+                            .cornerRadius(4)
                             .onAppear {
                                 DispatchQueue.main.async {
                                     isFocused = true
@@ -65,20 +68,25 @@ struct ChatBotChatView: View {
                             }
                     }
                     .padding(1)
-                    .background(viewModel.isPreparingResponse ? FancyColor.primary.color.opacity(0.5) : FancyColor.primary.color)
+                    .background(FancyColor.chatBotInputOutline.color)
+                    .cornerRadius(4)
 
                     Button(action: {
                         viewModel.sendMessage(chatBotID: chatBot.id)
                     }) {
-                        Text("보내기").foregroundColor(.white)
+                        Image("ic_circle_arrow_up")
+                            .foregroundColor(FancyColor.chatBotSendButton.color)
                     }
                     .padding(1)
+                    .padding(.top, 2)
                     .frame(height: 40)
-                    .frame(width: 80)
-                    .background(viewModel.isPreparingResponse ? FancyColor.primary.color.opacity(0.5) : FancyColor.primary.color)
+                    .frame(width: 40)
                     .disabled(viewModel.isPreparingResponse)
                 }
-                .padding(6)
+                .padding(.top, 5)
+                .padding(.leading, 14)
+                .padding(.trailing, 8)
+                .padding(.bottom, 8)
             }
             .background(FancyColor.background.color)
             .alert(isPresented: $showAlert) {
@@ -116,22 +124,22 @@ struct ChatBubble: View {
                     Spacer()
                     Text(messageModel.content)
                         .padding()
-                        .background(FancyColor.chatBubbleMe.color)
+                        .background(FancyColor.chatBotBubbleMe.color)
                         .clipShape(RoundedCorners(tl: 10, tr: 10, bl: 10, br: 0))
-                        .foregroundColor(.white)
+                        .foregroundColor(FancyColor.chatbotBubbleTextMe.color)
                 } else {
                     Text(messageModel.content)
                         .padding()
-                        .background(FancyColor.chatBubble.color)
+                        .background(FancyColor.chatBotBubble.color)
                         .clipShape(RoundedCorners(tl: 10, tr: 10, bl: 0, br: 10))
-                        .foregroundColor(colorScheme == .dark ? Color.white : FancyColor.primary.color)
+                        .foregroundColor(FancyColor.chatbotBubbleText.color)
                     Spacer()
                 }
             }
-            .padding(.vertical, 2)
-            .padding(.bottom, 10)
-            .padding(.leading, messageModel.isUser ? 0 : 10)
-            .padding(.trailing, messageModel.isUser ? 10 : 0)
+            .padding(0)
+            .padding(.bottom, 5)
+            .padding(.leading, messageModel.isUser ? 24 : 10)
+            .padding(.trailing, messageModel.isUser ? 10 : 24)
         }
         .rotationEffect(.degrees(180), anchor: .center) // VStack을 180도 회전
     }

@@ -73,7 +73,7 @@ struct FancyTabItem: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(maxWidth: 28, maxHeight: 28)
-                .foregroundColor(isSelected ? (colorScheme == .dark ? FancyColor.primary.color : FancyColor.black.color) : colorScheme == .dark ? FancyColor.gray8.color : FancyColor.gray2.color )
+                .foregroundColor(isSelected ? (colorScheme == .dark ? FancyColor.gray1.color : FancyColor.black.color) : colorScheme == .dark ? FancyColor.gray8.color : FancyColor.gray2.color )
             
             Spacer()
         }

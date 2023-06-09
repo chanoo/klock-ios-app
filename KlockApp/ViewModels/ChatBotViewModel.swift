@@ -92,6 +92,7 @@ class ChatBotViewModel: ObservableObject {
                         self?.tempMessage = nil
                     }
                     self?.isPreparingResponse = false
+                    self?.newMessage = ""
                 case .failure(let error):
                     print("Error: \(error.localizedDescription)")
                     self?.isPreparingResponse = false

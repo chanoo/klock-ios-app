@@ -47,7 +47,7 @@ struct HomeView: View {
             ),
             (
                 selectedImageName: "ic_balloon",
-                deselectedImageName: "ic_balloon_o",
+                deselectedImageName: "ic_balloon",
                 content: AnyView(
                     ChatBotListView()
                         .environmentObject(chatBotViewModel)
@@ -71,7 +71,7 @@ struct HomeView: View {
             ),
             (
                 selectedImageName: "ic_smile",
-                deselectedImageName: "ic_smile_o",
+                deselectedImageName: "ic_smile",
                 content: AnyView(
                     TaskListView()
                         .environmentObject(taskViewModel)
