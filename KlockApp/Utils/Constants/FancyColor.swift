@@ -17,6 +17,7 @@ enum FancyColor: String {
     case listCell = "color_list_cell"
     case header = "color_header"
     case text = "color_text"
+    case backButton = "color_back_button"
     case chatBotBubble = "color_chatbot_bubble"
     case chatBotBubbleMe = "color_chatbot_bubble_me"
     case chatbotBubbleTextMe = "color_chatbot_bubble_text_me"
