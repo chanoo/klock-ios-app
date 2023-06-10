@@ -25,15 +25,17 @@ struct TextView: UIViewRepresentable {
         textView.isUserInteractionEnabled = true
         textView.backgroundColor = UIColor.clear
         textView.font = UIFont.systemFont(ofSize: 16)
-        textView.textContainerInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0) // 추가된 코드
+        textView.textContainerInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
+        textView.showsVerticalScrollIndicator = false
+        textView.showsHorizontalScrollIndicator = false
         textView.text = text
         return textView
     }
 
-
     func updateUIView(_ uiView: UITextView, context: Context) {
         DispatchQueue.main.async {
             dynamicHeight = min(uiView.contentSize.height, maxHeight)
+            uiView.text = text
         }
     }
 

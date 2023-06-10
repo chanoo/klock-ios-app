@@ -15,6 +15,10 @@ struct ChatBotChatView: View {
     @FocusState private var isFocused: Bool
     @State private var dynamicHeight: CGFloat = 20 // 높이 초기값
     let maxHeight: CGFloat = 70 // 최대 높이 (1줄당 대략 20~25 정도를 예상하고 세팅)
+    
+    // 음성 인식 관련 변수
+    @StateObject private var speechService = SpeechService()
+    @State private var isRecording = false
 
     var body: some View {
         VStack(spacing: 0) {
@@ -50,13 +54,13 @@ struct ChatBotChatView: View {
             // ChatGPTView의 body 내에서 HStack 부분
             HStack(spacing: 0) {
                 HStack(alignment: .bottom, spacing: 0) {
-                    ZStack(alignment: .bottom) {
+                    ZStack(alignment: .bottomTrailing) {
                         TextView(text: $viewModel.newMessage, dynamicHeight: $dynamicHeight, maxHeight: maxHeight)
                             .frame(height: dynamicHeight)
                             .textFieldStyle(PlainTextFieldStyle())
                             .padding(0)
                             .padding(.leading, 6)
-                            .padding(.trailing, 6)
+                            .padding(.trailing, 25)
                             .focused($isFocused)
                             .foregroundColor(colorScheme == .dark ? .gray : FancyColor.primary.color)
                             .background(FancyColor.chatBotInput.color)
@@ -66,6 +70,20 @@ struct ChatBotChatView: View {
                                     isFocused = true
                                 }
                             }
+                        
+                        Button(action: {
+                            isRecording.toggle()
+                            if isRecording {
+                                try? speechService.startRecording()
+                            } else {
+                                speechService.stopRecording()
+                            }
+                        }) {
+                            Image("ic_microphone")
+                                .padding(.bottom, 6)
+                                .padding(.trailing, 4)
+                                .foregroundColor(isRecording ? FancyColor.red.color : FancyColor.gray7.color)
+                        }
                     }
                     .padding(1)
                     .background(FancyColor.chatBotInputOutline.color)
@@ -106,6 +124,7 @@ struct ChatBotChatView: View {
                 Image(systemName: "trash")
             })
             .onAppear {
+                viewModel.bindSpeechToMessage(speechService: speechService)
                 viewModel.loadStoredMessages(chatBotID: chatBot.id)
                 viewModel.initializeAssistant(chatBotID: chatBot.id, persona: chatBot.persona)
             }

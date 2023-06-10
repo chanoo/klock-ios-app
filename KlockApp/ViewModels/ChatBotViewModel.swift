@@ -42,6 +42,15 @@ class ChatBotViewModel: ObservableObject {
             .store(in: &cancellables)
     }
     
+    func bindSpeechToMessage(speechService: SpeechService) {
+        speechService.$transcript
+            .sink { [weak self] newValue in
+                print("New transcript value: \(newValue)")
+                self?.newMessage = newValue
+            }
+            .store(in: &cancellables)
+    }
+    
     func initializeAssistant(chatBotID: Int64?, persona: String) {
         guard let chatBotID = chatBotID, messages[chatBotID]?.isEmpty == true else { return }
         
