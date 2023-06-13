@@ -1,0 +1,11 @@
+<svg width="390" height="843" viewBox="0 0 390 843" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path opacity="0.7" fill-rule="evenodd" clip-rule="evenodd" d="M390 0H0V843H390V0ZM104 327C101.791 327 100 328.791 100 331V513C100 515.209 101.791 517 104 517H286C288.209 517 290 515.209 290 513V331C290 328.791 288.209 327 286 327H104Z" fill="black"/>
+<rect x="271" y="322" width="24" height="10" fill="white"/>
+<rect x="295" y="322" width="24" height="10" transform="rotate(90 295 322)" fill="white"/>
+<rect x="119" y="522" width="24" height="10" transform="rotate(-180 119 522)" fill="white"/>
+<rect x="95" y="522" width="24" height="10" transform="rotate(-90 95 522)" fill="white"/>
+<rect x="295" y="498" width="24" height="10" transform="rotate(90 295 498)" fill="white"/>
+<rect x="295" y="522" width="24" height="10" transform="rotate(-180 295 522)" fill="white"/>
+<rect x="95" y="346" width="24" height="10" transform="rotate(-90 95 346)" fill="white"/>
+<rect x="95" y="322" width="24" height="10" fill="white"/>
+</svg>

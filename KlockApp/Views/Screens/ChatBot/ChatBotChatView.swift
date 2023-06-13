@@ -59,7 +59,7 @@ struct ChatBotChatView: View {
                             .frame(height: dynamicHeight)
                             .textFieldStyle(PlainTextFieldStyle())
                             .padding(0)
-                            .padding(.leading, 6)
+                                .padding(.leading, 6)
                             .padding(.trailing, 25)
                             .focused($isFocused)
                             .foregroundColor(colorScheme == .dark ? .gray : FancyColor.primary.color)
