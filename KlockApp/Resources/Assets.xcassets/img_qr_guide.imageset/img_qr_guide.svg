@@ -1,11 +1,11 @@
 <svg width="390" height="843" viewBox="0 0 390 843" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path opacity="0.7" fill-rule="evenodd" clip-rule="evenodd" d="M390 0H0V843H390V0ZM104 327C101.791 327 100 328.791 100 331V513C100 515.209 101.791 517 104 517H286C288.209 517 290 515.209 290 513V331C290 328.791 288.209 327 286 327H104Z" fill="black"/>
-<rect x="271" y="322" width="24" height="10" fill="white"/>
-<rect x="295" y="322" width="24" height="10" transform="rotate(90 295 322)" fill="white"/>
-<rect x="119" y="522" width="24" height="10" transform="rotate(-180 119 522)" fill="white"/>
-<rect x="95" y="522" width="24" height="10" transform="rotate(-90 95 522)" fill="white"/>
-<rect x="295" y="498" width="24" height="10" transform="rotate(90 295 498)" fill="white"/>
-<rect x="295" y="522" width="24" height="10" transform="rotate(-180 295 522)" fill="white"/>
-<rect x="95" y="346" width="24" height="10" transform="rotate(-90 95 346)" fill="white"/>
-<rect x="95" y="322" width="24" height="10" fill="white"/>
+<path opacity="0.3" fill-rule="evenodd" clip-rule="evenodd" d="M390 0H0V843H390V0ZM79 302C76.7909 302 75 303.791 75 306V538C75 540.209 76.7909 542 79 542H311C313.209 542 315 540.209 315 538V306C315 303.791 313.209 302 311 302H79Z" fill="black"/>
+<rect x="295" y="298" width="24" height="10" fill="white"/>
+<rect x="319" y="298" width="24" height="10" transform="rotate(90 319 298)" fill="white"/>
+<rect x="95" y="546" width="24" height="10" transform="rotate(-180 95 546)" fill="white"/>
+<rect x="71" y="546" width="24" height="10" transform="rotate(-90 71 546)" fill="white"/>
+<rect x="319" y="522" width="24" height="10" transform="rotate(90 319 522)" fill="white"/>
+<rect x="319" y="546" width="24" height="10" transform="rotate(-180 319 546)" fill="white"/>
+<rect x="71" y="322" width="24" height="10" transform="rotate(-90 71 322)" fill="white"/>
+<rect x="71" y="298" width="24" height="10" fill="white"/>
 </svg>

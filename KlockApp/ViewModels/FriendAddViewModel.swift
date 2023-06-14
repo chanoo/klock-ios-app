@@ -5,13 +5,14 @@
 //  Created by 성찬우 on 2023/06/12.
 //
 
+import CoreImage.CIFilterBuiltins
 import SwiftUI
 import Combine
 import CoreLocation
 
 enum ActiveView {
-    case qrCode
-    case nickname
+    case scanQRCode
+    case myQRCode
 }
 
 class FriendAddViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
@@ -24,7 +25,13 @@ class FriendAddViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
         FriendModel(name: "Charlie", isOnline: true)
     ]
     @Published var scanResult: ScanResult?
-    @Published var activeView: ActiveView = .qrCode
+    @Published var activeView: ActiveView = .scanQRCode
+    
+    private let context = CIContext()
+    private let filter = CIFilter.qrCodeGenerator()
+    
+    @Published var qrCodeImage: UIImage?
+    @Published var centerImage: UIImage?
 
     override init() {
         locationManager = CLLocationManager()
@@ -53,5 +60,45 @@ class FriendAddViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
                          didRange beacons: [CLBeacon],
                          satisfying beaconConstraint: CLBeaconIdentityConstraint) {
         nearbyBeacons = beacons
+    }
+    
+    func generateQRCode(from string: String) {
+        let data = Data(string.utf8)
+        filter.setValue(data, forKey: "inputMessage")
+
+        if let outputImage = filter.outputImage {
+            // Increase size of the QR code image
+            let transform = CGAffineTransform(scaleX: 10, y: 10)
+            let transformedImage = outputImage.transformed(by: transform)
+            if let cgimg = context.createCGImage(transformedImage, from: transformedImage.extent) {
+                qrCodeImage = UIImage(cgImage: cgimg)
+            }
+        }
+    }
+
+    // Call this function after setting centerImage and qrCodeImage
+    func generateQRCodeWithCenterImage() -> UIImage? {
+        guard let qrCodeImage = qrCodeImage, let centerImage = centerImage else {
+            return nil
+        }
+
+        let size = qrCodeImage.size
+        UIGraphicsBeginImageContext(size)
+
+        qrCodeImage.draw(in: CGRect(origin: .zero, size: size))
+
+        let centerImageSize = centerImage.size
+        let rect = CGRect(
+            x: (size.width - centerImageSize.width) / 2,
+            y: (size.height - centerImageSize.height) / 2,
+            width: centerImageSize.width,
+            height: centerImageSize.height
+        )
+        centerImage.draw(in: rect)
+
+        let resultImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+
+        return resultImage
     }
 }

@@ -13,26 +13,26 @@ struct CustomSegmentedControl: View {
     var body: some View {
         HStack {
             Button(action: {
-                selection = .qrCode
+                selection = .scanQRCode
             }) {
                 Text("QR코드 스캔")
                     .padding(10)
                     .frame(maxWidth: .infinity)
                     .font(.system(size: 15, weight: .semibold))
-                    .background(selection == .qrCode ? .white : Color.clear)
-                    .foregroundColor(selection == .qrCode ? .black : .white)
+                    .background(selection == .scanQRCode ? .white : Color.clear)
+                    .foregroundColor(selection == .scanQRCode ? .black : .white)
             }
             .cornerRadius(4)
             .padding(10)
             Button(action: {
-                selection = .nickname
+                selection = .myQRCode
             }) {
-                Text("닉네임 입력")
+                Text("내 QR코드")
                     .padding(10)
                     .frame(maxWidth: .infinity)
                     .font(.system(size: 15, weight: .semibold))
-                    .background(selection == .nickname ? .white : Color.clear)
-                    .foregroundColor(selection == .nickname ? .black : .white)
+                    .background(selection == .myQRCode ? .white : Color.clear)
+                    .foregroundColor(selection == .myQRCode ? .black : .white)
             }
             .cornerRadius(4)
             .padding(10)
