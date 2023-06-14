@@ -27,12 +27,12 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="함께 지켜가는 공부습관" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="guc-PH-Ftv">
                                 <rect key="frame" x="119.00000000000001" y="386.66666666666669" width="155.33333333333337" height="20.333333333333314"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                <color key="textColor" name="color_launch_symbol"/>
+                                <color key="textColor" name="color_white"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
-                        <color key="backgroundColor" name="AccentColor"/>
+                        <color key="backgroundColor" name="color_black"/>
                         <constraints>
                             <constraint firstItem="Bcu-3y-fUS" firstAttribute="top" secondItem="aEu-la-wY5" secondAttribute="top" id="D3s-A3-NpQ"/>
                             <constraint firstItem="Bcu-3y-fUS" firstAttribute="trailing" secondItem="aEu-la-wY5" secondAttribute="trailing" id="NV0-om-wxJ"/>
@@ -53,10 +53,13 @@
     <resources>
         <image name="splash" width="293" height="633"/>
         <image name="splash_logo" width="217" height="23"/>
-        <namedColor name="AccentColor">
+        <namedColor name="color_black">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="color_launch_symbol">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="color_white">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
