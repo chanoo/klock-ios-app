@@ -11,14 +11,13 @@ import Foast
 struct FriendAddView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @StateObject private var viewModel = Container.shared.resolve(FriendAddViewModel.self)
-    @StateObject private var qrCodeScannerViewModel = Container.shared.resolve(QRCodeScannerViewModel.self)
 
     var body: some View {
         GeometryReader { geometry in
             ZStack {
                 switch viewModel.activeView {
                 case .scanQRCode:
-                    QRCodeScannerView(viewModel: qrCodeScannerViewModel)
+                    QRCodeScannerOverlay()
                         .frame(width: geometry.size.width, height: geometry.size.height)
                         .edgesIgnoringSafeArea(.all)
                 case .myQRCode:

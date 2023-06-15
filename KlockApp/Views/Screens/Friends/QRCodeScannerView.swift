@@ -34,7 +34,7 @@ struct QRCodeScannerView: UIViewControllerRepresentable {
 
         func qrCodeScanner(_ scanner: QRCodeScannerViewController, didDetectQRCode code: String) {
             self.scanner.viewModel.processScannedCode(code)
-            self.scanner.presentationMode.wrappedValue.dismiss()
+//            self.scanner.presentationMode.wrappedValue.dismiss()
         }
     }
 }
@@ -46,9 +46,15 @@ struct QRCodeScannerView_Previews: PreviewProvider {
 }
 
 struct QRCodeScannerOverlay: View {
+    @StateObject private var viewModel = Container.shared.resolve(QRCodeScannerViewModel.self)
+
     var body: some View {
         ZStack {
-            QRCodeScannerView(viewModel: QRCodeScannerViewModel())
+            QRCodeScannerView(viewModel: viewModel)
+            NavigationLink(destination: FriendAddDoneView(),
+                           isActive: $viewModel.isNavigatingToNextView) {
+                EmptyView()
+            }
         }
     }
 }
