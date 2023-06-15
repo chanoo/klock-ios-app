@@ -26,7 +26,8 @@ class FriendAddViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     ]
     @Published var scanResult: ScanResult?
     @Published var activeView: ActiveView = .scanQRCode
-    
+    @Published var isShowingAddFriend = false
+
     private let context = CIContext()
     private let filter = CIFilter.qrCodeGenerator()
     

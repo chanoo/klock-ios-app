@@ -34,7 +34,6 @@ struct QRCodeScannerView: UIViewControllerRepresentable {
 
         func qrCodeScanner(_ scanner: QRCodeScannerViewController, didDetectQRCode code: String) {
             self.scanner.viewModel.processScannedCode(code)
-//            self.scanner.presentationMode.wrappedValue.dismiss()
         }
     }
 }
@@ -47,11 +46,15 @@ struct QRCodeScannerView_Previews: PreviewProvider {
 
 struct QRCodeScannerOverlay: View {
     @StateObject private var viewModel = Container.shared.resolve(QRCodeScannerViewModel.self)
-
+    @EnvironmentObject var friendAddViewModel: FriendAddViewModel // 환경 객체로 타이머 뷰 모델을 가져옵니다.
+    
     var body: some View {
         ZStack {
             QRCodeScannerView(viewModel: viewModel)
-            NavigationLink(destination: FriendAddDoneView(),
+                .onAppear {
+                    viewModel.restartScanning()
+                }
+            NavigationLink(destination: FriendAddDoneView().environmentObject(friendAddViewModel),
                            isActive: $viewModel.isNavigatingToNextView) {
                 EmptyView()
             }

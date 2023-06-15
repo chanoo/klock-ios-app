@@ -8,9 +8,20 @@
 import SwiftUI
 
 struct FriendAddDoneView: View {
+    @EnvironmentObject var viewModel: FriendAddViewModel // 환경 객체로 타이머 뷰 모델을 가져옵니다.
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
-            
+            HStack(spacing: 0) {
+                Spacer()
+                Button(action: {
+                    viewModel.isShowingAddFriend = false
+                }) {
+                    Image("ic_xmark")
+                }
+            }.zIndex(100)
+
             VStack(alignment: .leading, spacing: 0) {
                 HStack {
                     Text("함께 성장할\n새 친구가 생겼어요!")
@@ -36,14 +47,24 @@ struct FriendAddDoneView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 120, height: 120)
+                Text("뀨처돌이")
+                    .padding(.top, 200)
+                    .font(.system(size: 22, weight: .semibold))
+                
             }
             .frame(width: 300, height: 300)
             .padding(20)
             
             Spacer()
             
-            FancyButton(title: "친구 프로필 보러가기", style: .constant(.button))
+            FancyButton(title: "친구 프로필 보러가기", action: {
+                viewModel.isShowingAddFriend = false
+            }, style: .constant(.button))
                 .padding(.top, 30)
+            FancyButton(title: "계속 QR코드 스캔", action: {
+                self.presentationMode.wrappedValue.dismiss()
+            }, style: .constant(.outline))
+            .padding(.top, 12)
         }
         .padding(30)
         .frame(width: .infinity, height: .infinity)

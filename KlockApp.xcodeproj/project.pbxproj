@@ -98,7 +98,7 @@
 		988D7CFC2A3851BD0018A85E /* QRCodeScannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988D7CFB2A3851BD0018A85E /* QRCodeScannerViewModel.swift */; };
 		988D7D042A386C400018A85E /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988D7D032A386C400018A85E /* CustomSegmentedControl.swift */; };
 		988D7D0B2A3ADACC0018A85E /* FriendAddDoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988D7D0A2A3ADACC0018A85E /* FriendAddDoneView.swift */; };
-		988D7D0E2A3AE10B0018A85E /* lottie-confetti.json in Resources */ = {isa = PBXBuildFile; fileRef = 988D7D0D2A3AE10B0018A85E /* lottie-confetti.json */; };
+		988D7D102A3B15560018A85E /* lottie-confetti.json in Resources */ = {isa = PBXBuildFile; fileRef = 988D7D0F2A3B15560018A85E /* lottie-confetti.json */; };
 		98976AFB2A00EC4800F1CEAE /* TimerRemoteServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98976AFA2A00EC4800F1CEAE /* TimerRemoteServiceProtocol.swift */; };
 		98976AFD2A00ED0200F1CEAE /* TimerRemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98976AFC2A00ED0200F1CEAE /* TimerRemoteService.swift */; };
 		98976AFF2A00ED8500F1CEAE /* TimeTimerDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98976AFE2A00ED8500F1CEAE /* TimeTimerDTO.swift */; };
@@ -303,7 +303,7 @@
 		988D7CFB2A3851BD0018A85E /* QRCodeScannerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeScannerViewModel.swift; sourceTree = "<group>"; };
 		988D7D032A386C400018A85E /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
 		988D7D0A2A3ADACC0018A85E /* FriendAddDoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendAddDoneView.swift; sourceTree = "<group>"; };
-		988D7D0D2A3AE10B0018A85E /* lottie-confetti.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "lottie-confetti.json"; sourceTree = "<group>"; };
+		988D7D0F2A3B15560018A85E /* lottie-confetti.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "lottie-confetti.json"; sourceTree = "<group>"; };
 		98976AFA2A00EC4800F1CEAE /* TimerRemoteServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerRemoteServiceProtocol.swift; sourceTree = "<group>"; };
 		98976AFC2A00ED0200F1CEAE /* TimerRemoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerRemoteService.swift; sourceTree = "<group>"; };
 		98976AFE2A00ED8500F1CEAE /* TimeTimerDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTimerDTO.swift; sourceTree = "<group>"; };
@@ -731,7 +731,7 @@
 			isa = PBXGroup;
 			children = (
 				981881D629F426FC002A4395 /* lottie-plus.json */,
-				988D7D0D2A3AE10B0018A85E /* lottie-confetti.json */,
+				988D7D0F2A3B15560018A85E /* lottie-confetti.json */,
 				985BE8AC29E73900008582A3 /* Config.xcconfig */,
 				98DC292929E90DAE00882E36 /* ConfigDebug.xcconfig */,
 				987E544429D552530007E156 /* KlockApp.xcdatamodeld */,
@@ -998,7 +998,7 @@
 			files = (
 				98B21B1829D55DE0004EFE0E /* README.md in Resources */,
 				987E544129D552530007E156 /* Preview Assets.xcassets in Resources */,
-				988D7D0E2A3AE10B0018A85E /* lottie-confetti.json in Resources */,
+				988D7D102A3B15560018A85E /* lottie-confetti.json in Resources */,
 				981881D729F426FC002A4395 /* lottie-plus.json in Resources */,
 				983B59D929FB37A100F0EACD /* LaunchScreen.storyboard in Resources */,
 				987E543E29D552530007E156 /* Assets.xcassets in Resources */,

@@ -9,69 +9,71 @@ import SwiftUI
 import Foast
 
 struct FriendAddView: View {
+    @EnvironmentObject var viewModel: FriendAddViewModel // 환경 객체로 타이머 뷰 모델을 가져옵니다.
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @StateObject private var viewModel = Container.shared.resolve(FriendAddViewModel.self)
-
     var body: some View {
-        GeometryReader { geometry in
-            ZStack {
-                switch viewModel.activeView {
-                case .scanQRCode:
-                    QRCodeScannerOverlay()
-                        .frame(width: geometry.size.width, height: geometry.size.height)
-                        .edgesIgnoringSafeArea(.all)
-                case .myQRCode:
-                    NicknameView()
-                        .frame(width: geometry.size.width, height: geometry.size.height)
-                        .background(.white)
-                }
+        NavigationView {
+            GeometryReader { geometry in
+                ZStack {
+                    switch viewModel.activeView {
+                    case .scanQRCode:
+                        QRCodeScannerOverlay()
+                            .environmentObject(viewModel)
+                            .frame(width: geometry.size.width, height: geometry.size.height)
+                            .edgesIgnoringSafeArea(.all)
+                    case .myQRCode:
+                        NicknameView()
+                            .frame(width: geometry.size.width, height: geometry.size.height)
+                            .background(.white)
+                    }
 
-                switch viewModel.activeView {
-                case .scanQRCode:
-                    Image("img_qr_guide")
-                        .resizable()
-                        .edgesIgnoringSafeArea(.all)
-                    ZStack {
-                        VStack {
-                            Text("QR코드를 스캔해주세요")
-                                .foregroundColor(.white)
-                                .font(.system(size: 28, weight: .bold))
-                                .padding(.top, 150)
-                                .padding(.bottom, 2)
-                            Text("되도록 밝은 곳에서 스캔해주세요")
-                                .foregroundColor(.white)
-                            Spacer()
+                    switch viewModel.activeView {
+                    case .scanQRCode:
+                        Image("img_qr_guide")
+                            .resizable()
+                            .edgesIgnoringSafeArea(.all)
+                        ZStack {
+                            VStack {
+                                Text("QR코드를 스캔해주세요")
+                                    .foregroundColor(.white)
+                                    .font(.system(size: 28, weight: .bold))
+                                    .padding(.top, 170)
+                                    .padding(.bottom, 2)
+                                Text("되도록 밝은 곳에서 스캔해주세요")
+                                    .foregroundColor(.white)
+                                Spacer()
+                            }
                         }
+                    case .myQRCode:
+                        EmptyView()
                     }
-                case .myQRCode:
-                    EmptyView()
-                }
-                
-                VStack(alignment: .leading) {
-                    Button(action: {
-                        self.presentationMode.wrappedValue.dismiss()
-                    }) {
-                        Image("ic_chevron_left")
-                    }
-                    .padding(.top, 8)
-                    .padding(.leading, 12)
-                    .foregroundColor(viewModel.activeView == .scanQRCode ? .white : .black)
+                    
+                    VStack(alignment: .trailing, spacing: 0) {
+                        Button(action: {
+                            self.presentationMode.wrappedValue.dismiss()
+                        }) {
+                            Image("ic_xmark")
+                        }
+                        .padding(.top, 30)
+                        .padding(.trailing, 30)
+                        .foregroundColor(viewModel.activeView == .scanQRCode ? .white : .black)
 
-                    HStack(alignment: .center) {
-                        CustomSegmentedControl(selection: $viewModel.activeView)
-                            .frame(width: 280)
-                    }
-                    .frame(minWidth: geometry.size.width)
-                    .padding(.top, 40)
+                        HStack(alignment: .center) {
+                            CustomSegmentedControl(selection: $viewModel.activeView)
+                                .frame(width: 280)
+                        }
+                        .frame(minWidth: geometry.size.width)
+                        .padding(.top, 40)
 
-                    Spacer()
+                        Spacer()
+                    }
+                    
                 }
-                
+                .frame(width: geometry.size.width, height: geometry.size.height)
+                .background(.black)
             }
-            .frame(width: geometry.size.width, height: geometry.size.height)
-            .background(.black)
+            .navigationBarHidden(true)
         }
-        .navigationBarHidden(true)
     }
 }
 struct QRCodeView: View {
@@ -141,7 +143,9 @@ struct NicknameView: View {
             if let qrCodeImage = viewModel.generateQRCodeWithCenterImage() {
                 viewModel.qrCodeImage = qrCodeImage
             }
+            
         }
+
     }
 }
 

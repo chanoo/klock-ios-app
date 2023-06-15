@@ -82,7 +82,9 @@ class QRCodeScannerViewController: UIViewController, AVCaptureMetadataOutputObje
     }
 
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
-        captureSession.stopRunning()
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            self?.captureSession.stopRunning()
+        }
 
         if let metadataObject = metadataObjects.first {
             guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject,
@@ -91,7 +93,15 @@ class QRCodeScannerViewController: UIViewController, AVCaptureMetadataOutputObje
             AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
             delegate?.qrCodeScanner(self, didDetectQRCode: code)
         }
-
-        dismiss(animated: true)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if !captureSession.isRunning {
+            DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 0.2) { [weak self] in
+                self?.captureSession.startRunning()
+            }
+        }
     }
 }

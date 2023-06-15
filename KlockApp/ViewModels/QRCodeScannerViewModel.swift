@@ -8,14 +8,16 @@
 import Combine
 
 class QRCodeScannerViewModel: ObservableObject {
-    var cancellables = Set<AnyCancellable>()
-
     @Published var scannedCode: String?
     @Published var isNavigatingToNextView = false
+    @Published var isScanning = false
 
     func processScannedCode(_ code: String) {
         scannedCode = code
-        debugPrint("scannedCode", code)
         self.isNavigatingToNextView = true
+    }
+    
+    func restartScanning() {
+        self.isScanning = true
     }
 }
