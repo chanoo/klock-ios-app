@@ -11,6 +11,7 @@ import SwiftUI
 struct FriendsView: View {
     @ObservedObject var beaconManager = BeaconManager()
     @State private var isShowingAddFriend = false
+    @StateObject private var viewModel = Container.shared.resolve(FriendsViewModel.self)
     @StateObject private var friendAddViewModel = FriendAddViewModel()
 
     var body: some View {
@@ -20,14 +21,16 @@ struct FriendsView: View {
         .navigationBarHidden(false)
         .navigationBarTitle("친구", displayMode: .inline)
         .navigationBarItems(
-            trailing: Button(action: { friendAddViewModel.isShowingAddFriend = true }) {
+            trailing: Button(action: { viewModel.showActionSheet() }) {
                 Image("ic_person_plus")
             }
-            .sheet(isPresented: $friendAddViewModel.isShowingAddFriend) {
-                FriendAddView()
-                    .environmentObject(friendAddViewModel)
+            .sheet(item: $viewModel.friendAddViewModel.activeSheet) { item in
+                viewModel.showAddFriendView(for: item)
             }
         )
+        .actionSheet(isPresented: $viewModel.isPresented) { () -> ActionSheet in
+            viewModel.friendAddActionSheet()
+        }
     }
 }
 

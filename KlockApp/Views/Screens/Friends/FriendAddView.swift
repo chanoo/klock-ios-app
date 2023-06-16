@@ -37,7 +37,7 @@ struct FriendAddView: View {
                                 Text("QR코드를 스캔해주세요")
                                     .foregroundColor(.white)
                                     .font(.system(size: 28, weight: .bold))
-                                    .padding(.top, 170)
+                                    .padding(.top, 180)
                                     .padding(.bottom, 2)
                                 Text("되도록 밝은 곳에서 스캔해주세요")
                                     .foregroundColor(.white)
@@ -55,7 +55,7 @@ struct FriendAddView: View {
                             Image("ic_xmark")
                         }
                         .padding(.top, 30)
-                        .padding(.trailing, 30)
+                        .padding(.trailing, 15)
                         .foregroundColor(viewModel.activeView == .scanQRCode ? .white : .black)
 
                         HStack(alignment: .center) {
@@ -63,7 +63,7 @@ struct FriendAddView: View {
                                 .frame(width: 280)
                         }
                         .frame(minWidth: geometry.size.width)
-                        .padding(.top, 40)
+                        .padding(.top, 30)
 
                         Spacer()
                     }
@@ -152,7 +152,9 @@ struct NicknameView: View {
 
 struct FriendAddView_Previews: PreviewProvider {
     static var previews: some View {
+        let viewModel = Container.shared.resolve(FriendAddViewModel.self)
         FriendAddView()
+            .environmentObject(viewModel)
     }
 }
 

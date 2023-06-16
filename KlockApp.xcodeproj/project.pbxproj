@@ -49,6 +49,7 @@
 		9843B7E529EF086600F91DAD /* ProximityAndOrientationServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9843B7E429EF086600F91DAD /* ProximityAndOrientationServiceProtocol.swift */; };
 		9843B7E729EFBF8200F91DAD /* StudySessionsByDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9843B7E629EFBF8200F91DAD /* StudySessionsByDateView.swift */; };
 		9843B7E929F0EB5200F91DAD /* TimeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9843B7E829F0EB5200F91DAD /* TimeUtils.swift */; };
+		984844132A3C54C1006DD342 /* SheetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984844122A3C54C1006DD342 /* SheetType.swift */; };
 		984D2C8029DFB197008D3EA9 /* FlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984D2C7F29DFB197008D3EA9 /* FlowLayout.swift */; };
 		984D2C8229DFC2B3008D3EA9 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984D2C8129DFC2B3008D3EA9 /* AppState.swift */; };
 		984D2C8429DFC311008D3EA9 /* UINavigationController+UIGestureRecognizerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984D2C8329DFC311008D3EA9 /* UINavigationController+UIGestureRecognizerDelegate.swift */; };
@@ -246,6 +247,7 @@
 		9843B7E429EF086600F91DAD /* ProximityAndOrientationServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProximityAndOrientationServiceProtocol.swift; sourceTree = "<group>"; };
 		9843B7E629EFBF8200F91DAD /* StudySessionsByDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudySessionsByDateView.swift; sourceTree = "<group>"; };
 		9843B7E829F0EB5200F91DAD /* TimeUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeUtils.swift; sourceTree = "<group>"; };
+		984844122A3C54C1006DD342 /* SheetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetType.swift; sourceTree = "<group>"; };
 		984D2C7F29DFB197008D3EA9 /* FlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowLayout.swift; sourceTree = "<group>"; };
 		984D2C8129DFC2B3008D3EA9 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		984D2C8329DFC311008D3EA9 /* UINavigationController+UIGestureRecognizerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+UIGestureRecognizerDelegate.swift"; sourceTree = "<group>"; };
@@ -662,6 +664,7 @@
 				98EBFBE729F968E8004E95F3 /* TaskModel.swift */,
 				98EBFBF329F98AA2004E95F3 /* AchievementModel.swift */,
 				988D7CD72A3711410018A85E /* ScanResult.swift */,
+				984844122A3C54C1006DD342 /* SheetType.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1143,6 +1146,7 @@
 				98E9386929EAD199009CBF32 /* StudySessionLocalService.swift in Sources */,
 				983B59E529FB9FD800F0EACD /* ChatBotLocalServiceProtocol.swift in Sources */,
 				98976AFD2A00ED0200F1CEAE /* TimerRemoteService.swift in Sources */,
+				984844132A3C54C1006DD342 /* SheetType.swift in Sources */,
 				98D7C94F29E332790075D201 /* APIErrorModel.swift in Sources */,
 				98AC30852A15CBA8006DC48D /* ExamTimerViewModel.swift in Sources */,
 				98AC30812A15CABB006DC48D /* PomodoroTimerCardView.swift in Sources */,

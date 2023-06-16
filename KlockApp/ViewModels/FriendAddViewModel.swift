@@ -26,7 +26,9 @@ class FriendAddViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     ]
     @Published var scanResult: ScanResult?
     @Published var activeView: ActiveView = .scanQRCode
-    @Published var isShowingAddFriend = false
+    @Published var activeSheet: SheetType? = Optional.none
+    @Published var isPresented = false
+    let beaconManager = BeaconManager()
 
     private let context = CIContext()
     private let filter = CIFilter.qrCodeGenerator()
