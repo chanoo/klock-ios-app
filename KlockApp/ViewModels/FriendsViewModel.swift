@@ -15,33 +15,15 @@ class FriendsViewModel: NSObject, ObservableObject {
     func showActionSheet() {
         self.isPresented = true
     }
-    
-    func addFriendByQRCode() {
-        // QR 코드로 친구를 추가하는 로직을 여기에 구현하십시오.
-        print("Add friend by QR code")
-        self.isPresented = false
-    }
-    
-    func addFriendByID() {
-        // 아이디로 친구를 추가하는 로직을 여기에 구현하십시오.
-        print("Add friend by ID")
-        self.isPresented = false
-    }
-    
-    func addFriendByNearbySearch() {
-        // 주변 탐색으로 친구를 추가하는 로직을 여기에 구현하십시오.
-        print("Add friend by Nearby Search")
-        self.isPresented = false
-    }
-    
+        
     func showAddFriendView(for item: SheetType) -> some View {
         switch item {
         case .qrcode:
-            return AnyView(FriendAddView().environmentObject(friendAddViewModel))
+            return AnyView(FriendAddByQRCodeView().environmentObject(friendAddViewModel))
         case .nickname:
-            return AnyView(Text("Add Friend By ID")) // 또는 AddFriendByIdView()
+            return AnyView(FriendAddByNicknameView().environmentObject(friendAddViewModel))
         case .nearby:
-            return AnyView(Text("Add Friend By Nearby Search")) // 또는 AddFriendByNearbySearchView()
+            return AnyView(FriendAddByNearView().environmentObject(friendAddViewModel))
         case .none:
             return AnyView(EmptyView())
         }

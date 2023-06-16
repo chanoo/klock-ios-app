@@ -14,7 +14,6 @@ struct FriendAddDoneView: View {
     var body: some View {
         ZStack(alignment: .top) {
             VStack(alignment: .center, spacing: 0) {
-                Spacer()
                 VStack(alignment: .leading, spacing: 0) {
                     HStack {
                         Text("함께 성장할\n새 친구가 생겼어요!")
@@ -30,7 +29,10 @@ struct FriendAddDoneView: View {
                     }
                 }
                 .frame(maxWidth: .infinity)
+                .padding(.top, 80)
+
                 Spacer()
+
                 ZStack(alignment: .center) {
                     LottieView(name: "lottie-confetti", currentFrame: 50)
                     Image("ic_img_logo")
@@ -51,7 +53,7 @@ struct FriendAddDoneView: View {
                     viewModel.activeSheet = Optional.none
                 }, style: .constant(.button))
                     .padding(.top, 30)
-                FancyButton(title: "계속 QR코드 스캔", action: {
+                FancyButton(title: "계속 친구 추가", action: {
                     self.presentationMode.wrappedValue.dismiss()
                 }, style: .constant(.outline))
                 .padding(.top, 12)

@@ -88,8 +88,7 @@
 		987E545D29D552540007E156 /* KlockAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E545C29D552540007E156 /* KlockAppUITestsLaunchTests.swift */; };
 		9881FC0B2A1F455200497937 /* BeaconManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9881FC0A2A1F455200497937 /* BeaconManager.swift */; };
 		988D7CD02A370B040018A85E /* FriendAddViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988D7CCF2A370B040018A85E /* FriendAddViewModel.swift */; };
-		988D7CD22A370BCD0018A85E /* FriendAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988D7CD12A370BCD0018A85E /* FriendAddView.swift */; };
-		988D7CD42A370C260018A85E /* FriendAddByQRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988D7CD32A370C260018A85E /* FriendAddByQRCodeView.swift */; };
+		988D7CD22A370BCD0018A85E /* FriendAddByQRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988D7CD12A370BCD0018A85E /* FriendAddByQRCodeView.swift */; };
 		988D7CD62A370C4A0018A85E /* FriendAddByNicknameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988D7CD52A370C4A0018A85E /* FriendAddByNicknameView.swift */; };
 		988D7CD82A3711410018A85E /* ScanResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988D7CD72A3711410018A85E /* ScanResult.swift */; };
 		988D7CDA2A37126C0018A85E /* FriendAddByNearView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988D7CD92A37126C0018A85E /* FriendAddByNearView.swift */; };
@@ -294,8 +293,7 @@
 		987E545C29D552540007E156 /* KlockAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlockAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		9881FC0A2A1F455200497937 /* BeaconManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconManager.swift; sourceTree = "<group>"; };
 		988D7CCF2A370B040018A85E /* FriendAddViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendAddViewModel.swift; sourceTree = "<group>"; };
-		988D7CD12A370BCD0018A85E /* FriendAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendAddView.swift; sourceTree = "<group>"; };
-		988D7CD32A370C260018A85E /* FriendAddByQRCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendAddByQRCodeView.swift; sourceTree = "<group>"; };
+		988D7CD12A370BCD0018A85E /* FriendAddByQRCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendAddByQRCodeView.swift; sourceTree = "<group>"; };
 		988D7CD52A370C4A0018A85E /* FriendAddByNicknameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendAddByNicknameView.swift; sourceTree = "<group>"; };
 		988D7CD72A3711410018A85E /* ScanResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanResult.swift; sourceTree = "<group>"; };
 		988D7CD92A37126C0018A85E /* FriendAddByNearView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendAddByNearView.swift; sourceTree = "<group>"; };
@@ -824,12 +822,11 @@
 				988D7CF82A3851770018A85E /* QRCodeScannerView.swift */,
 				988D7CF72A3851770018A85E /* QRCodeScannerViewController.swift */,
 				985BE89329E6E0DB008582A3 /* FriendsView.swift */,
-				988D7CD12A370BCD0018A85E /* FriendAddView.swift */,
-				988D7D0A2A3ADACC0018A85E /* FriendAddDoneView.swift */,
-				985BE89D29E6E5D0008582A3 /* FriendDetailView.swift */,
-				988D7CD32A370C260018A85E /* FriendAddByQRCodeView.swift */,
+				988D7CD12A370BCD0018A85E /* FriendAddByQRCodeView.swift */,
 				988D7CD52A370C4A0018A85E /* FriendAddByNicknameView.swift */,
 				988D7CD92A37126C0018A85E /* FriendAddByNearView.swift */,
+				988D7D0A2A3ADACC0018A85E /* FriendAddDoneView.swift */,
+				985BE89D29E6E5D0008582A3 /* FriendDetailView.swift */,
 			);
 			path = Friends;
 			sourceTree = "<group>";
@@ -1088,7 +1085,7 @@
 				98976AFF2A00ED8500F1CEAE /* TimeTimerDTO.swift in Sources */,
 				9878FF0D2A0EA17100D38BB4 /* TimerManager.swift in Sources */,
 				9843B7E529EF086600F91DAD /* ProximityAndOrientationServiceProtocol.swift in Sources */,
-				988D7CD22A370BCD0018A85E /* FriendAddView.swift in Sources */,
+				988D7CD22A370BCD0018A85E /* FriendAddByQRCodeView.swift in Sources */,
 				981B389129F44A2700AB0EF8 /* AccountTimerModel.swift in Sources */,
 				984D2C8F29E067FE008D3EA9 /* SplashView.swift in Sources */,
 				98DC292B29E9373D00882E36 /* ChatBotRemoteService.swift in Sources */,
@@ -1112,7 +1109,6 @@
 				98CE661929D55A650009916F /* Container.swift in Sources */,
 				986E5DB629EAF06D00FF7047 /* DayView.swift in Sources */,
 				98CE661B29D55AA40009916F /* AuthenticationService.swift in Sources */,
-				988D7CD42A370C260018A85E /* FriendAddByQRCodeView.swift in Sources */,
 				98DC292D29E9380200882E36 /* ChatBotServiceDTO.swift in Sources */,
 				98CE662129D55B730009916F /* SignInViewModel.swift in Sources */,
 				98B21B6E29D9D21A004EFE0E /* SignUpViewModel.swift in Sources */,

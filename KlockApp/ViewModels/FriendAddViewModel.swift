@@ -28,6 +28,11 @@ class FriendAddViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     @Published var activeView: ActiveView = .scanQRCode
     @Published var activeSheet: SheetType? = Optional.none
     @Published var isPresented = false
+    @Published var nickname: String
+    @Published var becomeFirstResponder: Bool = false
+    @Published var isStartOfWeekNextButtonEnabled = false
+    @Published var isNavigatingToNextView = false
+
     let beaconManager = BeaconManager()
 
     private let context = CIContext()
@@ -36,13 +41,22 @@ class FriendAddViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     @Published var qrCodeImage: UIImage?
     @Published var centerImage: UIImage?
 
+    var isStartOfWeekNextButtonEnabledCancellable: AnyCancellable?
+
     override init() {
         locationManager = CLLocationManager()
         beaconIdentityConstraint = CLBeaconIdentityConstraint(uuid: UUID(),
                                                               major: 1, minor: 456)
-
+        nickname = ""
         super.init()
         locationManager.delegate = self
+        setupIsNextButtonEnabled()
+    }
+    
+    private func setupIsNextButtonEnabled() {
+        isStartOfWeekNextButtonEnabledCancellable = $nickname
+            .map { $0.count >= 2 }
+            .assign(to: \.isStartOfWeekNextButtonEnabled, on: self)
     }
 
     func updateScanResult(_ result: ScanResult) {
