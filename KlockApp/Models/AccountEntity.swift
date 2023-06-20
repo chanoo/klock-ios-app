@@ -30,9 +30,9 @@ class AccountEntity: CoreStoreObject {
     @Field.Stored("updatedAt")
     var updatedAt: Date = Date()
     
-    var role: AccountRole {
+    var role: UserRole {
         get {
-            return AccountRole(rawValue: roleRaw) ?? .user
+            return UserRole(rawValue: roleRaw) ?? .user
         }
         set {
             roleRaw = newValue.rawValue

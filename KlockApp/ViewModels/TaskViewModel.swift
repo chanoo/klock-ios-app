@@ -19,6 +19,5 @@ class TaskViewModel: ObservableObject {
         TaskModel(id: UUID(), title: "지구과학 기후 변화 조사", description: "지구과학에서 기후 변화에 대한 조사를 하여 환경에 대한 이해를 높입니다.", participants: ["img_math_teacher", "img_english_teacher"], progress: 0.5, startDate: Date(), endDate: Date().addingTimeInterval(60 * 60 * 24 * 7), pokeCounts: [:]),
         TaskModel(id: UUID(), title: "역사 인물 연구", description: "한국 역사의 주요 인물들에 대해 연구하고 그 업적을 정리합니다.", participants: ["img_math_teacher", "img_english_teacher", "img_korean_teacher"], progress: 0.3, startDate: Date(), endDate: Date().addingTimeInterval(60 * 60 * 24 * 7), pokeCounts: [:]),
         TaskModel(id: UUID(), title: "생활 속 수학 문제 만들기", description: "생활 속에서 발생할 수 있는 수학 문제를 만들어 풀어봅니다.", participants: ["img_math_teacher", "img_english_teacher", "img_math_teacher"], progress: 0.9, startDate: Date(), endDate: Date().addingTimeInterval(60 * 60 * 24 * 7), pokeCounts: [:]),
-
     ]
 }

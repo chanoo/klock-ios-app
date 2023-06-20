@@ -11,22 +11,23 @@ import CoreData
 
 class AccountLocalService: CoreDataHelper, AccountLocalServiceProtocol {
     
-    private func mapEntityToModel(_ entity: Account) -> AccountModel {
-        return AccountModel(
+    private func mapEntityToModel(_ entity: Account) -> UserModel {
+        return UserModel(
             id: entity.id,
             email: entity.email,
             hashedPassword: nil,
             username: entity.username ?? "",
+            profileImage: entity.profileImage,
             totalStudyTime: Int(entity.totalStudyTime),
             accountLevelId: 1,
-            role: AccountRole(rawValue: entity.role ?? "") ?? .user,
+            role: UserRole(rawValue: entity.role ?? "") ?? .user,
             active: entity.active,
             createdAt: entity.createdAt ?? Date(),
             updatedAt: entity.updatedAt ?? Date()
         )
     }
     
-    func get(id: Int64) -> AnyPublisher<AccountModel, Error> {
+    func get(id: Int64) -> AnyPublisher<UserModel, Error> {
         return executeFuture { promise in
             do {
                 let fetchedEntities: [Account] = try self.fetchEntity("Account", id: id)
@@ -42,7 +43,7 @@ class AccountLocalService: CoreDataHelper, AccountLocalServiceProtocol {
         }
     }
 
-    func create(email: String, username: String) -> AnyPublisher<AccountModel, Error> {
+    func create(email: String, username: String) -> AnyPublisher<UserModel, Error> {
         return executeFuture { promise in
             let context = self.coreDataManager.persistentContainer.viewContext
             guard let entity = NSEntityDescription.entity(forEntityName: "Account", in: context) else {
@@ -54,7 +55,7 @@ class AccountLocalService: CoreDataHelper, AccountLocalServiceProtocol {
             accountEntity.email = email
             accountEntity.username = username
             accountEntity.totalStudyTime = 0
-            accountEntity.role = AccountRole.user.rawValue
+            accountEntity.role = UserRole.user.rawValue
             accountEntity.active = true
             accountEntity.createdAt = now
             accountEntity.updatedAt = now
@@ -73,7 +74,7 @@ class AccountLocalService: CoreDataHelper, AccountLocalServiceProtocol {
         }
     }
 
-    func fetch() -> AnyPublisher<[AccountModel], Error> {
+    func fetch() -> AnyPublisher<[UserModel], Error> {
         return executeFuture { promise in
             do {
                 let fetchedEntities = try self.fetchEntity("Account", sortDescriptors: [NSSortDescriptor(key: "id", ascending: false)])
@@ -85,7 +86,7 @@ class AccountLocalService: CoreDataHelper, AccountLocalServiceProtocol {
         }
     }
 
-    func update(id: Int64, email: String?, username: String?, totalStudyTime: Int?, active: Bool?) -> AnyPublisher<AccountModel, Error> {
+    func update(id: Int64, email: String?, username: String?, totalStudyTime: Int?, active: Bool?) -> AnyPublisher<UserModel, Error> {
         return executeFuture { promise in
             do {
                 let fetchedAccounts: [Account] = try self.fetchEntity("Account", id: id)

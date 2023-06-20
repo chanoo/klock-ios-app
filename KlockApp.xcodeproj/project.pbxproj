@@ -38,6 +38,7 @@
 		9833FFC829F58F8A00CC33F7 /* AccountLocalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9833FFC729F58F8A00CC33F7 /* AccountLocalService.swift */; };
 		9833FFCD29F6652800CC33F7 /* ChatBotLocalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9833FFCC29F6652800CC33F7 /* ChatBotLocalService.swift */; };
 		9833FFD029F683C800CC33F7 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9833FFCF29F683C800CC33F7 /* CoreDataHelper.swift */; };
+		9837CCA52A418C5F002F1A3A /* FriendsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9837CCA42A418C5F002F1A3A /* FriendsListView.swift */; };
 		983B59D129FB30F800F0EACD /* CoreStore in Frameworks */ = {isa = PBXBuildFile; productRef = 983B59D029FB30F800F0EACD /* CoreStore */; };
 		983B59D329FB331400F0EACD /* DataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983B59D229FB331400F0EACD /* DataStack.swift */; };
 		983B59D929FB37A100F0EACD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 983B59D829FB37A100F0EACD /* LaunchScreen.storyboard */; };
@@ -146,7 +147,7 @@
 		98CE661629D55A370009916F /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 98CE661529D55A370009916F /* Swinject */; };
 		98CE661929D55A650009916F /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CE661829D55A650009916F /* Container.swift */; };
 		98CE661B29D55AA40009916F /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CE661A29D55AA40009916F /* AuthenticationService.swift */; };
-		98CE661D29D55AE00009916F /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CE661C29D55AE00009916F /* AccountModel.swift */; };
+		98CE661D29D55AE00009916F /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CE661C29D55AE00009916F /* UserModel.swift */; };
 		98CE662129D55B730009916F /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CE662029D55B730009916F /* SignInViewModel.swift */; };
 		98CE662329D55BB10009916F /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CE662229D55BB10009916F /* SignInView.swift */; };
 		98D2826729E988100039E6E6 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D2826629E988100039E6E6 /* CoreDataManager.swift */; };
@@ -236,6 +237,7 @@
 		9833FFC729F58F8A00CC33F7 /* AccountLocalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountLocalService.swift; sourceTree = "<group>"; };
 		9833FFCC29F6652800CC33F7 /* ChatBotLocalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotLocalService.swift; sourceTree = "<group>"; };
 		9833FFCF29F683C800CC33F7 /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
+		9837CCA42A418C5F002F1A3A /* FriendsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsListView.swift; sourceTree = "<group>"; };
 		983B59D229FB331400F0EACD /* DataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStack.swift; sourceTree = "<group>"; };
 		983B59D829FB37A100F0EACD /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		983B59DE29FB7B1E00F0EACD /* AccountEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountEntity.swift; sourceTree = "<group>"; };
@@ -350,7 +352,7 @@
 		98BDD21F29DD0FA800B0440F /* EmailValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailValidator.swift; sourceTree = "<group>"; };
 		98CE661829D55A650009916F /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
 		98CE661A29D55AA40009916F /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
-		98CE661C29D55AE00009916F /* AccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
+		98CE661C29D55AE00009916F /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		98CE662029D55B730009916F /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		98CE662229D55BB10009916F /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		98D2826629E988100039E6E6 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -638,7 +640,7 @@
 		98CE660C29D553790009916F /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				98CE661C29D55AE00009916F /* AccountModel.swift */,
+				98CE661C29D55AE00009916F /* UserModel.swift */,
 				983B59DE29FB7B1E00F0EACD /* AccountEntity.swift */,
 				98B21B4C29D6F3A9004EFE0E /* AccountLevelModel.swift */,
 				98B21B4E29D6F3E1004EFE0E /* AccountTagModel.swift */,
@@ -827,6 +829,7 @@
 				988D7CD92A37126C0018A85E /* FriendAddByNearView.swift */,
 				988D7D0A2A3ADACC0018A85E /* FriendAddDoneView.swift */,
 				985BE89D29E6E5D0008582A3 /* FriendDetailView.swift */,
+				9837CCA42A418C5F002F1A3A /* FriendsListView.swift */,
 			);
 			path = Friends;
 			sourceTree = "<group>";
@@ -1146,6 +1149,7 @@
 				98D7C94F29E332790075D201 /* APIErrorModel.swift in Sources */,
 				98AC30852A15CBA8006DC48D /* ExamTimerViewModel.swift in Sources */,
 				98AC30812A15CABB006DC48D /* PomodoroTimerCardView.swift in Sources */,
+				9837CCA52A418C5F002F1A3A /* FriendsListView.swift in Sources */,
 				98B21B4F29D6F3E1004EFE0E /* AccountTagModel.swift in Sources */,
 				986E5DB429EAEF9200FF7047 /* CalendarView.swift in Sources */,
 				981881CF29F386A4002A4395 /* LottieView.swift in Sources */,
@@ -1195,7 +1199,7 @@
 				98E9385F29EA5856009CBF32 /* ClockModel.swift in Sources */,
 				984D2C8429DFC311008D3EA9 /* UINavigationController+UIGestureRecognizerDelegate.swift in Sources */,
 				988D7CF92A3851770018A85E /* QRCodeScannerViewController.swift in Sources */,
-				98CE661D29D55AE00009916F /* AccountModel.swift in Sources */,
+				98CE661D29D55AE00009916F /* UserModel.swift in Sources */,
 				98D7C94929E1AB450075D201 /* SignUpUserModel.swift in Sources */,
 				98EBFBF629FA54F6004E95F3 /* ClearListBackground+Extensions.swift in Sources */,
 				988D7CFA2A3851770018A85E /* QRCodeScannerView.swift in Sources */,

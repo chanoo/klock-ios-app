@@ -14,7 +14,7 @@ class AuthenticationService: AuthenticationServiceProtocol {
     private let baseURL = "https://api.klock.app/api/auth"
 
     // 로그인 함수
-    func signIn(email: String, password: String) -> AnyPublisher<AccountModel, AFError> {
+    func signIn(email: String, password: String) -> AnyPublisher<UserModel, AFError> {
         let url = "\(baseURL)/signin"
         let requestDTO = SignInReqDTO(email: email, password: password)
 
@@ -49,7 +49,7 @@ class AuthenticationService: AuthenticationServiceProtocol {
             .eraseToAnyPublisher()
     }
 
-    func signInWithFacebook(accessToken: String) -> AnyPublisher<AccountModel, AFError> {
+    func signInWithFacebook(accessToken: String) -> AnyPublisher<UserModel, AFError> {
         let url = "\(baseURL)/signin-with-facebook"
         let requestDTO = FacebookSignInReqDTO(accessToken: accessToken)
 
@@ -81,10 +81,10 @@ class AuthenticationService: AuthenticationServiceProtocol {
             .eraseToAnyPublisher()
     }
 
-    private func requestAndDecode(url: String, parameters: [String: Any]) -> AnyPublisher<AccountModel, AFError> {
+    private func requestAndDecode(url: String, parameters: [String: Any]) -> AnyPublisher<UserModel, AFError> {
         return AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default)
             .validate()
-            .publishDecodable(type: AccountModel.self)
+            .publishDecodable(type: UserModel.self)
             .value()
             .mapError { $0 }
             .eraseToAnyPublisher()
