@@ -15,6 +15,8 @@ enum FancyColor: String {
     case background = "color_background"
     case navigationBar = "color_navigation_bar"
     case listCell = "color_list_cell"
+    case listCellBorder = "color_list_cell_border"
+    case listCellUnderline = "color_list_cell_underline"
     case header = "color_header"
     case text = "color_text"
     case backButton = "color_back_button"

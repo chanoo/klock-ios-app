@@ -65,13 +65,13 @@ struct FirstFriendsRowView: View {
                 Spacer()
             }
             .padding()
-            .background(Color.white)  // Apply a background color to HStack
+            .background(FancyColor.listCell.color)
             .cornerRadius(4)
             .overlay(
                 RoundedRectangle(cornerRadius: 4)
-                    .stroke(FancyColor.black.color, lineWidth: 0.5)
+                    .stroke(FancyColor.listCellBorder.color, lineWidth: 0.5)
             )
-            .shadow(color: Color(.systemGray).opacity(0.4), radius: 4, x: 0, y: 0)
+            .shadow(color: FancyColor.black.color.opacity(0.1), radius: 5, x: 0, y: 0)
         }
     }
 }
@@ -79,7 +79,7 @@ struct FirstFriendsRowView: View {
 struct FriendsRowView: View {
     var userModel: UserModel
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             NavigationLink(destination: FriendsView()) {
                 HStack {
                     ZStack {
@@ -110,8 +110,10 @@ struct FriendsRowView: View {
                 .padding()
                 .background(FancyColor.listCell.color)  // Apply a background color to HStack
             }
-            Divider() // 회색의 언더라인 추가
-                .background(FancyColor.gray1.color)
+            Rectangle()
+                .frame(height: 0.5)
+                .foregroundColor(.clear)
+                .background(FancyColor.listCellUnderline.color)
         }
     }
 }
