@@ -78,7 +78,6 @@ struct HomeView: View {
                 )
             ),
         ])
-//        .navigationBarHidden(true)
         .onChange(of: selection) { newSelection in
             updateTitle(newSelection)
         }

@@ -39,6 +39,7 @@
 		9833FFCD29F6652800CC33F7 /* ChatBotLocalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9833FFCC29F6652800CC33F7 /* ChatBotLocalService.swift */; };
 		9833FFD029F683C800CC33F7 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9833FFCF29F683C800CC33F7 /* CoreDataHelper.swift */; };
 		9837CCA52A418C5F002F1A3A /* FriendsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9837CCA42A418C5F002F1A3A /* FriendsListView.swift */; };
+		9837CCAA2A42F255002F1A3A /* ActivityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9837CCA92A42F255002F1A3A /* ActivityModel.swift */; };
 		983B59D129FB30F800F0EACD /* CoreStore in Frameworks */ = {isa = PBXBuildFile; productRef = 983B59D029FB30F800F0EACD /* CoreStore */; };
 		983B59D329FB331400F0EACD /* DataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983B59D229FB331400F0EACD /* DataStack.swift */; };
 		983B59D929FB37A100F0EACD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 983B59D829FB37A100F0EACD /* LaunchScreen.storyboard */; };
@@ -238,6 +239,7 @@
 		9833FFCC29F6652800CC33F7 /* ChatBotLocalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotLocalService.swift; sourceTree = "<group>"; };
 		9833FFCF29F683C800CC33F7 /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		9837CCA42A418C5F002F1A3A /* FriendsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsListView.swift; sourceTree = "<group>"; };
+		9837CCA92A42F255002F1A3A /* ActivityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityModel.swift; sourceTree = "<group>"; };
 		983B59D229FB331400F0EACD /* DataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStack.swift; sourceTree = "<group>"; };
 		983B59D829FB37A100F0EACD /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		983B59DE29FB7B1E00F0EACD /* AccountEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountEntity.swift; sourceTree = "<group>"; };
@@ -665,6 +667,7 @@
 				98EBFBF329F98AA2004E95F3 /* AchievementModel.swift */,
 				988D7CD72A3711410018A85E /* ScanResult.swift */,
 				984844122A3C54C1006DD342 /* SheetType.swift */,
+				9837CCA92A42F255002F1A3A /* ActivityModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1071,6 +1074,7 @@
 				98B21B7629DA6288004EFE0E /* Destination.swift in Sources */,
 				98E314B529DEE67B00EA1617 /* TagRemoteServiceProtocol.swift in Sources */,
 				981881C629F26F00002A4395 /* PomodoroTimerView.swift in Sources */,
+				9837CCAA2A42F255002F1A3A /* ActivityModel.swift in Sources */,
 				98976B052A077F8F00F1CEAE /* ExamTimerRemoteServiceProtocol.swift in Sources */,
 				98B21B1B29D55F6C004EFE0E /* AuthenticationRemoteServiceProtocol.swift in Sources */,
 				98B21B2129D56BDF004EFE0E /* RegexConstants.swift in Sources */,
