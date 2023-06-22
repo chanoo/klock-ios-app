@@ -184,6 +184,7 @@
 		98EBFBF229F98A86004E95F3 /* CharacterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EBFBF129F98A86004E95F3 /* CharacterViewModel.swift */; };
 		98EBFBF429F98AA2004E95F3 /* AchievementModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EBFBF329F98AA2004E95F3 /* AchievementModel.swift */; };
 		98EBFBF629FA54F6004E95F3 /* ClearListBackground+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EBFBF529FA54F6004E95F3 /* ClearListBackground+Extensions.swift */; };
+		98F80EE92A44A3440084E44B /* Color+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F80EE82A44A3440084E44B /* Color+Extentions.swift */; };
 		98FD8F742A174A7900CEE0B1 /* StudySessionRemoteServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FD8F732A174A7900CEE0B1 /* StudySessionRemoteServiceProtocol.swift */; };
 		98FD8F762A174ED200CEE0B1 /* StudySessionRemoteServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FD8F752A174ED200CEE0B1 /* StudySessionRemoteServiceTests.swift */; };
 		98FD8F782A174F0C00CEE0B1 /* StudySessionRemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FD8F772A174F0C00CEE0B1 /* StudySessionRemoteService.swift */; };
@@ -391,6 +392,7 @@
 		98EBFBF129F98A86004E95F3 /* CharacterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterViewModel.swift; sourceTree = "<group>"; };
 		98EBFBF329F98AA2004E95F3 /* AchievementModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementModel.swift; sourceTree = "<group>"; };
 		98EBFBF529FA54F6004E95F3 /* ClearListBackground+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ClearListBackground+Extensions.swift"; sourceTree = "<group>"; };
+		98F80EE82A44A3440084E44B /* Color+Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extentions.swift"; sourceTree = "<group>"; };
 		98FD8F732A174A7900CEE0B1 /* StudySessionRemoteServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudySessionRemoteServiceProtocol.swift; sourceTree = "<group>"; };
 		98FD8F752A174ED200CEE0B1 /* StudySessionRemoteServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudySessionRemoteServiceTests.swift; sourceTree = "<group>"; };
 		98FD8F772A174F0C00CEE0B1 /* StudySessionRemoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudySessionRemoteService.swift; sourceTree = "<group>"; };
@@ -635,6 +637,7 @@
 				98B21B4A29D617F6004EFE0E /* Encodable+Extensions.swift */,
 				984D2C8329DFC311008D3EA9 /* UINavigationController+UIGestureRecognizerDelegate.swift */,
 				98EBFBF529FA54F6004E95F3 /* ClearListBackground+Extensions.swift */,
+				98F80EE82A44A3440084E44B /* Color+Extentions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1098,6 +1101,7 @@
 				98DC292B29E9373D00882E36 /* ChatBotRemoteService.swift in Sources */,
 				98EBFBE829F968E8004E95F3 /* TaskModel.swift in Sources */,
 				98976B012A077F7400F1CEAE /* FocusTimerRemoteServiceProtocol.swift in Sources */,
+				98F80EE92A44A3440084E44B /* Color+Extentions.swift in Sources */,
 				98D7C95329E460470075D201 /* AppFlowManager.swift in Sources */,
 				980CD5492A09485F00B203AC /* AlamofireLogger.swift in Sources */,
 				982140A32A07EFBE00C68EB9 /* APIServiceProtocol.swift in Sources */,

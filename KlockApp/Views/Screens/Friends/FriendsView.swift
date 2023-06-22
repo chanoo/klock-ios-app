@@ -62,7 +62,7 @@ struct FriendsView: View {
                 .padding(.trailing, 8)
                 .padding(.bottom, 8)
             }
-            .background(FancyColor.white.color)
+            .background(FancyColor.chatBotInputBackground.color)
         }
         .background(FancyColor.background.color)
         .navigationBarTitle("친구", displayMode: .inline)

@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct NavigationBarModifier: ViewModifier {
-    var backgroundColor: UIColor?
+    var backgroundColor: Color?
     
-    init(backgroundColor: UIColor?) {
+    init(backgroundColor: Color?) {
         self.backgroundColor = backgroundColor
         let coloredAppearance = UINavigationBarAppearance()
         if let backgroundColor = backgroundColor {
             coloredAppearance.configureWithTransparentBackground()
-            coloredAppearance.backgroundColor = backgroundColor.withAlphaComponent(0.5)
+            coloredAppearance.backgroundColor = backgroundColor.uiColor().withAlphaComponent(0.5)
         } else {
             coloredAppearance.configureWithTransparentBackground()
         }
@@ -32,12 +32,13 @@ struct NavigationBarModifier: ViewModifier {
 struct ContentView: View {
     @ObservedObject var viewModel: ContentViewModel
     @EnvironmentObject var appFlowManager: AppFlowManager
+    @Environment(\.colorScheme) var colorScheme // 이 부분을 추가하세요.
 
     var body: some View {
         NavigationView {
             viewModel.currentView
         }
-        .modifier(NavigationBarModifier(backgroundColor: .white))
+        .modifier(NavigationBarModifier(backgroundColor: FancyColor.navigationBar.color))
         .onReceive(appFlowManager.navigateToDestination) { _ in
             viewModel.updateCurrentView(appFlowManager: appFlowManager)
         }
