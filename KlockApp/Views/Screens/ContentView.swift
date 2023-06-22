@@ -7,16 +7,21 @@
 
 import SwiftUI
 
-struct NavigationBarColorModifier: ViewModifier {
-    var backgroundColor: UIColor
-
-    init(backgroundColor: UIColor) {
+struct NavigationBarModifier: ViewModifier {
+    var backgroundColor: UIColor?
+    
+    init(backgroundColor: UIColor?) {
         self.backgroundColor = backgroundColor
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = backgroundColor
-        UINavigationBar.appearance().standardAppearance = appearance
-        UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        let coloredAppearance = UINavigationBarAppearance()
+        if let backgroundColor = backgroundColor {
+            coloredAppearance.configureWithTransparentBackground()
+            coloredAppearance.backgroundColor = backgroundColor.withAlphaComponent(0.5)
+        } else {
+            coloredAppearance.configureWithTransparentBackground()
+        }
+        coloredAppearance.backgroundEffect = UIBlurEffect(style: .systemUltraThinMaterial)
+        UINavigationBar.appearance().standardAppearance = coloredAppearance
+        UINavigationBar.appearance().scrollEdgeAppearance = coloredAppearance
     }
 
     func body(content: Content) -> some View {
@@ -32,7 +37,7 @@ struct ContentView: View {
         NavigationView {
             viewModel.currentView
         }
-        .navigationViewStyle(.stack)
+        .modifier(NavigationBarModifier(backgroundColor: .white))
         .onReceive(appFlowManager.navigateToDestination) { _ in
             viewModel.updateCurrentView(appFlowManager: appFlowManager)
         }
