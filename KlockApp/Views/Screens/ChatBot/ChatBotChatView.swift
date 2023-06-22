@@ -25,10 +25,7 @@ struct ChatBotChatView: View {
             ScrollView(showsIndicators: false) { // 스크롤바 숨김
                 ScrollViewReader { _ in
                     LazyVStack {
-                        ForEach(viewModel.messages[chatBot.id, default: []].reversed()) { messageModel in
-                            ChatBubble(messageModel: messageModel, isPreparingResponse: $viewModel.isPreparingResponse)
-                        }
-                        
+
                         if viewModel.isPreparingResponse && viewModel.tempMessage == nil {
                             HStack(spacing: 0) {
                                 Spacer()
@@ -42,10 +39,15 @@ struct ChatBotChatView: View {
                             .padding(.trailing, 24)
                             .padding(.top, 10)
                         }
-
+                        
                         if let tempMessage = viewModel.tempMessage {
                             ChatBubble(messageModel: tempMessage, isPreparingResponse: $viewModel.isPreparingResponse)
                         }
+                        
+                        ForEach(viewModel.messages[chatBot.id, default: []].reversed()) { messageModel in
+                            ChatBubble(messageModel: messageModel, isPreparingResponse: $viewModel.isPreparingResponse)
+                        }
+
                     }
                 }
             }
@@ -106,7 +108,7 @@ struct ChatBotChatView: View {
                 .padding(.trailing, 8)
                 .padding(.bottom, 8)
             }
-            .background(FancyColor.background.color)
+            .background(FancyColor.chatBotInputBackground.color)
             .alert(isPresented: $showAlert) {
                 Alert(
                     title: Text("대화 내용 삭제"),
@@ -117,6 +119,7 @@ struct ChatBotChatView: View {
                     secondaryButton: .cancel())
             }
         }
+        .background(FancyColor.background.color)
         .modifier(CommonViewModifier(title: chatBot.subject))
         .navigationBarItems(
             leading: BackButtonView(),
