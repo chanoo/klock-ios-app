@@ -50,4 +50,28 @@ struct TimeUtils {
             return String(format: "%02d초", seconds)
         }
     }
+    
+    /// 이 함수는 주어진 날짜와 포맷을 받아 해당 포맷에 따른 날짜/시간 문자열을 반환합니다.
+    ///
+    /// - Parameters:
+    ///   - date: 변환할 날짜입니다.
+    ///   - format: 출력할 날짜/시간 문자열의 포맷입니다.
+    /// - Returns: 주어진 포맷에 따른 날짜/시간 문자열을 반환합니다.
+    static func formattedDateString(from date: Date, format: String) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = format
+        return formatter.string(from: date)
+    }
+    
+    /// 이 함수는 주어진 문자열과 포맷을 받아 해당 포맷에 따른 날짜 객체를 반환합니다.
+    ///
+    /// - Parameters:
+    ///   - dateString: 변환할 날짜/시간 문자열입니다.
+    ///   - format: 입력 문자열의 날짜/시간 포맷입니다.
+    /// - Returns: 주어진 포맷에 따른 날짜 객체를 반환합니다. 변환에 실패한 경우 nil을 반환합니다.
+    static func dateFromString(dateString: String, format: String) -> Date? {
+        let formatter = DateFormatter()
+        formatter.dateFormat = format
+        return formatter.date(from: dateString)
+    }
 }

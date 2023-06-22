@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Foast
 
 // 친구 목록 화
 struct FriendsView: View {
@@ -104,43 +103,49 @@ struct ActivityBubble: View {
                             .font(.system(size: 15))
                             .foregroundColor(FancyColor.subtext.color)
                             .padding(.bottom, 4)
-                        ZStack(alignment: .bottomTrailing) {
-                            Button {
-                                withAnimation(.easeInOut(duration: 0.5)) {
-                                    self.scale = 2
-                                    activityModel.likeCount += 1
-                                }
-                                withAnimation(.easeInOut(duration: 0.5).delay(0.5)) {
-                                    self.scale = activityModel.likeCount >= 10 ? 1.5 : 1
-                                }
-                                Foast.show(message: activityModel.message)
-                            } label: {
-                                VStack(alignment: .leading, spacing: 0) {
-                                    Text(activityModel.message)
-                                        .font(.system(size: 15))
-                                        .padding(12)
-                                    if let attachment = activityModel.attachment {
-                                        Image(attachment)
-                                            .resizable()
-                                            .frame(width: .infinity)
-                                            .aspectRatio(contentMode: .fit)
-                                            .cornerRadius(6)
-                                            .padding(.leading, 14)
-                                            .padding(.trailing, 14)
-                                            .padding(.bottom, 14)
+                        HStack(alignment: .bottom) {
+                            ZStack(alignment: .bottomTrailing) {
+                                Button {
+                                    withAnimation(.easeInOut(duration: 0.5)) {
+                                        self.scale = 2
+                                        activityModel.likeCount += 1
+                                    }
+                                    withAnimation(.easeInOut(duration: 0.5).delay(0.5)) {
+                                        self.scale = activityModel.likeCount >= 10 ? 1.5 : 1
+                                    }
+                                } label: {
+                                    VStack(alignment: .leading, spacing: 0) {
+                                        Text(activityModel.message)
+                                            .font(.system(size: 15))
+                                            .padding(12)
+                                        if let attachment = activityModel.attachment {
+                                            Image(attachment)
+                                                .resizable()
+                                                .frame(width: .infinity)
+                                                .aspectRatio(contentMode: .fit)
+                                                .cornerRadius(6)
+                                                .padding(.leading, 14)
+                                                .padding(.trailing, 14)
+                                                .padding(.bottom, 14)
+                                        }
                                     }
                                 }
+                                .background(FancyColor.chatBotBubbleMe.color)
+                                .clipShape(RoundedCorners(tl: 0, tr: 4, bl: 4, br: 4))
+                                .foregroundColor(FancyColor.chatbotBubbleTextMe.color)
+                                if activityModel.likeCount > 0 {
+                                    Image("ic_love")
+                                        .foregroundColor(FancyColor.red.color)
+                                        .padding(.bottom, -8)
+                                        .padding(.trailing, -8)
+                                        .scaleEffect(scale)
+                                }
                             }
-                            .background(FancyColor.chatBotBubbleMe.color)
-                            .clipShape(RoundedCorners(tl: 0, tr: 4, bl: 4, br: 4))
-                            .foregroundColor(FancyColor.chatbotBubbleTextMe.color)
-                            if activityModel.likeCount > 0 {
-                                Image("ic_love")
-                                    .foregroundColor(FancyColor.red.color)
-                                    .padding(.bottom, -8)
-                                    .padding(.trailing, -8)
-                                    .scaleEffect(scale)
-                            }
+                            .zIndex(10)
+                            Text(TimeUtils.formattedDateString(from: activityModel.createdAt, format: "a h:mm"))
+                                .font(.system(size: 13))
+                                .foregroundColor(FancyColor.subtext.color)
+                                .zIndex(9)
                         }
                     }
                     Spacer()
@@ -148,47 +153,54 @@ struct ActivityBubble: View {
                     Spacer()
                     VStack(alignment: .trailing, spacing: 0) {
                         Text(activityModel.nickname)
-                            .font(.system(size: 15))
+                            .font(.system(size: 13))
                             .foregroundColor(FancyColor.subtext.color)
                             .padding(.bottom, 4)
-                        ZStack(alignment: .bottomLeading) {
-                            Button {
-                                withAnimation(.easeInOut(duration: 0.5)) {
-                                    self.scale = 2
-                                    activityModel.likeCount += 1
-                                }
-                                withAnimation(.easeInOut(duration: 0.5).delay(0.5)) {
-                                    self.scale = activityModel.likeCount >= 10 ? 1.5 : 1
-                                }
-                                Foast.show(message: activityModel.message)
-                            } label: {
-                                VStack(alignment: .trailing, spacing: 0) {
-                                    Text(activityModel.message)
-                                        .font(.system(size: 15))
-                                        .padding(12)
-                                    if let attachment = activityModel.attachment {
-                                        Image(attachment)
-                                            .resizable()
-                                            .frame(width: .infinity)
-                                            .aspectRatio(contentMode: .fit)
-                                            .cornerRadius(6)
-                                            .padding(.leading, 14)
-                                            .padding(.trailing, 14)
-                                            .padding(.bottom, 14)
+                        HStack(alignment: .bottom) {
+                            Text(TimeUtils.formattedDateString(from: activityModel.createdAt, format: "a h:mm"))
+                                .font(.system(size: 13))
+                                .foregroundColor(FancyColor.subtext.color)
+                                .zIndex(9)
+                            ZStack(alignment: .bottomLeading) {
+                                Button {
+                                    withAnimation(.easeInOut(duration: 0.5)) {
+                                        self.scale = 2
+                                        activityModel.likeCount += 1
+                                    }
+                                    withAnimation(.easeInOut(duration: 0.5).delay(0.5)) {
+                                        self.scale = activityModel.likeCount >= 10 ? 1.5 : 1
+                                    }
+                                } label: {
+                                    VStack(alignment: .leading, spacing: 0) {
+                                        Text(activityModel.message)
+                                            .font(.system(size: 15))
+                                            .padding(12)
+                                        if let attachment = activityModel.attachment {
+                                            Image(attachment)
+                                                .resizable()
+                                                .frame(width: .infinity)
+                                                .aspectRatio(contentMode: .fit)
+                                                .cornerRadius(6)
+                                                .padding(.leading, 14)
+                                                .padding(.trailing, 14)
+                                                .padding(.bottom, 14)
+                                        }
                                     }
                                 }
+                                .background(FancyColor.chatBotBubble.color)
+                                .clipShape(RoundedCorners(tl: 4, tr: 0, bl: 4, br: 4))
+                                .foregroundColor(FancyColor.chatbotBubbleText.color)
+                                if activityModel.likeCount > 0 {
+                                    Image("ic_love")
+                                        .foregroundColor(FancyColor.red.color)
+                                        .padding(.bottom, -8)
+                                        .padding(.leading, -8)
+                                        .scaleEffect(scale)
+                                }
                             }
-                            .background(FancyColor.chatBotBubble.color)
-                            .clipShape(RoundedCorners(tl: 4, tr: 0, bl: 4, br: 4))
-                            .foregroundColor(FancyColor.chatbotBubbleText.color)
-                            if activityModel.likeCount > 0 {
-                                Image("ic_love")
-                                    .foregroundColor(FancyColor.red.color)
-                                    .padding(.bottom, -8)
-                                    .padding(.leading, -8)
-                                    .scaleEffect(scale)
-                            }
+                            .zIndex(10)
                         }
+
                     }
                     Image("img_profile2")
                         .padding(.trailing, 8)
@@ -204,6 +216,10 @@ struct ActivityBubble: View {
 
 struct FriendsView_Previews: PreviewProvider {
     static var previews: some View {
+        let viewModel = FriendsViewModel()
+        let friendAddViewModel = FriendAddViewModel()
         FriendsView()
+            .environmentObject(viewModel)
+            .environmentObject(friendAddViewModel)
     }
 }
