@@ -51,18 +51,15 @@ struct FirstFriendsRowView: View {
                             .foregroundColor(FancyColor.primary.color)
                     }
                 }
-                VStack(alignment: .leading, spacing: 0) {
-                    Text(userModel.username)
-                        .font(.headline)
-                        .foregroundColor(FancyColor.text.color)
-                    Text("\(TimeUtils.secondsToHMS(seconds: userModel.totalStudyTime))")
-                        .font(.system(size: 13, weight: .bold))
-                        .foregroundColor(FancyColor.gray4.color)
-                        .padding(.top, 2)
-                }
-                .padding(.leading, 10)
-
+                Text(userModel.username)
+                    .font(.system(size: 17, weight: .semibold))
+                    .foregroundColor(FancyColor.text.color)
+                    .padding(.leading, 10)
                 Spacer()
+                Text("\(TimeUtils.secondsToHMS(seconds: userModel.totalStudyTime))")
+                    .font(.system(size: 17, weight: .heavy))
+                    .foregroundColor(FancyColor.gray4.color)
+                    .padding(.top, 2)
             }
             .padding()
             .background(FancyColor.listCell.color)
@@ -95,17 +92,15 @@ struct FriendsRowView: View {
                                 .foregroundColor(FancyColor.primary.color)
                         }
                     }
-                    VStack(alignment: .leading, spacing: 0) {
-                        Text(userModel.username)
-                            .font(.headline)
-                            .foregroundColor(FancyColor.text.color)
-                        Text("\(TimeUtils.secondsToHMS(seconds: userModel.totalStudyTime))")
-                            .font(.system(size: 13, weight: .bold))
-                            .foregroundColor(FancyColor.gray4.color)
-                            .padding(.top, 2)
-                    }
-                    .padding(.leading, 10)
+                    Text(userModel.username)
+                        .font(.system(size: 15, weight: .semibold))
+                        .foregroundColor(FancyColor.text.color)
+                        .padding(.leading, 10)
                     Spacer()
+                    Text("\(TimeUtils.secondsToHMS(seconds: userModel.totalStudyTime))")
+                        .font(.system(size: 15, weight: .heavy))
+                        .foregroundColor(FancyColor.gray4.color)
+                        .padding(.top, 2)
                 }
                 .padding()
                 .background(FancyColor.listCell.color)  // Apply a background color to HStack
