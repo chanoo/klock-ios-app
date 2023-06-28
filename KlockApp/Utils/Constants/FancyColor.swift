@@ -10,9 +10,12 @@ import SwiftUI
 enum FancyColor: String {
     case facebook = "color_facebook"
     case apple = "color_apple"
+    case actionsheetBackground = "color_actionsheet_background"
     case kakao = "color_kakao"
     case kakaoBrown = "color_kakao_brown"
     case background = "color_background"
+    case button = "color_button"
+    case buttonCancel = "color_button_cancel"
     case navigationBar = "color_navigation_bar"
     case listCell = "color_list_cell"
     case listCellBorder = "color_list_cell_border"

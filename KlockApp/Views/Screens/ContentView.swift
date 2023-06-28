@@ -32,12 +32,18 @@ struct NavigationBarModifier: ViewModifier {
 struct ContentView: View {
     @ObservedObject var viewModel: ContentViewModel
     @EnvironmentObject var appFlowManager: AppFlowManager
-    @Environment(\.colorScheme) var colorScheme // 이 부분을 추가하세요.
+    @StateObject var actionSheetManager = ActionSheetManager()
 
     var body: some View {
-        NavigationView {
-            viewModel.currentView
+        ZStack {
+            NavigationView {
+                viewModel.currentView
+                    .environmentObject(actionSheetManager)
+            }
         }
+        .modifier(CustomActionSheetModifier(isPresented: $actionSheetManager.isPresented) {
+            AnyView(actionSheetManager.actionSheet)
+        })
         .modifier(NavigationBarModifier(backgroundColor: FancyColor.navigationBar.color))
         .onReceive(appFlowManager.navigateToDestination) { _ in
             viewModel.updateCurrentView(appFlowManager: appFlowManager)

@@ -9,7 +9,7 @@ import SwiftUI
 
 // 친구 목록 화
 struct FriendsView: View {
-    @ObservedObject var beaconManager = BeaconManager()
+    @EnvironmentObject var actionSheetManager: ActionSheetManager
     @State private var isShowingAddFriend = false
     @StateObject private var viewModel = Container.shared.resolve(FriendsViewModel.self)
     @StateObject private var friendAddViewModel = Container.shared.resolve(FriendAddViewModel.self)
@@ -17,53 +17,56 @@ struct FriendsView: View {
     let maxHeight: CGFloat = 70 // 최대 높이 (1줄당 대략 20~25 정도를 예상하고 세팅)
 
     var body: some View {
-        VStack(spacing: 0) {
-            ScrollView(showsIndicators: false) { // 스크롤바 숨김
-                ScrollViewReader { _ in
-                    LazyVStack(spacing: 4) {
-                        ForEach(viewModel.activities, id: \.id) { activity in
-                            ActivityBubble(activityModel: activity, isPreparingResponse: $viewModel.isPreparingResponse)
+        ZStack {
+            VStack(spacing: 0) {
+                ScrollView(showsIndicators: false) { // 스크롤바 숨김
+                    ScrollViewReader { _ in
+                        LazyVStack(spacing: 4) {
+                            ForEach(viewModel.activities, id: \.id) { activity in
+                                ActivityBubble(activityModel: activity, isPreparingResponse: $viewModel.isPreparingResponse)
+                            }
                         }
                     }
                 }
-            }
 
-            // ChatGPTView의 body 내에서 HStack 부분
-            HStack(spacing: 0) {
-                HStack(alignment: .bottom, spacing: 0) {
-                    ZStack(alignment: .bottomTrailing) {
-                        TextView(text: $viewModel.newMessage, dynamicHeight: $dynamicHeight, maxHeight: maxHeight)
-                            .frame(height: dynamicHeight)
-                            .textFieldStyle(PlainTextFieldStyle())
-                            .padding(0)
-                            .padding(.leading, 6)
-                            .padding(.trailing, 25)
-                            .foregroundColor(FancyColor.primary.color)
-                            .background(FancyColor.chatBotInput.color)
-                            .cornerRadius(4)
-                    }
-                    .padding(1)
-                    .background(FancyColor.chatBotInputOutline.color)
-                    .cornerRadius(4)
+                // ChatGPTView의 body 내에서 HStack 부분
+                HStack(spacing: 0) {
+                    HStack(alignment: .bottom, spacing: 0) {
+                        ZStack(alignment: .bottomTrailing) {
+                            TextView(text: $viewModel.newMessage, dynamicHeight: $dynamicHeight, maxHeight: maxHeight)
+                                .frame(height: dynamicHeight)
+                                .textFieldStyle(PlainTextFieldStyle())
+                                .padding(0)
+                                .padding(.leading, 6)
+                                .padding(.trailing, 25)
+                                .foregroundColor(FancyColor.primary.color)
+                                .background(FancyColor.chatBotInput.color)
+                                .cornerRadius(4)
+                        }
+                        .padding(1)
+                        .background(FancyColor.chatBotInputOutline.color)
+                        .cornerRadius(4)
 
-                    Button(action: {
-                    }) {
-                        Image("ic_circle_arrow_up")
-                            .foregroundColor(FancyColor.chatBotSendButton.color)
+                        Button(action: {
+                        }) {
+                            Image("ic_circle_arrow_up")
+                                .foregroundColor(FancyColor.chatBotSendButton.color)
+                        }
+                        .padding(1)
+                        .padding(.top, 2)
+                        .frame(height: 40)
+                        .frame(width: 40)
+                        .disabled(viewModel.isPreparingResponse)
                     }
-                    .padding(1)
-                    .padding(.top, 2)
-                    .frame(height: 40)
-                    .frame(width: 40)
-                    .disabled(viewModel.isPreparingResponse)
+                    .padding(.top, 5)
+                    .padding(.leading, 14)
+                    .padding(.trailing, 8)
+                    .padding(.bottom, 8)
                 }
-                .padding(.top, 5)
-                .padding(.leading, 14)
-                .padding(.trailing, 8)
-                .padding(.bottom, 8)
+                .background(FancyColor.chatBotInputBackground.color)
             }
-            .background(FancyColor.chatBotInputBackground.color)
         }
+        .edgesIgnoringSafeArea(.bottom)
         .background(FancyColor.background.color)
         .navigationBarTitle("친구", displayMode: .inline)
         .navigationBarItems(
@@ -73,15 +76,45 @@ struct FriendsView: View {
                     .frame(width: 25, height: 25)
                     .padding(.leading, 8)
             }),
-            trailing: Button(action: { viewModel.showActionSheet() }) {
+            trailing: Button(action: {
+                actionSheetManager.actionSheet = CustomActionSheetView(
+                    title: "친구 추가",
+                    message: "나와 같이 성장해 나갈 친구와 같이 공부하세요.",
+                    actionButtons: [
+                        ActionButton(label: Text("QR코드 스캔"), action: {
+                            withAnimation(.spring()) {
+                                actionSheetManager.isPresented = false
+                            }
+                            friendAddViewModel.activeSheet = .qrcode
+                        }),
+                        ActionButton(label: Text("닉네임 친구추가"), action: {
+                            withAnimation(.spring()) {
+                                actionSheetManager.isPresented = false
+                            }
+                            friendAddViewModel.activeSheet = .nickname
+                        }),
+                        ActionButton(label: Text("주변탐색 친구추가"), action: {
+                            withAnimation(.spring()) {
+                                actionSheetManager.isPresented = false
+                            }
+                            friendAddViewModel.activeSheet = .nearby
+                        }),
+                    ],
+                    cancelButton: ActionButton(label: Text("취소"), action: {
+                        withAnimation(.spring()) {
+                            actionSheetManager.isPresented = false
+                        }
+                    })
+                )
+                withAnimation(.spring()) {
+                    actionSheetManager.isPresented = true
+                }
+            }) {
                 Image("ic_person_plus")
             }
         )
-        .sheet(item: $viewModel.friendAddViewModel.activeSheet) { item in
+        .sheet(item: $friendAddViewModel.activeSheet) { item in
             viewModel.showAddFriendView(for: item)
-        }
-        .actionSheet(isPresented: $viewModel.isPresented) { () -> ActionSheet in
-            viewModel.friendAddActionSheet()
         }
     }
 }
