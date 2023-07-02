@@ -137,7 +137,6 @@ struct ChatBotChatView: View {
 struct ChatBubble: View {
     let messageModel: MessageModel
     @Binding var isPreparingResponse: Bool
-    @Environment(\.colorScheme) var colorScheme // 이 부분을 추가하세요.
 
     var body: some View {
         VStack {

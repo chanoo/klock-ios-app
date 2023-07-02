@@ -31,31 +31,23 @@ struct FocusTimerCardView: View {
                 .rotation3DEffect(.degrees(isFlipped ? 0 : 180), axis: (x: 0.0, y: 1.0, z: 0.0))
                 .opacity(isFlipped ? 1 : 0)
         }
-        .background(FancyColor.background.color)
         .cornerRadius(10)
         .shadow(color: Color(.systemGray).opacity(0.2), radius: 5, x: 0, y: 0)
     }
     
     private func frontView(geometry: GeometryProxy) -> some View {
         ZStack {
-            Image("img_watch_background3")
-                .aspectRatio(contentMode: .fill)
-                .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
+//            Image("img_watch_background3")
+//                .aspectRatio(contentMode: .fill)
+//                .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
 
             Button(action: flipAnimation) {
-                Image(systemName: "gearshape")
-                    .frame(width: 20, height: 20)
+                Image("ic_3dots")
+                    .foregroundColor(FancyColor.gray3.color)
             }
-            .position(x: geometry.size.width - 25, y: 25)
+            .position(x: geometry.size.width - 30, y: 30)
             
             VStack {
-                Text(focusTimerViewModel.elapsedTimeToString())
-                    .font(.largeTitle)
-                    .padding()
-                    .background(.white.opacity(0.5))
-                    .foregroundColor(.gray.opacity(0.8))
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-
                 AnalogClockView(
                     clockViewModel: ClockViewModel(
                         currentTime: Date(),
@@ -70,16 +62,30 @@ struct FocusTimerCardView: View {
                         minuteHandImageName: "img_watch_hand_min",
                         secondHandImageName: "img_watch_hand_sec",
                         clockBackgroundImageName: "img_watch_face1",
-                        clockSize: CGSize(width: 300, height: 300),
-                        hourHandColor: .black,
-                        minuteHandColor: .black,
+                        clockSize: CGSize(width: 200, height: 200),
+                        hourHandColor: .white,
+                        minuteHandColor: .white,
                         secondHandColor: .mint,
                         outlineInColor: .white.opacity(0.8),
                         outlineOutColor: .white.opacity(0.5)
                     )
                 )
                 .padding(.top, 20)
-                .padding(.bottom, 20)
+                .padding(.bottom, 50)
+                
+                Text(focusTimerViewModel.model.name)
+                    .font(.system(size: 17, weight: .bold))
+                    .foregroundColor(FancyColor.timerFocusText.color)
+                
+                Text(focusTimerViewModel.elapsedTimeToString())
+                    .font(.system(size: 40, weight: .bold))
+                    .foregroundColor(FancyColor.timerFocusText.color)
+                    .padding([.top], 4)
+
+                Text("(\(focusTimerViewModel.elapsedTimeToString()))")
+                    .font(.system(size: 16, weight: .heavy))
+                    .foregroundColor(FancyColor.gray2.color)
+                    .padding([.bottom], 50)
 
                 FancyButton(
                     title: "공부 시작",
@@ -91,11 +97,13 @@ struct FocusTimerCardView: View {
                             timeTimerViewModel.focusTimerViewModel = focusTimerViewModel
                         }
                     },
-                    style: .constant(.primary)
+                    icon: Image("ic_play"),
+                    isBlock: false,
+                    style: .constant(.black)
                 )
             }
         }
-        .background(FancyColor.background.color)
+        .background(FancyColor.timerFocusBackground.color)
     }
 
     private func backView(geometry: GeometryProxy) -> some View {
@@ -142,9 +150,7 @@ struct FocusTimerCardView: View {
             }
             .clearListBackground()
         }
-        .background(FancyColor.background.color)
-        .cornerRadius(10)
-        .shadow(color: Color(.systemGray).opacity(0.2), radius: 5, x: 0, y: 0)
+        .background(FancyColor.timerFocusBackground.color)
     }
 }
 
@@ -152,7 +158,7 @@ struct FocusTimerCardView_Previews: PreviewProvider {
     static var previews: some View {
         let model = FocusTimerModel(id: 1, userId: 1, seq: 1, type: "FOCUS", name: "집중시간 타이머")
         let viewModel = FocusTimerViewModel(model: model)
-        
-//        FocusTimerCardView(focusTimerViewModel: viewModel)
+        let timeTimerViewModel = Container.shared.resolve(TimeTimerViewModel.self)
+        FocusTimerCardView(focusTimerViewModel: viewModel, timeTimerViewModel: timeTimerViewModel)
     }
 }

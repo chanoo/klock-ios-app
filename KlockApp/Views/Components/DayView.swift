@@ -48,8 +48,9 @@ struct DayView: View {
                     Text(text)
                 }
             }
+            .font(.system(size: 13))
             .frame(width: size, height: size)
-            .cornerRadius(5)
+            .cornerRadius(4)
         }
     }
 }

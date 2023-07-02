@@ -15,7 +15,7 @@ struct NavigationBarModifier: ViewModifier {
         let coloredAppearance = UINavigationBarAppearance()
         if let backgroundColor = backgroundColor {
             coloredAppearance.configureWithTransparentBackground()
-            coloredAppearance.backgroundColor = backgroundColor.uiColor().withAlphaComponent(0.5)
+            coloredAppearance.backgroundColor = backgroundColor.uiColor().withAlphaComponent(1)
         } else {
             coloredAppearance.configureWithTransparentBackground()
         }

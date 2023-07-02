@@ -9,4 +9,12 @@ import Foundation
 
 class TabBarManager: ObservableObject {
     @Published var isTabBarVisible: Bool = true
+    
+    func hide() {
+        isTabBarVisible = false
+    }
+
+    func show() {
+        isTabBarVisible = true
+    }
 }

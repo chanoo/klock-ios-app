@@ -16,6 +16,7 @@ enum FancyButtonStyle {
     case apple
     case kakao
     case button
+    case black
 
     var backgroundColor: Color {
         switch self {
@@ -32,7 +33,9 @@ enum FancyButtonStyle {
         case .kakao:
             return FancyColor.kakao.color
         case .button:
-            return FancyColor.black.color
+            return FancyColor.button.color
+        case .black:
+            return FancyColor.blackButtonBackground.color
         }
     }
 
@@ -52,6 +55,8 @@ enum FancyButtonStyle {
             return FancyColor.kakaoBrown.color
         case .button:
             return FancyColor.white.color
+        case .black:
+            return FancyColor.blackButtonText.color
         }
     }
     
@@ -71,6 +76,8 @@ enum FancyButtonStyle {
             return FancyColor.kakao.color
         case .button:
             return FancyColor.black.color
+        case .black:
+            return FancyColor.black.color
         }
     }
     
@@ -89,6 +96,8 @@ enum FancyButtonStyle {
         case .kakao:
             return FancyColor.kakao.color
         case .button:
+            return FancyColor.gray2.color
+        case .black:
             return FancyColor.gray2.color
         }
     }

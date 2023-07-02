@@ -10,6 +10,7 @@ import SwiftUI
 // 친구 목록 화
 struct FriendsView: View {
     @EnvironmentObject var actionSheetManager: ActionSheetManager
+    @EnvironmentObject var tabBarManager: TabBarManager
     @State private var isShowingAddFriend = false
     @StateObject private var viewModel = Container.shared.resolve(FriendsViewModel.self)
     @StateObject private var friendAddViewModel = Container.shared.resolve(FriendAddViewModel.self)
@@ -42,6 +43,9 @@ struct FriendsView: View {
                                 .foregroundColor(FancyColor.primary.color)
                                 .background(FancyColor.chatBotInput.color)
                                 .cornerRadius(4)
+                                .onTapGesture {
+                                    tabBarManager.hide()
+                                }
                         }
                         .padding(1)
                         .background(FancyColor.chatBotInputOutline.color)
@@ -65,18 +69,25 @@ struct FriendsView: View {
                 }
                 .background(FancyColor.chatBotInputBackground.color)
             }
+            .onTapGesture {
+                viewModel.hideKeyboard()
+                tabBarManager.show()
+            }
         }
-        .edgesIgnoringSafeArea(.bottom)
         .background(FancyColor.background.color)
         .navigationBarTitle("친구", displayMode: .inline)
         .navigationBarItems(
-            leading: NavigationLink(destination: FriendsListView().environmentObject(viewModel), label: {
+            leading: NavigationLink(destination: FriendsListView().environmentObject(viewModel).onAppear(perform: {
+                tabBarManager.show()
+            }), label: {
                 Image("ic_sweats")
                     .resizable()
                     .frame(width: 25, height: 25)
                     .padding(.leading, 8)
             }),
             trailing: Button(action: {
+                viewModel.hideKeyboard()
+                tabBarManager.show()
                 actionSheetManager.actionSheet = CustomActionSheetView(
                     title: "친구 추가",
                     message: "나와 같이 성장해 나갈 친구와 같이 공부하세요.",

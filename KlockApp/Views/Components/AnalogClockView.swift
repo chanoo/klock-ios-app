@@ -26,6 +26,7 @@ struct AnalogClockView: View {
                     ZStack {
                         if let imageName = clockModel.clockBackgroundImageName {
                             Image(imageName)
+                                .resizable()
                                 .foregroundColor(.white.opacity(0.4))
                                 .frame(width: clockModel.clockSize.width,
                                        height: clockModel.clockSize.height)
@@ -150,6 +151,8 @@ struct ClockHand: View {
         // imageName이 있으면 이미지를 사용하여 바늘을 표시합니다.
         GeometryReader { geometry in
             Image(imageName)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
                 .foregroundColor(color)
                 .rotationEffect(angle, anchor: .center) // 회전 중심을 조정합니다.
                 .position(x: clockSize.width / 2, y: clockSize.height / 2) // 바늘을 시계의 중앙에 위치시킵니다.

@@ -23,24 +23,24 @@ struct CalendarView: View {
     }
 
     private var horizontalPadding: CGFloat {
-        return 8 + spacing * 20
+        return spacing * 20
     }
     
     private var dayViewSize: CGFloat {
-        return (UIScreen.main.bounds.width - horizontalPadding) / CGFloat(weeks)
+        return (UIScreen.main.bounds.width - horizontalPadding) / CGFloat(weeks) - 2.5
     }
       
     var body: some View {
         ScrollView {
-            VStack {
+            VStack(spacing: 0) {
                 if viewModel.isLoading {
                     // 로딩 인디케이터를 표시
                     ProgressView()
                 } else {
                     // 기존 캘린더 뷰를 표시
-                    if weeks > 15 {
+                    if weeks > weeks + 1 {
                         ScrollView(.horizontal, showsIndicators: false) {
-                            VStack {
+                            VStack(spacing: 0) {
                                 RoundedRectangle(cornerRadius: 10)
                                     .stroke(Color.gray.opacity(0.2), lineWidth: 1)
                                     .overlay(
@@ -52,7 +52,7 @@ struct CalendarView: View {
                             .padding(.all, 10)
                         }
 
-                        VStack(alignment: .leading, spacing: spacing) {
+                        VStack(alignment: .center, spacing: spacing) {
                             DayView(size: dayViewSize, backgroundColor: .clear)
                             ForEach(0..<7) { day in
                                 DayView(displayText: DateFormatter().shortWeekdaySymbols[day].prefix(1).uppercased(), size: dayViewSize, backgroundColor: .clear)
@@ -66,8 +66,9 @@ struct CalendarView: View {
 
                 }
             }
+            .padding(8)
         }
-        .navigationBarTitle("공부 시간")
+        .navigationBarTitle("공부 기록", displayMode: .inline)
         .navigationBarItems(
             trailing: NavigationLink(destination: StudySessionsByDateView().environmentObject(self.viewModel), isActive: $isShowingSelectTimer) {
                 Button(action: { isShowingSelectTimer.toggle() }) {
@@ -78,7 +79,7 @@ struct CalendarView: View {
     }
 
     private var calendarBody: some View {
-        VStack {
+        VStack(spacing: spacing) {
             HStack(spacing: spacing) {
                 DayView(size: dayViewSize, backgroundColor: .clear)
 
@@ -86,12 +87,14 @@ struct CalendarView: View {
                     let calendar = Calendar.current
                     let currentDate = calendar.date(byAdding: .day, value: week * 7, to: startDate)!
                     monthText(forWeekStartingOn: currentDate)
+                        .foregroundColor(FancyColor.gray7.color)
                 }
             }
 
             ForEach(0..<7) { day in
                 HStack(spacing: spacing) {
                     DayView(displayText: DateFormatter().shortWeekdaySymbols[day].prefix(1).uppercased(), size: dayViewSize, backgroundColor: .clear)
+                        .foregroundColor(FancyColor.gray7.color)
 
                     ForEach(Array(0..<weeks), id: \.self) { week in
                         let calendar = Calendar.current
@@ -112,9 +115,12 @@ struct CalendarView: View {
 
                 }
             }
-            
-            Spacer()
         }
+        .padding([.top, .leading, .trailing], 4)
+        .padding([.bottom], 8)
+        .background(FancyColor.calendarBackground.color)
+        .cornerRadius(10)
+        .shadow(color: Color(.systemGray).opacity(0.2), radius: 5, x: 0, y: 0)
     }
 
     private func monthText(forWeekStartingOn startDate: Date) -> some View {
@@ -165,17 +171,17 @@ struct CalendarView: View {
 
         switch totalDuration {
         case 0:
-            return Color.gray.opacity(0.3)
+            return FancyColor.calendarEmptyCell.color
         case 1...leve1:
-            return Color.green.opacity(0.2)
+            return FancyColor.primary.color.opacity(0.2)
         case leve1...leve2:
-            return Color.green.opacity(0.4)
+            return FancyColor.primary.color.opacity(0.4)
         case leve2...leve3:
-            return Color.green.opacity(0.6)
+            return FancyColor.primary.color.opacity(0.6)
         case leve3...leve4:
-            return Color.green.opacity(0.8)
+            return FancyColor.primary.color.opacity(0.8)
         default:
-            return Color.green
+            return FancyColor.primary.color
         }
     }
 }

@@ -143,7 +143,6 @@ struct NicknameView: View {
             if let qrCodeImage = viewModel.generateQRCodeWithCenterImage() {
                 viewModel.qrCodeImage = qrCodeImage
             }
-            
         }
 
     }

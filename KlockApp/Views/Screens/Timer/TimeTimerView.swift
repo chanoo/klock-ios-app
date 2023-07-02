@@ -80,17 +80,17 @@ struct TimerTabView: View {
                 }
                 AddTimerButton(geometry: geometry, isShowingSelectTimer: $isShowingSelectTimer)
             }
-            .tabViewStyle(.page(indexDisplayMode: .never))
+            .tabViewStyle(.page(indexDisplayMode: .automatic))
 
             Spacer()
         }
         .zIndex(1)
-        .navigationBarTitle("타임 타이머", displayMode: .inline)
-        .navigationBarItems(
-            trailing: Button(action: { isShowingSelectTimer.toggle() }) {
-                Image(systemName: "plus")
-            }
-        )
+        .navigationBarTitle("공부시간 타이머", displayMode: .inline)
+//        .navigationBarItems(
+//            trailing: Button(action: { isShowingSelectTimer.toggle() }) {
+//                Image(systemName: "plus")
+//            }
+//        )
         .sheet(isPresented: $isShowingSelectTimer) {
             SelectTimerView()
                 .environmentObject(self.viewModel)
@@ -107,12 +107,18 @@ struct AddTimerButton: View {
         Button(action: { isShowingSelectTimer.toggle() }) {
             ZStack {
                 RoundedRectangle(cornerRadius: 10)
-                    .fill(FancyColor.background.color)
+                    .fill(FancyColor.timerFocusBackground.color)
                     .frame(width: geometry.size.width - 30, height: geometry.size.height - 30)
                     .shadow(color: Color(.systemGray).opacity(0.2), radius: 5, x: 0, y: 0)
 
                 LottieView(name: "lottie-plus")
                     .frame(width: 128, height: 128)
+                    .shadow(color: Color(.systemGray).opacity(0.2), radius: 5, x: 0, y: 0)
+                
+                Text("원하는 타이머로 공부를 시작해보세요")
+                    .font(.system(size: 15, weight: .semibold))
+                    .foregroundColor(FancyColor.gray3.color)
+                    .padding(.top, 200)
             }
         }
     }
@@ -131,7 +137,9 @@ extension View {
 
 struct TimeTimerView_Previews: PreviewProvider {
     static var previews: some View {
+        let appFlowManager = Container.shared.resolve(AppFlowManager.self)
         ContentView(viewModel: Container.shared.resolve(ContentViewModel.self))
+            .environmentObject(appFlowManager)
             .environmentObject(Container.shared.resolve(TimeTimerViewModel.self))
     }
 }

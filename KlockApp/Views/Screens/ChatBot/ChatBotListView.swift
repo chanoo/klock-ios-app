@@ -39,6 +39,7 @@ struct ChatBotListView: View {
             }
             .listStyle(.plain)
         }
+        .navigationBarTitle("Ai 선생님", displayMode: .inline)
     }
 }
 

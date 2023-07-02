@@ -16,7 +16,7 @@ struct TextView: UIViewRepresentable {
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
-
+    
     func makeUIView(context: Context) -> UITextView {
         let textView = UITextView()
         textView.delegate = context.coordinator
@@ -46,7 +46,12 @@ struct TextView: UIViewRepresentable {
             self.parent = parent
         }
 
-        func textViewDidChange(_ textView: UITextView) {
+        func textViewDidBeginEditing(_ textView: UITextView) {
+            self.parent.text = textView.text
+            self.parent.dynamicHeight = min(textView.contentSize.height, parent.maxHeight)
+        }
+        
+        func textViewDidEndEditing(_ textView: UITextView) {
             self.parent.text = textView.text
             self.parent.dynamicHeight = min(textView.contentSize.height, parent.maxHeight)
         }
