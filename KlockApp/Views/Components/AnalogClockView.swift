@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct AnalogClockView: View {
-    var clockViewModel: ClockViewModel
+    @StateObject var clockViewModel: ClockViewModel
     var analogClockModel: AnalogClockModel
     @State private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             Circle()
                 .foregroundColor(.clear)
                 .frame(
@@ -25,9 +25,8 @@ struct AnalogClockView: View {
                         if let imageName = analogClockModel.clockBackgroundImageName {
                             Image(imageName)
                                 .resizable()
-                                .foregroundColor(.white.opacity(0.4))
-                                .frame(width: analogClockModel.clockSize.width,
-                                       height: analogClockModel.clockSize.height)
+                                .frame(width: analogClockModel.clockSize.width - 12,
+                                       height: analogClockModel.clockSize.height - 12)
                         }
 
                         ClockHand(
@@ -51,31 +50,32 @@ struct AnalogClockView: View {
                             clockSize: analogClockModel.clockSize
                         )
 
+                        // 오전
                         Circle()
                             .stroke(lineWidth: 4)
                             .foregroundColor(analogClockModel.outlineOutColor)
-                            .frame(width: analogClockModel.clockSize.width - 21, height: analogClockModel.clockSize.height - 21)
+                            .frame(width: analogClockModel.clockSize.width - 8, height: analogClockModel.clockSize.height - 8)
                             .opacity(0.3)
 
+                        // 오후
                         Circle()
                             .stroke(lineWidth: 4)
                             .foregroundColor(analogClockModel.outlineOutColor)
-                            .frame(width: analogClockModel.clockSize.width - 13, height: analogClockModel.clockSize.height - 13)
-                            .opacity(0.1)
+                            .frame(width: analogClockModel.clockSize.width, height: analogClockModel.clockSize.height)
+                            .opacity(0.2)
 
-                        ForEach(clockViewModel.studySessions, id: \.id) { studySession in
+                        if clockViewModel.isStudying {
                             ClockOutLine(
-                                studySession: studySession,
                                 clockSize: analogClockModel.clockSize,
-                                startTime: studySession.startTime,
-                                endTime: studySession.endTime,
+                                startTime: clockViewModel.startTime,
+                                endTime: clockViewModel.currentTime,
                                 outlineInColor: analogClockModel.outlineInColor,
-                                outlineOutColor: analogClockModel.outlineOutColor
+                                outlineOutColor: analogClockModel.outlineOutColor,
+                                isAfternoon: clockViewModel.isAfternoon
                             )
                         }
                     }
                 )
-
         }
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
             clockViewModel.currentTime = Date()
@@ -87,12 +87,6 @@ struct AnalogClockView: View {
                     clockViewModel.elapsedTime = clockViewModel.currentTime.timeIntervalSince(clockViewModel.startTime)
                 }
             }
-        }
-        .onAppear {
-            self.timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-        }
-        .onDisappear {
-            self.timer.upstream.connect().cancel()
         }
     }
 
@@ -115,18 +109,17 @@ struct AnalogClockView: View {
 }
 
 struct ClockOutLine: View {
-    let studySession: StudySessionModel
     let clockSize: CGSize
     let startTime: Date
     let endTime: Date
     let outlineInColor: Color
     let outlineOutColor: Color
+    let isAfternoon: Bool
 
     var body: some View {
         let elapsedTime = endTime.timeIntervalSince(startTime)
-        let isAfternoon = Calendar.current.component(.hour, from: startTime) >= 12
         let lineWidth: CGFloat = isAfternoon ? 4 : 4
-        let circleRadius = isAfternoon ? (clockSize.width / 2) - 5: (clockSize.width / 2) - 15
+        let circleRadius = isAfternoon ? (clockSize.width / 2) : (clockSize.width / 2) - 4
         let startAngle = TimeUtils.angleForTime(date: startTime)
         let endAngle = startAngle + elapsedTime / (12 * 3600) * 360
 
@@ -159,8 +152,8 @@ struct ClockHand: View {
                 .resizable()
                 .scaleEffect(0.9)
                 .aspectRatio(contentMode: .fit)
-                .foregroundColor(color)
                 .rotationEffect(angle, anchor: .center) // 회전 중심을 조정합니다.
+                .foregroundColor(color)
                 .position(x: clockSize.width / 2, y: clockSize.height / 2) // 바늘을 시계의 중앙에 위치시킵니다.
         }
     }

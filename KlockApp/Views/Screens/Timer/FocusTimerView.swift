@@ -28,12 +28,12 @@ struct FocusTimerView: View {
     }
     
     private func frontView(geometry: GeometryProxy) -> some View {
-        ZStack {
+        ZStack(alignment: .center) {
 //            Image("img_watch_background3")
 //                .aspectRatio(contentMode: .fill)
 //                .edgesIgnoringSafeArea(.all)
             
-            VStack {
+            VStack(spacing: 0) {
                 AnalogClockView(
                     clockViewModel: clockViewModel,
                     analogClockModel: AnalogClockModel(
@@ -45,8 +45,8 @@ struct FocusTimerView: View {
                         hourHandColor: FancyColor.white.color,
                         minuteHandColor: FancyColor.white.color,
                         secondHandColor: FancyColor.primary.color,
-                        outlineInColor: FancyColor.timerOutline.color.opacity(0.8),
-                        outlineOutColor: FancyColor.timerOutline.color.opacity(0.5)
+                        outlineInColor: FancyColor.timerOutline.color,
+                        outlineOutColor: FancyColor.timerOutline.color
                     )
                 )
                 .padding([.top, .bottom], 50)
@@ -75,8 +75,9 @@ struct FocusTimerView: View {
                         withAnimation {
                             tabBarManager.show()
                             focusTimerViewModel.stopStudy()
+                            focusTimerViewModel.elapsedTime = clockViewModel.elapsedTime
                             timeTimerViewModel.stopAndSaveStudySessionIfNeeded()
-                            timeTimerViewModel.focusTimerViewModel = nil                            
+                            timeTimerViewModel.focusTimerViewModel = nil
                         }
                     },
                     icon: Image("ic_pause"),
@@ -112,6 +113,7 @@ struct FocusTimerView: View {
         }
         .background(FancyColor.timerFocusBackground.color)
         .onAppear {
+            clockViewModel.startStudy()
             timeTimerViewModel.startStudySession()
             timeTimerViewModel.playVibration()
         }

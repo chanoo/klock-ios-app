@@ -100,11 +100,48 @@ struct TimerTabView: View {
 
 // 타이머를 추가하는 버튼을 표시하는 뷰입니다.
 struct AddTimerButton: View {
+    @EnvironmentObject var tabBarManager: TabBarManager
+    @EnvironmentObject var actionSheetManager: ActionSheetManager
+    @EnvironmentObject var viewModel: TimeTimerViewModel
     var geometry: GeometryProxy
     @Binding var isShowingSelectTimer: Bool
     
     var body: some View {
-        Button(action: { isShowingSelectTimer.toggle() }) {
+        Button(action: {
+            tabBarManager.show()
+            actionSheetManager.actionSheet = CustomActionSheetView(
+                title: "공부시간 타이머 추가",
+                message: "원하는 타이머로 공부를 시작해보세요.",
+                actionButtons: [
+                    ActionButton(title: "집중시간 타이머", action: {
+                        withAnimation(.spring()) {
+                            viewModel.addTimer(type: "FOCUS")
+                            actionSheetManager.isPresented = false
+                        }
+                    }),
+                    ActionButton(title: "뽀모도로 타이머", action: {
+                        withAnimation(.spring()) {
+                            viewModel.addTimer(type: "POMODORO")
+                            actionSheetManager.isPresented = false
+                        }
+                    }),
+                    ActionButton(title: "시험시간 타이머", action: {
+                        withAnimation(.spring()) {
+                            viewModel.addTimer(type: "EXAM")
+                            actionSheetManager.isPresented = false
+                        }
+                    }),
+                ],
+                cancelButton: ActionButton(title: "취소", action: {
+                    withAnimation(.spring()) {
+                        actionSheetManager.isPresented = false
+                    }
+                })
+            )
+            withAnimation(.spring()) {
+                actionSheetManager.isPresented = true
+            }
+        }) {
             ZStack {
                 RoundedRectangle(cornerRadius: 10)
                     .fill(FancyColor.timerFocusBackground.color)

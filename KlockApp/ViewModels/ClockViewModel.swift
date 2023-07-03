@@ -41,4 +41,8 @@ class ClockViewModel: ObservableObject {
     func elapsedTimeToString() -> String {
         return TimeUtils.elapsedTimeToString(elapsedTime: elapsedTime)
     }
+    
+    var isAfternoon: Bool {
+        return Calendar.current.component(.hour, from: currentTime) >= 12
+    }
 }

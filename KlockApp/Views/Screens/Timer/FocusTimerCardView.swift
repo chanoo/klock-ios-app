@@ -12,6 +12,14 @@ struct FocusTimerCardView: View {
     @StateObject var focusTimerViewModel: FocusTimerViewModel
     @StateObject var timeTimerViewModel: TimeTimerViewModel
     @State private var isFlipped: Bool = false
+    @StateObject var clockViewModel = ClockViewModel(
+        currentTime: Date(),
+        startTime: Date(),
+        elapsedTime: 0,
+        studySessions: [],
+        isStudying: false,
+        isRunning: true
+    )
     private func flipAnimation() {
         withAnimation(.spring()) {
             isFlipped.toggle()
@@ -33,7 +41,7 @@ struct FocusTimerCardView: View {
     }
     
     private func frontView(geometry: GeometryProxy) -> some View {
-        ZStack {
+        ZStack(alignment: .center) {
 //            Image("img_watch_background3")
 //                .aspectRatio(contentMode: .fill)
 //                .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
@@ -47,16 +55,9 @@ struct FocusTimerCardView: View {
             }
             .position(x: geometry.size.width - 30, y: 30)
             
-            VStack {
+            VStack(spacing: 0) {
                 AnalogClockView(
-                    clockViewModel: ClockViewModel(
-                        currentTime: Date(),
-                        startTime: Date(),
-                        elapsedTime: 0,
-                        studySessions: [],
-                        isStudying: false,
-                        isRunning: true
-                    ),
+                    clockViewModel: clockViewModel,
                     analogClockModel: AnalogClockModel(
                         hourHandImageName: "img_watch_hand_hour",
                         minuteHandImageName: "img_watch_hand_min",
@@ -66,17 +67,17 @@ struct FocusTimerCardView: View {
                         hourHandColor: FancyColor.white.color,
                         minuteHandColor: FancyColor.white.color,
                         secondHandColor: FancyColor.primary.color,
-                        outlineInColor: FancyColor.timerOutline.color.opacity(0.8),
-                        outlineOutColor: FancyColor.timerOutline.color.opacity(0.5)
+                        outlineInColor: FancyColor.timerOutline.color,
+                        outlineOutColor: FancyColor.timerOutline.color
                     )
                 )
-                .padding([.top, .bottom], 30)
+                .padding([.top, .bottom], 50)
 
                 Text(focusTimerViewModel.model.name)
                     .font(.system(size: 17, weight: .bold))
                     .foregroundColor(FancyColor.timerFocusText.color)
                 
-                Text(timeTimerViewModel.elapsedTimeToString())
+                Text(focusTimerViewModel.elapsedTimeToString())
                     .font(.system(size: 40, weight: .bold))
                     .monospacedDigit()
                     .foregroundColor(FancyColor.timerFocusText.color)
@@ -100,6 +101,8 @@ struct FocusTimerCardView: View {
                     isBlock: false,
                     style: .constant(.black)
                 )
+                .padding(.top, 40)
+                .padding(.bottom, 60)
             }
         }
         .background(FancyColor.timerFocusBackground.color)

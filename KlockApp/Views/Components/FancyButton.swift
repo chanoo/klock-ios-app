@@ -25,7 +25,7 @@ enum FancyButtonStyle {
         case .secondary:
             return FancyColor.white.color
         case .outline:
-            return FancyColor.white.color
+            return FancyColor.buttonOutlineBackground.color
         case .facebook:
             return FancyColor.facebook.color
         case .apple:
@@ -46,7 +46,7 @@ enum FancyButtonStyle {
         case .secondary:
             return FancyColor.primary.color
         case .outline:
-            return FancyColor.black.color
+            return FancyColor.buttonOutlineForground.color
         case .facebook:
             return FancyColor.white.color
         case .apple:
@@ -67,7 +67,7 @@ enum FancyButtonStyle {
         case .secondary:
             return FancyColor.white.color
         case .outline:
-            return FancyColor.gray1.color
+            return FancyColor.buttonOutlineLine.color
         case .facebook:
             return FancyColor.facebook.color
         case .apple:

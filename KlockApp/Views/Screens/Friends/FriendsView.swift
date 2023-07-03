@@ -92,26 +92,26 @@ struct FriendsView: View {
                     title: "친구 추가",
                     message: "나와 같이 성장해 나갈 친구와 같이 공부하세요.",
                     actionButtons: [
-                        ActionButton(label: Text("QR코드 스캔"), action: {
+                        ActionButton(title: "QR코드 스캔", action: {
                             withAnimation(.spring()) {
                                 actionSheetManager.isPresented = false
                             }
                             friendAddViewModel.activeSheet = .qrcode
                         }),
-                        ActionButton(label: Text("닉네임 친구추가"), action: {
+                        ActionButton(title: "닉네임 친구추가", action: {
                             withAnimation(.spring()) {
                                 actionSheetManager.isPresented = false
                             }
                             friendAddViewModel.activeSheet = .nickname
                         }),
-                        ActionButton(label: Text("주변탐색 친구추가"), action: {
+                        ActionButton(title: "주변탐색 친구추가", action: {
                             withAnimation(.spring()) {
                                 actionSheetManager.isPresented = false
                             }
                             friendAddViewModel.activeSheet = .nearby
                         }),
                     ],
-                    cancelButton: ActionButton(label: Text("취소"), action: {
+                    cancelButton: ActionButton(title: "취소", action: {
                         withAnimation(.spring()) {
                             actionSheetManager.isPresented = false
                         }

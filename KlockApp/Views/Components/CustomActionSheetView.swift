@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ActionButton {
-    var label: Text
+    var title: String
     var action: () -> Void
 }
 
@@ -40,31 +40,26 @@ struct CustomActionSheetView: View {
                             .padding([.top], 5)
 
                         ForEach(actionButtons.indices, id: \.self) { index in
-                            Button(action: {
-                                actionButtons[index].action()
-                            }) {
-                                actionButtons[index].label
-                                    .frame(width: geometry.size.width - 40, height: 60)
-                                    .font(.system(size: 17))
-                                    .background(FancyColor.button.color)
-                                    .foregroundColor(.white)
-                                    .cornerRadius(6)
-                            }
-                            .contentShape(Rectangle())
+                            FancyButton(
+                                title: actionButtons[index].title,
+                                action: {
+                                    actionButtons[index].action()
+                                },
+                                bordered: true,
+                                style: .constant(.outline)
+                            )
+                            .frame(width: geometry.size.width - 40, height: 60)
                             .padding([.top, .bottom], 4)
                         }
 
-                        Button(action: {
-                            cancelButton.action()
-                        }) {
-                            cancelButton.label
-                                .frame(width: geometry.size.width - 40, height: 60)
-                                .font(.system(size: 17))
-                                .background(FancyColor.buttonCancel.color)
-                                .foregroundColor(FancyColor.text.color)
-                                .cornerRadius(6)
-                        }
-                        .contentShape(Rectangle())
+                        FancyButton(
+                            title: cancelButton.title,
+                            action: {
+                                cancelButton.action()
+                            },
+                            style: .constant(.black)
+                        )
+                        .frame(width: geometry.size.width - 40, height: 60)
                         .padding([.top, .bottom], 12)
                     }
                     .padding(.bottom, 36)
