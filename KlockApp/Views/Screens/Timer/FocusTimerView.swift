@@ -9,11 +9,18 @@ import SwiftUI
 import Foast
 
 struct FocusTimerView: View {
+    @EnvironmentObject var tabBarManager: TabBarManager
     @EnvironmentObject var focusTimerViewModel: FocusTimerViewModel
     @EnvironmentObject var timeTimerViewModel: TimeTimerViewModel
-    @EnvironmentObject var tabBarManager: TabBarManager
     @State private var showChatBot = false
-
+    @State var clockViewModel = ClockViewModel(
+        currentTime: Date(),
+        startTime: Date(),
+        elapsedTime: 0,
+        studySessions: [],
+        isStudying: true,
+        isRunning: true
+    )
     var body: some View {
         GeometryReader { geometry in
             frontView(geometry: geometry)
@@ -27,45 +34,37 @@ struct FocusTimerView: View {
 //                .edgesIgnoringSafeArea(.all)
             
             VStack {
-
                 AnalogClockView(
-                    clockViewModel: ClockViewModel(
-                        currentTime: Date(),
-                        startTime: Date(),
-                        elapsedTime: 2,
-                        studySessions: [],
-                        isStudying: false,
-                        isRunning: true
-                    ),
-                    clockModel: ClockModel(
+                    clockViewModel: clockViewModel,
+                    analogClockModel: AnalogClockModel(
                         hourHandImageName: "img_watch_hand_hour",
                         minuteHandImageName: "img_watch_hand_min",
                         secondHandImageName: "img_watch_hand_sec",
                         clockBackgroundImageName: "img_watch_face1",
-                        clockSize: CGSize(width: 200, height: 200),
-                        hourHandColor: .white,
-                        minuteHandColor: .white,
-                        secondHandColor: .mint,
-                        outlineInColor: .white.opacity(0.8),
-                        outlineOutColor: .white.opacity(0.5)
+                        clockSize: CGSize(width: 260, height: 260),
+                        hourHandColor: FancyColor.white.color,
+                        minuteHandColor: FancyColor.white.color,
+                        secondHandColor: FancyColor.primary.color,
+                        outlineInColor: FancyColor.timerOutline.color.opacity(0.8),
+                        outlineOutColor: FancyColor.timerOutline.color.opacity(0.5)
                     )
                 )
-                .padding(.top, 20)
-                .padding(.bottom, 50)
-                
+                .padding([.top, .bottom], 50)
+
                 Text(focusTimerViewModel.model.name)
                     .font(.system(size: 17, weight: .bold))
-                    .foregroundColor(.black)
+                    .foregroundColor(FancyColor.timerFocusText.color)
                 
-                Text(focusTimerViewModel.elapsedTimeToString())
+                Text(clockViewModel.elapsedTimeToString())
                     .font(.system(size: 40, weight: .bold))
-                    .foregroundColor(.black)
+                    .monospacedDigit()
+                    .foregroundColor(FancyColor.timerFocusText.color)
                     .padding([.top], 4)
 
-                Text("(\(focusTimerViewModel.elapsedTimeToString()))")
-                    .font(.system(size: 16, weight: .heavy))
-                    .foregroundColor(FancyColor.gray2.color)
-                    .padding([.bottom], 50)
+//                Text("(\(focusTimerViewModel.elapsedTimeToString()))")
+//                    .font(.system(size: 16, weight: .heavy))
+//                    .foregroundColor(FancyColor.gray2.color)
+//                    .padding([.bottom], 50)
 
                 FancyButton(
                     title: "잠깐 쉴래요",
@@ -74,16 +73,18 @@ struct FocusTimerView: View {
                     },
                     longPressAction: {
                         withAnimation {
-                            tabBarManager.isTabBarVisible = true
-                            focusTimerViewModel.isStudying = false
-                            timeTimerViewModel.focusTimerViewModel = nil
+                            tabBarManager.show()
+                            focusTimerViewModel.stopStudy()
                             timeTimerViewModel.stopAndSaveStudySessionIfNeeded()
+                            timeTimerViewModel.focusTimerViewModel = nil                            
                         }
                     },
                     icon: Image("ic_pause"),
                     isBlock: false,
                     style: .constant(.black)
                 )
+                .padding(.top, 40)
+                .padding(.bottom, 60)
             }
             .frame(width: geometry.size.width, height: geometry.size.height)
             
@@ -96,9 +97,10 @@ struct FocusTimerView: View {
                     } label: {
                         Image("ic_star_balloon")
                     }
-                    .padding(.bottom, 40)
+                    .padding(.bottom, 60)
                     .padding(.trailing, 30)
                 }
+                .shadow(color: Color(.systemGray).opacity(0.2), radius: 5, x: 0, y: 0)
                 .sheet(isPresented: $showChatBot) {
                     let viewModel = Container.shared.resolve(ChatBotViewModel.self)
                     NavigationView {

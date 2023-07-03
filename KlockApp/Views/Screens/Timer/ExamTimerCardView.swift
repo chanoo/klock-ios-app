@@ -9,11 +9,18 @@ import SwiftUI
 import Foast
 
 struct ExamTimerCardView: View {
-    
     @EnvironmentObject var examTimerViewModel: ExamTimerViewModel
     @EnvironmentObject var timeTimerViewModel: TimeTimerViewModel
     @EnvironmentObject var tabBarManager: TabBarManager
-
+    @ObservedObject var clockViewModel = ClockViewModel(
+        currentTime: Date(),
+        startTime: Date(),
+        elapsedTime: 0,
+        studySessions: [],
+        isStudying: false,
+        isRunning: true
+    )
+    
     @State private var isFlipped: Bool = false
 
     private func flipAnimation() {
@@ -59,15 +66,8 @@ struct ExamTimerCardView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 10))
 
                 AnalogClockView(
-                    clockViewModel: ClockViewModel(
-                        currentTime: Date(),
-                        startTime: Date(),
-                        elapsedTime: 2,
-                        studySessions: [],
-                        isStudying: false,
-                        isRunning: true
-                    ),
-                    clockModel: ClockModel(
+                    clockViewModel: clockViewModel,
+                    analogClockModel: AnalogClockModel(
                         hourHandImageName: "img_watch_hand_hour",
                         minuteHandImageName: "img_watch_hand_min",
                         secondHandImageName: "img_watch_hand_sec",
@@ -80,11 +80,13 @@ struct ExamTimerCardView: View {
                         outlineOutColor: .white.opacity(0.5)
                     )
                 )
+                .environmentObject(clockViewModel)
                 .padding(.top, 20)
                 .padding(.bottom, 20)
 
                 FancyButton(title: "시험 시작", action: {
                     withAnimation {
+                        clockViewModel.startStudy()
                         tabBarManager.isTabBarVisible = false
                         examTimerViewModel.isStudying = true
                         timeTimerViewModel.startStudySession()

@@ -26,8 +26,8 @@ class Container {
 
         // Models
         container.register(SignUpUserModel.self) { _ in SignUpUserModel() }
-        container.register(ClockModel.self) { _ in
-             ClockModel(
+        container.register(AnalogClockModel.self) { _ in
+            AnalogClockModel(
                 hourHandImageName: "img_watch_hand_hour",
                 minuteHandImageName: "img_watch_hand_min",
                 secondHandImageName: "img_watch_hand_sec",

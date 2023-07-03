@@ -1,7 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "ic_start_balloon.svg",
+      "filename" : "ic_star_balloon_w.svg",
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "ic_star_balloon.svg",
       "idiom" : "universal"
     }
   ],

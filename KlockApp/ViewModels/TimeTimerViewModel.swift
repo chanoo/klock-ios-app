@@ -87,9 +87,9 @@ class TimeTimerViewModel: ObservableObject {
     func viewFor(timer: TimerModel) -> AnyView {
         switch timer {
         case let focusTimer as FocusTimerModel:
-            let viewModel = FocusTimerViewModel(model: focusTimer)
+            let focusTimerViewModel = FocusTimerViewModel(model: focusTimer)
             return AnyView(
-                FocusTimerCardView(focusTimerViewModel: viewModel, timeTimerViewModel: self)
+                FocusTimerCardView(focusTimerViewModel: focusTimerViewModel, timeTimerViewModel: self)
             )
         case let pomodoroTimer as PomodoroTimerModel:
             let viewModel = PomodoroTimerViewModel(model: pomodoroTimer)
@@ -242,6 +242,10 @@ class TimeTimerViewModel: ObservableObject {
     
     private func updateElapsedTime() {
         elapsedTime = Date().timeIntervalSince(currentStudySession.startTime)
+    }
+    
+    func elapsedTimeToString() -> String {
+        return TimeUtils.elapsedTimeToString(elapsedTime: elapsedTime)
     }
     
     func playVibration() {

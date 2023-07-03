@@ -74,7 +74,7 @@ struct FriendsView: View {
                 tabBarManager.show()
             }
         }
-        .background(FancyColor.background.color)
+        .background(FancyColor.chatBotBackground.color)
         .navigationBarTitle("친구", displayMode: .inline)
         .navigationBarItems(
             leading: NavigationLink(destination: FriendsListView().environmentObject(viewModel).onAppear(perform: {

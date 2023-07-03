@@ -46,12 +46,7 @@ struct TextView: UIViewRepresentable {
             self.parent = parent
         }
 
-        func textViewDidBeginEditing(_ textView: UITextView) {
-            self.parent.text = textView.text
-            self.parent.dynamicHeight = min(textView.contentSize.height, parent.maxHeight)
-        }
-        
-        func textViewDidEndEditing(_ textView: UITextView) {
+        func textViewDidChange(_ textView: UITextView) {
             self.parent.text = textView.text
             self.parent.dynamicHeight = min(textView.contentSize.height, parent.maxHeight)
         }

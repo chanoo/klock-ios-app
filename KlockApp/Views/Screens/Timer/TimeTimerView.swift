@@ -13,7 +13,7 @@ import Lottie
 struct TimeTimerView: View {
     @EnvironmentObject var viewModel: TimeTimerViewModel // 환경 객체로 타이머 뷰 모델을 가져옵니다.
     @State private var isShowingSelectTimer = false // 타이머 선택 화면의 표시 여부를 결정하는 상태 변수입니다.
-
+    
     // body에서 조건 분기를 통해 로딩 화면과 메인 화면을 나눕니다.
     var body: some View {
         if viewModel.isLoading {
@@ -72,10 +72,10 @@ struct TimerTabView: View {
                         viewModel.timerCardViews[index]
                             .environmentObject(self.viewModel)
                             .frame(width: geometry.size.width - 30, height: geometry.size.height - 30)
-                            .onDrag {
-                                NSItemProvider(object: String(index) as NSString)
-                            }
-                            .onDrop(of: [UTType.text], delegate: viewModel.dropDelegate(for: index))
+//                            .onDrag {
+//                                NSItemProvider(object: String(index) as NSString)
+//                            }
+//                            .onDrop(of: [UTType.text], delegate: viewModel.dropDelegate(for: index))
                     }
                 }
                 AddTimerButton(geometry: geometry, isShowingSelectTimer: $isShowingSelectTimer)

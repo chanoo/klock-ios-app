@@ -29,4 +29,16 @@ class ClockViewModel: ObservableObject {
         self.isStudying = isStudying
         self.isRunning = isRunning
     }
+    
+    func startStudy() {
+        isStudying = true
+    }
+
+    func stopStudy() {
+        isStudying = false
+    }
+    
+    func elapsedTimeToString() -> String {
+        return TimeUtils.elapsedTimeToString(elapsedTime: elapsedTime)
+    }
 }

@@ -8,13 +8,10 @@
 import SwiftUI
 
 struct FocusTimerCardView: View {
-    
-    @ObservedObject var focusTimerViewModel: FocusTimerViewModel
-    @ObservedObject var timeTimerViewModel: TimeTimerViewModel
     @EnvironmentObject var tabBarManager: TabBarManager
-
+    @StateObject var focusTimerViewModel: FocusTimerViewModel
+    @StateObject var timeTimerViewModel: TimeTimerViewModel
     @State private var isFlipped: Bool = false
-
     private func flipAnimation() {
         withAnimation(.spring()) {
             isFlipped.toggle()
@@ -41,7 +38,10 @@ struct FocusTimerCardView: View {
 //                .aspectRatio(contentMode: .fill)
 //                .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
 
-            Button(action: flipAnimation) {
+            Button(action: {
+                flipAnimation()
+                tabBarManager.hide()
+            }) {
                 Image("ic_3dots")
                     .foregroundColor(FancyColor.gray3.color)
             }
@@ -52,47 +52,46 @@ struct FocusTimerCardView: View {
                     clockViewModel: ClockViewModel(
                         currentTime: Date(),
                         startTime: Date(),
-                        elapsedTime: 2,
+                        elapsedTime: 0,
                         studySessions: [],
                         isStudying: false,
                         isRunning: true
                     ),
-                    clockModel: ClockModel(
+                    analogClockModel: AnalogClockModel(
                         hourHandImageName: "img_watch_hand_hour",
                         minuteHandImageName: "img_watch_hand_min",
                         secondHandImageName: "img_watch_hand_sec",
                         clockBackgroundImageName: "img_watch_face1",
-                        clockSize: CGSize(width: 200, height: 200),
-                        hourHandColor: .white,
-                        minuteHandColor: .white,
-                        secondHandColor: .mint,
-                        outlineInColor: .white.opacity(0.8),
-                        outlineOutColor: .white.opacity(0.5)
+                        clockSize: CGSize(width: 260, height: 260),
+                        hourHandColor: FancyColor.white.color,
+                        minuteHandColor: FancyColor.white.color,
+                        secondHandColor: FancyColor.primary.color,
+                        outlineInColor: FancyColor.timerOutline.color.opacity(0.8),
+                        outlineOutColor: FancyColor.timerOutline.color.opacity(0.5)
                     )
                 )
-                .padding(.top, 20)
-                .padding(.bottom, 50)
-                
+                .padding([.top, .bottom], 30)
+
                 Text(focusTimerViewModel.model.name)
                     .font(.system(size: 17, weight: .bold))
                     .foregroundColor(FancyColor.timerFocusText.color)
                 
-                Text(focusTimerViewModel.elapsedTimeToString())
+                Text(timeTimerViewModel.elapsedTimeToString())
                     .font(.system(size: 40, weight: .bold))
+                    .monospacedDigit()
                     .foregroundColor(FancyColor.timerFocusText.color)
                     .padding([.top], 4)
 
-                Text("(\(focusTimerViewModel.elapsedTimeToString()))")
-                    .font(.system(size: 16, weight: .heavy))
-                    .foregroundColor(FancyColor.gray2.color)
-                    .padding([.bottom], 50)
+//                Text("(\(focusTimerViewModel.elapsedTimeToString()))")
+//                    .font(.system(size: 16, weight: .heavy))
+//                    .foregroundColor(FancyColor.gray2.color)
 
                 FancyButton(
                     title: "공부 시작",
                     action: {
                         withAnimation {
-                            tabBarManager.isTabBarVisible = false
-                            focusTimerViewModel.isStudying = true
+                            tabBarManager.hide()
+                            focusTimerViewModel.startStudy()
                             timeTimerViewModel.startStudySession()
                             timeTimerViewModel.focusTimerViewModel = focusTimerViewModel
                         }
@@ -109,9 +108,9 @@ struct FocusTimerCardView: View {
     private func backView(geometry: GeometryProxy) -> some View {
         VStack {
             List {
-                Section(header: Text("공부시간 설정")) {
+                Section(header: Text("집중시간 타이머 설정")) {
                     VStack(alignment: .leading) {
-                        Text("공부")
+                        Text("과목명")
                             .font(.headline)
                             .foregroundColor(.gray)
                         TextField("어떤 공부를 할건가요?", text: $focusTimerViewModel.model.name)
@@ -122,6 +121,7 @@ struct FocusTimerCardView: View {
                     Button(action: {
                         timeTimerViewModel.update(type: "FOCUS", model: focusTimerViewModel.model)
                         flipAnimation()
+                        tabBarManager.show()
                     }) {
                         Text("저장")
                             .frame(maxWidth: .infinity, alignment: .center)
@@ -131,6 +131,7 @@ struct FocusTimerCardView: View {
                 Section {
                     Button(action: {
                         flipAnimation()
+                        tabBarManager.show()
                     }) {
                         Text("취소")
                             .frame(maxWidth: .infinity, alignment: .center)
@@ -140,6 +141,7 @@ struct FocusTimerCardView: View {
                 Section {
                     Button(action: {
                         flipAnimation()
+                        tabBarManager.show()
                         timeTimerViewModel.delete(model: focusTimerViewModel.model)
                     }) {
                         Text("삭제")
@@ -150,7 +152,7 @@ struct FocusTimerCardView: View {
             }
             .clearListBackground()
         }
-        .background(FancyColor.timerFocusBackground.color)
+        .background(FancyColor.chatBotBackground.color)
     }
 }
 

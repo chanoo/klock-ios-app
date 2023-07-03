@@ -1,5 +1,5 @@
 //
-//  ClockModel.swift
+//  AnalogClockModel.swift
 //  KlockApp
 //
 //  Created by 성찬우 on 2023/04/15.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ClockModel {
+struct AnalogClockModel {
     var hourHandImageName: String
     var minuteHandImageName: String
     var secondHandImageName: String

@@ -8,86 +8,91 @@
 import SwiftUI
 
 struct AnalogClockView: View {
-    @Environment(\.colorScheme) var colorScheme
-    @EnvironmentObject var tabBarManager: TabBarManager
-    @StateObject var clockViewModel: ClockViewModel
-    var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-    var clockModel: ClockModel
+    var clockViewModel: ClockViewModel
+    var analogClockModel: AnalogClockModel
+    @State private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
     var body: some View {
         VStack {
             Circle()
                 .foregroundColor(.clear)
                 .frame(
-                    width: clockModel.clockSize.width,
-                    height: clockModel.clockSize.height
+                    width: analogClockModel.clockSize.width,
+                    height: analogClockModel.clockSize.height
                 )
                 .overlay(
                     ZStack {
-                        if let imageName = clockModel.clockBackgroundImageName {
+                        if let imageName = analogClockModel.clockBackgroundImageName {
                             Image(imageName)
                                 .resizable()
                                 .foregroundColor(.white.opacity(0.4))
-                                .frame(width: clockModel.clockSize.width,
-                                       height: clockModel.clockSize.height)
+                                .frame(width: analogClockModel.clockSize.width,
+                                       height: analogClockModel.clockSize.height)
                         }
 
                         ClockHand(
                             angle: .degrees(hourAngle),
-                            color: clockModel.hourHandColor,
-                            imageName: clockModel.hourHandImageName,
-                            clockSize: clockModel.clockSize
+                            color: analogClockModel.hourHandColor,
+                            imageName: analogClockModel.hourHandImageName,
+                            clockSize: analogClockModel.clockSize
                         )
 
                         ClockHand(
                             angle: .degrees(minuteAngle),
-                            color: clockModel.minuteHandColor,
-                            imageName: clockModel.minuteHandImageName,
-                            clockSize: clockModel.clockSize
+                            color: analogClockModel.minuteHandColor,
+                            imageName: analogClockModel.minuteHandImageName,
+                            clockSize: analogClockModel.clockSize
                         )
 
                         ClockHand(
                             angle: .degrees(secondAngle),
-                            color: clockModel.secondHandColor,
-                            imageName: clockModel.secondHandImageName,
-                            clockSize: clockModel.clockSize
+                            color: analogClockModel.secondHandColor,
+                            imageName: analogClockModel.secondHandImageName,
+                            clockSize: analogClockModel.clockSize
                         )
 
                         Circle()
-                            .stroke(lineWidth: 10)
-                            .foregroundColor(clockModel.outlineOutColor)
-                            .frame(width: clockModel.clockSize.width - 10, height: clockModel.clockSize.height - 10)
-                            .opacity(0.1)
+                            .stroke(lineWidth: 4)
+                            .foregroundColor(analogClockModel.outlineOutColor)
+                            .frame(width: analogClockModel.clockSize.width - 21, height: analogClockModel.clockSize.height - 21)
+                            .opacity(0.3)
 
                         Circle()
-                            .stroke(lineWidth: 10)
-                            .foregroundColor(clockModel.outlineOutColor)
-                            .frame(width: clockModel.clockSize.width - 30, height: clockModel.clockSize.height - 30)
-                            .opacity(0.3)
+                            .stroke(lineWidth: 4)
+                            .foregroundColor(analogClockModel.outlineOutColor)
+                            .frame(width: analogClockModel.clockSize.width - 13, height: analogClockModel.clockSize.height - 13)
+                            .opacity(0.1)
 
                         ForEach(clockViewModel.studySessions, id: \.id) { studySession in
                             ClockOutLine(
                                 studySession: studySession,
-                                clockSize: clockModel.clockSize,
+                                clockSize: analogClockModel.clockSize,
                                 startTime: studySession.startTime,
                                 endTime: studySession.endTime,
-                                outlineInColor: clockModel.outlineInColor,
-                                outlineOutColor: clockModel.outlineOutColor
+                                outlineInColor: analogClockModel.outlineInColor,
+                                outlineOutColor: analogClockModel.outlineOutColor
                             )
                         }
                     }
                 )
 
         }
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
+            clockViewModel.currentTime = Date()
+        }
         .onReceive(timer) { _ in
             if clockViewModel.isRunning {
                 clockViewModel.currentTime = clockViewModel.currentTime.addingTimeInterval(1)
                 if clockViewModel.isStudying {
                     clockViewModel.elapsedTime = clockViewModel.currentTime.timeIntervalSince(clockViewModel.startTime)
-                } else {
-                    clockViewModel.elapsedTime = 0
                 }
             }
+        }
+        .onAppear {
+            self.timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+        }
+        .onDisappear {
+            self.timer.upstream.connect().cancel()
         }
     }
 
@@ -120,7 +125,7 @@ struct ClockOutLine: View {
     var body: some View {
         let elapsedTime = endTime.timeIntervalSince(startTime)
         let isAfternoon = Calendar.current.component(.hour, from: startTime) >= 12
-        let lineWidth: CGFloat = isAfternoon ? 10 : 10
+        let lineWidth: CGFloat = isAfternoon ? 4 : 4
         let circleRadius = isAfternoon ? (clockSize.width / 2) - 5: (clockSize.width / 2) - 15
         let startAngle = TimeUtils.angleForTime(date: startTime)
         let endAngle = startAngle + elapsedTime / (12 * 3600) * 360
@@ -135,7 +140,7 @@ struct ClockOutLine: View {
         }
         .stroke(style: StrokeStyle(lineWidth: lineWidth, lineCap: .butt, lineJoin: .round))
         .foregroundColor(isAfternoon ? outlineOutColor : outlineInColor)
-        .frame(width: clockSize.width, height: clockSize.height) // Set the frame size to be the same as the clock size
+        .frame(width: clockSize.width, height: clockSize.height)
     }
 }
 
@@ -152,6 +157,7 @@ struct ClockHand: View {
         GeometryReader { geometry in
             Image(imageName)
                 .resizable()
+                .scaleEffect(0.9)
                 .aspectRatio(contentMode: .fit)
                 .foregroundColor(color)
                 .rotationEffect(angle, anchor: .center) // 회전 중심을 조정합니다.
@@ -162,28 +168,30 @@ struct ClockHand: View {
 
 struct AnalogClockView_Previews: PreviewProvider {
     static var previews: some View {
+        @ObservedObject var clockViewModel = ClockViewModel(
+            currentTime: Date(),
+            startTime: Date(),
+            elapsedTime: 0,
+            studySessions: [],
+            isStudying: false,
+            isRunning: true
+        )
         AnalogClockView(
-            clockViewModel: ClockViewModel(
-                currentTime: Date(),
-                startTime: Date(),
-                elapsedTime: 2,
-                studySessions: [],
-                isStudying: false,
-                isRunning: true
-            ),
-            clockModel: ClockModel(
+            clockViewModel: clockViewModel,
+            analogClockModel: AnalogClockModel(
                 hourHandImageName: "img_watch_hand_hour",
                 minuteHandImageName: "img_watch_hand_min",
                 secondHandImageName: "img_watch_hand_sec",
                 clockBackgroundImageName: "img_watch_face1",
-                clockSize: CGSize(width: 300, height: 300),
-                hourHandColor: .black,
-                minuteHandColor: .black,
-                secondHandColor: .pink,
-                outlineInColor: .white.opacity(0.8),
-                outlineOutColor: .white.opacity(0.5)
+                clockSize: CGSize(width: 260, height: 260),
+                hourHandColor: FancyColor.white.color,
+                minuteHandColor: FancyColor.white.color,
+                secondHandColor: FancyColor.primary.color,
+                outlineInColor: FancyColor.timerOutline.color.opacity(0.8),
+                outlineOutColor: FancyColor.timerOutline.color.opacity(0.5)
             )
         )
+        .environmentObject(clockViewModel)
         .background(FancyColor.background.color)
     }
 }

@@ -173,7 +173,7 @@
 		98E9385029EA39A8009CBF32 /* ChatGPTServiceDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E9384F29EA39A8009CBF32 /* ChatGPTServiceDTO.swift */; };
 		98E9385229EA3AC4009CBF32 /* MessageServiceDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E9385129EA3AC4009CBF32 /* MessageServiceDTO.swift */; };
 		98E9385829EA4C45009CBF32 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 98E9385729EA4C45009CBF32 /* Alamofire */; };
-		98E9385F29EA5856009CBF32 /* ClockModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E9385E29EA5856009CBF32 /* ClockModel.swift */; };
+		98E9385F29EA5856009CBF32 /* AnalogClockModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E9385E29EA5856009CBF32 /* AnalogClockModel.swift */; };
 		98E9386129EA5871009CBF32 /* TimeTimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E9386029EA5871009CBF32 /* TimeTimerViewModel.swift */; };
 		98E9386529EA5899009CBF32 /* AnalogClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E9386429EA5899009CBF32 /* AnalogClockView.swift */; };
 		98E9386729EAD173009CBF32 /* StudySessionServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E9386629EAD173009CBF32 /* StudySessionServiceProtocol.swift */; };
@@ -385,7 +385,7 @@
 		98E9384F29EA39A8009CBF32 /* ChatGPTServiceDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGPTServiceDTO.swift; sourceTree = "<group>"; };
 		98E9385129EA3AC4009CBF32 /* MessageServiceDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageServiceDTO.swift; sourceTree = "<group>"; };
 		98E9385C29EA54E8009CBF32 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		98E9385E29EA5856009CBF32 /* ClockModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockModel.swift; sourceTree = "<group>"; };
+		98E9385E29EA5856009CBF32 /* AnalogClockModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalogClockModel.swift; sourceTree = "<group>"; };
 		98E9386029EA5871009CBF32 /* TimeTimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTimerViewModel.swift; sourceTree = "<group>"; };
 		98E9386429EA5899009CBF32 /* AnalogClockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalogClockView.swift; sourceTree = "<group>"; };
 		98E9386629EAD173009CBF32 /* StudySessionServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudySessionServiceProtocol.swift; sourceTree = "<group>"; };
@@ -670,7 +670,7 @@
 				985BE89B29E6E595008582A3 /* FriendModel.swift */,
 				985BE8A129E6E906008582A3 /* MessageModel.swift */,
 				985BE8AF29E7D48A008582A3 /* ChatBotModel.swift */,
-				98E9385E29EA5856009CBF32 /* ClockModel.swift */,
+				98E9385E29EA5856009CBF32 /* AnalogClockModel.swift */,
 				98327DF92A0CF87100CFEB3A /* TimerModel.swift */,
 				981B389429F44B1200AB0EF8 /* FocusTimerModel.swift */,
 				981B389229F44B0600AB0EF8 /* PomodoroTimerModel.swift */,
@@ -1220,7 +1220,7 @@
 				98BDD21D29DAD1D400B0440F /* FancyColor.swift in Sources */,
 				980C623629EE760100D0A7B5 /* FancyTabView.swift in Sources */,
 				98FD8F782A174F0C00CEE0B1 /* StudySessionRemoteService.swift in Sources */,
-				98E9385F29EA5856009CBF32 /* ClockModel.swift in Sources */,
+				98E9385F29EA5856009CBF32 /* AnalogClockModel.swift in Sources */,
 				984D2C8429DFC311008D3EA9 /* UINavigationController+UIGestureRecognizerDelegate.swift in Sources */,
 				988D7CF92A3851770018A85E /* QRCodeScannerViewController.swift in Sources */,
 				98CE661D29D55AE00009916F /* UserModel.swift in Sources */,

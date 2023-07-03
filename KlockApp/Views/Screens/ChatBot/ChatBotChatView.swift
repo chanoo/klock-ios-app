@@ -119,7 +119,7 @@ struct ChatBotChatView: View {
                     secondaryButton: .cancel())
             }
         }
-        .background(FancyColor.background.color)
+        .background(FancyColor.chatBotBackground.color)
         .modifier(CommonViewModifier(title: chatBot.subject))
         .navigationBarItems(
             leading: BackButtonView(),
