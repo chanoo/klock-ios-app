@@ -119,18 +119,18 @@ struct AddTimerButton: View {
                             actionSheetManager.isPresented = false
                         }
                     }),
-                    ActionButton(title: "뽀모도로 타이머", action: {
-                        withAnimation(.spring()) {
-                            viewModel.addTimer(type: "POMODORO")
-                            actionSheetManager.isPresented = false
-                        }
-                    }),
-                    ActionButton(title: "시험시간 타이머", action: {
-                        withAnimation(.spring()) {
-                            viewModel.addTimer(type: "EXAM")
-                            actionSheetManager.isPresented = false
-                        }
-                    }),
+//                    ActionButton(title: "뽀모도로 타이머", action: {
+//                        withAnimation(.spring()) {
+//                            viewModel.addTimer(type: "POMODORO")
+//                            actionSheetManager.isPresented = false
+//                        }
+//                    }),
+//                    ActionButton(title: "시험시간 타이머", action: {
+//                        withAnimation(.spring()) {
+//                            viewModel.addTimer(type: "EXAM")
+//                            actionSheetManager.isPresented = false
+//                        }
+//                    }),
                 ],
                 cancelButton: ActionButton(title: "취소", action: {
                     withAnimation(.spring()) {
