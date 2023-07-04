@@ -17,6 +17,7 @@ struct HomeView: View {
     @ObservedObject private var taskViewModel = Container.shared.resolve(TaskViewModel.self)
     @ObservedObject private var characterViewModel = Container.shared.resolve(CharacterViewModel.self)
     @ObservedObject private var friendsViewModel = Container.shared.resolve(FriendsViewModel.self)
+    @ObservedObject private var preferencesViewModel = Container.shared.resolve(PreferencesViewModel.self)
 
     private func updateTitle(_ selection: Int) {
         switch selection {
@@ -73,8 +74,8 @@ struct HomeView: View {
                 selectedImageName: "ic_gear_o",
                 deselectedImageName: "ic_gear_o",
                 content: AnyView(
-                    TaskListView()
-                        .environmentObject(taskViewModel)
+                    PreferencesView()
+                        .environmentObject(preferencesViewModel)
                 )
             ),
         ])

@@ -80,6 +80,7 @@ class Container {
         container.register(FriendsViewModel.self) { _ in FriendsViewModel() }
         container.register(FriendAddViewModel.self) { _ in FriendAddViewModel() }
         container.register(QRCodeScannerViewModel.self) { _ in QRCodeScannerViewModel() }
+        container.register(PreferencesViewModel.self) { _ in PreferencesViewModel() }
         container.register(SignInViewModel.self) { _ in SignInViewModel() }
         container.register(SignUpViewModel.self) { resolver in
             SignUpViewModel(signUpUserModel: resolver.resolve(SignUpUserModel.self) ?? SignUpUserModel() )

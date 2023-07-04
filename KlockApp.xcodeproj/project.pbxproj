@@ -20,6 +20,8 @@
 		981881CD29F3847A002A4395 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 981881CC29F3847A002A4395 /* Lottie */; };
 		981881CF29F386A4002A4395 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981881CE29F386A4002A4395 /* LottieView.swift */; };
 		981881D729F426FC002A4395 /* lottie-plus.json in Resources */ = {isa = PBXBuildFile; fileRef = 981881D629F426FC002A4395 /* lottie-plus.json */; };
+		98192F422A542DB5007073FB /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98192F412A542DB5007073FB /* PreferencesView.swift */; };
+		98192F442A542DD2007073FB /* PreferencesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98192F432A542DD2007073FB /* PreferencesViewModel.swift */; };
 		981B389129F44A2700AB0EF8 /* AccountTimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981B389029F44A2700AB0EF8 /* AccountTimerModel.swift */; };
 		981B389329F44B0600AB0EF8 /* PomodoroTimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981B389229F44B0600AB0EF8 /* PomodoroTimerModel.swift */; };
 		981B389529F44B1200AB0EF8 /* FocusTimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981B389429F44B1200AB0EF8 /* FocusTimerModel.swift */; };
@@ -226,6 +228,8 @@
 		981881C929F27316002A4395 /* PageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageControl.swift; sourceTree = "<group>"; };
 		981881CE29F386A4002A4395 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		981881D629F426FC002A4395 /* lottie-plus.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "lottie-plus.json"; sourceTree = "<group>"; };
+		98192F412A542DB5007073FB /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
+		98192F432A542DD2007073FB /* PreferencesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewModel.swift; sourceTree = "<group>"; };
 		981B389029F44A2700AB0EF8 /* AccountTimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTimerModel.swift; sourceTree = "<group>"; };
 		981B389229F44B0600AB0EF8 /* PomodoroTimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroTimerModel.swift; sourceTree = "<group>"; };
 		981B389429F44B1200AB0EF8 /* FocusTimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTimerModel.swift; sourceTree = "<group>"; };
@@ -452,6 +456,14 @@
 				980C623229EC621C00D0A7B5 /* FamilyControls.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		98192F402A5425C4007073FB /* Preference */ = {
+			isa = PBXGroup;
+			children = (
+				98192F412A542DB5007073FB /* PreferencesView.swift */,
+			);
+			path = Preference;
 			sourceTree = "<group>";
 		};
 		982140992A078C4E00C68EB9 /* Service */ = {
@@ -699,6 +711,7 @@
 				98EBFBE929F968FF004E95F3 /* TaskViewModel.swift */,
 				986E5DB129EAEF5600FF7047 /* CalendarViewModel.swift */,
 				98E9386029EA5871009CBF32 /* TimeTimerViewModel.swift */,
+				98192F432A542DD2007073FB /* PreferencesViewModel.swift */,
 				98AC30702A136198006DC48D /* FocusTimerViewModel.swift */,
 				98AC30822A15CB77006DC48D /* PomodoroTimerViewModel.swift */,
 				988D7CFB2A3851BD0018A85E /* QRCodeScannerViewModel.swift */,
@@ -785,12 +798,13 @@
 		98CE661329D553F10009916F /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				98E9385D29EA5844009CBF32 /* Timer */,
 				98EBFBF029F98A74004E95F3 /* Character */,
 				98EBFBED29F97B78004E95F3 /* Task */,
 				980C623029EBDDE800D0A7B5 /* Calendar */,
-				98E9385D29EA5844009CBF32 /* Timer */,
 				98E9385B29EA54B1009CBF32 /* Friends */,
 				98E9385A29EA546E009CBF32 /* ChatBot */,
+				98192F402A5425C4007073FB /* Preference */,
 				98E9385929EA5456009CBF32 /* SignUp */,
 				98D7C95029E45C550075D201 /* ContentView.swift */,
 				98B21B6B29D9A7A5004EFE0E /* HomeView.swift */,
@@ -1079,6 +1093,7 @@
 				981B389329F44B0600AB0EF8 /* PomodoroTimerModel.swift in Sources */,
 				984D2C9129E0728C008D3EA9 /* SplashViewModel.swift in Sources */,
 				9843B7D929EEE09400F91DAD /* ProximityAndOrientationService.swift in Sources */,
+				98192F422A542DB5007073FB /* PreferencesView.swift in Sources */,
 				98E9386129EA5871009CBF32 /* TimeTimerViewModel.swift in Sources */,
 				985BE89E29E6E5D0008582A3 /* FriendDetailView.swift in Sources */,
 				981D73182A1A49E0000C8F3D /* ClockViewModel.swift in Sources */,
@@ -1227,6 +1242,7 @@
 				98D7C94929E1AB450075D201 /* SignUpUserModel.swift in Sources */,
 				98EBFBF629FA54F6004E95F3 /* ClearListBackground+Extensions.swift in Sources */,
 				988D7CFA2A3851770018A85E /* QRCodeScannerView.swift in Sources */,
+				98192F442A542DD2007073FB /* PreferencesViewModel.swift in Sources */,
 				98976B032A077F7F00F1CEAE /* PomodoroTimerRemoteServiceProtocol.swift in Sources */,
 				98E9386529EA5899009CBF32 /* AnalogClockView.swift in Sources */,
 				98BDD22029DD0FA800B0440F /* EmailValidator.swift in Sources */,
