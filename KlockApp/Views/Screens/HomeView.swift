@@ -23,13 +23,13 @@ struct HomeView: View {
         case 0:
             title = "타이머"
         case 1:
-            title = "통계"
-        case 2:
             title = "Ai 선생님"
+        case 2:
+            title = "통계"
         case 3:
-            title = "도전 과제"
+            title = "친구"
         case 4:
-            title = "캐릭터"
+            title = "설정"
         default:
             title = ""
         }
@@ -38,11 +38,11 @@ struct HomeView: View {
     var body: some View {
         FancyTabView(selection: $selection, items: [
             (
-                selectedImageName: "ic_calendar",
-                deselectedImageName: "ic_calendar_o",
+                selectedImageName: "ic_timer",
+                deselectedImageName: "ic_timer",
                 content: AnyView(
-                    CalendarView()
-                        .environmentObject(calendarViewModel)
+                    TimeTimerView()
+                        .environmentObject(timeTimerViewModel)
                 )
             ),
             (
@@ -54,11 +54,11 @@ struct HomeView: View {
                 )
             ),
             (
-                selectedImageName: "ic_timer",
-                deselectedImageName: "ic_timer",
+                selectedImageName: "ic_graph_bar",
+                deselectedImageName: "ic_graph_bar",
                 content: AnyView(
-                    TimeTimerView()
-                        .environmentObject(timeTimerViewModel)
+                    CalendarView()
+                        .environmentObject(calendarViewModel)
                 )
             ),
             (
@@ -70,8 +70,8 @@ struct HomeView: View {
                 )
             ),
             (
-                selectedImageName: "ic_smile",
-                deselectedImageName: "ic_smile",
+                selectedImageName: "ic_gear_o",
+                deselectedImageName: "ic_gear_o",
                 content: AnyView(
                     TaskListView()
                         .environmentObject(taskViewModel)

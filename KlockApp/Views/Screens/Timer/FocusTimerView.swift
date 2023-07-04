@@ -16,6 +16,8 @@ struct FocusTimerView: View {
     @State var clockViewModel = ClockViewModel(
         currentTime: Date(),
         startTime: Date(),
+//        currentTime: TimeUtils.dateFromString(dateString: "20230704114000", format: "yyyyMMddHHmmss")!,
+//        startTime: TimeUtils.dateFromString(dateString: "20230704114000", format: "yyyyMMddHHmmss")!,
         elapsedTime: 0,
         studySessions: [],
         isStudying: true,

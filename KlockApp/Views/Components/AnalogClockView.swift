@@ -70,8 +70,7 @@ struct AnalogClockView: View {
                                 startTime: clockViewModel.startTime,
                                 endTime: clockViewModel.currentTime,
                                 outlineInColor: analogClockModel.outlineInColor,
-                                outlineOutColor: analogClockModel.outlineOutColor,
-                                isAfternoon: clockViewModel.isAfternoon
+                                outlineOutColor: analogClockModel.outlineOutColor
                             )
                         }
                     }
@@ -114,12 +113,71 @@ struct ClockOutLine: View {
     let endTime: Date
     let outlineInColor: Color
     let outlineOutColor: Color
+
+    private func afternoon(of date: Date) -> Date {
+        var components = Calendar.current.dateComponents([.year, .month, .day], from: date)
+        components.hour = 12
+        components.minute = 0
+        components.second = 0
+        return Calendar.current.date(from: components) ?? date
+    }
+
+    private func midnight(of date: Date) -> Date {
+        var components = Calendar.current.dateComponents([.year, .month, .day], from: date)
+        components.day = components.day! + 1
+        components.hour = 0
+        components.minute = 0
+        components.second = 0
+        return Calendar.current.date(from: components) ?? date
+    }
+
+    var body: some View {
+        ZStack {
+            ForEach(timeRanges(startTime: startTime, endTime: endTime), id: \.self) { timeRange in
+                ClockOutLineSubView(
+                    clockSize: clockSize,
+                    startTime: timeRange.start,
+                    endTime: timeRange.end,
+                    color: timeRange.isAfternoon ? outlineOutColor : outlineInColor,
+                    lineWidth: 4,
+                    isAfternoon: timeRange.isAfternoon
+                )
+            }
+        }
+        .frame(width: clockSize.width, height: clockSize.height)
+    }
+
+    private func timeRanges(startTime: Date, endTime: Date) -> [TimeRange] {
+        var ranges: [TimeRange] = []
+        var start = startTime
+        var isAfternoon = Calendar.current.component(.hour, from: start) >= 12
+        while start < endTime {
+            let end = min(isAfternoon ? midnight(of: start) : afternoon(of: start), endTime)
+            ranges.append(TimeRange(start: start, end: end, isAfternoon: isAfternoon))
+            start = end
+            isAfternoon.toggle()
+        }
+        return ranges
+    }
+
+    private struct TimeRange: Hashable {
+        let start: Date
+        let end: Date
+        let isAfternoon: Bool
+    }
+}
+
+struct ClockOutLineSubView: View {
+    let clockSize: CGSize
+    let startTime: Date
+    let endTime: Date
+    let color: Color
+    let lineWidth: CGFloat
     let isAfternoon: Bool
 
     var body: some View {
         let elapsedTime = endTime.timeIntervalSince(startTime)
-        let lineWidth: CGFloat = isAfternoon ? 4 : 4
-        let circleRadius = isAfternoon ? (clockSize.width / 2) : (clockSize.width / 2) - 4
+        let circleRadius = clockSize.width / 2 - (isAfternoon ? 0 : lineWidth)
         let startAngle = TimeUtils.angleForTime(date: startTime)
         let endAngle = startAngle + elapsedTime / (12 * 3600) * 360
 
@@ -132,8 +190,7 @@ struct ClockOutLine: View {
             path.addLine(to: endPoint)
         }
         .stroke(style: StrokeStyle(lineWidth: lineWidth, lineCap: .butt, lineJoin: .round))
-        .foregroundColor(isAfternoon ? outlineOutColor : outlineInColor)
-        .frame(width: clockSize.width, height: clockSize.height)
+        .foregroundColor(color)
     }
 }
 

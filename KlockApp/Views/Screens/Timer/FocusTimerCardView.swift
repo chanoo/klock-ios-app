@@ -11,15 +11,17 @@ struct FocusTimerCardView: View {
     @EnvironmentObject var tabBarManager: TabBarManager
     @StateObject var focusTimerViewModel: FocusTimerViewModel
     @StateObject var timeTimerViewModel: TimeTimerViewModel
-    @State private var isFlipped: Bool = false
     @StateObject var clockViewModel = ClockViewModel(
         currentTime: Date(),
         startTime: Date(),
+//        currentTime: TimeUtils.dateFromString(dateString: "20230704234000", format: "yyyyMMddHHmmss")!,
+//        startTime: TimeUtils.dateFromString(dateString: "20230704234000", format: "yyyyMMddHHmmss")!,
         elapsedTime: 0,
         studySessions: [],
         isStudying: false,
         isRunning: true
     )
+    @State private var isFlipped: Bool = false
     private func flipAnimation() {
         withAnimation(.spring()) {
             isFlipped.toggle()

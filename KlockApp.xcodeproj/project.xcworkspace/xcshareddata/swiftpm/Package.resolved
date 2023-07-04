@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Alamofire/Alamofire",
       "state" : {
-        "revision" : "78424be314842833c04bc3bef5b72e85fff99204",
-        "version" : "5.6.4"
+        "revision" : "bc268c28fb170f494de9e9927c371b8342979ece",
+        "version" : "5.7.1"
       }
     },
     {
@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/JohnEstropia/CoreStore",
       "state" : {
-        "revision" : "25593754913d228777f14634bc6f493dbeb4e9fb",
-        "version" : "9.0.0"
+        "revision" : "118bb685fcf2bbcfd5702fea07ec105cdc8cb43d",
+        "version" : "9.1.0"
       }
     },
     {
@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/facebook/facebook-ios-sdk",
       "state" : {
-        "revision" : "2ef0af2c7d8b6d6c3a14edf5299b78730555c679",
-        "version" : "16.1.0"
+        "revision" : "d001a0509c7051f8e16a0e9646cbde00e2f83ec1",
+        "version" : "16.1.2"
       }
     },
     {
