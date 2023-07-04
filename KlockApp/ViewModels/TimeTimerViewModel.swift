@@ -131,19 +131,31 @@ class TimeTimerViewModel: ObservableObject {
         updateElapsedTime()
     }
 
-    func stopAndSaveStudySessionIfNeeded() {
+    func stopAndSaveStudySession(timerName: String, timerType: TimerType, startTime: Date, endTime: Date) {
         updateElapsedTime()
-        let startTime = Date().addingTimeInterval(-elapsedTime)
-        let endTime = Date()
         let sessionDuration = endTime.timeIntervalSince(startTime)
-
         guard sessionDuration > 10 else {
             Foast.show(message: "10초 미만은 기록되지 않습니다.")
             removeStudyStartTime()
             return
         }
         
-        saveStudySession(accountID: 1, accountTimerID: 1, startTime: startTime, endTime: endTime)
+        let startTimeStr = DateUtils.dateToString(startTime)
+        let endTimeStr = DateUtils.dateToString(endTime)
+        let req = ReqStudySession(timerName: timerName, timerType: timerType, startTime: startTimeStr, endTime: endTimeStr)
+        studySessionRemoteService.create(data: req)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .failure(let error):
+                    print("Error saving study session: \(error)")
+                case .finished:
+                    print("Study session saved successfully")
+                    self.removeStudyStartTime()
+                }
+            }, receiveValue: { _ in })
+            .store(in: &cancellables)
+
+//        saveStudySession(accountID: 1, accountTimerID: 1, startTime: startTime, endTime: endTime)
     }
 
     private func saveStudySession(accountID: Int64, accountTimerID: Int64, startTime: Date, endTime: Date) {
@@ -158,7 +170,7 @@ class TimeTimerViewModel: ObservableObject {
         let endTimeDate = Date()
         let endTime = DateUtils.dateToString(endTimeDate)
 
-        let req = ReqStudySession(startTime: startTime, endTime: endTime)
+        let req = ReqStudySession(timerName: "Study Math", timerType: .focus, startTime: startTime, endTime: endTime)
         studySessionRemoteService.create(data: req)
             .sink(receiveCompletion: { completion in
                 switch completion {

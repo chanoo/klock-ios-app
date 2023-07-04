@@ -22,6 +22,7 @@
 		981881D729F426FC002A4395 /* lottie-plus.json in Resources */ = {isa = PBXBuildFile; fileRef = 981881D629F426FC002A4395 /* lottie-plus.json */; };
 		98192F422A542DB5007073FB /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98192F412A542DB5007073FB /* PreferencesView.swift */; };
 		98192F442A542DD2007073FB /* PreferencesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98192F432A542DD2007073FB /* PreferencesViewModel.swift */; };
+		98192F482A547D60007073FB /* TimerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98192F472A547D60007073FB /* TimerType.swift */; };
 		981B389129F44A2700AB0EF8 /* AccountTimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981B389029F44A2700AB0EF8 /* AccountTimerModel.swift */; };
 		981B389329F44B0600AB0EF8 /* PomodoroTimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981B389229F44B0600AB0EF8 /* PomodoroTimerModel.swift */; };
 		981B389529F44B1200AB0EF8 /* FocusTimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981B389429F44B1200AB0EF8 /* FocusTimerModel.swift */; };
@@ -230,6 +231,7 @@
 		981881D629F426FC002A4395 /* lottie-plus.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "lottie-plus.json"; sourceTree = "<group>"; };
 		98192F412A542DB5007073FB /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
 		98192F432A542DD2007073FB /* PreferencesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewModel.swift; sourceTree = "<group>"; };
+		98192F472A547D60007073FB /* TimerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerType.swift; sourceTree = "<group>"; };
 		981B389029F44A2700AB0EF8 /* AccountTimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTimerModel.swift; sourceTree = "<group>"; };
 		981B389229F44B0600AB0EF8 /* PomodoroTimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroTimerModel.swift; sourceTree = "<group>"; };
 		981B389429F44B1200AB0EF8 /* FocusTimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTimerModel.swift; sourceTree = "<group>"; };
@@ -692,6 +694,7 @@
 				988D7CD72A3711410018A85E /* ScanResult.swift */,
 				984844122A3C54C1006DD342 /* SheetType.swift */,
 				9837CCA92A42F255002F1A3A /* ActivityModel.swift */,
+				98192F472A547D60007073FB /* TimerType.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1134,6 +1137,7 @@
 				982140A32A07EFBE00C68EB9 /* APIServiceProtocol.swift in Sources */,
 				98B387B02A2DDFB500F18AD2 /* SignUpProfileImageView.swift in Sources */,
 				988D7D042A386C400018A85E /* CustomSegmentedControl.swift in Sources */,
+				98192F482A547D60007073FB /* TimerType.swift in Sources */,
 				985BE8A429E6EA3E008582A3 /* ChatGPTService.swift in Sources */,
 				985BE8B229E7D510008582A3 /* ChatBotListView.swift in Sources */,
 				98AC306D2A134D23006DC48D /* TabBarManager.swift in Sources */,

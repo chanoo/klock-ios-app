@@ -78,7 +78,12 @@ struct FocusTimerView: View {
                             tabBarManager.show()
                             focusTimerViewModel.stopStudy()
                             focusTimerViewModel.elapsedTime = clockViewModel.elapsedTime
-                            timeTimerViewModel.stopAndSaveStudySessionIfNeeded()
+                            timeTimerViewModel.stopAndSaveStudySession(
+                                timerName: focusTimerViewModel.model.name,
+                                timerType: .focus,
+                                startTime: clockViewModel.startTime,
+                                endTime: clockViewModel.currentTime
+                            )
                             timeTimerViewModel.focusTimerViewModel = nil
                         }
                     },

@@ -80,7 +80,7 @@ struct ExamTimerView: View {
                         tabBarManager.isTabBarVisible = true
                         examTimerViewModel.isStudying = false
                         timeTimerViewModel.examTimerViewModel = nil
-                        timeTimerViewModel.stopAndSaveStudySessionIfNeeded()
+//                        timeTimerViewModel.stopAndSaveStudySessionIfNeeded()
                     }
                 },
                 style: .constant(.primary))
