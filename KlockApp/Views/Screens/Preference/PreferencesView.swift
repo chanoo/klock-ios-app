@@ -9,6 +9,7 @@ import SwiftUI
 
 struct PreferencesView: View {
     @EnvironmentObject var viewModel: PreferencesViewModel
+    @EnvironmentObject var actionSheetManager: ActionSheetManager
 
     var body: some View {
         ScrollView(showsIndicators: false) {
@@ -29,11 +30,15 @@ struct PreferencesView: View {
 
                 // Settings
                 LazyVStack(spacing: 0) {
-                    ForEach(viewModel.sections, id: \.self.id) { section in
+                    ForEach(viewModel.preferencesSections, id: \.self.id) { section in
                         ForEach(section.items, id: \.self.id) { item in
                             Group {
                                 if let destination = item.destinationView {
-                                    NavigationLink(destination: destination) {
+                                    NavigationLink(
+                                        destination: destination
+                                            .environmentObject(viewModel)
+                                            .environmentObject(actionSheetManager)
+                                    ) {
                                         ItemView(item: item)
                                     }
                                 } else {
@@ -84,6 +89,7 @@ struct ItemModel: Identifiable {
     var id = UUID()
     var title: String
     var iconName: String
+    var actionType: ActionType
     var destinationView: AnyView?
     var action: (() -> Void)?
 }

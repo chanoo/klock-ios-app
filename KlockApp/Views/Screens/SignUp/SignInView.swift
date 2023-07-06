@@ -2,7 +2,6 @@ import SwiftUI
 
 struct SignInView: View {
 
-    @EnvironmentObject var appFlowManager: AppFlowManager
     @EnvironmentObject var viewModel: SignInViewModel
     @State private var activeDestination: Destination?
 
@@ -21,6 +20,7 @@ struct SignInView: View {
                     .padding(.top, 150)
 
                 Image("ic_logo")
+                    .foregroundColor(.black)
                     .padding(.top, 10)
 
                 Spacer()
@@ -33,6 +33,7 @@ struct SignInView: View {
                     icon: Image("ic_apple"),
                     style: .constant(.apple)
                 )
+                .padding(.bottom, 60)
 //
 //                FancyButton(
 //                    title: "카카오로 시작하기",
@@ -61,7 +62,7 @@ struct SignInView: View {
             viewModel.onSignInSuccess = signInSuccessful
         }
         .onReceive(viewModel.signInSuccess, perform: { _ in
-            appFlowManager.navigateToDestination.send(.home)
+            activeDestination = .splash
         })
         .onReceive(viewModel.signUpProcess, perform: { _ in
             activeDestination = .signUpNickname
@@ -88,8 +89,8 @@ struct SignInView: View {
     private func viewForDestination(_ destination: Destination?) -> AnyView {
         let signUpUserModel = viewModel.signUpUserModel
         switch destination {
-        case .home:
-            return AnyView(HomeView())
+        case .splash:
+            return AnyView(SplashView())
         case .signUpNickname:
             let viewModel = Container.shared.resolve(SignUpViewModel.self)
             viewModel.signUpUserModel = signUpUserModel

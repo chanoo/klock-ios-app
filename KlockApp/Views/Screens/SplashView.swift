@@ -21,24 +21,37 @@ struct SplashView: View {
             FancyColor.launchBackground.color.edgesIgnoringSafeArea(.all)
 
             VStack {
-                Image("ic_klock_3dot")
-                    .foregroundColor(FancyColor.launchSymbol.color)
+                Image("ic_img_logo")
                     .padding(.bottom, 32)
 
-                Text("남과의 경쟁이 아닌")
-                    .font(.system(size: 22))
-                    .foregroundColor(FancyColor.launchSymbol.color)
-                    .padding(.bottom, 2)
-
-                Text("나의 성장을 위해")
-                    .font(.system(size: 22))
-                    .fontWeight(.bold)
-                    .foregroundColor(FancyColor.launchSymbol.color)
+                if UserDefaults.standard.string(forKey: "access.token") != nil {
+                    Text("남과의 경쟁이 아닌")
+                        .font(.system(size: 22))
+                        .foregroundColor(FancyColor.text.color)
+                        .padding(.bottom, 2)
+                    Text("나의 성장을 위해")
+                        .font(.system(size: 22))
+                        .fontWeight(.bold)
+                        .foregroundColor(FancyColor.text.color)
+                } else {
+                    Text("나의 성장을 위해")
+                        .font(.system(size: 22))
+                        .foregroundColor(FancyColor.text.color)
+                        .padding(.bottom, 2)
+                    Text("또 만나요!")
+                        .font(.system(size: 22))
+                        .fontWeight(.bold)
+                        .foregroundColor(FancyColor.text.color)
+                }
             }
         }
         .onReceive(viewModel.$navigateToHome) { navigate in
             if navigate {
-                appFlowManager.navigateToDestination.send(.home)
+                if UserDefaults.standard.string(forKey: "access.token") != nil {
+                    appFlowManager.navigateToDestination.send(.home)
+                } else {
+                    appFlowManager.navigateToDestination.send(.signIn)
+                }
                 viewModel.resetDestination()
             }
         }
@@ -46,6 +59,7 @@ struct SplashView: View {
         .onAppear {
             viewModel.resetDestination()
         }
+        .background(FancyColor.background.color)
     }
 }
 

@@ -10,39 +10,72 @@ import Combine
 import SwiftUI
 import Foast
 
+enum ActionType {
+    case copyToken
+    case theme
+    case plannerSettings
+    case alarm
+    case qrCode
+    case category
+    case allowedAppSettings
+    case privacy
+    case feedback
+    case accountAndSecurity
+    case inquiries
+    case logout
+    case deleteAccount
+    case none
+}
+
 class PreferencesViewModel: ObservableObject {
     @Published var profileImage: String  = "ic_img_logo"
     @Published var profileName: String = "User Name"
-    @Published var sections: [SectionModel] = [
+    @Published var preferencesSections: [SectionModel] = [
         SectionModel(items: [
-            ItemModel(title: "토큰 복사", iconName: "doc.on.doc.fill", action: {
+            ItemModel(title: "토큰 복사", iconName: "doc.on.doc.fill", actionType: .copyToken, action: {
                 let jwtToken = UserDefaults.standard.string(forKey: "access.token") ?? ""
                 UIPasteboard.general.string = jwtToken
                 Foast.show(message: "복사 했습니다.")
             }),
         ]),
         SectionModel(items: [
-            ItemModel(title: "테마", iconName: "sun.max.fill"),
-            ItemModel(title: "플래너 설정", iconName: "calendar"),
-            ItemModel(title: "알람", iconName: "bell"),
-            ItemModel(title: "QR코드", iconName: "qrcode"),
-            ItemModel(title: "카테고리", iconName: "folder"),
-            ItemModel(title: "허용앱 설정", iconName: "app")
+            ItemModel(title: "계정 및 보안", iconName: "lock.fill", actionType: .accountAndSecurity, destinationView: AnyView(AccountSecurityView())),
         ]),
         SectionModel(items: [
-            ItemModel(title: "개인정보 보호", iconName: "person.fill"),
-            ItemModel(title: "도움말 피드백", iconName: "bubble.left.and.bubble.right.fill"),
-            ItemModel(title: "계정 및 보안", iconName: "lock.fill"),
-            ItemModel(title: "문의 사항", iconName: "envelope.fill")
+            ItemModel(title: "서비스 이용약관", iconName: "text.badge.checkmark", actionType: .privacy, action: {
+                if let url = URL(string: "https://klock.app/terms/service-policy") {
+                    UIApplication.shared.open(url)
+                }
+            }),
+            ItemModel(title: "개인정보 처리방침", iconName: "lock.doc.fill", actionType: .privacy, action: {
+                if let url = URL(string: "https://klock.app/terms/privacy-policy") {
+                    UIApplication.shared.open(url)
+                }
+            }),
         ]),
         SectionModel(items: [
-            ItemModel(title: "로그아웃", iconName: "arrowshape.turn.up.left.fill"),
-            ItemModel(title: "탈퇴하기", iconName: "xmark.circle.fill")
+            ItemModel(title: "문의 사항", iconName: "envelope.fill", actionType: .inquiries, action: {
+                if let url = URL(string: "mailto:hello@8hlab.com") {
+                    UIApplication.shared.open(url)
+                }
+            })
+        ]),
+    ]
+    @Published var accountSecuritySections: [SectionModel] = [
+        SectionModel(items: [
+            ItemModel(title: "로그아웃", iconName: "arrowshape.turn.up.left.fill", actionType: .logout),
+            ItemModel(title: "탈퇴하기", iconName: "xmark.circle.fill", actionType: .deleteAccount)
         ])
     ]
+    let logoutButtonTapped = PassthroughSubject<Void, Never>()
     
+    private var cancellables: Set<AnyCancellable> = []
+
     func editProfile() {
         // Handle profile editing
         print("Edit profile button pressed")
     }
+    init() {
+    }
+    
 }

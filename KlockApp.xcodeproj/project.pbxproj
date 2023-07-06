@@ -80,6 +80,7 @@
 		985BE8AE29E73A76008582A3 /* EnvironmentValuesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE8AD29E73A76008582A3 /* EnvironmentValuesProvider.swift */; };
 		985BE8B029E7D48A008582A3 /* ChatBotModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE8AF29E7D48A008582A3 /* ChatBotModel.swift */; };
 		985BE8B229E7D510008582A3 /* ChatBotListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE8B129E7D510008582A3 /* ChatBotListView.swift */; };
+		986E0D382A557570005159AA /* AccountSecurityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986E0D372A557570005159AA /* AccountSecurityView.swift */; };
 		986E5DB229EAEF5600FF7047 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986E5DB129EAEF5600FF7047 /* CalendarViewModel.swift */; };
 		986E5DB429EAEF9200FF7047 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986E5DB329EAEF9200FF7047 /* CalendarView.swift */; };
 		986E5DB629EAF06D00FF7047 /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986E5DB529EAF06D00FF7047 /* DayView.swift */; };
@@ -291,6 +292,7 @@
 		985BE8AD29E73A76008582A3 /* EnvironmentValuesProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentValuesProvider.swift; sourceTree = "<group>"; };
 		985BE8AF29E7D48A008582A3 /* ChatBotModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotModel.swift; sourceTree = "<group>"; };
 		985BE8B129E7D510008582A3 /* ChatBotListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotListView.swift; sourceTree = "<group>"; };
+		986E0D372A557570005159AA /* AccountSecurityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSecurityView.swift; sourceTree = "<group>"; };
 		986E5DB129EAEF5600FF7047 /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
 		986E5DB329EAEF9200FF7047 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		986E5DB529EAF06D00FF7047 /* DayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
@@ -464,6 +466,7 @@
 			isa = PBXGroup;
 			children = (
 				98192F412A542DB5007073FB /* PreferencesView.swift */,
+				986E0D372A557570005159AA /* AccountSecurityView.swift */,
 			);
 			path = Preference;
 			sourceTree = "<group>";
@@ -1242,6 +1245,7 @@
 				98E9385F29EA5856009CBF32 /* AnalogClockModel.swift in Sources */,
 				984D2C8429DFC311008D3EA9 /* UINavigationController+UIGestureRecognizerDelegate.swift in Sources */,
 				988D7CF92A3851770018A85E /* QRCodeScannerViewController.swift in Sources */,
+				986E0D382A557570005159AA /* AccountSecurityView.swift in Sources */,
 				98CE661D29D55AE00009916F /* UserModel.swift in Sources */,
 				98D7C94929E1AB450075D201 /* SignUpUserModel.swift in Sources */,
 				98EBFBF629FA54F6004E95F3 /* ClearListBackground+Extensions.swift in Sources */,

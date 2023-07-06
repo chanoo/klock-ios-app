@@ -114,10 +114,8 @@ struct AddTimerButton: View {
                 message: "원하는 타이머로 공부를 시작해보세요.",
                 actionButtons: [
                     ActionButton(title: "집중시간 타이머", action: {
-                        withAnimation(.spring()) {
-                            viewModel.addTimer(type: "FOCUS")
-                            actionSheetManager.isPresented = false
-                        }
+                        viewModel.addTimer(type: "FOCUS")
+                        actionSheetManager.isPresented = false
                     }),
 //                    ActionButton(title: "뽀모도로 타이머", action: {
 //                        withAnimation(.spring()) {
@@ -133,9 +131,7 @@ struct AddTimerButton: View {
 //                    }),
                 ],
                 cancelButton: ActionButton(title: "취소", action: {
-                    withAnimation(.spring()) {
-                        actionSheetManager.isPresented = false
-                    }
+                    actionSheetManager.isPresented = false
                 })
             )
             withAnimation(.spring()) {

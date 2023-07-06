@@ -13,6 +13,8 @@ struct ActionButton {
 }
 
 struct CustomActionSheetView: View {
+    @EnvironmentObject var tabBarManager: TabBarManager
+
     let title: String
     let message: String
     let actionButtons: [ActionButton]
