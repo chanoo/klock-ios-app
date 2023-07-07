@@ -12,14 +12,6 @@ import Combine
 class AuthenticationService: AuthenticationServiceProtocol {
     private let baseURL = "https://api.klock.app/api/auth"
 
-    // 로그인 함수
-    func signIn(email: String, password: String) -> AnyPublisher<UserModel, AFError> {
-        let url = "\(baseURL)/signin"
-        let requestDTO = SignInReqDTO(email: email, password: password)
-
-        return requestAndDecode(url: url, parameters: requestDTO.dictionary)
-    }
-
     func signUp(nickName: String,
                 provider: String,
                 providerUserId: String,

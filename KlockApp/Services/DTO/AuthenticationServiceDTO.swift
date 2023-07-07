@@ -24,7 +24,7 @@ struct SignUpResDTO: Decodable {
     let provider: String
     let providerUserId: String
     let email: String?
-    let tagId: Int64?
+    let tagId: Int64
     let startOfTheWeek: String
     let startOfTheDay: Int
 }

@@ -84,6 +84,8 @@
 		986E5DB229EAEF5600FF7047 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986E5DB129EAEF5600FF7047 /* CalendarViewModel.swift */; };
 		986E5DB429EAEF9200FF7047 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986E5DB329EAEF9200FF7047 /* CalendarView.swift */; };
 		986E5DB629EAF06D00FF7047 /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986E5DB529EAF06D00FF7047 /* DayView.swift */; };
+		987443D22A57D5600019F847 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 987443D12A57D5600019F847 /* KeychainAccess */; };
+		987443D42A57D93F0019F847 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987443D32A57D93F0019F847 /* UserViewModel.swift */; };
 		9878FF0D2A0EA17100D38BB4 /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9878FF0C2A0EA17100D38BB4 /* TimerManager.swift */; };
 		987E543A29D552520007E156 /* KlockAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E543929D552520007E156 /* KlockAppApp.swift */; };
 		987E543E29D552530007E156 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 987E543D29D552530007E156 /* Assets.xcassets */; };
@@ -298,6 +300,7 @@
 		986E5DB129EAEF5600FF7047 /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
 		986E5DB329EAEF9200FF7047 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		986E5DB529EAF06D00FF7047 /* DayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
+		987443D32A57D93F0019F847 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		9878FF0C2A0EA17100D38BB4 /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
 		987E543629D552520007E156 /* KlockApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KlockApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		987E543929D552520007E156 /* KlockAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlockAppApp.swift; sourceTree = "<group>"; };
@@ -427,6 +430,7 @@
 				9820035029F1A6DA0056CA03 /* Foast in Frameworks */,
 				98E9385829EA4C45009CBF32 /* Alamofire in Frameworks */,
 				98B21B3D29D5F54E004EFE0E /* FacebookCore in Frameworks */,
+				987443D22A57D5600019F847 /* KeychainAccess in Frameworks */,
 				983B59D129FB30F800F0EACD /* CoreStore in Frameworks */,
 				98CE661629D55A370009916F /* Swinject in Frameworks */,
 				981881CD29F3847A002A4395 /* Lottie in Frameworks */,
@@ -730,6 +734,7 @@
 				988D7CFB2A3851BD0018A85E /* QRCodeScannerViewModel.swift */,
 				98AC30842A15CBA8006DC48D /* ExamTimerViewModel.swift */,
 				981D73172A1A49E0000C8F3D /* ClockViewModel.swift */,
+				987443D32A57D93F0019F847 /* UserViewModel.swift */,
 				985BE88329E652CE008582A3 /* README.md */,
 			);
 			path = ViewModels;
@@ -943,6 +948,7 @@
 				9820034F29F1A6DA0056CA03 /* Foast */,
 				981881CC29F3847A002A4395 /* Lottie */,
 				983B59D029FB30F800F0EACD /* CoreStore */,
+				987443D12A57D5600019F847 /* KeychainAccess */,
 			);
 			productName = KlockApp;
 			productReference = 987E543629D552520007E156 /* KlockApp.app */;
@@ -1026,6 +1032,7 @@
 				9820034E29F1A6DA0056CA03 /* XCRemoteSwiftPackageReference "Foast" */,
 				981881CB29F3847A002A4395 /* XCRemoteSwiftPackageReference "lottie-spm" */,
 				983B59CF29FB30F800F0EACD /* XCRemoteSwiftPackageReference "CoreStore" */,
+				987443D02A57D5600019F847 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 			);
 			productRefGroup = 987E543729D552520007E156 /* Products */;
 			projectDirPath = "";
@@ -1165,6 +1172,7 @@
 				98DC292D29E9380200882E36 /* ChatBotServiceDTO.swift in Sources */,
 				98CE662129D55B730009916F /* SignInViewModel.swift in Sources */,
 				98B21B6E29D9D21A004EFE0E /* SignUpViewModel.swift in Sources */,
+				987443D42A57D93F0019F847 /* UserViewModel.swift in Sources */,
 				98B21B4629D60EEB004EFE0E /* FancyTextField.swift in Sources */,
 				98D2826929E988D00039E6E6 /* MessageLocalService.swift in Sources */,
 				985BE8AE29E73A76008582A3 /* EnvironmentValuesProvider.swift in Sources */,
@@ -1662,6 +1670,14 @@
 				minimumVersion = 9.0.0;
 			};
 		};
+		987443D02A57D5600019F847 /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 		98B21B3B29D5F54E004EFE0E /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
@@ -1703,6 +1719,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 983B59CF29FB30F800F0EACD /* XCRemoteSwiftPackageReference "CoreStore" */;
 			productName = CoreStore;
+		};
+		987443D12A57D5600019F847 /* KeychainAccess */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 987443D02A57D5600019F847 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
+			productName = KeychainAccess;
 		};
 		98B21B3C29D5F54E004EFE0E /* FacebookCore */ = {
 			isa = XCSwiftPackageProductDependency;

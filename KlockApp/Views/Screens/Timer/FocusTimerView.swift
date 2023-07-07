@@ -12,6 +12,7 @@ struct FocusTimerView: View {
     @EnvironmentObject var tabBarManager: TabBarManager
     @EnvironmentObject var focusTimerViewModel: FocusTimerViewModel
     @EnvironmentObject var timeTimerViewModel: TimeTimerViewModel
+    @EnvironmentObject var userViewModel: UserViewModel
     @State private var showChatBot = false
     @State var clockViewModel = ClockViewModel(
         currentTime: Date(),

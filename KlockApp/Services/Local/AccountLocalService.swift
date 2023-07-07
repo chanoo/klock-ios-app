@@ -14,17 +14,14 @@ class AccountLocalService: CoreDataHelper, AccountLocalServiceProtocol {
     private func mapEntityToModel(_ entity: Account) -> UserModel {
         return UserModel(
             id: entity.id,
-            email: entity.email,
-            hashedPassword: nil,
-            username: entity.username ?? "",
+            accessToken: "",
+            refreshToken: "",
+            nickName: entity.username ?? "",
             profileImage: entity.profileImage,
-            totalStudyTime: Int(entity.totalStudyTime),
-            accountLevelId: 1,
-            role: UserRole(rawValue: entity.role ?? "") ?? .user,
-            active: entity.active,
-            createdAt: entity.createdAt ?? Date(),
-            updatedAt: entity.updatedAt ?? Date()
-        )
+            tagId: 0,
+            startOfTheWeek: "SUNDAY",
+            startOfTheDay: 5,
+            totalStudyTime: Int(entity.totalStudyTime))
     }
     
     func get(id: Int64) -> AnyPublisher<UserModel, Error> {

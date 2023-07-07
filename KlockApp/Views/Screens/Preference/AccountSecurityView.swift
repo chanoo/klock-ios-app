@@ -78,10 +78,10 @@ struct AccountSecurityView: View {
     private func deleteAccountActionSheet() {
         actionSheetManager.actionSheet = CustomActionSheetView(
             title: "회원 탈퇴",
-            message: "데이터는 바로 삭제되며 복구할 수 없습니다.",
+            message: "데이터는 즉시 영구삭제되며 복구할 수 없습니다.",
             actionButtons: [
                 ActionButton(title: "회원탈퇴", action: {
-                    UserDefaults.standard.removeObject(forKey: "access.token")
+                    viewModel.deleteAccountButtonTapped.send()
                     actionSheetManager.isPresented = false
                     activeDestination = .splash
                 }),
@@ -101,7 +101,7 @@ struct AccountSecurityView: View {
             message: "정말로 로그아웃하시겠습니까?",
             actionButtons: [
                 ActionButton(title: "로그아웃", action: {
-                    UserDefaults.standard.removeObject(forKey: "access.token")
+                    viewModel.logoutButtonTapped.send()
                     actionSheetManager.isPresented = false
                     activeDestination = .splash
                 }),

@@ -33,12 +33,14 @@ struct ContentView: View {
     @ObservedObject var viewModel: ContentViewModel
     @EnvironmentObject var appFlowManager: AppFlowManager
     @StateObject var actionSheetManager = ActionSheetManager()
+    @StateObject var userViewModel = UserViewModel()
 
     var body: some View {
         ZStack {
             NavigationView {
                 viewModel.currentView
                     .environmentObject(actionSheetManager)
+                    .environmentObject(userViewModel)
             }
         }
         .modifier(CustomActionSheetModifier(isPresented: $actionSheetManager.isPresented) {

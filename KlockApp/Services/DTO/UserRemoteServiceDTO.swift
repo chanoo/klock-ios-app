@@ -14,3 +14,16 @@ struct ExistedNickNameReqDTO: Codable {
 struct ExistedNickNameResDTO: Codable {
     let exists: Bool
 }
+
+struct GetUserResDTO: Codable {
+    let id: Int64
+    let nickName: String
+    let email: String?
+    let level: Int
+    let requiredStudyTime: Int
+    let characterName: String
+    let characterImage: String
+    let startOfTheWeek: String
+    let startOfTheDay: Int
+    let tagId: Int64
+}

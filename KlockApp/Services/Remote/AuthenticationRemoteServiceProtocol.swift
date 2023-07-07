@@ -10,7 +10,6 @@ import Combine
 import Alamofire
 
 protocol AuthenticationServiceProtocol {
-    func signIn(email: String, password: String) -> AnyPublisher<UserModel, AFError>
     func signUp(nickName: String, provider: String, providerUserId: String, tagId: Int64?, startOfTheWeek: FirstDayOfWeek, startOfTheDay: Int) -> AnyPublisher<SignUpResDTO, AFError>
     func signInWithFacebook(accessToken: String) -> AnyPublisher<UserModel, AFError>
     func signInWithApple(accessToken: String) -> AnyPublisher<AppleSignInResDTO, AFError>

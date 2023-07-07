@@ -87,6 +87,7 @@ class Container {
             SignUpViewModel(signUpUserModel: resolver.resolve(SignUpUserModel.self) ?? SignUpUserModel() )
         }
         container.register(SplashViewModel.self) { _ in SplashViewModel() }
+        container.register(UserViewModel.self) { _ in UserViewModel() }
         container.register(ChatBotViewModel.self) { resolver in
             return ChatBotViewModel()
         }

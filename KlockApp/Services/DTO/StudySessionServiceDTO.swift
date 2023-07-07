@@ -23,7 +23,6 @@ struct ReqStudySession: Codable {
     }
 }
 
-
 struct ResStudySession: Codable {
     let id: Int64
     let userId: Int64

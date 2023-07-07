@@ -133,6 +133,12 @@ class TimeTimerViewModel: ObservableObject {
 
     func stopAndSaveStudySession(timerName: String, timerType: TimerType, startTime: Date, endTime: Date) {
         updateElapsedTime()
+        let userId = UserModel.load()?.id        
+        guard userId != nil else {
+            Foast.show(message: "Invalid user.")
+            return
+        }
+        
         let sessionDuration = endTime.timeIntervalSince(startTime)
         guard sessionDuration > 10 else {
             Foast.show(message: "10초 미만은 기록되지 않습니다.")
@@ -142,7 +148,7 @@ class TimeTimerViewModel: ObservableObject {
         
         let startTimeStr = DateUtils.dateToString(startTime)
         let endTimeStr = DateUtils.dateToString(endTime)
-        let req = ReqStudySession(timerName: timerName, timerType: timerType, startTime: startTimeStr, endTime: endTimeStr)
+        let req = ReqStudySession(userId: userId, timerName: timerName, timerType: timerType, startTime: startTimeStr, endTime: endTimeStr)
         studySessionRemoteService.create(data: req)
             .sink(receiveCompletion: { completion in
                 switch completion {

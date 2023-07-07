@@ -10,6 +10,7 @@ import Combine
 import AuthenticationServices
 import Alamofire
 import FacebookLogin
+import KeychainAccess
 
 class SignInViewModel: NSObject, ObservableObject, ASAuthorizationControllerDelegate {
 
@@ -26,6 +27,8 @@ class SignInViewModel: NSObject, ObservableObject, ASAuthorizationControllerDele
     var onSignInWithFacebook: (() -> Void)?
     var onSignUpProcess: (() -> Void)?
     var onSignInSuccess: (() -> Void)?
+    
+    private let userRemoteService: UserRemoteServiceProtocol = Container.shared.resolve(UserRemoteServiceProtocol.self)
 
     init(authenticationService: AuthenticationServiceProtocol = Container.shared.resolve(AuthenticationServiceProtocol.self)) {
         self.signUpUserModel = SignUpUserModel()
@@ -99,44 +102,96 @@ class SignInViewModel: NSObject, ObservableObject, ASAuthorizationControllerDele
         authorizationController.performRequests()
     }
 
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-        guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential,
-              let appleIDTokenData = appleIDCredential.identityToken,
+    func handleAppleIDCredential(_ credential: ASAuthorizationAppleIDCredential) {
+        guard let appleIDTokenData = credential.identityToken,
               let appleIDToken = String(data: appleIDTokenData, encoding: .utf8) else {
             print("Error during Apple login")
             return
         }
 
-        signUpUserModel.provider = "APPLE"
-        signUpUserModel.providerUserId = appleIDCredential.user
-        signUpUserModel.firstName = appleIDCredential.fullName?.givenName ?? ""
-        signUpUserModel.lastName = appleIDCredential.fullName?.familyName ?? ""
-        signUpUserModel.email = appleIDCredential.email ?? ""
-
+        fillSignUpUserModel(with: credential)
         debugPrint("appleIDToken", appleIDToken)
+        handleSignInWithAppleToken(appleIDToken)
+    }
 
-        authenticationService.signInWithApple(accessToken: appleIDToken)
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                case .failure(let error):
-                    print("Error: \(error.localizedDescription)")
-                    if error.responseCode == 401 {
-                        DispatchQueue.main.async {
-                            self.onSignUpProcess?()
-                        }
-                    }
-                case .finished:
-                    break
-                }
-            }, receiveValue: { user in
-                print("User: \(user)")
-                UserDefaults.standard.set(user.token, forKey: "access.token")
-                DispatchQueue.main.async {
-                    self.onSignInSuccess?()
-                }
-            })
+    func fillSignUpUserModel(with credential: ASAuthorizationAppleIDCredential) {
+        signUpUserModel.provider = "APPLE"
+        signUpUserModel.providerUserId = credential.user
+        signUpUserModel.firstName = credential.fullName?.givenName ?? ""
+        signUpUserModel.lastName = credential.fullName?.familyName ?? ""
+        signUpUserModel.email = credential.email ?? ""
+    }
+
+    func handleSignInWithAppleToken(_ token: String) {
+        authenticationService.signInWithApple(accessToken: token)
+            .sink(receiveCompletion: handleAuthenticationCompletion,
+                  receiveValue: handleReceivedUser)
             .store(in: &cancellableSet)
     }
+
+    func handleAuthenticationCompletion(_ completion: Subscribers.Completion<AFError>) {
+        switch completion {
+        case .failure(let error):
+            print("Error: \(error.localizedDescription)")
+            if error.responseCode == 401 {
+                DispatchQueue.main.async {
+                    self.onSignUpProcess?()
+                }
+            }
+        case .finished:
+            break
+        }
+    }
+
+    func handleReceivedUser(_ user: AppleSignInResDTO) {
+        print("User: \(user)")
+        UserDefaults.standard.set(user.userId, forKey: "user.id")
+        UserDefaults.standard.set(user.token, forKey: "access.token")
+        fetchUserRemoteData(user.userId)
+    }
+
+    func fetchUserRemoteData(_ id: Int64) {
+        self.userRemoteService.get(id: id)
+            .sink(receiveCompletion: handleFetchDataCompletion,
+                  receiveValue: handleReceivedData)
+            .store(in: &self.cancellableSet)
+    }
+
+    func handleFetchDataCompletion(_ completion: Subscribers.Completion<AFError>) {
+        switch completion {
+        case .failure(let error):
+            print("Error: \(error.localizedDescription)")
+            if error.responseCode == 401 {
+                DispatchQueue.main.async {
+                    self.onSignUpProcess?()
+                }
+            }
+        case .finished:
+            break
+        }
+    }
+
+    func handleReceivedData(_ dto: GetUserResDTO) {
+        let userModel = UserModel.from(dto: dto)
+        userModel.save()
+        let keychain = Keychain(service: "app.klock.ios")
+            .label("app.klock.ios (\(dto.id)")
+            .synchronizable(true)
+            .accessibility(.afterFirstUnlock)
+        keychain["userId"] = String(userModel.id)
+        DispatchQueue.main.async {
+            self.onSignInSuccess?()
+        }
+    }
+
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
+            handleAppleIDCredential(appleIDCredential)
+        } else {
+            print("Error during Apple login")
+        }
+    }
+
 
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         print("Error during Apple login: \(error.localizedDescription)")

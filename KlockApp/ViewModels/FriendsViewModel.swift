@@ -15,11 +15,10 @@ class FriendsViewModel: NSObject, ObservableObject {
     @Published var isPreparingResponse: Bool = false
 
     let friends: [UserModel] = [
-        UserModel(id: 1, email: nil, hashedPassword: nil, username: "날으는호랑이", profileImage: nil, totalStudyTime: 200, accountLevelId: 1, role: .user, active: true, createdAt: Date(), updatedAt: Date()),
-        UserModel(id: 2, email: nil, hashedPassword: nil, username: "여유로운쿼카", profileImage: nil, totalStudyTime: 180, accountLevelId: 1, role: .user, active: true, createdAt: Date(), updatedAt: Date()),
-        UserModel(id: 3, email: nil, hashedPassword: nil, username: "열정적인두루미", profileImage: nil, totalStudyTime: 100, accountLevelId: 1, role: .user, active: true, createdAt: Date(), updatedAt: Date()),
-        UserModel(id: 4, email: nil, hashedPassword: nil, username: "뀨처돌이", profileImage: nil, totalStudyTime: 100, accountLevelId: 1, role: .user, active: true, createdAt: Date(), updatedAt: Date())
-
+        UserModel(id: 1, accessToken: "", refreshToken: "", nickName: "날으는호랑이", profileImage: nil, tagId: 0, startOfTheWeek: "MONDAY", startOfTheDay: 0, totalStudyTime: 100),
+        UserModel(id: 2, accessToken: "", refreshToken: "", nickName: "여유로운쿼카", profileImage: nil, tagId: 0, startOfTheWeek: "MONDAY", startOfTheDay: 0, totalStudyTime: 200),
+        UserModel(id: 3, accessToken: "", refreshToken: "", nickName: "열정적인두루미", profileImage: nil, tagId: 0, startOfTheWeek: "MONDAY", startOfTheDay: 0, totalStudyTime: 300),
+        UserModel(id: 4, accessToken: "", refreshToken: "", nickName: "뀨처돌이", profileImage: nil, tagId: 0, startOfTheWeek: "MONDAY", startOfTheDay: 0, totalStudyTime: 400),
     ]
     
     let activities: [ActivityModel] = [

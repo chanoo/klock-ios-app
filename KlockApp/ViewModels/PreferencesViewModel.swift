@@ -68,14 +68,41 @@ class PreferencesViewModel: ObservableObject {
         ])
     ]
     let logoutButtonTapped = PassthroughSubject<Void, Never>()
-    
+    let deleteAccountButtonTapped = PassthroughSubject<Void, Never>()
+
+    private let userRemoteService: UserRemoteServiceProtocol = Container.shared.resolve(UserRemoteServiceProtocol.self)
+
     private var cancellables: Set<AnyCancellable> = []
 
     func editProfile() {
         // Handle profile editing
         print("Edit profile button pressed")
     }
-    init() {
+    
+    // 로그아웃 메소드
+    func logout() {
+        UserDefaults.standard.removeObject(forKey: "access.token")
+    }
+
+    // 계정 삭제 메소드
+    func deleteAccount() {
+        UserDefaults.standard.removeObject(forKey: "access.token")
     }
     
+    init() {
+        logoutButtonTapped
+            .sink { [weak self] _ in
+                self?.logout()
+            }
+            .store(in: &cancellables)
+
+        deleteAccountButtonTapped
+            .sink { [weak self] _ in
+                self?.deleteAccount()
+            }
+            .store(in: &cancellables)
+        
+        let userModel = UserModel.load()
+        profileName = userModel?.nickName ?? "-"
+    }
 }

@@ -10,6 +10,7 @@ import Combine
 import FacebookLogin
 import AuthenticationServices
 import Swinject
+import KeychainAccess
 
 class SignUpViewModel: NSObject, ObservableObject {
 
@@ -138,34 +139,48 @@ class SignUpViewModel: NSObject, ObservableObject {
 
     // MARK: - Sign Up
 
-    func signUp() {
+    // This function simplifies saving user information.
+    func saveUser(_ userModel: UserModel) {
+        userModel.save()
+        let keychain = Keychain(service: "app.klock.ios")
+            .label("app.klock.ios (\(userModel.id)")
+            .synchronizable(true)
+            .accessibility(.afterFirstUnlock)
+        keychain["userId"] = String(userModel.id)
+        keychain["token"] = userModel.accessToken
+        UserDefaults.standard.set(userModel.id, forKey: "user.id")
+        UserDefaults.standard.set(userModel.accessToken, forKey: "access.token")
 
-        // print signUpUserModel all properties
-        debugPrint("signUpUserModel: ", signUpUserModel.nickName, signUpUserModel.provider, signUpUserModel.providerUserId, signUpUserModel.tagId)
-
-        authenticationService.signUp(
-            nickName: signUpUserModel.nickName,
-            provider: signUpUserModel.provider,
-            providerUserId: signUpUserModel.providerUserId,
-            tagId: signUpUserModel.tagId,
-            startOfTheWeek: signUpUserModel.startDay,
-            startOfTheDay: signUpUserModel.startTime
-        )
-            .sink { completion in
-                switch completion {
-                case .failure(let error):
-                    print("Error signing up: \(error)")
-                case .finished:
-                    break
-                }
-            } receiveValue: { user in
-                UserDefaults.standard.set(user.accessToken, forKey: "access.token")
-                DispatchQueue.main.async {
-                    self.onSignUpSuccess?()
-                }
-                print("User signed up: \(user)")
-            }
-            .store(in: &cancellables)
+        // saving user model to user defaults if conversion to json is successful
+        if let jsonString = userModel.toJson() {
+            UserDefaults.standard.set(jsonString, forKey: "user")
+        }
     }
 
+    func signUp() {
+        let model = signUpUserModel
+        debugPrint("signUpUserModel: \(model)")
+        
+        authenticationService.signUp(
+            nickName: model.nickName,
+            provider: model.provider,
+            providerUserId: model.providerUserId,
+            tagId: model.tagId,
+            startOfTheWeek: model.startDay,
+            startOfTheDay: model.startTime
+        )
+        .sink { completion in
+            if case .failure(let error) = completion {
+                print("Error signing up: \(error)")
+            }
+        } receiveValue: { dto in
+            let userModel = UserModel.from(dto: dto)
+            self.saveUser(userModel)
+            DispatchQueue.main.async {
+                self.onSignUpSuccess?()
+            }
+            print("User signed up: \(userModel)")
+        }
+        .store(in: &cancellables)
+    }
 }
