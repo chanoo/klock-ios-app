@@ -56,10 +56,10 @@ struct SignUpTagView: View {
                     .frame(maxWidth: .infinity, alignment: .topLeading)
 
                 FancyButton(
-                    title: "다음",
+                    title: "시작하기",
                     action: {
                         guard self.viewModel.isTagNextButtonEnabled else { return }
-                        activeDestination = .signUpProfileImage
+                        viewModel.confirmButtonTapped.send()
                     },
                     disabled: Binding<Bool?>(
                         get: { !self.viewModel.isTagNextButtonEnabled },
@@ -78,7 +78,7 @@ struct SignUpTagView: View {
             NavigationLink(
                 destination: viewForDestination(activeDestination),
                 isActive: Binding<Bool>(
-                    get: { activeDestination == .signUpProfileImage },
+                    get: { activeDestination == .splash },
                     set: { newValue in
                         if !newValue {
                             activeDestination = nil
@@ -94,17 +94,26 @@ struct SignUpTagView: View {
         .frame(maxHeight: .infinity, alignment: .topLeading)
         .onAppear {
             viewModel.fetchTagsSubject.send()
+            viewModel.onSignUpSuccess = signUpSuccess
         }
+        .onReceive(viewModel.signUpSuccess, perform: { _ in
+            activeDestination = .splash
+        })
+        
     }
 
     private func viewForDestination(_ destination: Destination?) -> AnyView {
          switch destination {
-         case .signUpProfileImage:
-             return AnyView(SignUpProfileImageView().environmentObject(viewModel))
+         case .splash:
+             return AnyView(SplashView())
          case .none, _:
              return AnyView(EmptyView())
          }
      }
+    
+    private func signUpSuccess() {
+        viewModel.signUpSuccess.send()
+    }
 }
 
 struct SignUpTagView_Previews: PreviewProvider {

@@ -12,6 +12,7 @@ import AuthenticationServices
 import Swinject
 import KeychainAccess
 import Alamofire
+import Foast
 
 class SignUpViewModel: NSObject, ObservableObject {
 
@@ -178,6 +179,7 @@ class SignUpViewModel: NSObject, ObservableObject {
         switch completion {
         case .failure(let error):
             print("Error: \(error.localizedDescription)")
+            Foast.show(message: error.localizedDescription)
         case .finished:
             break
         }
@@ -197,10 +199,7 @@ class SignUpViewModel: NSObject, ObservableObject {
         switch completion {
         case .failure(let error):
             print("Error: \(error.localizedDescription)")
-            if error.responseCode == 401 {
-                DispatchQueue.main.async {
-                }
-            }
+            Foast.show(message: error.localizedDescription)
         case .finished:
             break
         }

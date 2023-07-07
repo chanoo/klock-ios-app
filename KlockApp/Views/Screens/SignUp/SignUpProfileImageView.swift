@@ -74,7 +74,6 @@ struct SignUpProfileImageView: View {
                 .font(.callout)
                 .frame(maxWidth: .infinity, alignment: .topLeading)
                 .padding(.top, 1)
-                .padding(.bottom, 30)
 
             Spacer()
 
