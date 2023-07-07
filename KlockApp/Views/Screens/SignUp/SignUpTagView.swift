@@ -17,7 +17,7 @@ struct SignUpTagView: View {
         ScrollView {
             VStack {
                 HStack {
-                    Image("img_signup_step4")
+                    Image("img_signup_step4_4")
                 }
                 .frame(maxWidth: .infinity, alignment: .topLeading)
                 

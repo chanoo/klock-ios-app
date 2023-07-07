@@ -3,6 +3,16 @@
     {
       "filename" : "img_characters.svg",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "img_characters_dark.svg",
+      "idiom" : "universal"
     }
   ],
   "info" : {

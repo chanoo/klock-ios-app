@@ -11,6 +11,7 @@ import FacebookLogin
 import AuthenticationServices
 import Swinject
 import KeychainAccess
+import Alamofire
 
 class SignUpViewModel: NSObject, ObservableObject {
 
@@ -54,12 +55,12 @@ class SignUpViewModel: NSObject, ObservableObject {
 
     private func setupIsNextButtonEnabled() {
         $signUpUserModel
-            .filter { $0.nickName.count >= 2 }
-            .map { $0.nickName }
+            .filter { $0.nickname.count >= 2 }
+            .map { $0.nickname }
             .removeDuplicates()
-            .flatMap { nickName in
-                return self.userRemoteService.existed(nickName: nickName)
-                    .replaceError(with: ExistedNickNameResDTO(exists: false))
+            .flatMap { nickname in
+                return self.userRemoteService.existed(nickname: nickname)
+                    .replaceError(with: ExistedNicknameResDTO(exists: false))
                     .receive(on: DispatchQueue.main)
             }
             .sink { [weak self] response in
@@ -141,7 +142,6 @@ class SignUpViewModel: NSObject, ObservableObject {
 
     // This function simplifies saving user information.
     func saveUser(_ userModel: UserModel) {
-        userModel.save()
         let keychain = Keychain(service: "app.klock.ios")
             .label("app.klock.ios (\(userModel.id)")
             .synchronizable(true)
@@ -162,25 +162,61 @@ class SignUpViewModel: NSObject, ObservableObject {
         debugPrint("signUpUserModel: \(model)")
         
         authenticationService.signUp(
-            nickName: model.nickName,
+            nickname: model.nickname,
             provider: model.provider,
             providerUserId: model.providerUserId,
             tagId: model.tagId,
             startOfTheWeek: model.startDay,
             startOfTheDay: model.startTime
         )
-        .sink { completion in
-            if case .failure(let error) = completion {
-                print("Error signing up: \(error)")
-            }
-        } receiveValue: { dto in
-            let userModel = UserModel.from(dto: dto)
-            self.saveUser(userModel)
-            DispatchQueue.main.async {
-                self.onSignUpSuccess?()
-            }
-            print("User signed up: \(userModel)")
-        }
+        .sink(receiveCompletion: handleSignUpCompletion,
+              receiveValue: handleReceivedSignUp)
         .store(in: &cancellables)
     }
+    
+    func handleSignUpCompletion(_ completion: Subscribers.Completion<AFError>) {
+        switch completion {
+        case .failure(let error):
+            print("Error: \(error.localizedDescription)")
+        case .finished:
+            break
+        }
+    }
+    
+    func handleReceivedSignUp(_ dto: SignUpResDTO) {
+        print("User: \(dto)")
+        UserDefaults.standard.set(dto.id, forKey: "user.id")
+        UserDefaults.standard.set(dto.accessToken, forKey: "access.token")
+        self.userRemoteService.get(id: dto.id)
+            .sink(receiveCompletion: handleFetchDataCompletion,
+                  receiveValue: handleReceivedData)
+            .store(in: &cancellables)
+    }
+    
+    func handleFetchDataCompletion(_ completion: Subscribers.Completion<AFError>) {
+        switch completion {
+        case .failure(let error):
+            print("Error: \(error.localizedDescription)")
+            if error.responseCode == 401 {
+                DispatchQueue.main.async {
+                }
+            }
+        case .finished:
+            break
+        }
+    }
+    
+    func handleReceivedData(_ dto: GetUserResDTO) {
+        let userModel = UserModel.from(dto: dto)
+        userModel.save()
+        let keychain = Keychain(service: "app.klock.ios")
+            .label("app.klock.ios (\(dto.id)")
+            .synchronizable(true)
+            .accessibility(.afterFirstUnlock)
+        keychain["userId"] = String(userModel.id)
+        DispatchQueue.main.async {
+            self.onSignUpSuccess?()
+        }
+    }
+
 }

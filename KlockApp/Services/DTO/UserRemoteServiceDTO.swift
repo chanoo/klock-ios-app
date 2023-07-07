@@ -7,17 +7,17 @@
 
 import Foundation
 
-struct ExistedNickNameReqDTO: Codable {
-    let nickName: String
+struct ExistedNicknameReqDTO: Codable {
+    let nickname: String
 }
 
-struct ExistedNickNameResDTO: Codable {
+struct ExistedNicknameResDTO: Codable {
     let exists: Bool
 }
 
 struct GetUserResDTO: Codable {
     let id: Int64
-    let nickName: String
+    let nickname: String
     let email: String?
     let level: Int
     let requiredStudyTime: Int

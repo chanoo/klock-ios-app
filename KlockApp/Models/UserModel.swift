@@ -16,7 +16,7 @@ struct UserModel: Hashable, Codable {
     let id: Int64
     let accessToken: String?
     let refreshToken: String?
-    let nickName: String
+    let nickname: String
     let profileImage: String?
     let tagId: Int64
     let startOfTheWeek: String
@@ -27,7 +27,7 @@ struct UserModel: Hashable, Codable {
         case id
         case accessToken
         case refreshToken
-        case nickName
+        case nickname
         case profileImage
         case tagId
         case startOfTheWeek
@@ -40,7 +40,7 @@ struct UserModel: Hashable, Codable {
             id: dto.id,
             accessToken: dto.accessToken,
             refreshToken: dto.refreshToken,
-            nickName: dto.nickName,
+            nickname: dto.nickname,
             profileImage: nil,
             tagId: dto.tagId,
             startOfTheWeek: dto.startOfTheWeek,
@@ -54,7 +54,7 @@ struct UserModel: Hashable, Codable {
             id: dto.id,
             accessToken: nil,
             refreshToken: nil,
-            nickName: dto.nickName,
+            nickname: dto.nickname,
             profileImage: nil,
             tagId: dto.tagId,
             startOfTheWeek: dto.startOfTheWeek,

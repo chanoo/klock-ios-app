@@ -17,7 +17,7 @@ class SignUpUserModel: ObservableObject {
     @Published var providerUserId: String = ""
     @Published var firstName: String = ""
     @Published var lastName: String = ""
-    @Published var nickName: String = ""
+    @Published var nickname: String = ""
     @Published var startDay: FirstDayOfWeek = .sunday
     @Published var startTime: Int = 5
     @Published var email: String = ""

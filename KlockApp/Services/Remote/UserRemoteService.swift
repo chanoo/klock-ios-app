@@ -42,14 +42,14 @@ class UserRemoteService: UserRemoteServiceProtocol, APIServiceProtocol {
             .eraseToAnyPublisher()
     }
     
-    func existed(nickName: String) -> AnyPublisher<ExistedNickNameResDTO, Alamofire.AFError> {
-        let url = "\(baseURL)/existedNickName"
-        let requestDTO = ExistedNickNameReqDTO(nickName: nickName)
+    func existed(nickname: String) -> AnyPublisher<ExistedNicknameResDTO, Alamofire.AFError> {
+        let url = "\(baseURL)/existed-nickname"
+        let requestDTO = ExistedNicknameReqDTO(nickname: nickname)
         
         return AF.request(url, method: .post, parameters: requestDTO.dictionary, encoding: JSONEncoding.default)
             .validate()
-            .publishDecodable(type: ExistedNickNameResDTO.self)
-            .tryMap { result -> ExistedNickNameResDTO in
+            .publishDecodable(type: ExistedNicknameResDTO.self)
+            .tryMap { result -> ExistedNicknameResDTO in
                 switch result.result {
                 case .success(let response):
                     return response

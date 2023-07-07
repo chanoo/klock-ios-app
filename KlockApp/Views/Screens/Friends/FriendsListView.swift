@@ -51,7 +51,7 @@ struct FirstFriendsRowView: View {
                             .foregroundColor(FancyColor.primary.color)
                     }
                 }
-                Text(userModel.nickName)
+                Text(userModel.nickname)
                     .font(.system(size: 17, weight: .semibold))
                     .foregroundColor(FancyColor.text.color)
                     .padding(.leading, 10)
@@ -92,7 +92,7 @@ struct FriendsRowView: View {
                                 .foregroundColor(FancyColor.primary.color)
                         }
                     }
-                    Text(userModel.nickName)
+                    Text(userModel.nickname)
                         .font(.system(size: 15, weight: .semibold))
                         .foregroundColor(FancyColor.text.color)
                         .padding(.leading, 10)

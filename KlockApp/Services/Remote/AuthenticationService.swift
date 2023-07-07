@@ -12,7 +12,7 @@ import Combine
 class AuthenticationService: AuthenticationServiceProtocol {
     private let baseURL = "https://api.klock.app/api/auth"
 
-    func signUp(nickName: String,
+    func signUp(nickname: String,
                 provider: String,
                 providerUserId: String,
                 tagId: Int64?,
@@ -20,7 +20,7 @@ class AuthenticationService: AuthenticationServiceProtocol {
                 startOfTheDay: Int
     ) -> AnyPublisher<SignUpResDTO, AFError> {
         let url = "\(baseURL)/signup"
-        let requestDTO = SignUpReqDTO(nickName: nickName, provider: provider, providerUserId: providerUserId, tagId: tagId, startOfTheWeek: startOfTheWeek.rawValue, startOfTheDay: startOfTheDay)
+        let requestDTO = SignUpReqDTO(nickname: nickname, provider: provider, providerUserId: providerUserId, tagId: tagId, startOfTheWeek: startOfTheWeek.rawValue, startOfTheDay: startOfTheDay)
 
         return AF.request(url, method: .post, parameters: requestDTO.dictionary, encoding: JSONEncoding.default)
             .validate()

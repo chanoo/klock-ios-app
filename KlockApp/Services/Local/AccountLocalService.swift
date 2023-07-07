@@ -16,7 +16,7 @@ class AccountLocalService: CoreDataHelper, AccountLocalServiceProtocol {
             id: entity.id,
             accessToken: "",
             refreshToken: "",
-            nickName: entity.username ?? "",
+            nickname: entity.username ?? "",
             profileImage: entity.profileImage,
             tagId: 0,
             startOfTheWeek: "SUNDAY",

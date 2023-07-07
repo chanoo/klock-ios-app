@@ -86,7 +86,23 @@ class PreferencesViewModel: ObservableObject {
 
     // 계정 삭제 메소드
     func deleteAccount() {
-        UserDefaults.standard.removeObject(forKey: "access.token")
+        guard let userModel = UserModel.load() else {
+            print("사용자 정보가 없습니다.")
+            return
+        }
+        userRemoteService.delete(id: userModel.id)
+            .sink { completion in
+                switch completion {
+                case .failure(let error):
+                    print(error)
+                case .finished:
+                    print("delete account success")
+                }
+            } receiveValue: { [weak self] response in
+                print(response)
+                self?.logout()
+            }
+            .store(in: &cancellables)
     }
     
     init() {
@@ -103,6 +119,6 @@ class PreferencesViewModel: ObservableObject {
             .store(in: &cancellables)
         
         let userModel = UserModel.load()
-        profileName = userModel?.nickName ?? "-"
+        profileName = userModel?.nickname ?? "-"
     }
 }

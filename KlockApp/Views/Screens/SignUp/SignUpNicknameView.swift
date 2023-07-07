@@ -14,7 +14,7 @@ struct SignUpNicknameView: View {
     var body: some View {
         VStack {
             HStack {
-                Image("img_signup_step1")
+                Image("img_signup_step1_4")
             }
             .foregroundColor(FancyColor.text.color)
             .frame(maxWidth: .infinity, alignment: .topLeading)
@@ -37,7 +37,7 @@ struct SignUpNicknameView: View {
 
             FancyTextField(
                 placeholder: "닉네임을 입력해주세요",
-                text: $viewModel.signUpUserModel.nickName,
+                text: $viewModel.signUpUserModel.nickname,
                 isValid: viewModel.isNickNameButtonEnabled,
                 firstResponder: $viewModel.nicknameTextFieldShouldBecomeFirstResponder
             )
@@ -88,7 +88,7 @@ struct SignUpNicknameView: View {
                 viewModel.nicknameTextFieldShouldBecomeFirstResponder = true
             }
         }
-        .onChange(of: viewModel.signUpUserModel.nickName) { newValue in
+        .onChange(of: viewModel.signUpUserModel.nickname) { newValue in
             viewModel.isNickNameButtonEnabled = newValue.count >= 2
         }
     }
