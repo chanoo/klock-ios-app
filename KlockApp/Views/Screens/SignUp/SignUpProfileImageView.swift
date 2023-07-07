@@ -76,6 +76,7 @@ struct SignUpProfileImageView: View {
                 .padding(.top, 1)
                 .padding(.bottom, 30)
 
+            Spacer()
 
             ZStack {
                 if let image = selectedImage {
@@ -92,9 +93,7 @@ struct SignUpProfileImageView: View {
                 }
                 .padding(.top, 110)
                 .padding(.leading, 110)
-            
             }
-            .padding(.top, 50)
 
             Spacer()
             
@@ -103,7 +102,7 @@ struct SignUpProfileImageView: View {
                 action: {
                     viewModel.confirmButtonTapped.send()
                 },
-                style: .constant(.button)
+                style: .constant(.black)
             )
             
             NavigationLink(

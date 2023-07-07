@@ -16,6 +16,7 @@ struct SignUpNicknameView: View {
             HStack {
                 Image("img_signup_step1")
             }
+            .foregroundColor(FancyColor.text.color)
             .frame(maxWidth: .infinity, alignment: .topLeading)
             
             HStack {
@@ -36,13 +37,14 @@ struct SignUpNicknameView: View {
 
             FancyTextField(
                 placeholder: "닉네임을 입력해주세요",
-                text: $viewModel.signUpUserModel.username,
-                isValid: viewModel.isStartOfWeekNextButtonEnabled,
+                text: $viewModel.signUpUserModel.nickName,
+                isValid: viewModel.isNickNameButtonEnabled,
                 firstResponder: $viewModel.nicknameTextFieldShouldBecomeFirstResponder
             )
 
             Text(viewModel.error ?? "")
-                .foregroundColor(.gray)
+                .foregroundColor(FancyColor.red.color)
+                .font(.system(size: 15))
                 .frame(maxWidth: .infinity, alignment: .topLeading)
             
             Spacer()
@@ -50,13 +52,14 @@ struct SignUpNicknameView: View {
             FancyButton(
                 title: "다음",
                 action: {
+                    guard self.viewModel.isNickNameButtonEnabled else { return }
                     DispatchQueue.main.async {
                         viewModel.nicknameTextFieldShouldBecomeFirstResponder = false
                     }
                     activeDestination = .signUpStartOfWeek
                 },
-                disabled: .constant(!viewModel.isStartOfWeekNextButtonEnabled),
-                style: .constant(.button)
+                disabled: .constant(!viewModel.isNickNameButtonEnabled),
+                style: .constant(.black)
             )
 
             NavigationLink(
@@ -77,7 +80,7 @@ struct SignUpNicknameView: View {
         }
         // 왼쪽 정렬
         .frame(maxHeight: .infinity, alignment: .topLeading)
-//        .navigationBarItems(leading: BackButtonView())
+        .navigationBarItems(leading: BackButtonView())
         .navigationBarBackButtonHidden()
         .padding(.all, 30)
         .onAppear {
@@ -85,8 +88,8 @@ struct SignUpNicknameView: View {
                 viewModel.nicknameTextFieldShouldBecomeFirstResponder = true
             }
         }
-        .onChange(of: viewModel.signUpUserModel.username) { newValue in
-            viewModel.isStartOfWeekNextButtonEnabled = newValue.count >= 2
+        .onChange(of: viewModel.signUpUserModel.nickName) { newValue in
+            viewModel.isNickNameButtonEnabled = newValue.count >= 2
         }
     }
     

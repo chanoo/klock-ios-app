@@ -22,7 +22,7 @@ struct SignUpTagView: View {
                 .frame(maxWidth: .infinity, alignment: .topLeading)
                 
                 HStack {
-                    Text("왜 스터디 습관이\n필요하신가요?")
+                    Text("어떤 스터디 습관이\n필요하신가요?")
                         .font(.system(size: 25))
                         .fontWeight(.bold)
                         .padding(.top, 30)
@@ -45,7 +45,7 @@ struct SignUpTagView: View {
                                 viewModel.toggleTagSelectionSubject.send(tag.id!)
                             },
                             bordered: true,
-                            style: .constant(viewModel.selectedTagId == tag.id ? .button : .outline)
+                            style: .constant(viewModel.selectedTagId == tag.id ? .black : .outline)
                         )
                     }
                 }
@@ -58,16 +58,17 @@ struct SignUpTagView: View {
                 FancyButton(
                     title: "다음",
                     action: {
+                        guard self.viewModel.isTagNextButtonEnabled else { return }
                         activeDestination = .signUpProfileImage
                     },
                     disabled: Binding<Bool?>(
                         get: { !self.viewModel.isTagNextButtonEnabled },
                         set: { self.viewModel.isTagNextButtonEnabled = !($0 ?? false) }
                     ),
-                    style: .constant(.button)
+                    style: .constant(.black)
                 )
             }
-//            .navigationBarItems(leading: BackButtonView())
+            .navigationBarItems(leading: BackButtonView())
             .navigationBarBackButtonHidden()
             .padding(.all, 30)
             .onChange(of: viewModel.signUpUserModel.tagId > 0) { newValue in

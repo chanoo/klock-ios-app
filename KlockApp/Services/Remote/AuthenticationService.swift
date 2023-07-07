@@ -10,7 +10,6 @@ import Alamofire
 import Combine
 
 class AuthenticationService: AuthenticationServiceProtocol {
-
     private let baseURL = "https://api.klock.app/api/auth"
 
     // 로그인 함수
@@ -21,12 +20,15 @@ class AuthenticationService: AuthenticationServiceProtocol {
         return requestAndDecode(url: url, parameters: requestDTO.dictionary)
     }
 
-    func signUp(username: String,
+    func signUp(nickName: String,
                 provider: String,
                 providerUserId: String,
-                tagId: Int64?) -> AnyPublisher<SignUpResDTO, AFError> {
+                tagId: Int64?,
+                startOfTheWeek: FirstDayOfWeek,
+                startOfTheDay: Int
+    ) -> AnyPublisher<SignUpResDTO, AFError> {
         let url = "\(baseURL)/signup"
-        let requestDTO = SignUpReqDTO(username: username, provider: provider, providerUserId: providerUserId, tagId: tagId)
+        let requestDTO = SignUpReqDTO(nickName: nickName, provider: provider, providerUserId: providerUserId, tagId: tagId, startOfTheWeek: startOfTheWeek.rawValue, startOfTheDay: startOfTheDay)
 
         return AF.request(url, method: .post, parameters: requestDTO.dictionary, encoding: JSONEncoding.default)
             .validate()

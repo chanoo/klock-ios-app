@@ -8,21 +8,25 @@
 import Foundation
 
 struct SignUpReqDTO: Encodable {
-    let username: String
+    let nickName: String
     let provider: String
     let providerUserId: String
     let tagId: Int64?
+    let startOfTheWeek: String
+    let startOfTheDay: Int
 }
 
 struct SignUpResDTO: Decodable {
     let id: Int64
     let accessToken: String
     let refreshToken: String
-    let username: String
+    let nickName: String
     let provider: String
     let providerUserId: String
     let email: String?
     let tagId: Int64?
+    let startOfTheWeek: String
+    let startOfTheDay: Int
 }
 
 // SignInReqDTO
@@ -43,4 +47,5 @@ struct AppleSignInReqDTO: Encodable {
 
 struct AppleSignInResDTO: Decodable {
     let token: String
+    let userId: Int64
 }

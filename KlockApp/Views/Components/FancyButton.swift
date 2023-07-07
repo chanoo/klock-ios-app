@@ -98,7 +98,7 @@ enum FancyButtonStyle {
         case .button:
             return FancyColor.gray2.color
         case .black:
-            return FancyColor.gray2.color
+            return FancyColor.backButtonDisable.color
         }
     }
 

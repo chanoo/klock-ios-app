@@ -14,6 +14,7 @@ import Swinject
 class SignUpViewModel: NSObject, ObservableObject {
 
     @Published var signUpUserModel: SignUpUserModel
+    @Published var isNickNameButtonEnabled = false
     @Published var isStartOfWeekNextButtonEnabled = false
     @Published var isStartOfDayNextButtonEnabled = false
     @Published var isTagNextButtonEnabled = false
@@ -24,11 +25,9 @@ class SignUpViewModel: NSObject, ObservableObject {
 
     private let authenticationService: AuthenticationServiceProtocol = Container.shared.resolve(AuthenticationServiceProtocol.self)
     private let tagService: TagServiceProtocol = Container.shared.resolve(TagServiceProtocol.self)
+    private let userRemoteService: UserRemoteServiceProtocol = Container.shared.resolve(UserRemoteServiceProtocol.self)
 
     var cancellables: Set<AnyCancellable> = []
-    var isStartOfWeekNextButtonEnabledCancellable: AnyCancellable?
-    var isStartOfDayNextButtonEnabledCancellable: AnyCancellable?
-    var isTagNextButtonEnabledCancellable: AnyCancellable?
 
     let toggleTagSelectionSubject = PassthroughSubject<Int64, Never>()
     let confirmButtonTapped = PassthroughSubject<Void, Never>()
@@ -53,19 +52,38 @@ class SignUpViewModel: NSObject, ObservableObject {
     }
 
     private func setupIsNextButtonEnabled() {
-        isStartOfWeekNextButtonEnabledCancellable = $signUpUserModel
-            .map { $0.username.count >= 2 }
-            .assign(to: \.isStartOfWeekNextButtonEnabled, on: self)
+        $signUpUserModel
+            .filter { $0.nickName.count >= 2 }
+            .map { $0.nickName }
+            .removeDuplicates()
+            .flatMap { nickName in
+                return self.userRemoteService.existed(nickName: nickName)
+                    .replaceError(with: ExistedNickNameResDTO(exists: false))
+                    .receive(on: DispatchQueue.main)
+            }
+            .sink { [weak self] response in
+                if response.exists {
+                    self?.error = "다른 친구가 이미 사용 중이에요"
+                    self?.isNickNameButtonEnabled = false
+                } else {
+                    self?.error = nil
+                    self?.isNickNameButtonEnabled = true
+                }
+            }
+            .store(in: &cancellables)
         
-        isStartOfDayNextButtonEnabledCancellable = $signUpUserModel
+        $signUpUserModel
             .map { $0.startDay == .sunday || $0.startDay == .monday }
             .assign(to: \.isStartOfDayNextButtonEnabled, on: self)
+            .store(in: &cancellables)
 
-        isTagNextButtonEnabledCancellable = $signUpUserModel
+        $signUpUserModel
             .map { $0.tagId > 0 }
             .assign(to: \.isTagNextButtonEnabled, on: self)
+            .store(in: &cancellables)
+
     }
-    
+        
     func setStartDay(day: FirstDayOfWeek) {
         signUpUserModel.startDay = day
     }
@@ -123,13 +141,16 @@ class SignUpViewModel: NSObject, ObservableObject {
     func signUp() {
 
         // print signUpUserModel all properties
-        debugPrint("signUpUserModel: ", signUpUserModel.username, signUpUserModel.provider, signUpUserModel.providerUserId, signUpUserModel.tagId)
+        debugPrint("signUpUserModel: ", signUpUserModel.nickName, signUpUserModel.provider, signUpUserModel.providerUserId, signUpUserModel.tagId)
 
         authenticationService.signUp(
-            username: signUpUserModel.username,
+            nickName: signUpUserModel.nickName,
             provider: signUpUserModel.provider,
             providerUserId: signUpUserModel.providerUserId,
-            tagId: signUpUserModel.tagId)
+            tagId: signUpUserModel.tagId,
+            startOfTheWeek: signUpUserModel.startDay,
+            startOfTheDay: signUpUserModel.startTime
+        )
             .sink { completion in
                 switch completion {
                 case .failure(let error):

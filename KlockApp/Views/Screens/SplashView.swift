@@ -18,7 +18,7 @@ struct SplashView: View {
 
     var body: some View {
         ZStack {
-            FancyColor.launchBackground.color.edgesIgnoringSafeArea(.all)
+            FancyColor.background.color.edgesIgnoringSafeArea(.all)
 
             VStack {
                 Image("ic_img_logo")
@@ -59,7 +59,6 @@ struct SplashView: View {
         .onAppear {
             viewModel.resetDestination()
         }
-        .background(FancyColor.background.color)
     }
 }
 

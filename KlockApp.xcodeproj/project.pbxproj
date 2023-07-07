@@ -146,7 +146,6 @@
 		98B21B5B29D6F4BF004EFE0E /* TagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B5A29D6F4BF004EFE0E /* TagModel.swift */; };
 		98B21B6C29D9A7A5004EFE0E /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B6B29D9A7A5004EFE0E /* HomeView.swift */; };
 		98B21B6E29D9D21A004EFE0E /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B6D29D9D21A004EFE0E /* SignUpViewModel.swift */; };
-		98B21B7229D9DC25004EFE0E /* SignUpTagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B7129D9DC25004EFE0E /* SignUpTagsView.swift */; };
 		98B21B7629DA6288004EFE0E /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B7529DA6288004EFE0E /* Destination.swift */; };
 		98B24A992A32386D0083444D /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B24A982A32386D0083444D /* TextView.swift */; };
 		98B24A9D2A34F1BE0083444D /* SpeechService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B24A9C2A34F1BE0083444D /* SpeechService.swift */; };
@@ -173,6 +172,9 @@
 		98E314B329DEE65E00EA1617 /* TagRemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E314B229DEE65E00EA1617 /* TagRemoteService.swift */; };
 		98E314B529DEE67B00EA1617 /* TagRemoteServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E314B429DEE67B00EA1617 /* TagRemoteServiceProtocol.swift */; };
 		98E314B729DEE6BB00EA1617 /* TagServiceDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E314B629DEE6BB00EA1617 /* TagServiceDTO.swift */; };
+		98E67FE12A5714750090AE23 /* UserRemoteServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E67FE02A5714750090AE23 /* UserRemoteServiceProtocol.swift */; };
+		98E67FE32A5714920090AE23 /* UserRemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E67FE22A5714920090AE23 /* UserRemoteService.swift */; };
+		98E67FE52A5715310090AE23 /* UserRemoteServiceDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E67FE42A5715310090AE23 /* UserRemoteServiceDTO.swift */; };
 		98E9384E29EA3935009CBF32 /* RoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E9384D29EA3935009CBF32 /* RoundedCorners.swift */; };
 		98E9385029EA39A8009CBF32 /* ChatGPTServiceDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E9384F29EA39A8009CBF32 /* ChatGPTServiceDTO.swift */; };
 		98E9385229EA3AC4009CBF32 /* MessageServiceDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E9385129EA3AC4009CBF32 /* MessageServiceDTO.swift */; };
@@ -362,7 +364,6 @@
 		98B21B5A29D6F4BF004EFE0E /* TagModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagModel.swift; sourceTree = "<group>"; };
 		98B21B6B29D9A7A5004EFE0E /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		98B21B6D29D9D21A004EFE0E /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
-		98B21B7129D9DC25004EFE0E /* SignUpTagsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTagsView.swift; sourceTree = "<group>"; };
 		98B21B7529DA6288004EFE0E /* Destination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Destination.swift; sourceTree = "<group>"; };
 		98B24A982A32386D0083444D /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		98B24A9C2A34F1BE0083444D /* SpeechService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechService.swift; sourceTree = "<group>"; };
@@ -389,6 +390,9 @@
 		98E314B229DEE65E00EA1617 /* TagRemoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagRemoteService.swift; sourceTree = "<group>"; };
 		98E314B429DEE67B00EA1617 /* TagRemoteServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagRemoteServiceProtocol.swift; sourceTree = "<group>"; };
 		98E314B629DEE6BB00EA1617 /* TagServiceDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagServiceDTO.swift; sourceTree = "<group>"; };
+		98E67FE02A5714750090AE23 /* UserRemoteServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRemoteServiceProtocol.swift; sourceTree = "<group>"; };
+		98E67FE22A5714920090AE23 /* UserRemoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRemoteService.swift; sourceTree = "<group>"; };
+		98E67FE42A5715310090AE23 /* UserRemoteServiceDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRemoteServiceDTO.swift; sourceTree = "<group>"; };
 		98E9384D29EA3935009CBF32 /* RoundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorners.swift; sourceTree = "<group>"; };
 		98E9384F29EA39A8009CBF32 /* ChatGPTServiceDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGPTServiceDTO.swift; sourceTree = "<group>"; };
 		98E9385129EA3AC4009CBF32 /* MessageServiceDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageServiceDTO.swift; sourceTree = "<group>"; };
@@ -503,6 +507,8 @@
 				982140A22A07EFBE00C68EB9 /* APIServiceProtocol.swift */,
 				98B21B1A29D55F6C004EFE0E /* AuthenticationRemoteServiceProtocol.swift */,
 				98CE661A29D55AA40009916F /* AuthenticationService.swift */,
+				98E67FE02A5714750090AE23 /* UserRemoteServiceProtocol.swift */,
+				98E67FE22A5714920090AE23 /* UserRemoteService.swift */,
 				9833FFC529F58F5C00CC33F7 /* AccountRemoteServiceProtocol.swift */,
 				98DC292E29E9383900882E36 /* ChatBotRemoteServiceProtocol.swift */,
 				98DC292A29E9373D00882E36 /* ChatBotRemoteService.swift */,
@@ -527,6 +533,7 @@
 		9833FFCB29F59E6400CC33F7 /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				98E67FE42A5715310090AE23 /* UserRemoteServiceDTO.swift */,
 				98E9385129EA3AC4009CBF32 /* MessageServiceDTO.swift */,
 				98E9386A29EAD1C3009CBF32 /* StudySessionServiceDTO.swift */,
 				98B21B4829D617A4004EFE0E /* AuthenticationServiceDTO.swift */,
@@ -840,7 +847,6 @@
 				98099DB82A287E340096AA27 /* SignUpStartWeekView.swift */,
 				98099DBA2A287E560096AA27 /* SignUpStartTimeView.swift */,
 				98099DBE2A29C43F0096AA27 /* SignUpTagView.swift */,
-				98B21B7129D9DC25004EFE0E /* SignUpTagsView.swift */,
 				98B387AF2A2DDFB500F18AD2 /* SignUpProfileImageView.swift */,
 			);
 			path = SignUp;
@@ -1093,6 +1099,7 @@
 				9843B7E929F0EB5200F91DAD /* TimeUtils.swift in Sources */,
 				98327DFA2A0CF87100CFEB3A /* TimerModel.swift in Sources */,
 				98B21B4D29D6F3A9004EFE0E /* AccountLevelModel.swift in Sources */,
+				98E67FE32A5714920090AE23 /* UserRemoteService.swift in Sources */,
 				985BE8B029E7D48A008582A3 /* ChatBotModel.swift in Sources */,
 				988D7CD82A3711410018A85E /* ScanResult.swift in Sources */,
 				984D2C8729DFDB5F008D3EA9 /* BackButtonView.swift in Sources */,
@@ -1108,6 +1115,7 @@
 				98EBFBF429F98AA2004E95F3 /* AchievementModel.swift in Sources */,
 				98B21B5929D6F4AE004EFE0E /* StudySessionModel.swift in Sources */,
 				98B21B7629DA6288004EFE0E /* Destination.swift in Sources */,
+				98E67FE52A5715310090AE23 /* UserRemoteServiceDTO.swift in Sources */,
 				98E314B529DEE67B00EA1617 /* TagRemoteServiceProtocol.swift in Sources */,
 				981881C629F26F00002A4395 /* PomodoroTimerView.swift in Sources */,
 				9837CCAA2A42F255002F1A3A /* ActivityModel.swift in Sources */,
@@ -1174,7 +1182,6 @@
 				988D7CD62A370C4A0018A85E /* FriendAddByNicknameView.swift in Sources */,
 				989D6F362A4C64E700BC2F2B /* SlideUpTransition.swift in Sources */,
 				98B21B5429D6F424004EFE0E /* DDayEventModel.swift in Sources */,
-				98B21B7229D9DC25004EFE0E /* SignUpTagsView.swift in Sources */,
 				98E9386B29EAD1C3009CBF32 /* StudySessionServiceDTO.swift in Sources */,
 				98976B072A07818800F1CEAE /* FocusTimerRemoteService.swift in Sources */,
 				981881C229F26879002A4395 /* SelectTimerView.swift in Sources */,
@@ -1230,6 +1237,7 @@
 				984D2C8B29DFDBAA008D3EA9 /* CommonViewModifier.swift in Sources */,
 				985BE89629E6E359008582A3 /* ClockModalView.swift in Sources */,
 				98AC30732A13637C006DC48D /* FocusTimerCardView.swift in Sources */,
+				98E67FE12A5714750090AE23 /* UserRemoteServiceProtocol.swift in Sources */,
 				98D7C95129E45C550075D201 /* ContentView.swift in Sources */,
 				98FD8F742A174A7900CEE0B1 /* StudySessionRemoteServiceProtocol.swift in Sources */,
 				986E5DB229EAEF5600FF7047 /* CalendarViewModel.swift in Sources */,

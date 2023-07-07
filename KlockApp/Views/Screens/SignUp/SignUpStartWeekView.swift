@@ -39,7 +39,7 @@ struct SignUpStartWeekView: View {
                         selectedDay = .sunday
                     },
                     bordered: true,
-                    style: .constant(selectedDay == .sunday ? .button : .outline)
+                    style: .constant(selectedDay == .sunday ? .black : .outline)
                 )
                 FancyButton(
                     title: "월요일",
@@ -48,7 +48,7 @@ struct SignUpStartWeekView: View {
                         selectedDay = .monday
                     },
                     bordered: true,
-                    style: .constant(selectedDay == .monday ? .button : .outline)
+                    style: .constant(selectedDay == .monday ? .black : .outline)
                 )
             }
             
@@ -59,8 +59,7 @@ struct SignUpStartWeekView: View {
                 action: {
                     activeDestination = .signUpStartOfDay
                 },
-                disabled: .constant(!viewModel.isStartOfWeekNextButtonEnabled),
-                style: .constant(.button)
+                style: .constant(.black)
             )
             
             NavigationLink(
@@ -80,7 +79,7 @@ struct SignUpStartWeekView: View {
             .hidden()
         }
         .frame(maxHeight: .infinity, alignment: .topLeading)
-//        .navigationBarItems(leading: BackButtonView())
+        .navigationBarItems(leading: BackButtonView())
         .navigationBarBackButtonHidden()
         .padding(.all, 30)
     }

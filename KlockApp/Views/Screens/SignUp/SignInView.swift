@@ -52,6 +52,22 @@ struct SignInView: View {
 //                    icon: Image("ic_facebook"),
 //                    style: .constant(.facebook)
 //                )
+                
+                NavigationLink(
+                    destination: viewForDestination(activeDestination),
+                    isActive: Binding<Bool>(
+                        get: { activeDestination != nil },
+                        set: { newValue in
+                            if !newValue {
+                                activeDestination = nil
+                            }
+                        }
+                    ),
+                    label: {
+                        EmptyView()
+                    }
+                )
+                .opacity(0)
             }
             .padding(.bottom, 40)
             .padding(40)
@@ -67,23 +83,6 @@ struct SignInView: View {
         .onReceive(viewModel.signUpProcess, perform: { _ in
             activeDestination = .signUpNickname
         })
-        .background(
-            NavigationLink(
-                destination: viewForDestination(activeDestination),
-                isActive: Binding<Bool>(
-                    get: { activeDestination != nil },
-                    set: { newValue in
-                        if !newValue {
-                            activeDestination = nil
-                        }
-                    }
-                ),
-                label: {
-                    EmptyView()
-                }
-            )
-            .opacity(0)
-        )
     }
 
     private func viewForDestination(_ destination: Destination?) -> AnyView {

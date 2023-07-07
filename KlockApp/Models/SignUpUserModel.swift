@@ -7,9 +7,9 @@
 
 import Foundation
 
-enum FirstDayOfWeek {
-    case sunday
-    case monday
+enum FirstDayOfWeek: String, Codable {
+    case sunday = "SUNDAY"
+    case monday = "MONDAY"
 }
 
 class SignUpUserModel: ObservableObject {
@@ -17,7 +17,7 @@ class SignUpUserModel: ObservableObject {
     @Published var providerUserId: String = ""
     @Published var firstName: String = ""
     @Published var lastName: String = ""
-    @Published var username: String = ""
+    @Published var nickName: String = ""
     @Published var startDay: FirstDayOfWeek = .sunday
     @Published var startTime: Int = 5
     @Published var email: String = ""

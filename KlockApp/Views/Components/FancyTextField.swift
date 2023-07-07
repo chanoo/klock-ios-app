@@ -37,12 +37,13 @@ struct FancyTextField: View {
     @FocusState private var isFocused: Bool
 
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             if isSecureField == true {
                 HStack {
                     SecureField(placeholder, text: $text, onCommit: {
                         onCommit?()
                     })
+                    .foregroundColor(FancyColor.text.color)
                     .keyboardType(keyboardType ?? .default)
                     .focused($isFocused)
                     
@@ -50,24 +51,30 @@ struct FancyTextField: View {
                         .foregroundColor(.black)
                         .opacity(text.count == 0 ? 0 : 1) // 이미지를 보이지 않게 하려면 opacity를 0으로 설정
                 }
+                .padding([.top, .bottom], 8)
+                .padding([.leading, .trailing], 4)
             } else {
                 HStack {
                     TextField(placeholder, text: $text, onCommit: {
                         onCommit?()
                     })
+                    .foregroundColor(FancyColor.text.color)
                     .keyboardType(keyboardType ?? .default)
                     .focused($isFocused)
                     
                     Image(imageName)
                         .foregroundColor(.black)
                         .opacity(text.count == 0 ? 0 : 1) // 이미지를 보이지 않게 하려면 opacity를 0으로 설정
+                    
                 }
+                .padding([.top, .bottom], 8)
+                .padding([.leading, .trailing], 4)
             }
             Rectangle()
                 .frame(height: 1)
-                .foregroundColor(.black)
+                .foregroundColor((text.count == 0 || isValid == true) ? FancyColor.textfieldUnderline.color : FancyColor.red.color)
         }
-        .background(Color.white)
+        .background(FancyColor.textfieldBackground.color)
         .onChange(of: firstResponder) { value in
             if value {
                 isFocused = true

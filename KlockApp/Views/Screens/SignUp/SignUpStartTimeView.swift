@@ -51,7 +51,7 @@ struct SignUpStartTimeView: View {
             }
             Rectangle()
                 .frame(height: 1)
-                .foregroundColor(.black)
+                .foregroundColor(FancyColor.textfieldUnderline.color)
 
             Text(viewModel.error ?? "")
                 .foregroundColor(.gray)
@@ -65,8 +65,7 @@ struct SignUpStartTimeView: View {
                 action: {
                     activeDestination = .signUpTags
                 },
-                disabled: .constant(!viewModel.isStartOfWeekNextButtonEnabled),
-                style: .constant(.button)
+                style: .constant(.black)
             )
 
             NavigationLink(
@@ -87,7 +86,7 @@ struct SignUpStartTimeView: View {
         }
         // 왼쪽 정렬
         .frame(maxHeight: .infinity, alignment: .topLeading)
-//        .navigationBarItems(leading: BackButtonView())ㄴ
+        .navigationBarItems(leading: BackButtonView())
         .navigationBarBackButtonHidden()
         .padding(.all, 30)
     }
