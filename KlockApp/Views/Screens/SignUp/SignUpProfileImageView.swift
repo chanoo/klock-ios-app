@@ -122,7 +122,7 @@ struct SignUpProfileImageView: View {
             .hidden()
         }
         .frame(maxHeight: .infinity, alignment: .topLeading)
-//        .navigationBarItems(leading: BackButtonView())
+        .navigationBarItems(leading: BackButtonView())
         .navigationBarBackButtonHidden()
         .padding(.all, 30)
         .onAppear {

@@ -29,7 +29,7 @@ enum FancyButtonStyle {
         case .facebook:
             return FancyColor.facebook.color
         case .apple:
-            return FancyColor.apple.color
+            return FancyColor.appleBackground.color
         case .kakao:
             return FancyColor.kakao.color
         case .button:
@@ -50,7 +50,7 @@ enum FancyButtonStyle {
         case .facebook:
             return FancyColor.white.color
         case .apple:
-            return FancyColor.white.color
+            return FancyColor.appleText.color
         case .kakao:
             return FancyColor.kakaoBrown.color
         case .button:
@@ -71,7 +71,7 @@ enum FancyButtonStyle {
         case .facebook:
             return FancyColor.facebook.color
         case .apple:
-            return FancyColor.black.color
+            return FancyColor.appleBackground.color
         case .kakao:
             return FancyColor.kakao.color
         case .button:
@@ -92,7 +92,7 @@ enum FancyButtonStyle {
         case .facebook:
             return FancyColor.facebook.color
         case .apple:
-            return FancyColor.apple.color
+            return FancyColor.appleBackground.color
         case .kakao:
             return FancyColor.kakao.color
         case .button:

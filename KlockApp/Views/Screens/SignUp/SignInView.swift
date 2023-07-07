@@ -14,19 +14,19 @@ struct SignInView: View {
 
             VStack(alignment: .leading) { // Add alignment here
                 Text("평생 지켜질 공부습관\n평생 친구와 함께")
-                    .foregroundColor(FancyColor.black.color)
+                    .foregroundColor(FancyColor.text.color)
                     .font(.system(size: 24, weight: .semibold))
                     .lineSpacing(6)
                     .padding(.top, 150)
 
                 Image("ic_logo")
-                    .foregroundColor(.black)
+                    .foregroundColor(FancyColor.text.color)
                     .padding(.top, 10)
 
                 Spacer()
 
                 FancyButton(
-                    title: "애플로 시작하기",
+                    title: "Apple로 로그인",
                     action: {
                         viewModel.signInWithAppleTapped.send()
                     },
