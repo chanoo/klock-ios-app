@@ -29,3 +29,12 @@ struct ResStudySession: Codable {
     let startTime: String
     let endTime: String?
 }
+
+struct GetStudySessionsResDTO: Codable {
+    let id: Int64
+    let userId: Int64
+    let startTime: String
+    let endTime: String
+    let timerName: String
+    let timerType: String
+}

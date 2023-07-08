@@ -39,4 +39,14 @@ class StudySessionRemoteService: StudySessionRemoteServiceProtocol, APIServicePr
             .eraseToAnyPublisher()
     }
 
+    func fetch(userId: Int64, startDate: String, endDate: String) -> AnyPublisher<[GetStudySessionsResDTO], Alamofire.AFError> {
+        let url = "\(baseURL)/period?userId=\(userId)&startDate=\(startDate)&endDate=\(endDate)"
+
+        return AF.request(url, method: .get, encoding: JSONEncoding.default, headers: self.headers())
+            .validate()
+            .publishDecodable(type: [GetStudySessionsResDTO].self)
+            .value()
+            .mapError { $0 }
+            .eraseToAnyPublisher()
+    }
 }
