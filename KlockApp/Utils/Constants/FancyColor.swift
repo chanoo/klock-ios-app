@@ -32,6 +32,8 @@ enum FancyColor: String {
     case listCellUnderline = "color_list_cell_underline"
     case header = "color_header"
     case subtext = "color_subtext"
+    case tabbarIcon = "color_tabbar_icon"
+    case tabbarIconSelected = "color_tabbar_icon_selected"
     case text = "color_text"
     case textfieldBackground = "color_textfield_background"
     case textfieldUnderline = "color_textfield_underline"

@@ -19,22 +19,22 @@ struct HomeView: View {
     @ObservedObject private var friendsViewModel = Container.shared.resolve(FriendsViewModel.self)
     @ObservedObject private var preferencesViewModel = Container.shared.resolve(PreferencesViewModel.self)
 
-    private func updateTitle(_ selection: Int) {
-        switch selection {
-        case 0:
-            title = "타이머"
-        case 1:
-            title = "Ai 선생님"
-        case 2:
-            title = "통계"
-        case 3:
-            title = "친구"
-        case 4:
-            title = "설정"
-        default:
-            title = ""
-        }
-    }
+//    private func updateTitle(_ selection: Int) {
+//        switch selection {
+//        case 0:
+//            title = "타이머"
+//        case 1:
+//            title = "Ai 선생님"
+//        case 2:
+//            title = "통계"
+//        case 3:
+//            title = "친구"
+//        case 4:
+//            title = "설정"
+//        default:
+//            title = ""
+//        }
+//    }
 
     var body: some View {
         FancyTabView(selection: $selection, items: [
@@ -62,14 +62,14 @@ struct HomeView: View {
                         .environmentObject(calendarViewModel)
                 )
             ),
-            (
-                selectedImageName: "ic_peaple",
-                deselectedImageName: "ic_peaple_o",
-                content: AnyView(
-                    FriendsView()
-                        .environmentObject(friendsViewModel)
-                )
-            ),
+//            (
+//                selectedImageName: "ic_peaple",
+//                deselectedImageName: "ic_peaple_o",
+//                content: AnyView(
+//                    FriendsView()
+//                        .environmentObject(friendsViewModel)
+//                )
+//            ),
             (
                 selectedImageName: "ic_gear",
                 deselectedImageName: "ic_gear_o",
@@ -79,12 +79,12 @@ struct HomeView: View {
                 )
             ),
         ])
-        .onChange(of: selection) { newSelection in
-            updateTitle(newSelection)
-        }
-        .onAppear {
-            updateTitle(selection)
-        }
+//        .onChange(of: selection) { newSelection in
+//            updateTitle(newSelection)
+//        }
+//        .onAppear {
+//            updateTitle(selection)
+//        }
         .background(FancyColor.background.color)
     }
 }

@@ -72,8 +72,8 @@ struct FancyTabItem: View {
             Image(isSelected ? (selectedImageName ?? deselectedImageName) : deselectedImageName)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(maxWidth: 28, maxHeight: 28)
-                .foregroundColor(isSelected ? (colorScheme == .dark ? FancyColor.gray1.color : FancyColor.black.color) : colorScheme == .dark ? FancyColor.gray8.color : FancyColor.gray2.color )
+                .frame(maxWidth: 26, maxHeight: 26)
+                .foregroundColor(isSelected ? FancyColor.tabbarIconSelected.color : FancyColor.tabbarIcon.color )
             
             Spacer()
         }
