@@ -71,7 +71,7 @@ struct HomeView: View {
                 )
             ),
             (
-                selectedImageName: "ic_gear_o",
+                selectedImageName: "ic_gear",
                 deselectedImageName: "ic_gear_o",
                 content: AnyView(
                     PreferencesView()

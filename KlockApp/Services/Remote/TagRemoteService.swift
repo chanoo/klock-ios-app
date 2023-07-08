@@ -11,7 +11,7 @@ import Combine
 
 class TagService: TagServiceProtocol {
 
-    private let baseURL = "https://api.klock.app/api/tags"
+    private let baseURL = "https://api.klock.app/api/v1/tags"
 
     func tags() -> AnyPublisher<[TagResDTO], Alamofire.AFError> {
         let url = "\(baseURL)"

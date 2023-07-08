@@ -10,7 +10,7 @@ import Alamofire
 import Combine
 
 class ExamTimerRemoteService: ExamTimerRemoteServiceProtocol, APIServiceProtocol {
-    private let baseURL = "https://api.klock.app/api/exam-timers"
+    private let baseURL = "https://api.klock.app/api/v1/exam-timers"
 
     private let logger = AlamofireLogger()
     private let session: Session

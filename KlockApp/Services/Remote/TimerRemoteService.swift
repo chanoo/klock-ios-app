@@ -10,7 +10,7 @@ import Alamofire
 import Combine
 
 class TimerRemoteService: TimerRemoteServiceProtocol, APIServiceProtocol {
-    private let baseURL = "https://api.klock.app/api/timers"
+    private let baseURL = "https://api.klock.app/api/v1/timers"
 
     func fetch() -> AnyPublisher<[TimerDTO], AFError> {
         let url = "\(baseURL)"

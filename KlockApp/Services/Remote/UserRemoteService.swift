@@ -10,7 +10,7 @@ import Alamofire
 import Combine
 
 class UserRemoteService: UserRemoteServiceProtocol, APIServiceProtocol {
-    private let baseURL = "https://api.klock.app/api/users"
+    private let baseURL = "https://api.klock.app/api/v1/users"
     private let logger = AlamofireLogger()
     private let session: Session
 

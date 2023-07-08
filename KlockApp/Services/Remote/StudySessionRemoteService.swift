@@ -10,7 +10,7 @@ import Alamofire
 import Combine
 
 class StudySessionRemoteService: StudySessionRemoteServiceProtocol, APIServiceProtocol {
-    private let baseURL = "https://api.klock.app/api/study-sessions"
+    private let baseURL = "https://api.klock.app/api/v1/study-sessions"
 
     private let logger = AlamofireLogger()
     private let session: Session

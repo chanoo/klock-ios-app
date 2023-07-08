@@ -10,7 +10,7 @@ import Alamofire
 import Combine
 
 class PomodoroTimerRemoteService: PomodoroTimerRemoteServiceProtocol, APIServiceProtocol {
-    private let baseURL = "https://api.klock.app/api/pomodoro-timers"
+    private let baseURL = "https://api.klock.app/api/v1/pomodoro-timers"
     
     private let logger = AlamofireLogger()
     private let session: Session

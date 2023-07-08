@@ -10,7 +10,7 @@ import Alamofire
 import Combine
 
 class AuthenticationService: AuthenticationServiceProtocol {
-    private let baseURL = "https://api.klock.app/api/auth"
+    private let baseURL = "https://api.klock.app/api/v1/auth"
 
     func signUp(nickname: String,
                 provider: String,

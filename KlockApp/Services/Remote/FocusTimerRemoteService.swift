@@ -3,7 +3,7 @@ import Alamofire
 import Combine
 
 class FocusTimerRemoteService: FocusTimerRemoteServiceProtocol, APIServiceProtocol {
-    private let baseURL = "https://api.klock.app/api/focus-timers"
+    private let baseURL = "https://api.klock.app/api/v1/focus-timers"
 
     private let logger = AlamofireLogger()
     private let session: Session
