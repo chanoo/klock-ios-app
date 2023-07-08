@@ -9,20 +9,33 @@ import Foundation
 
 struct StudySessionModel: Identifiable, Codable {
     let id: Int64?
-    let accountId: Int64
+    let userId: Int64
     let startTime: Date
     let endTime: Date
-    let syncDate: Date?
+    let timerName: String
+    let timerType: String
 
     enum CodingKeys: String, CodingKey {
         case id
-        case accountId = "account_id"
-        case startTime = "start_time"
-        case endTime = "end_time"
-        case syncDate = "sync_date"
+        case userId
+        case startTime
+        case endTime
+        case timerName
+        case timerType
+    }
+    
+    static func from(dto: GetStudySessionsResDTO) -> StudySessionModel {
+        return StudySessionModel(
+            id: dto.id,
+            userId: dto.userId,
+            startTime: TimeUtils.dateFromString(dateString: dto.startTime, format: "yyyy-MM-dd'T'HH:mm:ss") ?? Date(),
+            endTime: TimeUtils.dateFromString(dateString: dto.endTime, format: "yyyy-MM-dd'T'HH:mm:ss") ?? Date(),
+            timerName: dto.timerName,
+            timerType: dto.timerType
+        )
     }
 
-    var sessionDuration: TimeInterval {
+    var duration: TimeInterval {
         return endTime.timeIntervalSince(startTime)
     }
 }

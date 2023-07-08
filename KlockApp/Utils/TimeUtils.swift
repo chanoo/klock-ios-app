@@ -74,4 +74,14 @@ struct TimeUtils {
         formatter.dateFormat = format
         return formatter.date(from: dateString)
     }
+    
+    /// 이 함수는 주어진 날짜에서 특정 일 수를 뺀 날짜를 반환합니다.
+    ///
+    /// - Parameters:
+    ///   - date: 일 수를 뺄 날짜입니다.
+    ///   - days: 빼고자 하는 일 수입니다.
+    /// - Returns: 특정 일 수를 뺀 날짜를 반환합니다.
+    static func subtractDaysFromDate(date: Date, days: Int) -> Date {
+        return Calendar.current.date(byAdding: .day, value: -days, to: date)!
+    }
 }

@@ -43,7 +43,6 @@ class TimeTimerViewModel: ObservableObject {
     private let pomodoroTimerRemoteService = Container.shared.resolve(PomodoroTimerRemoteServiceProtocol.self)
     private let examTimerRemoteService = Container.shared.resolve(ExamTimerRemoteServiceProtocol.self)
     private let proximityAndOrientationService = Container.shared.resolve(ProximityAndOrientationServiceProtocol.self)
-    private let studySessionService = Container.shared.resolve(StudySessionServiceProtocol.self)
     private let studySessionRemoteService = Container.shared.resolve(StudySessionRemoteServiceProtocol.self)
 
     // Other properties
@@ -55,7 +54,7 @@ class TimeTimerViewModel: ObservableObject {
         let now = Date()
         let currentTime = UserDefaults.standard.double(forKey: studyStartTimeKey)
         let startTime = Date(timeIntervalSince1970: currentTime)
-        self.currentStudySession = StudySessionModel(id: 0, accountId: 1, startTime: startTime, endTime: now, syncDate: nil)
+        self.currentStudySession = StudySessionModel(id: 0, userId: 1, startTime: startTime, endTime: now, timerName: "", timerType: "")
         setupSensor()
         timerManager.fetchTimers { [weak self] timerModels in
             guard let self = self else { return }
@@ -126,7 +125,7 @@ class TimeTimerViewModel: ObservableObject {
         let currentTime = UserDefaults.standard.double(forKey: studyStartTimeKey)
         let now = Date()
         let startTime = currentTime == 0 ? now : Date(timeIntervalSince1970: currentTime)
-        currentStudySession = StudySessionModel(id: 0, accountId: 1, startTime: startTime, endTime: now, syncDate: nil)
+        currentStudySession = StudySessionModel(id: 0, userId: 1, startTime: startTime, endTime: now, timerName: "", timerType: "FOCUS")
         elapsedTime = 0
         updateElapsedTime()
     }
@@ -252,10 +251,12 @@ class TimeTimerViewModel: ObservableObject {
         let now = Date()
         currentStudySession = StudySessionModel(
             id: currentStudySession.id,
-            accountId: currentStudySession.accountId,
+            userId: currentStudySession.userId,
             startTime: currentStudySession.startTime,
             endTime: now,
-            syncDate: nil)
+            timerName: "",
+            timerType: ""
+        )
     }
     
     private func updateElapsedTime() {

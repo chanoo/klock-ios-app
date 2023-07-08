@@ -46,7 +46,6 @@ class Container {
         container.register(AccountLocalServiceProtocol.self) { _ in AccountLocalService() }
         container.register(AccountTimerServiceProtocol.self) { _ in AccountTimerLocalService() }
         container.register(MessageServiceProtocol.self) { _ in MessageLocalService() }
-        container.register(StudySessionServiceProtocol.self) { _ in StudySessionLocalService() }
         // Remote
         container.register(AuthenticationServiceProtocol.self) { _ in AuthenticationService() }
         container.register(ChatGPTServiceProtocol.self) { _ in ChatGPTService() }

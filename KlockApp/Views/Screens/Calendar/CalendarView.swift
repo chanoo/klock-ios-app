@@ -11,7 +11,7 @@ import SwiftUI
 struct CalendarView: View {
     @State private var spacing: CGFloat = 5
     @StateObject var viewModel = Container.shared.resolve(CalendarViewModel.self)
-    let weeks = 14
+    let weeks = 13
     @State private var isShowingSelectTimer = false
 
     private var startDate: Date {
@@ -31,51 +31,89 @@ struct CalendarView: View {
     }
       
     var body: some View {
-        ScrollView {
-            VStack(spacing: 0) {
-                if viewModel.isLoading {
-                    // 로딩 인디케이터를 표시
+        ZStack {
+            if viewModel.isLoading {
+                VStack {
+                    Spacer()
                     ProgressView()
-                } else {
-                    // 기존 캘린더 뷰를 표시
-                    if weeks > weeks + 1 {
-                        ScrollView(.horizontal, showsIndicators: false) {
+                    Spacer()
+                }
+            } else {
+                ScrollView {
+                    VStack(spacing: 0) {
+                        VStack(spacing: 0) {
+                            calendarBody
                             VStack(spacing: 0) {
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(Color.gray.opacity(0.2), lineWidth: 1)
-                                    .overlay(
-                                        calendarBody
-                                            .padding(.leading, dayViewSize + spacing)
-                                    )
-                                    .shadow(color: Color.gray.opacity(0.3), radius: 5, x: 0, y: 2)
+                                Text(viewModel.selectedDate)
+                                    .font(.system(size: 13))
+                                    .padding(.bottom, 4)
+                                Text(viewModel.totalStudyTime)
+                                    .foregroundColor(FancyColor.text.color)
+                                    .font(.system(size: 16, weight: .heavy))
                             }
-                            .padding(.all, 10)
+                            .padding([.top, .bottom], 18)
                         }
+                        .padding(8)
+                        .background(FancyColor.calendarBackground.color)
+                        .cornerRadius(10)
+                        .shadow(color: Color(.systemGray).opacity(0.2), radius: 5, x: 0, y: 0)
+                    }
+                    .padding(8)
+                    
+//                    HStack {
+//                        Text("6월 28일 수요일에는\n얼마나 공부했을까요?")
+//                            .font(.system(size: 24, weight: .heavy))
+//                        Spacer()
+//                    }
+//                    .padding(12)
+//                    .padding([.leading, .trailing], 24)
 
-                        VStack(alignment: .center, spacing: spacing) {
-                            DayView(size: dayViewSize, backgroundColor: .clear)
-                            ForEach(0..<7) { day in
-                                DayView(displayText: DateFormatter().shortWeekdaySymbols[day].prefix(1).uppercased(), size: dayViewSize, backgroundColor: .clear)
+                    if viewModel.studySessionsOfDay.count > 0 {
+                        VStack(spacing: 0) {
+                            LazyVStack(spacing: 0) {
+                                ForEach(viewModel.studySessionsOfDay, id: \.self.id) { studySession in
+                                    Group {
+                                        HStack(spacing: 0) {
+                                            Text(studySession.timerName)
+                                                .foregroundColor(FancyColor.text.color)
+                                                .font(.system(size: 16, weight: .heavy))
+                                            Spacer()
+                                            VStack(alignment: .trailing, spacing: 0) {
+                                                Text("\(TimeUtils.elapsedTimeToString(elapsedTime: studySession.duration))")
+                                                    .foregroundColor(FancyColor.text.color)
+                                                    .font(.system(size: 16, weight: .heavy))
+                                                Text("\(TimeUtils.formattedDateString(from: studySession.startTime, format: "hh시 mm분")) ~ \(TimeUtils.formattedDateString(from: studySession.endTime, format: "hh시 mm분"))")
+                                                    .foregroundColor(FancyColor.gray6.color)
+                                                    .font(.system(size: 13, weight: .regular))
+                                                    .padding(.top, 4)
+                                            }
+                                        }
+                                        .padding(8)
+                                    }
+                                    Divider()
+                                        .padding([.leading, .trailing], 8)
+                                }
                             }
+                            .padding(8)
+                            .background(FancyColor.calendarBackground.color)
+                            .cornerRadius(10)
+                            .shadow(color: Color(.systemGray).opacity(0.2), radius: 5, x: 0, y: 0)
+                        }
+                        .padding(8)
+                    } else {
+                        VStack {
+                            Spacer()
+                            Text("공부 기록이 없어요~")
+                                .foregroundColor(FancyColor.gray6.color)
+                                .font(.system(size: 17, weight: .heavy))
                             Spacer()
                         }
-
-                    } else {
-                        calendarBody
+                        .frame(height: 200)
                     }
-
                 }
             }
-            .padding(8)
         }
         .navigationBarTitle("공부 기록", displayMode: .inline)
-        .navigationBarItems(
-            trailing: NavigationLink(destination: StudySessionsByDateView().environmentObject(self.viewModel), isActive: $isShowingSelectTimer) {
-                Button(action: { isShowingSelectTimer.toggle() }) {
-                    Image(systemName: "gear")
-                }
-            }
-        )
     }
 
     private var calendarBody: some View {
@@ -99,8 +137,8 @@ struct CalendarView: View {
                     ForEach(Array(0..<weeks), id: \.self) { week in
                         let calendar = Calendar.current
                         let currentDate = calendar.date(byAdding: .day, value: day + (week * 7), to: startDate)!
-                        let dateString = viewModel.stringFromDate(currentDate)
-                        
+                        let dateString = TimeUtils.formattedDateString(from: currentDate, format: "yyyy-MM-dd")
+
                         VStack(alignment: .center, spacing: 0) {
                             let studySessions = viewModel.studySessions[dateString] ?? []
                             let backgroundColor = color(for: studySessions, date: currentDate)
@@ -109,18 +147,16 @@ struct CalendarView: View {
                             DayView(size: dayViewSize, backgroundColor: backgroundColor, fadeInOutDuration: 0.5, randomDelay: randomDelay, maxBlinks: maxBlinks) {
                                 // 여기에 버튼을 클릭했을 때의 액션을 추가하세요.
                                 debugPrint(dateString, studySessions)
+                                viewModel.setStudySessionsOfDay(studySessions)
+                                viewModel.setSelectedDate(dateString)
                             }
                         }
                     }
-
                 }
             }
         }
         .padding([.top, .leading, .trailing], 4)
         .padding([.bottom], 8)
-        .background(FancyColor.calendarBackground.color)
-        .cornerRadius(10)
-        .shadow(color: Color(.systemGray).opacity(0.2), radius: 5, x: 0, y: 0)
     }
 
     private func monthText(forWeekStartingOn startDate: Date) -> some View {
@@ -156,7 +192,7 @@ struct CalendarView: View {
     }
 
     private func color(for studySessions: [StudySessionModel], date: Date) -> Color {
-        let totalDuration = studySessions.reduce(0) { $0 + $1.sessionDuration }
+        let totalDuration = studySessions.reduce(0) { $0 + $1.duration }
         let isFutureDate = Calendar.current.compare(date, to: Date(), toGranularity: .day) == .orderedDescending
 
         if isFutureDate {
