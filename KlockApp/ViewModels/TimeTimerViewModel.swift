@@ -11,6 +11,7 @@ import Combine
 import AudioToolbox
 import Foast
 import UniformTypeIdentifiers
+import FamilyControls
 
 class TimeTimerViewModel: ObservableObject {
     // Constants
@@ -18,6 +19,7 @@ class TimeTimerViewModel: ObservableObject {
     
     // Managers
     private let timerManager = Container.shared.resolve(TimerManager.self)
+    let authorizationCenter = AuthorizationCenter.shared
 
     @Namespace var animation
 
@@ -72,6 +74,10 @@ class TimeTimerViewModel: ObservableObject {
         }
         if let examTimerViewModel = self.examTimerModel {
             self.examTimerViewModel = ExamTimerViewModel(model: examTimerViewModel)
+        }
+        
+        Task{
+            try await AuthorizationCenter.shared.requestAuthorization(for: .individual)
         }
     }
 
@@ -311,5 +317,8 @@ class TimeTimerViewModel: ObservableObject {
         guard sourceIndex != destinationIndex else { return }
         let sourceView = timerCardViews.remove(at: sourceIndex)
         timerCardViews.insert(sourceView, at: destinationIndex)
+    }
+    
+    func authorizationScreenTime() async {
     }
 }

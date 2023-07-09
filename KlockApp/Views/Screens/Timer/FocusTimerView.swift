@@ -85,6 +85,8 @@ struct FocusTimerView: View {
                                 startTime: clockViewModel.startTime,
                                 endTime: clockViewModel.currentTime
                             )
+                            let model = MyModel.shared
+                            model.stopMonitoring()
                             timeTimerViewModel.focusTimerViewModel = nil
                         }
                     },

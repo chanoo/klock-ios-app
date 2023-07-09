@@ -123,11 +123,20 @@ struct AccountSecurityItemView: View {
     var body: some View {
         Button(action: action) {
             HStack(spacing: 0) {
-                Image(systemName: item.iconName)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 18, height: 18)
-                    .padding([.trailing], 12)
+                if let iconName = item.iconName {
+                    Image(iconName)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 18, height: 18)
+                        .padding([.trailing], 12)
+                }
+                if let systemIconName = item.systemIconName {
+                    Image(systemName: systemIconName)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 18, height: 18)
+                        .padding([.trailing], 12)
+                }
                 Text(item.title)
                     .font(.system(size: 15))
                 Spacer()

@@ -34,6 +34,7 @@ struct ContentView: View {
     @EnvironmentObject var appFlowManager: AppFlowManager
     @StateObject var actionSheetManager = ActionSheetManager()
     @StateObject var userViewModel = UserViewModel()
+    @StateObject var model = MyModel.shared
 
     var body: some View {
         ZStack {
@@ -41,6 +42,7 @@ struct ContentView: View {
                 viewModel.currentView
                     .environmentObject(actionSheetManager)
                     .environmentObject(userViewModel)
+                    .environmentObject(model)
             }
         }
         .modifier(CustomActionSheetModifier(isPresented: $actionSheetManager.isPresented) {

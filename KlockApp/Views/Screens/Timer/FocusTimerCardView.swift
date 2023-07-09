@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FamilyControls
 
 struct FocusTimerCardView: View {
     @EnvironmentObject var tabBarManager: TabBarManager
@@ -22,6 +23,7 @@ struct FocusTimerCardView: View {
         isRunning: true
     )
     @State private var isFlipped: Bool = false
+
     private func flipAnimation() {
         withAnimation(.spring()) {
             isFlipped.toggle()
@@ -97,6 +99,8 @@ struct FocusTimerCardView: View {
                             focusTimerViewModel.startStudy()
                             timeTimerViewModel.startStudySession()
                             timeTimerViewModel.focusTimerViewModel = focusTimerViewModel
+                            let model = MyModel.shared
+                            model.initiateMonitoring()
                         }
                     },
                     icon: Image("ic_play"),

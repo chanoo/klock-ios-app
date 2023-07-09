@@ -10,6 +10,7 @@ import SwiftUI
 struct PreferencesView: View {
     @EnvironmentObject var viewModel: PreferencesViewModel
     @EnvironmentObject var actionSheetManager: ActionSheetManager
+    @EnvironmentObject var myModel: MyModel
 
     var body: some View {
         ScrollView(showsIndicators: false) {
@@ -55,6 +56,11 @@ struct PreferencesView: View {
                     }
                 }
             }
+            .familyActivityPicker(isPresented: $viewModel.isAppsSettingPresented,  selection: $myModel.selectionToDiscourage)
+            .onChange(of: myModel.selectionToDiscourage) { newSelection in
+                MyModel.shared.setShieldRestrictions()
+            }
+
         }
         .navigationBarTitle("설정", displayMode: .inline)
     }
@@ -65,11 +71,20 @@ struct ItemView: View {
 
     var body: some View {
         HStack(spacing: 0) {
-            Image(systemName: item.iconName)
-                .resizable()
-                .scaledToFit()
-                .frame(width: 18, height: 18)
-                .padding([.trailing], 12)
+            if let iconName = item.iconName {
+                Image(iconName)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 18, height: 18)
+                    .padding([.trailing], 12)
+            }
+            if let systemIconName = item.systemIconName {
+                Image(systemName: systemIconName)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 18, height: 18)
+                    .padding([.trailing], 12)
+            }
             Text(item.title)
                 .font(.system(size: 15))
             Spacer()
@@ -88,7 +103,8 @@ struct SectionModel: Identifiable {
 struct ItemModel: Identifiable {
     var id = UUID()
     var title: String
-    var iconName: String
+    var iconName: String?
+    var systemIconName: String?
     var actionType: ActionType
     var destinationView: AnyView?
     var action: (() -> Void)?

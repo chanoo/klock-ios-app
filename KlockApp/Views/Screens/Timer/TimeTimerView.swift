@@ -8,6 +8,7 @@
 import SwiftUI
 import UniformTypeIdentifiers
 import Lottie
+import FamilyControls
 
 // 주 타이머 화면 뷰
 struct TimeTimerView: View {

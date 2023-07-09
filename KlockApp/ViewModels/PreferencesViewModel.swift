@@ -9,6 +9,7 @@ import Foundation
 import Combine
 import SwiftUI
 import Foast
+import FamilyControls
 
 enum ActionType {
     case copyToken
@@ -28,33 +29,38 @@ enum ActionType {
 }
 
 class PreferencesViewModel: ObservableObject {
+    @Published var isAppsSettingPresented = false
+    @Published var selection = FamilyActivitySelection()
     @Published var profileImage: String  = "ic_img_logo"
     @Published var profileName: String = "User Name"
-    @Published var preferencesSections: [SectionModel] = [
+    lazy var preferencesSections: [SectionModel] = [
         SectionModel(items: [
-            ItemModel(title: "토큰 복사", iconName: "doc.on.doc.fill", actionType: .copyToken, action: {
+            ItemModel(title: "토큰 복사", systemIconName: "doc.on.doc.fill", actionType: .copyToken, action: {
                 let jwtToken = UserDefaults.standard.string(forKey: "access.token") ?? ""
                 UIPasteboard.general.string = jwtToken
                 Foast.show(message: "복사 했습니다.")
             }),
         ]),
         SectionModel(items: [
-            ItemModel(title: "계정 및 보안", iconName: "lock.fill", actionType: .accountAndSecurity, destinationView: AnyView(AccountSecurityView())),
+            ItemModel(title: "계정 및 보안", iconName: "ic_shield_o", actionType: .accountAndSecurity, destinationView: AnyView(AccountSecurityView())),
+            ItemModel(title: "허용앱 설정", iconName: "ic_four_square", actionType: .allowedAppSettings, action: {
+                self.isAppsSettingPresented = true
+            })
         ]),
         SectionModel(items: [
-            ItemModel(title: "서비스 이용약관", iconName: "text.badge.checkmark", actionType: .privacy, action: {
+            ItemModel(title: "서비스 이용약관", systemIconName: "text.badge.checkmark", actionType: .privacy, action: {
                 if let url = URL(string: "https://klock.app/terms/service-policy") {
                     UIApplication.shared.open(url)
                 }
             }),
-            ItemModel(title: "개인정보 처리방침", iconName: "lock.doc.fill", actionType: .privacy, action: {
+            ItemModel(title: "개인정보 처리방침", systemIconName: "lock.doc.fill", actionType: .privacy, action: {
                 if let url = URL(string: "https://klock.app/terms/privacy-policy") {
                     UIApplication.shared.open(url)
                 }
             }),
         ]),
         SectionModel(items: [
-            ItemModel(title: "문의 사항", iconName: "envelope.fill", actionType: .inquiries, action: {
+            ItemModel(title: "문의 사항", iconName: "ic_circle_q_mark", actionType: .inquiries, action: {
                 if let url = URL(string: "mailto:hello@8hlab.com") {
                     UIApplication.shared.open(url)
                 }
@@ -63,8 +69,8 @@ class PreferencesViewModel: ObservableObject {
     ]
     @Published var accountSecuritySections: [SectionModel] = [
         SectionModel(items: [
-            ItemModel(title: "로그아웃", iconName: "arrowshape.turn.up.left.fill", actionType: .logout),
-            ItemModel(title: "탈퇴하기", iconName: "xmark.circle.fill", actionType: .deleteAccount)
+            ItemModel(title: "로그아웃", systemIconName: "arrowshape.turn.up.left.fill", actionType: .logout),
+            ItemModel(title: "탈퇴하기", systemIconName: "xmark.circle.fill", actionType: .deleteAccount)
         ])
     ]
     let logoutButtonTapped = PassthroughSubject<Void, Never>()
