@@ -70,24 +70,3 @@ extension DeviceActivityName {
 extension DeviceActivityEvent.Name {
     static let encouraged = Self("encouraged")
 }
-
-class MySchedule {
-    static public func setSchedule() {
-        let events: [DeviceActivityEvent.Name: DeviceActivityEvent] = [
-            .encouraged: DeviceActivityEvent(
-                applications: MyModel.shared.selectionToEncourage.applicationTokens,
-                threshold: DateComponents(minute: 5)
-            )
-        ]
-
-        print("Setting schedule...")
-        print("Hour is: ", Calendar.current.dateComponents([.hour, .minute], from: Date()).hour!)
-        
-        do {
-            print("Try to start monitoring...")
-            try MyModel.shared.center.startMonitoring(.daily, during: MyModel.shared.schedule, events: events)
-        } catch {
-            print("Error monitoring schedule: ", error)
-        }
-    }
-}
