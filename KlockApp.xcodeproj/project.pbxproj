@@ -94,9 +94,6 @@
 		987E545B29D552540007E156 /* KlockAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E545A29D552540007E156 /* KlockAppUITests.swift */; };
 		987E545D29D552540007E156 /* KlockAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E545C29D552540007E156 /* KlockAppUITestsLaunchTests.swift */; };
 		9881FC0B2A1F455200497937 /* BeaconManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9881FC0A2A1F455200497937 /* BeaconManager.swift */; };
-		9885F3082A5A9065000E2F7A /* DeviceActivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9885F3072A5A9064000E2F7A /* DeviceActivity.framework */; };
-		9885F30B2A5A9065000E2F7A /* DeviceActivityMonitorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9885F30A2A5A9065000E2F7A /* DeviceActivityMonitorExtension.swift */; };
-		9885F3102A5A9065000E2F7A /* MyMonitor.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 9885F3062A5A9064000E2F7A /* MyMonitor.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9885F3182A5A9187000E2F7A /* MyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9885F3172A5A9187000E2F7A /* MyModel.swift */; };
 		988D7CD02A370B040018A85E /* FriendAddViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988D7CCF2A370B040018A85E /* FriendAddViewModel.swift */; };
 		988D7CD22A370BCD0018A85E /* FriendAddByQRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988D7CD12A370BCD0018A85E /* FriendAddByQRCodeView.swift */; };
@@ -218,13 +215,6 @@
 			remoteGlobalIDString = 987E543529D552520007E156;
 			remoteInfo = KlockApp;
 		};
-		9885F30E2A5A9065000E2F7A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 987E542E29D552520007E156 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 9885F3052A5A9064000E2F7A;
-			remoteInfo = MyMonitor;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -234,7 +224,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				9885F3102A5A9065000E2F7A /* MyMonitor.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -335,11 +324,7 @@
 		987E545A29D552540007E156 /* KlockAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlockAppUITests.swift; sourceTree = "<group>"; };
 		987E545C29D552540007E156 /* KlockAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlockAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		9881FC0A2A1F455200497937 /* BeaconManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconManager.swift; sourceTree = "<group>"; };
-		9885F3062A5A9064000E2F7A /* MyMonitor.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MyMonitor.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		9885F3072A5A9064000E2F7A /* DeviceActivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DeviceActivity.framework; path = System/Library/Frameworks/DeviceActivity.framework; sourceTree = SDKROOT; };
-		9885F30A2A5A9065000E2F7A /* DeviceActivityMonitorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceActivityMonitorExtension.swift; sourceTree = "<group>"; };
-		9885F30C2A5A9065000E2F7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9885F30D2A5A9065000E2F7A /* MyMonitor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MyMonitor.entitlements; sourceTree = "<group>"; };
 		9885F3172A5A9187000E2F7A /* MyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyModel.swift; sourceTree = "<group>"; };
 		988D7CCF2A370B040018A85E /* FriendAddViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendAddViewModel.swift; sourceTree = "<group>"; };
 		988D7CD12A370BCD0018A85E /* FriendAddByQRCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendAddByQRCodeView.swift; sourceTree = "<group>"; };
@@ -476,14 +461,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9885F3032A5A9064000E2F7A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9885F3082A5A9065000E2F7A /* DeviceActivity.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -605,7 +582,6 @@
 				98B21B1729D55DE0004EFE0E /* README.md */,
 				98A30CBE29DE8E1A002E42A2 /* KlockAppPlayground.playground */,
 				987E543829D552520007E156 /* KlockApp */,
-				9885F3092A5A9065000E2F7A /* MyMonitor */,
 				987E544F29D552540007E156 /* KlockAppTests */,
 				987E545929D552540007E156 /* KlockAppUITests */,
 				987E543729D552520007E156 /* Products */,
@@ -619,7 +595,6 @@
 				987E543629D552520007E156 /* KlockApp.app */,
 				987E544C29D552540007E156 /* KlockAppTests.xctest */,
 				987E545629D552540007E156 /* KlockAppUITests.xctest */,
-				9885F3062A5A9064000E2F7A /* MyMonitor.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -672,16 +647,6 @@
 				987E545C29D552540007E156 /* KlockAppUITestsLaunchTests.swift */,
 			);
 			path = KlockAppUITests;
-			sourceTree = "<group>";
-		};
-		9885F3092A5A9065000E2F7A /* MyMonitor */ = {
-			isa = PBXGroup;
-			children = (
-				9885F30A2A5A9065000E2F7A /* DeviceActivityMonitorExtension.swift */,
-				9885F30C2A5A9065000E2F7A /* Info.plist */,
-				9885F30D2A5A9065000E2F7A /* MyMonitor.entitlements */,
-			);
-			path = MyMonitor;
 			sourceTree = "<group>";
 		};
 		98B21B1929D55EFF004EFE0E /* Protocols */ = {
@@ -983,7 +948,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				9885F30F2A5A9065000E2F7A /* PBXTargetDependency */,
 			);
 			name = KlockApp;
 			packageProductDependencies = (
@@ -1036,23 +1000,6 @@
 			productReference = 987E545629D552540007E156 /* KlockAppUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		9885F3052A5A9064000E2F7A /* MyMonitor */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 9885F3142A5A9065000E2F7A /* Build configuration list for PBXNativeTarget "MyMonitor" */;
-			buildPhases = (
-				9885F3022A5A9064000E2F7A /* Sources */,
-				9885F3032A5A9064000E2F7A /* Frameworks */,
-				9885F3042A5A9064000E2F7A /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = MyMonitor;
-			productName = MyMonitor;
-			productReference = 9885F3062A5A9064000E2F7A /* MyMonitor.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1075,9 +1022,6 @@
 					987E545529D552540007E156 = {
 						CreatedOnToolsVersion = 14.2;
 						TestTargetID = 987E543529D552520007E156;
-					};
-					9885F3052A5A9064000E2F7A = {
-						CreatedOnToolsVersion = 14.3;
 					};
 				};
 			};
@@ -1107,7 +1051,6 @@
 				987E543529D552520007E156 /* KlockApp */,
 				987E544B29D552540007E156 /* KlockAppTests */,
 				987E545529D552540007E156 /* KlockAppUITests */,
-				9885F3052A5A9064000E2F7A /* MyMonitor */,
 			);
 		};
 /* End PBXProject section */
@@ -1134,13 +1077,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		987E545429D552540007E156 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9885F3042A5A9064000E2F7A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1370,14 +1306,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9885F3022A5A9064000E2F7A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9885F30B2A5A9065000E2F7A /* DeviceActivityMonitorExtension.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1390,11 +1318,6 @@
 			isa = PBXTargetDependency;
 			target = 987E543529D552520007E156 /* KlockApp */;
 			targetProxy = 987E545729D552540007E156 /* PBXContainerItemProxy */;
-		};
-		9885F30F2A5A9065000E2F7A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 9885F3052A5A9064000E2F7A /* MyMonitor */;
-			targetProxy = 9885F30E2A5A9065000E2F7A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1521,7 +1444,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 98DC292929E90DAE00882E36 /* ConfigDebug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
@@ -1570,7 +1492,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 985BE8AC29E73900008582A3 /* Config.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
@@ -1691,61 +1612,6 @@
 			};
 			name = Release;
 		};
-		9885F3122A5A9065000E2F7A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = MyMonitor/MyMonitor.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Z49D557LQF;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = MyMonitor/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = MyMonitor;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = app.klock.ios.MyMonitor;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		9885F3132A5A9065000E2F7A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = MyMonitor/MyMonitor.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Z49D557LQF;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = MyMonitor/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = MyMonitor;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = app.klock.ios.MyMonitor;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1781,15 +1647,6 @@
 			buildConfigurations = (
 				987E546729D552540007E156 /* Debug */,
 				987E546829D552540007E156 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		9885F3142A5A9065000E2F7A /* Build configuration list for PBXNativeTarget "MyMonitor" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				9885F3122A5A9065000E2F7A /* Debug */,
-				9885F3132A5A9065000E2F7A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
