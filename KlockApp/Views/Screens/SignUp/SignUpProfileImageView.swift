@@ -153,7 +153,8 @@ struct SignUpProfileImageView: View {
         })
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
 
-        if let controller = UIApplication.shared.windows.first?.rootViewController {
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let controller = windowScene.windows.first?.rootViewController {
             controller.present(actionSheet, animated: true)
         }
     }

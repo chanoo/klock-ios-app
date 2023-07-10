@@ -36,22 +36,30 @@ class MyModel: ObservableObject {
     }
     
     func setShieldRestrictions() {
-        let applications = MyModel.shared.selectionToDiscourage
-        let exceptions = applications.applicationTokens
-        store.shield.applicationCategories = .all(except:exceptions)
+        if #available(iOS 16.0, *) {
+            let applications = MyModel.shared.selectionToDiscourage
+            let exceptions = applications.applicationTokens
+            store.shield.applicationCategories = .all(except:exceptions)
+        }
     }
     
     private func startMonitoring() {
-        do {
-            try center.startMonitoring(.daily, during: schedule)
-        } catch {
-            print ("Could not start monitoring \(error)")
+        if #available(iOS 16.0, *) {
+            do {
+                try center.startMonitoring(.daily, during: schedule)
+            } catch {
+                print ("Could not start monitoring \(error)")
+            }
         }
     }
 
     func stopMonitoring() {
-        center.stopMonitoring()
-        store.clearAllSettings()
+        if #available(iOS 16.0, *) {
+            store.clearAllSettings()
+            center.stopMonitoring()
+        } else {
+            // Fallback on earlier versions
+        }
     }
 }
 

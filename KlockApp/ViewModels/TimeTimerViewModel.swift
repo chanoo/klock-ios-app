@@ -76,8 +76,10 @@ class TimeTimerViewModel: ObservableObject {
             self.examTimerViewModel = ExamTimerViewModel(model: examTimerViewModel)
         }
         
-        Task{
-            try await AuthorizationCenter.shared.requestAuthorization(for: .individual)
+        if #available(iOS 16.0, *) {
+            Task{
+                try await AuthorizationCenter.shared.requestAuthorization(for: .individual)
+            }
         }
     }
 
