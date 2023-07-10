@@ -10,7 +10,6 @@ import SwiftUI
 struct ChatBotChatView: View {
     @EnvironmentObject var viewModel: ChatBotViewModel
     @State private var showAlert = false
-    @Environment(\.colorScheme) var colorScheme
     var chatBot: ChatBotModel
     @FocusState private var isFocused: Bool
     @State private var dynamicHeight: CGFloat = 20 // 높이 초기값
@@ -25,7 +24,6 @@ struct ChatBotChatView: View {
             ScrollView(showsIndicators: false) { // 스크롤바 숨김
                 ScrollViewReader { _ in
                     LazyVStack {
-
                         if viewModel.isPreparingResponse && viewModel.tempMessage == nil {
                             HStack(spacing: 0) {
                                 Spacer()
@@ -33,21 +31,18 @@ struct ChatBotChatView: View {
                                     .padding()
                                     .background(FancyColor.chatBotBubble.color)
                                     .clipShape(RoundedCorners(tl: 10, tr: 0, bl: 10, br: 10))
-                                    .foregroundColor(colorScheme == .dark ? Color.white : FancyColor.primary.color)
+                                    .foregroundColor(FancyColor.primary.color)
                             }
                             .padding(.leading, 10)
                             .padding(.trailing, 24)
                             .padding(.top, 10)
                         }
-                        
                         if let tempMessage = viewModel.tempMessage {
                             ChatBubble(messageModel: tempMessage, isPreparingResponse: $viewModel.isPreparingResponse)
                         }
-                        
                         ForEach(viewModel.messages[chatBot.id, default: []].reversed()) { messageModel in
                             ChatBubble(messageModel: messageModel, isPreparingResponse: $viewModel.isPreparingResponse)
                         }
-
                     }
                 }
             }
@@ -64,7 +59,7 @@ struct ChatBotChatView: View {
                                 .padding(.leading, 6)
                             .padding(.trailing, 25)
                             .focused($isFocused)
-                            .foregroundColor(colorScheme == .dark ? .gray : FancyColor.primary.color)
+                            .foregroundColor(FancyColor.primary.color)
                             .background(FancyColor.chatBotInput.color)
                             .cornerRadius(4)
                             .onAppear {

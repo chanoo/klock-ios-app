@@ -13,6 +13,7 @@ struct FocusTimerView: View {
     @EnvironmentObject var focusTimerViewModel: FocusTimerViewModel
     @EnvironmentObject var timeTimerViewModel: TimeTimerViewModel
     @EnvironmentObject var userViewModel: UserViewModel
+    @EnvironmentObject var chatBotViewModel: ChatBotViewModel
     @State private var showChatBot = false
     @State var clockViewModel = ClockViewModel(
         currentTime: Date(),
@@ -113,10 +114,9 @@ struct FocusTimerView: View {
                 }
                 .shadow(color: Color(.systemGray).opacity(0.2), radius: 5, x: 0, y: 0)
                 .sheet(isPresented: $showChatBot) {
-                    let viewModel = Container.shared.resolve(ChatBotViewModel.self)
                     NavigationView {
                         ChatBotListView()
-                            .environmentObject(viewModel)
+                            .environmentObject(chatBotViewModel)
                     }
                 }
             }

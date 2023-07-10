@@ -13,6 +13,7 @@ import FamilyControls
 // 주 타이머 화면 뷰
 struct TimeTimerView: View {
     @EnvironmentObject var viewModel: TimeTimerViewModel // 환경 객체로 타이머 뷰 모델을 가져옵니다.
+    @EnvironmentObject var chatBotViewModel: ChatBotViewModel
     @State private var isShowingSelectTimer = false // 타이머 선택 화면의 표시 여부를 결정하는 상태 변수입니다.
     
     // body에서 조건 분기를 통해 로딩 화면과 메인 화면을 나눕니다.
@@ -40,6 +41,7 @@ struct TimeTimerView: View {
                 if let focusTimerViewModel = viewModel.focusTimerViewModel {
                     FocusTimerView()
                         .environmentObject(focusTimerViewModel)
+                        .environmentObject(chatBotViewModel)
                         .defaultTimerViewSettings(geometry: geometry, animation: viewModel.animation)
                 }
                 

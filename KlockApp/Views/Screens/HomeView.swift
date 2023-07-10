@@ -11,13 +11,13 @@ struct HomeView: View {
     @State private var selection = 0
     @State private var title: String = "홈"
     
-    @ObservedObject private var timeTimerViewModel = Container.shared.resolve(TimeTimerViewModel.self)
-    @ObservedObject private var calendarViewModel = Container.shared.resolve(CalendarViewModel.self)
-    @ObservedObject private var chatBotViewModel = Container.shared.resolve(ChatBotViewModel.self)
-    @ObservedObject private var taskViewModel = Container.shared.resolve(TaskViewModel.self)
-    @ObservedObject private var characterViewModel = Container.shared.resolve(CharacterViewModel.self)
-    @ObservedObject private var friendsViewModel = Container.shared.resolve(FriendsViewModel.self)
-    @ObservedObject private var preferencesViewModel = Container.shared.resolve(PreferencesViewModel.self)
+    @StateObject private var timeTimerViewModel = Container.shared.resolve(TimeTimerViewModel.self)
+    @StateObject private var calendarViewModel = Container.shared.resolve(CalendarViewModel.self)
+    @StateObject private var chatBotViewModel = Container.shared.resolve(ChatBotViewModel.self)
+    @StateObject private var taskViewModel = Container.shared.resolve(TaskViewModel.self)
+    @StateObject private var characterViewModel = Container.shared.resolve(CharacterViewModel.self)
+    @StateObject private var friendsViewModel = Container.shared.resolve(FriendsViewModel.self)
+    @StateObject private var preferencesViewModel = Container.shared.resolve(PreferencesViewModel.self)
 
 //    private func updateTitle(_ selection: Int) {
 //        switch selection {
@@ -44,6 +44,7 @@ struct HomeView: View {
                 content: AnyView(
                     TimeTimerView()
                         .environmentObject(timeTimerViewModel)
+                        .environmentObject(chatBotViewModel)
                 )
             ),
             (
