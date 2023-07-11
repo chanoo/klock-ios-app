@@ -42,14 +42,14 @@ class PreferencesViewModel: ObservableObject {
             }),
         ]),
         SectionModel(items: [
-            ItemModel(title: "계정 및 보안", iconName: "ic_shield_o", actionType: .accountAndSecurity, destinationView: AnyView(AccountSecurityView())),
             ItemModel(title: "허용앱 설정", iconName: "ic_four_square", actionType: .allowedAppSettings, action: {
                 if #available(iOS 16.0, *) {
                     self.isAppsSettingPresented = true
                 } else {
                     Foast.show(message: "iOS 16에서 사용할 수 있습니다.")
                 }
-            })
+            }),
+            ItemModel(title: "계정 및 보안", iconName: "ic_shield_o", actionType: .accountAndSecurity, destinationView: AnyView(AccountSecurityView())),
         ]),
         SectionModel(items: [
             ItemModel(title: "서비스 이용약관", systemIconName: "text.badge.checkmark", actionType: .privacy, action: {
