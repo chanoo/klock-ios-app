@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "img_teacher_science.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

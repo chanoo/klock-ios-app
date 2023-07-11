@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "img_teacher_korean_history.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
