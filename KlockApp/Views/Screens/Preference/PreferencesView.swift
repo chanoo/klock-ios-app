@@ -23,9 +23,9 @@ struct PreferencesView: View {
                         .frame(width: 66, height: 66)
                     Text(viewModel.profileName)
                     Spacer()
-                    Button(action: { viewModel.editProfile() }) {
-                        Image(systemName: "pencil")
-                    }
+//                    Button(action: { viewModel.editProfile() }) {
+//                        Image(systemName: "pencil")
+//                    }
                 }
                 .padding()
 
