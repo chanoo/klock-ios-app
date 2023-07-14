@@ -34,13 +34,13 @@ class PreferencesViewModel: ObservableObject {
     @Published var profileImage: String  = "ic_img_logo"
     @Published var profileName: String = "User Name"
     lazy var preferencesSections: [SectionModel] = [
-        SectionModel(items: [
-            ItemModel(title: "토큰 복사", systemIconName: "doc.on.doc.fill", actionType: .copyToken, action: {
-                let jwtToken = UserDefaults.standard.string(forKey: "access.token") ?? ""
-                UIPasteboard.general.string = jwtToken
-                Foast.show(message: "복사 했습니다.")
-            }),
-        ]),
+//        SectionModel(items: [
+//            ItemModel(title: "토큰 복사", systemIconName: "doc.on.doc.fill", actionType: .copyToken, action: {
+//                let jwtToken = UserDefaults.standard.string(forKey: "access.token") ?? ""
+//                UIPasteboard.general.string = jwtToken
+//                Foast.show(message: "복사 했습니다.")
+//            }),
+//        ]),
         SectionModel(items: [
             ItemModel(title: "허용앱 설정", iconName: "ic_four_square", actionType: .allowedAppSettings, action: {
                 if #available(iOS 16.0, *) {
@@ -53,12 +53,12 @@ class PreferencesViewModel: ObservableObject {
         ]),
         SectionModel(items: [
             ItemModel(title: "서비스 이용약관", systemIconName: "text.badge.checkmark", actionType: .privacy, action: {
-                if let url = URL(string: "https://klock.app/terms/service-policy") {
+                if let url = URL(string: "https://klock.app/policies/terms-of-use.html") {
                     UIApplication.shared.open(url)
                 }
             }),
             ItemModel(title: "개인정보 처리방침", systemIconName: "lock.doc.fill", actionType: .privacy, action: {
-                if let url = URL(string: "https://klock.app/terms/privacy-policy") {
+                if let url = URL(string: "https://klock.app/policies/privacy-policy.html") {
                     UIApplication.shared.open(url)
                 }
             }),
