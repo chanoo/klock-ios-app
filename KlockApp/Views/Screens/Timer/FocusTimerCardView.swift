@@ -75,7 +75,7 @@ struct FocusTimerCardView: View {
                         outlineOutColor: FancyColor.timerOutline.color
                     )
                 )
-                .padding([.top, .bottom], 50)
+                .padding([.top, .bottom], 40)
 
                 Text(focusTimerViewModel.model.name)
                     .font(.system(size: 17, weight: .bold))
@@ -107,7 +107,7 @@ struct FocusTimerCardView: View {
                     isBlock: false,
                     style: .constant(.black)
                 )
-                .padding(.top, 40)
+                .padding(.top, 30)
                 .padding(.bottom, 60)
             }
         }
