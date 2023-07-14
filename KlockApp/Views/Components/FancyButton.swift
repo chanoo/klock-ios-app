@@ -113,6 +113,7 @@ struct FancyButton: View {
     let isBlock: Bool
     @Binding var disabled: Bool?
     @Binding var style: FancyButtonStyle
+    @State private var isLongPressing = false
 
     init(title: String,
          action: (() -> Void)? = nil,
@@ -133,15 +134,19 @@ struct FancyButton: View {
     }
 
     var body: some View {
-        Button(action: {
-            action?()
-        }) {
-            buttonContent
-        }
-        .simultaneousGesture(LongPressGesture().onEnded { _ in
-            longPressAction?()
-            print("Button was long pressed")
-        })
+        buttonContent
+            .simultaneousGesture(TapGesture().onEnded { _ in
+                action?()
+            })
+            .simultaneousGesture(LongPressGesture(minimumDuration: 0.5).onChanged { _ in
+                isLongPressing = true
+            }.onEnded { _ in
+                if isLongPressing {
+                    longPressAction?()
+                    print("Button was long pressed")
+                }
+                isLongPressing = false
+            })
     }
 
     var buttonContent: some View {
