@@ -40,6 +40,9 @@ class MyModel: ObservableObject {
             let applications = MyModel.shared.selectionToDiscourage
             let exceptions = applications.applicationTokens
             store.shield.applicationCategories = .all(except:exceptions)
+
+            let webDomainTokens = applications.webDomainTokens
+            store.shield.webDomainCategories = .all(except: webDomainTokens)
         }
     }
     
