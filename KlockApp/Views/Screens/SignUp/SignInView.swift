@@ -19,7 +19,7 @@ struct SignInView: View {
                     .lineSpacing(6)
                     .padding(.top, 150)
 
-                Image("ic_logo")
+                Image("ic_logo_klock")
                     .foregroundColor(FancyColor.text.color)
                     .padding(.top, 10)
 
