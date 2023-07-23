@@ -33,7 +33,7 @@ class FriendAddViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     @Published var isStartOfWeekNextButtonEnabled = false
     @Published var isNavigatingToNextView = false
 
-    let beaconManager = BeaconManager()
+//    let beaconManager = BeaconManager()
 
     private let context = CIContext()
     private let filter = CIFilter.qrCodeGenerator()
