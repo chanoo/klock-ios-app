@@ -49,15 +49,40 @@ class AuthenticationService: AuthenticationServiceProtocol {
 
         return requestAndDecode(url: url, parameters: requestDTO.dictionary)
     }
+    
+    func socialLogin(provider: String, providerUserId: String) -> AnyPublisher<SocialLoginResDTO, Alamofire.AFError> {
+        let url = "\(baseURL)/social-login"
+        let requestDTO = SocialLoginReqDTO(provider: provider, providerUserId: providerUserId)
 
-    func signInWithApple(accessToken: String) -> AnyPublisher<AppleSignInResDTO, AFError> {
+        return AF.request(url, method: .post, parameters: requestDTO.dictionary, encoding: JSONEncoding.default)
+            .validate()
+            .publishDecodable(type: SocialLoginResDTO.self)
+            .tryMap { result -> SocialLoginResDTO in
+                switch result.result {
+                case .success(let response):
+                    return response
+                case .failure(let error):
+                    if let data = result.data {
+                        let decoder = JSONDecoder()
+                        if let errorResponse = try? decoder.decode(APIErrorModel.self, from: data) {
+                            print("Server error message: \(errorResponse.error)")
+                        }
+                    }
+                    throw error
+                }
+            }
+            .mapError { $0 as! AFError }
+            .eraseToAnyPublisher()
+    }
+
+    func signInWithApple(accessToken: String) -> AnyPublisher<SocialLoginResDTO, AFError> {
         let url = "\(baseURL)/signin-with-apple"
         let requestDTO = AppleSignInReqDTO(accessToken: accessToken)
 
         return AF.request(url, method: .post, parameters: requestDTO.dictionary, encoding: JSONEncoding.default)
             .validate()
-            .publishDecodable(type: AppleSignInResDTO.self)
-            .tryMap { result -> AppleSignInResDTO in
+            .publishDecodable(type: SocialLoginResDTO.self)
+            .tryMap { result -> SocialLoginResDTO in
                 switch result.result {
                 case .success(let response):
                     return response

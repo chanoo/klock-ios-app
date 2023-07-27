@@ -11,6 +11,7 @@ import AuthenticationServices
 import Alamofire
 import FacebookLogin
 import KeychainAccess
+import KakaoSDKUser
 
 class SignInViewModel: NSObject, ObservableObject, ASAuthorizationControllerDelegate {
 
@@ -21,6 +22,7 @@ class SignInViewModel: NSObject, ObservableObject, ASAuthorizationControllerDele
 
     let signInWithFacebookTapped = PassthroughSubject<Void, Never>()
     let signInWithAppleTapped = PassthroughSubject<Void, Never>()
+    let signInWithKakaoTapped = PassthroughSubject<Void, Never>()
     let signUpProcess = PassthroughSubject<Void, Never>()
     let signInSuccess = PassthroughSubject<Void, Never>()
 
@@ -42,12 +44,21 @@ class SignInViewModel: NSObject, ObservableObject, ASAuthorizationControllerDele
     private func setupBindings() {
         setupSignInWithFacebookTapped()
         setupSignInWithAppleTapped()
+        setupSignInWithKakaoTapped()
     }
 
     private func setupSignInWithFacebookTapped() {
         signInWithFacebookTapped
             .sink { [weak self] _ in
                 self?.signInWithFacebook()
+            }
+            .store(in: &cancellableSet)
+    }
+    
+    private func setupSignInWithKakaoTapped() {
+        signInWithKakaoTapped
+            .sink { [weak self] _ in
+                self?.signInWithKakao()
             }
             .store(in: &cancellableSet)
     }
@@ -91,6 +102,35 @@ class SignInViewModel: NSObject, ObservableObject, ASAuthorizationControllerDele
                 .store(in: &self!.cancellableSet)
         }
     }
+    
+    func signInWithKakao() {
+        if (UserApi.isKakaoTalkLoginAvailable()) {
+            UserApi.shared.loginWithKakaoTalk {(oauthToken, error) in
+                if let error = error {
+                    print(error)
+                }
+                else {
+                    print("loginWithKakaoTalk() success.")
+                    UserApi.shared.me() { (user, error) in
+                        if let error = error {
+                            print(error)
+                        }
+                        else {
+                            print("me() success.")
+                            
+                            //do something
+                            if let user = user, let userId = user.id {
+                                let userIdString = String(userId)
+                                self.signUpUserModel.provider = "KAKAO"
+                                self.signUpUserModel.providerUserId = userIdString
+                                self.handleSocialLogin("KAKAO", userIdString)
+                            }
+                        }
+                    }
+               }
+            }
+        }
+    }
 
     func signInWithApple() {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
@@ -121,9 +161,16 @@ class SignInViewModel: NSObject, ObservableObject, ASAuthorizationControllerDele
         signUpUserModel.lastName = credential.fullName?.familyName ?? ""
         signUpUserModel.email = credential.email ?? ""
     }
-
+    
     func handleSignInWithAppleToken(_ token: String) {
         authenticationService.signInWithApple(accessToken: token)
+            .sink(receiveCompletion: handleAuthenticationCompletion,
+                  receiveValue: handleReceivedUser)
+            .store(in: &cancellableSet)
+    }
+
+    func handleSocialLogin(_ provider: String, _ providerUserId: String) {
+        authenticationService.socialLogin(provider: provider, providerUserId: providerUserId)
             .sink(receiveCompletion: handleAuthenticationCompletion,
                   receiveValue: handleReceivedUser)
             .store(in: &cancellableSet)
@@ -143,7 +190,7 @@ class SignInViewModel: NSObject, ObservableObject, ASAuthorizationControllerDele
         }
     }
 
-    func handleReceivedUser(_ user: AppleSignInResDTO) {
+    func handleReceivedUser(_ user: SocialLoginResDTO) {
         print("User: \(user)")
         UserDefaults.standard.set(user.userId, forKey: "user.id")
         UserDefaults.standard.set(user.token, forKey: "access.token")

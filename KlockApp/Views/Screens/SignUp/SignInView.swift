@@ -33,16 +33,16 @@ struct SignInView: View {
                     icon: Image("ic_apple"),
                     style: .constant(.apple)
                 )
-                .padding(.bottom, 60)
-//
-//                FancyButton(
-//                    title: "카카오로 시작하기",
-//                    action: {
-//                        viewModel.signInWithAppleTapped.send()
-//                    },
-//                    icon: Image("ic_kakao"),
-//                    style: .constant(.kakao)
-//                )
+                .padding(.bottom, 12)
+
+                FancyButton(
+                    title: "카카오로 로그인",
+                    action: {
+                        viewModel.signInWithKakaoTapped.send()
+                    },
+                    icon: Image("ic_kakao"),
+                    style: .constant(.kakao)
+                )
 //
 //                FancyButton(
 //                    title: "페이스북으로 시작하기",

@@ -174,6 +174,10 @@
 		98E314B329DEE65E00EA1617 /* TagRemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E314B229DEE65E00EA1617 /* TagRemoteService.swift */; };
 		98E314B529DEE67B00EA1617 /* TagRemoteServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E314B429DEE67B00EA1617 /* TagRemoteServiceProtocol.swift */; };
 		98E314B729DEE6BB00EA1617 /* TagServiceDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E314B629DEE6BB00EA1617 /* TagServiceDTO.swift */; };
+		98E64D8E2A6E2CF300A7FF16 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
+		98E64D9B2A72431400A7FF16 /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 98E64D9A2A72431400A7FF16 /* KakaoSDKAuth */; };
+		98E64D9D2A72431400A7FF16 /* KakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = 98E64D9C2A72431400A7FF16 /* KakaoSDKCommon */; };
+		98E64D9F2A72431400A7FF16 /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = 98E64D9E2A72431400A7FF16 /* KakaoSDKUser */; };
 		98E67FE12A5714750090AE23 /* UserRemoteServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E67FE02A5714750090AE23 /* UserRemoteServiceProtocol.swift */; };
 		98E67FE32A5714920090AE23 /* UserRemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E67FE22A5714920090AE23 /* UserRemoteService.swift */; };
 		98E67FE52A5715310090AE23 /* UserRemoteServiceDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E67FE42A5715310090AE23 /* UserRemoteServiceDTO.swift */; };
@@ -436,13 +440,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				98B21B3F29D5F54E004EFE0E /* FacebookLogin in Frameworks */,
+				98E64D9D2A72431400A7FF16 /* KakaoSDKCommon in Frameworks */,
 				9820035029F1A6DA0056CA03 /* Foast in Frameworks */,
 				98E9385829EA4C45009CBF32 /* Alamofire in Frameworks */,
 				98B21B3D29D5F54E004EFE0E /* FacebookCore in Frameworks */,
 				987443D22A57D5600019F847 /* KeychainAccess in Frameworks */,
 				983B59D129FB30F800F0EACD /* CoreStore in Frameworks */,
+				98E64D8E2A6E2CF300A7FF16 /* (null) in Frameworks */,
+				98E64D9F2A72431400A7FF16 /* KakaoSDKUser in Frameworks */,
 				98CE661629D55A370009916F /* Swinject in Frameworks */,
 				981881CD29F3847A002A4395 /* Lottie in Frameworks */,
+				98E64D9B2A72431400A7FF16 /* KakaoSDKAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -957,6 +965,9 @@
 				981881CC29F3847A002A4395 /* Lottie */,
 				983B59D029FB30F800F0EACD /* CoreStore */,
 				987443D12A57D5600019F847 /* KeychainAccess */,
+				98E64D9A2A72431400A7FF16 /* KakaoSDKAuth */,
+				98E64D9C2A72431400A7FF16 /* KakaoSDKCommon */,
+				98E64D9E2A72431400A7FF16 /* KakaoSDKUser */,
 			);
 			productName = KlockApp;
 			productReference = 987E543629D552520007E156 /* KlockApp.app */;
@@ -1041,6 +1052,7 @@
 				981881CB29F3847A002A4395 /* XCRemoteSwiftPackageReference "lottie-spm" */,
 				983B59CF29FB30F800F0EACD /* XCRemoteSwiftPackageReference "CoreStore" */,
 				987443D02A57D5600019F847 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
+				98E64D992A72431400A7FF16 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 			);
 			productRefGroup = 987E543729D552520007E156 /* Products */;
 			projectDirPath = "";
@@ -1702,6 +1714,14 @@
 				minimumVersion = 2.8.3;
 			};
 		};
+		98E64D992A72431400A7FF16 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kakao/kakao-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		98E9385629EA4C45009CBF32 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire";
@@ -1747,6 +1767,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 98CE661429D55A370009916F /* XCRemoteSwiftPackageReference "Swinject" */;
 			productName = Swinject;
+		};
+		98E64D9A2A72431400A7FF16 /* KakaoSDKAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 98E64D992A72431400A7FF16 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKAuth;
+		};
+		98E64D9C2A72431400A7FF16 /* KakaoSDKCommon */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 98E64D992A72431400A7FF16 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKCommon;
+		};
+		98E64D9E2A72431400A7FF16 /* KakaoSDKUser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 98E64D992A72431400A7FF16 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKUser;
 		};
 		98E9385729EA4C45009CBF32 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;

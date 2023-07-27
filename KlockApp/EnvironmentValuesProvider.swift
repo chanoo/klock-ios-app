@@ -11,12 +11,17 @@ class EnvironmentValuesProvider {
     static let shared = EnvironmentValuesProvider()
 
     let openaiAPIKey: String
+    let kakaoAPIKey: String
 
     private init() {
-        guard let apiKey = Bundle.main.infoDictionary?["OPENAI_API_KEY"] as? String else {
+        guard let openaiAPIKey = Bundle.main.infoDictionary?["OPENAI_API_KEY"] as? String else {
             fatalError("OPENAI_API_KEY not defined in Info.plist.")
         }
-        self.openaiAPIKey = apiKey
+        self.openaiAPIKey = openaiAPIKey
+        guard let kakaoAPIKey = Bundle.main.infoDictionary?["KAKAO_API_KEY"] as? String else {
+            fatalError("KAKAO_API_KEY not defined in Info.plist.")
+        }
+        self.kakaoAPIKey = kakaoAPIKey
     }
 }
 

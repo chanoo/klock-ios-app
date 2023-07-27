@@ -9,3 +9,4 @@
 // https://help.apple.com/xcode/#/dev745c5c974
 
 OPENAI_API_KEY = $(OPENAI_API_KEY)
+KAKAO_API_KEY = $(KAKAO_API_KEY)

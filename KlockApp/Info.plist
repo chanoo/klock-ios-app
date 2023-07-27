@@ -10,6 +10,14 @@
 				<string>fb884288326020269</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>kakaod6c52b8627c52a9b4b3814efe0929668</string>
+			</array>
+		</dict>
 	</array>
 	<key>FacebookAdvertiserIDCollectionEnabled</key>
 	<true/>
@@ -23,9 +31,13 @@
 	<string>클라크</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
+	<key>KAKAO_API_KEY</key>
+	<string>$(KAKAO_API_KEY)</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
+		<string>kakaokompassauth</string>
+		<string>kakaolink</string>
 	</array>
 	<key>OPENAI_API_KEY</key>
 	<string>$(OPENAI_API_KEY)</string>
@@ -39,7 +51,7 @@
 			<array>
 				<dict>
 					<key>UISceneConfigurationName</key>
-					<string>UISceneConfigurationName</string>
+					<string>Default Configuration</string>
 				</dict>
 			</array>
 		</dict>

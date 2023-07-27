@@ -158,7 +158,7 @@ struct FancyButton: View {
             }
             Text(title)
                 .foregroundColor(style.foregroundColor)
-                .fontWeight(.bold)
+                .font(.system(size: 15, weight: .bold))
         }
         .padding(.leading, 15)
         .padding(.trailing, 15)

@@ -1,5 +1,7 @@
 import SwiftUI
 import FacebookCore
+import KakaoSDKCommon
+import KakaoSDKAuth
 
 @main
 struct KlockAppApp: App {
@@ -13,11 +15,18 @@ struct KlockAppApp: App {
 
     init() {
         requestNotificationAuthorization()
+        
+        KakaoSDK.initSDK(appKey: "d6c52b8627c52a9b4b3814efe0929668")
     }
     
     var body: some Scene {
         WindowGroup {
             ContentView(viewModel: container.resolve(ContentViewModel.self))
+                .onOpenURL(perform: { url in
+                    if (AuthApi.isKakaoTalkLoginUrl(url)) {
+                        _ = AuthController.handleOpenUrl(url: url)
+                    }
+                })
                 .environmentObject(appFlowManager)
                 .environmentObject(signUpUserModel)
         }

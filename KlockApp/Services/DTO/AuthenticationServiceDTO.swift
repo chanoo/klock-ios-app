@@ -45,7 +45,12 @@ struct AppleSignInReqDTO: Encodable {
     let accessToken: String
 }
 
-struct AppleSignInResDTO: Decodable {
+struct SocialLoginReqDTO: Encodable {
+    let provider: String
+    let providerUserId: String
+}
+
+struct SocialLoginResDTO: Decodable {
     let token: String
     let userId: Int64
 }
