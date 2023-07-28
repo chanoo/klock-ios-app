@@ -34,13 +34,13 @@ class PreferencesViewModel: ObservableObject {
     @Published var profileImage: String  = "ic_img_logo"
     @Published var profileName: String = "User Name"
     lazy var preferencesSections: [SectionModel] = [
-//        SectionModel(items: [
-//            ItemModel(title: "토큰 복사", systemIconName: "doc.on.doc.fill", actionType: .copyToken, action: {
-//                let jwtToken = UserDefaults.standard.string(forKey: "access.token") ?? ""
-//                UIPasteboard.general.string = jwtToken
-//                Foast.show(message: "복사 했습니다.")
-//            }),
-//        ]),
+        SectionModel(items: [
+            ItemModel(title: "토큰 복사", systemIconName: "doc.on.doc.fill", actionType: .copyToken, action: {
+                let jwtToken = UserDefaults.standard.string(forKey: "access.token") ?? ""
+                UIPasteboard.general.string = jwtToken
+                Foast.show(message: "복사 했습니다.")
+            }),
+        ]),
         SectionModel(items: [
             ItemModel(title: "허용앱 설정", iconName: "ic_four_square", actionType: .allowedAppSettings, action: {
                 if #available(iOS 16.0, *) {

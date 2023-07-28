@@ -43,6 +43,7 @@ struct SignInView: View {
                     icon: Image("ic_kakao"),
                     style: .constant(.kakao)
                 )
+                .padding(.bottom, 24)
 //
 //                FancyButton(
 //                    title: "페이스북으로 시작하기",
