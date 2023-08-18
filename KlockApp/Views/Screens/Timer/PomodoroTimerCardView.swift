@@ -17,11 +17,11 @@ struct PomodoroTimerCardView: View {
         currentTime: Date(),
         startTime: Date(),
         elapsedTime: 0,
-        studySessions: [],
         isStudying: false,
         isRunning: true
     )
-    
+    @State private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+
     private func flipAnimation() {
         withAnimation(.spring()) {
             isFlipped.toggle()
@@ -65,6 +65,7 @@ struct PomodoroTimerCardView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 10))
 
                 AnalogClockView(
+                    timer: timer,
                     clockViewModel: clockViewModel,
                     analogClockModel: AnalogClockModel(
                         hourHandImageName: "img_watch_hand_hour",

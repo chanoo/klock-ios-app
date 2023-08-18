@@ -65,6 +65,19 @@ struct FocusTimerDTO: Codable, TimerDTO {
     let name: String
 }
 
+struct ReqAutoTimer: Codable {
+    let seq: Int
+    let name: String
+}
+
+struct AutoTimerDTO: Codable, TimerDTO {
+    let id: Int64?
+    let userId: Int64?
+    let seq: Int
+    let type: String?
+    let name: String
+}
+
 // 타이머 항목 디코딩 함수
 func decodeTimerItem(from data: Data) throws -> TimerDTO? {
     let item = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
@@ -77,6 +90,8 @@ func decodeTimerItem(from data: Data) throws -> TimerDTO? {
         return try JSONDecoder().decode(PomodoroTimerDTO.self, from: data)
     case "EXAM":
         return try JSONDecoder().decode(ExamTimerDTO.self, from: data)
+    case "AUTO":
+        return try JSONDecoder().decode(AutoTimerDTO.self, from: data)
     default:
         return nil
     }

@@ -10,4 +10,12 @@ import Foundation
 class ActionSheetManager: ObservableObject {
     @Published var isPresented = false
     @Published var actionSheet: CustomActionSheetView? = nil
+    
+    func show() {
+        isPresented = true
+    }
+    
+    func hide() {
+        isPresented = false
+    }
 }

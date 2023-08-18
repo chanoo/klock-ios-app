@@ -17,6 +17,7 @@ class TimerManager {
     private let focusTimerRemoteService = Container.shared.resolve(FocusTimerRemoteServiceProtocol.self)
     private let pomodoroTimerRemoteService = Container.shared.resolve(PomodoroTimerRemoteServiceProtocol.self)
     private let examTimerRemoteService = Container.shared.resolve(ExamTimerRemoteServiceProtocol.self)
+    private let autoTimerRemoteService = Container.shared.resolve(AutoTimerRemoteServiceProtocol.self)
 
     func fetchTimers(completion: @escaping ([TimerModel]) -> Void) {
         timerRemoteService.fetch()
@@ -38,6 +39,8 @@ class TimerManager {
                         return PomodoroTimerModel.from(dto: dto as! PomodoroTimerDTO)
                     case "EXAM":
                         return ExamTimerModel.from(dto: dto as! ExamTimerDTO)
+                    case "AUTO":
+                        return AutoTimerModel.from(dto: dto as! AutoTimerDTO)
                     default:
                         return nil
                     }
@@ -84,6 +87,20 @@ class TimerManager {
                     switch completion {
                     case .failure(let error):
                         print("Error deleting focus timer: \(error)")
+                    case .finished:
+                        break
+                    }
+                }, receiveValue: { _ in
+                    completion(true)
+                })
+                .store(in: &self.cancellables)
+            break
+        case "AUTO":
+            self.autoTimerRemoteService.delete(id: model.id!)
+                .sink(receiveCompletion: { completion in
+                    switch completion {
+                    case .failure(let error):
+                        print("Error deleting auto timer: \(error)")
                     case .finished:
                         break
                     }
@@ -145,6 +162,21 @@ class TimerManager {
                     completion(model)
                 })
                 .store(in: &cancellables)
+        case "AUTO":
+            let req = ReqAutoTimer(seq: seq, name: "자동측정 타이머")
+            autoTimerRemoteService.create(data: req)
+                .sink(receiveCompletion: { completion in
+                    switch completion {
+                    case .failure(let error):
+                        print("Error creating auto timer: \(error)")
+                    case .finished:
+                        break
+                    }
+                }, receiveValue: { createdTimer in
+                    let model = AutoTimerModel.from(dto: createdTimer)
+                    completion(model)
+                })
+                .store(in: &cancellables)
         default:
             break
         }
@@ -198,6 +230,22 @@ class TimerManager {
                     }
                 }, receiveValue: { createdTimer in
                     let model = ExamTimerModel.from(dto: createdTimer)
+                    completion(model)
+                })
+                .store(in: &cancellables)
+        case "AUTO":
+            let dto = AutoTimerModel.toDTO(model: model as! AutoTimerModel)
+            let req = ReqAutoTimer(seq: dto.seq, name: dto.name)
+            autoTimerRemoteService.update(id: id, data: req)
+                .sink(receiveCompletion: { completion in
+                    switch completion {
+                    case .failure(let error):
+                        print("Error creating focus timer: \(error)")
+                    case .finished:
+                        break
+                    }
+                }, receiveValue: { createdTimer in
+                    let model = AutoTimerModel.from(dto: createdTimer)
                     completion(model)
                 })
                 .store(in: &cancellables)

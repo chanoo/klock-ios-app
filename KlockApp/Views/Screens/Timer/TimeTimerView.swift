@@ -56,6 +56,12 @@ struct TimeTimerView: View {
                         .environmentObject(examTimerViewModel)
                         .defaultTimerViewSettings(geometry: geometry, animation: viewModel.animation)
                 }
+                
+                if let autoTimerViewModel = viewModel.autoTimerViewModel {
+                    AutoTimerView()
+                        .environmentObject(autoTimerViewModel)
+                        .defaultTimerViewSettings(geometry: geometry, animation: viewModel.animation)
+                }
             }
         }
     }
@@ -94,10 +100,6 @@ struct TimerTabView: View {
 //                Image(systemName: "plus")
 //            }
 //        )
-        .sheet(isPresented: $isShowingSelectTimer) {
-            SelectTimerView()
-                .environmentObject(self.viewModel)
-        }
     }
 }
 
@@ -118,6 +120,10 @@ struct AddTimerButton: View {
                 actionButtons: [
                     ActionButton(title: "집중시간 타이머", action: {
                         viewModel.addTimer(type: "FOCUS")
+                        actionSheetManager.isPresented = false
+                    }),
+                    ActionButton(title: "Ai자동 타이머", action: {
+                        viewModel.addTimer(type: "AUTO")
                         actionSheetManager.isPresented = false
                     }),
 //                    ActionButton(title: "뽀모도로 타이머", action: {

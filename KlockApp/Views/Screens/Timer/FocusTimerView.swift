@@ -18,16 +18,24 @@ struct FocusTimerView: View {
     @State var clockViewModel = ClockViewModel(
         currentTime: Date(),
         startTime: Date(),
-//        currentTime: TimeUtils.dateFromString(dateString: "20230704114000", format: "yyyyMMddHHmmss")!,
-//        startTime: TimeUtils.dateFromString(dateString: "20230704114000", format: "yyyyMMddHHmmss")!,
         elapsedTime: 0,
-        studySessions: [],
         isStudying: true,
         isRunning: true
     )
+    @State private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+
     var body: some View {
         GeometryReader { geometry in
             frontView(geometry: geometry)
+        }
+    }
+    
+    private func updateCurrentTime(_ time: Date) {
+        if focusTimerViewModel.isRunning {
+            focusTimerViewModel.currentTime = focusTimerViewModel.currentTime.addingTimeInterval(1)
+            if focusTimerViewModel.isStudying {
+                focusTimerViewModel.elapsedTime = focusTimerViewModel.currentTime.timeIntervalSince(focusTimerViewModel.startTime)
+            }
         }
     }
     
@@ -39,6 +47,7 @@ struct FocusTimerView: View {
             
             VStack(spacing: 0) {
                 AnalogClockView(
+                    timer: timer,
                     clockViewModel: clockViewModel,
                     analogClockModel: AnalogClockModel(
                         hourHandImageName: "img_watch_hand_hour",
@@ -59,7 +68,7 @@ struct FocusTimerView: View {
                     .font(.system(size: 17, weight: .bold))
                     .foregroundColor(FancyColor.timerFocusText.color)
                 
-                Text(clockViewModel.elapsedTimeToString())
+                Text(focusTimerViewModel.elapsedTimeToString())
                     .font(.system(size: 40, weight: .bold))
                     .monospacedDigit()
                     .foregroundColor(FancyColor.timerFocusText.color)
@@ -79,12 +88,12 @@ struct FocusTimerView: View {
                         withAnimation {
                             tabBarManager.show()
                             focusTimerViewModel.stopStudy()
-                            focusTimerViewModel.elapsedTime = clockViewModel.elapsedTime
+                            focusTimerViewModel.elapsedTime = focusTimerViewModel.elapsedTime
                             timeTimerViewModel.stopAndSaveStudySession(
                                 timerName: focusTimerViewModel.model.name,
                                 timerType: .focus,
-                                startTime: clockViewModel.startTime,
-                                endTime: clockViewModel.currentTime
+                                startTime: focusTimerViewModel.startTime,
+                                endTime: focusTimerViewModel.currentTime
                             )
                             let model = MyModel.shared
                             model.stopMonitoring()
@@ -122,6 +131,7 @@ struct FocusTimerView: View {
             }
         }
         .background(FancyColor.timerFocusBackground.color)
+        .onReceive(timer, perform: updateCurrentTime)
         .onAppear {
             clockViewModel.startStudy()
             timeTimerViewModel.startStudySession()

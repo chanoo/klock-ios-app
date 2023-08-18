@@ -14,7 +14,6 @@
 		98099DBF2A29C43F0096AA27 /* SignUpTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98099DBE2A29C43F0096AA27 /* SignUpTagView.swift */; };
 		980C623629EE760100D0A7B5 /* FancyTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980C623529EE760100D0A7B5 /* FancyTabView.swift */; };
 		980CD5492A09485F00B203AC /* AlamofireLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980CD5482A09485F00B203AC /* AlamofireLogger.swift */; };
-		981881C229F26879002A4395 /* SelectTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981881C129F26879002A4395 /* SelectTimerView.swift */; };
 		981881C629F26F00002A4395 /* PomodoroTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981881C529F26F00002A4395 /* PomodoroTimerView.swift */; };
 		981881C829F26F07002A4395 /* ExamTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981881C729F26F07002A4395 /* ExamTimerView.swift */; };
 		981881CA29F27316002A4395 /* PageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981881C929F27316002A4395 /* PageControl.swift */; };
@@ -24,6 +23,7 @@
 		98192F422A542DB5007073FB /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98192F412A542DB5007073FB /* PreferencesView.swift */; };
 		98192F442A542DD2007073FB /* PreferencesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98192F432A542DD2007073FB /* PreferencesViewModel.swift */; };
 		98192F482A547D60007073FB /* TimerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98192F472A547D60007073FB /* TimerType.swift */; };
+		981A54A92ADEB87A00115652 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981A54A82ADEB87A00115652 /* View+Extensions.swift */; };
 		981B389129F44A2700AB0EF8 /* AccountTimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981B389029F44A2700AB0EF8 /* AccountTimerModel.swift */; };
 		981B389329F44B0600AB0EF8 /* PomodoroTimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981B389229F44B0600AB0EF8 /* PomodoroTimerModel.swift */; };
 		981B389529F44B1200AB0EF8 /* FocusTimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981B389429F44B1200AB0EF8 /* FocusTimerModel.swift */; };
@@ -50,6 +50,15 @@
 		983B59DF29FB7B1E00F0EACD /* AccountEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983B59DE29FB7B1E00F0EACD /* AccountEntity.swift */; };
 		983B59E329FB99F900F0EACD /* AccountLocalServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983B59E229FB99F900F0EACD /* AccountLocalServiceProtocol.swift */; };
 		983B59E529FB9FD800F0EACD /* ChatBotLocalServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983B59E429FB9FD800F0EACD /* ChatBotLocalServiceProtocol.swift */; };
+		983BC01F2A8EF5AB00DC108B /* AutoTimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983BC01E2A8EF5AB00DC108B /* AutoTimerViewModel.swift */; };
+		983BC0222A8EF62E00DC108B /* AutoTimerRemoteServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983BC0202A8EF62E00DC108B /* AutoTimerRemoteServiceProtocol.swift */; };
+		983BC0232A8EF62E00DC108B /* AutoTimerRemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983BC0212A8EF62E00DC108B /* AutoTimerRemoteService.swift */; };
+		983BC0252A8EF64400DC108B /* AutoTimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983BC0242A8EF64400DC108B /* AutoTimerModel.swift */; };
+		983BC0272A8F010500DC108B /* TFLiteExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983BC0262A8F010500DC108B /* TFLiteExtension.swift */; };
+		983BC0292A8F011400DC108B /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983BC0282A8F011400DC108B /* Array+Extensions.swift */; };
+		983BC02B2A8F012900DC108B /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983BC02A2A8F012900DC108B /* UIImage+Extensions.swift */; };
+		983BC02F2A8F0DAF00DC108B /* AutoTimerCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983BC02D2A8F0DAE00DC108B /* AutoTimerCardView.swift */; };
+		983BC0302A8F0DAF00DC108B /* AutoTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983BC02E2A8F0DAE00DC108B /* AutoTimerView.swift */; };
 		9843B7D929EEE09400F91DAD /* ProximityAndOrientationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9843B7D829EEE09400F91DAD /* ProximityAndOrientationService.swift */; };
 		9843B7DD29EEE0EB00F91DAD /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9843B7DC29EEE0EB00F91DAD /* NotificationManager.swift */; };
 		9843B7E529EF086600F91DAD /* ProximityAndOrientationServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9843B7E429EF086600F91DAD /* ProximityAndOrientationServiceProtocol.swift */; };
@@ -117,6 +126,8 @@
 		98976B072A07818800F1CEAE /* FocusTimerRemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98976B062A07818800F1CEAE /* FocusTimerRemoteService.swift */; };
 		98976B092A07819100F1CEAE /* PomodoroTimerRemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98976B082A07819100F1CEAE /* PomodoroTimerRemoteService.swift */; };
 		98976B0B2A07819E00F1CEAE /* ExamTimerRemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98976B0A2A07819E00F1CEAE /* ExamTimerRemoteService.swift */; };
+		9899A7EA2AA37645001B4C72 /* CameraPermissionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9899A7E92AA37645001B4C72 /* CameraPermissionViewModel.swift */; };
+		9899A7EC2AA37662001B4C72 /* CameraPermissionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9899A7EB2AA37662001B4C72 /* CameraPermissionView.swift */; };
 		989D6F322A4C2E0800BC2F2B /* CustomActionSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989D6F312A4C2E0800BC2F2B /* CustomActionSheetView.swift */; };
 		989D6F342A4C34BA00BC2F2B /* ActionSheetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989D6F332A4C34BA00BC2F2B /* ActionSheetManager.swift */; };
 		989D6F362A4C64E700BC2F2B /* SlideUpTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989D6F352A4C64E700BC2F2B /* SlideUpTransition.swift */; };
@@ -132,7 +143,6 @@
 		98AC75C42A094D5600EE95D4 /* TimerRemoteServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AC75C32A094D5600EE95D4 /* TimerRemoteServiceTests.swift */; };
 		98AE104F2A8D961400D99322 /* deeplabv3.tflite in Resources */ = {isa = PBXBuildFile; fileRef = 98AE104D2A8D961400D99322 /* deeplabv3.tflite */; };
 		98AE10502A8D961400D99322 /* ImageSegmentationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE104E2A8D961400D99322 /* ImageSegmentationHelper.swift */; };
-		98AE10542A8D965400D99322 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE10532A8D965400D99322 /* UIImage+Extensions.swift */; };
 		98AE10582A8D97F500D99322 /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE10572A8D97F500D99322 /* Data+Extensions.swift */; };
 		98B21B1829D55DE0004EFE0E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 98B21B1729D55DE0004EFE0E /* README.md */; };
 		98B21B1B29D55F6C004EFE0E /* AuthenticationRemoteServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B1A29D55F6C004EFE0E /* AuthenticationRemoteServiceProtocol.swift */; };
@@ -249,7 +259,6 @@
 		980C623429ED32E000D0A7B5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		980C623529EE760100D0A7B5 /* FancyTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyTabView.swift; sourceTree = "<group>"; };
 		980CD5482A09485F00B203AC /* AlamofireLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireLogger.swift; sourceTree = "<group>"; };
-		981881C129F26879002A4395 /* SelectTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTimerView.swift; sourceTree = "<group>"; };
 		981881C529F26F00002A4395 /* PomodoroTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroTimerView.swift; sourceTree = "<group>"; };
 		981881C729F26F07002A4395 /* ExamTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamTimerView.swift; sourceTree = "<group>"; };
 		981881C929F27316002A4395 /* PageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageControl.swift; sourceTree = "<group>"; };
@@ -258,6 +267,7 @@
 		98192F412A542DB5007073FB /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
 		98192F432A542DD2007073FB /* PreferencesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewModel.swift; sourceTree = "<group>"; };
 		98192F472A547D60007073FB /* TimerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerType.swift; sourceTree = "<group>"; };
+		981A54A82ADEB87A00115652 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		981B389029F44A2700AB0EF8 /* AccountTimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTimerModel.swift; sourceTree = "<group>"; };
 		981B389229F44B0600AB0EF8 /* PomodoroTimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroTimerModel.swift; sourceTree = "<group>"; };
 		981B389429F44B1200AB0EF8 /* FocusTimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTimerModel.swift; sourceTree = "<group>"; };
@@ -282,6 +292,16 @@
 		983B59DE29FB7B1E00F0EACD /* AccountEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountEntity.swift; sourceTree = "<group>"; };
 		983B59E229FB99F900F0EACD /* AccountLocalServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountLocalServiceProtocol.swift; sourceTree = "<group>"; };
 		983B59E429FB9FD800F0EACD /* ChatBotLocalServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotLocalServiceProtocol.swift; sourceTree = "<group>"; };
+		983BC01E2A8EF5AB00DC108B /* AutoTimerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoTimerViewModel.swift; sourceTree = "<group>"; };
+		983BC0202A8EF62E00DC108B /* AutoTimerRemoteServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoTimerRemoteServiceProtocol.swift; sourceTree = "<group>"; };
+		983BC0212A8EF62E00DC108B /* AutoTimerRemoteService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoTimerRemoteService.swift; sourceTree = "<group>"; };
+		983BC0242A8EF64400DC108B /* AutoTimerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoTimerModel.swift; sourceTree = "<group>"; };
+		983BC0262A8F010500DC108B /* TFLiteExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TFLiteExtension.swift; sourceTree = "<group>"; };
+		983BC0282A8F011400DC108B /* Array+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
+		983BC02A2A8F012900DC108B /* UIImage+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
+		983BC02C2A8F014400DC108B /* deeplabv3.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = deeplabv3.tflite; sourceTree = "<group>"; };
+		983BC02D2A8F0DAE00DC108B /* AutoTimerCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoTimerCardView.swift; sourceTree = "<group>"; };
+		983BC02E2A8F0DAE00DC108B /* AutoTimerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoTimerView.swift; sourceTree = "<group>"; };
 		9843B7D829EEE09400F91DAD /* ProximityAndOrientationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProximityAndOrientationService.swift; sourceTree = "<group>"; };
 		9843B7DC29EEE0EB00F91DAD /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		9843B7E429EF086600F91DAD /* ProximityAndOrientationServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProximityAndOrientationServiceProtocol.swift; sourceTree = "<group>"; };
@@ -356,6 +376,8 @@
 		98976B062A07818800F1CEAE /* FocusTimerRemoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTimerRemoteService.swift; sourceTree = "<group>"; };
 		98976B082A07819100F1CEAE /* PomodoroTimerRemoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroTimerRemoteService.swift; sourceTree = "<group>"; };
 		98976B0A2A07819E00F1CEAE /* ExamTimerRemoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamTimerRemoteService.swift; sourceTree = "<group>"; };
+		9899A7E92AA37645001B4C72 /* CameraPermissionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPermissionViewModel.swift; sourceTree = "<group>"; };
+		9899A7EB2AA37662001B4C72 /* CameraPermissionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPermissionView.swift; sourceTree = "<group>"; };
 		989D6F312A4C2E0800BC2F2B /* CustomActionSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomActionSheetView.swift; sourceTree = "<group>"; };
 		989D6F332A4C34BA00BC2F2B /* ActionSheetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionSheetManager.swift; sourceTree = "<group>"; };
 		989D6F352A4C64E700BC2F2B /* SlideUpTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideUpTransition.swift; sourceTree = "<group>"; };
@@ -541,6 +563,8 @@
 				982140A22A07EFBE00C68EB9 /* APIServiceProtocol.swift */,
 				98B21B1A29D55F6C004EFE0E /* AuthenticationRemoteServiceProtocol.swift */,
 				98CE661A29D55AA40009916F /* AuthenticationService.swift */,
+				983BC0202A8EF62E00DC108B /* AutoTimerRemoteServiceProtocol.swift */,
+				983BC0212A8EF62E00DC108B /* AutoTimerRemoteService.swift */,
 				98E67FE02A5714750090AE23 /* UserRemoteServiceProtocol.swift */,
 				98E67FE22A5714920090AE23 /* UserRemoteService.swift */,
 				9833FFC529F58F5C00CC33F7 /* AccountRemoteServiceProtocol.swift */,
@@ -671,6 +695,14 @@
 			path = KlockAppUITests;
 			sourceTree = "<group>";
 		};
+		9899A7E82AA3743A001B4C72 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				9899A7EB2AA37662001B4C72 /* CameraPermissionView.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		98AE104C2A8D95F700D99322 /* TFLite */ = {
 			isa = PBXGroup;
 			children = (
@@ -711,12 +743,16 @@
 		98B21B2529D57A5F004EFE0E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				983BC0282A8F011400DC108B /* Array+Extensions.swift */,
+				983BC0262A8F010500DC108B /* TFLiteExtension.swift */,
 				98AE10532A8D965400D99322 /* UIImage+Extensions.swift */,
 				98B21B4A29D617F6004EFE0E /* Encodable+Extensions.swift */,
+				983BC02A2A8F012900DC108B /* UIImage+Extensions.swift */,
 				984D2C8329DFC311008D3EA9 /* UINavigationController+UIGestureRecognizerDelegate.swift */,
 				98EBFBF529FA54F6004E95F3 /* ClearListBackground+Extensions.swift */,
 				98F80EE82A44A3440084E44B /* Color+Extentions.swift */,
 				98AE10572A8D97F500D99322 /* Data+Extensions.swift */,
+				981A54A82ADEB87A00115652 /* View+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -739,6 +775,7 @@
 				98D7C94E29E332790075D201 /* APIErrorModel.swift */,
 				985BE89B29E6E595008582A3 /* FriendModel.swift */,
 				985BE8A129E6E906008582A3 /* MessageModel.swift */,
+				983BC0242A8EF64400DC108B /* AutoTimerModel.swift */,
 				985BE8AF29E7D48A008582A3 /* ChatBotModel.swift */,
 				98E9385E29EA5856009CBF32 /* AnalogClockModel.swift */,
 				98327DF92A0CF87100CFEB3A /* TimerModel.swift */,
@@ -771,6 +808,7 @@
 				986E5DB129EAEF5600FF7047 /* CalendarViewModel.swift */,
 				98E9386029EA5871009CBF32 /* TimeTimerViewModel.swift */,
 				98192F432A542DD2007073FB /* PreferencesViewModel.swift */,
+				983BC01E2A8EF5AB00DC108B /* AutoTimerViewModel.swift */,
 				98AC30702A136198006DC48D /* FocusTimerViewModel.swift */,
 				98AC30822A15CB77006DC48D /* PomodoroTimerViewModel.swift */,
 				988D7CFB2A3851BD0018A85E /* QRCodeScannerViewModel.swift */,
@@ -779,6 +817,7 @@
 				987443D32A57D93F0019F847 /* UserViewModel.swift */,
 				985BE88329E652CE008582A3 /* README.md */,
 				9885F3172A5A9187000E2F7A /* MyModel.swift */,
+				9899A7E92AA37645001B4C72 /* CameraPermissionViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -824,6 +863,7 @@
 			children = (
 				981881D629F426FC002A4395 /* lottie-plus.json */,
 				988D7D0F2A3B15560018A85E /* lottie-confetti.json */,
+				983BC02C2A8F014400DC108B /* deeplabv3.tflite */,
 				985BE8AC29E73900008582A3 /* Config.xcconfig */,
 				98DC292929E90DAE00882E36 /* ConfigDebug.xcconfig */,
 				987E544429D552530007E156 /* KlockApp.xcdatamodeld */,
@@ -859,6 +899,7 @@
 		98CE661329D553F10009916F /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				9899A7E82AA3743A001B4C72 /* Common */,
 				98E9385D29EA5844009CBF32 /* Timer */,
 				98EBFBF029F98A74004E95F3 /* Character */,
 				98EBFBED29F97B78004E95F3 /* Task */,
@@ -929,7 +970,8 @@
 			isa = PBXGroup;
 			children = (
 				985BE88B29E6DC35008582A3 /* TimeTimerView.swift */,
-				981881C129F26879002A4395 /* SelectTimerView.swift */,
+				983BC02D2A8F0DAE00DC108B /* AutoTimerCardView.swift */,
+				983BC02E2A8F0DAE00DC108B /* AutoTimerView.swift */,
 				98AC30722A13637C006DC48D /* FocusTimerCardView.swift */,
 				98AC30742A1363A3006DC48D /* FocusTimerView.swift */,
 				98AC30802A15CABB006DC48D /* PomodoroTimerCardView.swift */,
@@ -1136,7 +1178,6 @@
 /* Begin PBXShellScriptBuildPhase section */
 		98BDD22629DDA2B900B0440F /* SwiftLint Script */ = {
 			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -1187,11 +1228,15 @@
 				98327DFA2A0CF87100CFEB3A /* TimerModel.swift in Sources */,
 				98B21B4D29D6F3A9004EFE0E /* AccountLevelModel.swift in Sources */,
 				98E67FE32A5714920090AE23 /* UserRemoteService.swift in Sources */,
+				983BC0292A8F011400DC108B /* Array+Extensions.swift in Sources */,
+				983BC02B2A8F012900DC108B /* UIImage+Extensions.swift in Sources */,
 				985BE8B029E7D48A008582A3 /* ChatBotModel.swift in Sources */,
 				988D7CD82A3711410018A85E /* ScanResult.swift in Sources */,
 				984D2C8729DFDB5F008D3EA9 /* BackButtonView.swift in Sources */,
 				981B389329F44B0600AB0EF8 /* PomodoroTimerModel.swift in Sources */,
 				984D2C9129E0728C008D3EA9 /* SplashViewModel.swift in Sources */,
+				983BC0252A8EF64400DC108B /* AutoTimerModel.swift in Sources */,
+				983BC02F2A8F0DAF00DC108B /* AutoTimerCardView.swift in Sources */,
 				9843B7D929EEE09400F91DAD /* ProximityAndOrientationService.swift in Sources */,
 				98192F422A542DB5007073FB /* PreferencesView.swift in Sources */,
 				98E9386129EA5871009CBF32 /* TimeTimerViewModel.swift in Sources */,
@@ -1206,6 +1251,7 @@
 				981881C629F26F00002A4395 /* PomodoroTimerView.swift in Sources */,
 				9837CCAA2A42F255002F1A3A /* ActivityModel.swift in Sources */,
 				98976B052A077F8F00F1CEAE /* ExamTimerRemoteServiceProtocol.swift in Sources */,
+				983BC0302A8F0DAF00DC108B /* AutoTimerView.swift in Sources */,
 				98B21B1B29D55F6C004EFE0E /* AuthenticationRemoteServiceProtocol.swift in Sources */,
 				98B21B2129D56BDF004EFE0E /* RegexConstants.swift in Sources */,
 				981D73162A191C96000C8F3D /* DateUtils.swift in Sources */,
@@ -1229,6 +1275,7 @@
 				98DC292B29E9373D00882E36 /* ChatBotRemoteService.swift in Sources */,
 				98EBFBE829F968E8004E95F3 /* TaskModel.swift in Sources */,
 				98976B012A077F7400F1CEAE /* FocusTimerRemoteServiceProtocol.swift in Sources */,
+				9899A7EA2AA37645001B4C72 /* CameraPermissionViewModel.swift in Sources */,
 				98F80EE92A44A3440084E44B /* Color+Extentions.swift in Sources */,
 				98D7C95329E460470075D201 /* AppFlowManager.swift in Sources */,
 				980CD5492A09485F00B203AC /* AlamofireLogger.swift in Sources */,
@@ -1272,7 +1319,6 @@
 				98B21B5429D6F424004EFE0E /* DDayEventModel.swift in Sources */,
 				98E9386B29EAD1C3009CBF32 /* StudySessionServiceDTO.swift in Sources */,
 				98976B072A07818800F1CEAE /* FocusTimerRemoteService.swift in Sources */,
-				981881C229F26879002A4395 /* SelectTimerView.swift in Sources */,
 				98E314B329DEE65E00EA1617 /* TagRemoteService.swift in Sources */,
 				98E9384E29EA3935009CBF32 /* RoundedCorners.swift in Sources */,
 				9833FFC429F5769700CC33F7 /* AccountTimerServiceProtocol.swift in Sources */,
@@ -1297,6 +1343,7 @@
 				987E544629D552530007E156 /* KlockApp.xcdatamodeld in Sources */,
 				989D6F322A4C2E0800BC2F2B /* CustomActionSheetView.swift in Sources */,
 				983B59E329FB99F900F0EACD /* AccountLocalServiceProtocol.swift in Sources */,
+				983BC0232A8EF62E00DC108B /* AutoTimerRemoteService.swift in Sources */,
 				98EBFBE329F78307004E95F3 /* ChatBotSyncProtocol.swift in Sources */,
 				98E9385229EA3AC4009CBF32 /* MessageServiceDTO.swift in Sources */,
 				988D7D0B2A3ADACC0018A85E /* FriendAddDoneView.swift in Sources */,
@@ -1308,6 +1355,7 @@
 				989D6F342A4C34BA00BC2F2B /* ActionSheetManager.swift in Sources */,
 				98AE10502A8D961400D99322 /* ImageSegmentationHelper.swift in Sources */,
 				98B24A992A32386D0083444D /* TextView.swift in Sources */,
+				983BC0222A8EF62E00DC108B /* AutoTimerRemoteServiceProtocol.swift in Sources */,
 				98EBFBEF29F97B85004E95F3 /* TaskDetailView.swift in Sources */,
 				985BE88E29E6DC3E008582A3 /* MissionView.swift in Sources */,
 				983B59DF29FB7B1E00F0EACD /* AccountEntity.swift in Sources */,
@@ -1338,6 +1386,7 @@
 				98BDD21D29DAD1D400B0440F /* FancyColor.swift in Sources */,
 				980C623629EE760100D0A7B5 /* FancyTabView.swift in Sources */,
 				98FD8F782A174F0C00CEE0B1 /* StudySessionRemoteService.swift in Sources */,
+				9899A7EC2AA37662001B4C72 /* CameraPermissionView.swift in Sources */,
 				98E9385F29EA5856009CBF32 /* AnalogClockModel.swift in Sources */,
 				984D2C8429DFC311008D3EA9 /* UINavigationController+UIGestureRecognizerDelegate.swift in Sources */,
 				988D7CF92A3851770018A85E /* QRCodeScannerViewController.swift in Sources */,
@@ -1350,8 +1399,10 @@
 				98976B032A077F7F00F1CEAE /* PomodoroTimerRemoteServiceProtocol.swift in Sources */,
 				98E9386529EA5899009CBF32 /* AnalogClockView.swift in Sources */,
 				98BDD22029DD0FA800B0440F /* EmailValidator.swift in Sources */,
+				983BC0272A8F010500DC108B /* TFLiteExtension.swift in Sources */,
 				98E314B729DEE6BB00EA1617 /* TagServiceDTO.swift in Sources */,
-				98AE10542A8D965400D99322 /* UIImage+Extensions.swift in Sources */,
+				981A54A92ADEB87A00115652 /* View+Extensions.swift in Sources */,
+				983BC01F2A8EF5AB00DC108B /* AutoTimerViewModel.swift in Sources */,
 				98B21B4929D617A4004EFE0E /* AuthenticationServiceDTO.swift in Sources */,
 				98DC292F29E9383900882E36 /* ChatBotRemoteServiceProtocol.swift in Sources */,
 			);
@@ -1527,13 +1578,14 @@
 				DEVELOPMENT_ASSET_PATHS = "\"KlockApp/Preview Content\"";
 				DEVELOPMENT_TEAM = Z49D557LQF;
 				ENABLE_PREVIEWS = YES;
+				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = KlockApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "클라크";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "친구가 나를 찾을때 사용 됩니다.";
 				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "친구가 나를 찾을때 사용 됩니다.";
-				INFOPLIST_KEY_NSCameraUsageDescription = "QR코드 스캔에 사용 됩니다.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "공부시간을 측정, QR코드 스캔에 사용 됩니다.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "친구가 나를 찾을때 사용 됩니다.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "음성을 텍스트로 변경 해줍니다.";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "음성을 텍스트로 변경 해줍니다.";
@@ -1575,13 +1627,14 @@
 				DEVELOPMENT_ASSET_PATHS = "\"KlockApp/Preview Content\"";
 				DEVELOPMENT_TEAM = Z49D557LQF;
 				ENABLE_PREVIEWS = YES;
+				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = KlockApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "클라크";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "친구가 나를 찾을때 사용 됩니다.";
 				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "친구가 나를 찾을때 사용 됩니다.";
-				INFOPLIST_KEY_NSCameraUsageDescription = "QR코드 스캔에 사용 됩니다.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "공부시간을 측정, QR코드 스캔에 사용 됩니다.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "친구가 나를 찾을때 사용 됩니다.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "음성을 텍스트로 변경 해줍니다.";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "음성을 텍스트로 변경 해줍니다.";

@@ -34,10 +34,12 @@ class TimeTimerViewModel: ObservableObject {
     @Published var focusTimerModel: FocusTimerModel? = nil
     @Published var pomodoroTimerModel: PomodoroTimerModel? = nil
     @Published var examTimerModel: ExamTimerModel? = nil
-    
+    @Published var autoTimerModel: AutoTimerModel? = nil
+
     @Published var focusTimerViewModel: FocusTimerViewModel?
     @Published var pomodoroTimerViewModel: PomodoroTimerViewModel?
     @Published var examTimerViewModel: ExamTimerViewModel?
+    @Published var autoTimerViewModel: AutoTimerViewModel?
 
     // Service objects
     private let timerRemoteService = Container.shared.resolve(TimerRemoteServiceProtocol.self)
@@ -75,6 +77,9 @@ class TimeTimerViewModel: ObservableObject {
         if let examTimerViewModel = self.examTimerModel {
             self.examTimerViewModel = ExamTimerViewModel(model: examTimerViewModel)
         }
+        if let autoTimerViewModel = self.autoTimerModel {
+            self.autoTimerViewModel = AutoTimerViewModel(model: autoTimerViewModel)
+        }
         
         if #available(iOS 16.0, *) {
             Task{
@@ -109,6 +114,11 @@ class TimeTimerViewModel: ObservableObject {
             return AnyView(
                 ExamTimerCardView()
                     .environmentObject(viewModel)
+            )
+        case let autoTimer as AutoTimerModel:
+            let autoTimerViewModel = AutoTimerViewModel(model: autoTimer)
+            return AnyView(
+                AutoTimerCardView(autoTimerViewModel: autoTimerViewModel, timeTimerViewModel: self)
             )
         default:
             return AnyView(EmptyView())
@@ -319,8 +329,5 @@ class TimeTimerViewModel: ObservableObject {
         guard sourceIndex != destinationIndex else { return }
         let sourceView = timerCardViews.remove(at: sourceIndex)
         timerCardViews.insert(sourceView, at: destinationIndex)
-    }
-    
-    func authorizationScreenTime() async {
     }
 }
