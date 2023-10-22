@@ -75,7 +75,6 @@ struct PomodoroTimerView: View {
                             tabBarManager.isTabBarVisible = true
                             pomodoroTimerViewModel.isStudying = false
                             timeTimerViewModel.pomodoroTimerViewModel = nil
-//                            timeTimerViewModel.stopAndSaveStudySessionIfNeeded()
                         }
                     },
                     style: .constant(.primary)

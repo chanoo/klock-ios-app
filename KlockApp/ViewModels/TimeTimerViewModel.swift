@@ -65,7 +65,6 @@ class TimeTimerViewModel: ObservableObject {
             self.timerModels = timerModels
             self.timerCardViews = self.timerModels.map { self.viewFor(timer: $0) }
         }
-//        observeIsStudyingChanges()
         calculateElapsedTime()
         
         if let focusTimerModel = self.focusTimerModel {
@@ -126,14 +125,6 @@ class TimeTimerViewModel: ObservableObject {
     }
 
     // MARK: - Study Session Management
-//    private func observeIsStudyingChanges() {
-//        $isStudying
-//            .sink { [weak self] isStudying in
-//                isStudying ? self?.startStudySession() : self?.stopAndSaveStudySessionIfNeeded()
-//            }
-//            .store(in: &cancellables)
-//    }
-
     func calculateElapsedTime() {
         guard let startTime = UserDefaults.standard.object(forKey: studyStartTimeKey) as? Date else { return }
         elapsedTime += Date().timeIntervalSince(startTime)
