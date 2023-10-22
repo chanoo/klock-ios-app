@@ -1,32 +1,25 @@
 //
-//  FocusTimerCardView.swift
+//  AutoTimerCardView.swift
 //  KlockApp
 //
-//  Created by 성찬우 on 2023/05/16.
+//  Created by 성찬우 on 2023/07/18.
 //
 
 import SwiftUI
 
-struct FocusTimerCardView: View {
+struct AutoTimerCardView: View {
     @EnvironmentObject var tabBarManager: TabBarManager
-    @StateObject var focusTimerViewModel: FocusTimerViewModel
+    @EnvironmentObject var actionSheetManager: ActionSheetManager
+    @StateObject var autoTimerViewModel: AutoTimerViewModel
     @StateObject var timeTimerViewModel: TimeTimerViewModel
-    @StateObject var clockViewModel = ClockViewModel(
-        currentTime: Date(),
-        startTime: Date(),
-        elapsedTime: 0,
-        isStudying: false,
-        isRunning: true
-    )
     @State private var isFlipped: Bool = false
-    @State private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
     private func flipAnimation() {
         withAnimation(.spring()) {
             isFlipped.toggle()
         }
     }
-    
+
     var body: some View {
         GeometryReader { geometry in
             frontView(geometry: geometry)
@@ -57,59 +50,63 @@ struct FocusTimerCardView: View {
             .position(x: geometry.size.width - 30, y: 30)
             
             VStack(spacing: 0) {
-                AnalogClockView(
-                    timer: timer,
-                    clockViewModel: clockViewModel,
-                    analogClockModel: AnalogClockModel(
-                        hourHandImageName: "img_watch_hand_hour",
-                        minuteHandImageName: "img_watch_hand_min",
-                        secondHandImageName: "img_watch_hand_sec",
-                        clockBackgroundImageName: "img_watch_face1",
-                        clockSize: CGSize(width: 260, height: 260),
-                        hourHandColor: FancyColor.white.color,
-                        minuteHandColor: FancyColor.white.color,
-                        secondHandColor: FancyColor.primary.color,
-                        outlineInColor: FancyColor.timerOutline.color,
-                        outlineOutColor: FancyColor.timerOutline.color
-                    )
-                )
-                .padding([.top, .bottom], 40)
+                
+                Image("img_circle_ai_charactor")
+                    .padding(.bottom, 30)
 
-                Text(focusTimerViewModel.model.name)
+                Text(autoTimerViewModel.model.name)
                     .font(.system(size: 17, weight: .bold))
                     .foregroundColor(FancyColor.timerFocusText.color)
                 
-                Text(focusTimerViewModel.elapsedTimeToString())
+                Text(autoTimerViewModel.elapsedTimeToString())
                     .font(.system(size: 40, weight: .bold))
                     .monospacedDigit()
                     .foregroundColor(FancyColor.timerFocusText.color)
                     .padding([.top], 4)
-
-//                Text("(\(focusTimerViewModel.elapsedTimeToString()))")
-//                    .font(.system(size: 16, weight: .heavy))
-//                    .foregroundColor(FancyColor.gray2.color)
-
-                FancyButton(
-                    title: "공부 시작",
-                    action: {
-                        withAnimation {
-                            tabBarManager.hide()
-                            focusTimerViewModel.startStudy()
-                            timeTimerViewModel.startStudySession()
-                            timeTimerViewModel.focusTimerViewModel = focusTimerViewModel
-                            let model = MyModel.shared
-                            model.initiateMonitoring()
-                        }
-                    },
-                    icon: Image("ic_play"),
-                    isBlock: false,
-                    style: .constant(.black)
-                )
-                .padding(.top, 30)
-                .padding(.bottom, 60)
+                
+                if autoTimerViewModel.cameraPermissionGranted {
+                    FancyButton(
+                        title: "자동으로 기록",
+                        action: {
+                            withAnimation {
+                                tabBarManager.hide()
+                                timeTimerViewModel.autoTimerViewModel = autoTimerViewModel
+                                timeTimerViewModel.startStudySession()
+                                autoTimerViewModel.startStudy()
+                                let model = MyModel.shared
+                                model.initiateMonitoring()
+                            }
+                        },
+                        icon: Image("ic_play"),
+                        isBlock: false,
+                        style: .constant(.black)
+                    )
+                    .padding(.top, 50)
+                    .padding(.bottom, 60)
+                } else {
+                    NavigationLink(
+                        destination: CameraPermissionView().environmentObject(actionSheetManager),
+                        isActive: $autoTimerViewModel.isShowCemeraPermissionView)
+                    {
+                        FancyButton(
+                            title: "자동으로 기록",
+                            action: {
+                                autoTimerViewModel.showCameraPermissionView()
+                            },
+                            icon: Image("ic_play"),
+                            isBlock: false,
+                            style: .constant(.black)
+                        )
+                        .padding(.top, 50)
+                        .padding(.bottom, 60)
+                    }
+                }
             }
         }
         .background(FancyColor.timerFocusBackground.color)
+        .onAppear {
+            autoTimerViewModel.checkCameraPermission()
+        }
     }
 
     private func backView(geometry: GeometryProxy) -> some View {
@@ -120,13 +117,13 @@ struct FocusTimerCardView: View {
                         Text("과목명")
                             .font(.headline)
                             .foregroundColor(.gray)
-                        TextField("어떤 공부를 할건가요?", text: $focusTimerViewModel.model.name)
+                        TextField("어떤 공부를 할건가요?", text: $autoTimerViewModel.model.name)
                     }
                 }
 
                 Section {
                     Button(action: {
-                        timeTimerViewModel.update(type: "FOCUS", model: focusTimerViewModel.model)
+                        timeTimerViewModel.update(type: "AUTO", model: autoTimerViewModel.model)
                         flipAnimation()
                         tabBarManager.show()
                     }) {
@@ -149,7 +146,7 @@ struct FocusTimerCardView: View {
                     Button(action: {
                         flipAnimation()
                         tabBarManager.show()
-                        timeTimerViewModel.delete(model: focusTimerViewModel.model)
+                        timeTimerViewModel.delete(model: autoTimerViewModel.model)
                     }) {
                         Text("삭제")
                             .frame(maxWidth: .infinity, alignment: .center)
@@ -161,13 +158,14 @@ struct FocusTimerCardView: View {
         }
         .background(FancyColor.chatBotBackground.color)
     }
+
 }
 
-struct FocusTimerCardView_Previews: PreviewProvider {
+struct AutoTimerCardView_Previews: PreviewProvider {
     static var previews: some View {
-        let model = FocusTimerModel(id: 1, userId: 1, seq: 1, type: "FOCUS", name: "집중시간 타이머")
-        let viewModel = FocusTimerViewModel(model: model)
+        let model = AutoTimerModel(id: 1, userId: 1, seq: 1, type: "AUTO", name: "자동 집중시간 타이머")
+        let viewModel = AutoTimerViewModel(model: model)
         let timeTimerViewModel = Container.shared.resolve(TimeTimerViewModel.self)
-        FocusTimerCardView(focusTimerViewModel: viewModel, timeTimerViewModel: timeTimerViewModel)
+        AutoTimerCardView(autoTimerViewModel: viewModel, timeTimerViewModel: timeTimerViewModel)
     }
 }

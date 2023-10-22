@@ -55,6 +55,7 @@ class Container {
         container.register(PomodoroTimerRemoteServiceProtocol.self) { _ in PomodoroTimerRemoteService() }
         container.register(ExamTimerRemoteServiceProtocol.self) { _ in ExamTimerRemoteService() }
         container.register(StudySessionRemoteServiceProtocol.self) { _ in StudySessionRemoteService() }
+        container.register(AutoTimerRemoteServiceProtocol.self) { _ in AutoTimerRemoteService() }
         container.register(UserRemoteServiceProtocol.self) { _ in UserRemoteService() }
         
         // ETC
@@ -96,6 +97,7 @@ class Container {
         container.register(TaskViewModel.self) { _ in TaskViewModel() }
         container.register(CharacterViewModel.self) { _ in CharacterViewModel() }
         container.register(CalendarViewModel.self) { _ in CalendarViewModel() }
+        container.register(CameraPermissionViewModel.self) { _ in CameraPermissionViewModel() }
    }
 
     func resolve<Service>(_ serviceType: Service.Type, name: String? = nil) -> Service {

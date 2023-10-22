@@ -9,4 +9,5 @@ enum TimerType: String, Codable {
     case focus = "FOCUS"
     case pomodoro = "POMODORO"
     case exam = "EXAM"
+    case auto = "AUTO"
 }

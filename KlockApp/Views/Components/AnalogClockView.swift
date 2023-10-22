@@ -6,11 +6,12 @@
 //
 
 import SwiftUI
+import Combine
 
 struct AnalogClockView: View {
+    var timer: Publishers.Autoconnect<Timer.TimerPublisher>
     @StateObject var clockViewModel: ClockViewModel
     var analogClockModel: AnalogClockModel
-    @State private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
     var body: some View {
         VStack(spacing: 0) {
@@ -222,11 +223,12 @@ struct AnalogClockView_Previews: PreviewProvider {
             currentTime: Date(),
             startTime: Date(),
             elapsedTime: 0,
-            studySessions: [],
             isStudying: false,
             isRunning: true
         )
+        @State var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
         AnalogClockView(
+            timer: timer,
             clockViewModel: clockViewModel,
             analogClockModel: AnalogClockModel(
                 hourHandImageName: "img_watch_hand_hour",

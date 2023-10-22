@@ -16,11 +16,10 @@ struct ExamTimerCardView: View {
         currentTime: Date(),
         startTime: Date(),
         elapsedTime: 0,
-        studySessions: [],
         isStudying: false,
         isRunning: true
     )
-    
+    @State private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     @State private var isFlipped: Bool = false
 
     private func flipAnimation() {
@@ -66,6 +65,7 @@ struct ExamTimerCardView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 10))
 
                 AnalogClockView(
+                    timer: timer,
                     clockViewModel: clockViewModel,
                     analogClockModel: AnalogClockModel(
                         hourHandImageName: "img_watch_hand_hour",
