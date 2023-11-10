@@ -63,14 +63,14 @@ struct HomeView: View {
                         .environmentObject(calendarViewModel)
                 )
             ),
-//            (
-//                selectedImageName: "ic_peaple",
-//                deselectedImageName: "ic_peaple_o",
-//                content: AnyView(
-//                    FriendsView()
-//                        .environmentObject(friendsViewModel)
-//                )
-//            ),
+            (
+                selectedImageName: "ic_peaple",
+                deselectedImageName: "ic_peaple_o",
+                content: AnyView(
+                    FriendsView()
+                        .environmentObject(friendsViewModel)
+                )
+            ),
             (
                 selectedImageName: "ic_gear",
                 deselectedImageName: "ic_gear_o",

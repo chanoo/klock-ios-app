@@ -37,7 +37,7 @@ struct TimeUtils {
     /// - Parameter seconds: 변환할 초 단위의 시간입니다.
     /// - Returns: 시, 분, 초를 포함하는 문자열을 반환합니다.
     ///            시간이 0이면 "mm:ss" 형식, 시간과 분이 0이면 "ss" 형식의 문자열을 반환합니다.
-    static func secondsToHMS(seconds: Int) -> String {
+    static func secondsToHMS(seconds: Int64) -> String {
         let hours = seconds / 3600
         let minutes = (seconds % 3600) / 60
         let seconds = seconds % 60
