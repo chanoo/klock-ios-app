@@ -9,6 +9,7 @@ import SwiftUI
 import Lottie
 
 struct LottieView: UIViewRepresentable {
+    
     let name: String
     let speed: CGFloat?
     let currentFrame: CGFloat?
@@ -19,15 +20,27 @@ struct LottieView: UIViewRepresentable {
         self.currentFrame = currentFrame
     }
 
-    func makeUIView(context: UIViewRepresentableContext<LottieView>) -> LottieAnimationView {
+    func makeUIView(context: UIViewRepresentableContext<LottieView>) -> UIView {
+        let view = UIView()
+
         let animationView = LottieAnimationView(name: name)
+        animationView.translatesAutoresizingMaskIntoConstraints = false
         animationView.loopMode = .loop
         animationView.animationSpeed = speed ?? 1.0
         animationView.currentFrame = currentFrame ?? 0
+        animationView.contentMode = .scaleAspectFit
         animationView.play()
-        return animationView
+        view.addSubview(animationView)
+
+        NSLayoutConstraint.activate([
+            animationView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            animationView.heightAnchor.constraint(equalTo: view.heightAnchor)
+        ])
+
+        return view
     }
 
-    func updateUIView(_ uiView: LottieAnimationView, context: UIViewRepresentableContext<LottieView>) {
+    func updateUIView(_ uiView: UIView, context: Context) {
+        
     }
 }

@@ -25,6 +25,7 @@ enum ActionType {
     case inquiries
     case logout
     case deleteAccount
+    case loading
     case none
 }
 
@@ -40,6 +41,7 @@ class PreferencesViewModel: ObservableObject {
                 UIPasteboard.general.string = jwtToken
                 Foast.show(message: "복사 했습니다.")
             }),
+            ItemModel(title: "로딩뷰", iconName: "ic_shield_o", actionType: .loading, destinationView: AnyView(LoadingView())),
         ]),
         SectionModel(items: [
             ItemModel(title: "허용앱 설정", iconName: "ic_four_square", actionType: .allowedAppSettings, action: {
