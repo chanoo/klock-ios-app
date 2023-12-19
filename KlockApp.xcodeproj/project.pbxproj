@@ -1597,7 +1597,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "친구가 나를 찾을때 사용 됩니다.";
 				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "친구가 나를 찾을때 사용 됩니다.";
-				INFOPLIST_KEY_NSCameraUsageDescription = "공부시간을 측정, QR코드 스캔에 사용 됩니다.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "프로필 이미지 촬영 및 공부시간 측정, QR코드 스캔에 사용 됩니다.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "친구가 나를 찾을때 사용 됩니다.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "음성을 텍스트로 변경 해줍니다.";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "음성을 텍스트로 변경 해줍니다.";
@@ -1646,7 +1646,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "친구가 나를 찾을때 사용 됩니다.";
 				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "친구가 나를 찾을때 사용 됩니다.";
-				INFOPLIST_KEY_NSCameraUsageDescription = "공부시간을 측정, QR코드 스캔에 사용 됩니다.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "프로필 이미지 촬영 및 공부시간 측정, QR코드 스캔에 사용 됩니다.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "친구가 나를 찾을때 사용 됩니다.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "음성을 텍스트로 변경 해줍니다.";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "음성을 텍스트로 변경 해줍니다.";

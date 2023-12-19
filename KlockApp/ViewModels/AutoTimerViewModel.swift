@@ -21,6 +21,7 @@ class AutoTimerViewModel: ObservableObject {
 
         func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
             connection.videoOrientation = .portrait
+            connection.isVideoMirrored = true
             parent?.processSampleBuffer(sampleBuffer)
         }
     }
@@ -85,27 +86,26 @@ class AutoTimerViewModel: ObservableObject {
     
     private func setupCaptureSession() {
         DispatchQueue.global(qos: .userInitiated).async {
-            guard
-                let device = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front)
-            else {
+            guard let device = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front) else {
                 print("ERROR: Unable to access camera.")
                 return
             }
 
             do {
                 let input = try AVCaptureDeviceInput(device: device)
-                
-                let output = AVCaptureVideoDataOutput()
-                output.setSampleBufferDelegate(self.captureDelegate, queue: DispatchQueue(label: "VideoFrameProcessingQueue"))
-                
-                if let connection = output.connection(with: .video), connection.isVideoOrientationSupported {
-                    connection.videoOrientation = .portrait
-                }
-
                 let session = AVCaptureSession()
                 session.addInput(input)
+
+                let output = AVCaptureVideoDataOutput()
+                output.setSampleBufferDelegate(self.captureDelegate, queue: DispatchQueue(label: "VideoFrameProcessingQueue"))
                 session.addOutput(output)
-            
+
+                // 이 부분을 이동합니다.
+                if let connection = output.connection(with: .video), connection.isVideoOrientationSupported {
+                    connection.videoOrientation = .portrait
+                    connection.isVideoMirrored = true
+                }
+
                 self.captureSession = session
                 self.captureSession?.startRunning()
                 

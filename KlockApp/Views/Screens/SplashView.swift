@@ -10,6 +10,7 @@ import SwiftUI
 struct SplashView: View {
     @StateObject var viewModel: SplashViewModel = Container.shared.resolve(SplashViewModel.self)
     @EnvironmentObject var appFlowManager: AppFlowManager
+    @Environment(\.colorScheme) var colorScheme
 
     @ViewBuilder
     var destinationView: some View {
@@ -21,8 +22,16 @@ struct SplashView: View {
             FancyColor.background.color.edgesIgnoringSafeArea(.all)
 
             VStack {
-                Image("ic_img_logo")
-                    .padding(.bottom, 32)
+                ZStack(alignment: .center) {
+                    if colorScheme == .dark {
+                        LottieView(name: "lottie-loading-white", speed: 1.1)
+                            .frame(width: 120, height: 120)
+                    } else {
+                        LottieView(name: "lottie-loading-black", speed: 1.1)
+                            .frame(width: 120, height: 120)
+                    }
+                }
+                .padding(.bottom, 32)
 
                 if UserDefaults.standard.string(forKey: "access.token") != nil {
                     Text("남과의 경쟁이 아닌")
