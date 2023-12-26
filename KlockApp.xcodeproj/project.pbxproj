@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		02DC558749B5531E425BB498 /* Pods_KlockApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD03164649C92D8A6E7C2D33 /* Pods_KlockApp.framework */; };
 		98099DB92A287E340096AA27 /* SignUpStartWeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98099DB82A287E340096AA27 /* SignUpStartWeekView.swift */; };
 		98099DBB2A287E560096AA27 /* SignUpStartTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98099DBA2A287E560096AA27 /* SignUpStartTimeView.swift */; };
 		98099DBD2A287E920096AA27 /* SignUpNicknameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98099DBC2A287E920096AA27 /* SignUpNicknameView.swift */; };
@@ -106,6 +105,7 @@
 		987E545129D552540007E156 /* KlockAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E545029D552540007E156 /* KlockAppTests.swift */; };
 		987E545B29D552540007E156 /* KlockAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E545A29D552540007E156 /* KlockAppUITests.swift */; };
 		987E545D29D552540007E156 /* KlockAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E545C29D552540007E156 /* KlockAppUITestsLaunchTests.swift */; };
+		987F2E752B3B010800DC462D /* TensorFlowLiteTaskVision.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98CF07DC2B3AF4FB00BF33C2 /* TensorFlowLiteTaskVision.framework */; };
 		9881FC0B2A1F455200497937 /* BeaconManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9881FC0A2A1F455200497937 /* BeaconManager.swift */; };
 		9885F3182A5A9187000E2F7A /* MyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9885F3172A5A9187000E2F7A /* MyModel.swift */; };
 		988D7CD02A370B040018A85E /* FriendAddViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988D7CCF2A370B040018A85E /* FriendAddViewModel.swift */; };
@@ -192,7 +192,7 @@
 		98E314B329DEE65E00EA1617 /* TagRemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E314B229DEE65E00EA1617 /* TagRemoteService.swift */; };
 		98E314B529DEE67B00EA1617 /* TagRemoteServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E314B429DEE67B00EA1617 /* TagRemoteServiceProtocol.swift */; };
 		98E314B729DEE6BB00EA1617 /* TagServiceDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E314B629DEE6BB00EA1617 /* TagServiceDTO.swift */; };
-		98E64D8E2A6E2CF300A7FF16 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
+		98E64D8E2A6E2CF300A7FF16 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
 		98E64D9B2A72431400A7FF16 /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 98E64D9A2A72431400A7FF16 /* KakaoSDKAuth */; };
 		98E64D9D2A72431400A7FF16 /* KakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = 98E64D9C2A72431400A7FF16 /* KakaoSDKCommon */; };
 		98E64D9F2A72431400A7FF16 /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = 98E64D9E2A72431400A7FF16 /* KakaoSDKUser */; };
@@ -253,7 +253,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		699E9A4950948EB6E31D5566 /* Pods-KlockApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KlockApp.release.xcconfig"; path = "Target Support Files/Pods-KlockApp/Pods-KlockApp.release.xcconfig"; sourceTree = "<group>"; };
 		98099DB82A287E340096AA27 /* SignUpStartWeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpStartWeekView.swift; sourceTree = "<group>"; };
 		98099DBA2A287E560096AA27 /* SignUpStartTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpStartTimeView.swift; sourceTree = "<group>"; };
 		98099DBC2A287E920096AA27 /* SignUpNicknameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpNicknameView.swift; sourceTree = "<group>"; };
@@ -431,6 +430,8 @@
 		98CE661C29D55AE00009916F /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		98CE662029D55B730009916F /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		98CE662229D55BB10009916F /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		98CF07DA2B3454AB00BF33C2 /* CustomImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImagePicker.swift; sourceTree = "<group>"; };
+		98CF07DC2B3AF4FB00BF33C2 /* TensorFlowLiteTaskVision.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TensorFlowLiteTaskVision.framework; path = Frameworks/TensorFlowLiteTaskVision.framework; sourceTree = "<group>"; };
 		98D2826629E988100039E6E6 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		98D2826829E988D00039E6E6 /* MessageLocalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageLocalService.swift; sourceTree = "<group>"; };
 		98D2826A29E988E70039E6E6 /* MessageServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageServiceProtocol.swift; sourceTree = "<group>"; };
@@ -470,8 +471,6 @@
 		98FD8F732A174A7900CEE0B1 /* StudySessionRemoteServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudySessionRemoteServiceProtocol.swift; sourceTree = "<group>"; };
 		98FD8F752A174ED200CEE0B1 /* StudySessionRemoteServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudySessionRemoteServiceTests.swift; sourceTree = "<group>"; };
 		98FD8F772A174F0C00CEE0B1 /* StudySessionRemoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudySessionRemoteService.swift; sourceTree = "<group>"; };
-		9C31E398BC2B6DF74CABA485 /* Pods-KlockApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KlockApp.debug.xcconfig"; path = "Target Support Files/Pods-KlockApp/Pods-KlockApp.debug.xcconfig"; sourceTree = "<group>"; };
-		CD03164649C92D8A6E7C2D33 /* Pods_KlockApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KlockApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -486,12 +485,12 @@
 				98B21B3D29D5F54E004EFE0E /* FacebookCore in Frameworks */,
 				987443D22A57D5600019F847 /* KeychainAccess in Frameworks */,
 				983B59D129FB30F800F0EACD /* CoreStore in Frameworks */,
-				98E64D8E2A6E2CF300A7FF16 /* (null) in Frameworks */,
+				98E64D8E2A6E2CF300A7FF16 /* BuildFile in Frameworks */,
 				98E64D9F2A72431400A7FF16 /* KakaoSDKUser in Frameworks */,
 				98CE661629D55A370009916F /* Swinject in Frameworks */,
 				981881CD29F3847A002A4395 /* Lottie in Frameworks */,
+				987F2E752B3B010800DC462D /* TensorFlowLiteTaskVision.framework in Frameworks */,
 				98E64D9B2A72431400A7FF16 /* KakaoSDKAuth in Frameworks */,
-				02DC558749B5531E425BB498 /* Pods_KlockApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -523,8 +522,8 @@
 		980C623129EC621B00D0A7B5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				98CF07DC2B3AF4FB00BF33C2 /* TensorFlowLiteTaskVision.framework */,
 				980C623229EC621C00D0A7B5 /* FamilyControls.framework */,
-				CD03164649C92D8A6E7C2D33 /* Pods_KlockApp.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -637,7 +636,6 @@
 				987E545929D552540007E156 /* KlockAppUITests */,
 				987E543729D552520007E156 /* Products */,
 				980C623129EC621B00D0A7B5 /* Frameworks */,
-				B8DA0DC41E960E74E76DE07A /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -901,6 +899,7 @@
 				989D6F352A4C64E700BC2F2B /* SlideUpTransition.swift */,
 				989D6F372A4C654200BC2F2B /* CustomActionSheetModifier.swift */,
 				987DC3B72AFE4A37000DCBAD /* LoadingView.swift */,
+				98CF07DA2B3454AB00BF33C2 /* CustomImagePicker.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1016,15 +1015,6 @@
 			path = Character;
 			sourceTree = "<group>";
 		};
-		B8DA0DC41E960E74E76DE07A /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				9C31E398BC2B6DF74CABA485 /* Pods-KlockApp.debug.xcconfig */,
-				699E9A4950948EB6E31D5566 /* Pods-KlockApp.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1032,7 +1022,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 987E546029D552540007E156 /* Build configuration list for PBXNativeTarget "KlockApp" */;
 			buildPhases = (
-				CF2C59E319540F6EAE053FBC /* [CP] Check Pods Manifest.lock */,
 				987E543229D552520007E156 /* Sources */,
 				987E543329D552520007E156 /* Frameworks */,
 				987E543429D552520007E156 /* Resources */,
@@ -1105,7 +1094,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					987E543529D552520007E156 = {
 						CreatedOnToolsVersion = 14.2;
@@ -1133,11 +1122,11 @@
 			);
 			mainGroup = 987E542D29D552520007E156;
 			packageReferences = (
-				98CE661429D55A370009916F /* XCRemoteSwiftPackageReference "Swinject" */,
+				98CE661429D55A370009916F /* XCRemoteSwiftPackageReference "Swinject.git" */,
 				98B21B3B29D5F54E004EFE0E /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
 				98E9385629EA4C45009CBF32 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				9820034E29F1A6DA0056CA03 /* XCRemoteSwiftPackageReference "Foast" */,
-				981881CB29F3847A002A4395 /* XCRemoteSwiftPackageReference "lottie-spm" */,
+				981881CB29F3847A002A4395 /* XCRemoteSwiftPackageReference "lottie-spm.git" */,
 				983B59CF29FB30F800F0EACD /* XCRemoteSwiftPackageReference "CoreStore" */,
 				987443D02A57D5600019F847 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 				98E64D992A72431400A7FF16 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
@@ -1204,28 +1193,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "#export PATH=\"$PATH:/opt/homebrew/bin\"\n#if which swiftlint >/dev/null; then\n# swiftlint --fix && swiftlint\n#fi\n";
-		};
-		CF2C59E319540F6EAE053FBC /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-KlockApp-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1496,6 +1463,7 @@
 				ENABLE_PREVIEWS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1558,6 +1526,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1591,6 +1560,10 @@
 				DEVELOPMENT_TEAM = Z49D557LQF;
 				ENABLE_PREVIEWS = YES;
 				EXCLUDED_ARCHS = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Frameworks",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = KlockApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "클라크";
@@ -1640,6 +1613,10 @@
 				DEVELOPMENT_TEAM = Z49D557LQF;
 				ENABLE_PREVIEWS = YES;
 				EXCLUDED_ARCHS = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Frameworks",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = KlockApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "클라크";
@@ -1794,7 +1771,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		981881CB29F3847A002A4395 /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
+		981881CB29F3847A002A4395 /* XCRemoteSwiftPackageReference "lottie-spm.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-spm.git";
 			requirement = {
@@ -1834,7 +1811,7 @@
 				minimumVersion = 16.0.1;
 			};
 		};
-		98CE661429D55A370009916F /* XCRemoteSwiftPackageReference "Swinject" */ = {
+		98CE661429D55A370009916F /* XCRemoteSwiftPackageReference "Swinject.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Swinject/Swinject.git";
 			requirement = {
@@ -1863,7 +1840,7 @@
 /* Begin XCSwiftPackageProductDependency section */
 		981881CC29F3847A002A4395 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 981881CB29F3847A002A4395 /* XCRemoteSwiftPackageReference "lottie-spm" */;
+			package = 981881CB29F3847A002A4395 /* XCRemoteSwiftPackageReference "lottie-spm.git" */;
 			productName = Lottie;
 		};
 		9820034F29F1A6DA0056CA03 /* Foast */ = {
@@ -1893,7 +1870,7 @@
 		};
 		98CE661529D55A370009916F /* Swinject */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 98CE661429D55A370009916F /* XCRemoteSwiftPackageReference "Swinject" */;
+			package = 98CE661429D55A370009916F /* XCRemoteSwiftPackageReference "Swinject.git" */;
 			productName = Swinject;
 		};
 		98E64D9A2A72431400A7FF16 /* KakaoSDKAuth */ = {
