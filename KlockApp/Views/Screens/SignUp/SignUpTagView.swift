@@ -17,7 +17,7 @@ struct SignUpTagView: View {
         ScrollView {
             VStack {
                 HStack {
-                    Image("img_signup_step4_4")
+                    Image("img_signup_step4")
                 }
                 .frame(maxWidth: .infinity, alignment: .topLeading)
                 
@@ -56,10 +56,10 @@ struct SignUpTagView: View {
                     .frame(maxWidth: .infinity, alignment: .topLeading)
 
                 FancyButton(
-                    title: "시작하기",
+                    title: "다음",
                     action: {
                         guard self.viewModel.isTagNextButtonEnabled else { return }
-                        viewModel.confirmButtonTapped.send()
+                        activeDestination = .signUpProfileImage
                     },
                     disabled: Binding<Bool?>(
                         get: { !self.viewModel.isTagNextButtonEnabled },
@@ -67,6 +67,22 @@ struct SignUpTagView: View {
                     ),
                     style: .constant(.black)
                 )
+                
+                NavigationLink(
+                    destination: viewForDestination(activeDestination),
+                    isActive: Binding<Bool>(
+                        get: { activeDestination == .signUpProfileImage },
+                        set: { newValue in
+                            if !newValue {
+                                activeDestination = nil
+                            }
+                        }
+                    ),
+                    label: {
+                        EmptyView()
+                    }
+                )
+                .hidden()
             }
             .navigationBarItems(leading: BackButtonView())
             .navigationBarBackButtonHidden()
@@ -74,22 +90,6 @@ struct SignUpTagView: View {
             .onChange(of: viewModel.signUpUserModel.tagId > 0) { newValue in
                 viewModel.isTagNextButtonEnabled = newValue
             }
-
-            NavigationLink(
-                destination: viewForDestination(activeDestination),
-                isActive: Binding<Bool>(
-                    get: { activeDestination == .splash },
-                    set: { newValue in
-                        if !newValue {
-                            activeDestination = nil
-                        }
-                    }
-                ),
-                label: {
-                    EmptyView()
-                }
-            )
-            .hidden()
         }
         .frame(maxHeight: .infinity, alignment: .topLeading)
         .onAppear {
@@ -97,15 +97,15 @@ struct SignUpTagView: View {
             viewModel.onSignUpSuccess = signUpSuccess
         }
         .onReceive(viewModel.signUpSuccess, perform: { _ in
-            activeDestination = .splash
+            activeDestination = .signUpProfileImage
         })
         
     }
 
     private func viewForDestination(_ destination: Destination?) -> AnyView {
          switch destination {
-         case .splash:
-             return AnyView(SplashView())
+         case .signUpProfileImage:
+             return AnyView(SignUpProfileImageView().environmentObject(viewModel))
          case .none, _:
              return AnyView(EmptyView())
          }

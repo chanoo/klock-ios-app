@@ -35,14 +35,6 @@ class PreferencesViewModel: ObservableObject {
     @Published var profileImage: String  = "ic_img_logo"
     @Published var profileName: String = "User Name"
     lazy var preferencesSections: [SectionModel] = [
-//        SectionModel(items: [
-//            ItemModel(title: "토큰 복사", systemIconName: "doc.on.doc.fill", actionType: .copyToken, action: {
-//                let jwtToken = UserDefaults.standard.string(forKey: "access.token") ?? ""
-//                UIPasteboard.general.string = jwtToken
-//                Foast.show(message: "복사 했습니다.")
-//            }),
-//            ItemModel(title: "로딩뷰", iconName: "ic_shield_o", actionType: .loading, destinationView: AnyView(LoadingView())),
-//        ]),
         SectionModel(items: [
             ItemModel(title: "허용앱 설정", iconName: "ic_four_square", actionType: .allowedAppSettings, action: {
                 if #available(iOS 16.0, *) {
@@ -132,5 +124,18 @@ class PreferencesViewModel: ObservableObject {
         
         let userModel = UserModel.load()
         profileName = userModel?.nickname ?? "-"
+        if let profileImage = userModel?.profileImage {
+            self.profileImage = profileImage
+        }
+        
+        #if DEBUG
+        preferencesSections.insert(SectionModel(items: [
+            ItemModel(title: "토큰 복사", systemIconName: "doc.on.doc.fill", actionType: .copyToken, action: {
+                let jwtToken = UserDefaults.standard.string(forKey: "access.token") ?? ""
+                UIPasteboard.general.string = jwtToken
+                Foast.show(message: "복사 했습니다.")
+            })
+        ]), at: 0)
+        #endif
     }
 }

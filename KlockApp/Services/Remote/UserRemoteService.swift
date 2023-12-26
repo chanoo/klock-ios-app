@@ -80,14 +80,50 @@ class UserRemoteService: UserRemoteServiceProtocol, APIServiceProtocol {
                     throw dataResponse.error ?? AFError.responseValidationFailed(reason: .unacceptableStatusCode(code: dataResponse.response?.statusCode ?? -1))
                 }
             }
-            .mapError { error -> AFError in
-                if let afError = error as? AFError {
-                    return afError
-                } else {
-                    return AFError.sessionTaskFailed(error: error)
-                }
-            }
+            .mapError { $0 as! AFError }
             .eraseToAnyPublisher()
     }
 
+    func update(id: Int64, request: UserUpdateReqDTO) -> AnyPublisher<ProfileImageResDTO, AFError> {
+        let url = "\(baseURL)/\(id)"
+        
+        return AF.request(url, method: .put, parameters: request.dictionary, encoding: JSONEncoding.default, headers: self.headers())
+            .validate()
+            .publishDecodable(type: ProfileImageResDTO.self)
+            .tryMap { result -> ProfileImageResDTO in
+                switch result.result {
+                case .success(let response):
+                    return response
+                case .failure(let error):
+                    if let data = result.data {
+                        let decoder = JSONDecoder()
+                        if let errorResponse = try? decoder.decode(APIErrorModel.self, from: data) {
+                            print("Server error message: \(errorResponse.error)")
+                        }
+                    }
+                    throw error
+                }
+            }
+            .mapError { $0 as! AFError }
+            .eraseToAnyPublisher()
+    }
+    
+    func profileImage(id: Int64, request: ProfileImageReqDTO) -> AnyPublisher<ProfileImageResDTO, Alamofire.AFError> {
+        let url = "\(baseURL)/\(id)/profile-image"
+
+        return Future<ProfileImageResDTO, AFError> { promise in
+            AF.upload(multipartFormData: { multipartFormData in
+                multipartFormData.append(request.file, withName: "file", fileName: "profile-image-\(id).png", mimeType: "image/png")
+            }, to: url, method: .post, headers: self.headers())
+            .validate()
+            .responseDecodable(of: ProfileImageResDTO.self) { response in
+                switch response.result {
+                case .success(let resDTO):
+                    promise(.success(resDTO))
+                case .failure(let error):
+                    promise(.failure(error))
+                }
+            }
+        }.eraseToAnyPublisher()
+    }
 }

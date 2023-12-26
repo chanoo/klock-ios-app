@@ -14,7 +14,7 @@ struct SignUpStartWeekView: View {
 
     var body: some View {
         VStack {
-            Image("img_signup_step2_4")
+            Image("img_signup_step2")
                 .frame(maxWidth: .infinity, alignment: .topLeading)
             
             Text("한 주의 시작은\n언제인가요?")

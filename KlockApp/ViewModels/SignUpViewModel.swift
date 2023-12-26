@@ -15,7 +15,7 @@ import Alamofire
 import Foast
 
 class SignUpViewModel: NSObject, ObservableObject {
-
+    @Published var selectedImage: UIImage?
     @Published var signUpUserModel: SignUpUserModel
     @Published var isNickNameButtonEnabled = false
     @Published var isStartOfWeekNextButtonEnabled = false
@@ -189,23 +189,23 @@ class SignUpViewModel: NSObject, ObservableObject {
         print("User: \(dto)")
         UserDefaults.standard.set(dto.id, forKey: "user.id")
         UserDefaults.standard.set(dto.accessToken, forKey: "access.token")
-        self.userRemoteService.get(id: dto.id)
-            .sink(receiveCompletion: handleFetchDataCompletion,
-                  receiveValue: handleReceivedData)
-            .store(in: &cancellables)
-    }
-    
-    func handleFetchDataCompletion(_ completion: Subscribers.Completion<AFError>) {
-        switch completion {
-        case .failure(let error):
-            print("Error: \(error.localizedDescription)")
-            Foast.show(message: error.localizedDescription)
-        case .finished:
-            break
+        
+        // 프로필 이미지가 있으면 추가 업로드 시도 아니면 다음
+        if (selectedImage != nil) {
+            let _selectedImage = selectedImage?.resize(to: CGSize(width: 600, height: 600))
+            guard let pngData = _selectedImage?.pngData() else {
+                return
+            }
+            uploadProfileImage(userId: dto.id, imageData: pngData)
+        } else {
+            self.userRemoteService.get(id: dto.id)
+                .sink(receiveCompletion: handleFetchDataCompletion,
+                      receiveValue: handleSignUpReceivedData)
+                .store(in: &cancellables)
         }
     }
     
-    func handleReceivedData(_ dto: GetUserResDTO) {
+    func handleSignUpReceivedData(_ dto: GetUserResDTO) {
         let userModel = UserModel.from(dto: dto)
         userModel.save()
         let keychain = Keychain(service: "app.klock.ios")
@@ -217,5 +217,32 @@ class SignUpViewModel: NSObject, ObservableObject {
             self.onSignUpSuccess?()
         }
     }
+    
+    func uploadProfileImage(userId: Int64, imageData: Data) {
+        let request = ProfileImageReqDTO(file: imageData)
+        userRemoteService.profileImage(id: userId, request: request)
+            .sink(receiveCompletion: handleFetchDataCompletion,
+                  receiveValue: handleReceivedUploadProfileImageDataResponse)
+            .store(in: &cancellables)
+    }
+    
+    func handleReceivedUploadProfileImageDataResponse(_ dto: ProfileImageResDTO) {
+        var userModel = UserModel.load()
+        userModel?.profileImage = dto.profileImage
+        userModel?.save()
+        DispatchQueue.main.async {
+            self.onSignUpSuccess?()
+        }
+    }
 
+    // 공통 핸들러
+    func handleFetchDataCompletion(_ completion: Subscribers.Completion<AFError>) {
+        switch completion {
+        case .failure(let error):
+            print("Error: \(error.localizedDescription)")
+            Foast.show(message: error.localizedDescription)
+        case .finished:
+            break
+        }
+    }
 }

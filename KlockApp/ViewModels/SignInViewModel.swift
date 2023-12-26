@@ -239,8 +239,11 @@ class SignInViewModel: NSObject, ObservableObject, ASAuthorizationControllerDele
         }
     }
 
-
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         print("Error during Apple login: \(error.localizedDescription)")
+    }
+    
+    deinit {
+        cancellableSet.forEach { $0.cancel() }
     }
 }

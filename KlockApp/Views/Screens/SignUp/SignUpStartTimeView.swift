@@ -17,7 +17,7 @@ struct SignUpStartTimeView: View {
     var body: some View {
         VStack {
             HStack {
-                Image("img_signup_step3_4")
+                Image("img_signup_step3")
             }
             .frame(maxWidth: .infinity, alignment: .topLeading)
             

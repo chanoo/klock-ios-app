@@ -7,55 +7,13 @@
 
 import SwiftUI
 import UIKit
-
-struct ImagePicker: UIViewControllerRepresentable {
-    @Environment(\.presentationMode) private var presentationMode
-    @Binding var selectedImage: UIImage?
-    var sourceType: UIImagePickerController.SourceType
-
-    class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-        @Binding var selectedImage: UIImage?
-        @Environment(\.presentationMode) var presentationMode
-
-        init(selectedImage: Binding<UIImage?>) {
-            _selectedImage = selectedImage
-        }
-
-        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-            if let uiImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-                selectedImage = uiImage
-            }
-            presentationMode.wrappedValue.dismiss()
-        }
-        
-        func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-            presentationMode.wrappedValue.dismiss()
-        }
-    }
-
-    func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> UIImagePickerController {
-        let picker = UIImagePickerController()
-        picker.sourceType = sourceType
-        picker.delegate = context.coordinator
-        return picker
-    }
-    
-    func makeCoordinator() -> Coordinator {
-        return Coordinator(selectedImage: $selectedImage)
-    }
-    
-    func updateUIViewController(_ uiViewController: UIImagePickerController, context: UIViewControllerRepresentableContext<ImagePicker>) {
-    }
-}
-
+import Combine
 
 struct SignUpProfileImageView: View {
     @EnvironmentObject var viewModel: SignUpViewModel
-    @State private var selectedDay: FirstDayOfWeek = .sunday
+    @ObservedObject private var userProfileImageViewModel = UserProfileImageViewModel()
     @State private var activeDestination: Destination?
-    @State private var isShowingImagePicker = false
-    @State private var selectedImage: UIImage?
-    @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
+    @State private var cancellables = Set<AnyCancellable>()
 
     var body: some View {
         VStack {
@@ -78,21 +36,46 @@ struct SignUpProfileImageView: View {
             Spacer()
 
             ZStack {
-                if let image = selectedImage {
+                if let image = viewModel.selectedImage {
                     Image(uiImage: image)
                         .resizable()
+                        .scaledToFit()
+                        .frame(width: 150, height: 150)
+                        .clipShape(Circle())
+                        .overlay(Circle().stroke(FancyColor.black.color, lineWidth: 4))
                 } else {
                     Image("img_profile")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 150, height: 150)
+                        .clipShape(Circle())
+                        .overlay(Circle().stroke(FancyColor.black.color, lineWidth: 4))
                 }
                 
-                Button {
-                    showActionSheet()
-                } label: {
-                    Image("ic_plus")
+                if userProfileImageViewModel.isShowCemeraPermissionView {
+                    Button {
+                        userProfileImageViewModel.showImagePickerView()
+                    } label: {
+                        Image("ic_plus")
+                    }
+                    .padding(.top, 110)
+                    .padding(.leading, 110)
+                } else {
+                    NavigationLink(
+                        destination: CameraPermissionView(),
+                        isActive: $userProfileImageViewModel.isShowCemeraPermissionView)
+                    {
+                        Button {
+                            userProfileImageViewModel.showCameraPermissionView()
+                        } label: {
+                            Image("ic_plus")
+                        }
+                        .padding(.top, 110)
+                        .padding(.leading, 110)
+                    }
                 }
-                .padding(.top, 110)
-                .padding(.leading, 110)
             }
+            .padding(.bottom, 100)
 
             Spacer()
             
@@ -120,17 +103,34 @@ struct SignUpProfileImageView: View {
             )
             .hidden()
         }
+        .sheet(isPresented: $userProfileImageViewModel.isShowCemeraPermissionView) {
+            YPImagePickerView(showingImagePicker: $userProfileImageViewModel.showingImagePicker, selectedImage: $viewModel.selectedImage)
+        }
         .frame(maxHeight: .infinity, alignment: .topLeading)
         .navigationBarItems(leading: BackButtonView())
         .navigationBarBackButtonHidden()
         .padding(.all, 30)
         .onAppear {
+            subscribeToUserProfileImageViewModelChanges()
+            onAppearActions()
             viewModel.onSignUpSuccess = signUpSuccess
         }
         .onReceive(viewModel.signUpSuccess, perform: { _ in
             activeDestination = .splash
         })
     }
+    
+    private func subscribeToUserProfileImageViewModelChanges() {
+        userProfileImageViewModel.$selectedImage
+            .sink { [weak viewModel] newImage in
+                viewModel?.selectedImage = newImage
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func onAppearActions() {
+        userProfileImageViewModel.checkCameraPermission()
+     }
     
     private func viewForDestination(_ destination: Destination?) -> AnyView {
         switch destination {
@@ -141,24 +141,6 @@ struct SignUpProfileImageView: View {
         }
     }
     
-    func showActionSheet() {
-        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        actionSheet.addAction(UIAlertAction(title: "Camera", style: .default) { _ in
-            self.sourceType = .camera
-            self.isShowingImagePicker = true
-        })
-        actionSheet.addAction(UIAlertAction(title: "Photo Library", style: .default) { _ in
-            self.sourceType = .photoLibrary
-            self.isShowingImagePicker = true
-        })
-        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-           let controller = windowScene.windows.first?.rootViewController {
-            controller.present(actionSheet, animated: true)
-        }
-    }
-
     private func signUpSuccess() {
         viewModel.signUpSuccess.send()
     }

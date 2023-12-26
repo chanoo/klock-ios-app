@@ -14,4 +14,5 @@ enum Destination {
     case signUpTags
     case signUpProfileImage
     case splash
+    case editProfile
 }
