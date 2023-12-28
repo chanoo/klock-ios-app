@@ -26,10 +26,6 @@ struct LoadingView: View {
             
             Spacer()
         }
-        .navigationBarBackButtonHidden(true)
-        .navigationBarItems(
-            leading: BackButtonView()
-        )
     }
 }
 
