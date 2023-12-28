@@ -25,10 +25,10 @@ class TimeTimerViewModel: ObservableObject {
 
     // Published properties
     @Published var studySessions: [StudySessionModel] = []
-    @Published var currentStudySession: StudySessionModel
+    @Published var currentStudySession: StudySessionModel?
     @Published var elapsedTime: TimeInterval = 0
     @Published var isDark: Bool = false
-    @Published var isLoading: Bool = false
+    @Published var isLoading: Bool = true
     @Published var timerCardViews: [AnyView] = []
     @Published var isShowingClockModal = false
     @Published var focusTimerModel: FocusTimerModel? = nil
@@ -53,12 +53,9 @@ class TimeTimerViewModel: ObservableObject {
     var timerModels: [TimerModel] = []
     private var cancellables: Set<AnyCancellable> = []
 
-    init() {
+    func loadTimer() {
         debugPrint("TimeTimerViewModel init")
-        let now = Date()
-        let currentTime = UserDefaults.standard.double(forKey: studyStartTimeKey)
-        let startTime = Date(timeIntervalSince1970: currentTime)
-        self.currentStudySession = StudySessionModel(id: 0, userId: 1, startTime: startTime, endTime: now, timerName: "", timerType: "")
+        isLoading = true
         setupSensor()
         timerManager.fetchTimers { [weak self] timerModels in
             guard let self = self else { return }
@@ -84,6 +81,10 @@ class TimeTimerViewModel: ObservableObject {
             Task{
                 try await AuthorizationCenter.shared.requestAuthorization(for: .individual)
             }
+        }
+        
+        DispatchQueue.main.async {
+            self.isLoading = false
         }
     }
 
@@ -177,7 +178,7 @@ class TimeTimerViewModel: ObservableObject {
         // 공부 시작 시간
 //        let startTimeDouble = UserDefaults.standard.double(forKey: studyStartTimeKey)
 //        let startTimeDate = DateUtils.doubleToDate(startTimeDouble)
-        let startTimeDate = currentStudySession.startTime
+        let startTimeDate = currentStudySession?.startTime ?? Date()
         let startTime = DateUtils.dateToString(startTimeDate)
         
         // 공부 종료 시간
@@ -257,11 +258,14 @@ class TimeTimerViewModel: ObservableObject {
 
     // MARK: - Other methods
     func updateTime() {
+        guard let userId = UserModel.load()?.id else {
+            return
+        }
         let now = Date()
         currentStudySession = StudySessionModel(
-            id: currentStudySession.id,
-            userId: currentStudySession.userId,
-            startTime: currentStudySession.startTime,
+            id: currentStudySession?.id,
+            userId: currentStudySession?.userId ?? userId,
+            startTime: currentStudySession?.startTime ?? now,
             endTime: now,
             timerName: "",
             timerType: ""
@@ -269,7 +273,7 @@ class TimeTimerViewModel: ObservableObject {
     }
     
     private func updateElapsedTime() {
-        elapsedTime = Date().timeIntervalSince(currentStudySession.startTime)
+        elapsedTime = Date().timeIntervalSince(currentStudySession?.startTime ?? Date())
     }
     
     func elapsedTimeToString() -> String {

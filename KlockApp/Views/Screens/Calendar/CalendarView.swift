@@ -33,11 +33,7 @@ struct CalendarView: View {
     var body: some View {
         ZStack {
             if viewModel.isLoading {
-                VStack {
-                    Spacer()
-                    ProgressView()
-                    Spacer()
-                }
+                LoadingView()
             } else {
                 ScrollView {
                     VStack(spacing: 0) {

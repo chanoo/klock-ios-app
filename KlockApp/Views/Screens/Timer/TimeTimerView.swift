@@ -27,7 +27,10 @@ struct TimeTimerView: View {
 
     // 로딩 화면을 나타내는 뷰입니다.
     private var loadingView: some View {
-        ProgressView()
+        LoadingView()
+            .onAppear {
+                viewModel.loadTimer()
+            }
     }
 
     // 메인 화면을 나타내는 뷰입니다.
