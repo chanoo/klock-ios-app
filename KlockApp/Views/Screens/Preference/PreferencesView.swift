@@ -11,21 +11,67 @@ struct PreferencesView: View {
     @EnvironmentObject var viewModel: PreferencesViewModel
     @EnvironmentObject var actionSheetManager: ActionSheetManager
     @EnvironmentObject var myModel: MyModel
+    @State private var isUserProfileImageViewPresented = false
 
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: 0) {
                 // Profile
                 HStack {
-                    Image(viewModel.profileImage)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 66, height: 66)
+                    AsyncImage(url: URL(string: viewModel.profileImage)) { phase in
+                        switch phase {
+                        case .empty:
+                            Image("ic_img_logo")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 66, height: 66)
+                        case .success(let image):
+                            image
+                                .resizable() // 이미지가 로드되면 resizable 적용
+                                .aspectRatio(contentMode: .fit)
+                                .scaledToFit() // 이미지의 비율을 유지하면서 프레임에 맞게 조정
+                                .clipShape(Circle())
+                                .overlay(Circle().stroke(FancyColor.black.color, lineWidth: 4))
+                        case .failure(_):
+                            Image("ic_img_logo")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 66, height: 66)
+                        @unknown default:
+                            Image("ic_img_logo")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 66, height: 66)
+                        }
+                    }
+                    .frame(width: 66, height: 66)
+                    
                     Text(viewModel.profileName)
                     Spacer()
-//                    Button(action: { viewModel.editProfile() }) {
-//                        Image(systemName: "pencil")
-//                    }
+                    NavigationLink(
+                        destination: UserProfileImageView()
+                            .environmentObject(viewModel)
+                            .environmentObject(actionSheetManager),
+                        isActive: $isUserProfileImageViewPresented // Binding the state
+                    ) {
+                        HStack {
+                            Image("ic_pencil_line")
+                                .foregroundColor(FancyColor.black.color)
+                            Text("편집")
+                                .font(.system(size: 12, weight: .semibold))
+                                .lineSpacing(18)
+                                .foregroundColor(FancyColor.black.color)
+                        }
+                        .padding([.top, .bottom], 8)
+                        .padding([.leading, .trailing], 16)
+                        .foregroundColor(.clear)
+                        .background(Color(red: 0.93, green: 0.94, blue: 0.96))
+                        .cornerRadius(15)
+                    }
+                    .onAppear {
+                        // Resetting the navigation state
+                        isUserProfileImageViewPresented = false
+                    }
                 }
                 .padding()
 
@@ -113,7 +159,12 @@ struct ItemModel: Identifiable {
 struct PreferencesView_Previews: PreviewProvider {
     static var previews: some View {
         let viewModel = Container.shared.resolve(PreferencesViewModel.self)
+        let actionSheetManager = ActionSheetManager()
+        let model = MyModel.shared
+
         PreferencesView()
             .environmentObject(viewModel)
+            .environmentObject(actionSheetManager)
+            .environmentObject(model)
     }
 }

@@ -37,7 +37,6 @@
 		98327DFA2A0CF87100CFEB3A /* TimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98327DF92A0CF87100CFEB3A /* TimerModel.swift */; };
 		9833FFC229F5759E00CC33F7 /* AccountTimerLocalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9833FFC129F5759E00CC33F7 /* AccountTimerLocalService.swift */; };
 		9833FFC429F5769700CC33F7 /* AccountTimerServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9833FFC329F5769700CC33F7 /* AccountTimerServiceProtocol.swift */; };
-		9833FFC629F58F5C00CC33F7 /* AccountRemoteServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9833FFC529F58F5C00CC33F7 /* AccountRemoteServiceProtocol.swift */; };
 		9833FFC829F58F8A00CC33F7 /* AccountLocalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9833FFC729F58F8A00CC33F7 /* AccountLocalService.swift */; };
 		9833FFCD29F6652800CC33F7 /* ChatBotLocalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9833FFCC29F6652800CC33F7 /* ChatBotLocalService.swift */; };
 		9833FFD029F683C800CC33F7 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9833FFCF29F683C800CC33F7 /* CoreDataHelper.swift */; };
@@ -107,6 +106,10 @@
 		987E545D29D552540007E156 /* KlockAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E545C29D552540007E156 /* KlockAppUITestsLaunchTests.swift */; };
 		987F2E752B3B010800DC462D /* TensorFlowLiteTaskVision.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98CF07DC2B3AF4FB00BF33C2 /* TensorFlowLiteTaskVision.framework */; };
 		9881FC0B2A1F455200497937 /* BeaconManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9881FC0A2A1F455200497937 /* BeaconManager.swift */; };
+		988572472B3C1F6300E7256B /* UserProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988572462B3C1F6300E7256B /* UserProfileImageView.swift */; };
+		9885724A2B3C488200E7256B /* lottie-heart.json in Resources */ = {isa = PBXBuildFile; fileRef = 988572492B3C488200E7256B /* lottie-heart.json */; };
+		9885724D2B3C560700E7256B /* YPImagePicker in Frameworks */ = {isa = PBXBuildFile; productRef = 9885724C2B3C560700E7256B /* YPImagePicker */; };
+		9885724F2B3C5A4D00E7256B /* YPImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9885724E2B3C5A4D00E7256B /* YPImagePickerView.swift */; };
 		9885F3182A5A9187000E2F7A /* MyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9885F3172A5A9187000E2F7A /* MyModel.swift */; };
 		988D7CD02A370B040018A85E /* FriendAddViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988D7CCF2A370B040018A85E /* FriendAddViewModel.swift */; };
 		988D7CD22A370BCD0018A85E /* FriendAddByQRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988D7CD12A370BCD0018A85E /* FriendAddByQRCodeView.swift */; };
@@ -178,6 +181,8 @@
 		98CE661D29D55AE00009916F /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CE661C29D55AE00009916F /* UserModel.swift */; };
 		98CE662129D55B730009916F /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CE662029D55B730009916F /* SignInViewModel.swift */; };
 		98CE662329D55BB10009916F /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CE662229D55BB10009916F /* SignInView.swift */; };
+		98CF07D92B34546E00BF33C2 /* UserProfileImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CF07D82B34546E00BF33C2 /* UserProfileImageViewModel.swift */; };
+		98CF07DB2B3454AB00BF33C2 /* CustomImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CF07DA2B3454AB00BF33C2 /* CustomImagePicker.swift */; };
 		98D2826729E988100039E6E6 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D2826629E988100039E6E6 /* CoreDataManager.swift */; };
 		98D2826929E988D00039E6E6 /* MessageLocalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D2826829E988D00039E6E6 /* MessageLocalService.swift */; };
 		98D2826B29E988E70039E6E6 /* MessageServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D2826A29E988E70039E6E6 /* MessageServiceProtocol.swift */; };
@@ -186,6 +191,7 @@
 		98D7C95129E45C550075D201 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D7C95029E45C550075D201 /* ContentView.swift */; };
 		98D7C95329E460470075D201 /* AppFlowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D7C95229E460470075D201 /* AppFlowManager.swift */; };
 		98D7C95729E510990075D201 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D7C95629E510990075D201 /* ContentViewModel.swift */; };
+		98DB24DF2B3D6130001ACE21 /* UserRemoteServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DB24DE2B3D6130001ACE21 /* UserRemoteServiceTests.swift */; };
 		98DC292B29E9373D00882E36 /* ChatBotRemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DC292A29E9373D00882E36 /* ChatBotRemoteService.swift */; };
 		98DC292D29E9380200882E36 /* ChatBotServiceDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DC292C29E9380200882E36 /* ChatBotServiceDTO.swift */; };
 		98DC292F29E9383900882E36 /* ChatBotRemoteServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DC292E29E9383900882E36 /* ChatBotRemoteServiceProtocol.swift */; };
@@ -283,7 +289,6 @@
 		98327DF92A0CF87100CFEB3A /* TimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerModel.swift; sourceTree = "<group>"; };
 		9833FFC129F5759E00CC33F7 /* AccountTimerLocalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTimerLocalService.swift; sourceTree = "<group>"; };
 		9833FFC329F5769700CC33F7 /* AccountTimerServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTimerServiceProtocol.swift; sourceTree = "<group>"; };
-		9833FFC529F58F5C00CC33F7 /* AccountRemoteServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRemoteServiceProtocol.swift; sourceTree = "<group>"; };
 		9833FFC729F58F8A00CC33F7 /* AccountLocalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountLocalService.swift; sourceTree = "<group>"; };
 		9833FFCC29F6652800CC33F7 /* ChatBotLocalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotLocalService.swift; sourceTree = "<group>"; };
 		9833FFCF29F683C800CC33F7 /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
@@ -359,6 +364,9 @@
 		987E545A29D552540007E156 /* KlockAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlockAppUITests.swift; sourceTree = "<group>"; };
 		987E545C29D552540007E156 /* KlockAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlockAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		9881FC0A2A1F455200497937 /* BeaconManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconManager.swift; sourceTree = "<group>"; };
+		988572462B3C1F6300E7256B /* UserProfileImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileImageView.swift; sourceTree = "<group>"; };
+		988572492B3C488200E7256B /* lottie-heart.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "lottie-heart.json"; sourceTree = "<group>"; };
+		9885724E2B3C5A4D00E7256B /* YPImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YPImagePickerView.swift; sourceTree = "<group>"; };
 		9885F3172A5A9187000E2F7A /* MyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyModel.swift; sourceTree = "<group>"; };
 		988D7CCF2A370B040018A85E /* FriendAddViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendAddViewModel.swift; sourceTree = "<group>"; };
 		988D7CD12A370BCD0018A85E /* FriendAddByQRCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendAddByQRCodeView.swift; sourceTree = "<group>"; };
@@ -430,6 +438,8 @@
 		98CE661C29D55AE00009916F /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		98CE662029D55B730009916F /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		98CE662229D55BB10009916F /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		98CF07D82B34546E00BF33C2 /* UserProfileImageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileImageViewModel.swift; sourceTree = "<group>"; };
+		98CF07DA2B3454AB00BF33C2 /* CustomImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImagePicker.swift; sourceTree = "<group>"; };
 		98CF07DC2B3AF4FB00BF33C2 /* TensorFlowLiteTaskVision.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TensorFlowLiteTaskVision.framework; path = Frameworks/TensorFlowLiteTaskVision.framework; sourceTree = "<group>"; };
 		98D2826629E988100039E6E6 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		98D2826829E988D00039E6E6 /* MessageLocalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageLocalService.swift; sourceTree = "<group>"; };
@@ -439,6 +449,7 @@
 		98D7C95029E45C550075D201 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		98D7C95229E460470075D201 /* AppFlowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowManager.swift; sourceTree = "<group>"; };
 		98D7C95629E510990075D201 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
+		98DB24DE2B3D6130001ACE21 /* UserRemoteServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRemoteServiceTests.swift; sourceTree = "<group>"; };
 		98DC292929E90DAE00882E36 /* ConfigDebug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ConfigDebug.xcconfig; sourceTree = "<group>"; };
 		98DC292A29E9373D00882E36 /* ChatBotRemoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotRemoteService.swift; sourceTree = "<group>"; };
 		98DC292C29E9380200882E36 /* ChatBotServiceDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotServiceDTO.swift; sourceTree = "<group>"; };
@@ -488,6 +499,7 @@
 				98E64D9F2A72431400A7FF16 /* KakaoSDKUser in Frameworks */,
 				98CE661629D55A370009916F /* Swinject in Frameworks */,
 				981881CD29F3847A002A4395 /* Lottie in Frameworks */,
+				9885724D2B3C560700E7256B /* YPImagePicker in Frameworks */,
 				987F2E752B3B010800DC462D /* TensorFlowLiteTaskVision.framework in Frameworks */,
 				98E64D9B2A72431400A7FF16 /* KakaoSDKAuth in Frameworks */,
 			);
@@ -532,6 +544,7 @@
 			children = (
 				98192F412A542DB5007073FB /* PreferencesView.swift */,
 				986E0D372A557570005159AA /* AccountSecurityView.swift */,
+				988572462B3C1F6300E7256B /* UserProfileImageView.swift */,
 			);
 			path = Preference;
 			sourceTree = "<group>";
@@ -544,6 +557,7 @@
 				9821409E2A07AFB800C68EB9 /* ExamTimerRemoteServiceTests.swift */,
 				98AC75C32A094D5600EE95D4 /* TimerRemoteServiceTests.swift */,
 				98FD8F752A174ED200CEE0B1 /* StudySessionRemoteServiceTests.swift */,
+				98DB24DE2B3D6130001ACE21 /* UserRemoteServiceTests.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -571,7 +585,6 @@
 				983BC0212A8EF62E00DC108B /* AutoTimerRemoteService.swift */,
 				98E67FE02A5714750090AE23 /* UserRemoteServiceProtocol.swift */,
 				98E67FE22A5714920090AE23 /* UserRemoteService.swift */,
-				9833FFC529F58F5C00CC33F7 /* AccountRemoteServiceProtocol.swift */,
 				98DC292E29E9383900882E36 /* ChatBotRemoteServiceProtocol.swift */,
 				98DC292A29E9373D00882E36 /* ChatBotRemoteService.swift */,
 				98E314B429DEE67B00EA1617 /* TagRemoteServiceProtocol.swift */,
@@ -698,6 +711,13 @@
 			path = KlockAppUITests;
 			sourceTree = "<group>";
 		};
+		988572482B3C329000E7256B /* Message Bubble */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Message Bubble";
+			sourceTree = "<group>";
+		};
 		9899A7E82AA3743A001B4C72 /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -817,6 +837,7 @@
 				988D7CFB2A3851BD0018A85E /* QRCodeScannerViewModel.swift */,
 				98AC30842A15CBA8006DC48D /* ExamTimerViewModel.swift */,
 				981D73172A1A49E0000C8F3D /* ClockViewModel.swift */,
+				98CF07D82B34546E00BF33C2 /* UserProfileImageViewModel.swift */,
 				987443D32A57D93F0019F847 /* UserViewModel.swift */,
 				985BE88329E652CE008582A3 /* README.md */,
 				9885F3172A5A9187000E2F7A /* MyModel.swift */,
@@ -867,6 +888,7 @@
 				987DC3C82B030164000DCBAD /* lottie-loading-black.json */,
 				987DC3C92B030164000DCBAD /* lottie-loading-white.json */,
 				981881D629F426FC002A4395 /* lottie-plus.json */,
+				988572492B3C488200E7256B /* lottie-heart.json */,
 				988D7D0F2A3B15560018A85E /* lottie-confetti.json */,
 				983BC02C2A8F014400DC108B /* deeplabv3.tflite */,
 				985BE8AC29E73900008582A3 /* Config.xcconfig */,
@@ -881,6 +903,7 @@
 		98CE661229D553EA0009916F /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				988572482B3C329000E7256B /* Message Bubble */,
 				98E9386429EA5899009CBF32 /* AnalogClockView.swift */,
 				98B21B4329D60D25004EFE0E /* FancyButton.swift */,
 				98B21B4529D60EEB004EFE0E /* FancyTextField.swift */,
@@ -898,6 +921,8 @@
 				989D6F352A4C64E700BC2F2B /* SlideUpTransition.swift */,
 				989D6F372A4C654200BC2F2B /* CustomActionSheetModifier.swift */,
 				987DC3B72AFE4A37000DCBAD /* LoadingView.swift */,
+				98CF07DA2B3454AB00BF33C2 /* CustomImagePicker.swift */,
+				9885724E2B3C5A4D00E7256B /* YPImagePickerView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1023,7 +1048,6 @@
 				987E543229D552520007E156 /* Sources */,
 				987E543329D552520007E156 /* Frameworks */,
 				987E543429D552520007E156 /* Resources */,
-				98BDD22629DDA2B900B0440F /* SwiftLint Script */,
 				9885F3112A5A9065000E2F7A /* Embed Foundation Extensions */,
 			);
 			buildRules = (
@@ -1043,6 +1067,7 @@
 				98E64D9A2A72431400A7FF16 /* KakaoSDKAuth */,
 				98E64D9C2A72431400A7FF16 /* KakaoSDKCommon */,
 				98E64D9E2A72431400A7FF16 /* KakaoSDKUser */,
+				9885724C2B3C560700E7256B /* YPImagePicker */,
 			);
 			productName = KlockApp;
 			productReference = 987E543629D552520007E156 /* KlockApp.app */;
@@ -1128,6 +1153,7 @@
 				983B59CF29FB30F800F0EACD /* XCRemoteSwiftPackageReference "CoreStore" */,
 				987443D02A57D5600019F847 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 				98E64D992A72431400A7FF16 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
+				9885724B2B3C560700E7256B /* XCRemoteSwiftPackageReference "YPImagePicker" */,
 			);
 			productRefGroup = 987E543729D552520007E156 /* Products */;
 			projectDirPath = "";
@@ -1146,6 +1172,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				98B21B1829D55DE0004EFE0E /* README.md in Resources */,
+				9885724A2B3C488200E7256B /* lottie-heart.json in Resources */,
 				987E544129D552530007E156 /* Preview Assets.xcassets in Resources */,
 				988D7D102A3B15560018A85E /* lottie-confetti.json in Resources */,
 				981881D729F426FC002A4395 /* lottie-plus.json in Resources */,
@@ -1172,27 +1199,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		98BDD22629DDA2B900B0440F /* SwiftLint Script */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "SwiftLint Script";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "#export PATH=\"$PATH:/opt/homebrew/bin\"\n#if which swiftlint >/dev/null; then\n# swiftlint --fix && swiftlint\n#fi\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		987E543229D552520007E156 /* Sources */ = {
@@ -1242,6 +1248,7 @@
 				981881CA29F27316002A4395 /* PageControl.swift in Sources */,
 				9843B7DD29EEE0EB00F91DAD /* NotificationManager.swift in Sources */,
 				98099DBD2A287E920096AA27 /* SignUpNicknameView.swift in Sources */,
+				988572472B3C1F6300E7256B /* UserProfileImageView.swift in Sources */,
 				98976AFF2A00ED8500F1CEAE /* TimeTimerDTO.swift in Sources */,
 				9878FF0D2A0EA17100D38BB4 /* TimerManager.swift in Sources */,
 				9843B7E529EF086600F91DAD /* ProximityAndOrientationServiceProtocol.swift in Sources */,
@@ -1284,12 +1291,12 @@
 				988D7CDC2A3713490018A85E /* ActivityView.swift in Sources */,
 				98AC30752A1363A3006DC48D /* FocusTimerView.swift in Sources */,
 				98B21B5229D6F404004EFE0E /* FriendRelationModel.swift in Sources */,
+				9885724F2B3C5A4D00E7256B /* YPImagePickerView.swift in Sources */,
 				985BE89C29E6E595008582A3 /* FriendModel.swift in Sources */,
 				98EBFBEC29F9694E004E95F3 /* TaskListView.swift in Sources */,
 				98B21B6C29D9A7A5004EFE0E /* HomeView.swift in Sources */,
 				988D7CD02A370B040018A85E /* FriendAddViewModel.swift in Sources */,
 				98976B092A07819100F1CEAE /* PomodoroTimerRemoteService.swift in Sources */,
-				9833FFC629F58F5C00CC33F7 /* AccountRemoteServiceProtocol.swift in Sources */,
 				988D7CD62A370C4A0018A85E /* FriendAddByNicknameView.swift in Sources */,
 				989D6F362A4C64E700BC2F2B /* SlideUpTransition.swift in Sources */,
 				98B21B5429D6F424004EFE0E /* DDayEventModel.swift in Sources */,
@@ -1309,6 +1316,7 @@
 				98AC30852A15CBA8006DC48D /* ExamTimerViewModel.swift in Sources */,
 				98AC30812A15CABB006DC48D /* PomodoroTimerCardView.swift in Sources */,
 				9837CCA52A418C5F002F1A3A /* FriendsListView.swift in Sources */,
+				98CF07D92B34546E00BF33C2 /* UserProfileImageViewModel.swift in Sources */,
 				98B21B4F29D6F3E1004EFE0E /* AccountTagModel.swift in Sources */,
 				986E5DB429EAEF9200FF7047 /* CalendarView.swift in Sources */,
 				981881CF29F386A4002A4395 /* LottieView.swift in Sources */,
@@ -1337,6 +1345,7 @@
 				983B59DF29FB7B1E00F0EACD /* AccountEntity.swift in Sources */,
 				98EBFBEA29F968FF004E95F3 /* TaskViewModel.swift in Sources */,
 				98976AFB2A00EC4800F1CEAE /* TimerRemoteServiceProtocol.swift in Sources */,
+				98CF07DB2B3454AB00BF33C2 /* CustomImagePicker.swift in Sources */,
 				988D7CDA2A37126C0018A85E /* FriendAddByNearView.swift in Sources */,
 				98AC30872A15CCA9006DC48D /* ExamTimerCardView.swift in Sources */,
 				981881C829F26F07002A4395 /* ExamTimerView.swift in Sources */,
@@ -1390,6 +1399,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				98AC75C42A094D5600EE95D4 /* TimerRemoteServiceTests.swift in Sources */,
+				98DB24DF2B3D6130001ACE21 /* UserRemoteServiceTests.swift in Sources */,
 				9821409F2A07AFB800C68EB9 /* ExamTimerRemoteServiceTests.swift in Sources */,
 				98FD8F762A174ED200CEE0B1 /* StudySessionRemoteServiceTests.swift in Sources */,
 				9821409D2A07AC3100C68EB9 /* PomodoroTimerRemoteServiceTests.swift in Sources */,
@@ -1427,6 +1437,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -1490,6 +1501,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -1557,7 +1569,6 @@
 				DEVELOPMENT_ASSET_PATHS = "\"KlockApp/Preview Content\"";
 				DEVELOPMENT_TEAM = Z49D557LQF;
 				ENABLE_PREVIEWS = YES;
-				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
@@ -1636,6 +1647,16 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.3;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-framework",
+					"\"Accelerate\"",
+					"-framework",
+					"\"CoreMedia\"",
+					"-framework",
+					"\"TensorFlowLiteTaskVision\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = app.klock.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1801,6 +1822,14 @@
 				minimumVersion = 4.0.0;
 			};
 		};
+		9885724B2B3C560700E7256B /* XCRemoteSwiftPackageReference "YPImagePicker" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Yummypets/YPImagePicker.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.2.2;
+			};
+		};
 		98B21B3B29D5F54E004EFE0E /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
@@ -1855,6 +1884,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 987443D02A57D5600019F847 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
 			productName = KeychainAccess;
+		};
+		9885724C2B3C560700E7256B /* YPImagePicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9885724B2B3C560700E7256B /* XCRemoteSwiftPackageReference "YPImagePicker" */;
+			productName = YPImagePicker;
 		};
 		98B21B3C29D5F54E004EFE0E /* FacebookCore */ = {
 			isa = XCSwiftPackageProductDependency;

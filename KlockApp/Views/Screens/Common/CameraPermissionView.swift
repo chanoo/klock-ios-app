@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CameraPermissionView: View {
     @StateObject var viewModel = CameraPermissionViewModel()
-    @EnvironmentObject var actionSheetManager: ActionSheetManager
+    @StateObject var actionSheetManager = ActionSheetManager()
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
     var body: some View {
@@ -17,7 +17,7 @@ struct CameraPermissionView: View {
             VStack(alignment: .center, spacing: 0) {
                 VStack(alignment: .leading, spacing: 0) {
                     HStack {
-                        Text("권한 허용이\n필요한 기능이에요.")
+                        Text("카메라 권한 허용이\n필요한 기능이에요.")
                             .lineSpacing(6)
                             .font(.system(size: 24, weight: .semibold))
                         Spacer()

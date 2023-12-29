@@ -13,6 +13,7 @@ struct FancyTextField: View {
     let keyboardType: UIKeyboardType?
     let isSecureField: Bool?
     let isValid: Bool?
+    let maxLength: Int?
     @Binding var firstResponder: Bool
     var onCommit: (() -> Void)?
     
@@ -22,6 +23,7 @@ struct FancyTextField: View {
         keyboardType: UIKeyboardType? = .default,
         isSecureField: Bool? = false,
         isValid: Bool? = nil,
+        maxLength: Int? = nil,
         firstResponder: Binding<Bool>,
         onCommit: ( () -> Void)? = nil)
     {
@@ -29,7 +31,8 @@ struct FancyTextField: View {
         self._text = text
         self.keyboardType = keyboardType
         self.isSecureField = isSecureField
-        self.isValid = isValid        
+        self.isValid = isValid
+        self.maxLength = maxLength
         self._firstResponder = firstResponder
         self.onCommit = onCommit
     }
@@ -73,6 +76,15 @@ struct FancyTextField: View {
             Rectangle()
                 .frame(height: 1)
                 .foregroundColor((text.count == 0 || isValid == true) ? FancyColor.textfieldUnderline.color : FancyColor.red.color)
+            if let maxLength = maxLength {
+                HStack {
+                    Spacer() // 오른쪽 정렬을 위해 Spacer 추가
+                    Text("\(text.count) / \(maxLength)")
+                        .font(.caption)
+                        .foregroundColor(FancyColor.black.color)
+                        .padding([.top, .trailing], 4)
+                }
+            }
         }
         .background(FancyColor.textfieldBackground.color)
         .onChange(of: firstResponder) { value in
@@ -80,6 +92,11 @@ struct FancyTextField: View {
                 isFocused = true
             } else {
                 isFocused = false
+            }
+        }
+        .onChange(of: text) { newValue in
+            if let maxLength = maxLength, newValue.count > maxLength {
+                text = String(newValue.prefix(maxLength))
             }
         }
     }

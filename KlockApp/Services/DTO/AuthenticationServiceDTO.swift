@@ -53,4 +53,5 @@ struct SocialLoginReqDTO: Encodable {
 struct SocialLoginResDTO: Decodable {
     let token: String
     let userId: Int64
+    let publicKey: String
 }

@@ -14,7 +14,7 @@ struct SignUpNicknameView: View {
     var body: some View {
         VStack {
             HStack {
-                Image("img_signup_step1_4")
+                Image("img_signup_step1")
             }
             .foregroundColor(FancyColor.text.color)
             .frame(maxWidth: .infinity, alignment: .topLeading)

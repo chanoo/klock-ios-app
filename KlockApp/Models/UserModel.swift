@@ -16,8 +16,8 @@ struct UserModel: Hashable, Codable {
     let id: Int64
     let accessToken: String?
     let refreshToken: String?
-    let nickname: String
-    let profileImage: String?
+    var nickname: String
+    var profileImage: String?
     let tagId: Int64
     let startOfTheWeek: String
     let startOfTheDay: Int
