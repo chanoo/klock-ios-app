@@ -46,6 +46,7 @@ struct FocusTimerView: View {
 //                .edgesIgnoringSafeArea(.all)
             
             VStack(spacing: 0) {
+                Spacer()
                 AnalogClockView(
                     timer: timer,
                     clockViewModel: clockViewModel,
@@ -62,7 +63,7 @@ struct FocusTimerView: View {
                         outlineOutColor: FancyColor.timerOutline.color
                     )
                 )
-                .padding([.top, .bottom], 50)
+                Spacer()
 
                 Text(focusTimerViewModel.model.name)
                     .font(.system(size: 17, weight: .bold))
@@ -104,7 +105,7 @@ struct FocusTimerView: View {
                     isBlock: false,
                     style: .constant(.black)
                 )
-                .padding(.top, 40)
+                .padding(.top, 30)
                 .padding(.bottom, 60)
             }
             .frame(width: geometry.size.width, height: geometry.size.height)

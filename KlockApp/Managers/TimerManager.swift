@@ -118,7 +118,7 @@ class TimerManager {
         let seq = 1
         switch type {
         case "FOCUS":
-            let req = ReqFocusTimer(seq: seq, name: "Focus Timer")
+            let req = ReqFocusTimer(seq: seq, name: "집중시간 타이머")
             focusTimerRemoteService.create(data: req)
                 .sink(receiveCompletion: { completion in
                     switch completion {
@@ -133,7 +133,7 @@ class TimerManager {
                 })
                 .store(in: &cancellables)
         case "POMODORO":
-            let req = ReqPomodoroTimer(seq: seq, name: "Pomodoro Timer", focusTime: 25, breakTime: 5, cycleCount: 4)
+            let req = ReqPomodoroTimer(seq: seq, name: "뽀모도로 타이머", focusTime: 25, breakTime: 5, cycleCount: 4)
             pomodoroTimerRemoteService.create(data: req)
                 .sink(receiveCompletion: { completion in
                     switch completion {
@@ -148,7 +148,7 @@ class TimerManager {
                 })
                 .store(in: &cancellables)
         case "EXAM":
-            let req = ReqExamTimer(seq: seq, name: "국어", startTime: "2023-01-01T08:40:00.000000", duration: 80, questionCount: 45)
+            let req = ReqExamTimer(seq: seq, name: "시험시간 타이머", startTime: "2023-01-01T08:40:00.000000", duration: 80, questionCount: 45)
             examTimerRemoteService.create(data: req)
                 .sink(receiveCompletion: { completion in
                     switch completion {

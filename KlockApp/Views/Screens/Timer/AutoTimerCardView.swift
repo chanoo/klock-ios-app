@@ -50,9 +50,11 @@ struct AutoTimerCardView: View {
             .position(x: geometry.size.width - 30, y: 30)
             
             VStack(spacing: 0) {
-                
+                Spacer()
                 Image("img_circle_ai_charactor")
-                    .padding(.bottom, 30)
+                    .resizable()
+                    .frame(width: 260, height: 260)
+                Spacer()
 
                 Text(autoTimerViewModel.model.name)
                     .font(.system(size: 17, weight: .bold))
@@ -81,7 +83,7 @@ struct AutoTimerCardView: View {
                         isBlock: false,
                         style: .constant(.black)
                     )
-                    .padding(.top, 50)
+                    .padding(.top, 30)
                     .padding(.bottom, 60)
                 } else {
                     NavigationLink(
@@ -97,7 +99,7 @@ struct AutoTimerCardView: View {
                             isBlock: false,
                             style: .constant(.black)
                         )
-                        .padding(.top, 50)
+                        .padding(.top, 30)
                         .padding(.bottom, 60)
                     }
                 }

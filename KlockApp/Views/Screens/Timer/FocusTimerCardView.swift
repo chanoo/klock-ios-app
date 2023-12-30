@@ -57,6 +57,7 @@ struct FocusTimerCardView: View {
             .position(x: geometry.size.width - 30, y: 30)
             
             VStack(spacing: 0) {
+                Spacer()
                 AnalogClockView(
                     timer: timer,
                     clockViewModel: clockViewModel,
@@ -73,7 +74,7 @@ struct FocusTimerCardView: View {
                         outlineOutColor: FancyColor.timerOutline.color
                     )
                 )
-                .padding([.top, .bottom], 40)
+                Spacer()
 
                 Text(focusTimerViewModel.model.name)
                     .font(.system(size: 17, weight: .bold))
@@ -88,7 +89,7 @@ struct FocusTimerCardView: View {
 //                Text("(\(focusTimerViewModel.elapsedTimeToString()))")
 //                    .font(.system(size: 16, weight: .heavy))
 //                    .foregroundColor(FancyColor.gray2.color)
-
+                
                 FancyButton(
                     title: "공부 시작",
                     action: {
