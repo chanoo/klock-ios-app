@@ -33,7 +33,7 @@ class PreferencesViewModel: ObservableObject {
     @Published var isAppsSettingPresented = false
     @Published var selection = FamilyActivitySelection()
     @Published var profileImage: String  = "ic_img_logo"
-    @Published var profileName: String = "User Name"
+    @Published var nickname: String = "User Name"
     lazy var preferencesSections: [SectionModel] = [
         SectionModel(items: [
             ItemModel(title: "허용앱 설정", iconName: "ic_four_square", actionType: .allowedAppSettings, action: {
@@ -122,12 +122,6 @@ class PreferencesViewModel: ObservableObject {
             }
             .store(in: &cancellables)
         
-        let userModel = UserModel.load()
-        profileName = userModel?.nickname ?? "-"
-        if let profileImage = userModel?.profileImage {
-            self.profileImage = profileImage
-        }
-        
         #if DEBUG
         preferencesSections.insert(SectionModel(items: [
             ItemModel(title: "토큰 복사", systemIconName: "doc.on.doc.fill", actionType: .copyToken, action: {
@@ -137,5 +131,13 @@ class PreferencesViewModel: ObservableObject {
             })
         ]), at: 0)
         #endif
+    }
+    
+    func loadUserInfo() {
+        let userModel = UserModel.load()
+        nickname = userModel?.nickname ?? "-"
+        if let profileImage = userModel?.profileImage {
+            self.profileImage = profileImage
+        }
     }
 }

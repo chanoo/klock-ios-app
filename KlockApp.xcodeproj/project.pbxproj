@@ -1582,6 +1582,7 @@
 				INFOPLIST_KEY_NSCameraUsageDescription = "프로필 이미지 촬영 및 공부시간 측정, QR코드 스캔에 사용 됩니다.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "친구가 나를 찾을때 사용 됩니다.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "음성을 텍스트로 변경 해줍니다.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "프로필 이미지 등록에 사용됩니다.";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "음성을 텍스트로 변경 해줍니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1635,6 +1636,7 @@
 				INFOPLIST_KEY_NSCameraUsageDescription = "프로필 이미지 촬영 및 공부시간 측정, QR코드 스캔에 사용 됩니다.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "친구가 나를 찾을때 사용 됩니다.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "음성을 텍스트로 변경 해줍니다.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "프로필 이미지 등록에 사용됩니다.";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "음성을 텍스트로 변경 해줍니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
