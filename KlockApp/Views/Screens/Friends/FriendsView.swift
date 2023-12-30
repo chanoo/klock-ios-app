@@ -104,12 +104,12 @@ struct FriendsView: View {
                             }
                             friendAddViewModel.activeSheet = .nickname
                         }),
-                        ActionButton(title: "주변탐색 친구추가", action: {
-                            withAnimation(.spring()) {
-                                actionSheetManager.isPresented = false
-                            }
-                            friendAddViewModel.activeSheet = .nearby
-                        }),
+//                        ActionButton(title: "주변탐색 친구추가", action: {
+//                            withAnimation(.spring()) {
+//                                actionSheetManager.isPresented = false
+//                            }
+//                            friendAddViewModel.activeSheet = .nearby
+//                        }),
                     ],
                     cancelButton: ActionButton(title: "취소", action: {
                         withAnimation(.spring()) {

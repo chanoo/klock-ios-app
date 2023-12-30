@@ -83,9 +83,9 @@ class FriendsViewModel: NSObject, ObservableObject {
                 .default(Text("닉네임 친구추가"), action: {
                     self.friendAddViewModel.activeSheet = .nickname
                 }),
-                .default(Text("주변탐색 친구추가"), action: {
-                    self.friendAddViewModel.activeSheet = .nearby
-                }),
+//                .default(Text("주변탐색 친구추가"), action: {
+//                    self.friendAddViewModel.activeSheet = .nearby
+//                }),
                 .cancel()
             ]
         )
