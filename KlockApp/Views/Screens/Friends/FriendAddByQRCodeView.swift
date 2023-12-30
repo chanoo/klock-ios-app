@@ -19,11 +19,11 @@ struct FriendAddByQRCodeView: View {
                     case .scanQRCode:
                         QRCodeScannerOverlay()
                             .environmentObject(viewModel)
-                            .frame(width: geometry.size.width, height: geometry.size.height)
+                            .frame(width: geometry.size.width, height: .infinity)
                             .edgesIgnoringSafeArea(.all)
                     case .myQRCode:
                         NicknameView()
-                            .frame(width: geometry.size.width, height: geometry.size.height)
+                            .frame(width: geometry.size.width, height: .infinity)
                             .background(.white)
                     }
 
@@ -31,6 +31,8 @@ struct FriendAddByQRCodeView: View {
                     case .scanQRCode:
                         Image("img_qr_guide")
                             .resizable()
+                            .scaledToFill()
+                            .frame(width: .infinity, height: .infinity)
                             .edgesIgnoringSafeArea(.all)
                         ZStack {
                             VStack {
@@ -55,7 +57,7 @@ struct FriendAddByQRCodeView: View {
                             Image("ic_xmark")
                         }
                         .padding(.top, 30)
-                        .padding(.trailing, 15)
+                        .padding(.trailing, 20)
                         .foregroundColor(viewModel.activeView == .scanQRCode ? .white : .black)
 
                         HStack(alignment: .center) {
@@ -69,7 +71,7 @@ struct FriendAddByQRCodeView: View {
                     }
                     
                 }
-                .frame(width: geometry.size.width, height: geometry.size.height)
+                .frame(width: .infinity, height: .infinity)
                 .background(.black)
             }
             .navigationBarHidden(true)
