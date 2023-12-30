@@ -84,13 +84,13 @@ class UserRemoteService: UserRemoteServiceProtocol, APIServiceProtocol {
             .eraseToAnyPublisher()
     }
 
-    func update(id: Int64, request: UserUpdateReqDTO) -> AnyPublisher<ProfileImageResDTO, AFError> {
+    func update(id: Int64, request: UserUpdateReqDTO) -> AnyPublisher<UserUpdateResDTO, AFError> {
         let url = "\(baseURL)/\(id)"
         
         return AF.request(url, method: .put, parameters: request.dictionary, encoding: JSONEncoding.default, headers: self.headers())
             .validate()
-            .publishDecodable(type: ProfileImageResDTO.self)
-            .tryMap { result -> ProfileImageResDTO in
+            .publishDecodable(type: UserUpdateResDTO.self)
+            .tryMap { result -> UserUpdateResDTO in
                 switch result.result {
                 case .success(let response):
                     return response

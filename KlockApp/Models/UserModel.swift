@@ -55,7 +55,7 @@ struct UserModel: Hashable, Codable {
             accessToken: nil,
             refreshToken: nil,
             nickname: dto.nickname,
-            profileImage: nil,
+            profileImage: dto.profileImage,
             tagId: dto.tagId,
             startOfTheWeek: dto.startOfTheWeek,
             startOfTheDay: dto.startOfTheDay,

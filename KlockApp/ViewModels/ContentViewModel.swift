@@ -14,21 +14,28 @@
 
 import Combine
 import SwiftUI
+import Foast
+import Combine
+import KeychainAccess
+import Alamofire
 
 class ContentViewModel: ObservableObject {
     @Published var currentView: AnyView
-    private let authService: AuthenticationServiceProtocol
+    private let authService: AuthenticationServiceProtocol = Container.shared.resolve(AuthenticationServiceProtocol.self)
+    private let userRemoteService: UserRemoteServiceProtocol = Container.shared.resolve(UserRemoteServiceProtocol.self)
+    private var cancellableSet: Set<AnyCancellable> = []
 
-    init(authService: AuthenticationServiceProtocol = Container.shared.resolve(AuthenticationServiceProtocol.self)) {
-        self.authService = authService
-        self.currentView = AnyView(EmptyView())
+    init() {
+        self.currentView = AnyView(LoadingView())
     }
 
     func updateCurrentView(appFlowManager: AppFlowManager) {
-        if authService.isLoggedIn() {
-            self.currentView = AnyView(HomeView()
-                .environmentObject(TabBarManager())
-                .environmentObject(appFlowManager))
+        let userModel = UserModel.load()
+        if let userId = userModel?.id, userModel != nil {
+            self.userRemoteService.get(id: userId)
+                .sink(receiveCompletion: handleFetchDataCompletion,
+                      receiveValue: handleReceivedData)
+                .store(in: &self.cancellableSet)
         } else {
             let signInViewModel = Container.shared.resolve(SignInViewModel.self)
             self.currentView = AnyView(SignInView()
@@ -36,4 +43,31 @@ class ContentViewModel: ObservableObject {
                 .environmentObject(signInViewModel))
         }
     }
+    
+    func handleFetchDataCompletion(_ completion: Subscribers.Completion<AFError>) {
+        switch completion {
+        case .failure(let error):
+            print("Error: \(error.localizedDescription)")
+            Foast.show(message: error.localizedDescription)
+        case .finished:
+            break
+        }
+    }
+    
+    func handleReceivedData(_ dto: GetUserResDTO) {
+        let userModel = UserModel.from(dto: dto)
+        userModel.save()
+        let keychain = Keychain(service: "app.klock.ios")
+            .label("app.klock.ios (\(dto.id)")
+            .synchronizable(true)
+            .accessibility(.afterFirstUnlock)
+        keychain["userId"] = String(userModel.id)
+        DispatchQueue.main.async {
+            self.currentView = AnyView(HomeView()
+                .environmentObject(TabBarManager())
+            )
+        }
+    }
+
+
 }

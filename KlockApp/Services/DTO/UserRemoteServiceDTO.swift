@@ -58,6 +58,7 @@ struct GetUserResDTO: Codable {
     let id: Int64
     let nickname: String
     let email: String?
+    let profileImage: String?
     let level: Int
     let requiredStudyTime: Int
     let characterName: String

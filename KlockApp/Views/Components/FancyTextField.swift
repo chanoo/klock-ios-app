@@ -13,6 +13,7 @@ struct FancyTextField: View {
     let keyboardType: UIKeyboardType?
     let isSecureField: Bool?
     let isValid: Bool?
+    @Binding var error: String?
     let maxLength: Int?
     @Binding var firstResponder: Bool
     var onCommit: (() -> Void)?
@@ -23,6 +24,7 @@ struct FancyTextField: View {
         keyboardType: UIKeyboardType? = .default,
         isSecureField: Bool? = false,
         isValid: Bool? = nil,
+        error: Binding<String?> = .constant(nil),
         maxLength: Int? = nil,
         firstResponder: Binding<Bool>,
         onCommit: ( () -> Void)? = nil)
@@ -32,6 +34,7 @@ struct FancyTextField: View {
         self.keyboardType = keyboardType
         self.isSecureField = isSecureField
         self.isValid = isValid
+        self._error = error
         self.maxLength = maxLength
         self._firstResponder = firstResponder
         self.onCommit = onCommit
@@ -75,14 +78,20 @@ struct FancyTextField: View {
             }
             Rectangle()
                 .frame(height: 1)
-                .foregroundColor((text.count == 0 || isValid == true) ? FancyColor.textfieldUnderline.color : FancyColor.red.color)
-            if let maxLength = maxLength {
-                HStack {
-                    Spacer() // 오른쪽 정렬을 위해 Spacer 추가
+                .foregroundColor((text.count == 0 || error?.count ?? 0 == 0) ? FancyColor.textfieldUnderline.color : FancyColor.red.color)
+            HStack {
+                if let error = error, text.count > 0 {
+                    Text(error)
+                        .font(.system(size: 13))
+                        .foregroundColor(FancyColor.red.color)
+                        .padding([.top, .leading], 6)
+                }
+                Spacer() // 오른쪽 정렬을 위해 Spacer 추가
+                if let maxLength = maxLength {
                     Text("\(text.count) / \(maxLength)")
-                        .font(.caption)
-                        .foregroundColor(FancyColor.black.color)
-                        .padding([.top, .trailing], 4)
+                        .font(.system(size: 13))
+                        .foregroundColor((text.count == 0 || error?.count ?? 0 == 0) ? FancyColor.text.color : FancyColor.red.color)
+                        .padding([.top, .trailing], 6)
                 }
             }
         }
@@ -103,8 +112,8 @@ struct FancyTextField: View {
     
     private var imageName: String {
         // isValid 값에 따라 이미지 이름을 결정
-        if isValid == true {
-            return "ic_check_o"
+        if error?.count ?? 0 == 0 {
+            return ""
         } else {
             return "ic_circle_cross"
         }
@@ -114,10 +123,13 @@ struct FancyTextField: View {
 struct FancyTextField_Previews: PreviewProvider {
     static var previews: some View {
         FancyTextField(
-            placeholder: "닉네임",
-            text: .constant(""),
+            placeholder: "닉네임을 입력해주세요",
+            text: .constant("hello"),
             keyboardType: .default,
             isSecureField: false,
+            isValid: false,
+            error: .constant("다른 친구가 이미 사용 중이에요"),
+            maxLength: 10,
             firstResponder: .constant(false)
         )
     }

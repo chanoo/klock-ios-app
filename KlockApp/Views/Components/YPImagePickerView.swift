@@ -13,7 +13,11 @@ struct YPImagePickerView: UIViewControllerRepresentable {
     @Binding var selectedImage: UIImage?
 
     func makeUIViewController(context: Context) -> YPImagePicker {
-        let picker = YPImagePicker()
+        var config = YPImagePickerConfiguration()
+        config.startOnScreen = YPPickerScreen.photo
+        config.screens = [.library, .photo]
+
+        let picker = YPImagePicker(configuration: config)
         // Configure your picker here
         picker.didFinishPicking { [unowned picker] items, _ in
             if let photo = items.singlePhoto {

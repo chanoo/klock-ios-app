@@ -39,6 +39,7 @@ struct SignUpNicknameView: View {
                 placeholder: "닉네임을 입력해주세요",
                 text: $viewModel.signUpUserModel.nickname,
                 isValid: viewModel.isNickNameButtonEnabled,
+                maxLength: 10,
                 firstResponder: $viewModel.nicknameTextFieldShouldBecomeFirstResponder
             )
 
