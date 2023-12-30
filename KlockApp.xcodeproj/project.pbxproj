@@ -175,12 +175,16 @@
 		98B387B02A2DDFB500F18AD2 /* SignUpProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B387AF2A2DDFB500F18AD2 /* SignUpProfileImageView.swift */; };
 		98BDD21D29DAD1D400B0440F /* FancyColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BDD21C29DAD1D400B0440F /* FancyColor.swift */; };
 		98BDD22029DD0FA800B0440F /* EmailValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BDD21F29DD0FA800B0440F /* EmailValidator.swift */; };
+		98C378242AFBC86400F537BA /* FriendRelationServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C378232AFBC86400F537BA /* FriendRelationServiceProtocol.swift */; };
 		98CE661629D55A370009916F /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 98CE661529D55A370009916F /* Swinject */; };
 		98CE661929D55A650009916F /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CE661829D55A650009916F /* Container.swift */; };
 		98CE661B29D55AA40009916F /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CE661A29D55AA40009916F /* AuthenticationService.swift */; };
 		98CE661D29D55AE00009916F /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CE661C29D55AE00009916F /* UserModel.swift */; };
 		98CE662129D55B730009916F /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CE662029D55B730009916F /* SignInViewModel.swift */; };
 		98CE662329D55BB10009916F /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CE662229D55BB10009916F /* SignInView.swift */; };
+		98CFCD362B07A5EC00706B7A /* FriendRelationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CFCD352B07A5EC00706B7A /* FriendRelationService.swift */; };
+		98CFCD382B07A89300706B7A /* FriendRelationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CFCD372B07A89300706B7A /* FriendRelationDTO.swift */; };
+		98CFCD3A2B07AA9D00706B7A /* FriendRelationsRemoteServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CFCD392B07AA9D00706B7A /* FriendRelationsRemoteServiceTests.swift */; };
 		98CF07D92B34546E00BF33C2 /* UserProfileImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CF07D82B34546E00BF33C2 /* UserProfileImageViewModel.swift */; };
 		98CF07DB2B3454AB00BF33C2 /* CustomImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CF07DA2B3454AB00BF33C2 /* CustomImagePicker.swift */; };
 		98D2826729E988100039E6E6 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D2826629E988100039E6E6 /* CoreDataManager.swift */; };
@@ -433,11 +437,15 @@
 		98B387AF2A2DDFB500F18AD2 /* SignUpProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpProfileImageView.swift; sourceTree = "<group>"; };
 		98BDD21C29DAD1D400B0440F /* FancyColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyColor.swift; sourceTree = "<group>"; };
 		98BDD21F29DD0FA800B0440F /* EmailValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailValidator.swift; sourceTree = "<group>"; };
+		98C378232AFBC86400F537BA /* FriendRelationServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRelationServiceProtocol.swift; sourceTree = "<group>"; };
 		98CE661829D55A650009916F /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
 		98CE661A29D55AA40009916F /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		98CE661C29D55AE00009916F /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		98CE662029D55B730009916F /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		98CE662229D55BB10009916F /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		98CFCD352B07A5EC00706B7A /* FriendRelationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRelationService.swift; sourceTree = "<group>"; };
+		98CFCD372B07A89300706B7A /* FriendRelationDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRelationDTO.swift; sourceTree = "<group>"; };
+		98CFCD392B07AA9D00706B7A /* FriendRelationsRemoteServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRelationsRemoteServiceTests.swift; sourceTree = "<group>"; };
 		98CF07D82B34546E00BF33C2 /* UserProfileImageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileImageViewModel.swift; sourceTree = "<group>"; };
 		98CF07DA2B3454AB00BF33C2 /* CustomImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImagePicker.swift; sourceTree = "<group>"; };
 		98CF07DC2B3AF4FB00BF33C2 /* TensorFlowLiteTaskVision.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TensorFlowLiteTaskVision.framework; path = Frameworks/TensorFlowLiteTaskVision.framework; sourceTree = "<group>"; };
@@ -557,6 +565,7 @@
 				9821409E2A07AFB800C68EB9 /* ExamTimerRemoteServiceTests.swift */,
 				98AC75C32A094D5600EE95D4 /* TimerRemoteServiceTests.swift */,
 				98FD8F752A174ED200CEE0B1 /* StudySessionRemoteServiceTests.swift */,
+				98CFCD392B07AA9D00706B7A /* FriendRelationsRemoteServiceTests.swift */,
 				98DB24DE2B3D6130001ACE21 /* UserRemoteServiceTests.swift */,
 			);
 			path = Service;
@@ -601,6 +610,8 @@
 				98976B0A2A07819E00F1CEAE /* ExamTimerRemoteService.swift */,
 				98FD8F732A174A7900CEE0B1 /* StudySessionRemoteServiceProtocol.swift */,
 				98FD8F772A174F0C00CEE0B1 /* StudySessionRemoteService.swift */,
+				98C378232AFBC86400F537BA /* FriendRelationServiceProtocol.swift */,
+				98CFCD352B07A5EC00706B7A /* FriendRelationService.swift */,
 			);
 			path = Remote;
 			sourceTree = "<group>";
@@ -616,6 +627,7 @@
 				98DC292C29E9380200882E36 /* ChatBotServiceDTO.swift */,
 				98E314B629DEE6BB00EA1617 /* TagServiceDTO.swift */,
 				98976AFE2A00ED8500F1CEAE /* TimeTimerDTO.swift */,
+				98CFCD372B07A89300706B7A /* FriendRelationDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -1208,10 +1220,12 @@
 				98CE662329D55BB10009916F /* SignInView.swift in Sources */,
 				9843B7E929F0EB5200F91DAD /* TimeUtils.swift in Sources */,
 				98327DFA2A0CF87100CFEB3A /* TimerModel.swift in Sources */,
+				98CFCD382B07A89300706B7A /* FriendRelationDTO.swift in Sources */,
 				98B21B4D29D6F3A9004EFE0E /* AccountLevelModel.swift in Sources */,
 				98E67FE32A5714920090AE23 /* UserRemoteService.swift in Sources */,
 				983BC0292A8F011400DC108B /* Array+Extensions.swift in Sources */,
 				983BC02B2A8F012900DC108B /* UIImage+Extensions.swift in Sources */,
+				98CFCD362B07A5EC00706B7A /* FriendRelationService.swift in Sources */,
 				985BE8B029E7D48A008582A3 /* ChatBotModel.swift in Sources */,
 				988D7CD82A3711410018A85E /* ScanResult.swift in Sources */,
 				984D2C8729DFDB5F008D3EA9 /* BackButtonView.swift in Sources */,
@@ -1232,6 +1246,7 @@
 				98E314B529DEE67B00EA1617 /* TagRemoteServiceProtocol.swift in Sources */,
 				981881C629F26F00002A4395 /* PomodoroTimerView.swift in Sources */,
 				9837CCAA2A42F255002F1A3A /* ActivityModel.swift in Sources */,
+				98C378242AFBC86400F537BA /* FriendRelationServiceProtocol.swift in Sources */,
 				98976B052A077F8F00F1CEAE /* ExamTimerRemoteServiceProtocol.swift in Sources */,
 				983BC0302A8F0DAF00DC108B /* AutoTimerView.swift in Sources */,
 				98B21B1B29D55F6C004EFE0E /* AuthenticationRemoteServiceProtocol.swift in Sources */,
@@ -1398,6 +1413,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				98CFCD3A2B07AA9D00706B7A /* FriendRelationsRemoteServiceTests.swift in Sources */,
 				98AC75C42A094D5600EE95D4 /* TimerRemoteServiceTests.swift in Sources */,
 				98DB24DF2B3D6130001ACE21 /* UserRemoteServiceTests.swift in Sources */,
 				9821409F2A07AFB800C68EB9 /* ExamTimerRemoteServiceTests.swift in Sources */,

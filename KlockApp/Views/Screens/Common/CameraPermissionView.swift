@@ -23,7 +23,7 @@ struct CameraPermissionView: View {
                         Spacer()
                     }
                     HStack {
-                        Text("더 유용한 기능을 사용해 설장해 보세요.")
+                        Text("새로운 기능으로 더욱 똑똑하게 성장해보세요")
                             .foregroundColor(FancyColor.gray4.color)
                             .padding(.top, 18)
                         Spacer()

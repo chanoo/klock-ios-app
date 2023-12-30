@@ -11,26 +11,54 @@ struct FriendsListView: View {
     @EnvironmentObject var viewModel: FriendsViewModel
 
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 12) {
-                ForEach(Array(viewModel.friends.enumerated()), id: \.element) { index, friendModel in
-                    if index == 0 {
-                        FirstFriendsRowView(userModel: friendModel)
-                    } else {
-                        FriendsRowView(userModel: friendModel)
+        VStack {
+            // Check if the friends list is empty
+            if viewModel.friends.isEmpty {
+                Spacer() // Pushes content to the center vertically
+
+                VStack {
+                    Image("img_three_characters")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 100, height: 79)
+                    Text("아직 함께 공부할 친구가 없네요!\n친구와 함께 더 즐겁게 성장해볼까요?")
+                        .multilineTextAlignment(.center)
+                        .lineSpacing(6)
+                        .foregroundColor(FancyColor.gray4.color)
+                        .font(.system(size: 13, weight: .semibold))
+                        .padding()
+                    
+                }
+                .frame(maxWidth: .infinity) // Ensure it takes up the full width
+
+                Spacer() // Pushes content to the center vertically
+            } else {
+                // ScrollView to show the friends list
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 12) {
+                        ForEach(Array(viewModel.friends.enumerated()), id: \.element) { index, friendModel in
+                            if index == 0 {
+                                FirstFriendsRowView(friendModel: friendModel)
+                            } else {
+                                FriendsRowView(friendModel: friendModel)
+                            }
+                        }
                     }
+                    .padding()
                 }
             }
-            .padding()
         }
         .navigationTitle("친구")
         .navigationBarBackButtonHidden()
         .navigationBarItems(leading: BackButtonView())
+        .onAppear(perform: {
+            viewModel.fetchFriends()
+        })
     }
 }
 
 struct FirstFriendsRowView: View {
-    var userModel: UserModel
+    var friendModel: FriendRelationFetchResDTO
     var body: some View {
         NavigationLink(destination: FriendsView()) {
             HStack {
@@ -51,12 +79,12 @@ struct FirstFriendsRowView: View {
                             .foregroundColor(FancyColor.primary.color)
                     }
                 }
-                Text(userModel.nickname)
+                Text(friendModel.nickname ?? "-")
                     .font(.system(size: 17, weight: .semibold))
                     .foregroundColor(FancyColor.text.color)
                     .padding(.leading, 10)
                 Spacer()
-                Text("\(TimeUtils.secondsToHMS(seconds: userModel.totalStudyTime))")
+                Text("\(TimeUtils.secondsToHMS(seconds: friendModel.totalStudyTime ?? 0))")
                     .font(.system(size: 17, weight: .heavy))
                     .foregroundColor(FancyColor.gray4.color)
                     .padding(.top, 2)
@@ -74,7 +102,7 @@ struct FirstFriendsRowView: View {
 }
 
 struct FriendsRowView: View {
-    var userModel: UserModel
+    var friendModel: FriendRelationFetchResDTO
     var body: some View {
         VStack(spacing: 0) {
             NavigationLink(destination: FriendsView()) {
@@ -92,12 +120,12 @@ struct FriendsRowView: View {
                                 .foregroundColor(FancyColor.primary.color)
                         }
                     }
-                    Text(userModel.nickname)
+                    Text(friendModel.nickname ?? "-")
                         .font(.system(size: 15, weight: .semibold))
                         .foregroundColor(FancyColor.text.color)
                         .padding(.leading, 10)
                     Spacer()
-                    Text("\(TimeUtils.secondsToHMS(seconds: userModel.totalStudyTime))")
+                    Text("\(TimeUtils.secondsToHMS(seconds: friendModel.totalStudyTime ?? 0))")
                         .font(.system(size: 15, weight: .heavy))
                         .foregroundColor(FancyColor.gray4.color)
                         .padding(.top, 2)

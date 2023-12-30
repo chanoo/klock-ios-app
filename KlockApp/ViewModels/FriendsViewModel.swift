@@ -7,19 +7,43 @@
 
 import SwiftUI
 import Combine
+import Foast
 
 class FriendsViewModel: NSObject, ObservableObject {
     @Published var newMessage: String = ""
     @Published var isPresented = false
     @Published var friendAddViewModel = FriendAddViewModel()
     @Published var isPreparingResponse: Bool = false
+    @Published var isLoading: Bool = false
+    @Published var friends: [FriendRelationFetchResDTO] = []
 
-    let friends: [UserModel] = [
-        UserModel(id: 1, accessToken: "", refreshToken: "", nickname: "날으는호랑이", profileImage: nil, tagId: 0, startOfTheWeek: "MONDAY", startOfTheDay: 0, totalStudyTime: 100),
-        UserModel(id: 2, accessToken: "", refreshToken: "", nickname: "여유로운쿼카", profileImage: nil, tagId: 0, startOfTheWeek: "MONDAY", startOfTheDay: 0, totalStudyTime: 200),
-        UserModel(id: 3, accessToken: "", refreshToken: "", nickname: "열정적인두루미", profileImage: nil, tagId: 0, startOfTheWeek: "MONDAY", startOfTheDay: 0, totalStudyTime: 300),
-        UserModel(id: 4, accessToken: "", refreshToken: "", nickname: "뀨처돌이", profileImage: nil, tagId: 0, startOfTheWeek: "MONDAY", startOfTheDay: 0, totalStudyTime: 400),
-    ]
+    private let friendRelationService = Container.shared.resolve(FriendRelationServiceProtocol.self)
+
+    var cancellables: Set<AnyCancellable> = []
+    
+    func fetchFriends() {
+        isLoading = true
+
+        friendRelationService.fetch()
+            .sink { [weak self] completion in
+                guard let self = self else { return }
+                switch completion {
+                case .failure(let error):
+                    print("Error fetching study sessions: \(error)")
+                case .finished:
+                    break
+                }
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                }
+            } receiveValue: { [weak self] dto in
+                guard let self = self else { return }
+                DispatchQueue.main.async {
+                    self.friends = dto
+                }
+            }
+            .store(in: &cancellables)
+    }
     
     let activities: [ActivityModel] = [
         ActivityModel(id: 1, message: "국어 공부를 시작했어요!🔥", userId: 2, nickname: "뀨처돌이", profileImage: "", attachment: nil, likeCount: 0, createdAt: TimeUtils.dateFromString(dateString: "20230622132310", format: "yyyyMMddHHmmss")!),
