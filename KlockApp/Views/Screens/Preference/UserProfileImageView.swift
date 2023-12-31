@@ -27,9 +27,9 @@ struct UserProfileImageView: View {
                             .scaledToFit()
                             .frame(width: 150, height: 150)
                             .clipShape(Circle())
-                            .overlay(Circle().stroke(FancyColor.black.color, lineWidth: 4))
+                            .overlay(Circle().stroke(FancyColor.profileImageBorder.color, lineWidth: 4))
                     } else {
-                        ProfileImageView(imageURL: viewModel.userModel?.profileImage, size: 150)
+                        ProfileImageEditView(imageURL: viewModel.userModel?.profileImage, size: 150)
                     }
                     
                     Button(action: {

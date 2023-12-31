@@ -3,6 +3,16 @@
     {
       "filename" : "ic_plus.svg",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "ic_plus_white.svg",
+      "idiom" : "universal"
     }
   ],
   "info" : {

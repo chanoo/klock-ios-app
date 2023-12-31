@@ -50,6 +50,7 @@ enum FancyColor: String {
     case chatBotInputOutline = "color_chatbot_input_outline"
     case chatBotInputBackground = "color_chatbot_input_background"
     case chatBotSendButton = "color_chatbot_send_button"
+    case profileImageBorder = "color_profile_image_border"
     case primary = "color_primary"
     case secondary = "color_secondary"
     case gray1 = "color_gray1"

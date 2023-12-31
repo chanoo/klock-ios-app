@@ -50,44 +50,6 @@ extension PreferencesView {
 }
 
 // MARK: - Helper Views
-struct ProfileImageView: View {
-    let imageURL: String?
-    let size: CGFloat
-
-    var body: some View {
-        Group {
-            if let urlString = imageURL, let url = URL(string: urlString) {
-                AsyncImage(url: url) { phase in
-                    switch phase {
-                    case .empty, .failure(_):
-                        DefaultProfileImage()
-                    case .success(let image):
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .scaledToFit()
-                            .clipShape(Circle())
-                            .overlay(Circle().stroke(FancyColor.black.color, lineWidth: 4))
-                    @unknown default:
-                        DefaultProfileImage()
-                    }
-                }
-            } else {
-                DefaultProfileImage()
-            }
-        }
-        .frame(width: size, height: size)
-    }
-}
-
-
-struct DefaultProfileImage: View {
-    var body: some View {
-        Image("img_profile")
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-    }
-}
 
 struct EditProfileLink: View {
     @EnvironmentObject var viewModel: PreferencesViewModel
