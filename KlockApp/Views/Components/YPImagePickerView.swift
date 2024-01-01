@@ -16,6 +16,7 @@ struct YPImagePickerView: UIViewControllerRepresentable {
         var config = YPImagePickerConfiguration()
         config.startOnScreen = YPPickerScreen.photo
         config.screens = [.library, .photo]
+        config.usesFrontCamera = true
 
         let picker = YPImagePicker(configuration: config)
         // Configure your picker here
