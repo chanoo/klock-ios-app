@@ -194,6 +194,7 @@ class SignInViewModel: NSObject, ObservableObject, ASAuthorizationControllerDele
         print("User: \(user)")
         UserDefaults.standard.set(user.userId, forKey: "user.id")
         UserDefaults.standard.set(user.token, forKey: "access.token")
+        UserDefaults.standard.set(user.publicKey, forKey: "public.key")
         fetchUserRemoteData(user.userId)
     }
 

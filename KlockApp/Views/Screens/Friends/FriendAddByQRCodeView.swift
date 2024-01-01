@@ -140,7 +140,7 @@ struct NicknameView: View {
             Spacer()
         }
         .onAppear {
-            viewModel.generateQRCode(from: "nice-ipin://action=add?id=100")
+            viewModel.generateQRCode()
             viewModel.centerImage = centerImage
             if let qrCodeImage = viewModel.generateQRCodeWithCenterImage() {
                 viewModel.qrCodeImage = qrCodeImage

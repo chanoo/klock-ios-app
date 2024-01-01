@@ -9,6 +9,7 @@ import CoreImage.CIFilterBuiltins
 import SwiftUI
 import Combine
 import CoreLocation
+import CryptoKit
 
 enum ActiveView {
     case scanQRCode
@@ -79,8 +80,44 @@ class FriendAddViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
         nearbyBeacons = beacons
     }
     
-    func generateQRCode(from string: String) {
-        let data = Data(string.utf8)
+    func generateInviteQRCode() -> FollowQRCode? {
+        // 사용자 모델을 불러오고 필요한 데이터가 있는지 확인합니다.
+        guard let userModel = UserModel.load(),
+              let base64PublicKey = UserDefaults.standard.string(forKey: "public.key") else {
+            return nil // 필요한 데이터가 없으면 nil을 반환합니다.
+        }
+
+        // 옵셔널이 아닌 userId를 사용합니다.
+        let userId = userModel.id
+
+        // 128비트 AES 키를 생성합니다.
+        let aesKey = SymmetricKey(size: .bits128)
+        let aesKeyData = aesKey.toData()
+
+        // RSA 공개 키를 사용하여 AES 키를 암호화합니다.
+        guard let publicKey = RSACrypto.publicKey(from: base64PublicKey),
+              let encryptedAESKey = RSACrypto.encryptData(aesKeyData, using: publicKey) else {
+            return nil // RSA 암호화에 실패하면 nil을 반환합니다.
+        }
+        let encryptedAESKeyBase64 = encryptedAESKey.base64EncodedString()
+
+        // 팔로우 코드를 준비하고 암호화합니다.
+        let followCode = createFollowCode(for: userId)
+        guard let followCodeJson = followCode.toJson(),
+              let encryptedFollowCodeData = AESCrypto.encryptString(followCodeJson, using: aesKey) else {
+            return nil // AES 암호화에 실패하면 nil을 반환합니다.
+        }
+        let encryptedFollowCodeBase64 = encryptedFollowCodeData.base64EncodedString()
+
+        // FollowQRCode 객체를 반환합니다.
+        return FollowQRCode(followData: encryptedFollowCodeBase64, encryptedKey: encryptedAESKeyBase64)
+    }
+
+    func generateQRCode() {
+        guard let qrCode = generateInviteQRCode()?.toJson() else {
+            return
+        }
+        let data = Data(qrCode.utf8)
         filter.setValue(data, forKey: "inputMessage")
 
         if let outputImage = filter.outputImage {

@@ -155,6 +155,10 @@
 		98B0650F2B41B057009D0F69 /* SymmetricKey+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B0650E2B41B057009D0F69 /* SymmetricKey+Extensions.swift */; };
 		98B065122B41B229009D0F69 /* ProfileImageEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B065112B41B229009D0F69 /* ProfileImageEditView.swift */; };
 		98B065142B41B90E009D0F69 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B065132B41B90E009D0F69 /* ProfileImageView.swift */; };
+		98B065172B4279FD009D0F69 /* AESCrypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B065162B4279FD009D0F69 /* AESCrypto.swift */; };
+		98B065192B427A6B009D0F69 /* RSACrypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B065182B427A6B009D0F69 /* RSACrypto.swift */; };
+		98B0651D2B427CBF009D0F69 /* FollowQRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B0651C2B427CBF009D0F69 /* FollowQRCode.swift */; };
+		98B065222B428317009D0F69 /* FriendAddViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B065212B428317009D0F69 /* FriendAddViewModelTests.swift */; };
 		98B21B1829D55DE0004EFE0E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 98B21B1729D55DE0004EFE0E /* README.md */; };
 		98B21B1B29D55F6C004EFE0E /* AuthenticationRemoteServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B1A29D55F6C004EFE0E /* AuthenticationRemoteServiceProtocol.swift */; };
 		98B21B2129D56BDF004EFE0E /* RegexConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B2029D56BDF004EFE0E /* RegexConstants.swift */; };
@@ -423,6 +427,10 @@
 		98B0650E2B41B057009D0F69 /* SymmetricKey+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SymmetricKey+Extensions.swift"; sourceTree = "<group>"; };
 		98B065112B41B229009D0F69 /* ProfileImageEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageEditView.swift; sourceTree = "<group>"; };
 		98B065132B41B90E009D0F69 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
+		98B065162B4279FD009D0F69 /* AESCrypto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AESCrypto.swift; sourceTree = "<group>"; };
+		98B065182B427A6B009D0F69 /* RSACrypto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSACrypto.swift; sourceTree = "<group>"; };
+		98B0651C2B427CBF009D0F69 /* FollowQRCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowQRCode.swift; sourceTree = "<group>"; };
+		98B065212B428317009D0F69 /* FriendAddViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendAddViewModelTests.swift; sourceTree = "<group>"; };
 		98B21B1729D55DE0004EFE0E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		98B21B1A29D55F6C004EFE0E /* AuthenticationRemoteServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationRemoteServiceProtocol.swift; sourceTree = "<group>"; };
 		98B21B2029D56BDF004EFE0E /* RegexConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegexConstants.swift; sourceTree = "<group>"; };
@@ -718,6 +726,7 @@
 		987E544F29D552540007E156 /* KlockAppTests */ = {
 			isa = PBXGroup;
 			children = (
+				98B065202B4282C5009D0F69 /* ViewModel */,
 				982140992A078C4E00C68EB9 /* Service */,
 				987E545029D552540007E156 /* KlockAppTests.swift */,
 			);
@@ -764,6 +773,23 @@
 				98B065132B41B90E009D0F69 /* ProfileImageView.swift */,
 			);
 			path = "Profile Edit";
+			sourceTree = "<group>";
+		};
+		98B065152B4279E9009D0F69 /* Crypto */ = {
+			isa = PBXGroup;
+			children = (
+				98B065162B4279FD009D0F69 /* AESCrypto.swift */,
+				98B065182B427A6B009D0F69 /* RSACrypto.swift */,
+			);
+			path = Crypto;
+			sourceTree = "<group>";
+		};
+		98B065202B4282C5009D0F69 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				98B065212B428317009D0F69 /* FriendAddViewModelTests.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		98B21B1929D55EFF004EFE0E /* Protocols */ = {
@@ -845,6 +871,7 @@
 				9837CCA92A42F255002F1A3A /* ActivityModel.swift */,
 				98192F472A547D60007073FB /* TimerType.swift */,
 				98B0650A2B408248009D0F69 /* FollowCode.swift */,
+				98B0651C2B427CBF009D0F69 /* FollowQRCode.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -908,6 +935,7 @@
 		98CE661029D5539E0009916F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				98B065152B4279E9009D0F69 /* Crypto */,
 				98B21B1F29D56BD2004EFE0E /* Constants */,
 				98B21B1C29D56B3C004EFE0E /* Validators */,
 				9843B7E829F0EB5200F91DAD /* TimeUtils.swift */,
@@ -1344,9 +1372,11 @@
 				98976B072A07818800F1CEAE /* FocusTimerRemoteService.swift in Sources */,
 				98E314B329DEE65E00EA1617 /* TagRemoteService.swift in Sources */,
 				98E9384E29EA3935009CBF32 /* RoundedCorners.swift in Sources */,
+				98B0651D2B427CBF009D0F69 /* FollowQRCode.swift in Sources */,
 				9833FFC429F5769700CC33F7 /* AccountTimerServiceProtocol.swift in Sources */,
 				98099DB92A287E340096AA27 /* SignUpStartWeekView.swift in Sources */,
 				98B21B4429D60D25004EFE0E /* FancyButton.swift in Sources */,
+				98B065172B4279FD009D0F69 /* AESCrypto.swift in Sources */,
 				98AE10582A8D97F500D99322 /* Data+Extensions.swift in Sources */,
 				98EBFBE629F783BA004E95F3 /* ChatBotSync.swift in Sources */,
 				983B59E529FB9FD800F0EACD /* ChatBotLocalServiceProtocol.swift in Sources */,
@@ -1428,6 +1458,7 @@
 				98E9386529EA5899009CBF32 /* AnalogClockView.swift in Sources */,
 				98BDD22029DD0FA800B0440F /* EmailValidator.swift in Sources */,
 				987DC3B82AFE4A37000DCBAD /* LoadingView.swift in Sources */,
+				98B065192B427A6B009D0F69 /* RSACrypto.swift in Sources */,
 				983BC0272A8F010500DC108B /* TFLiteExtension.swift in Sources */,
 				98E314B729DEE6BB00EA1617 /* TagServiceDTO.swift in Sources */,
 				981A54A92ADEB87A00115652 /* View+Extensions.swift in Sources */,
@@ -1442,6 +1473,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				98CFCD3A2B07AA9D00706B7A /* FriendRelationsRemoteServiceTests.swift in Sources */,
+				98B065222B428317009D0F69 /* FriendAddViewModelTests.swift in Sources */,
 				98AC75C42A094D5600EE95D4 /* TimerRemoteServiceTests.swift in Sources */,
 				98DB24DF2B3D6130001ACE21 /* UserRemoteServiceTests.swift in Sources */,
 				9821409F2A07AFB800C68EB9 /* ExamTimerRemoteServiceTests.swift in Sources */,
