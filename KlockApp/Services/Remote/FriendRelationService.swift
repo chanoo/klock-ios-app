@@ -8,8 +8,15 @@
 import Alamofire
 import Combine
 
-class FriendRelationService: FriendRelationServiceProtocol, APIServiceProtocol {    
+class FriendRelationService: FriendRelationServiceProtocol, APIServiceProtocol {
     private let baseURL = "https://api.klock.app/api/v1/friend-relations"
+    
+    private let logger = AlamofireLogger()
+    private let session: Session
+
+    init() {
+        session = Session(eventMonitors: [logger])
+    }
     
     func fetch() -> AnyPublisher<[FriendRelationFetchResDTO], Alamofire.AFError> {
         let url = "\(baseURL)"
@@ -22,11 +29,13 @@ class FriendRelationService: FriendRelationServiceProtocol, APIServiceProtocol {
             .eraseToAnyPublisher()
     }
 
-//    func follow(followId: Int64) -> AnyPublisher<ResStudySession, Alamofire.AFError> {
-//        
-//    }
-//    
-//    func unfollow(followId: Int64) -> AnyPublisher<ResStudySession, Alamofire.AFError> {
-//        
-//    }
+    func followQRCode(request: FriendRelationFollowQRCodeReqDTO) -> AnyPublisher<FriendRelationFollowQRCodeResDTO, Alamofire.AFError> {
+        let url = "\(baseURL)/follow/qr-code"
+
+        return session.request(url, method: .post, parameters: request, encoder: JSONParameterEncoder.default, headers: self.headers())
+            .validate()
+            .publishDecodable(type: FriendRelationFollowQRCodeResDTO.self)
+            .value()
+            .eraseToAnyPublisher()
+    }
 }

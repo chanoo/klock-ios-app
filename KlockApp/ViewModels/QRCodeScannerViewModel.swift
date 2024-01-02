@@ -11,6 +11,15 @@ class QRCodeScannerViewModel: ObservableObject {
     @Published var scannedCode: String?
     @Published var isNavigatingToNextView = false
     @Published var isScanning = false
+    
+    private var cancellableSet: Set<AnyCancellable> = []
+
+    init() {
+        $scannedCode.sink { code in
+            debugPrint(code ?? "-")
+        }
+        .store(in: &cancellableSet)
+    }
 
     func processScannedCode(_ code: String) {
         scannedCode = code
