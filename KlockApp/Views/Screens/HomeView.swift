@@ -72,8 +72,8 @@ struct HomeView: View {
                 )
             ),
             (
-                selectedImageName: "ic_gear",
-                deselectedImageName: "ic_gear_o",
+                selectedImageName: "ic_tame",
+                deselectedImageName: "ic_tame_o",
                 content: AnyView(
                     PreferencesView()
                         .environmentObject(preferencesViewModel)
