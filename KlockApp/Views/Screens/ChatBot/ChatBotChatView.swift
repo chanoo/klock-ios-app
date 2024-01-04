@@ -38,10 +38,10 @@ struct ChatBotChatView: View {
                             .padding(.top, 10)
                         }
                         if let tempMessage = viewModel.tempMessage {
-                            MessageBubble(messageModel: tempMessage, isPreparingResponse: $viewModel.isPreparingResponse)
+                            MessageBubbleView(me: tempMessage.isUser, content: tempMessage.content)
                         }
                         ForEach(viewModel.messages[chatBot.id, default: []].reversed()) { messageModel in
-                            MessageBubble(messageModel: messageModel, isPreparingResponse: $viewModel.isPreparingResponse)
+                            MessageBubbleView(me: messageModel.isUser, content: messageModel.content)
                         }
                     }
                 }

@@ -62,8 +62,9 @@
 		9843B7E529EF086600F91DAD /* ProximityAndOrientationServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9843B7E429EF086600F91DAD /* ProximityAndOrientationServiceProtocol.swift */; };
 		9843B7E929F0EB5200F91DAD /* TimeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9843B7E829F0EB5200F91DAD /* TimeUtils.swift */; };
 		984844132A3C54C1006DD342 /* SheetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984844122A3C54C1006DD342 /* SheetType.swift */; };
-		984B10182B46200900186B6D /* MessageBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984B10172B46200900186B6D /* MessageBubble.swift */; };
-		984B101B2B46209A00186B6D /* AlarmBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984B101A2B46209A00186B6D /* AlarmBubble.swift */; };
+		984B10182B46200900186B6D /* MessageBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984B10172B46200900186B6D /* MessageBubbleView.swift */; };
+		984B101B2B46209A00186B6D /* AlarmBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984B101A2B46209A00186B6D /* AlarmBubbleView.swift */; };
+		984B101E2B46F48700186B6D /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = 984B101D2B46F48700186B6D /* CachedAsyncImage */; };
 		984D2C8029DFB197008D3EA9 /* FlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984D2C7F29DFB197008D3EA9 /* FlowLayout.swift */; };
 		984D2C8229DFC2B3008D3EA9 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984D2C8129DFC2B3008D3EA9 /* AppState.swift */; };
 		984D2C8429DFC311008D3EA9 /* UINavigationController+UIGestureRecognizerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984D2C8329DFC311008D3EA9 /* UINavigationController+UIGestureRecognizerDelegate.swift */; };
@@ -329,8 +330,8 @@
 		9843B7E429EF086600F91DAD /* ProximityAndOrientationServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProximityAndOrientationServiceProtocol.swift; sourceTree = "<group>"; };
 		9843B7E829F0EB5200F91DAD /* TimeUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeUtils.swift; sourceTree = "<group>"; };
 		984844122A3C54C1006DD342 /* SheetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetType.swift; sourceTree = "<group>"; };
-		984B10172B46200900186B6D /* MessageBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageBubble.swift; sourceTree = "<group>"; };
-		984B101A2B46209A00186B6D /* AlarmBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmBubble.swift; sourceTree = "<group>"; };
+		984B10172B46200900186B6D /* MessageBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageBubbleView.swift; sourceTree = "<group>"; };
+		984B101A2B46209A00186B6D /* AlarmBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmBubbleView.swift; sourceTree = "<group>"; };
 		984D2C7F29DFB197008D3EA9 /* FlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowLayout.swift; sourceTree = "<group>"; };
 		984D2C8129DFC2B3008D3EA9 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		984D2C8329DFC311008D3EA9 /* UINavigationController+UIGestureRecognizerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+UIGestureRecognizerDelegate.swift"; sourceTree = "<group>"; };
@@ -524,6 +525,7 @@
 				98E9385829EA4C45009CBF32 /* Alamofire in Frameworks */,
 				98B21B3D29D5F54E004EFE0E /* FacebookCore in Frameworks */,
 				987443D22A57D5600019F847 /* KeychainAccess in Frameworks */,
+				984B101E2B46F48700186B6D /* CachedAsyncImage in Frameworks */,
 				983B59D129FB30F800F0EACD /* CoreStore in Frameworks */,
 				98E64D8E2A6E2CF300A7FF16 /* (null) in Frameworks */,
 				98E64D9F2A72431400A7FF16 /* KakaoSDKUser in Frameworks */,
@@ -763,8 +765,8 @@
 		988572482B3C329000E7256B /* Bubble */ = {
 			isa = PBXGroup;
 			children = (
-				984B10172B46200900186B6D /* MessageBubble.swift */,
-				984B101A2B46209A00186B6D /* AlarmBubble.swift */,
+				984B10172B46200900186B6D /* MessageBubbleView.swift */,
+				984B101A2B46209A00186B6D /* AlarmBubbleView.swift */,
 			);
 			path = Bubble;
 			sourceTree = "<group>";
@@ -1153,6 +1155,7 @@
 				98E64D9C2A72431400A7FF16 /* KakaoSDKCommon */,
 				98E64D9E2A72431400A7FF16 /* KakaoSDKUser */,
 				9885724C2B3C560700E7256B /* YPImagePicker */,
+				984B101D2B46F48700186B6D /* CachedAsyncImage */,
 			);
 			productName = KlockApp;
 			productReference = 987E543629D552520007E156 /* KlockApp.app */;
@@ -1239,6 +1242,7 @@
 				987443D02A57D5600019F847 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 				98E64D992A72431400A7FF16 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 				9885724B2B3C560700E7256B /* XCRemoteSwiftPackageReference "YPImagePicker" */,
+				984B101C2B46F48700186B6D /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */,
 			);
 			productRefGroup = 987E543729D552520007E156 /* Products */;
 			projectDirPath = "";
@@ -1455,12 +1459,12 @@
 				98E67FE12A5714750090AE23 /* UserRemoteServiceProtocol.swift in Sources */,
 				98D7C95129E45C550075D201 /* ContentView.swift in Sources */,
 				98FD8F742A174A7900CEE0B1 /* StudySessionRemoteServiceProtocol.swift in Sources */,
-				984B101B2B46209A00186B6D /* AlarmBubble.swift in Sources */,
+				984B101B2B46209A00186B6D /* AlarmBubbleView.swift in Sources */,
 				986E5DB229EAEF5600FF7047 /* CalendarViewModel.swift in Sources */,
 				98AC30832A15CB77006DC48D /* PomodoroTimerViewModel.swift in Sources */,
 				985BE89A29E6E579008582A3 /* FriendsViewModel.swift in Sources */,
 				98AC30712A136198006DC48D /* FocusTimerViewModel.swift in Sources */,
-				984B10182B46200900186B6D /* MessageBubble.swift in Sources */,
+				984B10182B46200900186B6D /* MessageBubbleView.swift in Sources */,
 				98099DBB2A287E560096AA27 /* SignUpStartTimeView.swift in Sources */,
 				984D2C8229DFC2B3008D3EA9 /* AppState.swift in Sources */,
 				989D6F382A4C654200BC2F2B /* CustomActionSheetModifier.swift in Sources */,
@@ -1916,6 +1920,14 @@
 				minimumVersion = 9.0.0;
 			};
 		};
+		984B101C2B46F48700186B6D /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/lorenzofiamingo/swiftui-cached-async-image";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.1.1;
+			};
+		};
 		987443D02A57D5600019F847 /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
@@ -1981,6 +1993,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 983B59CF29FB30F800F0EACD /* XCRemoteSwiftPackageReference "CoreStore" */;
 			productName = CoreStore;
+		};
+		984B101D2B46F48700186B6D /* CachedAsyncImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 984B101C2B46F48700186B6D /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */;
+			productName = CachedAsyncImage;
 		};
 		987443D12A57D5600019F847 /* KeychainAccess */ = {
 			isa = XCSwiftPackageProductDependency;

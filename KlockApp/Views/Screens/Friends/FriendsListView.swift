@@ -79,12 +79,12 @@ struct FirstFriendsRowView: View {
                             .foregroundColor(FancyColor.primary.color)
                     }
                 }
-                Text(friendModel.nickname ?? "-")
+                Text(friendModel.nickname)
                     .font(.system(size: 17, weight: .semibold))
                     .foregroundColor(FancyColor.text.color)
                     .padding(.leading, 10)
                 Spacer()
-                Text("\(TimeUtils.secondsToHMS(seconds: friendModel.totalStudyTime ?? 0))")
+                Text("\(TimeUtils.secondsToHMS(seconds: friendModel.totalStudyTime))")
                     .font(.system(size: 17, weight: .heavy))
                     .foregroundColor(FancyColor.gray4.color)
                     .padding(.top, 2)
@@ -120,12 +120,12 @@ struct FriendsRowView: View {
                                 .foregroundColor(FancyColor.primary.color)
                         }
                     }
-                    Text(friendModel.nickname ?? "-")
+                    Text(friendModel.nickname)
                         .font(.system(size: 15, weight: .semibold))
                         .foregroundColor(FancyColor.text.color)
                         .padding(.leading, 10)
                     Spacer()
-                    Text("\(TimeUtils.secondsToHMS(seconds: friendModel.totalStudyTime ?? 0))")
+                    Text("\(TimeUtils.secondsToHMS(seconds: friendModel.totalStudyTime))")
                         .font(.system(size: 15, weight: .heavy))
                         .foregroundColor(FancyColor.gray4.color)
                         .padding(.top, 2)

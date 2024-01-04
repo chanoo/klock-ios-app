@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AlarmBubble: View {
+struct AlarmBubbleView: View {
     @Environment(\.colorScheme) var colorScheme
     var content: String
     var showIcon: Bool?
@@ -54,8 +54,8 @@ struct AlarmBubble: View {
 struct AlarmBubbleView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            AlarmBubble(content: "영어 공부를 시작했어요!", showIcon: true)
-            AlarmBubble(content: "영어 공부를 종료했어요!", showIcon: false)
+            AlarmBubbleView(content: "영어 공부를 시작했어요!", showIcon: true)
+            AlarmBubbleView(content: "영어 공부를 종료했어요!", showIcon: false)
         }
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CachedAsyncImage
 
 struct ProfileImageView: View {
     let imageURL: String?
@@ -14,7 +15,7 @@ struct ProfileImageView: View {
     var body: some View {
         Group {
             if let urlString = imageURL, let url = URL(string: urlString) {
-                AsyncImage(url: url) { phase in
+                CachedAsyncImage(url: url) { phase in
                     switch phase {
                     case .empty, .failure(_):
                         DefaultProfileImage()
