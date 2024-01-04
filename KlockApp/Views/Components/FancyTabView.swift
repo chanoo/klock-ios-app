@@ -5,6 +5,7 @@
 //
 
 import SwiftUI
+import UIKit // UIKit을 임포트해야 합니다
 
 struct FancyTabView: View {
     @Environment(\.colorScheme) var colorScheme
@@ -28,6 +29,7 @@ struct FancyTabView: View {
                         HStack(spacing: 0) {
                             ForEach(0..<items.count, id: \.self) { index in
                                 Button(action: {
+                                    triggerHapticFeedback() // 햅틱 피드백을 트리거하는 함수 호출
                                     selection = index
                                 }) {
                                     FancyTabItem(selectedImageName: items[index].selectedImageName,
@@ -46,6 +48,11 @@ struct FancyTabView: View {
                 }
             }
         }
+    }
+    
+    private func triggerHapticFeedback() {
+        let impactMed = UIImpactFeedbackGenerator(style: .soft)
+        impactMed.impactOccurred(intensity: 0.7)
     }
 }
 
