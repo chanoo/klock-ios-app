@@ -30,8 +30,8 @@ struct AutoTimerView: View {
             warningImageView(with: geometry)
             mainContentView(with: geometry)
             chatBotButton(with: geometry)
+            placeholderImage
         }
-        .background(FancyColor.timerFocusBackground.color)
         .onAppear(perform: onAppearActions)
         .onDisappear {
             UIApplication.shared.isIdleTimerDisabled = false
@@ -104,8 +104,6 @@ extension AutoTimerView {
 //                                .opacity(0.2)
 //                            : nil
 //                    )
-            } else {
-                PlaceholderImage()
             }
         }
     }
@@ -209,6 +207,18 @@ extension AutoTimerView {
             }
         }
     }
+    
+    private var placeholderImage: some View {
+        Group {
+            if autoTimerViewModel.originalImage == nil {
+                Rectangle()
+                    .overlay(
+                        LoadingView()
+                    )
+                    .foregroundColor(FancyColor.background.color)
+            }
+        }
+    }
 }
 
 private struct Constants {
@@ -235,16 +245,6 @@ struct ProgressCircle: Shape {
                     clockwise: false)
         
         return path
-    }
-}
-
-struct PlaceholderImage: View {
-    var body: some View {
-        Rectangle()
-            .overlay(
-                Text("준비 중...")
-                    .foregroundColor(.white)
-            )
     }
 }
 
