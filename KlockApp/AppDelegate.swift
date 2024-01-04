@@ -21,4 +21,9 @@ class AppDelegate: NSObject, UIApplicationDelegate, UIWindowSceneDelegate {
         }
         return ApplicationDelegate.shared.application(app, open: url, options: options)
     }
+    
+    func applicationWillTerminate(_ application: UIApplication) {
+        let model = MyModel.shared
+        model.stopMonitoring()
+    }
 }
