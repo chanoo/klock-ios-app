@@ -38,10 +38,10 @@ struct ChatBotChatView: View {
                             .padding(.top, 10)
                         }
                         if let tempMessage = viewModel.tempMessage {
-                            ChatBubble(messageModel: tempMessage, isPreparingResponse: $viewModel.isPreparingResponse)
+                            MessageBubble(messageModel: tempMessage, isPreparingResponse: $viewModel.isPreparingResponse)
                         }
                         ForEach(viewModel.messages[chatBot.id, default: []].reversed()) { messageModel in
-                            ChatBubble(messageModel: messageModel, isPreparingResponse: $viewModel.isPreparingResponse)
+                            MessageBubble(messageModel: messageModel, isPreparingResponse: $viewModel.isPreparingResponse)
                         }
                     }
                 }
@@ -126,38 +126,6 @@ struct ChatBotChatView: View {
                 viewModel.loadStoredMessages(chatBotID: chatBot.id)
                 viewModel.initializeAssistant(chatBotID: chatBot.id, persona: chatBot.persona)
             }
-    }
-}
-
-struct ChatBubble: View {
-    let messageModel: MessageModel
-    @Binding var isPreparingResponse: Bool
-
-    var body: some View {
-        VStack {
-            HStack {
-                if messageModel.isUser {
-                    Spacer()
-                    Text(messageModel.content)
-                        .padding()
-                        .background(FancyColor.chatBotBubbleMe.color)
-                        .clipShape(RoundedCorners(tl: 10, tr: 10, bl: 10, br: 0))
-                        .foregroundColor(FancyColor.chatbotBubbleTextMe.color)
-                } else {
-                    Text(messageModel.content)
-                        .padding()
-                        .background(FancyColor.chatBotBubble.color)
-                        .clipShape(RoundedCorners(tl: 10, tr: 10, bl: 0, br: 10))
-                        .foregroundColor(FancyColor.chatbotBubbleText.color)
-                    Spacer()
-                }
-            }
-            .padding(0)
-            .padding(.bottom, 5)
-            .padding(.leading, messageModel.isUser ? 24 : 10)
-            .padding(.trailing, messageModel.isUser ? 10 : 24)
-        }
-        .rotationEffect(.degrees(180), anchor: .center) // VStack을 180도 회전
     }
 }
 

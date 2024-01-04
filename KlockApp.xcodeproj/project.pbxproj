@@ -62,6 +62,8 @@
 		9843B7E529EF086600F91DAD /* ProximityAndOrientationServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9843B7E429EF086600F91DAD /* ProximityAndOrientationServiceProtocol.swift */; };
 		9843B7E929F0EB5200F91DAD /* TimeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9843B7E829F0EB5200F91DAD /* TimeUtils.swift */; };
 		984844132A3C54C1006DD342 /* SheetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984844122A3C54C1006DD342 /* SheetType.swift */; };
+		984B10182B46200900186B6D /* MessageBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984B10172B46200900186B6D /* MessageBubble.swift */; };
+		984B101B2B46209A00186B6D /* AlarmBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984B101A2B46209A00186B6D /* AlarmBubble.swift */; };
 		984D2C8029DFB197008D3EA9 /* FlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984D2C7F29DFB197008D3EA9 /* FlowLayout.swift */; };
 		984D2C8229DFC2B3008D3EA9 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984D2C8129DFC2B3008D3EA9 /* AppState.swift */; };
 		984D2C8429DFC311008D3EA9 /* UINavigationController+UIGestureRecognizerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984D2C8329DFC311008D3EA9 /* UINavigationController+UIGestureRecognizerDelegate.swift */; };
@@ -327,6 +329,8 @@
 		9843B7E429EF086600F91DAD /* ProximityAndOrientationServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProximityAndOrientationServiceProtocol.swift; sourceTree = "<group>"; };
 		9843B7E829F0EB5200F91DAD /* TimeUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeUtils.swift; sourceTree = "<group>"; };
 		984844122A3C54C1006DD342 /* SheetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetType.swift; sourceTree = "<group>"; };
+		984B10172B46200900186B6D /* MessageBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageBubble.swift; sourceTree = "<group>"; };
+		984B101A2B46209A00186B6D /* AlarmBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmBubble.swift; sourceTree = "<group>"; };
 		984D2C7F29DFB197008D3EA9 /* FlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowLayout.swift; sourceTree = "<group>"; };
 		984D2C8129DFC2B3008D3EA9 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		984D2C8329DFC311008D3EA9 /* UINavigationController+UIGestureRecognizerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+UIGestureRecognizerDelegate.swift"; sourceTree = "<group>"; };
@@ -650,6 +654,20 @@
 			path = DTO;
 			sourceTree = "<group>";
 		};
+		984B10162B461F5B00186B6D /* ChatInput */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ChatInput;
+			sourceTree = "<group>";
+		};
+		984B10192B46205400186B6D /* AlarmBubble */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AlarmBubble;
+			sourceTree = "<group>";
+		};
 		984D2C8529DFC479008D3EA9 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -742,11 +760,13 @@
 			path = KlockAppUITests;
 			sourceTree = "<group>";
 		};
-		988572482B3C329000E7256B /* Message Bubble */ = {
+		988572482B3C329000E7256B /* Bubble */ = {
 			isa = PBXGroup;
 			children = (
+				984B10172B46200900186B6D /* MessageBubble.swift */,
+				984B101A2B46209A00186B6D /* AlarmBubble.swift */,
 			);
-			path = "Message Bubble";
+			path = Bubble;
 			sourceTree = "<group>";
 		};
 		9899A7E82AA3743A001B4C72 /* Common */ = {
@@ -766,13 +786,13 @@
 			path = TFLite;
 			sourceTree = "<group>";
 		};
-		98B065102B41B212009D0F69 /* Profile Edit */ = {
+		98B065102B41B212009D0F69 /* ProfileEdit */ = {
 			isa = PBXGroup;
 			children = (
 				98B065112B41B229009D0F69 /* ProfileImageEditView.swift */,
 				98B065132B41B90E009D0F69 /* ProfileImageView.swift */,
 			);
-			path = "Profile Edit";
+			path = ProfileEdit;
 			sourceTree = "<group>";
 		};
 		98B065152B4279E9009D0F69 /* Crypto */ = {
@@ -965,8 +985,10 @@
 		98CE661229D553EA0009916F /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				98B065102B41B212009D0F69 /* Profile Edit */,
-				988572482B3C329000E7256B /* Message Bubble */,
+				984B10192B46205400186B6D /* AlarmBubble */,
+				984B10162B461F5B00186B6D /* ChatInput */,
+				98B065102B41B212009D0F69 /* ProfileEdit */,
+				988572482B3C329000E7256B /* Bubble */,
 				98E9386429EA5899009CBF32 /* AnalogClockView.swift */,
 				98B21B4329D60D25004EFE0E /* FancyButton.swift */,
 				98B21B4529D60EEB004EFE0E /* FancyTextField.swift */,
@@ -1433,10 +1455,12 @@
 				98E67FE12A5714750090AE23 /* UserRemoteServiceProtocol.swift in Sources */,
 				98D7C95129E45C550075D201 /* ContentView.swift in Sources */,
 				98FD8F742A174A7900CEE0B1 /* StudySessionRemoteServiceProtocol.swift in Sources */,
+				984B101B2B46209A00186B6D /* AlarmBubble.swift in Sources */,
 				986E5DB229EAEF5600FF7047 /* CalendarViewModel.swift in Sources */,
 				98AC30832A15CB77006DC48D /* PomodoroTimerViewModel.swift in Sources */,
 				985BE89A29E6E579008582A3 /* FriendsViewModel.swift in Sources */,
 				98AC30712A136198006DC48D /* FocusTimerViewModel.swift in Sources */,
+				984B10182B46200900186B6D /* MessageBubble.swift in Sources */,
 				98099DBB2A287E560096AA27 /* SignUpStartTimeView.swift in Sources */,
 				984D2C8229DFC2B3008D3EA9 /* AppState.swift in Sources */,
 				989D6F382A4C654200BC2F2B /* CustomActionSheetModifier.swift in Sources */,

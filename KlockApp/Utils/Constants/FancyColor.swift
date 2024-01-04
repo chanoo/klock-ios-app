@@ -25,6 +25,7 @@ enum FancyColor: String {
     case calendarEmptyCell = "color_calendar_empty_cell"
     case blackButtonBackground = "color_black_button_background"
     case blackButtonText = "color_black_button_text"
+    case bubbleAlram = "color_bubble_alram"
     case buttonCancel = "color_button_cancel"
     case navigationBar = "color_navigation_bar"
     case listCell = "color_list_cell"
