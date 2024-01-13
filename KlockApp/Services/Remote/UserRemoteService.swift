@@ -21,7 +21,7 @@ class UserRemoteService: UserRemoteServiceProtocol, APIServiceProtocol {
     func get(id: Int64) -> AnyPublisher<GetUserResDTO, Alamofire.AFError> {
         let url = "\(baseURL)/\(id)"
         
-        return AF.request(url, method: .get, encoding: JSONEncoding.default, headers: self.headers())
+        return session.request(url, method: .get, encoding: JSONEncoding.default, headers: self.headers())
             .validate()
             .publishDecodable(type: GetUserResDTO.self)
             .tryMap { result -> GetUserResDTO in
@@ -46,7 +46,7 @@ class UserRemoteService: UserRemoteServiceProtocol, APIServiceProtocol {
         let url = "\(baseURL)/existed-nickname"
         let requestDTO = ExistedNicknameReqDTO(nickname: nickname)
         
-        return AF.request(url, method: .post, parameters: requestDTO.dictionary, encoding: JSONEncoding.default)
+        return session.request(url, method: .post, parameters: requestDTO.dictionary, encoding: JSONEncoding.default)
             .validate()
             .publishDecodable(type: ExistedNicknameResDTO.self)
             .tryMap { result -> ExistedNicknameResDTO in
@@ -70,7 +70,7 @@ class UserRemoteService: UserRemoteServiceProtocol, APIServiceProtocol {
     func delete(id: Int64) -> AnyPublisher<Void, AFError> {
         let url = "\(baseURL)/\(id)"
 
-        return AF.request(url, method: .delete, headers: self.headers())
+        return session.request(url, method: .delete, headers: self.headers())
             .validate()
             .publishData()
             .tryMap { dataResponse -> Void in
@@ -80,14 +80,20 @@ class UserRemoteService: UserRemoteServiceProtocol, APIServiceProtocol {
                     throw dataResponse.error ?? AFError.responseValidationFailed(reason: .unacceptableStatusCode(code: dataResponse.response?.statusCode ?? -1))
                 }
             }
-            .mapError { $0 as! AFError }
+            .mapError { error -> AFError in
+                if let afError = error as? AFError {
+                    return afError
+                } else {
+                    return AFError.sessionTaskFailed(error: error)
+                }
+            }
             .eraseToAnyPublisher()
     }
 
     func update(id: Int64, request: UserUpdateReqDTO) -> AnyPublisher<UserUpdateResDTO, AFError> {
         let url = "\(baseURL)/\(id)"
         
-        return AF.request(url, method: .put, parameters: request.dictionary, encoding: JSONEncoding.default, headers: self.headers())
+        return session.request(url, method: .put, parameters: request.dictionary, encoding: JSONEncoding.default, headers: self.headers())
             .validate()
             .publishDecodable(type: UserUpdateResDTO.self)
             .tryMap { result -> UserUpdateResDTO in

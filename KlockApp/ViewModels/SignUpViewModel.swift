@@ -25,6 +25,7 @@ class SignUpViewModel: NSObject, ObservableObject {
     @Published var selectedTagId: Int64?
     @Published var tags: [TagModel] = []
     @Published var error: String?
+    @Published var isLoading: Bool = false
 
     private let authenticationService: AuthenticationServiceProtocol = Container.shared.resolve(AuthenticationServiceProtocol.self)
     private let tagService: TagServiceProtocol = Container.shared.resolve(TagServiceProtocol.self)
@@ -45,6 +46,11 @@ class SignUpViewModel: NSObject, ObservableObject {
         setupBindings()
 
         self.signUpUserModel.tagId = self.selectedTagId ?? 0
+    }
+    
+    // isLoading get set
+    func setLoading(_ isLoading: Bool) {
+        self.isLoading = isLoading
     }
 
     private func setupBindings() {
@@ -134,6 +140,7 @@ class SignUpViewModel: NSObject, ObservableObject {
     private func setupSignUpButtonTapped() {
         confirmButtonTapped
             .sink { [weak self] _ in
+                self?.setLoading(true)
                 self?.signUp()
             }
             .store(in: &cancellables)
@@ -227,9 +234,8 @@ class SignUpViewModel: NSObject, ObservableObject {
     }
     
     func handleReceivedUploadProfileImageDataResponse(_ dto: ProfileImageResDTO) {
-        var userModel = UserModel.load()
-        userModel?.profileImage = dto.profileImage
-        userModel?.save()
+        let userModel = UserModel.from(dto: dto)
+        userModel.save()
         DispatchQueue.main.async {
             self.onSignUpSuccess?()
         }

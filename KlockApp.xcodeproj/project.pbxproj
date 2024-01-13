@@ -74,11 +74,8 @@
 		984D2C9129E0728C008D3EA9 /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984D2C9029E0728C008D3EA9 /* SplashViewModel.swift */; };
 		985BE88A29E6DC2C008582A3 /* ChatBotChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE88929E6DC2C008582A3 /* ChatBotChatView.swift */; };
 		985BE88C29E6DC35008582A3 /* TimeTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE88B29E6DC35008582A3 /* TimeTimerView.swift */; };
-		985BE88E29E6DC3E008582A3 /* MissionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE88D29E6DC3E008582A3 /* MissionView.swift */; };
-		985BE89029E6DC49008582A3 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE88F29E6DC49008582A3 /* SettingsView.swift */; };
 		985BE89229E6E0CD008582A3 /* CharacterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE89129E6E0CD008582A3 /* CharacterView.swift */; };
 		985BE89429E6E0DB008582A3 /* FriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE89329E6E0DB008582A3 /* FriendsView.swift */; };
-		985BE89629E6E359008582A3 /* ClockModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE89529E6E359008582A3 /* ClockModalView.swift */; };
 		985BE89829E6E559008582A3 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE89729E6E559008582A3 /* HomeViewModel.swift */; };
 		985BE89A29E6E579008582A3 /* FriendsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE89929E6E579008582A3 /* FriendsViewModel.swift */; };
 		985BE89C29E6E595008582A3 /* FriendModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE89B29E6E595008582A3 /* FriendModel.swift */; };
@@ -344,11 +341,8 @@
 		985BE88329E652CE008582A3 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		985BE88929E6DC2C008582A3 /* ChatBotChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotChatView.swift; sourceTree = "<group>"; };
 		985BE88B29E6DC35008582A3 /* TimeTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTimerView.swift; sourceTree = "<group>"; };
-		985BE88D29E6DC3E008582A3 /* MissionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionView.swift; sourceTree = "<group>"; };
-		985BE88F29E6DC49008582A3 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		985BE89129E6E0CD008582A3 /* CharacterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterView.swift; sourceTree = "<group>"; };
 		985BE89329E6E0DB008582A3 /* FriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsView.swift; sourceTree = "<group>"; };
-		985BE89529E6E359008582A3 /* ClockModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockModalView.swift; sourceTree = "<group>"; };
 		985BE89729E6E559008582A3 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		985BE89929E6E579008582A3 /* FriendsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewModel.swift; sourceTree = "<group>"; };
 		985BE89B29E6E595008582A3 /* FriendModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendModel.swift; sourceTree = "<group>"; };
@@ -1029,9 +1023,6 @@
 				98D7C95029E45C550075D201 /* ContentView.swift */,
 				98B21B6B29D9A7A5004EFE0E /* HomeView.swift */,
 				984D2C8E29E067FE008D3EA9 /* SplashView.swift */,
-				985BE88D29E6DC3E008582A3 /* MissionView.swift */,
-				985BE88F29E6DC49008582A3 /* SettingsView.swift */,
-				985BE89529E6E359008582A3 /* ClockModalView.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -1338,7 +1329,6 @@
 				9881FC0B2A1F455200497937 /* BeaconManager.swift in Sources */,
 				98976B0B2A07819E00F1CEAE /* ExamTimerRemoteService.swift in Sources */,
 				9885F3182A5A9187000E2F7A /* MyModel.swift in Sources */,
-				985BE89029E6DC49008582A3 /* SettingsView.swift in Sources */,
 				981881CA29F27316002A4395 /* PageControl.swift in Sources */,
 				9843B7DD29EEE0EB00F91DAD /* NotificationManager.swift in Sources */,
 				98099DBD2A287E920096AA27 /* SignUpNicknameView.swift in Sources */,
@@ -1439,7 +1429,6 @@
 				98B24A992A32386D0083444D /* TextView.swift in Sources */,
 				983BC0222A8EF62E00DC108B /* AutoTimerRemoteServiceProtocol.swift in Sources */,
 				98EBFBEF29F97B85004E95F3 /* TaskDetailView.swift in Sources */,
-				985BE88E29E6DC3E008582A3 /* MissionView.swift in Sources */,
 				983B59DF29FB7B1E00F0EACD /* AccountEntity.swift in Sources */,
 				98EBFBEA29F968FF004E95F3 /* TaskViewModel.swift in Sources */,
 				98976AFB2A00EC4800F1CEAE /* TimerRemoteServiceProtocol.swift in Sources */,
@@ -1454,7 +1443,6 @@
 				985BE8A629E6EA60008582A3 /* ChatGPTServiceProtocol.swift in Sources */,
 				98D2826729E988100039E6E6 /* CoreDataManager.swift in Sources */,
 				984D2C8B29DFDBAA008D3EA9 /* CommonViewModifier.swift in Sources */,
-				985BE89629E6E359008582A3 /* ClockModalView.swift in Sources */,
 				98AC30732A13637C006DC48D /* FocusTimerCardView.swift in Sources */,
 				98E67FE12A5714750090AE23 /* UserRemoteServiceProtocol.swift in Sources */,
 				98D7C95129E45C550075D201 /* ContentView.swift in Sources */,

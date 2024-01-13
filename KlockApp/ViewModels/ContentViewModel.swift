@@ -23,6 +23,7 @@ class ContentViewModel: ObservableObject {
     @Published var currentView: AnyView
     private let authService: AuthenticationServiceProtocol = Container.shared.resolve(AuthenticationServiceProtocol.self)
     private let userRemoteService: UserRemoteServiceProtocol = Container.shared.resolve(UserRemoteServiceProtocol.self)
+    private let signInViewModel = Container.shared.resolve(SignInViewModel.self)
     private var cancellableSet: Set<AnyCancellable> = []
 
     init() {
@@ -37,7 +38,6 @@ class ContentViewModel: ObservableObject {
                       receiveValue: handleReceivedData)
                 .store(in: &self.cancellableSet)
         } else {
-            let signInViewModel = Container.shared.resolve(SignInViewModel.self)
             self.currentView = AnyView(SignInView()
                 .environmentObject(appFlowManager)
                 .environmentObject(signInViewModel))
@@ -48,10 +48,23 @@ class ContentViewModel: ObservableObject {
         switch completion {
         case .failure(let error):
             print("Error: \(error.localizedDescription)")
-            Foast.show(message: error.localizedDescription)
+            logout()
+            showSignInView()
         case .finished:
             break
         }
+    }
+    
+    // 로그아웃 메소드
+    func logout() {
+        let standard = UserDefaults.standard
+        standard.removeObject(forKey: "access.token")
+        standard.synchronize()
+    }
+    
+    func showSignInView() {
+        self.currentView = AnyView(SignInView()
+            .environmentObject(signInViewModel))
     }
     
     func handleReceivedData(_ dto: GetUserResDTO) {

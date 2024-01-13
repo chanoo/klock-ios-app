@@ -17,75 +17,79 @@ struct SignUpProfileImageView: View {
 
     var body: some View {
         VStack {
-            Image("img_signup_step5")
-                .frame(maxWidth: .infinity, alignment: .topLeading)
-            
-            Text("친구에게 보여주고픈\n나를 표현할 사진을 선택해요")
-                .font(.system(size: 25))
-                .fontWeight(.bold)
-                .padding(.top, 30)
-                .lineSpacing(4)
-                .frame(maxWidth: .infinity, alignment: .topLeading)
-            
-            Text("아직 고민된다면 언제든지 설정이 가능해요")
-                .foregroundColor(.gray)
-                .font(.callout)
-                .frame(maxWidth: .infinity, alignment: .topLeading)
-                .padding(.top, 1)
-
-            Spacer()
-
-            ZStack {
-                if let image = viewModel.selectedImage {
-                    Image(uiImage: image)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 150, height: 150)
-                        .clipShape(Circle())
-                        .overlay(Circle().stroke(FancyColor.black.color, lineWidth: 4))
-                } else {
-                    Image("img_profile")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 150, height: 150)
-                        .clipShape(Circle())
-                        .overlay(Circle().stroke(FancyColor.black.color, lineWidth: 4))
-                }
+            if viewModel.isLoading {
+                LoadingView()
+            } else {
+                Image("img_signup_step5")
+                    .frame(maxWidth: .infinity, alignment: .topLeading)
                 
-                if userProfileImageViewModel.isShowCemeraPermissionView {
-                    Button {
-                        userProfileImageViewModel.showImagePickerView()
-                    } label: {
-                        Image("ic_plus")
+                Text("친구에게 보여주고픈\n나를 표현할 사진을 선택해요")
+                    .font(.system(size: 25))
+                    .fontWeight(.bold)
+                    .padding(.top, 30)
+                    .lineSpacing(4)
+                    .frame(maxWidth: .infinity, alignment: .topLeading)
+                
+                Text("아직 고민된다면 언제든지 설정이 가능해요")
+                    .foregroundColor(.gray)
+                    .font(.callout)
+                    .frame(maxWidth: .infinity, alignment: .topLeading)
+                    .padding(.top, 1)
+
+                Spacer()
+
+                ZStack {
+                    if let image = viewModel.selectedImage {
+                        Image(uiImage: image)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 150, height: 150)
+                            .clipShape(Circle())
+                            .overlay(Circle().stroke(FancyColor.black.color, lineWidth: 4))
+                    } else {
+                        Image("img_profile")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 150, height: 150)
+                            .clipShape(Circle())
+                            .overlay(Circle().stroke(FancyColor.black.color, lineWidth: 4))
                     }
-                    .padding(.top, 110)
-                    .padding(.leading, 110)
-                } else {
-                    NavigationLink(
-                        destination: CameraPermissionView(),
-                        isActive: $userProfileImageViewModel.isShowCemeraPermissionView)
-                    {
+                    
+                    if userProfileImageViewModel.isShowCemeraPermissionView {
                         Button {
-                            userProfileImageViewModel.showCameraPermissionView()
+                            userProfileImageViewModel.showImagePickerView()
                         } label: {
                             Image("ic_plus")
                         }
                         .padding(.top, 110)
                         .padding(.leading, 110)
+                    } else {
+                        NavigationLink(
+                            destination: CameraPermissionView(),
+                            isActive: $userProfileImageViewModel.isShowCemeraPermissionView)
+                        {
+                            Button {
+                                userProfileImageViewModel.showCameraPermissionView()
+                            } label: {
+                                Image("ic_plus")
+                            }
+                            .padding(.top, 110)
+                            .padding(.leading, 110)
+                        }
                     }
                 }
-            }
-            .padding(.bottom, 100)
+                .padding(.bottom, 100)
 
-            Spacer()
-            
-            FancyButton(
-                title: "시작하기",
-                action: {
-                    viewModel.confirmButtonTapped.send()
-                },
-                style: .constant(.black)
-            )
+                Spacer()
+                
+                FancyButton(
+                    title: "시작하기",
+                    action: {
+                        viewModel.confirmButtonTapped.send()
+                    },
+                    style: .constant(.black)
+                )
+            }
             
             NavigationLink(
                 destination: viewForDestination(activeDestination),

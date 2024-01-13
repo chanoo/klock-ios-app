@@ -48,8 +48,22 @@ struct UserModel: Hashable, Codable {
             totalStudyTime: 0
         )
     }
-    
+
     static func from(dto: GetUserResDTO) -> UserModel {
+        return UserModel(
+            id: dto.id,
+            accessToken: nil,
+            refreshToken: nil,
+            nickname: dto.nickname,
+            profileImage: dto.profileImage,
+            tagId: dto.tagId,
+            startOfTheWeek: dto.startOfTheWeek,
+            startOfTheDay: dto.startOfTheDay,
+            totalStudyTime: 0
+        )
+    }
+
+    static func from(dto: ProfileImageResDTO) -> UserModel {
         return UserModel(
             id: dto.id,
             accessToken: nil,
