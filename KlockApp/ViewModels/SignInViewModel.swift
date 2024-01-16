@@ -12,6 +12,7 @@ import Alamofire
 import FacebookLogin
 import KeychainAccess
 import KakaoSDKUser
+import Foast
 
 class SignInViewModel: NSObject, ObservableObject, ASAuthorizationControllerDelegate {
 
@@ -129,6 +130,8 @@ class SignInViewModel: NSObject, ObservableObject, ASAuthorizationControllerDele
                     }
                }
             }
+        } else {
+            Foast.show(message: "카카오톡을 설치하고 로그인해 주세요")
         }
     }
 
