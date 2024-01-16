@@ -24,6 +24,10 @@ struct PreferencesView: View {
                 viewModel.loadUserInfo()
             }
         }
+        .familyActivityPicker(isPresented: $viewModel.isAppsSettingPresented,  selection: $myModel.selectionToDiscourage)
+        .onChange(of: myModel.selectionToDiscourage) { newSelection in
+            MyModel.shared.setShieldRestrictions()
+        }
     }
 }
 
