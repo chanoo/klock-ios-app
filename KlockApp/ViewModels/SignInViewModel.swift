@@ -13,6 +13,8 @@ import FacebookLogin
 import KeychainAccess
 import KakaoSDKUser
 import Foast
+import KakaoSDKCommon
+import KakaoSDKAuth
 
 class SignInViewModel: NSObject, ObservableObject, ASAuthorizationControllerDelegate {
 
@@ -131,7 +133,32 @@ class SignInViewModel: NSObject, ObservableObject, ASAuthorizationControllerDele
                }
             }
         } else {
-            Foast.show(message: "카카오톡을 설치하고 로그인해 주세요")
+            UserApi.shared.loginWithKakaoAccount {(oauthToken, error) in
+                    if let error = error {
+                        print(error)
+                    }
+                    else {
+                        print("loginWithKakaoAccount() success.")
+
+                        //do something
+                        UserApi.shared.me() { (user, error) in
+                            if let error = error {
+                                print(error)
+                            }
+                            else {
+                                print("me() success.")
+                                
+                                //do something
+                                if let user = user, let userId = user.id {
+                                    let userIdString = String(userId)
+                                    self.signUpUserModel.provider = "KAKAO"
+                                    self.signUpUserModel.providerUserId = userIdString
+                                    self.handleSocialLogin("KAKAO", userIdString)
+                                }
+                            }
+                        }
+                    }
+                }
         }
     }
 
