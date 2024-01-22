@@ -98,8 +98,8 @@ struct FocusTimerCardView: View {
                             focusTimerViewModel.startStudy()
                             timeTimerViewModel.startStudySession()
                             timeTimerViewModel.focusTimerViewModel = focusTimerViewModel
-                            let model = MyModel.shared
-                            model.initiateMonitoring()
+                            let appUsageController = AppUsageController.shared
+                            appUsageController.initiateMonitoring()
                         }
                     },
                     icon: Image("ic_play"),

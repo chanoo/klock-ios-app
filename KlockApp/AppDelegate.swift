@@ -23,7 +23,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UIWindowSceneDelegate {
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
-        let model = MyModel.shared
-        model.stopMonitoring()
+        let appUsageController = AppUsageController.shared
+        appUsageController.stopMonitoring()
     }
 }

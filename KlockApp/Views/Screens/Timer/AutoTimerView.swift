@@ -79,8 +79,8 @@ struct AutoTimerView: View {
                 startTime: autoTimerViewModel.startTime,
                 endTime: autoTimerViewModel.currentTime
             )
-            let model = MyModel.shared
-            model.stopMonitoring()
+            let appUsageController = AppUsageController.shared
+            appUsageController.stopMonitoring()
             timeTimerViewModel.autoTimerViewModel = nil
         }
     }

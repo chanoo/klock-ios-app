@@ -10,7 +10,7 @@ import SwiftUI
 struct PreferencesView: View {
     @EnvironmentObject var viewModel: PreferencesViewModel
     @EnvironmentObject var actionSheetManager: ActionSheetManager
-    @EnvironmentObject var myModel: MyModel
+    @EnvironmentObject var appUsageController: AppUsageController
     @State private var isUserProfileImageViewPresented = false
 
     var body: some View {
@@ -24,9 +24,9 @@ struct PreferencesView: View {
                 viewModel.loadUserInfo()
             }
         }
-        .familyActivityPicker(isPresented: $viewModel.isAppsSettingPresented,  selection: $myModel.selectionToDiscourage)
-        .onChange(of: myModel.selectionToDiscourage) { newSelection in
-            MyModel.shared.setShieldRestrictions()
+        .familyActivityPicker(isPresented: $viewModel.isAppsSettingPresented,  selection: $appUsageController.selectionToDiscourage)
+        .onChange(of: appUsageController.selectionToDiscourage) { newSelection in
+            AppUsageController.shared.setShieldRestrictions()
         }
     }
 }
@@ -162,11 +162,11 @@ struct PreferencesView_Previews: PreviewProvider {
     static var previews: some View {
         let viewModel = Container.shared.resolve(PreferencesViewModel.self)
         let actionSheetManager = ActionSheetManager()
-        let model = MyModel.shared
+        let appUsageController = AppUsageController.shared
 
         PreferencesView()
             .environmentObject(viewModel)
             .environmentObject(actionSheetManager)
-            .environmentObject(model)
+            .environmentObject(appUsageController)
     }
 }

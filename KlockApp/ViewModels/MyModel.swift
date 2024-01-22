@@ -12,8 +12,8 @@ import MobileCoreServices
 import UIKit
 import FamilyControls
 
-class MyModel: ObservableObject {
-    static let shared = MyModel()
+class AppUsageController: ObservableObject {
+    static let shared = AppUsageController()
     let store = ManagedSettingsStore()
     let center = DeviceActivityCenter()
     let schedule = DeviceActivitySchedule(
@@ -21,13 +21,18 @@ class MyModel: ObservableObject {
         intervalEnd: DateComponents(hour: 23, minute: 59),
         repeats: true
     )
-    
+    private let encoder = PropertyListEncoder()
+    private let decoder = PropertyListDecoder()
+
     @Published var selectionToDiscourage: FamilyActivitySelection
     @Published var selectionToEncourage: FamilyActivitySelection
 
     init() {
         selectionToDiscourage = FamilyActivitySelection()
         selectionToEncourage = FamilyActivitySelection()
+
+        // 앱 초기화 시 저장된 설정 불러오기
+        loadFromUserDefaults()
     }
     
     func initiateMonitoring() {
@@ -37,12 +42,38 @@ class MyModel: ObservableObject {
     
     func setShieldRestrictions() {
         if #available(iOS 16.0, *) {
-            let applications = MyModel.shared.selectionToDiscourage
+            let applications = AppUsageController.shared.selectionToDiscourage
             let exceptions = applications.applicationTokens
-            store.shield.applicationCategories = .all(except:exceptions)
+            store.shield.applicationCategories = .all(except: exceptions)
 
             let webDomainTokens = applications.webDomainTokens
             store.shield.webDomainCategories = .all(except: webDomainTokens)
+
+            // Save current selections
+            saveToUserDefaults(selection: selectionToDiscourage)
+        }
+    }
+
+    private func saveToUserDefaults(selection: FamilyActivitySelection) {
+        if let encodedData = try? encoder.encode(selection) {
+            UserDefaults.standard.set(encodedData, forKey: "familyControlSelections")
+        }
+    }
+
+    private func loadFromUserDefaults() {
+        guard let data = UserDefaults.standard.data(forKey: "familyControlSelections") else {
+            print("====> No data saved in the family controls user defaults")
+            return
+        }
+        
+        if let selections = try? decoder.decode(FamilyActivitySelection.self, from: data) {
+            self.selectionToDiscourage.applicationTokens = selections.applicationTokens
+            self.selectionToDiscourage.categoryTokens = selections.categoryTokens
+            self.selectionToDiscourage.webDomainTokens = selections.webDomainTokens
+        } else {
+            self.selectionToDiscourage.applicationTokens = Set()
+            self.selectionToDiscourage.categoryTokens = Set()
+            self.selectionToDiscourage.webDomainTokens = Set()
         }
     }
     

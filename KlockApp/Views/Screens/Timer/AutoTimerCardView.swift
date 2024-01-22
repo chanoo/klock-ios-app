@@ -75,8 +75,8 @@ struct AutoTimerCardView: View {
                                 timeTimerViewModel.autoTimerViewModel = autoTimerViewModel
                                 timeTimerViewModel.startStudySession()
                                 autoTimerViewModel.startStudy()
-                                let model = MyModel.shared
-                                model.initiateMonitoring()
+                                let appUsageController = AppUsageController.shared
+                                appUsageController.initiateMonitoring()
                             }
                         },
                         icon: Image("ic_play"),
