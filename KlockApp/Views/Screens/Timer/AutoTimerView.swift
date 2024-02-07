@@ -250,7 +250,7 @@ struct ProgressCircle: Shape {
 
 struct AutoTimerView_Previews: PreviewProvider {
     static var previews: some View {
-        let model = AutoTimerModel(id: 1, userId: 1, seq: 1, type: "AUTO", name: "자동 집중시간 타이머")
+        let model = AutoTimerModel(id: 1, userId: 1, seq: 1, type: TimerType.auto.rawValue, name: "자동 집중시간 타이머")
         let autoTimerViewModel = AutoTimerViewModel(model: model)
         let TimeTimerViewModel = Container.shared.resolve(TimeTimerViewModel.self)
         let TabBarManager = Container.shared.resolve(TabBarManager.self)

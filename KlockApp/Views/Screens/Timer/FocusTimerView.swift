@@ -143,7 +143,7 @@ struct FocusTimerView: View {
 
 struct FocusTimerView_Previews: PreviewProvider {
     static var previews: some View {
-        let model = FocusTimerModel(id: 1, userId: 1, seq: 1, type: "FOCUS", name: "집중시간 타이머")
+        let model = FocusTimerModel(id: 1, userId: 1, seq: 1, type: TimerType.focus.rawValue, name: "집중시간 타이머")
         let focusTimerViewModel = FocusTimerViewModel(model: model)
         let TimeTimerViewModel = Container.shared.resolve(TimeTimerViewModel.self)
         let TabBarManager = Container.shared.resolve(TabBarManager.self)

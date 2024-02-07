@@ -151,7 +151,7 @@ struct ExamTimerCardView: View {
                         // Save settings
                         withAnimation(.spring()) {
                             flipAnimation()
-                            timeTimerViewModel.update(type: "EXAM", model: examTimerViewModel.model)
+                            timeTimerViewModel.update(type: TimerType.exam.rawValue, model: examTimerViewModel.model)
                         }
                     }) {
                         Text("저장")
@@ -194,7 +194,7 @@ struct ExamTimerCardView: View {
 
 struct ExamTimerCardView_Previews: PreviewProvider {
     static var previews: some View {
-        let model = ExamTimerModel(id: 1, userId: 1, seq: 1, type: "EXAM", name: "시험시간 타이머", startTime: Date(), duration: 80, questionCount: 45, markingTime: 5)
+        let model = ExamTimerModel(id: 1, userId: 1, seq: 1, type: TimerType.exam.rawValue, name: "시험시간 타이머", startTime: Date(), duration: 80, questionCount: 45, markingTime: 5)
         let viewModel = ExamTimerViewModel(model: model)
         ExamTimerCardView()
             .environmentObject(viewModel)

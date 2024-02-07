@@ -144,7 +144,7 @@ struct PomodoroTimerCardView: View {
                     Button(action: {
                         // Save settings
                         withAnimation(.spring()) {
-                            timeTimerViewModel.update(type: "POMODORO", model: pomodoroTimerViewModel.model)
+                            timeTimerViewModel.update(type: TimerType.pomodoro.rawValue, model: pomodoroTimerViewModel.model)
                             isFlipped.toggle()
                         }
                     }) {

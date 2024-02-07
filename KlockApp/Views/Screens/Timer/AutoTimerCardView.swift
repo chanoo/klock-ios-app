@@ -125,7 +125,7 @@ struct AutoTimerCardView: View {
 
                 Section {
                     Button(action: {
-                        timeTimerViewModel.update(type: "AUTO", model: autoTimerViewModel.model)
+                        timeTimerViewModel.update(type: TimerType.auto.rawValue, model: autoTimerViewModel.model)
                         flipAnimation()
                         tabBarManager.show()
                     }) {
@@ -165,7 +165,7 @@ struct AutoTimerCardView: View {
 
 struct AutoTimerCardView_Previews: PreviewProvider {
     static var previews: some View {
-        let model = AutoTimerModel(id: 1, userId: 1, seq: 1, type: "AUTO", name: "자동 집중시간 타이머")
+        let model = AutoTimerModel(id: 1, userId: 1, seq: 1, type: TimerType.auto.rawValue, name: "자동 집중시간 타이머")
         let viewModel = AutoTimerViewModel(model: model)
         let timeTimerViewModel = Container.shared.resolve(TimeTimerViewModel.self)
         AutoTimerCardView(autoTimerViewModel: viewModel, timeTimerViewModel: timeTimerViewModel)

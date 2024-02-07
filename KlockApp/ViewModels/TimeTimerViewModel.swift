@@ -135,7 +135,7 @@ class TimeTimerViewModel: ObservableObject {
         let currentTime = UserDefaults.standard.double(forKey: studyStartTimeKey)
         let now = Date()
         let startTime = currentTime == 0 ? now : Date(timeIntervalSince1970: currentTime)
-        currentStudySession = StudySessionModel(id: 0, userId: 1, startTime: startTime, endTime: now, timerName: "", timerType: "FOCUS")
+        currentStudySession = StudySessionModel(id: 0, userId: 1, startTime: startTime, endTime: now, timerName: "", timerType: TimerType.focus.rawValue)
         elapsedTime = 0
         updateElapsedTime()
     }

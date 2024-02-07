@@ -122,22 +122,22 @@ struct AddTimerButton: View {
                 message: "원하는 타이머로 공부를 시작해보세요.",
                 actionButtons: [
                     ActionButton(title: "집중시간 타이머", action: {
-                        viewModel.addTimer(type: "FOCUS")
+                        viewModel.addTimer(type: TimerType.focus.rawValue)
                         actionSheetManager.isPresented = false
                     }),
                     ActionButton(title: "Ai자동 타이머", action: {
-                        viewModel.addTimer(type: "AUTO")
+                        viewModel.addTimer(type: TimerType.auto.rawValue)
                         actionSheetManager.isPresented = false
                     }),
 //                    ActionButton(title: "뽀모도로 타이머", action: {
 //                        withAnimation(.spring()) {
-//                            viewModel.addTimer(type: "POMODORO")
+//                            viewModel.addTimer(type: TimerType.pomodoro.rawValue)
 //                            actionSheetManager.isPresented = false
 //                        }
 //                    }),
 //                    ActionButton(title: "시험시간 타이머", action: {
 //                        withAnimation(.spring()) {
-//                            viewModel.addTimer(type: "EXAM")
+//                            viewModel.addTimer(type: TimerType.exam.rawValue)
 //                            actionSheetManager.isPresented = false
 //                        }
 //                    }),

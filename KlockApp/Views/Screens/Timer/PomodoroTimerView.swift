@@ -88,7 +88,7 @@ struct PomodoroTimerView: View {
 
 struct PomodoroTimerView_Previews: PreviewProvider {
     static var previews: some View {
-        let model = PomodoroTimerModel(id: 1, userId: 1, seq: 1, type: "POMODORO", name: "뽀모도로 타이머", focusTime: 25, breakTime: 5, cycleCount: 4)
+        let model = PomodoroTimerModel(id: 1, userId: 1, seq: 1, type: TimerType.pomodoro.rawValue, name: "뽀모도로 타이머", focusTime: 25, breakTime: 5, cycleCount: 4)
         let viewModel = PomodoroTimerViewModel(model: model)
         PomodoroTimerView()
             .environmentObject(viewModel)

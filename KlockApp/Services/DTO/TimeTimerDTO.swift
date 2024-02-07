@@ -23,7 +23,7 @@ struct ExamTimerDTO: Codable, TimerDTO {
     var id: Int64? = nil
     var userId: Int64? = nil
     let seq: Int
-    var type: String? = "EXAM"
+    var type: String? = TimerType.exam.rawValue
     let name: String
     let startTime: String
     let duration: Int
@@ -81,18 +81,20 @@ struct AutoTimerDTO: Codable, TimerDTO {
 // 타이머 항목 디코딩 함수
 func decodeTimerItem(from data: Data) throws -> TimerDTO? {
     let item = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
-    guard let itemType = item?["type"] as? String else { return nil }
+    guard let itemTypeStr = item?["type"] as? String else { return nil }
 
-    switch itemType {
-    case "FOCUS":
-        return try JSONDecoder().decode(FocusTimerDTO.self, from: data)
-    case "POMODORO":
-        return try JSONDecoder().decode(PomodoroTimerDTO.self, from: data)
-    case "EXAM":
-        return try JSONDecoder().decode(ExamTimerDTO.self, from: data)
-    case "AUTO":
-        return try JSONDecoder().decode(AutoTimerDTO.self, from: data)
-    default:
+    if let timerType = TimerType(rawValue: itemTypeStr) {
+        switch timerType {
+        case .focus:
+            return try JSONDecoder().decode(FocusTimerDTO.self, from: data)
+        case .pomodoro:
+            return try JSONDecoder().decode(PomodoroTimerDTO.self, from: data)
+        case .exam:
+            return try JSONDecoder().decode(ExamTimerDTO.self, from: data)
+        case .auto:
+            return try JSONDecoder().decode(AutoTimerDTO.self, from: data)
+        }
+    } else {
         return nil
     }
 }

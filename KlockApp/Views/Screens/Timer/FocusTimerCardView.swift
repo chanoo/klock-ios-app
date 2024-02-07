@@ -127,7 +127,7 @@ struct FocusTimerCardView: View {
 
                 Section {
                     Button(action: {
-                        timeTimerViewModel.update(type: "FOCUS", model: focusTimerViewModel.model)
+                        timeTimerViewModel.update(type: TimerType.focus.rawValue, model: focusTimerViewModel.model)
                         flipAnimation()
                         tabBarManager.show()
                     }) {
@@ -166,7 +166,7 @@ struct FocusTimerCardView: View {
 
 struct FocusTimerCardView_Previews: PreviewProvider {
     static var previews: some View {
-        let model = FocusTimerModel(id: 1, userId: 1, seq: 1, type: "FOCUS", name: "집중시간 타이머")
+        let model = FocusTimerModel(id: 1, userId: 1, seq: 1, type: TimerType.focus.rawValue, name: "집중시간 타이머")
         let viewModel = FocusTimerViewModel(model: model)
         let timeTimerViewModel = Container.shared.resolve(TimeTimerViewModel.self)
         FocusTimerCardView(focusTimerViewModel: viewModel, timeTimerViewModel: timeTimerViewModel)
