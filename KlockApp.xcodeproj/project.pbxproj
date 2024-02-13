@@ -137,6 +137,10 @@
 		989D6F342A4C34BA00BC2F2B /* ActionSheetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989D6F332A4C34BA00BC2F2B /* ActionSheetManager.swift */; };
 		989D6F362A4C64E700BC2F2B /* SlideUpTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989D6F352A4C64E700BC2F2B /* SlideUpTransition.swift */; };
 		989D6F382A4C654200BC2F2B /* CustomActionSheetModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989D6F372A4C654200BC2F2B /* CustomActionSheetModifier.swift */; };
+		98A8CED32B7B7D8500B5A29C /* UserTraceRemoteServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A8CED22B7B7D8500B5A29C /* UserTraceRemoteServiceProtocol.swift */; };
+		98A8CED52B7B7D8C00B5A29C /* UserTraceRemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A8CED42B7B7D8C00B5A29C /* UserTraceRemoteService.swift */; };
+		98A8CED72B7B7DD800B5A29C /* UserTraceDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A8CED62B7B7DD800B5A29C /* UserTraceDTO.swift */; };
+		98A8CED92B7B82E900B5A29C /* UserTraceRemoteServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A8CED82B7B82E900B5A29C /* UserTraceRemoteServiceTests.swift */; };
 		98AC306D2A134D23006DC48D /* TabBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AC306C2A134D23006DC48D /* TabBarManager.swift */; };
 		98AC30712A136198006DC48D /* FocusTimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AC30702A136198006DC48D /* FocusTimerViewModel.swift */; };
 		98AC30732A13637C006DC48D /* FocusTimerCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AC30722A13637C006DC48D /* FocusTimerCardView.swift */; };
@@ -406,6 +410,10 @@
 		989D6F352A4C64E700BC2F2B /* SlideUpTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideUpTransition.swift; sourceTree = "<group>"; };
 		989D6F372A4C654200BC2F2B /* CustomActionSheetModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomActionSheetModifier.swift; sourceTree = "<group>"; };
 		98A30CBE29DE8E1A002E42A2 /* KlockAppPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = KlockAppPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		98A8CED22B7B7D8500B5A29C /* UserTraceRemoteServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTraceRemoteServiceProtocol.swift; sourceTree = "<group>"; };
+		98A8CED42B7B7D8C00B5A29C /* UserTraceRemoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTraceRemoteService.swift; sourceTree = "<group>"; };
+		98A8CED62B7B7DD800B5A29C /* UserTraceDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTraceDTO.swift; sourceTree = "<group>"; };
+		98A8CED82B7B82E900B5A29C /* UserTraceRemoteServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTraceRemoteServiceTests.swift; sourceTree = "<group>"; };
 		98AC306C2A134D23006DC48D /* TabBarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarManager.swift; sourceTree = "<group>"; };
 		98AC30702A136198006DC48D /* FocusTimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTimerViewModel.swift; sourceTree = "<group>"; };
 		98AC30722A13637C006DC48D /* FocusTimerCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTimerCardView.swift; sourceTree = "<group>"; };
@@ -583,6 +591,7 @@
 				98FD8F752A174ED200CEE0B1 /* StudySessionRemoteServiceTests.swift */,
 				98CFCD392B07AA9D00706B7A /* FriendRelationsRemoteServiceTests.swift */,
 				98DB24DE2B3D6130001ACE21 /* UserRemoteServiceTests.swift */,
+				98A8CED82B7B82E900B5A29C /* UserTraceRemoteServiceTests.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -628,6 +637,8 @@
 				98FD8F772A174F0C00CEE0B1 /* StudySessionRemoteService.swift */,
 				98C378232AFBC86400F537BA /* FriendRelationServiceProtocol.swift */,
 				98CFCD352B07A5EC00706B7A /* FriendRelationService.swift */,
+				98A8CED22B7B7D8500B5A29C /* UserTraceRemoteServiceProtocol.swift */,
+				98A8CED42B7B7D8C00B5A29C /* UserTraceRemoteService.swift */,
 			);
 			path = Remote;
 			sourceTree = "<group>";
@@ -644,6 +655,7 @@
 				98E314B629DEE6BB00EA1617 /* TagServiceDTO.swift */,
 				98976AFE2A00ED8500F1CEAE /* TimeTimerDTO.swift */,
 				98CFCD372B07A89300706B7A /* FriendRelationDTO.swift */,
+				98A8CED62B7B7DD800B5A29C /* UserTraceDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -1287,6 +1299,7 @@
 				988D7CD82A3711410018A85E /* ScanResult.swift in Sources */,
 				984D2C8729DFDB5F008D3EA9 /* BackButtonView.swift in Sources */,
 				981B389329F44B0600AB0EF8 /* PomodoroTimerModel.swift in Sources */,
+				98A8CED52B7B7D8C00B5A29C /* UserTraceRemoteService.swift in Sources */,
 				984D2C9129E0728C008D3EA9 /* SplashViewModel.swift in Sources */,
 				983BC0252A8EF64400DC108B /* AutoTimerModel.swift in Sources */,
 				983BC02F2A8F0DAF00DC108B /* AutoTimerCardView.swift in Sources */,
@@ -1325,6 +1338,7 @@
 				98976AFF2A00ED8500F1CEAE /* TimeTimerDTO.swift in Sources */,
 				9878FF0D2A0EA17100D38BB4 /* TimerManager.swift in Sources */,
 				9843B7E529EF086600F91DAD /* ProximityAndOrientationServiceProtocol.swift in Sources */,
+				98A8CED72B7B7DD800B5A29C /* UserTraceDTO.swift in Sources */,
 				988D7CD22A370BCD0018A85E /* FriendAddByQRCodeView.swift in Sources */,
 				981B389129F44A2700AB0EF8 /* AccountTimerModel.swift in Sources */,
 				984D2C8F29E067FE008D3EA9 /* SplashView.swift in Sources */,
@@ -1370,6 +1384,7 @@
 				988D7CD02A370B040018A85E /* FriendAddViewModel.swift in Sources */,
 				98976B092A07819100F1CEAE /* PomodoroTimerRemoteService.swift in Sources */,
 				988D7CD62A370C4A0018A85E /* FriendAddByNicknameView.swift in Sources */,
+				98A8CED32B7B7D8500B5A29C /* UserTraceRemoteServiceProtocol.swift in Sources */,
 				989D6F362A4C64E700BC2F2B /* SlideUpTransition.swift in Sources */,
 				98B21B5429D6F424004EFE0E /* DDayEventModel.swift in Sources */,
 				98E9386B29EAD1C3009CBF32 /* StudySessionServiceDTO.swift in Sources */,
@@ -1482,6 +1497,7 @@
 				98DB24DF2B3D6130001ACE21 /* UserRemoteServiceTests.swift in Sources */,
 				9821409F2A07AFB800C68EB9 /* ExamTimerRemoteServiceTests.swift in Sources */,
 				98FD8F762A174ED200CEE0B1 /* StudySessionRemoteServiceTests.swift in Sources */,
+				98A8CED92B7B82E900B5A29C /* UserTraceRemoteServiceTests.swift in Sources */,
 				9821409D2A07AC3100C68EB9 /* PomodoroTimerRemoteServiceTests.swift in Sources */,
 				9821409B2A078C6900C68EB9 /* FocusTimerRemoteServiceTests.swift in Sources */,
 				987E545129D552540007E156 /* KlockAppTests.swift in Sources */,
