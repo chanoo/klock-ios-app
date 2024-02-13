@@ -14,6 +14,7 @@ class ChatBotViewModel: ObservableObject {
     @Published var tempMessage: MessageModel?
     @Published var newMessage: String = ""
     @Published var isPreparingResponse: Bool = false
+    var userModel: UserModel?
     
     private let chatGPTService = Container.shared.resolve(ChatGPTServiceProtocol.self)
     private let chatBotRemoteService = Container.shared.resolve(ChatBotRemoteServiceProtocol.self)
@@ -24,6 +25,9 @@ class ChatBotViewModel: ObservableObject {
 
     init() {
         syncData()
+        if let userModel = UserModel.load() {
+            self.userModel = userModel
+        }
         debugPrint("ChatBotViewModel init")
     }
 

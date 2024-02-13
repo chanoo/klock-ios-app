@@ -73,7 +73,7 @@ class StudySessionRemoteServiceTests: XCTestCase {
     func testFetchStudySession() {
         let expectation = XCTestExpectation(description: "Fetch Study Session")
 
-        sut.fetch(userId: 88, startDate: "2023-06-01", endDate: "2023-07-08")
+        sut.fetch(userId: 154, startDate: "2023-06-01", endDate: "2024-07-08")
             .sink(receiveCompletion: { result in
                 switch result {
                 case .failure(let error):

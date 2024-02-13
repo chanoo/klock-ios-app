@@ -116,7 +116,6 @@
 		988D7CD62A370C4A0018A85E /* FriendAddByNicknameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988D7CD52A370C4A0018A85E /* FriendAddByNicknameView.swift */; };
 		988D7CD82A3711410018A85E /* ScanResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988D7CD72A3711410018A85E /* ScanResult.swift */; };
 		988D7CDA2A37126C0018A85E /* FriendAddByNearView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988D7CD92A37126C0018A85E /* FriendAddByNearView.swift */; };
-		988D7CDC2A3713490018A85E /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988D7CDB2A3713490018A85E /* ActivityView.swift */; };
 		988D7CF92A3851770018A85E /* QRCodeScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988D7CF72A3851770018A85E /* QRCodeScannerViewController.swift */; };
 		988D7CFA2A3851770018A85E /* QRCodeScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988D7CF82A3851770018A85E /* QRCodeScannerView.swift */; };
 		988D7CFC2A3851BD0018A85E /* QRCodeScannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988D7CFB2A3851BD0018A85E /* QRCodeScannerViewModel.swift */; };
@@ -385,7 +384,6 @@
 		988D7CD52A370C4A0018A85E /* FriendAddByNicknameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendAddByNicknameView.swift; sourceTree = "<group>"; };
 		988D7CD72A3711410018A85E /* ScanResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanResult.swift; sourceTree = "<group>"; };
 		988D7CD92A37126C0018A85E /* FriendAddByNearView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendAddByNearView.swift; sourceTree = "<group>"; };
-		988D7CDB2A3713490018A85E /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
 		988D7CF72A3851770018A85E /* QRCodeScannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeScannerViewController.swift; sourceTree = "<group>"; };
 		988D7CF82A3851770018A85E /* QRCodeScannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeScannerView.swift; sourceTree = "<group>"; };
 		988D7CFB2A3851BD0018A85E /* QRCodeScannerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeScannerViewModel.swift; sourceTree = "<group>"; };
@@ -655,13 +653,6 @@
 			children = (
 			);
 			path = ChatInput;
-			sourceTree = "<group>";
-		};
-		984B10192B46205400186B6D /* AlarmBubble */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = AlarmBubble;
 			sourceTree = "<group>";
 		};
 		984D2C8529DFC479008D3EA9 /* Managers */ = {
@@ -981,7 +972,6 @@
 		98CE661229D553EA0009916F /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				984B10192B46205400186B6D /* AlarmBubble */,
 				984B10162B461F5B00186B6D /* ChatInput */,
 				98B065102B41B212009D0F69 /* ProfileEdit */,
 				988572482B3C329000E7256B /* Bubble */,
@@ -1061,7 +1051,6 @@
 		98E9385B29EA54B1009CBF32 /* Friends */ = {
 			isa = PBXGroup;
 			children = (
-				988D7CDB2A3713490018A85E /* ActivityView.swift */,
 				988D7CF82A3851770018A85E /* QRCodeScannerView.swift */,
 				988D7CF72A3851770018A85E /* QRCodeScannerViewController.swift */,
 				985BE89329E6E0DB008582A3 /* FriendsView.swift */,
@@ -1372,7 +1361,6 @@
 				985BE8AE29E73A76008582A3 /* EnvironmentValuesProvider.swift in Sources */,
 				981B389529F44B1200AB0EF8 /* FocusTimerModel.swift in Sources */,
 				98099DBF2A29C43F0096AA27 /* SignUpTagView.swift in Sources */,
-				988D7CDC2A3713490018A85E /* ActivityView.swift in Sources */,
 				98AC30752A1363A3006DC48D /* FocusTimerView.swift in Sources */,
 				98B21B5229D6F404004EFE0E /* FriendRelationModel.swift in Sources */,
 				9885724F2B3C5A4D00E7256B /* YPImagePickerView.swift in Sources */,

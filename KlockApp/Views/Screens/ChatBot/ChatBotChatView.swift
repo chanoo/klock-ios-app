@@ -38,10 +38,18 @@ struct ChatBotChatView: View {
                             .padding(.top, 10)
                         }
                         if let tempMessage = viewModel.tempMessage {
-                            MessageBubbleView(me: tempMessage.isUser, content: tempMessage.content)
+                            MessageBubbleView(
+                                me: tempMessage.isUser,
+                                nickname: chatBot.name,
+                                profileImageURL: chatBot.chatBotImageUrl,
+                                content: tempMessage.content)
                         }
                         ForEach(viewModel.messages[chatBot.id, default: []].reversed()) { messageModel in
-                            MessageBubbleView(me: messageModel.isUser, content: messageModel.content)
+                            MessageBubbleView(
+                                me: messageModel.isUser,
+                                nickname: messageModel.isUser ? viewModel.userModel?.nickname ?? "" : chatBot.name,
+                                profileImageURL: messageModel.isUser ? viewModel.userModel?.profileImage : chatBot.chatBotImageUrl,
+                                content: messageModel.content)
                         }
                     }
                 }

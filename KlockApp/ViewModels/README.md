@@ -1,3 +1,98 @@
+##  Thread
+
+아래는 iOS에서 Swift를 사용하여 각각의 스레드 유형을 사용하는 예제 코드입니다. 이 코드들은 기본적인 사용 방법을 보여줍니다.
+
+### Main Thread
+메인 스레드에서 UI 업데이트를 수행하는 예제입니다. 모든 UI 관련 작업은 메인 스레드에서 수행되어야 합니다.
+
+```swift
+DispatchQueue.main.async {
+    // UI 업데이트 코드를 여기에 작성합니다.
+    self.myLabel.text = "Updated on Main Thread"
+}
+```
+
+### Global Dispatch Queue
+백그라운드에서 작업을 실행하고, 그 후 메인 스레드에서 결과를 처리하는 예제입니다.
+
+```swift
+DispatchQueue.global(qos: .background).async {
+    // 백그라운드에서 수행될 작업
+    let result = "Data fetched"
+
+    DispatchQueue.main.async {
+        // 메인 스레드에서 UI 업데이트
+        self.myLabel.text = result
+    }
+}
+```
+
+### Custom Dispatch Queue
+사용자 정의 직렬 디스패치 큐에서 작업을 수행하는 예제입니다.
+
+```swift
+let customQueue = DispatchQueue(label: "com.example.myCustomQueue")
+
+customQueue.async {
+    // 사용자 정의 큐에서 수행될 작업
+    for i in 1...5 {
+        print("Custom Queue Task \(i)")
+    }
+}
+```
+
+사용자 정의 동시 디스패치 큐에서 작업을 수행하는 예제입니다. 동시 큐는 여러 작업을 동시에 실행할 수 있습니다. 이를 통해 병렬 처리가 가능해지며, 작업 처리 시간을 단축시킬 수 있습니다.
+
+```swift
+let concurrentQueue = DispatchQueue(label: "com.example.myConcurrentQueue", attributes: .concurrent)
+
+concurrentQueue.async {
+    for i in 1...5 {
+        print("Task 1, iteration \(i)")
+    }
+}
+
+concurrentQueue.async {
+    for i in 1...5 {
+        print("Task 2, iteration \(i)")
+    }
+}
+```
+
+### Operation Queues
+
+OperationQueue를 사용하여 백그라운드에서 작업을 수행하고, 메인 큐에서 결과를 처리하는 예제입니다.
+
+```swift
+let operationQueue = OperationQueue()
+
+let operation = BlockOperation {
+    // 백그라운드에서 수행될 작업
+    let result = "Operation Data fetched"
+    OperationQueue.main.addOperation {
+        // 메인 큐에서 UI 업데이트
+        self.myLabel.text = result
+    }
+}
+
+operationQueue.addOperation(operation)
+```
+
+### Threads
+Thread를 직접 생성하고 사용하는 예제입니다. 이 방법은 권장되지 않으며, 대신 GCD나 OperationQueue를 사용하는 것이 좋습니다.
+
+```swift
+let thread = Thread {
+    // 새 스레드에서 수행될 작업
+    for i in 1...5 {
+        print("Thread Task \(i)")
+    }
+}
+
+thread.start()
+```
+
+
 ##  PassthroughSubject
 
 SwiftUI와 Combine 프레임워크를 사용하는 Swift 프로그래밍 언어에서 PassthroughSubject는 Combine 프레임워크의 일부로 제공되는 유형의 퍼블리셔(publisher)입니다. PassthroughSubject는 데이터를 방출하거나 오류를 전파할 수 있으며, 해당 데이터를 구독자(subscribers)에게 전달합니다.
