@@ -141,6 +141,7 @@
 		98A8CED52B7B7D8C00B5A29C /* UserTraceRemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A8CED42B7B7D8C00B5A29C /* UserTraceRemoteService.swift */; };
 		98A8CED72B7B7DD800B5A29C /* UserTraceDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A8CED62B7B7DD800B5A29C /* UserTraceDTO.swift */; };
 		98A8CED92B7B82E900B5A29C /* UserTraceRemoteServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A8CED82B7B82E900B5A29C /* UserTraceRemoteServiceTests.swift */; };
+		98A8CEDB2B7C9CB300B5A29C /* UserTraceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A8CEDA2B7C9CB300B5A29C /* UserTraceType.swift */; };
 		98AC306D2A134D23006DC48D /* TabBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AC306C2A134D23006DC48D /* TabBarManager.swift */; };
 		98AC30712A136198006DC48D /* FocusTimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AC30702A136198006DC48D /* FocusTimerViewModel.swift */; };
 		98AC30732A13637C006DC48D /* FocusTimerCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AC30722A13637C006DC48D /* FocusTimerCardView.swift */; };
@@ -188,6 +189,7 @@
 		98BDD21D29DAD1D400B0440F /* FancyColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BDD21C29DAD1D400B0440F /* FancyColor.swift */; };
 		98BDD22029DD0FA800B0440F /* EmailValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BDD21F29DD0FA800B0440F /* EmailValidator.swift */; };
 		98C378242AFBC86400F537BA /* FriendRelationServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C378232AFBC86400F537BA /* FriendRelationServiceProtocol.swift */; };
+		98CC9EBC2B7DE6F200BF044E /* UserTraceGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CC9EBB2B7DE6F200BF044E /* UserTraceGroup.swift */; };
 		98CE661629D55A370009916F /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 98CE661529D55A370009916F /* Swinject */; };
 		98CE661929D55A650009916F /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CE661829D55A650009916F /* Container.swift */; };
 		98CE661B29D55AA40009916F /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CE661A29D55AA40009916F /* AuthenticationService.swift */; };
@@ -414,6 +416,7 @@
 		98A8CED42B7B7D8C00B5A29C /* UserTraceRemoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTraceRemoteService.swift; sourceTree = "<group>"; };
 		98A8CED62B7B7DD800B5A29C /* UserTraceDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTraceDTO.swift; sourceTree = "<group>"; };
 		98A8CED82B7B82E900B5A29C /* UserTraceRemoteServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTraceRemoteServiceTests.swift; sourceTree = "<group>"; };
+		98A8CEDA2B7C9CB300B5A29C /* UserTraceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTraceType.swift; sourceTree = "<group>"; };
 		98AC306C2A134D23006DC48D /* TabBarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarManager.swift; sourceTree = "<group>"; };
 		98AC30702A136198006DC48D /* FocusTimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTimerViewModel.swift; sourceTree = "<group>"; };
 		98AC30722A13637C006DC48D /* FocusTimerCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTimerCardView.swift; sourceTree = "<group>"; };
@@ -461,6 +464,7 @@
 		98BDD21C29DAD1D400B0440F /* FancyColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyColor.swift; sourceTree = "<group>"; };
 		98BDD21F29DD0FA800B0440F /* EmailValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailValidator.swift; sourceTree = "<group>"; };
 		98C378232AFBC86400F537BA /* FriendRelationServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRelationServiceProtocol.swift; sourceTree = "<group>"; };
+		98CC9EBB2B7DE6F200BF044E /* UserTraceGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTraceGroup.swift; sourceTree = "<group>"; };
 		98CE661829D55A650009916F /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
 		98CE661A29D55AA40009916F /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		98CE661C29D55AE00009916F /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
@@ -891,6 +895,8 @@
 				98192F472A547D60007073FB /* TimerType.swift */,
 				98B0650A2B408248009D0F69 /* FollowCode.swift */,
 				98B0651C2B427CBF009D0F69 /* FollowQRCode.swift */,
+				98A8CEDA2B7C9CB300B5A29C /* UserTraceType.swift */,
+				98CC9EBB2B7DE6F200BF044E /* UserTraceGroup.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1299,6 +1305,7 @@
 				988D7CD82A3711410018A85E /* ScanResult.swift in Sources */,
 				984D2C8729DFDB5F008D3EA9 /* BackButtonView.swift in Sources */,
 				981B389329F44B0600AB0EF8 /* PomodoroTimerModel.swift in Sources */,
+				98A8CEDB2B7C9CB300B5A29C /* UserTraceType.swift in Sources */,
 				98A8CED52B7B7D8C00B5A29C /* UserTraceRemoteService.swift in Sources */,
 				984D2C9129E0728C008D3EA9 /* SplashViewModel.swift in Sources */,
 				983BC0252A8EF64400DC108B /* AutoTimerModel.swift in Sources */,
@@ -1423,6 +1430,7 @@
 				988D7D0B2A3ADACC0018A85E /* FriendAddDoneView.swift in Sources */,
 				9833FFD029F683C800CC33F7 /* CoreDataHelper.swift in Sources */,
 				98B24A9D2A34F1BE0083444D /* SpeechService.swift in Sources */,
+				98CC9EBC2B7DE6F200BF044E /* UserTraceGroup.swift in Sources */,
 				985BE89829E6E559008582A3 /* HomeViewModel.swift in Sources */,
 				981B389729F44B1C00AB0EF8 /* ExamTimerModel.swift in Sources */,
 				9833FFC829F58F8A00CC33F7 /* AccountLocalService.swift in Sources */,

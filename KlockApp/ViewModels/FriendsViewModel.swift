@@ -16,8 +16,10 @@ class FriendsViewModel: NSObject, ObservableObject {
     @Published var isPreparingResponse: Bool = false
     @Published var isLoading: Bool = false
     @Published var friends: [FriendRelationFetchResDTO] = []
+    @Published var groupedUserTraces: [UserTraceGroup] = []
 
     private let friendRelationService = Container.shared.resolve(FriendRelationServiceProtocol.self)
+    private let userTraceService = Container.shared.resolve(UserTraceRemoteServiceProtocol.self)
 
     var cancellables: Set<AnyCancellable> = []
     
@@ -45,16 +47,35 @@ class FriendsViewModel: NSObject, ObservableObject {
             .store(in: &cancellables)
     }
     
-    let activities: [ActivityModel] = [
-        ActivityModel(id: 1, message: "국어 공부를 시작했어요!🔥", userId: 2, nickname: "뀨처돌이", profileImage: "", attachment: nil, likeCount: 0, createdAt: TimeUtils.dateFromString(dateString: "20230622132310", format: "yyyyMMddHHmmss")!),
-        ActivityModel(id: 2, message: "아직 다 못외움.. 진짜 왤케 많냐 ㅜㅜ", userId: 1, nickname: "날으는호랑이", profileImage: "", attachment: nil, likeCount: 1, createdAt: TimeUtils.dateFromString(dateString: "20230622133110", format: "yyyyMMddHHmmss")!),
-        ActivityModel(id: 3, message: "나도 아직 ㅜ 홧팅하자!!!!!!🔥", userId: 3, nickname: "열정적인두루미", profileImage: "", attachment: nil, likeCount: 0, createdAt: TimeUtils.dateFromString(dateString: "20230622141110", format: "yyyyMMddHHmmss")!),
-        ActivityModel(id: 4, message: "어제보다 오늘 하나 더 알면 성공!", userId: 4, nickname: "여유로운쿼카", profileImage: "", attachment: "img_sample_study1", likeCount: 0, createdAt: TimeUtils.dateFromString(dateString: "20230622141133", format: "yyyyMMddHHmmss")!),
-        ActivityModel(id: 5, message: "영어 공부를 시작했어요!🔥", userId: 2, nickname: "뀨처돌이", profileImage: "", attachment: nil, likeCount: 0, createdAt: TimeUtils.dateFromString(dateString: "20230622141133", format: "yyyyMMddHHmmss")!),
-        ActivityModel(id: 6, message: "국어 공부를 시작했어요!🔥", userId: 2, nickname: "뀨처돌이", profileImage: "", attachment: nil, likeCount: 1, createdAt: TimeUtils.dateFromString(dateString: "20230622141133", format: "yyyyMMddHHmmss")!),
-        ActivityModel(id: 7, message: "오늘 공부 인증!! 아자아자!!!🔥", userId: 2, nickname: "뀨처돌이", profileImage: "", attachment: "img_sample_study2", likeCount: 0, createdAt: TimeUtils.dateFromString(dateString: "20230622141133", format: "yyyyMMddHHmmss")!),
-    ]
-    
+    func fetchUserTrace() {
+        isLoading = true
+
+        userTraceService.fetch()
+            .sink { [weak self] completion in
+                guard let self = self else { return }
+                switch completion {
+                case .failure(let error):
+                    print("Error fetching user traces: \(error)")
+                case .finished:
+                    break
+                }
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                }
+            } receiveValue: { [weak self] dto in
+                guard let self = self else { return }
+                let grouped = Dictionary(grouping: dto) { (element: UserTraceFetchResDTO) -> String in
+                    return element.createdAt.toDateFormat() ?? ""
+                }
+                .map { UserTraceGroup(date: $0.key, userTraces: $0.value) }
+                .sorted { $0.date > $1.date }
+                DispatchQueue.main.async {
+                    self.groupedUserTraces = grouped
+                }
+            }
+            .store(in: &cancellables)
+    }
+
     func showActionSheet() {
         self.isPresented = true
     }

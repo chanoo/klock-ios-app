@@ -13,12 +13,12 @@ class ActivityModel: ObservableObject {
     let message: String
     let userId: Int64
     let nickname: String
-    let profileImage: String
+    let profileImage: String?
     let attachment: String?
     @Published var likeCount: Int
     let createdAt: Date
 
-    init(id: Int64?, message: String, userId: Int64, nickname: String, profileImage: String, attachment: String?, likeCount: Int, createdAt: Date) {
+    init(id: Int64?, message: String, userId: Int64, nickname: String, profileImage: String?, attachment: String?, likeCount: Int, createdAt: Date) {
         self.id = id
         self.message = message
         self.userId = userId

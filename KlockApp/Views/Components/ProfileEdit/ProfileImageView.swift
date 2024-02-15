@@ -18,18 +18,18 @@ struct ProfileImageView: View {
                 CachedAsyncImage(url: url) { phase in
                     switch phase {
                     case .empty, .failure(_):
-                        DefaultProfileImage()
+                        DefaultProfileImage(size: size)
                     case .success(let image):
                         image
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .scaledToFit()
                     @unknown default:
-                        DefaultProfileImage()
+                        DefaultProfileImage(size: size)
                     }
                 }
             } else {
-                DefaultProfileImage()
+                DefaultProfileImage(size: size)
             }
         }
         .clipShape(Circle())
@@ -38,10 +38,14 @@ struct ProfileImageView: View {
 }
 
 struct DefaultProfileImage: View {
+    let size: CGFloat
+
     var body: some View {
         Image("img_profile")
             .resizable()
             .aspectRatio(contentMode: .fit)
+            .clipShape(Circle())
+            .frame(width: size, height: size)
     }
 }
 

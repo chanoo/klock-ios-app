@@ -21,8 +21,8 @@ class UserTraceRemoteService: UserTraceRemoteServiceProtocol, APIServiceProtocol
     
     func fetch() -> AnyPublisher<[UserTraceFetchResDTO], Alamofire.AFError> {
         let url = "\(baseURL)"
-
-        return AF.request(url, method: .get, encoding: JSONEncoding.default)
+        
+        return session.request(url, method: .get, encoding: JSONEncoding.default, headers: self.headers())
             .validate()
             .publishDecodable(type: [UserTraceFetchResDTO].self)
             .value()
@@ -41,7 +41,7 @@ class UserTraceRemoteService: UserTraceRemoteServiceProtocol, APIServiceProtocol
                 }
                 
                 // Append the JSON data
-                let contentTrace = ["writeUserId": data.contentTrace.writeUserId, "contents": data.contentTrace.contents]
+                let contentTrace = ["writeUserId": data.contentTrace.writeUserId, "type": UserTraceType.activity.rawValue, "contents": data.contentTrace.contents]
                 if let jsonData = try? JSONSerialization.data(withJSONObject: contentTrace, options: []) {
                     multipartFormData.append(jsonData, withName: "contentTrace", mimeType: "application/json")
                 }

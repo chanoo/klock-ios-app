@@ -20,16 +20,48 @@ struct FriendsView: View {
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
-                ScrollView(showsIndicators: false) { // 스크롤바 숨김
-                    ScrollViewReader { _ in
-                        LazyVStack(spacing: 4) {
-                            ForEach(viewModel.activities, id: \.id) { activity in
-                                ActivityBubble(activityModel: activity, isPreparingResponse: $viewModel.isPreparingResponse)
+                if viewModel.groupedUserTraces.isEmpty {
+                    Spacer() // Pushes content to the center vertically
+
+                    VStack {
+                        Image("img_three_characters")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 100, height: 79)
+                        Text("아직 함께 공부한 기록이 없네요!!\n공부를 시작해서 나를 성장시켜볼까요?")
+                            .multilineTextAlignment(.center)
+                            .lineSpacing(6)
+                            .foregroundColor(FancyColor.gray4.color)
+                            .font(.system(size: 13, weight: .semibold))
+                            .padding()
+                        
+                    }
+                    .frame(maxWidth: .infinity) // Ensure it takes up the full width
+
+                    Spacer() // Pushes content to the center vertically
+                } else {
+                    ScrollView(showsIndicators: false) { // 스크롤바 숨김
+                        ScrollViewReader { _ in
+                            LazyVStack(spacing: 4) {
+                                ForEach(viewModel.groupedUserTraces, id: \.id) { group in
+                                    ForEach(group.userTraces, id: \.id) { userTrace in
+                                        MessageBubbleView(
+                                            me: userTrace.writeUserId == 2, // 이 예제에서는 사용자 ID가 2일 경우 자신으로 간주
+                                            nickname: userTrace.writeNickname, // 실제 닉네임 정보가 필요. 여기서는 예시 값을 사용
+                                            profileImageURL: userTrace.writeUserImage,
+                                            content: userTrace.contents,
+                                            imageURL: userTrace.contentsImage,
+                                            date: userTrace.createdAt.toTimeFormat() // 날짜 정보 전달
+                                        )
+                                    }
+                                    Header(title: group.date)
+                                }
                             }
                         }
                     }
+                    .rotationEffect(.degrees(180), anchor: .center)
                 }
-
+                
                 // ChatGPTView의 body 내에서 HStack 부분
                 HStack(spacing: 0) {
                     HStack(alignment: .bottom, spacing: 0) {
@@ -127,8 +159,30 @@ struct FriendsView: View {
         .sheet(item: $friendAddViewModel.activeSheet) { item in
             viewModel.showAddFriendView(for: item)
         }
+        .onAppear(perform: {
+            viewModel.fetchUserTrace()
+        })
     }
 }
+
+struct Header: View {
+    var title: String
+
+    var body: some View {
+        VStack {
+            Text(title)
+                .font(.system(size: 13, weight: .semibold))
+                .rotationEffect(.degrees(180), anchor: .center) // 텍스트를 180도 회전
+                .padding([.top, .bottom], 8) // 텍스트 상하 패딩
+                .padding([.leading, .trailing], 10) // 텍스트 좌우 패딩
+                .background(FancyColor.gray9.color.opacity(0.5)) // 반투명 흰색 배경 추가
+                .cornerRadius(6) // 모서리를 둥글게 처리
+                .foregroundColor(.white) // 텍스트 색상을 흰색으로 설정
+        }
+        .padding(.bottom, 10) // VStack에 상단 패딩 추가
+    }
+}
+
 
 struct ActivityBubble: View {
     @ObservedObject var activityModel: ActivityModel

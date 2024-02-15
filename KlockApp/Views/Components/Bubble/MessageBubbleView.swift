@@ -12,6 +12,7 @@ struct MessageBubbleView: View {
     var me: Bool
     var nickname: String
     var profileImageURL: String?
+    var profileImageSize: CGFloat = 44
     var content: String
     var imageURL: String?
     var date: String?
@@ -21,22 +22,24 @@ struct MessageBubbleView: View {
             HStack(alignment: .top, spacing: 8) {
                 if me {
                     if let url = profileImageURL, url.starts(with: "http") {
-                        ProfileImageView(imageURL: url, size: 44)
+                        ProfileImageView(imageURL: url, size: profileImageSize)
                             .padding(.trailing, 8)
                     } else if let imageName = profileImageURL {
                         Image(imageName)
                             .cornerRadius(22.0)
                             .padding(.trailing, 8)
+                    } else {
+                        DefaultProfileImage(size: profileImageSize)
                     }
                     VStack(alignment: .leading, spacing: 0) {
                         Text(nickname)
-                            .font(.system(size: 15))
+                            .font(.system(size: 13))
                             .foregroundColor(FancyColor.subtext.color)
                             .padding(.bottom, 4)
                         HStack(alignment: .bottom) {
                             if let date = date {
                                 Text(date)
-                                    .font(.system(size: 14))
+                                    .font(.system(size: 11))
                                     .foregroundColor(FancyColor.subtext.color)
                             }
                             VStack(alignment: .leading) {
@@ -57,12 +60,17 @@ struct MessageBubbleView: View {
                     Spacer()
                     VStack(alignment: .trailing, spacing: 0) {
                         Text(nickname)
-                            .font(.system(size: 15))
+                            .font(.system(size: 13))
                             .foregroundColor(FancyColor.subtext.color)
                             .padding(.bottom, 4)
                         HStack(alignment: .bottom) {
+                            if let date = date {
+                                Text(date)
+                                    .font(.system(size: 11))
+                                    .foregroundColor(FancyColor.subtext.color)
+                            }
                             VStack(alignment: .leading) {
-                                if let imageURL = imageURL {
+                                if let imageURL = imageURL, imageURL.isEmpty == false {
                                     MessageBubbleImageView(imageURL: imageURL, size: .infinity)
                                         .padding(.bottom, 8)
                                 }
@@ -72,20 +80,17 @@ struct MessageBubbleView: View {
                             .background(FancyColor.chatBotBubble.color)
                             .clipShape(RoundedCorners(tl: 10, tr: 0, bl: 10, br: 10))
                             .foregroundColor(FancyColor.chatbotBubbleText.color)
-                            if let date = date {
-                                Text(date)
-                                    .font(.system(size: 14))
-                                    .foregroundColor(FancyColor.subtext.color)
-                            }
                         }
                     }
                     if let url = profileImageURL, url.starts(with: "http") {
-                        ProfileImageView(imageURL: url, size: 44)
+                        ProfileImageView(imageURL: url, size: profileImageSize)
                             .padding(.trailing, 8)
                     } else if let imageName = profileImageURL {
                         Image(imageName)
                             .cornerRadius(22.0)
                             .padding(.trailing, 8)
+                    } else {
+                        DefaultProfileImage(size: profileImageSize)
                     }
                 }
             }
@@ -108,21 +113,22 @@ struct MessageBubbleImageView: View {
                 CachedAsyncImage(url: url) { phase in
                     switch phase {
                     case .empty, .failure(_):
-                        DefaultProfileImage()
+                        DefaultProfileImage(size: size)
                     case .success(let image):
                         image
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .scaledToFit()
                     @unknown default:
-                        DefaultProfileImage()
+                        DefaultProfileImage(size: size)
                     }
                 }
             } else {
-                DefaultProfileImage()
+                DefaultProfileImage(size: size)
             }
         }
         .frame(maxWidth: size)
+        .cornerRadius(6) // 모서리를 둥글게 처리
     }
 }
 

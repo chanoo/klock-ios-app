@@ -47,7 +47,9 @@ class UserTraceRemoteServiceTests: XCTestCase {
     func testCreateUserTraceWithImage() {
         let expectation = XCTestExpectation(description: "Create User Trace")
         
-        let createReqDTO = UserTraceCreateReqDTO(contentTrace: UserTraceCreateReqContentTraceDTO(writeUserId: 128, contents: "Sample content"), image: nil)
+        let createReqDTO = UserTraceCreateReqDTO(
+            contentTrace: UserTraceCreateReqContentTraceDTO(writeUserId: 128, type: .activity, contents: "Sample content 오직 텍스트 뿐인 글입니다."),
+            image: nil)
 
         sut.create(data: createReqDTO)
             .sink(receiveCompletion: { result in
@@ -73,7 +75,7 @@ class UserTraceRemoteServiceTests: XCTestCase {
         
         let dummyImageData = UIImage(systemName: "photo")!.jpegData(compressionQuality: 0.5)!
 
-        let createReqDTO = UserTraceCreateReqDTO(contentTrace: UserTraceCreateReqContentTraceDTO(writeUserId: 128, contents: "Sample content"), image: dummyImageData)
+        let createReqDTO = UserTraceCreateReqDTO(contentTrace: UserTraceCreateReqContentTraceDTO(writeUserId: 128, type: .activity, contents: "Sample content ??"), image: dummyImageData)
 
         sut.create(data: createReqDTO)
             .sink(receiveCompletion: { result in

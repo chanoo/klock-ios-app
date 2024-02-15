@@ -10,7 +10,9 @@ import Foundation
 struct UserTraceFetchResDTO: Codable, Hashable {
     let id: Int64
     let writeUserId: Int64
+    let writeNickname: String
     let writeUserImage: String?
+    let type: UserTraceType
     let contents: String
     let contentsImage: String?
     let heart: Bool
@@ -19,7 +21,9 @@ struct UserTraceFetchResDTO: Codable, Hashable {
     enum CodingKeys: String, CodingKey {
         case id
         case writeUserId
+        case writeNickname
         case writeUserImage
+        case type
         case contents
         case contentsImage
         case heart
@@ -34,6 +38,7 @@ struct UserTraceCreateReqDTO: Codable {
 
 struct UserTraceCreateReqContentTraceDTO: Codable {
     let writeUserId: Int64
+    let type: UserTraceType
     let contents: String
 }
 
@@ -41,6 +46,7 @@ struct UserTraceCreateResDTO: Codable {
     let id: Int64
     let writeUserId: Int64
     let writeUserImage: String?
+    let type: UserTraceType
     let contents: String
     let contentsImage: String?
     let heart: Bool
