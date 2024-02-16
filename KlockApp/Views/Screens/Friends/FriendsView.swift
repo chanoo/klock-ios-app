@@ -20,47 +20,51 @@ struct FriendsView: View {
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
-                if viewModel.groupedUserTraces.isEmpty {
-                    Spacer() // Pushes content to the center vertically
-
-                    VStack {
-                        Image("img_three_characters")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 100, height: 79)
-                        Text("아직 함께 공부한 기록이 없네요!!\n공부를 시작해서 나를 성장시켜볼까요?")
-                            .multilineTextAlignment(.center)
-                            .lineSpacing(6)
-                            .foregroundColor(FancyColor.gray4.color)
-                            .font(.system(size: 13, weight: .semibold))
-                            .padding()
-                        
-                    }
-                    .frame(maxWidth: .infinity) // Ensure it takes up the full width
-
-                    Spacer() // Pushes content to the center vertically
+                if viewModel.isLoading {
+                    LoadingView()
                 } else {
-                    ScrollView(showsIndicators: false) { // 스크롤바 숨김
-                        ScrollViewReader { _ in
-                            LazyVStack(spacing: 4) {
-                                ForEach(viewModel.groupedUserTraces, id: \.id) { group in
-                                    ForEach(group.userTraces, id: \.id) { userTrace in
-                                        MessageBubbleView(
-                                            me: userTrace.writeUserId == viewModel.userModel?.id, // 이 예제에서는 사용자 ID가 2일 경우 자신으로 간주
-                                            nickname: userTrace.writeNickname, // 실제 닉네임 정보가 필요. 여기서는 예시 값을 사용
-                                            userTraceType: userTrace.type,
-                                            profileImageURL: userTrace.writeUserImage,
-                                            content: userTrace.contents,
-                                            imageURL: userTrace.contentsImage,
-                                            date: userTrace.createdAt.toTimeFormat() // 날짜 정보 전달
-                                        )
+                    if viewModel.groupedUserTraces.isEmpty {
+                        Spacer() // Pushes content to the center vertically
+
+                        VStack {
+                            Image("img_three_characters")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 100, height: 79)
+                            Text("아직 함께 공부한 기록이 없네요!!\n공부를 시작해서 나를 성장시켜볼까요?")
+                                .multilineTextAlignment(.center)
+                                .lineSpacing(6)
+                                .foregroundColor(FancyColor.gray4.color)
+                                .font(.system(size: 13, weight: .semibold))
+                                .padding()
+                            
+                        }
+                        .frame(maxWidth: .infinity) // Ensure it takes up the full width
+
+                        Spacer() // Pushes content to the center vertically
+                    } else {
+                        ScrollView(showsIndicators: false) { // 스크롤바 숨김
+                            ScrollViewReader { _ in
+                                LazyVStack(spacing: 4) {
+                                    ForEach(viewModel.groupedUserTraces, id: \.id) { group in
+                                        ForEach(group.userTraces, id: \.id) { userTrace in
+                                            MessageBubbleView(
+                                                me: userTrace.writeUserId == viewModel.userModel?.id, // 이 예제에서는 사용자 ID가 2일 경우 자신으로 간주
+                                                nickname: userTrace.writeNickname, // 실제 닉네임 정보가 필요. 여기서는 예시 값을 사용
+                                                userTraceType: userTrace.type,
+                                                profileImageURL: userTrace.writeUserImage,
+                                                content: userTrace.contents,
+                                                imageURL: userTrace.contentsImage,
+                                                date: userTrace.createdAt.toTimeFormat() // 날짜 정보 전달
+                                            )
+                                        }
+                                        Header(title: group.date)
                                     }
-                                    Header(title: group.date)
                                 }
                             }
                         }
+                        .rotationEffect(.degrees(180), anchor: .center)
                     }
-                    .rotationEffect(.degrees(180), anchor: .center)
                 }
                 
                 // ChatGPTView의 body 내에서 HStack 부분

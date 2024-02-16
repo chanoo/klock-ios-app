@@ -81,7 +81,7 @@ struct FocusTimerCardView: View {
                     .font(.system(size: 17, weight: .bold))
                     .foregroundColor(FancyColor.timerFocusText.color)
                 
-                Text(clockViewModel.elapsedTimeToString())
+                Text(focusTimerViewModel.elapsedTimeToString())
                     .font(.system(size: 40, weight: .bold))
                     .monospacedDigit()
                     .foregroundColor(FancyColor.timerFocusText.color)

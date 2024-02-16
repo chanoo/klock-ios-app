@@ -69,7 +69,7 @@ struct FocusTimerView: View {
                     .font(.system(size: 17, weight: .bold))
                     .foregroundColor(FancyColor.timerFocusText.color)
                 
-                Text(clockViewModel.elapsedTimeToString())
+                Text(focusTimerViewModel.elapsedTimeToString())
                     .font(.system(size: 40, weight: .bold))
                     .monospacedDigit()
                     .foregroundColor(FancyColor.timerFocusText.color)
@@ -86,20 +86,7 @@ struct FocusTimerView: View {
                         Foast.show(message: "정지하려면 길게 누르세요.")
                     },
                     longPressAction: {
-                        withAnimation {
-                            tabBarManager.show()
-                            focusTimerViewModel.stopStudy()
-                            focusTimerViewModel.elapsedTime = focusTimerViewModel.elapsedTime
-                            timeTimerViewModel.stopAndSaveStudySession(
-                                timerName: focusTimerViewModel.model.name,
-                                timerType: .focus,
-                                startTime: focusTimerViewModel.startTime,
-                                endTime: focusTimerViewModel.currentTime
-                            )
-                            let appUsageController = AppUsageController.shared
-                            appUsageController.stopMonitoring()
-                            timeTimerViewModel.focusTimerViewModel = nil
-                        }
+                        stopAndSaveStudySession()
                     },
                     icon: Image("ic_pause"),
                     isBlock: false,
@@ -133,10 +120,31 @@ struct FocusTimerView: View {
         }
         .background(FancyColor.timerFocusBackground.color)
         .onReceive(timer, perform: updateCurrentTime)
-        .onAppear {
-            clockViewModel.startStudy()
-            timeTimerViewModel.startStudySession(timerName: focusTimerViewModel.model.name)
-            timeTimerViewModel.playVibration()
+        .onAppear(perform: onAppearActions)
+    }
+    
+    private func onAppearActions() {
+        clockViewModel.startStudy()
+        focusTimerViewModel.startStudy()
+        timeTimerViewModel.startStudySession(timerName: focusTimerViewModel.model.name)
+        timeTimerViewModel.playVibration()
+    }
+    
+    private func stopAndSaveStudySession() {
+        withAnimation {
+            tabBarManager.show()
+            clockViewModel.stopStudy()
+            focusTimerViewModel.stopStudy()
+            focusTimerViewModel.elapsedTime = focusTimerViewModel.elapsedTime
+            timeTimerViewModel.stopAndSaveStudySession(
+                timerName: focusTimerViewModel.model.name,
+                timerType: .focus,
+                startTime: focusTimerViewModel.startTime,
+                endTime: focusTimerViewModel.currentTime
+            )
+            let appUsageController = AppUsageController.shared
+            appUsageController.stopMonitoring()
+            timeTimerViewModel.focusTimerViewModel = nil
         }
     }
 }
