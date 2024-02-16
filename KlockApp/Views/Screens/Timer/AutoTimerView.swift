@@ -50,7 +50,7 @@ struct AutoTimerView: View {
     private func onAppearActions() {
         UIApplication.shared.isIdleTimerDisabled = true
         autoTimerViewModel.startStudy()
-        timeTimerViewModel.startStudySession()
+        timeTimerViewModel.startStudySession(timerName: autoTimerViewModel.model.name)
         timeTimerViewModel.playVibration()
     }
     

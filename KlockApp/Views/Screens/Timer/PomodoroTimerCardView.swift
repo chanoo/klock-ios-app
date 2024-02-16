@@ -90,7 +90,7 @@ struct PomodoroTimerCardView: View {
                         withAnimation {
                             tabBarManager.isTabBarVisible = false
                             pomodoroTimerViewModel.isStudying = true
-                            timeTimerViewModel.startStudySession()
+                            timeTimerViewModel.startStudySession(timerName: pomodoroTimerViewModel.model.name)
                             timeTimerViewModel.pomodoroTimerViewModel = pomodoroTimerViewModel
                         }
                     },

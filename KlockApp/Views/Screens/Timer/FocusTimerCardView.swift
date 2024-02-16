@@ -9,6 +9,7 @@ import SwiftUI
 
 struct FocusTimerCardView: View {
     @EnvironmentObject var tabBarManager: TabBarManager
+    @StateObject var timerModel: TimerModel
     @StateObject var focusTimerViewModel: FocusTimerViewModel
     @StateObject var timeTimerViewModel: TimeTimerViewModel
     @StateObject var clockViewModel = ClockViewModel(
@@ -95,8 +96,6 @@ struct FocusTimerCardView: View {
                     action: {
                         withAnimation {
                             tabBarManager.hide()
-                            focusTimerViewModel.startStudy()
-                            timeTimerViewModel.startStudySession()
                             timeTimerViewModel.focusTimerViewModel = focusTimerViewModel
                             let appUsageController = AppUsageController.shared
                             appUsageController.initiateMonitoring()
@@ -166,9 +165,10 @@ struct FocusTimerCardView: View {
 
 struct FocusTimerCardView_Previews: PreviewProvider {
     static var previews: some View {
+        let timerModel = TimerModel(id: 1, userId: 1, seq: 1, type: "AUTO", name: "국어")
         let model = FocusTimerModel(id: 1, userId: 1, seq: 1, type: TimerType.focus.rawValue, name: "집중시간 타이머")
         let viewModel = FocusTimerViewModel(model: model)
         let timeTimerViewModel = Container.shared.resolve(TimeTimerViewModel.self)
-        FocusTimerCardView(focusTimerViewModel: viewModel, timeTimerViewModel: timeTimerViewModel)
+        FocusTimerCardView(timerModel: timerModel, focusTimerViewModel: viewModel, timeTimerViewModel: timeTimerViewModel)
     }
 }

@@ -33,7 +33,7 @@ struct UserTraceFetchResDTO: Codable, Hashable {
 
 struct UserTraceCreateReqDTO: Codable {
     let contentTrace: UserTraceCreateReqContentTraceDTO
-    let image: Data?
+    var image: Data? = nil
 }
 
 struct UserTraceCreateReqContentTraceDTO: Codable {

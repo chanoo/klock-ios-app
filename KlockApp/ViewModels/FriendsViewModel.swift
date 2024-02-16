@@ -23,6 +23,8 @@ class FriendsViewModel: NSObject, ObservableObject {
 
     var cancellables: Set<AnyCancellable> = []
     
+    var userModel = UserModel.load()
+    
     func fetchFriends() {
         isLoading = true
 

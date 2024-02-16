@@ -46,8 +46,9 @@ struct FriendsView: View {
                                 ForEach(viewModel.groupedUserTraces, id: \.id) { group in
                                     ForEach(group.userTraces, id: \.id) { userTrace in
                                         MessageBubbleView(
-                                            me: userTrace.writeUserId == 2, // 이 예제에서는 사용자 ID가 2일 경우 자신으로 간주
+                                            me: userTrace.writeUserId == viewModel.userModel?.id, // 이 예제에서는 사용자 ID가 2일 경우 자신으로 간주
                                             nickname: userTrace.writeNickname, // 실제 닉네임 정보가 필요. 여기서는 예시 값을 사용
+                                            userTraceType: userTrace.type,
                                             profileImageURL: userTrace.writeUserImage,
                                             content: userTrace.contents,
                                             imageURL: userTrace.contentsImage,

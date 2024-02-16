@@ -41,7 +41,7 @@ class UserTraceRemoteService: UserTraceRemoteServiceProtocol, APIServiceProtocol
                 }
                 
                 // Append the JSON data
-                let contentTrace = ["writeUserId": data.contentTrace.writeUserId, "type": UserTraceType.activity.rawValue, "contents": data.contentTrace.contents]
+                let contentTrace = ["writeUserId": data.contentTrace.writeUserId, "type": data.contentTrace.type.rawValue, "contents": data.contentTrace.contents]
                 if let jsonData = try? JSONSerialization.data(withJSONObject: contentTrace, options: []) {
                     multipartFormData.append(jsonData, withName: "contentTrace", mimeType: "application/json")
                 }

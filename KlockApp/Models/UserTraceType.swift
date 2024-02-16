@@ -6,6 +6,7 @@
 //
 
 enum UserTraceType: String, Codable {
-    case state = "STATE"
     case activity = "ACTIVITY"
+    case studyStart = "STUDY_START" // 공부 시작
+    case studyEnd = "STUDY_END"     // 공부 종료
 }

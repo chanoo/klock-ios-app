@@ -48,6 +48,7 @@ class TimeTimerViewModel: ObservableObject {
     private let examTimerRemoteService = Container.shared.resolve(ExamTimerRemoteServiceProtocol.self)
     private let proximityAndOrientationService = Container.shared.resolve(ProximityAndOrientationServiceProtocol.self)
     private let studySessionRemoteService = Container.shared.resolve(StudySessionRemoteServiceProtocol.self)
+    private let userTraceRemoteService = Container.shared.resolve(UserTraceRemoteServiceProtocol.self)
 
     // Other properties
     var timerModels: [TimerModel] = []
@@ -101,7 +102,7 @@ class TimeTimerViewModel: ObservableObject {
         case let focusTimer as FocusTimerModel:
             let focusTimerViewModel = FocusTimerViewModel(model: focusTimer)
             return AnyView(
-                FocusTimerCardView(focusTimerViewModel: focusTimerViewModel, timeTimerViewModel: self)
+                FocusTimerCardView(timerModel: timer, focusTimerViewModel: focusTimerViewModel, timeTimerViewModel: self)
             )
         case let pomodoroTimer as PomodoroTimerModel:
             let viewModel = PomodoroTimerViewModel(model: pomodoroTimer)
@@ -118,7 +119,7 @@ class TimeTimerViewModel: ObservableObject {
         case let autoTimer as AutoTimerModel:
             let autoTimerViewModel = AutoTimerViewModel(model: autoTimer)
             return AnyView(
-                AutoTimerCardView(autoTimerViewModel: autoTimerViewModel, timeTimerViewModel: self)
+                AutoTimerCardView(timerModel: timer, autoTimerViewModel: autoTimerViewModel, timeTimerViewModel: self)
             )
         default:
             return AnyView(EmptyView())
@@ -131,13 +132,19 @@ class TimeTimerViewModel: ObservableObject {
         elapsedTime += Date().timeIntervalSince(startTime)
     }
     
-    func startStudySession() {
+    func startStudySession(timerName: String) {
         let currentTime = UserDefaults.standard.double(forKey: studyStartTimeKey)
         let now = Date()
         let startTime = currentTime == 0 ? now : Date(timeIntervalSince1970: currentTime)
-        currentStudySession = StudySessionModel(id: 0, userId: 1, startTime: startTime, endTime: now, timerName: "", timerType: TimerType.focus.rawValue)
+        currentStudySession = StudySessionModel(id: 0, userId: 1, startTime: startTime, endTime: now, timerName: timerName, timerType: TimerType.focus.rawValue)
         elapsedTime = 0
         updateElapsedTime()
+        
+        let userModel = UserModel.load()
+        if let writeUserId = userModel?.id {
+            let message = "\(timerName) 공부를 시작했어요!"
+            createUserTrace(writeUserId: writeUserId, type: .studyStart, contents: message)
+        }
     }
 
     func stopAndSaveStudySession(timerName: String, timerType: TimerType, startTime: Date, endTime: Date) {
@@ -148,11 +155,17 @@ class TimeTimerViewModel: ObservableObject {
             return
         }
         
-        let sessionDuration = endTime.timeIntervalSince(startTime)
-        guard sessionDuration > 10 else {
-            Foast.show(message: "10초 미만은 기록되지 않습니다.")
-            removeStudyStartTime()
-            return
+//        let sessionDuration = endTime.timeIntervalSince(startTime)
+//        guard sessionDuration > 10 else {
+//            Foast.show(message: "10초 미만은 기록되지 않습니다.")
+//            removeStudyStartTime()
+//            return
+//        }
+        
+        let userModel = UserModel.load()
+        if let writeUserId = userModel?.id {
+            let message = "\(timerName) 공부를 종료했어요!"
+            createUserTrace(writeUserId: writeUserId, type: .studyEnd, contents: message)
         }
         
         let startTimeStr = DateUtils.dateToString(startTime)
@@ -172,6 +185,23 @@ class TimeTimerViewModel: ObservableObject {
 
 //        saveStudySession(accountID: 1, accountTimerID: 1, startTime: startTime, endTime: endTime)
     }
+    
+    private func createUserTrace(writeUserId: Int64, type: UserTraceType, contents: String) {
+        let contentTrace = UserTraceCreateReqContentTraceDTO(writeUserId: writeUserId, type: type, contents: contents)
+        let userTraceCreateReq = UserTraceCreateReqDTO(contentTrace: contentTrace)
+        userTraceRemoteService.create(data: userTraceCreateReq)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .failure(let error):
+                    print("Error saving user trace: \(error)")
+                case .finished:
+                    print("User trace saved successfully")
+                    self.removeStudyStartTime()
+                }
+            }, receiveValue: { _ in })
+            .store(in: &cancellables)
+    }
+
 
     private func saveStudySession(accountID: Int64, accountTimerID: Int64, startTime: Date, endTime: Date) {
 

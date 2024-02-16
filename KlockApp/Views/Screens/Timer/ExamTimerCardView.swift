@@ -89,7 +89,7 @@ struct ExamTimerCardView: View {
                         clockViewModel.startStudy()
                         tabBarManager.isTabBarVisible = false
                         examTimerViewModel.isStudying = true
-                        timeTimerViewModel.startStudySession()
+                        timeTimerViewModel.startStudySession(timerName: examTimerViewModel.model.name)
                         timeTimerViewModel.examTimerViewModel = examTimerViewModel
                     }
                 }, style: .constant(.primary))

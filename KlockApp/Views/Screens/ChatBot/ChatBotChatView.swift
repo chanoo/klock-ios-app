@@ -41,6 +41,7 @@ struct ChatBotChatView: View {
                             MessageBubbleView(
                                 me: tempMessage.isUser,
                                 nickname: chatBot.name,
+                                userTraceType: .activity,
                                 profileImageURL: chatBot.chatBotImageUrl,
                                 content: tempMessage.content)
                         }
@@ -48,6 +49,7 @@ struct ChatBotChatView: View {
                             MessageBubbleView(
                                 me: messageModel.isUser,
                                 nickname: messageModel.isUser ? viewModel.userModel?.nickname ?? "" : chatBot.name,
+                                userTraceType: .activity,
                                 profileImageURL: messageModel.isUser ? viewModel.userModel?.profileImage : chatBot.chatBotImageUrl,
                                 content: messageModel.content)
                         }

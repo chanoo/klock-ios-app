@@ -10,6 +10,7 @@ import SwiftUI
 struct AutoTimerCardView: View {
     @EnvironmentObject var tabBarManager: TabBarManager
     @EnvironmentObject var actionSheetManager: ActionSheetManager
+    @StateObject var timerModel: TimerModel
     @StateObject var autoTimerViewModel: AutoTimerViewModel
     @StateObject var timeTimerViewModel: TimeTimerViewModel
     @State private var isFlipped: Bool = false
@@ -73,8 +74,6 @@ struct AutoTimerCardView: View {
                             withAnimation {
                                 tabBarManager.hide()
                                 timeTimerViewModel.autoTimerViewModel = autoTimerViewModel
-                                timeTimerViewModel.startStudySession()
-                                autoTimerViewModel.startStudy()
                                 let appUsageController = AppUsageController.shared
                                 appUsageController.initiateMonitoring()
                             }
@@ -165,9 +164,10 @@ struct AutoTimerCardView: View {
 
 struct AutoTimerCardView_Previews: PreviewProvider {
     static var previews: some View {
+        let timerModel = TimerModel(id: 1, userId: 1, seq: 1, type: "AUTO", name: "국어")
         let model = AutoTimerModel(id: 1, userId: 1, seq: 1, type: TimerType.auto.rawValue, name: "자동 집중시간 타이머")
         let viewModel = AutoTimerViewModel(model: model)
         let timeTimerViewModel = Container.shared.resolve(TimeTimerViewModel.self)
-        AutoTimerCardView(autoTimerViewModel: viewModel, timeTimerViewModel: timeTimerViewModel)
+        AutoTimerCardView(timerModel: timerModel, autoTimerViewModel: viewModel, timeTimerViewModel: timeTimerViewModel)
     }
 }

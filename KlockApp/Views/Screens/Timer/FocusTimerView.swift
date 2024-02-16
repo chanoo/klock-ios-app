@@ -135,7 +135,7 @@ struct FocusTimerView: View {
         .onReceive(timer, perform: updateCurrentTime)
         .onAppear {
             clockViewModel.startStudy()
-            timeTimerViewModel.startStudySession()
+            timeTimerViewModel.startStudySession(timerName: focusTimerViewModel.model.name)
             timeTimerViewModel.playVibration()
         }
     }
