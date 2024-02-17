@@ -137,6 +137,7 @@
 		989D6F342A4C34BA00BC2F2B /* ActionSheetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989D6F332A4C34BA00BC2F2B /* ActionSheetManager.swift */; };
 		989D6F362A4C64E700BC2F2B /* SlideUpTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989D6F352A4C64E700BC2F2B /* SlideUpTransition.swift */; };
 		989D6F382A4C654200BC2F2B /* CustomActionSheetModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989D6F372A4C654200BC2F2B /* CustomActionSheetModifier.swift */; };
+		989EA1882B8072F7003A25F3 /* ChatInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989EA1872B8072F7003A25F3 /* ChatInputView.swift */; };
 		98A8CED32B7B7D8500B5A29C /* UserTraceRemoteServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A8CED22B7B7D8500B5A29C /* UserTraceRemoteServiceProtocol.swift */; };
 		98A8CED52B7B7D8C00B5A29C /* UserTraceRemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A8CED42B7B7D8C00B5A29C /* UserTraceRemoteService.swift */; };
 		98A8CED72B7B7DD800B5A29C /* UserTraceDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A8CED62B7B7DD800B5A29C /* UserTraceDTO.swift */; };
@@ -411,6 +412,7 @@
 		989D6F332A4C34BA00BC2F2B /* ActionSheetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionSheetManager.swift; sourceTree = "<group>"; };
 		989D6F352A4C64E700BC2F2B /* SlideUpTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideUpTransition.swift; sourceTree = "<group>"; };
 		989D6F372A4C654200BC2F2B /* CustomActionSheetModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomActionSheetModifier.swift; sourceTree = "<group>"; };
+		989EA1872B8072F7003A25F3 /* ChatInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatInputView.swift; sourceTree = "<group>"; };
 		98A30CBE29DE8E1A002E42A2 /* KlockAppPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = KlockAppPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		98A8CED22B7B7D8500B5A29C /* UserTraceRemoteServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTraceRemoteServiceProtocol.swift; sourceTree = "<group>"; };
 		98A8CED42B7B7D8C00B5A29C /* UserTraceRemoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTraceRemoteService.swift; sourceTree = "<group>"; };
@@ -667,6 +669,7 @@
 		984B10162B461F5B00186B6D /* ChatInput */ = {
 			isa = PBXGroup;
 			children = (
+				989EA1872B8072F7003A25F3 /* ChatInputView.swift */,
 			);
 			path = ChatInput;
 			sourceTree = "<group>";
@@ -1383,6 +1386,7 @@
 				981B389529F44B1200AB0EF8 /* FocusTimerModel.swift in Sources */,
 				98099DBF2A29C43F0096AA27 /* SignUpTagView.swift in Sources */,
 				98AC30752A1363A3006DC48D /* FocusTimerView.swift in Sources */,
+				989EA1882B8072F7003A25F3 /* ChatInputView.swift in Sources */,
 				98B21B5229D6F404004EFE0E /* FriendRelationModel.swift in Sources */,
 				9885724F2B3C5A4D00E7256B /* YPImagePickerView.swift in Sources */,
 				985BE89C29E6E595008582A3 /* FriendModel.swift in Sources */,

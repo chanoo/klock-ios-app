@@ -25,13 +25,13 @@ struct ChatBotListView: View {
                         .padding(.leading, 15)
                         .padding(.trailing, 15)
                         .padding([.top], 10)
-                        .background(FancyColor.chatBotBackground.color)
+                        .background(FancyColor.background2.color)
                 }
             }
             .listStyle(.plain)
         }
         .navigationBarTitle("Ai 선생님", displayMode: .inline)
-        .background(FancyColor.chatBotBackground.color)
+        .background(FancyColor.background2.color)
     }
 }
 
@@ -62,7 +62,7 @@ struct ChatBotRow: View {
         }
         .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
         .padding(10)
-        .background(FancyColor.listCell.color)
+        .background(FancyColor.chatBotListCell.color)
         .cornerRadius(4)
     }
 }

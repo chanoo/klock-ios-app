@@ -39,7 +39,7 @@ struct FancyTabView: View {
                             }
                         }
                         .padding(.horizontal)
-                        .background(FancyColor.navigationBar.color)
+                        .background(FancyColor.tabbarBackground.color)
                         .frame(height: tabBarManager.isTabBarVisible ? 60 : 0)
                     }
                     .offset(y: tabBarManager.isTabBarVisible ? 0 : 100)
