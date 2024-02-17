@@ -23,9 +23,11 @@ class FriendsViewModel: NSObject, ObservableObject {
 
     var cancellables: Set<AnyCancellable> = []
     
+    var page = 0
     var userModel = UserModel.load()
     
     func fetchFriends() {
+        guard !isLoading else { return } // 이미 로딩 중이라면 중복 호출 방지
         isLoading = true
 
         friendRelationService.fetch()
@@ -50,9 +52,12 @@ class FriendsViewModel: NSObject, ObservableObject {
     }
     
     func fetchUserTrace() {
+        guard !isLoading else { return } // 이미 로딩 중이라면 중복 호출 방지
         isLoading = true
+        
+        print("### page", page)
 
-        userTraceService.fetch()
+        userTraceService.fetch(page: page, size: 10)
             .sink { [weak self] completion in
                 guard let self = self else { return }
                 switch completion {
@@ -66,13 +71,26 @@ class FriendsViewModel: NSObject, ObservableObject {
                 }
             } receiveValue: { [weak self] dto in
                 guard let self = self else { return }
-                let grouped = Dictionary(grouping: dto) { (element: UserTraceFetchResDTO) -> String in
+                if !dto.isEmpty {
+                    self.page += 1 // 다음 페이지를 위해 page 증가
+                }
+                let newGrouped = Dictionary(grouping: dto) { (element: UserTraceFetchResDTO) -> String in
                     return element.createdAt.toDateFormat() ?? ""
                 }
-                .map { UserTraceGroup(date: $0.key, userTraces: $0.value) }
-                .sorted { $0.date > $1.date }
+                
                 DispatchQueue.main.async {
-                    self.groupedUserTraces = grouped
+                    for (newDate, newUserTraces) in newGrouped {
+                        if let index = self.groupedUserTraces.firstIndex(where: { $0.date == newDate }) {
+                            // 기존 그룹에 새로운 사용자 트레이스 추가
+                            self.groupedUserTraces[index].userTraces.append(contentsOf: newUserTraces)
+                        } else {
+                            // 새로운 그룹 생성 및 추가
+                            let newGroup = UserTraceGroup(date: newDate, userTraces: newUserTraces)
+                            self.groupedUserTraces.append(newGroup)
+                        }
+                    }
+                    // 날짜별로 정렬, 필요에 따라 순서를 조정
+                    self.groupedUserTraces.sort { $0.date > $1.date }
                 }
             }
             .store(in: &cancellables)

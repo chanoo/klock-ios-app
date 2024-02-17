@@ -19,8 +19,8 @@ class UserTraceRemoteService: UserTraceRemoteServiceProtocol, APIServiceProtocol
         session = Session(eventMonitors: [logger])
     }
     
-    func fetch() -> AnyPublisher<[UserTraceFetchResDTO], Alamofire.AFError> {
-        let url = "\(baseURL)"
+    func fetch(page: Int, size: Int? = 10) -> AnyPublisher<[UserTraceFetchResDTO], Alamofire.AFError> {
+        let url = "\(baseURL)?page=\(page)&size=\(size ?? 10)"
         
         return session.request(url, method: .get, encoding: JSONEncoding.default, headers: self.headers())
             .validate()
