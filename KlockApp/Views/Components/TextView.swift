@@ -35,6 +35,9 @@ struct TextView: UIViewRepresentable {
     func updateUIView(_ uiView: UITextView, context: Context) {
         DispatchQueue.main.async {
             dynamicHeight = min(uiView.contentSize.height, maxHeight)
+            if dynamicHeight < 20 {
+                dynamicHeight = 20
+            }
             uiView.text = text
         }
     }
