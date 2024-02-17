@@ -48,7 +48,7 @@ extension String {
         } else {
             dateFormatter.locale = Locale(identifier: "ko_KR")
             dateFormatter.timeZone = TimeZone.current // 사용자의 현재 시간대로 설정
-            dateFormatter.dateFormat = "yyyy.MM.dd일" // 날짜 형식
+            dateFormatter.dateFormat = "yyyy.MM.dd" // 날짜 형식
             return dateFormatter.string(from: date)
         }
     }
