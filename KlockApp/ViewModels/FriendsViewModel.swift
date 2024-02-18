@@ -74,7 +74,7 @@ class FriendsViewModel: NSObject, ObservableObject {
                 if !dto.isEmpty {
                     self.page += 1 // 다음 페이지를 위해 page 증가
                 }
-                let newGrouped = Dictionary(grouping: dto) { (element: UserTraceFetchResDTO) -> String in
+                let newGrouped = Dictionary(grouping: dto) { (element: UserTraceResDTO) -> String in
                     return element.createdAt.toDateFormat() ?? ""
                 }
                 
@@ -113,6 +113,45 @@ class FriendsViewModel: NSObject, ObservableObject {
         }
     }
     
+    func addUserTrace(contents: String?, image: Data?) {
+        let contentTrace = UserTraceCreateReqContentTraceDTO(writeUserId: 128, type: .activity, contents: contents)
+        let createReqDTO = UserTraceCreateReqDTO(contentTrace: contentTrace, image: image)
+
+        userTraceService.create(data: createReqDTO)
+            .sink(receiveCompletion: { result in
+                switch result {
+                case .failure(let error):
+                    print("Error creating user trace: \(error)")
+                case .finished:
+                    break
+                }
+            }, receiveValue: { [weak self] response in
+                guard let self = self else { return }
+                var dto = response
+                let endIndex = dto.createdAt.index(dto.createdAt.startIndex, offsetBy: 19)
+                let dateString = String(dto.createdAt[..<endIndex])
+                dto.createdAt = dateString
+                
+                let newDate = dto.createdAt.toDateFormat()
+                guard let newDate = newDate else { return }
+
+                DispatchQueue.main.async {
+                    if let index = self.groupedUserTraces.firstIndex(where: { $0.date == newDate }) {
+                        // 기존 그룹에 결과 추가
+                        self.groupedUserTraces[index].userTraces.append(dto)
+                        self.groupedUserTraces[index].userTraces.sort { $0.id > $1.id }
+                    } else {
+                        // 새로운 그룹 생성 및 추가
+                        let newGroup = UserTraceGroup(date: newDate, userTraces: [dto])
+                        self.groupedUserTraces.append(newGroup)
+                        // 날짜별로 정렬
+                        self.groupedUserTraces.sort { $0.date > $1.date }
+                    }
+                }
+            })
+            .store(in: &cancellables)
+    }
+
     func friendAddActionSheet() -> ActionSheet {
         ActionSheet(
             title: Text("친구 추가 방식을 선택하세요"),

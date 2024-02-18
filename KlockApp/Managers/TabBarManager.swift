@@ -11,10 +11,14 @@ class TabBarManager: ObservableObject {
     @Published var isTabBarVisible: Bool = true
     
     func hide() {
-        isTabBarVisible = false
+        DispatchQueue.main.async {
+            self.isTabBarVisible = false
+        }
     }
 
     func show() {
-        isTabBarVisible = true
+        DispatchQueue.main.async {
+            self.isTabBarVisible = true
+        }
     }
 }

@@ -34,10 +34,10 @@ extension String {
         return dateFormatter.string(from: date)
     }
     
-    func toDateFormat() -> String? {
+    func toDateFormat(format: String = "yyyy-MM-dd'T'HH:mm:ss", timezone: String = "UTC") -> String? {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss" // ISO 8601 형식 지정
-        dateFormatter.timeZone = TimeZone(abbreviation: "UTC") // UTC로 설정
+        dateFormatter.dateFormat = format // ISO 8601 형식 지정
+        dateFormatter.timeZone = TimeZone(abbreviation: timezone) // UTC로 설정
         guard let date = dateFormatter.date(from: self) else { return nil }
         
         let calendar = Calendar.current

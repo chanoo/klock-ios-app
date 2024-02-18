@@ -10,5 +10,5 @@ import Foundation
 struct UserTraceGroup: Identifiable {
     var id: String { date }
     let date: String
-    var userTraces: [UserTraceFetchResDTO]
+    var userTraces: [UserTraceResDTO]
 }

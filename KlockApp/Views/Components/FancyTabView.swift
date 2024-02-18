@@ -44,7 +44,7 @@ struct FancyTabView: View {
                     }
                     .offset(y: tabBarManager.isTabBarVisible ? 0 : 100)
                     .opacity(tabBarManager.isTabBarVisible ? 1.0 : 0)
-                    .animation(.easeInOut(duration: 0.5), value: tabBarManager.isTabBarVisible)
+                    .animation(.easeInOut(duration: 0.2), value: tabBarManager.isTabBarVisible)
                 }
             }
         }

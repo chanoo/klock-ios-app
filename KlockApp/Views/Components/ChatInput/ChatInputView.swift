@@ -13,6 +13,7 @@ struct ChatInputView: View {
     @Binding var text: String
     @Binding var dynamicHeight: CGFloat
     @Binding var isPreparingResponse: Bool
+    let onSend: (String) -> Void // 클로저 추가
     let maxHeight: CGFloat = 70 // 최대 높이 (1줄당 대략 20~25 정도를 예상하고 세팅)
 
     var body: some View {
@@ -28,15 +29,16 @@ struct ChatInputView: View {
                         .foregroundColor(FancyColor.primary.color)
                         .background(FancyColor.chatBotInput.color)
                         .cornerRadius(4)
-                        .onTapGesture {
-                            tabBarManager.hide()
-                        }
                 }
                 .padding(1)
                 .background(FancyColor.chatBotInputOutline.color)
                 .cornerRadius(4)
 
                 Button(action: {
+                    if !text.isEmpty {
+                        onSend(text) // 버튼을 눌렀을 때 클로저 실행
+                        text = ""
+                    }
                 }) {
                     Image("ic_circle_arrow_up")
                         .foregroundColor(FancyColor.chatBotSendButton.color)
@@ -53,5 +55,19 @@ struct ChatInputView: View {
             .padding(.bottom, 8)
         }
         .background(FancyColor.chatBotInputBackground.color)
+        .onAppear {
+            NotificationCenter.default.addObserver(
+                forName: UIResponder.keyboardWillShowNotification,
+                object: nil,
+                queue: .main) { _ in
+                    self.tabBarManager.hide()
+                }
+        }
+        .onDisappear {
+            NotificationCenter.default.removeObserver(
+                self,
+                name: UIResponder.keyboardWillShowNotification,
+                object: nil)
+        }
     }
 }

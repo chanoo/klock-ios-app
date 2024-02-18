@@ -47,7 +47,7 @@ struct MessageBubbleView: View {
                                     }
                                     Text(content)
                                 }
-                                .padding()
+                                .padding(12)
                                 .background(FancyColor.chatBotBubbleMe.color)
                                 .clipShape(RoundedCorners(tl: 0, tr: 10, bl: 10, br: 10))
                                 .foregroundColor(FancyColor.chatbotBubbleTextMe.color)
@@ -80,7 +80,7 @@ struct MessageBubbleView: View {
                                 }
                                 Text(content)
                             }
-                            .padding()
+                            .padding(12)
                             .background(FancyColor.chatBotBubble.color)
                             .clipShape(RoundedCorners(tl: 10, tr: 0, bl: 10, br: 10))
                             .foregroundColor(FancyColor.chatbotBubbleText.color)

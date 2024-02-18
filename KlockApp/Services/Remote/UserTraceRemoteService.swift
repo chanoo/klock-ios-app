@@ -19,21 +19,21 @@ class UserTraceRemoteService: UserTraceRemoteServiceProtocol, APIServiceProtocol
         session = Session(eventMonitors: [logger])
     }
     
-    func fetch(page: Int, size: Int? = 10) -> AnyPublisher<[UserTraceFetchResDTO], Alamofire.AFError> {
+    func fetch(page: Int, size: Int? = 10) -> AnyPublisher<[UserTraceResDTO], Alamofire.AFError> {
         let url = "\(baseURL)?page=\(page)&size=\(size ?? 10)"
         
         return session.request(url, method: .get, encoding: JSONEncoding.default, headers: self.headers())
             .validate()
-            .publishDecodable(type: [UserTraceFetchResDTO].self)
+            .publishDecodable(type: [UserTraceResDTO].self)
             .value()
             .mapError { $0 }
             .eraseToAnyPublisher()
     }
     
-    func create(data: UserTraceCreateReqDTO) -> AnyPublisher<UserTraceCreateResDTO, Alamofire.AFError> {
+    func create(data: UserTraceCreateReqDTO) -> AnyPublisher<UserTraceResDTO, Alamofire.AFError> {
         let url = "\(baseURL)"
         
-        return Future<UserTraceCreateResDTO, Alamofire.AFError> { promise in
+        return Future<UserTraceResDTO, Alamofire.AFError> { promise in
             self.session.upload(multipartFormData: { multipartFormData in
                 // Append the image data
                 if let image = data.image {
@@ -41,13 +41,13 @@ class UserTraceRemoteService: UserTraceRemoteServiceProtocol, APIServiceProtocol
                 }
                 
                 // Append the JSON data
-                let contentTrace = ["writeUserId": data.contentTrace.writeUserId, "type": data.contentTrace.type.rawValue, "contents": data.contentTrace.contents]
+                let contentTrace = ["writeUserId": data.contentTrace.writeUserId, "type": data.contentTrace.type.rawValue, "contents": data.contentTrace.contents ?? ""]
                 if let jsonData = try? JSONSerialization.data(withJSONObject: contentTrace, options: []) {
                     multipartFormData.append(jsonData, withName: "contentTrace", mimeType: "application/json")
                 }
             }, to: url, method: .post, headers: self.headers())
             .validate(statusCode: 200..<300)
-            .responseDecodable(of: UserTraceCreateResDTO.self) { response in
+            .responseDecodable(of: UserTraceResDTO.self) { response in
                 switch response.result {
                 case .success(let value):
                     promise(.success(value))
