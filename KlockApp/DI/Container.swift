@@ -91,6 +91,7 @@ class Container {
         container.register(SplashViewModel.self) { _ in SplashViewModel() }
         container.register(UserViewModel.self) { _ in UserViewModel() }
         container.register(UserProfileImageViewModel.self) { _ in UserProfileImageViewModel() }
+        container.register(ImageViewModel.self) { _ in ImageViewModel() }
         container.register(ChatBotViewModel.self) { resolver in
             return ChatBotViewModel()
         }

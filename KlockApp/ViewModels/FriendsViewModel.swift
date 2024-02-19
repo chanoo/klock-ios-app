@@ -22,7 +22,7 @@ class FriendsViewModel: NSObject, ObservableObject {
     private let userTraceService = Container.shared.resolve(UserTraceRemoteServiceProtocol.self)
 
     var cancellables: Set<AnyCancellable> = []
-    
+    var last = false
     var page = 0
     var userModel = UserModel.load()
     
@@ -52,7 +52,7 @@ class FriendsViewModel: NSObject, ObservableObject {
     }
     
     func fetchUserTrace() {
-        guard !isLoading else { return } // 이미 로딩 중이라면 중복 호출 방지
+        guard !last, !isLoading else { return } // 이미 로딩 중이라면 중복 호출 방지
         isLoading = true
         
         print("### page", page)
@@ -73,6 +73,8 @@ class FriendsViewModel: NSObject, ObservableObject {
                 guard let self = self else { return }
                 if !dto.isEmpty {
                     self.page += 1 // 다음 페이지를 위해 page 증가
+                } else {
+                    self.last = true
                 }
                 let newGrouped = Dictionary(grouping: dto) { (element: UserTraceResDTO) -> String in
                     return element.createdAt.toDateFormat() ?? ""

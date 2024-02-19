@@ -13,6 +13,7 @@ struct FriendsView: View {
     @EnvironmentObject var tabBarManager: TabBarManager
     @State private var isShowingAddFriend = false
     @StateObject private var viewModel = Container.shared.resolve(FriendsViewModel.self)
+    @StateObject private var imageViewModel = Container.shared.resolve(ImageViewModel.self)
     @StateObject private var friendAddViewModel = Container.shared.resolve(FriendAddViewModel.self)
     @State private var dynamicHeight: CGFloat = 20 // 높이 초기값
 
@@ -77,8 +78,14 @@ struct FriendsView: View {
                     text: $viewModel.newMessage,
                     dynamicHeight: $dynamicHeight,
                     isPreparingResponse: $viewModel.isPreparingResponse,
+                    selectedImage: $imageViewModel.selectedImage,
+                    isShowCemeraPermissionView: $imageViewModel.isShowCemeraPermissionView,
+                    showingImagePicker: $imageViewModel.showingImagePicker,
                     onSend: { message in
-                        viewModel.addUserTrace(contents: message, image: nil) // 실제 동작 정의
+                        let _selectedImage = imageViewModel.selectedImage?.resize(to: CGSize(width: 600, height: 600))
+                        let pngData = _selectedImage?.pngData()
+                        viewModel.addUserTrace(contents: message, image: pngData) // 실제 동작 정의
+                        imageViewModel.selectedImage = nil
                     }
                 )
             }

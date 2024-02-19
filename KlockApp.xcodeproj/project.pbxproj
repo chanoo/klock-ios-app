@@ -13,6 +13,7 @@
 		98099DBF2A29C43F0096AA27 /* SignUpTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98099DBE2A29C43F0096AA27 /* SignUpTagView.swift */; };
 		980C623629EE760100D0A7B5 /* FancyTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980C623529EE760100D0A7B5 /* FancyTabView.swift */; };
 		980CD5492A09485F00B203AC /* AlamofireLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980CD5482A09485F00B203AC /* AlamofireLogger.swift */; };
+		980FCBC02B837945001A819D /* ImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980FCBBF2B837945001A819D /* ImageViewModel.swift */; };
 		981881C629F26F00002A4395 /* PomodoroTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981881C529F26F00002A4395 /* PomodoroTimerView.swift */; };
 		981881C829F26F07002A4395 /* ExamTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981881C729F26F07002A4395 /* ExamTimerView.swift */; };
 		981881CA29F27316002A4395 /* PageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981881C929F27316002A4395 /* PageControl.swift */; };
@@ -286,6 +287,7 @@
 		980C623429ED32E000D0A7B5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		980C623529EE760100D0A7B5 /* FancyTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyTabView.swift; sourceTree = "<group>"; };
 		980CD5482A09485F00B203AC /* AlamofireLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireLogger.swift; sourceTree = "<group>"; };
+		980FCBBF2B837945001A819D /* ImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewModel.swift; sourceTree = "<group>"; };
 		981881C529F26F00002A4395 /* PomodoroTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroTimerView.swift; sourceTree = "<group>"; };
 		981881C729F26F07002A4395 /* ExamTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamTimerView.swift; sourceTree = "<group>"; };
 		981881C929F27316002A4395 /* PageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageControl.swift; sourceTree = "<group>"; };
@@ -927,6 +929,7 @@
 				98AC30842A15CBA8006DC48D /* ExamTimerViewModel.swift */,
 				981D73172A1A49E0000C8F3D /* ClockViewModel.swift */,
 				98CF07D82B34546E00BF33C2 /* UserProfileImageViewModel.swift */,
+				980FCBBF2B837945001A819D /* ImageViewModel.swift */,
 				987443D32A57D93F0019F847 /* UserViewModel.swift */,
 				985BE88329E652CE008582A3 /* README.md */,
 				9885F3172A5A9187000E2F7A /* MyModel.swift */,
@@ -1311,6 +1314,7 @@
 				98A8CEDB2B7C9CB300B5A29C /* UserTraceType.swift in Sources */,
 				98A8CED52B7B7D8C00B5A29C /* UserTraceRemoteService.swift in Sources */,
 				984D2C9129E0728C008D3EA9 /* SplashViewModel.swift in Sources */,
+				980FCBC02B837945001A819D /* ImageViewModel.swift in Sources */,
 				983BC0252A8EF64400DC108B /* AutoTimerModel.swift in Sources */,
 				983BC02F2A8F0DAF00DC108B /* AutoTimerCardView.swift in Sources */,
 				9843B7D929EEE09400F91DAD /* ProximityAndOrientationService.swift in Sources */,

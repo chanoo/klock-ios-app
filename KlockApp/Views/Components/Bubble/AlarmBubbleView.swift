@@ -24,20 +24,21 @@ struct AlarmBubbleView: View {
     private var contentStack: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text(nickname)
+                .fontWeight(.semibold)
                 .font(.system(size: 13))
-                .foregroundColor(FancyColor.subtext.color)
+                .foregroundColor(FancyColor.chatBotBubbleNickname.color)
                 .padding(.bottom, 4)
-            HStack(alignment: .bottom, spacing: 8) {
+            HStack(alignment: .bottom, spacing: 0) {
                 HStack {
                     iconView
                     Text(content)
                         .bold()
                         .foregroundColor(FancyColor.text.color)
-                        .padding(.leading, 8)
+                        .padding(.leading, showIcon == true ? 0 : 14)
                         .padding(.trailing, 14)
                 }
-                .padding(.vertical, showIcon == true ? 0 : 16)
-                .padding(.horizontal, showIcon == true ? 0 : 8)
+                .padding(.vertical, showIcon == true ? 0 : 14)
+                .padding(.horizontal, 0)
                 .background(FancyColor.bubbleAlram.color)
                 .overlay(
                     RoundedCorners(tl: 0, tr: 10, bl: 10, br: 10)
@@ -47,6 +48,7 @@ struct AlarmBubbleView: View {
                 Text(date)
                     .font(.system(size: 11))
                     .foregroundColor(FancyColor.subtext.color)
+                    .padding(.leading, 8)
             }
         }
     }
@@ -55,7 +57,7 @@ struct AlarmBubbleView: View {
         Group {
             if showIcon ?? false {
                 Text("🔥")
-                    .padding()
+                    .padding(14)
                     .background(FancyColor.primary.color)
             }
         }

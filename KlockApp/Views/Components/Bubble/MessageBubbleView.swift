@@ -36,8 +36,9 @@ struct MessageBubbleView: View {
                         ProfileImageWrapperView(profileImageURL: profileImageURL)
                         VStack(alignment: .leading, spacing: 0) {
                             Text(nickname)
+                                .fontWeight(.semibold)
                                 .font(.system(size: 13))
-                                .foregroundColor(FancyColor.subtext.color)
+                                .foregroundColor(FancyColor.chatBotBubbleNickname.color)
                                 .padding(.bottom, 4)
                             HStack(alignment: .bottom) {
                                 VStack(alignment: .leading) {
@@ -64,8 +65,9 @@ struct MessageBubbleView: View {
                     Spacer()
                     VStack(alignment: .trailing, spacing: 0) {
                         Text(nickname)
+                            .fontWeight(.semibold)
                             .font(.system(size: 13))
-                            .foregroundColor(FancyColor.subtext.color)
+                            .foregroundColor(FancyColor.chatBotBubbleNickname.color)
                             .padding(.bottom, 4)
                         HStack(alignment: .bottom) {
                             if let date = date {
