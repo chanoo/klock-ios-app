@@ -32,7 +32,8 @@ class CharacterViewModel: ObservableObject {
     }
     
     func copyToken() {
-        let jwtToken = UserDefaults.standard.string(forKey: "access.token") ?? ""
-        UIPasteboard.general.string = jwtToken
+        if let jwtToken = UserDefaults.standard.string(forKey: "access.token") {
+            UIPasteboard.general.string = jwtToken
+        }
     }
 }

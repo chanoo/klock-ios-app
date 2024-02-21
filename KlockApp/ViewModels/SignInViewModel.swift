@@ -222,9 +222,11 @@ class SignInViewModel: NSObject, ObservableObject, ASAuthorizationControllerDele
 
     func handleReceivedUser(_ user: SocialLoginResDTO) {
         print("User: \(user)")
-        UserDefaults.standard.set(user.userId, forKey: "user.id")
-        UserDefaults.standard.set(user.token, forKey: "access.token")
-        UserDefaults.standard.set(user.publicKey, forKey: "public.key")
+        let standard = UserDefaults.standard
+        standard.set(user.userId, forKey: "user.id")
+        standard.set(user.token, forKey: "access.token")
+        standard.set(user.publicKey, forKey: "public.key")
+        standard.synchronize()
         fetchUserRemoteData(user.userId)
     }
 

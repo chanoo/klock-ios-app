@@ -85,8 +85,10 @@ class PreferencesViewModel: ObservableObject {
     
     // 로그아웃 메소드
     func logout() {
-        UserDefaults.standard.removeObject(forKey: "access.token")
-        UserDefaults.standard.synchronize()
+        let standard = UserDefaults.standard
+        standard.removeObject(forKey: "access.token")
+        standard.removeObject(forKey: "user")
+        standard.synchronize()
     }
 
     // 계정 삭제 메소드

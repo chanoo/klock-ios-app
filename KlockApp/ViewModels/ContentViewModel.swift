@@ -59,6 +59,7 @@ class ContentViewModel: ObservableObject {
     func logout() {
         let standard = UserDefaults.standard
         standard.removeObject(forKey: "access.token")
+        standard.removeObject(forKey: "user")
         standard.synchronize()
     }
     
