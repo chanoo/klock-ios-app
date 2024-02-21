@@ -1,8 +1,19 @@
 {
   "images" : [
     {
-      "filename" : "img_circle_ai_charactor.pdf",
-      "idiom" : "universal"
+      "filename" : "Group 161.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "Group 161@2x.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "Group 161@3x.png",
+      "idiom" : "universal",
+      "scale" : "3x"
     }
   ],
   "info" : {
