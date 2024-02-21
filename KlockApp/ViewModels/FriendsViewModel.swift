@@ -138,7 +138,11 @@ class FriendsViewModel: ObservableObject {
     }
     
     func addUserTrace(contents: String?, image: Data?) {
-        let contentTrace = UserTraceCreateReqContentTraceDTO(writeUserId: 128, type: .activity, contents: contents)
+        guard let userId = userModel?.id else  {
+            return
+        }
+        
+        let contentTrace = UserTraceCreateReqContentTraceDTO(writeUserId: userId, type: .activity, contents: contents)
         let createReqDTO = UserTraceCreateReqDTO(contentTrace: contentTrace, image: image)
 
         userTraceService.create(data: createReqDTO)
