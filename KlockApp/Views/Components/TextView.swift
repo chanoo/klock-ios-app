@@ -28,6 +28,7 @@ struct TextView: UIViewRepresentable {
         textView.textContainerInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
         textView.showsVerticalScrollIndicator = false
         textView.showsHorizontalScrollIndicator = false
+        textView.contentSize.height = 36
         textView.text = text
         return textView
     }
@@ -35,8 +36,8 @@ struct TextView: UIViewRepresentable {
     func updateUIView(_ uiView: UITextView, context: Context) {
         DispatchQueue.main.async {
             dynamicHeight = min(uiView.contentSize.height, maxHeight)
-            if dynamicHeight < 20 {
-                dynamicHeight = 20
+            if dynamicHeight < 36 {
+                dynamicHeight = 36
             }
             uiView.text = text
         }

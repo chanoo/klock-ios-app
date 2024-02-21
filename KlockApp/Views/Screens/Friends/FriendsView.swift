@@ -11,15 +11,11 @@ import SwiftUI
 struct FriendsView: View {
     @EnvironmentObject var actionSheetManager: ActionSheetManager
     @EnvironmentObject var tabBarManager: TabBarManager
-    @State private var isShowingAddFriend = false
     @StateObject private var viewModel = Container.shared.resolve(FriendsViewModel.self)
     @StateObject private var imageViewModel = Container.shared.resolve(ImageViewModel.self)
     @StateObject private var friendAddViewModel = Container.shared.resolve(FriendAddViewModel.self)
-    @State private var dynamicHeight: CGFloat = 20 // 높이 초기값
 
-    init() {
-        UITableView.appearance().showsVerticalScrollIndicator = false
-    }
+    @State private var isShowingAddFriend = false
     
     var body: some View {
         ZStack {
@@ -73,14 +69,14 @@ struct FriendsView: View {
                     .rotationEffect(.degrees(180), anchor: .center)
                 }
                 
-                // ChatGPTView의 body 내에서 HStack 부분
                 ChatInputView(
                     text: $viewModel.newMessage,
-                    dynamicHeight: $dynamicHeight,
+                    dynamicHeight: $viewModel.dynamicHeight,
                     isPreparingResponse: $viewModel.isPreparingResponse,
                     selectedImage: $imageViewModel.selectedImage,
                     isShowCemeraPermissionView: $imageViewModel.isShowCemeraPermissionView,
                     showingImagePicker: $imageViewModel.showingImagePicker,
+                    isLoading: $viewModel.isLoading,
                     onSend: { message in
                         let _selectedImage = imageViewModel.selectedImage?.resize(to: CGSize(width: 600, height: 600))
                         viewModel.image = _selectedImage?.pngData()

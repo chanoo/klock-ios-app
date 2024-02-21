@@ -17,7 +17,7 @@ class FriendsViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     @Published var friends: [FriendRelationFetchResDTO] = []
     @Published var groupedUserTraces: [UserTraceGroup] = []
-
+    @Published var dynamicHeight: CGFloat = 36 // 높이 초기값
     @Published var contents: String? = nil
     @Published var image: Data? = nil
 
@@ -38,11 +38,10 @@ class FriendsViewModel: ObservableObject {
     private func setupSendButtonTapped() {
         sendTapped
             .sink { [weak self] _ in
-                let userModel = UserModel.load()
-                guard let userId = userModel?.id, let nickname = userModel?.nickname else {
-                    return
+                DispatchQueue.main.async {
+                    self?.isLoading = true
+                    self?.dynamicHeight = 36
                 }
-                self?.isLoading = true
                 self?.addUserTrace(contents: self?.contents, image: self?.image)
             }
             .store(in: &cancellables)

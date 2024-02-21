@@ -188,6 +188,8 @@
 		98B24A992A32386D0083444D /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B24A982A32386D0083444D /* TextView.swift */; };
 		98B24A9D2A34F1BE0083444D /* SpeechService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B24A9C2A34F1BE0083444D /* SpeechService.swift */; };
 		98B387B02A2DDFB500F18AD2 /* SignUpProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B387AF2A2DDFB500F18AD2 /* SignUpProfileImageView.swift */; };
+		98B5F79C2B8649C500CD8A42 /* lottie-circle-loading-light.json in Resources */ = {isa = PBXBuildFile; fileRef = 98B5F79B2B8649C500CD8A42 /* lottie-circle-loading-light.json */; };
+		98B5F79E2B864C0A00CD8A42 /* lottie-circle-loading-dark.json in Resources */ = {isa = PBXBuildFile; fileRef = 98B5F79D2B864C0A00CD8A42 /* lottie-circle-loading-dark.json */; };
 		98BDD21D29DAD1D400B0440F /* FancyColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BDD21C29DAD1D400B0440F /* FancyColor.swift */; };
 		98BDD22029DD0FA800B0440F /* EmailValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BDD21F29DD0FA800B0440F /* EmailValidator.swift */; };
 		98C378242AFBC86400F537BA /* FriendRelationServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C378232AFBC86400F537BA /* FriendRelationServiceProtocol.swift */; };
@@ -465,6 +467,8 @@
 		98B24A982A32386D0083444D /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		98B24A9C2A34F1BE0083444D /* SpeechService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechService.swift; sourceTree = "<group>"; };
 		98B387AF2A2DDFB500F18AD2 /* SignUpProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpProfileImageView.swift; sourceTree = "<group>"; };
+		98B5F79B2B8649C500CD8A42 /* lottie-circle-loading-light.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "lottie-circle-loading-light.json"; sourceTree = "<group>"; };
+		98B5F79D2B864C0A00CD8A42 /* lottie-circle-loading-dark.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "lottie-circle-loading-dark.json"; sourceTree = "<group>"; };
 		98BDD21C29DAD1D400B0440F /* FancyColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyColor.swift; sourceTree = "<group>"; };
 		98BDD21F29DD0FA800B0440F /* EmailValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailValidator.swift; sourceTree = "<group>"; };
 		98C378232AFBC86400F537BA /* FriendRelationServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRelationServiceProtocol.swift; sourceTree = "<group>"; };
@@ -979,6 +983,8 @@
 		98CE661129D553A60009916F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				98B5F79D2B864C0A00CD8A42 /* lottie-circle-loading-dark.json */,
+				98B5F79B2B8649C500CD8A42 /* lottie-circle-loading-light.json */,
 				987DC3C82B030164000DCBAD /* lottie-loading-black.json */,
 				987DC3C92B030164000DCBAD /* lottie-loading-white.json */,
 				981881D629F426FC002A4395 /* lottie-plus.json */,
@@ -1264,6 +1270,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				98B5F79C2B8649C500CD8A42 /* lottie-circle-loading-light.json in Resources */,
 				98B21B1829D55DE0004EFE0E /* README.md in Resources */,
 				9885724A2B3C488200E7256B /* lottie-heart.json in Resources */,
 				987E544129D552530007E156 /* Preview Assets.xcassets in Resources */,
@@ -1272,6 +1279,7 @@
 				983B59D929FB37A100F0EACD /* LaunchScreen.storyboard in Resources */,
 				98AE104F2A8D961400D99322 /* deeplabv3.tflite in Resources */,
 				987E543E29D552530007E156 /* Assets.xcassets in Resources */,
+				98B5F79E2B864C0A00CD8A42 /* lottie-circle-loading-dark.json in Resources */,
 				987DC3CA2B030164000DCBAD /* lottie-loading-black.json in Resources */,
 				987DC3CB2B030164000DCBAD /* lottie-loading-white.json in Resources */,
 			);

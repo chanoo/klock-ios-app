@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ChatInputView: View {
+    @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var tabBarManager: TabBarManager
 
     @Binding var text: String
@@ -16,6 +17,7 @@ struct ChatInputView: View {
     @Binding var selectedImage: UIImage?
     @Binding var isShowCemeraPermissionView: Bool
     @Binding var showingImagePicker: Bool
+    @Binding var isLoading: Bool
     let onSend: (String) -> Void // 클로저 추가
     let maxHeight: CGFloat = 70 // 최대 높이 (1줄당 대략 20~25 정도를 예상하고 세팅)
 
@@ -87,13 +89,24 @@ struct ChatInputView: View {
                 .padding(.top, 2)
 
                 Button(action: {
-                    if !text.isEmpty || selectedImage != nil {
+                    if !isLoading && (!text.isEmpty || selectedImage != nil) {
                         onSend(text) // 버튼을 눌렀을 때 클로저 실행
                         text = ""
+                        
                     }
                 }) {
-                    Image("ic_circle_arrow_up")
-                        .foregroundColor(FancyColor.chatBotSendButton.color)
+                    if isLoading {
+                        if colorScheme == .dark {
+                            LottieView(name: "lottie-circle-loading-dark", speed: 1.0)
+                                .frame(width: 42, height: 42)
+                        } else {
+                            LottieView(name: "lottie-circle-loading-light", speed: 1.0)
+                                .frame(width: 42, height: 42)
+                        }
+                    } else {
+                        Image("ic_circle_arrow_up")
+                            .foregroundColor(FancyColor.chatBotSendButton.color)
+                    }
                 }
                 .padding(1)
                 .padding(.top, 2)
@@ -157,7 +170,9 @@ struct ChatInputView_Previews: PreviewProvider {
                 isPreparingResponse: .constant(false),
                 selectedImage: .constant(UIImage(named: "ic_picture")),
                 isShowCemeraPermissionView: .constant(false),
-                showingImagePicker: .constant(false), onSend: { _ in })
+                showingImagePicker: .constant(false),
+                isLoading: .constant(false),
+                onSend: { _ in })
                 .padding(.bottom, 0)
         }
     }
