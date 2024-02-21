@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 import Foast
 
-class FriendsViewModel: NSObject, ObservableObject {
+class FriendsViewModel: ObservableObject {
     @Published var newMessage: String = ""
     @Published var isPresented = false
     @Published var friendAddViewModel = FriendAddViewModel()
@@ -18,13 +18,35 @@ class FriendsViewModel: NSObject, ObservableObject {
     @Published var friends: [FriendRelationFetchResDTO] = []
     @Published var groupedUserTraces: [UserTraceGroup] = []
 
+    @Published var contents: String? = nil
+    @Published var image: Data? = nil
+
     private let friendRelationService = Container.shared.resolve(FriendRelationServiceProtocol.self)
     private let userTraceService = Container.shared.resolve(UserTraceRemoteServiceProtocol.self)
+
+    let sendTapped = PassthroughSubject<Void, Never>()
 
     var cancellables: Set<AnyCancellable> = []
     var last = false
     var page = 0
     var userModel = UserModel.load()
+    
+    init() {
+        setupSendButtonTapped()
+    }
+    
+    private func setupSendButtonTapped() {
+        sendTapped
+            .sink { [weak self] _ in
+                let userModel = UserModel.load()
+                guard let userId = userModel?.id, let nickname = userModel?.nickname else {
+                    return
+                }
+                self?.isLoading = true
+                self?.addUserTrace(contents: self?.contents, image: self?.image)
+            }
+            .store(in: &cancellables)
+    }
     
     func fetchFriends() {
         guard !isLoading else { return } // 이미 로딩 중이라면 중복 호출 방지
@@ -126,6 +148,9 @@ class FriendsViewModel: NSObject, ObservableObject {
                     print("Error creating user trace: \(error)")
                 case .finished:
                     break
+                }
+                DispatchQueue.main.async {
+                    self.isLoading = false
                 }
             }, receiveValue: { [weak self] response in
                 guard let self = self else { return }

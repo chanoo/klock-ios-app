@@ -44,7 +44,6 @@
 		9837CCA52A418C5F002F1A3A /* FriendsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9837CCA42A418C5F002F1A3A /* FriendsListView.swift */; };
 		9837CCAA2A42F255002F1A3A /* ActivityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9837CCA92A42F255002F1A3A /* ActivityModel.swift */; };
 		983B59D129FB30F800F0EACD /* CoreStore in Frameworks */ = {isa = PBXBuildFile; productRef = 983B59D029FB30F800F0EACD /* CoreStore */; };
-		983B59D329FB331400F0EACD /* DataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983B59D229FB331400F0EACD /* DataStack.swift */; };
 		983B59D929FB37A100F0EACD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 983B59D829FB37A100F0EACD /* LaunchScreen.storyboard */; };
 		983B59DF29FB7B1E00F0EACD /* AccountEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983B59DE29FB7B1E00F0EACD /* AccountEntity.swift */; };
 		983B59E329FB99F900F0EACD /* AccountLocalServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983B59E229FB99F900F0EACD /* AccountLocalServiceProtocol.swift */; };
@@ -73,6 +72,7 @@
 		984D2C8B29DFDBAA008D3EA9 /* CommonViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984D2C8A29DFDBAA008D3EA9 /* CommonViewModifier.swift */; };
 		984D2C8F29E067FE008D3EA9 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984D2C8E29E067FE008D3EA9 /* SplashView.swift */; };
 		984D2C9129E0728C008D3EA9 /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984D2C9029E0728C008D3EA9 /* SplashViewModel.swift */; };
+		985823C22B8511AC003E88B4 /* URLCache+imageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985823C12B8511AC003E88B4 /* URLCache+imageCache.swift */; };
 		985BE88A29E6DC2C008582A3 /* ChatBotChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE88929E6DC2C008582A3 /* ChatBotChatView.swift */; };
 		985BE88C29E6DC35008582A3 /* TimeTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE88B29E6DC35008582A3 /* TimeTimerView.swift */; };
 		985BE89229E6E0CD008582A3 /* CharacterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE89129E6E0CD008582A3 /* CharacterView.swift */; };
@@ -315,7 +315,6 @@
 		9833FFCF29F683C800CC33F7 /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		9837CCA42A418C5F002F1A3A /* FriendsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsListView.swift; sourceTree = "<group>"; };
 		9837CCA92A42F255002F1A3A /* ActivityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityModel.swift; sourceTree = "<group>"; };
-		983B59D229FB331400F0EACD /* DataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStack.swift; sourceTree = "<group>"; };
 		983B59D829FB37A100F0EACD /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		983B59DE29FB7B1E00F0EACD /* AccountEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountEntity.swift; sourceTree = "<group>"; };
 		983B59E229FB99F900F0EACD /* AccountLocalServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountLocalServiceProtocol.swift; sourceTree = "<group>"; };
@@ -346,6 +345,7 @@
 		984D2C8D29E056A6008D3EA9 /* KlockApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KlockApp.entitlements; sourceTree = "<group>"; };
 		984D2C8E29E067FE008D3EA9 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		984D2C9029E0728C008D3EA9 /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
+		985823C12B8511AC003E88B4 /* URLCache+imageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLCache+imageCache.swift"; sourceTree = "<group>"; };
 		985BE88329E652CE008582A3 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		985BE88929E6DC2C008582A3 /* ChatBotChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotChatView.swift; sourceTree = "<group>"; };
 		985BE88B29E6DC35008582A3 /* TimeTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTimerView.swift; sourceTree = "<group>"; };
@@ -863,6 +863,7 @@
 				981A54A82ADEB87A00115652 /* View+Extensions.swift */,
 				98B0650C2B40864A009D0F69 /* String+Extensions.swift */,
 				98B0650E2B41B057009D0F69 /* SymmetricKey+Extensions.swift */,
+				985823C12B8511AC003E88B4 /* URLCache+imageCache.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1045,7 +1046,6 @@
 			isa = PBXGroup;
 			children = (
 				98CE661829D55A650009916F /* Container.swift */,
-				983B59D229FB331400F0EACD /* DataStack.swift */,
 			);
 			path = DI;
 			sourceTree = "<group>";
@@ -1323,7 +1323,6 @@
 				98B065122B41B229009D0F69 /* ProfileImageEditView.swift in Sources */,
 				985BE89E29E6E5D0008582A3 /* FriendDetailView.swift in Sources */,
 				981D73182A1A49E0000C8F3D /* ClockViewModel.swift in Sources */,
-				983B59D329FB331400F0EACD /* DataStack.swift in Sources */,
 				98EBFBF429F98AA2004E95F3 /* AchievementModel.swift in Sources */,
 				98B21B5929D6F4AE004EFE0E /* StudySessionModel.swift in Sources */,
 				98B21B7629DA6288004EFE0E /* Destination.swift in Sources */,
@@ -1408,6 +1407,7 @@
 				98E9384E29EA3935009CBF32 /* RoundedCorners.swift in Sources */,
 				98B0651D2B427CBF009D0F69 /* FollowQRCode.swift in Sources */,
 				9833FFC429F5769700CC33F7 /* AccountTimerServiceProtocol.swift in Sources */,
+				985823C22B8511AC003E88B4 /* URLCache+imageCache.swift in Sources */,
 				98099DB92A287E340096AA27 /* SignUpStartWeekView.swift in Sources */,
 				98B21B4429D60D25004EFE0E /* FancyButton.swift in Sources */,
 				98B065172B4279FD009D0F69 /* AESCrypto.swift in Sources */,

@@ -15,7 +15,7 @@ struct ProfileImageView: View {
     var body: some View {
         Group {
             if let urlString = imageURL, let url = URL(string: urlString) {
-                CachedAsyncImage(url: url) { phase in
+                CachedAsyncImage(url: url, urlCache: .imageCache) { phase in
                     switch phase {
                     case .empty, .failure(_):
                         DefaultProfileImage(size: size)

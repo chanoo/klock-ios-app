@@ -44,9 +44,11 @@ struct MessageBubbleView: View {
                                 VStack(alignment: .leading) {
                                     if let imageURL = imageURL, imageURL.isEmpty == false {
                                         MessageBubbleImageView(imageURL: imageURL, size: .infinity)
-                                            .padding(.bottom, 8)
+                                            .padding(.bottom, content.isEmpty ? 0 : 8)
                                     }
-                                    Text(content)
+                                    if !content.isEmpty {
+                                        Text(content)
+                                    }
                                 }
                                 .padding(12)
                                 .background(FancyColor.chatBotBubbleMe.color)
@@ -78,9 +80,11 @@ struct MessageBubbleView: View {
                             VStack(alignment: .leading) {
                                 if let imageURL = imageURL, imageURL.isEmpty == false {
                                     MessageBubbleImageView(imageURL: imageURL, size: .infinity)
-                                        .padding(.bottom, 8)
+                                        .padding(.bottom, content.isEmpty ? 0 : 8)
                                 }
-                                Text(content)
+                                if !content.isEmpty {
+                                    Text(content)
+                                }
                             }
                             .padding(12)
                             .background(FancyColor.chatBotBubble.color)
@@ -130,25 +134,26 @@ struct ProfileImageWrapperView: View {
 struct MessageBubbleImageView: View {
     let imageURL: String?
     let size: CGFloat
+    let defaultImageSize: CGFloat = 100
 
     var body: some View {
         Group {
             if let urlString = imageURL, let url = URL(string: urlString) {
-                CachedAsyncImage(url: url) { phase in
+                CachedAsyncImage(url: url, urlCache: .imageCache) { phase in
                     switch phase {
                     case .empty, .failure(_):
-                        DefaultProfileImage(size: size)
+                        DefaultMessageBubbleImageView(size: defaultImageSize)
                     case .success(let image):
                         image
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .scaledToFit()
                     @unknown default:
-                        DefaultProfileImage(size: size)
+                        DefaultMessageBubbleImageView(size: defaultImageSize)
                     }
                 }
             } else {
-                DefaultProfileImage(size: size)
+                DefaultMessageBubbleImageView(size: defaultImageSize)
             }
         }
         .frame(maxWidth: size)
@@ -156,6 +161,25 @@ struct MessageBubbleImageView: View {
     }
 }
 
+struct DefaultMessageBubbleImageView: View {
+    let size: CGFloat
+
+    var body: some View {
+        VStack {
+            Spacer()
+            HStack {
+                Spacer()
+                Image("img_image_placeholder")
+                Spacer()
+            }
+            .frame(width: .infinity, height: .infinity)
+            Spacer()
+        }
+        .background(FancyColor.imagePlaceholder.color)
+        .aspectRatio(1, contentMode: .fit) // 너비에 맞춰 높이 조절
+        .frame(width: .infinity, height: .infinity)
+    }
+}
 
 struct MessageBubbleView_Previews: PreviewProvider {
     static var previews: some View {

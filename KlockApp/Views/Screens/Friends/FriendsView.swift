@@ -28,11 +28,11 @@ struct FriendsView: View {
                     Spacer() // Pushes content to the center vertically
 
                     VStack {
-                        Image("img_three_characters")
+                        Image("img_chat_characters")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 100, height: 79)
-                        Text("아직 함께 공부한 기록이 없네요!!\n공부를 시작해서 나를 성장시켜볼까요?")
+                        Text("친구와 함께 소통하며 공부할 수 있어요!\n지금 친구를 추가해볼까요?")
                             .multilineTextAlignment(.center)
                             .lineSpacing(6)
                             .foregroundColor(FancyColor.gray4.color)
@@ -83,8 +83,9 @@ struct FriendsView: View {
                     showingImagePicker: $imageViewModel.showingImagePicker,
                     onSend: { message in
                         let _selectedImage = imageViewModel.selectedImage?.resize(to: CGSize(width: 600, height: 600))
-                        let pngData = _selectedImage?.pngData()
-                        viewModel.addUserTrace(contents: message, image: pngData) // 실제 동작 정의
+                        viewModel.image = _selectedImage?.pngData()
+                        viewModel.contents = message
+                        viewModel.sendTapped.send()
                         imageViewModel.selectedImage = nil
                     }
                 )

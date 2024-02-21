@@ -71,7 +71,7 @@ enum FancyColor: String {
     case black = "color_black"
     case white = "color_white"
     case red = "color_red"
-
+    case imagePlaceholder = "color_image_placeholder"
     case launchBackground = "color_launch_background"
     case launchSymbol = "color_launch_symbol"
 

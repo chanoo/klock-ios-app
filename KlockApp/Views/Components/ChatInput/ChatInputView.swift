@@ -87,8 +87,7 @@ struct ChatInputView: View {
                 .padding(.top, 2)
 
                 Button(action: {
-                    print("send")
-                    if !text.isEmpty {
+                    if !text.isEmpty || selectedImage != nil {
                         onSend(text) // 버튼을 눌렀을 때 클로저 실행
                         text = ""
                     }
