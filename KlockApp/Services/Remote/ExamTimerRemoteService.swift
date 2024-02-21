@@ -42,7 +42,7 @@ class ExamTimerRemoteService: ExamTimerRemoteServiceProtocol, APIServiceProtocol
     func delete(id: Int64) -> AnyPublisher<Void, AFError> {
         let url = "\(baseURL)/\(id)"
 
-        return AF.request(url, method: .delete, headers: self.headers())
+        return session.request(url, method: .delete, headers: self.headers())
             .validate(statusCode: 200..<300)
             .publishData()
             .tryMap { dataResponse -> Void in

@@ -20,8 +20,8 @@ class FriendRelationService: FriendRelationServiceProtocol, APIServiceProtocol {
     
     func fetch() -> AnyPublisher<[FriendRelationFetchResDTO], Alamofire.AFError> {
         let url = "\(baseURL)"
-
-        return AF.request(url, method: .get, encoding: JSONEncoding.default)
+        
+        return session.request(url, method: .get, encoding: JSONEncoding.default, headers: self.headers())
             .validate()
             .publishDecodable(type: [FriendRelationFetchResDTO].self)
             .value()

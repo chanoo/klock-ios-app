@@ -25,7 +25,7 @@ class FocusTimerRemoteService: FocusTimerRemoteServiceProtocol, APIServiceProtoc
     func update(id: Int64, data: ReqFocusTimer) -> AnyPublisher<FocusTimerDTO, AFError> {
         let url = "\(baseURL)/\(id)"
 
-        return AF.request(url, method: .put, parameters: data, encoder: JSONParameterEncoder.default, headers: self.headers())
+        return session.request(url, method: .put, parameters: data, encoder: JSONParameterEncoder.default, headers: self.headers())
             .validate()
             .publishDecodable(type: FocusTimerDTO.self)
             .value()
@@ -35,7 +35,7 @@ class FocusTimerRemoteService: FocusTimerRemoteServiceProtocol, APIServiceProtoc
     func delete(id: Int64) -> AnyPublisher<Void, AFError> {
         let url = "\(baseURL)/\(id)"
 
-        return AF.request(url, method: .delete, headers: self.headers())
+        return session.request(url, method: .delete, headers: self.headers())
             .validate()
             .publishData()
             .tryMap { dataResponse -> Void in

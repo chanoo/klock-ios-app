@@ -32,7 +32,7 @@ class StudySessionRemoteService: StudySessionRemoteServiceProtocol, APIServicePr
     func update(id: Int64, data: ReqStudySession) -> AnyPublisher<ResStudySession, AFError> {
         let url = "\(baseURL)/\(id)"
 
-        return AF.request(url, method: .put, parameters: data, encoder: JSONParameterEncoder.default, headers: self.headers())
+        return session.request(url, method: .put, parameters: data, encoder: JSONParameterEncoder.default, headers: self.headers())
             .validate(statusCode: 200..<300)
             .publishDecodable(type: ResStudySession.self)
             .value()
@@ -42,7 +42,7 @@ class StudySessionRemoteService: StudySessionRemoteServiceProtocol, APIServicePr
     func fetch(userId: Int64, startDate: String, endDate: String) -> AnyPublisher<[GetStudySessionsResDTO], Alamofire.AFError> {
         let url = "\(baseURL)/period?userId=\(userId)&startDate=\(startDate)&endDate=\(endDate)"
 
-        return AF.request(url, method: .get, encoding: JSONEncoding.default, headers: self.headers())
+        return session.request(url, method: .get, encoding: JSONEncoding.default, headers: self.headers())
             .validate()
             .publishDecodable(type: [GetStudySessionsResDTO].self)
             .value()

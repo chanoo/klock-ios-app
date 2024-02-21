@@ -32,7 +32,7 @@ class PomodoroTimerRemoteService: PomodoroTimerRemoteServiceProtocol, APIService
     func update(id: Int64, data: ReqPomodoroTimer) -> AnyPublisher<PomodoroTimerDTO, AFError> {
         let url = "\(baseURL)/\(id)"
 
-        return AF.request(url, method: .put, parameters: data, encoder: JSONParameterEncoder.default, headers: self.headers())
+        return session.request(url, method: .put, parameters: data, encoder: JSONParameterEncoder.default, headers: self.headers())
             .validate()
             .publishDecodable(type: PomodoroTimerDTO.self)
             .value()
@@ -42,7 +42,7 @@ class PomodoroTimerRemoteService: PomodoroTimerRemoteServiceProtocol, APIService
     func delete(id: Int64) -> AnyPublisher<Void, AFError> {
         let url = "\(baseURL)/\(id)"
 
-        return AF.request(url, method: .delete, headers: self.headers())
+        return session.request(url, method: .delete, headers: self.headers())
             .validate()
             .publishData()
             .tryMap { dataResponse -> Void in
