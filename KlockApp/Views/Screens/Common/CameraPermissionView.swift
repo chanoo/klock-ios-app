@@ -51,6 +51,7 @@ struct CameraPermissionView: View {
         }
         .withoutAnimation()
         .frame(width: .infinity, height: .infinity)
+        .navigationBarTitle("앱 권한")
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(
             leading: BackButtonView()

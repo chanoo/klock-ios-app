@@ -16,7 +16,7 @@ class UserTraceRemoteService: UserTraceRemoteServiceProtocol, APIServiceProtocol
     private let session: Session
 
     init() {
-        session = Session(eventMonitors: [logger])
+        session = Session(eventMonitors: [])
     }
     
     func fetch(page: Int, size: Int? = 10) -> AnyPublisher<[UserTraceResDTO], Alamofire.AFError> {

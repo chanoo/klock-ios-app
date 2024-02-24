@@ -37,6 +37,22 @@ struct ProfileImageView: View {
     }
 }
 
+struct ProfileImageWrapperView: View {
+    var profileImageURL: String?
+    var profileImageSize: CGFloat = 44
+
+    var body: some View {
+        if let url = profileImageURL, url.starts(with: "http") {
+            ProfileImageView(imageURL: url, size: profileImageSize)
+        } else if let imageName = profileImageURL {
+            Image(imageName)
+                .cornerRadius(22.0)
+        } else {
+            DefaultProfileImage(size: profileImageSize)
+        }
+    }
+}
+
 struct DefaultProfileImage: View {
     let size: CGFloat
 

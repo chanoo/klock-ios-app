@@ -19,33 +19,31 @@ struct FancyTabView: View {
     }
 
     var body: some View {
-        GeometryReader { geometry in
-            VStack(spacing: 0) {
-                items[selection].content
-                    .frame(height: .infinity) // 추가
-                
-                ZStack {
+        VStack(spacing: 0) {
+            items[selection].content
+                .frame(height: .infinity)
+            
+            ZStack {
+                HStack(spacing: 0) {
                     HStack(spacing: 0) {
-                        HStack(spacing: 0) {
-                            ForEach(0..<items.count, id: \.self) { index in
-                                Button(action: {
-                                    triggerHapticFeedback() // 햅틱 피드백을 트리거하는 함수 호출
-                                    selection = index
-                                }) {
-                                    FancyTabItem(selectedImageName: items[index].selectedImageName,
-                                                 deselectedImageName: items[index].deselectedImageName,
-                                                 isSelected: selection == index)
-                                }
+                        ForEach(0..<items.count, id: \.self) { index in
+                            Button(action: {
+                                triggerHapticFeedback() // 햅틱 피드백을 트리거하는 함수 호출
+                                selection = index
+                            }) {
+                                FancyTabItem(selectedImageName: items[index].selectedImageName,
+                                             deselectedImageName: items[index].deselectedImageName,
+                                             isSelected: selection == index)
                             }
                         }
-                        .padding(.horizontal)
-                        .background(FancyColor.tabbarBackground.color)
-                        .frame(height: tabBarManager.isTabBarVisible ? 60 : 0)
                     }
-                    .offset(y: tabBarManager.isTabBarVisible ? 0 : 100)
-                    .opacity(tabBarManager.isTabBarVisible ? 1.0 : 0)
-                    .animation(.easeInOut(duration: 0.2), value: tabBarManager.isTabBarVisible)
+                    .padding(.horizontal)
+                    .background(FancyColor.tabbarBackground.color)
+                    .frame(height: tabBarManager.isTabBarVisible ? 60 : 0)
                 }
+                .offset(y: tabBarManager.isTabBarVisible ? 0 : 100)
+                .opacity(tabBarManager.isTabBarVisible ? 1.0 : 0)
+                .animation(.easeInOut(duration: 0.2), value: tabBarManager.isTabBarVisible)
             }
         }
     }

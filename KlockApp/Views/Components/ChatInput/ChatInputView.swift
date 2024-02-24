@@ -15,11 +15,13 @@ struct ChatInputView: View {
     @Binding var dynamicHeight: CGFloat
     @Binding var isPreparingResponse: Bool
     @Binding var selectedImage: UIImage?
-    @Binding var isShowCemeraPermissionView: Bool
+    @Binding var cameraPermissionGranted: Bool
     @Binding var showingImagePicker: Bool
-    @Binding var isLoading: Bool
+    @Binding var isSendMessage: Bool
     let onSend: (String) -> Void // 클로저 추가
     let maxHeight: CGFloat = 70 // 최대 높이 (1줄당 대략 20~25 정도를 예상하고 세팅)
+
+    @State var isShowCemeraPermissionView: Bool = false
 
     var body: some View {
         VStack(spacing: 0) {
@@ -38,23 +40,7 @@ struct ChatInputView: View {
             }
 
             HStack(alignment: .bottom, spacing: 0) {
-                if isShowCemeraPermissionView {
-                    NavigationLink(
-                        destination: CameraPermissionView(),
-                        isActive: $isShowCemeraPermissionView)
-                    {
-                        Button {
-                            isShowCemeraPermissionView = true
-                        } label: {
-                            Image("ic_picture")
-                                .foregroundColor(FancyColor.chatBotUploadButton.color)
-                                .padding(10)
-                        }
-                        .frame(width: 30, height: 30)
-                        .padding(.trailing, 12)
-                        .padding(.bottom, 4)
-                    }
-                } else {
+                if cameraPermissionGranted {
                     Button(action: {
                         DispatchQueue.main.async {
                             self.showingImagePicker = true
@@ -69,6 +55,22 @@ struct ChatInputView: View {
                     .padding(.bottom, 4)
                     .sheet(isPresented: $showingImagePicker) {
                         YPImagePickerView(showingImagePicker: $showingImagePicker, selectedImage: $selectedImage)
+                    }
+                } else {
+                    NavigationLink(
+                        destination: CameraPermissionView(),
+                        isActive: $isShowCemeraPermissionView)
+                    {
+                        Button {
+                            isShowCemeraPermissionView = true
+                        } label: {
+                            Image("ic_picture")
+                                .foregroundColor(FancyColor.chatBotUploadButton.color)
+                                .padding(10)
+                        }
+                        .frame(width: 30, height: 30)
+                        .padding(.trailing, 12)
+                        .padding(.bottom, 4)
                     }
                 }
                 
@@ -89,13 +91,15 @@ struct ChatInputView: View {
                 .padding(.top, 2)
 
                 Button(action: {
-                    if !isLoading && (!text.isEmpty || selectedImage != nil) {
+                    if !isSendMessage && (!text.isEmpty || selectedImage != nil) {
                         onSend(text) // 버튼을 눌렀을 때 클로저 실행
+                        withAnimation(Animation.linear(duration: 0.2)) {
+                            dynamicHeight = 36
+                        }
                         text = ""
-                        
                     }
                 }) {
-                    if isLoading {
+                    if isSendMessage {
                         if colorScheme == .dark {
                             LottieView(name: "lottie-circle-loading-dark", speed: 1.0)
                                 .frame(width: 42, height: 42)
@@ -169,9 +173,9 @@ struct ChatInputView_Previews: PreviewProvider {
                 dynamicHeight: .constant(36),
                 isPreparingResponse: .constant(false),
                 selectedImage: .constant(UIImage(named: "ic_picture")),
-                isShowCemeraPermissionView: .constant(false),
+                cameraPermissionGranted: .constant(false),
                 showingImagePicker: .constant(false),
-                isLoading: .constant(false),
+                isSendMessage: .constant(false),
                 onSend: { _ in })
                 .padding(.bottom, 0)
         }

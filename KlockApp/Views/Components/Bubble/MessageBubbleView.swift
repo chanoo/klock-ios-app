@@ -17,167 +17,42 @@ struct MessageBubbleView: View {
     var content: String
     var imageURL: String?
     var date: String?
+    let onDelete: () -> Void
 
     var body: some View {
-        VStack(spacing: 0) {
-            HStack(alignment: .top, spacing: 8) {
-                if me {
-                    if userTraceType == .studyStart {
-                        if let date = date {
-                            ProfileImageWrapperView(profileImageURL: profileImageURL)
-                            AlarmBubbleView(nickname: nickname, content: content, date: date, showIcon: true)
-                        }
-                    } else if userTraceType == .studyEnd {
-                        if let date = date {
-                            ProfileImageWrapperView(profileImageURL: profileImageURL)
-                            AlarmBubbleView(nickname: nickname, content: content, date: date, showIcon: false)
-                        }
-                    } else {
+        HStack(alignment: .top, spacing: 0) {
+            if me {
+                if userTraceType == .studyStart {
+                    if let date = date {
                         ProfileImageWrapperView(profileImageURL: profileImageURL)
-                        VStack(alignment: .leading, spacing: 0) {
-                            Text(nickname)
-                                .fontWeight(.semibold)
-                                .font(.system(size: 13))
-                                .foregroundColor(FancyColor.chatBotBubbleNickname.color)
-                                .padding(.bottom, 4)
-                            HStack(alignment: .bottom) {
-                                VStack(alignment: .leading) {
-                                    if let imageURL = imageURL, imageURL.isEmpty == false {
-                                        MessageBubbleImageView(imageURL: imageURL, size: .infinity)
-                                            .padding(.bottom, content.isEmpty ? 0 : 8)
-                                    }
-                                    if !content.isEmpty {
-                                        Text(content)
-                                    }
-                                }
-                                .padding(12)
-                                .background(FancyColor.chatBotBubbleMe.color)
-                                .clipShape(RoundedCorners(tl: 0, tr: 10, bl: 10, br: 10))
-                                .foregroundColor(FancyColor.chatbotBubbleTextMe.color)
-                                if let date = date {
-                                    Text(date)
-                                        .font(.system(size: 11))
-                                        .foregroundColor(FancyColor.subtext.color)
-                                }
-                            }
-                        }
-                        Spacer()
+                            .padding(.trailing, 8)
+                        AlarmBubbleView(nickname: nickname, content: content, date: date, showIcon: true)
+                    }
+                } else if userTraceType == .studyEnd {
+                    if let date = date {
+                        ProfileImageWrapperView(profileImageURL: profileImageURL)
+                            .padding(.trailing, 8)
+                        AlarmBubbleView(nickname: nickname, content: content, date: date, showIcon: false)
                     }
                 } else {
-                    Spacer()
-                    VStack(alignment: .trailing, spacing: 0) {
-                        Text(nickname)
-                            .fontWeight(.semibold)
-                            .font(.system(size: 13))
-                            .foregroundColor(FancyColor.chatBotBubbleNickname.color)
-                            .padding(.bottom, 4)
-                        HStack(alignment: .bottom) {
-                            if let date = date {
-                                Text(date)
-                                    .font(.system(size: 11))
-                                    .foregroundColor(FancyColor.subtext.color)
-                            }
-                            VStack(alignment: .leading) {
-                                if let imageURL = imageURL, imageURL.isEmpty == false {
-                                    MessageBubbleImageView(imageURL: imageURL, size: .infinity)
-                                        .padding(.bottom, content.isEmpty ? 0 : 8)
-                                }
-                                if !content.isEmpty {
-                                    Text(content)
-                                }
-                            }
-                            .padding(12)
-                            .background(FancyColor.chatBotBubble.color)
-                            .clipShape(RoundedCorners(tl: 10, tr: 0, bl: 10, br: 10))
-                            .foregroundColor(FancyColor.chatbotBubbleText.color)
-                        }
-                    }
-                    if let url = profileImageURL, url.starts(with: "http") {
-                        ProfileImageView(imageURL: url, size: profileImageSize)
-                            .padding(.trailing, 8)
-                    } else if let imageName = profileImageURL {
-                        Image(imageName)
-                            .cornerRadius(22.0)
-                            .padding(.trailing, 8)
-                    } else {
-                        DefaultProfileImage(size: profileImageSize)
-                    }
-                }
-            }
-            .padding(.top, 4)
-            .padding(.bottom, 4)
-            .padding(.leading, me ? 8 : 16)
-            .padding(.trailing, me ? 16 : 8)
-        }
-        .rotationEffect(.degrees(180), anchor: .center) // VStack을 180도 회전
-    }
-}
-
-struct ProfileImageWrapperView: View {
-    var profileImageURL: String?
-    var profileImageSize: CGFloat = 44
-
-    var body: some View {
-        if let url = profileImageURL, url.starts(with: "http") {
-            ProfileImageView(imageURL: url, size: profileImageSize)
-                .padding(.trailing, 8)
-        } else if let imageName = profileImageURL {
-            Image(imageName)
-                .cornerRadius(22.0)
-                .padding(.trailing, 8)
-        } else {
-            DefaultProfileImage(size: profileImageSize)
-        }
-    }
-}
-
-struct MessageBubbleImageView: View {
-    let imageURL: String?
-    let size: CGFloat
-    let defaultImageSize: CGFloat = 100
-
-    var body: some View {
-        Group {
-            if let urlString = imageURL, let url = URL(string: urlString) {
-                CachedAsyncImage(url: url, urlCache: .imageCache) { phase in
-                    switch phase {
-                    case .empty, .failure(_):
-                        DefaultMessageBubbleImageView(size: defaultImageSize)
-                    case .success(let image):
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .scaledToFit()
-                    @unknown default:
-                        DefaultMessageBubbleImageView(size: defaultImageSize)
+                    ProfileImageWrapperView(profileImageURL: profileImageURL)
+                        .padding(.trailing, 8)
+                    MessageLeftBubbleView(nickname: nickname, content: content, imageURL: imageURL, date: date) {
+                        onDelete()
                     }
                 }
             } else {
-                DefaultMessageBubbleImageView(size: defaultImageSize)
+                MessageRightBubbleView(nickname: nickname, content: content, imageURL: imageURL, date: date) {
+                    onDelete()
+                }
+                ProfileImageWrapperView(profileImageURL: profileImageURL)
+                    .padding(.leading, 8)
             }
         }
-        .frame(maxWidth: size)
-        .cornerRadius(6) // 모서리를 둥글게 처리
-    }
-}
-
-struct DefaultMessageBubbleImageView: View {
-    let size: CGFloat
-
-    var body: some View {
-        VStack {
-            Spacer()
-            HStack {
-                Spacer()
-                Image("img_image_placeholder")
-                Spacer()
-            }
-            .frame(width: .infinity, height: .infinity)
-            Spacer()
-        }
-        .background(FancyColor.imagePlaceholder.color)
-        .aspectRatio(1, contentMode: .fit) // 너비에 맞춰 높이 조절
-        .frame(width: .infinity, height: .infinity)
+        .padding(.top, 4)
+        .padding(.bottom, 4)
+        .padding(.leading, me ? 8 : 16)
+        .padding(.trailing, me ? 16 : 8)
     }
 }
 
@@ -187,10 +62,10 @@ struct MessageBubbleView_Previews: PreviewProvider {
             ScrollView(showsIndicators: false) { // 스크롤바 숨김
                 ScrollViewReader { _ in
                     LazyVStack {
-                        MessageBubbleView(me: true, nickname: "뀨쳐돌이", userTraceType: .activity, content: "영단어 교재 새로 나온 거 서점에서 구입함📚 군데 이거 열어보니까 문제들이 다 어렵기는하더라 ㅠㅜ 내가 이거 풀 수 있을까...???", date: "30초 전")
-                        MessageBubbleView(me: false, nickname: "차누", userTraceType: .activity, content: "와 진짜 열심히 한다! 우리모두 열심히 하자꾸나!", date: "43초 전")
-                        MessageBubbleView(me: true, nickname: "뀨쳐돌이", userTraceType: .activity, content: "영단어 교재 새로 나온 거 서점에서 구입함📚 군데 이거 열어보니까 문제들이 다 어렵기는하더라 ㅠㅜ 내가 이거 풀 수 있을까...???", imageURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoXU4XsmoPnfSayFM7KDpN04SRCzkj_jT9jQ", date: "30초 전")
-                        MessageBubbleView(me: false, nickname: "진우", userTraceType: .activity, content: "와 진짜 열심히 한다! 우리모두 열심히 하자꾸나!", imageURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKE6araToPNj5OvHYkkI7QIxhNU2qkhDMguA&usqp=CAU", date: "10시 30분 22초")
+                        MessageBubbleView(me: true, nickname: "뀨쳐돌이", userTraceType: .activity, content: "영단어 교재 새로 나온 거 서점에서 구입함📚 군데 이거 열어보니까 문제들이 다 어렵기는하더라 ㅠㅜ 내가 이거 풀 수 있을까...???", date: "30초 전", onDelete: {})
+                        MessageBubbleView(me: false, nickname: "차누", userTraceType: .activity, content: "와 진짜 열심히 한다! 우리모두 열심히 하자꾸나!", date: "43초 전", onDelete: {})
+                        MessageBubbleView(me: true, nickname: "뀨쳐돌이", userTraceType: .activity, content: "영단어 교재 새로 나온 거 서점에서 구입함📚 군데 이거 열어보니까 문제들이 다 어렵기는하더라 ㅠㅜ 내가 이거 풀 수 있을까...???", imageURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoXU4XsmoPnfSayFM7KDpN04SRCzkj_jT9jQ", date: "30초 전", onDelete: {})
+                        MessageBubbleView(me: false, nickname: "진우", userTraceType: .activity, content: "와 진짜 열심히 한다! 우리모두 열심히 하자꾸나!", imageURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKE6araToPNj5OvHYkkI7QIxhNU2qkhDMguA&usqp=CAU", date: "10시 30분 22초", onDelete: {})
                     }
                 }
             }

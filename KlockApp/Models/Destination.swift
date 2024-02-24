@@ -15,4 +15,5 @@ enum Destination {
     case signUpProfileImage
     case splash
     case editProfile
+    case cameraPermission
 }

@@ -18,4 +18,10 @@ extension View {
             .background(Color.clear) // 배경은 선택적으로 설정할 수 있습니다.
             .edgesIgnoringSafeArea(.all)
     }
+    
+    func upsideDown() -> some View {
+        self
+            .rotationEffect(Angle(radians: .pi))
+            .scaleEffect(x: -1, y: 1, anchor: .center)
+    }
 }

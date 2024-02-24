@@ -43,7 +43,8 @@ struct ChatBotChatView: View {
                                 nickname: chatBot.name,
                                 userTraceType: .activity,
                                 profileImageURL: chatBot.chatBotImageUrl,
-                                content: tempMessage.content)
+                                content: tempMessage.content,
+                                onDelete: {})
                         }
                         ForEach(viewModel.messages[chatBot.id, default: []].reversed()) { messageModel in
                             MessageBubbleView(
@@ -51,7 +52,8 @@ struct ChatBotChatView: View {
                                 nickname: messageModel.isUser ? viewModel.userModel?.nickname ?? "" : chatBot.name,
                                 userTraceType: .activity,
                                 profileImageURL: messageModel.isUser ? viewModel.userModel?.profileImage : chatBot.chatBotImageUrl,
-                                content: messageModel.content)
+                                content: messageModel.content,
+                                onDelete: {})
                         }
                     }
                 }
