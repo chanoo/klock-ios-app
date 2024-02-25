@@ -132,4 +132,29 @@ class UserRemoteService: UserRemoteServiceProtocol, APIServiceProtocol {
             }
         }.eraseToAnyPublisher()
     }
+    
+    func searchBy(nickname: String) -> AnyPublisher<SearchByNicknameResDTO, Alamofire.AFError> {
+        let url = "\(baseURL)/search-by-nickname"
+        let requestDTO = SearchByNicknameReqDTO(nickname: nickname)
+        
+        return session.request(url, method: .post, parameters: requestDTO.dictionary, encoding: JSONEncoding.default, headers: self.headers())
+            .validate()
+            .publishDecodable(type: SearchByNicknameResDTO.self)
+            .tryMap { result -> SearchByNicknameResDTO in
+                switch result.result {
+                case .success(let response):
+                    return response
+                case .failure(let error):
+                    if let data = result.data {
+                        let decoder = JSONDecoder()
+                        if let errorResponse = try? decoder.decode(APIErrorModel.self, from: data) {
+                            print("Server error message: \(errorResponse.error)")
+                        }
+                    }
+                    throw error
+                }
+            }
+            .mapError { $0 as! AFError }
+            .eraseToAnyPublisher()
+    }
 }

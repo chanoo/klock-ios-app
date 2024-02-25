@@ -26,7 +26,7 @@ class UserTraceRemoteServiceTests: XCTestCase {
     func testFetchUserTraces() {
         let expectation = XCTestExpectation(description: "Fetch User Traces")
 
-        sut.fetch()
+        sut.fetch(page: 0)
             .sink(receiveCompletion: { result in
                 switch result {
                 case .failure(let error):

@@ -36,6 +36,16 @@ struct ProfileImageReqDTO: Codable {
     let file: Data
 }
 
+struct SearchByNicknameReqDTO: Codable {
+    let nickname: String
+}
+
+struct SearchByNicknameResDTO: Codable {
+    let id: Int64
+    let nickname: String
+    let profileImage: String
+}
+
 struct ProfileImageResDTO: Codable {
     let id: Int64
     let nickname: String
