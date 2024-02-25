@@ -22,31 +22,27 @@ struct MessageBubbleView: View {
     var body: some View {
         HStack(alignment: .top, spacing: 0) {
             if me {
+                Spacer()
                 if userTraceType == .studyStart {
                     if let date = date {
-                        ProfileImageWrapperView(profileImageURL: profileImageURL)
-                            .padding(.trailing, 8)
                         AlarmBubbleView(nickname: nickname, content: content, date: date, showIcon: true)
                     }
                 } else if userTraceType == .studyEnd {
                     if let date = date {
-                        ProfileImageWrapperView(profileImageURL: profileImageURL)
-                            .padding(.trailing, 8)
                         AlarmBubbleView(nickname: nickname, content: content, date: date, showIcon: false)
                     }
                 } else {
-                    ProfileImageWrapperView(profileImageURL: profileImageURL)
-                        .padding(.trailing, 8)
-                    MessageLeftBubbleView(nickname: nickname, content: content, imageURL: imageURL, date: date) {
+                    MessageRightBubbleView(nickname: nickname, content: content, imageURL: imageURL, date: date) {
                         onDelete()
                     }
                 }
             } else {
-                MessageRightBubbleView(nickname: nickname, content: content, imageURL: imageURL, date: date) {
+                ProfileImageWrapperView(profileImageURL: profileImageURL)
+                    .padding(.trailing, 8)
+                MessageLeftBubbleView(nickname: nickname, content: content, imageURL: imageURL, date: date) {
                     onDelete()
                 }
-                ProfileImageWrapperView(profileImageURL: profileImageURL)
-                    .padding(.leading, 8)
+                Spacer()
             }
         }
         .padding(.top, 4)

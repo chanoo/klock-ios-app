@@ -21,7 +21,7 @@ struct ChatBotChatView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            ScrollView(showsIndicators: false) { // 스크롤바 숨김
+            ScrollView { // 스크롤바 숨김
                 ScrollViewReader { _ in
                     LazyVStack {
                         if viewModel.isPreparingResponse && viewModel.tempMessage == nil {
@@ -45,6 +45,7 @@ struct ChatBotChatView: View {
                                 profileImageURL: chatBot.chatBotImageUrl,
                                 content: tempMessage.content,
                                 onDelete: {})
+                            .upsideDown()
                         }
                         ForEach(viewModel.messages[chatBot.id, default: []].reversed()) { messageModel in
                             MessageBubbleView(
@@ -54,11 +55,12 @@ struct ChatBotChatView: View {
                                 profileImageURL: messageModel.isUser ? viewModel.userModel?.profileImage : chatBot.chatBotImageUrl,
                                 content: messageModel.content,
                                 onDelete: {})
+                            .upsideDown()
                         }
                     }
                 }
             }
-            .rotationEffect(.degrees(180), anchor: .center)
+            .upsideDown()
 
             // ChatGPTView의 body 내에서 HStack 부분
             HStack(spacing: 0) {

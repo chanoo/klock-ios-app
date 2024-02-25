@@ -15,13 +15,7 @@ struct MessageRightBubbleView: View {
     var onDelete: () -> Void
     
     var body: some View {
-        Spacer()
         VStack(alignment: .trailing, spacing: 0) {
-            Text(nickname)
-                .fontWeight(.semibold)
-                .font(.system(size: 13))
-                .foregroundColor(FancyColor.chatBotBubbleNickname.color)
-                .padding(.bottom, 4)
             HStack(alignment: .bottom) {
                 if let date = date {
                     Text(date)
@@ -57,7 +51,6 @@ struct MessageRightBubbleView: View {
                 }
             }
         }
-
     }
 }
 

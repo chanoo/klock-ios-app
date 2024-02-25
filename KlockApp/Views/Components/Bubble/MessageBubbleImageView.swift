@@ -11,7 +11,6 @@ import CachedAsyncImage
 struct MessageBubbleImageView: View {
     let imageURL: String?
     let size: CGFloat
-    let defaultImageSize: CGFloat = 100
 
     var body: some View {
         Group {
@@ -19,17 +18,17 @@ struct MessageBubbleImageView: View {
                 CachedAsyncImage(url: url, urlCache: .imageCache) { phase in
                     switch phase {
                     case .empty, .failure(_):
-                        DefaultMessageBubbleImageView(size: defaultImageSize)
+                        DefaultMessageBubbleImageView()
                     case .success(let image):
                         image
                             .resizable()
-                            .aspectRatio(contentMode: .fill)
+                            .aspectRatio(contentMode: .fit)
                     @unknown default:
-                        DefaultMessageBubbleImageView(size: defaultImageSize)
+                        DefaultMessageBubbleImageView()
                     }
                 }
             } else {
-                DefaultMessageBubbleImageView(size: defaultImageSize)
+                DefaultMessageBubbleImageView()
             }
         }
         .frame(maxWidth: size)
@@ -38,8 +37,6 @@ struct MessageBubbleImageView: View {
 }
 
 struct DefaultMessageBubbleImageView: View {
-    let size: CGFloat
-
     var body: some View {
         VStack {
             Spacer()

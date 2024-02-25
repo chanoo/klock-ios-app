@@ -16,39 +16,34 @@ struct AlarmBubbleView: View {
 
     var body: some View {
         HStack {
-            contentStack
             Spacer()
+            contentStack
         }
     }
 
     private var contentStack: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            Text(nickname)
-                .fontWeight(.semibold)
-                .font(.system(size: 13))
-                .foregroundColor(FancyColor.chatBotBubbleNickname.color)
-                .padding(.bottom, 4)
+        VStack(alignment: .trailing, spacing: 0) {
             HStack(alignment: .bottom, spacing: 0) {
+                Text(date)
+                    .font(.system(size: 11))
+                    .foregroundColor(FancyColor.subtext.color)
+                    .padding(.trailing, 8)
                 HStack {
-                    iconView
                     Text(content)
                         .bold()
                         .foregroundColor(FancyColor.text.color)
-                        .padding(.leading, showIcon == true ? 0 : 14)
-                        .padding(.trailing, 14)
+                        .padding(.trailing, showIcon == true ? 0 : 14)
+                        .padding(.leading, 14)
+                    iconView
                 }
                 .padding(.vertical, showIcon == true ? 0 : 14)
                 .padding(.horizontal, 0)
                 .background(FancyColor.bubbleAlram.color)
                 .overlay(
-                    RoundedCorners(tl: 0, tr: 10, bl: 10, br: 10)
+                    RoundedCorners(tl: 10, tr: 0, bl: 10, br: 10)
                         .stroke(colorScheme == .dark ? FancyColor.gray8.color : FancyColor.gray3.color, lineWidth: 2) // 테두리 색상과 두께 지정
                 )
-                .clipShape(RoundedCorners(tl: 0, tr: 10, bl: 10, br: 10))
-                Text(date)
-                    .font(.system(size: 11))
-                    .foregroundColor(FancyColor.subtext.color)
-                    .padding(.leading, 8)
+                .clipShape(RoundedCorners(tl: 10, tr: 0, bl: 10, br: 10))
             }
         }
     }

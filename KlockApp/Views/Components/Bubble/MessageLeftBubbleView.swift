@@ -58,7 +58,6 @@ struct MessageLeftBubbleView: View {
                 }
             }
         }
-        Spacer()
     }
 }
 
