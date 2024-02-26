@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct FriendAddByNicknameView: View {
-    @EnvironmentObject var viewModel: FriendAddViewModel // 환경 객체로 타이머 뷰 모델을 가져옵니다.
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @Environment(\.dismiss) var dismiss
+
+    @StateObject private var viewModel = Container.shared.resolve(FriendAddViewModel.self)
 
     var body: some View {
         NavigationView {
@@ -29,7 +31,8 @@ struct FriendAddByNicknameView: View {
                     FancyTextField(
                         placeholder: "친구의 닉네임을 입력해주세요",
                         text: $viewModel.nickname,
-                        isValid: viewModel.isStartOfWeekNextButtonEnabled,
+                        isValid: viewModel.isStartOfWeekNextButtonDisabled,
+                        error: $viewModel.error,
                         firstResponder: $viewModel.becomeFirstResponder
                     )
                     .padding(.top, 40)
@@ -42,12 +45,9 @@ struct FriendAddByNicknameView: View {
                             FancyButton(
                                 title: "다음",
                                 action: {
-                                    DispatchQueue.main.async {
-                                        viewModel.becomeFirstResponder = false
-                                        viewModel.isNavigatingToNextView = true
-                                    }
+                                    viewModel.addFriendButtonTapped.send()
                                 },
-                                disabled: .constant(!viewModel.isStartOfWeekNextButtonEnabled),
+                                disabled: $viewModel.isStartOfWeekNextButtonDisabled,
                                 style: .constant(.button)
                             )
                     }
@@ -56,10 +56,12 @@ struct FriendAddByNicknameView: View {
                 HStack(spacing: 0) {
                     Spacer()
                     Button(action: {
-                        viewModel.isNavigatingToNextView = true
+                        dismiss()
                     }) {
                         Image("ic_xmark")
+                            .resizable()
                     }
+                    .frame(width: 24, height: 24)
                 }
             }
             .padding(30)

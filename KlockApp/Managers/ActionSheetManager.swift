@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 class ActionSheetManager: ObservableObject {
     @Published var isPresented = false
@@ -16,6 +17,13 @@ class ActionSheetManager: ObservableObject {
     }
     
     func hide() {
-        isPresented = false
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let rootViewController = windowScene.windows.first(where: { $0.isKeyWindow })?.rootViewController {
+            var topController = rootViewController
+            while let presentedViewController = topController.presentedViewController {
+                topController = presentedViewController
+            }
+            topController.dismiss(animated: true)
+        }
     }
 }

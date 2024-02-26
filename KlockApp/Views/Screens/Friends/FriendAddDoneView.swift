@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct FriendAddDoneView: View {
+    @EnvironmentObject var actionSheetManager: ActionSheetManager
     @EnvironmentObject var viewModel: FriendAddViewModel // 환경 객체로 타이머 뷰 모델을 가져옵니다.
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @Environment(\.dismiss) var dismiss
 
     var body: some View {
         ZStack(alignment: .top) {
@@ -35,11 +37,15 @@ struct FriendAddDoneView: View {
 
                 ZStack(alignment: .center) {
                     LottieView(name: "lottie-confetti", currentFrame: 50)
-                    Image("ic_img_logo")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 120, height: 120)
-                    Text("뀨처돌이")
+                    if let profileImageUrl = viewModel.friendUser?.profileImage {
+                        ProfileImageView(imageURL: profileImageUrl, size: 150)
+                    } else {
+                        Image("ic_img_logo")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 150, height: 150)
+                    }
+                    Text(viewModel.friendUser?.nickname ?? "")
                         .padding(.top, 200)
                         .font(.system(size: 22, weight: .semibold))
                     
@@ -50,10 +56,11 @@ struct FriendAddDoneView: View {
                 Spacer()
                 
                 FancyButton(title: "친구 프로필 보러가기", action: {
-                    viewModel.activeSheet = Optional.none
+                    viewModel.activeSheet = nil
                 }, style: .constant(.button))
                     .padding(.top, 30)
                 FancyButton(title: "계속 친구 추가", action: {
+                    self.viewModel.nickname = ""
                     self.presentationMode.wrappedValue.dismiss()
                 }, style: .constant(.outline))
                 .padding(.top, 12)
@@ -62,15 +69,20 @@ struct FriendAddDoneView: View {
             HStack(spacing: 0) {
                 Spacer()
                 Button(action: {
-                    viewModel.activeSheet = Optional.none
+                    actionSheetManager.hide()
                 }) {
                     Image("ic_xmark")
+                        .resizable()
                 }
+                .frame(width: 24, height: 24)
             }
         }
          .padding(30)
         .frame(width: .infinity, height: .infinity)
         .navigationBarHidden(true)
+        .onDisappear {
+            viewModel.isNavigatingToNextView = false
+        }
     }
 }
 

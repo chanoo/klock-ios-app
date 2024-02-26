@@ -27,22 +27,30 @@ class FriendAddViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     ]
     @Published var scanResult: ScanResult?
     @Published var activeView: ActiveView = .scanQRCode
-    @Published var activeSheet: SheetType? = Optional.none
-    @Published var isPresented = false
+    @Published var activeSheet: SheetType?
     @Published var nickname: String
+    @Published var error: String?
     @Published var becomeFirstResponder: Bool = false
-    @Published var isStartOfWeekNextButtonEnabled = false
+    @Published var isStartOfWeekNextButtonDisabled: Bool? = true
     @Published var isNavigatingToNextView = false
+    @Published var friendUser: SearchByNicknameResDTO?
 
 //    let beaconManager = BeaconManager()
 
+    private let userModel = UserModel.load()
     private let context = CIContext()
     private let filter = CIFilter.qrCodeGenerator()
     
     @Published var qrCodeImage: UIImage?
     @Published var centerImage: UIImage?
+    
+    let addFriendButtonTapped = PassthroughSubject<Void, Never>()
 
     var isStartOfWeekNextButtonEnabledCancellable: AnyCancellable?
+
+    private let userRemoteService = Container.shared.resolve(UserRemoteServiceProtocol.self)
+    private var cancellables = Set<AnyCancellable>()
+    private var searchCancellable: AnyCancellable?
 
     override init() {
         locationManager = CLLocationManager()
@@ -51,15 +59,60 @@ class FriendAddViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
         nickname = ""
         super.init()
         locationManager.delegate = self
-        setupIsNextButtonEnabled()
+        setupNicknameSearch()
+        setupAddFriendButtonTapped()
     }
     
-    private func setupIsNextButtonEnabled() {
-        isStartOfWeekNextButtonEnabledCancellable = $nickname
-            .map { $0.count >= 2 }
-            .assign(to: \.isStartOfWeekNextButtonEnabled, on: self)
+    private func setupNicknameSearch() {
+        $nickname
+            .removeDuplicates() // 연속된 중복 값 필터링
+            .debounce(for: .seconds(0.5), scheduler: RunLoop.main) // 사용자 입력 후 0.5초 대기
+            .sink { [weak self] nickname in
+                guard let self = self else { return }
+                self.error = nil
+                self.isStartOfWeekNextButtonDisabled = true
+                if nickname == self.userModel?.nickname {
+                    self.error = "나를 친구로 추가할 수 없어요"
+                    return
+                }
+                self.searchNickname(nickname)
+            }
+            .store(in: &cancellables)
     }
+    
+    private func searchNickname(_ nickname: String) {
+        // 이전 요청이 있다면 취소합니다.
+        searchCancellable?.cancel()
 
+        // 닉네임 검색 로직 구현, 예시로 userRemoteService 사용
+        searchCancellable = userRemoteService.searchBy(nickname: nickname)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .failure(let error):
+                    print(error) // 에러 처리
+                    self.error = "이 닉네임을 가진 친구가 없어요"
+                    break
+                case .finished:
+                    break
+                }
+            }, receiveValue: { [weak self] response in
+                // 검색 결과에 따른 처리, 예시로 검색 결과가 있을 때만 isNavigatingToNextView 활성화
+                self?.friendUser = response
+                self?.isStartOfWeekNextButtonDisabled = response.nickname.isEmpty
+            })
+    }
+    
+    private func setupAddFriendButtonTapped() {
+        addFriendButtonTapped
+            .sink { [weak self] _ in
+                DispatchQueue.main.async {
+                    self?.becomeFirstResponder = false
+                    self?.isNavigatingToNextView = true
+                }
+            }
+            .store(in: &cancellables)
+    }
+    
     func updateScanResult(_ result: ScanResult) {
         scanResult = result
     }
@@ -73,7 +126,6 @@ class FriendAddViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
         locationManager.stopRangingBeacons(satisfying: beaconIdentityConstraint)
     }
 
-    @available(iOS 13.0, *)
     func locationManager(_ manager: CLLocationManager,
                          didRange beacons: [CLBeacon],
                          satisfying beaconConstraint: CLBeaconIdentityConstraint) {

@@ -9,7 +9,6 @@ enum SheetType: Identifiable {
     case qrcode
     case nickname
     case nearby
-    case none
     
     var id: Int {
         switch self {
@@ -19,8 +18,6 @@ enum SheetType: Identifiable {
             return 2
         case .nearby:
             return 3
-        case .none:
-            return 4
         }
     }
 }

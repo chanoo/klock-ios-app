@@ -11,7 +11,7 @@ import Foast
 
 class FriendsViewModel: ObservableObject {
     @Published var newMessage: String = ""
-    @Published var isPresented = false
+    @Published var isActionSheetPresented = false
     @Published var friendAddViewModel = FriendAddViewModel()
     @Published var isPreparingResponse: Bool = false
     @Published var isLoading: Bool = false
@@ -161,8 +161,8 @@ class FriendsViewModel: ObservableObject {
         }
     }
 
-    func showActionSheet() {
-        self.isPresented = true
+    func hideActionSheet() {
+        self.isActionSheetPresented = false
     }
         
     func showAddFriendView(for item: SheetType) -> some View {
@@ -170,11 +170,9 @@ class FriendsViewModel: ObservableObject {
         case .qrcode:
             return AnyView(FriendAddByQRCodeView().environmentObject(friendAddViewModel))
         case .nickname:
-            return AnyView(FriendAddByNicknameView().environmentObject(friendAddViewModel))
+            return AnyView(FriendAddByNicknameView())
         case .nearby:
-            return AnyView(FriendAddByNearView().environmentObject(friendAddViewModel))
-        case .none:
-            return AnyView(EmptyView())
+            return AnyView(FriendAddByNearView())
         }
     }
     
