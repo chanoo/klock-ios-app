@@ -71,5 +71,56 @@ class FriendRelationServiceTests: XCTestCase {
 
         wait(for: [expectation], timeout: 10)
     }
+    
+    // 팔로우 기능 테스트
+    func testFollowFriend() {
+        let expectation = XCTestExpectation(description: "Follow Friend")
+
+        // 팔로우할 친구의 ID를 가정한 값으로 설정
+        let followId: Int64 = 61 // 예시 ID
+
+        sut.follow(followId: followId)
+            .sink(receiveCompletion: { result in
+                switch result {
+                case .failure(let error):
+                    XCTFail("Follow Friend 실패: \(error)")
+                case .finished:
+                    break
+                }
+                expectation.fulfill()
+            }, receiveValue: { response in
+                // 응답 검증
+                XCTAssertNotNil(response, "Follow Friend에 대한 응답 없음")
+                // 여기에 더 많은 검증을 추가할 수 있음
+            })
+            .store(in: &subscriptions)
+
+        wait(for: [expectation], timeout: 10)
+    }
+
+    // 언팔로우 기능 테스트
+    func testUnfollowFriend() {
+        let expectation = XCTestExpectation(description: "Unfollow Friend")
+
+        // 언팔로우할 친구의 ID를 가정한 값으로 설정
+        let followId: Int64 = 61 // 예시 ID
+
+        sut.unfollow(followId: followId)
+            .sink(receiveCompletion: { result in
+                switch result {
+                case .failure(let error):
+                    XCTFail("Unfollow Friend 실패: \(error)")
+                case .finished:
+                    break
+                }
+                expectation.fulfill()
+            }, receiveValue: { _ in
+                // 언팔로우 성공 시 특별한 응답이 없으므로, 성공적으로 완료되었음을 확인
+                XCTAssertTrue(true, "Unfollow Friend 성공")
+            })
+            .store(in: &subscriptions)
+
+        wait(for: [expectation], timeout: 10)
+    }
 
 }

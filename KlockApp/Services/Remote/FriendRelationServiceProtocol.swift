@@ -11,6 +11,6 @@ import Alamofire
 protocol FriendRelationServiceProtocol {
     func fetch() -> AnyPublisher<[FriendRelationFetchResDTO], AFError>
     func followQRCode(request: FriendRelationFollowQRCodeReqDTO) -> AnyPublisher<FriendRelationFollowQRCodeResDTO, Alamofire.AFError>
-//    func follow(followId: Int64) -> AnyPublisher<ResStudySession, AFError>
-//    func unfollow(followId: Int64) -> AnyPublisher<ResStudySession, AFError>
+    func follow(followId: Int64) -> AnyPublisher<FriendRelationFollowResDTO, AFError>
+    func unfollow(followId: Int64) -> AnyPublisher<Void, AFError>
 }

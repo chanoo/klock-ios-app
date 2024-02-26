@@ -55,3 +55,21 @@ struct FriendRelationFollowQRCodeResDTO: Codable, Hashable {
         case createdAt
     }
 }
+
+struct FriendRelationFollowReqDTO: Codable {
+    let followId: Int64
+}
+
+struct FriendRelationFollowResDTO: Codable {
+    let id: Int64
+    let userId: Int64
+    let followId: Int64
+    let followed: Bool
+    let profileImage: String?
+    let nickname: String
+    let createdAt: String
+}
+
+struct FriendRelationUnfollowReqDTO: Codable {
+    let followId: Int64
+}

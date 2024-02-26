@@ -38,7 +38,13 @@ class UserRemoteService: UserRemoteServiceProtocol, APIServiceProtocol {
                     throw error
                 }
             }
-            .mapError { $0 as! AFError }
+            .mapError { error -> AFError in
+                if let afError = error as? AFError {
+                    return afError
+                } else {
+                    return AFError.sessionTaskFailed(error: error)
+                }
+            }
             .eraseToAnyPublisher()
     }
     
@@ -63,7 +69,13 @@ class UserRemoteService: UserRemoteServiceProtocol, APIServiceProtocol {
                     throw error
                 }
             }
-            .mapError { $0 as! AFError }
+            .mapError { error -> AFError in
+                if let afError = error as? AFError {
+                    return afError
+                } else {
+                    return AFError.sessionTaskFailed(error: error)
+                }
+            }
             .eraseToAnyPublisher()
     }
 
@@ -110,7 +122,13 @@ class UserRemoteService: UserRemoteServiceProtocol, APIServiceProtocol {
                     throw error
                 }
             }
-            .mapError { $0 as! AFError }
+            .mapError { error -> AFError in
+                if let afError = error as? AFError {
+                    return afError
+                } else {
+                    return AFError.sessionTaskFailed(error: error)
+                }
+            }
             .eraseToAnyPublisher()
     }
     
@@ -154,7 +172,13 @@ class UserRemoteService: UserRemoteServiceProtocol, APIServiceProtocol {
                     throw error
                 }
             }
-            .mapError { $0 as! AFError }
+            .mapError { error -> AFError in
+                if let afError = error as? AFError {
+                    return afError
+                } else {
+                    return AFError.sessionTaskFailed(error: error)
+                }
+            }
             .eraseToAnyPublisher()
     }
 }

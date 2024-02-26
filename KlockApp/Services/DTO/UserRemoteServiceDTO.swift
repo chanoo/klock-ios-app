@@ -43,7 +43,7 @@ struct SearchByNicknameReqDTO: Codable {
 struct SearchByNicknameResDTO: Codable {
     let id: Int64
     let nickname: String
-    let profileImage: String
+    let profileImage: String?
 }
 
 struct ProfileImageResDTO: Codable {
