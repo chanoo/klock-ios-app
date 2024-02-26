@@ -54,7 +54,7 @@ enum FancyButtonStyle {
         case .kakao:
             return FancyColor.kakaoBrown.color
         case .button:
-            return FancyColor.white.color
+            return FancyColor.buttonText.color
         case .black:
             return FancyColor.blackButtonText.color
         }
@@ -81,7 +81,7 @@ enum FancyButtonStyle {
         }
     }
     
-    var disableColor: Color {
+    var disableBackgroundColor: Color {
         switch self {
         case .primary:
             return FancyColor.primary.color
@@ -96,9 +96,30 @@ enum FancyButtonStyle {
         case .kakao:
             return FancyColor.kakao.color
         case .button:
-            return FancyColor.gray2.color
+            return FancyColor.blackDisabledButtonBackground.color
         case .black:
             return FancyColor.backButtonDisable.color
+        }
+    }
+    
+    var disableTextColor: Color {
+        switch self {
+        case .primary:
+            return FancyColor.white.color
+        case .secondary:
+            return FancyColor.primary.color
+        case .outline:
+            return FancyColor.buttonOutlineForground.color
+        case .facebook:
+            return FancyColor.white.color
+        case .apple:
+            return FancyColor.appleText.color
+        case .kakao:
+            return FancyColor.kakaoBrown.color
+        case .button:
+            return FancyColor.blackDisabledButtonText.color
+        case .black:
+            return FancyColor.blackButtonText.color
         }
     }
 
@@ -135,7 +156,7 @@ struct FancyButton: View {
 
     var body: some View {
         Button(action: {
-            if isTapped {
+            if isTapped, !(disabled ?? false) {
                 action?()
             }
         }) {
@@ -157,13 +178,13 @@ struct FancyButton: View {
                     .padding(.trailing, 12)
             }
             Text(title)
-                .foregroundColor(style.foregroundColor)
+                .foregroundColor(disabled ?? false ? style.disableTextColor : style.foregroundColor)
                 .font(.system(size: 15, weight: .bold))
         }
         .padding(.leading, 20)
         .padding(.trailing, 20)
         .frame(maxWidth: isBlock ? .infinity : nil, minHeight: 52)
-        .background(disabled ?? false ? style.disableColor : style.backgroundColor)
+        .background(disabled ?? false ? style.disableBackgroundColor : style.backgroundColor)
         .cornerRadius(4)
         .overlay(
             RoundedRectangle(cornerRadius: 4)
