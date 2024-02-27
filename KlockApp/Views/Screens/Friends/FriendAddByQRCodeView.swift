@@ -55,7 +55,9 @@ struct FriendAddByQRCodeView: View {
                             self.presentationMode.wrappedValue.dismiss()
                         }) {
                             Image("ic_xmark")
+                                .resizable()
                         }
+                        .frame(width: 24, height: 24)
                         .padding(.top, 30)
                         .padding(.trailing, 20)
                         .foregroundColor(viewModel.activeView == .scanQRCode ? .white : .black)

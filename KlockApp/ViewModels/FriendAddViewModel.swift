@@ -49,6 +49,8 @@ class FriendAddViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     var isStartOfWeekNextButtonEnabledCancellable: AnyCancellable?
 
     private let userRemoteService = Container.shared.resolve(UserRemoteServiceProtocol.self)
+    private let friendRelationService = Container.shared.resolve(FriendRelationServiceProtocol.self)
+
     private var cancellables = Set<AnyCancellable>()
     private var searchCancellable: AnyCancellable?
 
@@ -67,14 +69,12 @@ class FriendAddViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
         $nickname
             .removeDuplicates() // 연속된 중복 값 필터링
             .debounce(for: .seconds(0.5), scheduler: RunLoop.main) // 사용자 입력 후 0.5초 대기
+            // $nickname이 0 이상일때만 보내기
+            .filter { !$0.isEmpty }
             .sink { [weak self] nickname in
                 guard let self = self else { return }
                 self.error = nil
                 self.isStartOfWeekNextButtonDisabled = true
-                if nickname == self.userModel?.nickname {
-                    self.error = "나를 친구로 추가할 수 없어요"
-                    return
-                }
                 self.searchNickname(nickname)
             }
             .store(in: &cancellables)
@@ -90,7 +90,11 @@ class FriendAddViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
                 switch completion {
                 case .failure(let error):
                     print(error) // 에러 처리
-                    self.error = "이 닉네임을 가진 친구가 없어요"
+                    if (error.code == 204) {
+                        self.error = "친구 닉네임을 확인해주세요"
+                    } else {
+                        self.error = error.message
+                    }
                     break
                 case .finished:
                     break
@@ -98,21 +102,39 @@ class FriendAddViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
             }, receiveValue: { [weak self] response in
                 // 검색 결과에 따른 처리, 예시로 검색 결과가 있을 때만 isNavigatingToNextView 활성화
                 self?.friendUser = response
-                self?.isStartOfWeekNextButtonDisabled = response.nickname.isEmpty
+                self?.isStartOfWeekNextButtonDisabled = response?.nickname.isEmpty
             })
     }
     
     private func setupAddFriendButtonTapped() {
         addFriendButtonTapped
             .sink { [weak self] _ in
-                DispatchQueue.main.async {
-                    self?.becomeFirstResponder = false
-                    self?.isNavigatingToNextView = true
+                guard let self = self, let followId = self.friendUser?.id else {
+                    self?.error = "팔로우할 사용자가 선택되지 않았습니다"
+                    return
                 }
+                
+                self.friendRelationService.follow(followId: followId)
+                    .sink(receiveCompletion: { completion in
+                        switch completion {
+                        case .failure(let error):
+                            DispatchQueue.main.async {
+                                self.error = "사용자 팔로우 실패: \(error.localizedDescription)"
+                                self.isNavigatingToNextView = false
+                            }
+                        case .finished:
+                            break
+                        }
+                    }, receiveValue: { _ in
+                        DispatchQueue.main.async {
+                            self.isNavigatingToNextView = true
+                        }
+                    })
+                    .store(in: &self.cancellables)
             }
             .store(in: &cancellables)
     }
-    
+
     func updateScanResult(_ result: ScanResult) {
         scanResult = result
     }

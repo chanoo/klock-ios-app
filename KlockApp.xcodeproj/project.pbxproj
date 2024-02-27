@@ -13,6 +13,7 @@
 		98099DBF2A29C43F0096AA27 /* SignUpTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98099DBE2A29C43F0096AA27 /* SignUpTagView.swift */; };
 		980C623629EE760100D0A7B5 /* FancyTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980C623529EE760100D0A7B5 /* FancyTabView.swift */; };
 		980CD5492A09485F00B203AC /* AlamofireLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980CD5482A09485F00B203AC /* AlamofireLogger.swift */; };
+		980FC4572B8E23DE0096A609 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980FC4562B8E23DE0096A609 /* APIError.swift */; };
 		980FCBC02B837945001A819D /* ImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980FCBBF2B837945001A819D /* ImageViewModel.swift */; };
 		981881C629F26F00002A4395 /* PomodoroTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981881C529F26F00002A4395 /* PomodoroTimerView.swift */; };
 		981881C829F26F07002A4395 /* ExamTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981881C729F26F07002A4395 /* ExamTimerView.swift */; };
@@ -293,6 +294,7 @@
 		980C623429ED32E000D0A7B5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		980C623529EE760100D0A7B5 /* FancyTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyTabView.swift; sourceTree = "<group>"; };
 		980CD5482A09485F00B203AC /* AlamofireLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireLogger.swift; sourceTree = "<group>"; };
+		980FC4562B8E23DE0096A609 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		980FCBBF2B837945001A819D /* ImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewModel.swift; sourceTree = "<group>"; };
 		981881C529F26F00002A4395 /* PomodoroTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroTimerView.swift; sourceTree = "<group>"; };
 		981881C729F26F07002A4395 /* ExamTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamTimerView.swift; sourceTree = "<group>"; };
@@ -983,6 +985,7 @@
 				980CD5482A09485F00B203AC /* AlamofireLogger.swift */,
 				98B24A9C2A34F1BE0083444D /* SpeechService.swift */,
 				984D2C8C29E00296008D3EA9 /* README.md */,
+				980FC4562B8E23DE0096A609 /* APIError.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1406,6 +1409,7 @@
 				98D7C95729E510990075D201 /* ContentViewModel.swift in Sources */,
 				985BE89229E6E0CD008582A3 /* CharacterView.swift in Sources */,
 				985BE88C29E6DC35008582A3 /* TimeTimerView.swift in Sources */,
+				980FC4572B8E23DE0096A609 /* APIError.swift in Sources */,
 				98D2826B29E988E70039E6E6 /* MessageServiceProtocol.swift in Sources */,
 				98CE661929D55A650009916F /* Container.swift in Sources */,
 				986E5DB629EAF06D00FF7047 /* DayView.swift in Sources */,

@@ -24,6 +24,7 @@ class ContentViewModel: ObservableObject {
     private let authService: AuthenticationServiceProtocol = Container.shared.resolve(AuthenticationServiceProtocol.self)
     private let userRemoteService: UserRemoteServiceProtocol = Container.shared.resolve(UserRemoteServiceProtocol.self)
     private let signInViewModel = Container.shared.resolve(SignInViewModel.self)
+    private let tabBarManager = Container.shared.resolve(TabBarManager.self)
     private var cancellableSet: Set<AnyCancellable> = []
 
     init() {
@@ -59,6 +60,8 @@ class ContentViewModel: ObservableObject {
     func logout() {
         let standard = UserDefaults.standard
         standard.removeObject(forKey: "access.token")
+        standard.removeObject(forKey: "user.id")
+        standard.removeObject(forKey: "public.key")
         standard.removeObject(forKey: "user")
         standard.synchronize()
     }
@@ -78,7 +81,7 @@ class ContentViewModel: ObservableObject {
         keychain["userId"] = String(userModel.id)
         DispatchQueue.main.async {
             self.currentView = AnyView(HomeView()
-                .environmentObject(TabBarManager())
+                .environmentObject(self.tabBarManager)
             )
         }
     }

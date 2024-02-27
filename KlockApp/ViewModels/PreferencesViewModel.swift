@@ -87,6 +87,8 @@ class PreferencesViewModel: ObservableObject {
     func logout() {
         let standard = UserDefaults.standard
         standard.removeObject(forKey: "access.token")
+        standard.removeObject(forKey: "user.id")
+        standard.removeObject(forKey: "public.key")
         standard.removeObject(forKey: "user")
         standard.synchronize()
     }
