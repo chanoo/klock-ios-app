@@ -170,8 +170,6 @@
 		98B21B1B29D55F6C004EFE0E /* AuthenticationRemoteServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B1A29D55F6C004EFE0E /* AuthenticationRemoteServiceProtocol.swift */; };
 		98B21B2129D56BDF004EFE0E /* RegexConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B2029D56BDF004EFE0E /* RegexConstants.swift */; };
 		98B21B3A29D5EBC3004EFE0E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B3929D5EBC3004EFE0E /* AppDelegate.swift */; };
-		98B21B3D29D5F54E004EFE0E /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 98B21B3C29D5F54E004EFE0E /* FacebookCore */; };
-		98B21B3F29D5F54E004EFE0E /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 98B21B3E29D5F54E004EFE0E /* FacebookLogin */; };
 		98B21B4429D60D25004EFE0E /* FancyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B4329D60D25004EFE0E /* FancyButton.swift */; };
 		98B21B4629D60EEB004EFE0E /* FancyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B4529D60EEB004EFE0E /* FancyTextField.swift */; };
 		98B21B4929D617A4004EFE0E /* AuthenticationServiceDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B21B4829D617A4004EFE0E /* AuthenticationServiceDTO.swift */; };
@@ -541,11 +539,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				98B21B3F29D5F54E004EFE0E /* FacebookLogin in Frameworks */,
 				98E64D9D2A72431400A7FF16 /* KakaoSDKCommon in Frameworks */,
 				9820035029F1A6DA0056CA03 /* Foast in Frameworks */,
 				98E9385829EA4C45009CBF32 /* Alamofire in Frameworks */,
-				98B21B3D29D5F54E004EFE0E /* FacebookCore in Frameworks */,
 				987443D22A57D5600019F847 /* KeychainAccess in Frameworks */,
 				984B101E2B46F48700186B6D /* CachedAsyncImage in Frameworks */,
 				983B59D129FB30F800F0EACD /* CoreStore in Frameworks */,
@@ -1177,8 +1173,6 @@
 			name = KlockApp;
 			packageProductDependencies = (
 				98CE661529D55A370009916F /* Swinject */,
-				98B21B3C29D5F54E004EFE0E /* FacebookCore */,
-				98B21B3E29D5F54E004EFE0E /* FacebookLogin */,
 				98E9385729EA4C45009CBF32 /* Alamofire */,
 				9820034F29F1A6DA0056CA03 /* Foast */,
 				981881CC29F3847A002A4395 /* Lottie */,
@@ -1267,7 +1261,6 @@
 			mainGroup = 987E542D29D552520007E156;
 			packageReferences = (
 				98CE661429D55A370009916F /* XCRemoteSwiftPackageReference "Swinject" */,
-				98B21B3B29D5F54E004EFE0E /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
 				98E9385629EA4C45009CBF32 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				9820034E29F1A6DA0056CA03 /* XCRemoteSwiftPackageReference "Foast" */,
 				981881CB29F3847A002A4395 /* XCRemoteSwiftPackageReference "lottie-spm" */,
@@ -1988,14 +1981,6 @@
 				minimumVersion = 5.2.2;
 			};
 		};
-		98B21B3B29D5F54E004EFE0E /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 16.0.1;
-			};
-		};
 		98CE661429D55A370009916F /* XCRemoteSwiftPackageReference "Swinject" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Swinject/Swinject.git";
@@ -2052,16 +2037,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9885724B2B3C560700E7256B /* XCRemoteSwiftPackageReference "YPImagePicker" */;
 			productName = YPImagePicker;
-		};
-		98B21B3C29D5F54E004EFE0E /* FacebookCore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 98B21B3B29D5F54E004EFE0E /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
-			productName = FacebookCore;
-		};
-		98B21B3E29D5F54E004EFE0E /* FacebookLogin */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 98B21B3B29D5F54E004EFE0E /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
-			productName = FacebookLogin;
 		};
 		98CE661529D55A370009916F /* Swinject */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -7,7 +7,6 @@
 
 import Foundation
 import Combine
-import FacebookLogin
 import AuthenticationServices
 import Swinject
 import KeychainAccess

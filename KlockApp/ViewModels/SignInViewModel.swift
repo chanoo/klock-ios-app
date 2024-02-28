@@ -9,7 +9,6 @@ import SwiftUI
 import Combine
 import AuthenticationServices
 import Alamofire
-import FacebookLogin
 import KeychainAccess
 import KakaoSDKUser
 import Foast
@@ -45,19 +44,10 @@ class SignInViewModel: NSObject, ObservableObject, ASAuthorizationControllerDele
     }
 
     private func setupBindings() {
-        setupSignInWithFacebookTapped()
         setupSignInWithAppleTapped()
         setupSignInWithKakaoTapped()
     }
 
-    private func setupSignInWithFacebookTapped() {
-        signInWithFacebookTapped
-            .sink { [weak self] _ in
-                self?.signInWithFacebook()
-            }
-            .store(in: &cancellableSet)
-    }
-    
     private func setupSignInWithKakaoTapped() {
         signInWithKakaoTapped
             .sink { [weak self] _ in
@@ -74,38 +64,6 @@ class SignInViewModel: NSObject, ObservableObject, ASAuthorizationControllerDele
             .store(in: &cancellableSet)
     }
 
-    func signInWithFacebook() {
-        // Implement Facebook login
-        let loginManager = LoginManager()
-        loginManager.logIn(permissions: ["public_profile", "email"], from: nil) { [weak self] (result, error) in
-            if let error = error {
-                print("Error during Facebook login: \(error.localizedDescription)")
-                return
-            }
-
-            guard let result = result, !result.isCancelled, let accessToken = AccessToken.current?.tokenString else {
-                print("Facebook login cancelled")
-                return
-            }
-
-            self?.authenticationService.signInWithFacebook(accessToken: accessToken)
-                .sink(receiveCompletion: { completion in
-                    switch completion {
-                    case .failure(let error):
-                        print("Error: \(error.localizedDescription)")
-                    case .finished:
-                        break
-                    }
-                }, receiveValue: { user in
-                    print("User: \(user)")
-                    DispatchQueue.main.async {
-                        self?.onSignInWithFacebook?()
-                    }
-                })
-                .store(in: &self!.cancellableSet)
-        }
-    }
-    
     func signInWithKakao() {
         if (UserApi.isKakaoTalkLoginAvailable()) {
             UserApi.shared.loginWithKakaoTalk {(oauthToken, error) in

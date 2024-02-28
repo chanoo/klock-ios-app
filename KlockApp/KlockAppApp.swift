@@ -1,5 +1,4 @@
 import SwiftUI
-import FacebookCore
 import KakaoSDKCommon
 import KakaoSDKAuth
 
