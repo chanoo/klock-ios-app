@@ -49,7 +49,7 @@ class ImageViewModel: ObservableObject {
         confirmTapped
             .sink { [weak self] _ in
                 let userModel = UserModel.load()
-                guard let userId = userModel?.id, let nickname = userModel?.nickname else {
+                guard let userId = userModel?.id else {
                     return
                 }
                 self?.isLoading = true
@@ -97,7 +97,7 @@ class ImageViewModel: ObservableObject {
     }
     
     func handleReceivedUpdateUserInfoResponse(_ dto: UserUpdateResDTO) {
-        var userModel = UserModel.load()
+        let userModel = UserModel.load()
         guard let userId = userModel?.id else {
             return
         }
