@@ -42,7 +42,6 @@ enum FancyColor: String {
     case tabbarIcon = "color_tabbar_icon"
     case tabbarIconSelected = "color_tabbar_icon_selected"
     case text = "color_text"
-    case textfieldBackground = "color_textfield_background"
     case textfieldUnderline = "color_textfield_underline"
     case timerFocusBackground = "color_timer_focus_background"
     case timerFocusText = "color_timer_focus_text"

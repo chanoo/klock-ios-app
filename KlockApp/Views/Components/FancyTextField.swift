@@ -95,7 +95,6 @@ struct FancyTextField: View {
                 }
             }
         }
-        .background(FancyColor.textfieldBackground.color)
         .onChange(of: firstResponder) { value in
             if value {
                 isFocused = true
