@@ -11,8 +11,8 @@ struct StudySessionModel: Identifiable, Codable {
     let id: Int64?
     let userId: Int64
     let startTime: Date
-    let endTime: Date
-    let timerName: String
+    let endTime: Date?
+    var timerName: String
     let timerType: String
 
     enum CodingKeys: String, CodingKey {
@@ -36,6 +36,6 @@ struct StudySessionModel: Identifiable, Codable {
     }
 
     var duration: TimeInterval {
-        return endTime.timeIntervalSince(startTime)
+        return endTime?.timeIntervalSince(startTime) ?? 0
     }
 }

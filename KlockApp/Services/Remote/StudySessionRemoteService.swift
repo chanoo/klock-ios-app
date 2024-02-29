@@ -29,12 +29,12 @@ class StudySessionRemoteService: StudySessionRemoteServiceProtocol, APIServicePr
             .eraseToAnyPublisher()
     }
 
-    func update(id: Int64, data: ReqStudySession) -> AnyPublisher<ResStudySession, AFError> {
+    func update(id: Int64, data: StudySessionUpdateReqDTO) -> AnyPublisher<StudySessionUpdateResDTO, AFError> {
         let url = "\(baseURL)/\(id)"
 
         return session.request(url, method: .put, parameters: data, encoder: JSONParameterEncoder.default, headers: self.headers())
             .validate(statusCode: 200..<300)
-            .publishDecodable(type: ResStudySession.self)
+            .publishDecodable(type: StudySessionUpdateResDTO.self)
             .value()
             .eraseToAnyPublisher()
     }

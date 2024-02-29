@@ -95,11 +95,9 @@ struct FancyTextField: View {
                 }
             }
         }
-        .onChange(of: firstResponder) { value in
-            if value {
-                isFocused = true
-            } else {
-                isFocused = false
+        .onChange(of: firstResponder) { newValue in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                self.isFocused = newValue
             }
         }
         .onChange(of: text) { newValue in

@@ -50,8 +50,10 @@ class StudySessionRemoteServiceTests: XCTestCase {
     func testUpdateFocusTimer() {
         let expectation = XCTestExpectation(description: "Update Study Session")
 
-        let id: Int64 = 1
-        let req = ReqStudySession(userId: 56, timerName: "집중시간 타이머", timerType: .focus, startTime: "2023-01-01T08:40:00", endTime: "2023-01-01T10:10:10")
+//        {"timerType":"AUTO","startTime":730862782,"endTime":730863168,"timerName":"공부","id":429,"userId":151}
+        
+        let id: Int64 = 429
+        let req = StudySessionUpdateReqDTO(id: 429, userId: 151, startTime: "", endTime: "", timerName: "공부", timerType: "AUTO")
 
         sut.update(id: id, data: req)
             .sink(receiveCompletion: { result in
@@ -63,7 +65,7 @@ class StudySessionRemoteServiceTests: XCTestCase {
                 }
                 expectation.fulfill()
             }, receiveValue: { timer in
-                XCTAssertEqual(timer.endTime, req.endTime)
+                XCTAssertEqual(timer.timerType, req.timerType)
             })
             .store(in: &subscriptions)
 

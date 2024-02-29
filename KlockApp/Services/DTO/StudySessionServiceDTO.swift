@@ -38,3 +38,21 @@ struct GetStudySessionsResDTO: Codable {
     let timerName: String
     let timerType: String
 }
+
+struct StudySessionUpdateReqDTO: Codable {
+    let id: Int64
+    let userId: Int64
+    let startTime: String
+    let endTime: String?
+    var timerName: String
+    let timerType: String
+}
+
+struct StudySessionUpdateResDTO: Codable {
+    let id: Int64
+    let userId: Int64
+    let startTime: String
+    let endTime: String?
+    var timerName: String
+    let timerType: String
+}

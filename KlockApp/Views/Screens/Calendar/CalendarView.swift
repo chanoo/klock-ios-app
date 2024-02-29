@@ -9,10 +9,13 @@ import Foundation
 import SwiftUI
 
 struct CalendarView: View {
-    @State private var spacing: CGFloat = 5
+    @EnvironmentObject var actionSheetManager: ActionSheetManager
     @StateObject var viewModel = Container.shared.resolve(CalendarViewModel.self)
-    let weeks = 13
+    @State private var spacing: CGFloat = 5
     @State private var isShowingSelectTimer = false
+    @State private var actionSheetView: CustomActionSheetView? = nil
+    @State private var isActionSheetPresented = false
+    let weeks = 13
 
     private var startDate: Date {
         let today = Date()
@@ -78,16 +81,62 @@ struct CalendarView: View {
                                                 Text("\(TimeUtils.elapsedTimeToString(elapsedTime: studySession.duration))")
                                                     .foregroundColor(FancyColor.text.color)
                                                     .font(.system(size: 16, weight: .heavy))
-                                                Text("\(TimeUtils.formattedDateString(from: studySession.startTime, format: "hh시 mm분")) ~ \(TimeUtils.formattedDateString(from: studySession.endTime, format: "hh시 mm분"))")
+                                                Text("\(TimeUtils.formattedDateString(from: studySession.startTime, format: "hh시 mm분")) ~ \(studySession.endTime != nil ? TimeUtils.formattedDateString(from: studySession.endTime!, format: "hh시 mm분") : "진행 중")")
                                                     .foregroundColor(FancyColor.gray6.color)
                                                     .font(.system(size: 13, weight: .regular))
                                                     .padding(.top, 4)
                                             }
                                         }
+                                        .background(FancyColor.clear.color)
                                         .padding(8)
+                                        .contextMenu {
+                                            Button(action: {
+                                                viewModel.studySessionModel = studySession
+                                                actionSheetManager.actionSheet = CustomActionSheetView(
+                                                    title: studySession.timerName,
+                                                    message: "\(TimeUtils.formattedDateString(from: studySession.startTime, format: "hh시 mm분")) ~ \(studySession.endTime != nil ? TimeUtils.formattedDateString(from: studySession.endTime!, format: "hh시 mm분") : "진행 중")",
+                                                    content: AnyView(
+                                                        FancyTextField(
+                                                            placeholder: "공부 내용을 적어주세요",
+                                                            text: $viewModel.studySessionModel.timerName,
+                                                            firstResponder: $viewModel.becomeFirstResponder) {
+                                                                print("done")
+                                                            }
+                                                    ),
+                                                    actionButtons: [
+                                                        ActionButton(title: "완료", action: {
+                                                            viewModel.updateStudySession()
+                                                            viewModel.studySessionsOfDay[viewModel.studySessionsOfDay.firstIndex(where: { $0.id == studySession.id })!] = viewModel.studySessionModel
+                                                            withAnimation(.spring()) {
+                                                                actionSheetManager.isPresented = false
+                                                                viewModel.hideKeyboard()
+                                                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                                                    actionSheetManager.actionSheet = nil
+                                                                }
+                                                            }
+                                                        }),
+                                                    ],
+                                                    cancelButton: ActionButton(title: "취소", action: {
+                                                        withAnimation(.spring()) {
+                                                            actionSheetManager.isPresented = false
+                                                            viewModel.hideKeyboard()
+                                                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                                                actionSheetManager.actionSheet = nil
+                                                            }
+                                                        }
+                                                    })
+                                                )
+                                                withAnimation(.spring()) {
+                                                    actionSheetManager.isPresented = true
+                                                    viewModel.becomeFirstResponder = true
+                                                }
+                                            }) {
+                                                Label("수정", image: "ic_pencil_line2")
+                                            }
+                                        }
+                                        Divider()
+                                            .padding([.leading, .trailing], 8)
                                     }
-                                    Divider()
-                                        .padding([.leading, .trailing], 8)
                                 }
                             }
                             .padding(8)
@@ -110,6 +159,9 @@ struct CalendarView: View {
             }
         }
         .navigationBarTitle("공부 기록", displayMode: .inline)
+        
+        // 수정 함수 action
+        
     }
 
     private var calendarBody: some View {

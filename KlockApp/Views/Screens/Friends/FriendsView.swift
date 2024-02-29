@@ -10,14 +10,13 @@ import SwiftUI
 // 친구 목록 화
 struct FriendsView: View {
     @EnvironmentObject var actionSheetManager: ActionSheetManager
+    @EnvironmentObject var tabBarManager: TabBarManager
     @StateObject private var viewModel = Container.shared.resolve(FriendsViewModel.self)
     @StateObject private var imageViewModel = Container.shared.resolve(ImageViewModel.self)
     @StateObject private var friendAddViewModel = Container.shared.resolve(FriendAddViewModel.self)
 
     @State private var isShowingAddFriend = false
     @State private var proxy: ScrollViewProxy?
-
-    private let tabBarManager = Container.shared.resolve(TabBarManager.self)
 
     var body: some View {
         VStack(spacing: 0) {

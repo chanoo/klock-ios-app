@@ -77,6 +77,7 @@ enum FancyColor: String {
     case imagePlaceholder = "color_image_placeholder"
     case launchBackground = "color_launch_background"
     case launchSymbol = "color_launch_symbol"
+    case clear = "color_clear"
 
     var color: Color {
         Color(self.rawValue)

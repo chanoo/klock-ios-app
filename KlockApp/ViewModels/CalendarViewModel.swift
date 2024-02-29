@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 import Foast
+import UIKit
 
 class CalendarViewModel: ObservableObject {
     @Published var studySessions: [String: [StudySessionModel]] = [:]
@@ -15,6 +16,8 @@ class CalendarViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     @Published var selectedDate: String
     @Published var totalStudyTime: String
+    @Published var becomeFirstResponder: Bool = false
+    @Published var studySessionModel: StudySessionModel = StudySessionModel(id: nil, userId: 0, startTime: Date(), endTime: Date(), timerName: "", timerType: "")
     private let studySessionRemoteService = Container.shared.resolve(StudySessionRemoteServiceProtocol.self)
     private let accountTimerService = Container.shared.resolve(AccountTimerServiceProtocol.self)
     private let accountService = Container.shared.resolve(AccountLocalServiceProtocol.self)
@@ -26,6 +29,7 @@ class CalendarViewModel: ObservableObject {
         return formatter
     }()
     private let userModel = UserModel.load()
+    private let apiQueue = DispatchQueue(label: "app.klockApp.api.queue")
 
     init() {
         self.selectedDate = TimeUtils.formattedDateString(from: Date(), format: "yyyy년 M월 d일 (E)")
@@ -33,56 +37,74 @@ class CalendarViewModel: ObservableObject {
         self.fetchStudySession()
     }
     
-    func fetchStudySession() {
-        guard let userId = userModel?.id else {
-            Foast.show(message: "회원 정보가 없습니다.")
-            return
-        }
+    func updateStudySession() {
+        apiQueue.async { [weak self] in
+            guard let self = self, let id = studySessionModel.id else { return }
+            
+            let startTime = TimeUtils.formattedDateString(from: studySessionModel.startTime, format: "yyyy-MM-dd'T'HH:mm:ss")
+            let endTime = studySessionModel.endTime.map { TimeUtils.formattedDateString(from: $0, format: "yyyy-MM-dd'T'HH:mm:ss") }
 
-        isLoading = true
-        
-        let endDate = Date()
-        let endDateStr = TimeUtils.formattedDateString(from: Date(), format: "yyyy-MM-dd")
-        let startDate = TimeUtils.subtractDaysFromDate(date: endDate, days: 92)
-        let startDateStr = TimeUtils.formattedDateString(from: startDate, format: "yyyy-MM-dd")
-        print("period \(startDateStr) ~ \(endDateStr)")
-
-        studySessionRemoteService.fetch(userId: userId, startDate: startDateStr, endDate: endDateStr)
-            .sink { [weak self] completion in
-                guard let self = self else { return }
-                switch completion {
-                case .failure(let error):
-                    print("Error fetching study sessions: \(error)")
-                case .finished:
-                    break
-                }
-                DispatchQueue.main.async {
-                    self.isLoading = false
-                }
-            } receiveValue: { [weak self] dto in
-                guard let self = self else { return }
-                DispatchQueue.main.async {
-                    var groupedStudySessions: [String: [StudySessionModel]] = [:]
-
-                    for dtoSession in dto {
-                        let session = StudySessionModel.from(dto: dtoSession)
-                        let dateString = self.getYMD(date: dtoSession.startTime)
-                        if groupedStudySessions[dateString] == nil {
-                            groupedStudySessions[dateString] = [session]
-                        } else {
-                            groupedStudySessions[dateString]?.append(session)
-                        }
+            let request = StudySessionUpdateReqDTO(
+                id: id,
+                userId: studySessionModel.userId,
+                startTime: startTime,
+                endTime: endTime,
+                timerName: studySessionModel.timerName,
+                timerType: studySessionModel.timerType
+            )
+            
+            self.studySessionRemoteService.update(id: id, data: request)
+                .sink(receiveCompletion: { completion in
+                    if case .failure(let error) = completion {
+                        print("Error updating study session: \(error)")
                     }
-
-                    self.studySessions = groupedStudySessions
-                    self.setSelectedDate(endDateStr)
-                    let studySessions = self.studySessions[endDateStr] ?? []
-                    self.setStudySessionsOfDay(studySessions)
-                }
-            }
-            .store(in: &cancellables)
+                }, receiveValue: { _ in
+                    // Handle the successful update, if needed
+                })
+                .store(in: &self.cancellables)
+        }
     }
     
+    func fetchStudySession() {
+        apiQueue.async { [weak self] in
+            guard let self = self, let userId = userModel?.id else {
+                Foast.show(message: "회원 정보가 없습니다.")
+                return
+            }
+
+            self.isLoading = true
+            
+            let endDate = Date()
+            let endDateStr = TimeUtils.formattedDateString(from: endDate, format: "yyyy-MM-dd")
+            let startDate = TimeUtils.subtractDaysFromDate(date: endDate, days: 92)
+            let startDateStr = TimeUtils.formattedDateString(from: startDate, format: "yyyy-MM-dd")
+            print("period \(startDateStr) ~ \(endDateStr)")
+
+            studySessionRemoteService.fetch(userId: userId, startDate: startDateStr, endDate: endDateStr)
+                .sink(receiveCompletion: { [weak self] completion in
+                    if case .failure(let error) = completion {
+                        print("Error fetching study sessions: \(error)")
+                    }
+                    DispatchQueue.main.async {
+                        self?.isLoading = false
+                    }
+                }, receiveValue: { [weak self] dto in
+                    DispatchQueue.main.async {
+                        let groupedStudySessions = dto.reduce(into: [String: [StudySessionModel]]()) { (acc, dtoSession) in
+                            let session = StudySessionModel.from(dto: dtoSession)
+                            let dateString = self?.getYMD(date: dtoSession.startTime) ?? ""
+                            acc[dateString, default: []].append(session)
+                        }
+
+                        self?.studySessions = groupedStudySessions
+                        self?.setSelectedDate(endDateStr)
+                        self?.setStudySessionsOfDay(self?.studySessions[endDateStr] ?? [])
+                    }
+                })
+                .store(in: &self.cancellables)
+        }
+    }
+
     func getYMD(date: String) -> String {
         return String(date.prefix(10))
     }
@@ -109,5 +131,10 @@ class CalendarViewModel: ObservableObject {
         } else {
             totalStudyTime = "00:00:00"
         }
+    }
+    
+    func hideKeyboard() {
+        becomeFirstResponder = false
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }

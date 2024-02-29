@@ -44,10 +44,9 @@ struct MessageLeftBubbleView: View {
                     }
                     Button(role: .destructive) { // 👈 This argument
                         // delete something
-                        print("삭제")
-                        onDelete()
+                        print("신고")
                     } label: {
-                        Label("삭제", image: "ic_trash")
+                        Label("신고", image: "ic_emergency")
                     }
                 }
 

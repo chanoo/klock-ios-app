@@ -11,6 +11,6 @@ import Alamofire
 
 protocol StudySessionRemoteServiceProtocol {
     func create(data: ReqStudySession) -> AnyPublisher<ResStudySession, AFError>
-    func update(id: Int64, data: ReqStudySession) -> AnyPublisher<ResStudySession, AFError>
+    func update(id: Int64, data: StudySessionUpdateReqDTO) -> AnyPublisher<StudySessionUpdateResDTO, AFError>
     func fetch(userId: Int64, startDate: String, endDate: String) -> AnyPublisher<[GetStudySessionsResDTO], AFError>
 }

@@ -131,11 +131,21 @@ struct ChatInputView: View {
                 queue: .main) { _ in
                     self.tabBarManager.hide()
                 }
+            NotificationCenter.default.addObserver(
+                forName: UIResponder.keyboardWillHideNotification,
+                object: nil,
+                queue: .main) { _ in
+                    self.tabBarManager.show()
+                }
         }
         .onDisappear {
             NotificationCenter.default.removeObserver(
                 self,
                 name: UIResponder.keyboardWillShowNotification,
+                object: nil)
+            NotificationCenter.default.removeObserver(
+                self,
+                name: UIResponder.keyboardWillHideNotification,
                 object: nil)
         }
     }

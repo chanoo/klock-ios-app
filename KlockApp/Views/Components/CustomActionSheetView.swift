@@ -14,9 +14,11 @@ struct ActionButton {
 
 struct CustomActionSheetView: View {
     @EnvironmentObject var tabBarManager: TabBarManager
-
+    @State private var keyboardHeight: CGFloat = 0
+    
     let title: String
-    let message: String
+    var message: String? = nil
+    var content: AnyView? = nil
     let actionButtons: [ActionButton]
     let cancelButton: ActionButton
 
@@ -34,12 +36,19 @@ struct CustomActionSheetView: View {
                             .padding([.bottom], 5)
                             .padding([.top], 60)
 
-                        Text(message)
-                            .font(.system(size: 15))
-                            .foregroundColor(Color("color_subtext"))
-                            .padding([.leading, .trailing], 10)
-                            .padding([.bottom], 20)
-                            .padding([.top], 5)
+                        if let message = message {
+                            Text(message)
+                                .font(.system(size: 15))
+                                .foregroundColor(Color("color_subtext"))
+                                .padding([.leading, .trailing], 10)
+                                .padding([.bottom], 20)
+                                .padding([.top], 5)
+                        }
+                        
+                        if let content = content {
+                            content
+                                .frame(width: geometry.size.width - 40, height: 60)
+                        }
 
                         ForEach(actionButtons.indices, id: \.self) { index in
                             FancyButton(
@@ -64,7 +73,7 @@ struct CustomActionSheetView: View {
                         .frame(width: geometry.size.width - 40, height: 60)
                         .padding([.top, .bottom], 12)
                     }
-                    .padding(.bottom, 36)
+                    .padding(.bottom, 36 + keyboardHeight) // Adjust padding based on keyboard height
                     .padding(.bottom, geometry.safeAreaInsets.bottom)
                     .frame(width: geometry.size.width)
                     .background(RoundedCorner(radius: 20, corners: [.topLeft, .topRight]).fill(FancyColor.actionsheetBackground.color))
@@ -73,7 +82,30 @@ struct CustomActionSheetView: View {
             }
         }
         .edgesIgnoringSafeArea(.bottom)
+        .onAppear {
+            self.addKeyboardObservers()
+        }
+        .onDisappear {
+            self.removeKeyboardObservers()
+        }
     }
+    
+    private func addKeyboardObservers() {
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { (notification) in
+            guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
+            self.keyboardHeight = keyboardFrame.height
+        }
+
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { _ in
+            self.keyboardHeight = 0
+        }
+    }
+
+    private func removeKeyboardObservers() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
 }
 
 struct RoundedCorner: Shape {
