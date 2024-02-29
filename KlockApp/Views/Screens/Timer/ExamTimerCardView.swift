@@ -87,7 +87,7 @@ struct ExamTimerCardView: View {
                 FancyButton(title: "시험 시작", action: {
                     withAnimation {
                         clockViewModel.startStudy()
-                        tabBarManager.isTabBarVisible = false
+                        tabBarManager.hide()
                         examTimerViewModel.isStudying = true
                         timeTimerViewModel.startStudySession(timerName: examTimerViewModel.model.name)
                         timeTimerViewModel.examTimerViewModel = examTimerViewModel

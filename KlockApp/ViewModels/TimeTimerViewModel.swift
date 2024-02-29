@@ -143,7 +143,7 @@ class TimeTimerViewModel: ObservableObject {
         let userModel = UserModel.load()
         if let writeUserId = userModel?.id {
             let message = "\(timerName) 공부를 시작했어요!"
-            createUserTrace(writeUserId: writeUserId, type: .studyStart, contents: message)
+            createUserTrace(userId: writeUserId, writeUserId: writeUserId, type: .studyStart, contents: message)
         }
     }
 
@@ -165,7 +165,7 @@ class TimeTimerViewModel: ObservableObject {
         let userModel = UserModel.load()
         if let writeUserId = userModel?.id {
             let message = "\(timerName) 공부를 종료했어요!"
-            createUserTrace(writeUserId: writeUserId, type: .studyEnd, contents: message)
+            createUserTrace(userId: writeUserId, writeUserId: writeUserId, type: .studyEnd, contents: message)
         }
         
         let startTimeStr = DateUtils.dateToString(startTime)
@@ -186,8 +186,8 @@ class TimeTimerViewModel: ObservableObject {
 //        saveStudySession(accountID: 1, accountTimerID: 1, startTime: startTime, endTime: endTime)
     }
     
-    private func createUserTrace(writeUserId: Int64, type: UserTraceType, contents: String) {
-        let contentTrace = UserTraceCreateReqContentTraceDTO(writeUserId: writeUserId, type: type, contents: contents)
+    private func createUserTrace(userId: Int64, writeUserId: Int64, type: UserTraceType, contents: String) {
+        let contentTrace = UserTraceCreateReqContentTraceDTO(userId: userId, writeUserId: writeUserId, type: type, contents: contents)
         let userTraceCreateReq = UserTraceCreateReqDTO(contentTrace: contentTrace)
         userTraceRemoteService.create(data: userTraceCreateReq)
             .sink(receiveCompletion: { completion in

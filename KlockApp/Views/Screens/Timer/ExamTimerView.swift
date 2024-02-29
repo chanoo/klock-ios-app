@@ -77,7 +77,7 @@ struct ExamTimerView: View {
                 },
                 longPressAction: {
                     withAnimation {
-                        tabBarManager.isTabBarVisible = true
+                        tabBarManager.show()
                         examTimerViewModel.isStudying = false
                         timeTimerViewModel.examTimerViewModel = nil
                     }

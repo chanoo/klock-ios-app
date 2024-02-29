@@ -25,11 +25,11 @@ struct MessageBubbleView: View {
                 Spacer()
                 if userTraceType == .studyStart {
                     if let date = date {
-                        AlarmBubbleView(nickname: nickname, content: content, date: date, showIcon: true)
+                        AlarmRightBubbleView(nickname: nickname, content: content, date: date, showIcon: true)
                     }
                 } else if userTraceType == .studyEnd {
                     if let date = date {
-                        AlarmBubbleView(nickname: nickname, content: content, date: date, showIcon: false)
+                        AlarmRightBubbleView(nickname: nickname, content: content, date: date, showIcon: false)
                     }
                 } else {
                     MessageRightBubbleView(nickname: nickname, content: content, imageURL: imageURL, date: date) {
@@ -37,10 +37,24 @@ struct MessageBubbleView: View {
                     }
                 }
             } else {
-                ProfileImageWrapperView(profileImageURL: profileImageURL)
-                    .padding(.trailing, 8)
-                MessageLeftBubbleView(nickname: nickname, content: content, imageURL: imageURL, date: date) {
-                    onDelete()
+                if userTraceType == .studyStart {
+                    ProfileImageWrapperView(profileImageURL: profileImageURL)
+                        .padding(.trailing, 8)
+                    if let date = date {
+                        AlarmLeftBubbleView(nickname: nickname, content: content, date: date, showIcon: true)
+                    }
+                } else if userTraceType == .studyEnd {
+                    ProfileImageWrapperView(profileImageURL: profileImageURL)
+                        .padding(.trailing, 8)
+                    if let date = date {
+                        AlarmLeftBubbleView(nickname: nickname, content: content, date: date, showIcon: false)
+                    }
+                } else {
+                    ProfileImageWrapperView(profileImageURL: profileImageURL)
+                        .padding(.trailing, 8)
+                    MessageLeftBubbleView(nickname: nickname, content: content, imageURL: imageURL, date: date) {
+                        onDelete()
+                    }
                 }
                 Spacer()
             }

@@ -9,7 +9,7 @@ import Combine
 import Alamofire
 
 protocol UserTraceRemoteServiceProtocol {
-    func fetch(page: Int, size: Int?) -> AnyPublisher<[UserTraceResDTO], AFError>
+    func fetch(userId: Int64, page: Int, size: Int?) -> AnyPublisher<[UserTraceResDTO], AFError>
     func create(data: UserTraceCreateReqDTO) -> AnyPublisher<UserTraceResDTO, AFError>
     func delete(id: Int64) -> AnyPublisher<Void, AFError>
 }

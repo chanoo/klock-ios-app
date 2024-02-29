@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct FriendsListView: View {
+    @EnvironmentObject var actionSheetManager: ActionSheetManager
     @EnvironmentObject var viewModel: FriendsViewModel
-
+    
     var body: some View {
         VStack {
             // Check if the friends list is empty
@@ -38,9 +39,11 @@ struct FriendsListView: View {
                     VStack(alignment: .leading, spacing: 12) {
                         ForEach(Array(viewModel.friends.enumerated()), id: \.element) { index, friendModel in
                             if index == 0 {
-                                FirstFriendsRowView(friendModel: friendModel)
+                                FirstFriendsRowView(userId: friendModel.followId, friendModel: friendModel)
+                                    .environmentObject(actionSheetManager)
                             } else {
-                                FriendsRowView(friendModel: friendModel)
+                                FriendsRowView(userId: friendModel.followId,friendModel: friendModel)
+                                    .environmentObject(actionSheetManager)
                             }
                         }
                     }
@@ -58,9 +61,14 @@ struct FriendsListView: View {
 }
 
 struct FirstFriendsRowView: View {
+    let userId: Int64
+    @EnvironmentObject var actionSheetManager: ActionSheetManager
+
     var friendModel: FriendRelationFetchResDTO
     var body: some View {
-        NavigationLink(destination: FriendsView()) {
+        NavigationLink(
+            destination: FriendsView(userId: userId)
+                .environmentObject(actionSheetManager)) {
             HStack {
                 ZStack {
                     ZStack(alignment: .center) {
@@ -102,10 +110,15 @@ struct FirstFriendsRowView: View {
 }
 
 struct FriendsRowView: View {
+    let userId: Int64
+    @EnvironmentObject var actionSheetManager: ActionSheetManager
+
     var friendModel: FriendRelationFetchResDTO
     var body: some View {
         VStack(spacing: 0) {
-            NavigationLink(destination: FriendsView()) {
+            NavigationLink(
+                destination: FriendsView(userId: userId)
+                    .environmentObject(actionSheetManager)) {
                 HStack {
                     ZStack {
                         ZStack(alignment: .center) {

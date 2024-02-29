@@ -72,7 +72,7 @@ struct PomodoroTimerView: View {
                     },
                     longPressAction: {
                         withAnimation {
-                            tabBarManager.isTabBarVisible = true
+                            tabBarManager.show()
                             pomodoroTimerViewModel.isStudying = false
                             timeTimerViewModel.pomodoroTimerViewModel = nil
                         }

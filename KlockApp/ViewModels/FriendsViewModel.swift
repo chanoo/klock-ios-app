@@ -31,6 +31,7 @@ class FriendsViewModel: ObservableObject {
     var cancellables: Set<AnyCancellable> = []
     var last = false
     var page = -1
+    var userId: Int64?
     var userModel = UserModel.load()
     
     private let userTraceFetchQueue = DispatchQueue(label: "app.klockApp.userTraceFetchQueue")
@@ -38,16 +39,24 @@ class FriendsViewModel: ObservableObject {
     init() {
         setupSendButtonTapped()
         setupDeleteUserTrace()
+        if let userId = UserModel.load()?.id {
+            self.userId = userId
+        }
+    }
+    
+    func set(userId: Int64) {
+        self.userId = userId
     }
     
     private func setupSendButtonTapped() {
         sendTapped
             .sink { [weak self] _ in
+                guard let userId = self?.userId else { return }
                 DispatchQueue.main.async {
                     self?.isLoading = true
                     self?.dynamicHeight = 36
                 }
-                self?.addUserTrace(contents: self?.contents, image: self?.image)
+                self?.addUserTrace(userId: userId, contents: self?.contents, image: self?.image)
             }
             .store(in: &cancellables)
     }
@@ -114,18 +123,13 @@ class FriendsViewModel: ObservableObject {
             .store(in: &cancellables)
     }
     
-    func fetchUserTrace() {
+    func fetchUserTrace(userId: Int64) {
         userTraceFetchQueue.async { [weak self] in
-            guard let self = self else { return }
-            
-            guard !self.last else { return }
-            DispatchQueue.main.async {
-                self.isLoading = true
-            }
+            guard let self = self, !self.last else { return }
 
             self.page += 1
             print("### page ", page)
-            self.userTraceService.fetch(page: self.page, size: 10)
+            self.userTraceService.fetch(userId: userId, page: self.page, size: 10)
                 .sink { completion in
                     switch completion {
                     case .failure(let error):
@@ -176,7 +180,7 @@ class FriendsViewModel: ObservableObject {
         }
     }
     
-    func addUserTrace(contents: String?, image: Data?) {
+    func addUserTrace(userId: Int64, contents: String?, image: Data?) {
         userTraceFetchQueue.async { [weak self] in
             guard let self = self else { return }
             
@@ -184,11 +188,11 @@ class FriendsViewModel: ObservableObject {
                 self.isSendMessage = true
             }
 
-            guard let userId = userModel?.id else  {
+            guard let writeUserId = userModel?.id else  {
                 return
             }
             
-            let contentTrace = UserTraceCreateReqContentTraceDTO(writeUserId: userId, type: .activity, contents: contents)
+            let contentTrace = UserTraceCreateReqContentTraceDTO(userId: userId, writeUserId: writeUserId, type: .activity, contents: contents)
             let createReqDTO = UserTraceCreateReqDTO(contentTrace: contentTrace, image: image)
 
             userTraceService.create(data: createReqDTO)

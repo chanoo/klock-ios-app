@@ -11,6 +11,7 @@ struct HomeView: View {
     @State private var selection = 0
     @State private var title: String = "홈"
     
+    @StateObject private var tabBarManager = Container.shared.resolve(TabBarManager.self)
     @StateObject private var timeTimerViewModel = Container.shared.resolve(TimeTimerViewModel.self)
     @StateObject private var calendarViewModel = Container.shared.resolve(CalendarViewModel.self)
     @StateObject private var chatBotViewModel = Container.shared.resolve(ChatBotViewModel.self)
@@ -69,6 +70,7 @@ struct HomeView: View {
                 content: AnyView(
                     FriendsView()
                         .environmentObject(friendsViewModel)
+                        .environmentObject(tabBarManager)
                 )
             ),
             (

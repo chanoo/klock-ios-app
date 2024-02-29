@@ -10,7 +10,8 @@ import Combine
 import Foundation
 
 class UserTraceRemoteService: UserTraceRemoteServiceProtocol, APIServiceProtocol {
-    private let baseURL = "https://api.klock.app/api/v1/user-trace"
+    private let baseURL = "https://api.klock.app"
+//    private let baseURL = "http://192.168.68.73:8080"
     
     private let logger = AlamofireLogger()
     private let session: Session
@@ -19,8 +20,8 @@ class UserTraceRemoteService: UserTraceRemoteServiceProtocol, APIServiceProtocol
         session = Session(eventMonitors: [])
     }
     
-    func fetch(page: Int, size: Int? = 10) -> AnyPublisher<[UserTraceResDTO], Alamofire.AFError> {
-        let url = "\(baseURL)?page=\(page)&size=\(size ?? 10)"
+    func fetch(userId: Int64, page: Int, size: Int? = 10) -> AnyPublisher<[UserTraceResDTO], Alamofire.AFError> {
+        let url = "\(baseURL)/api/v1/user-trace?userId=\(userId)&page=\(page)&size=\(size ?? 10)"
         
         return session.request(url, method: .get, encoding: JSONEncoding.default, headers: self.headers())
             .validate()
@@ -31,7 +32,7 @@ class UserTraceRemoteService: UserTraceRemoteServiceProtocol, APIServiceProtocol
     }
     
     func create(data: UserTraceCreateReqDTO) -> AnyPublisher<UserTraceResDTO, Alamofire.AFError> {
-        let url = "\(baseURL)"
+        let url = "\(baseURL)/api/v1/user-trace"
         
         return Future<UserTraceResDTO, Alamofire.AFError> { promise in
             self.session.upload(multipartFormData: { multipartFormData in
@@ -41,7 +42,7 @@ class UserTraceRemoteService: UserTraceRemoteServiceProtocol, APIServiceProtocol
                 }
                 
                 // Append the JSON data
-                let contentTrace = ["writeUserId": data.contentTrace.writeUserId, "type": data.contentTrace.type.rawValue, "contents": data.contentTrace.contents ?? ""]
+                let contentTrace = ["userId": data.contentTrace.userId, "writeUserId": data.contentTrace.writeUserId, "type": data.contentTrace.type.rawValue, "contents": data.contentTrace.contents ?? ""]
                 if let jsonData = try? JSONSerialization.data(withJSONObject: contentTrace, options: []) {
                     multipartFormData.append(jsonData, withName: "contentTrace", mimeType: "application/json")
                 }
@@ -60,7 +61,7 @@ class UserTraceRemoteService: UserTraceRemoteServiceProtocol, APIServiceProtocol
     }
 
     func delete(id: Int64) -> AnyPublisher<Void, Alamofire.AFError> {
-        let url = "\(baseURL)/\(id)"
+        let url = "\(baseURL)/api/v1/user-trace/\(id)"
 
         return AF.request(url, method: .delete, headers: self.headers())
             .validate()

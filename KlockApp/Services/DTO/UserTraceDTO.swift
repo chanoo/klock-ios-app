@@ -37,6 +37,7 @@ struct UserTraceCreateReqDTO: Codable {
 }
 
 struct UserTraceCreateReqContentTraceDTO: Codable {
+    let userId: Int64
     let writeUserId: Int64
     let type: UserTraceType
     let contents: String?
