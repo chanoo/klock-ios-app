@@ -32,9 +32,9 @@ struct MessageLeftBubbleView: View {
                     }
                 }
                 .padding(12)
-                .background(FancyColor.chatBotBubbleMe.color)
+                .background(FancyColor.chatBotBubble.color)
                 .clipShape(RoundedCorners(tl: 0, tr: 10, bl: 10, br: 10))
-                .foregroundColor(FancyColor.chatbotBubbleTextMe.color)
+                .foregroundColor(FancyColor.chatbotBubbleText.color)
                 .contextMenu { // Use contextMenu instead of onLongPressGesture
                     Button(action: {
                         UIPasteboard.general.string = content // `content`의 값을 클립보드에 복사

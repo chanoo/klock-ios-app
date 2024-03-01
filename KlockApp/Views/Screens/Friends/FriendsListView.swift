@@ -39,10 +39,10 @@ struct FriendsListView: View {
                     VStack(alignment: .leading, spacing: 12) {
                         ForEach(Array(viewModel.friends.enumerated()), id: \.element) { index, friendModel in
                             if index == 0 {
-                                FirstFriendsRowView(userId: friendModel.followId, friendModel: friendModel)
+                                FirstFriendsRowView(friendModel: friendModel)
                                     .environmentObject(actionSheetManager)
                             } else {
-                                FriendsRowView(userId: friendModel.followId,friendModel: friendModel)
+                                FriendsRowView(friendModel: friendModel)
                                     .environmentObject(actionSheetManager)
                             }
                         }
@@ -61,13 +61,12 @@ struct FriendsListView: View {
 }
 
 struct FirstFriendsRowView: View {
-    let userId: Int64
     @EnvironmentObject var actionSheetManager: ActionSheetManager
 
     var friendModel: FriendRelationFetchResDTO
     var body: some View {
         NavigationLink(
-            destination: FriendsView(userId: userId)
+            destination: FriendsView(nickname: friendModel.nickname, userId: friendModel.followId)
                 .environmentObject(actionSheetManager)) {
             HStack {
                 ZStack {
@@ -110,14 +109,13 @@ struct FirstFriendsRowView: View {
 }
 
 struct FriendsRowView: View {
-    let userId: Int64
     @EnvironmentObject var actionSheetManager: ActionSheetManager
 
     var friendModel: FriendRelationFetchResDTO
     var body: some View {
         VStack(spacing: 0) {
             NavigationLink(
-                destination: FriendsView(userId: userId)
+                destination: FriendsView(nickname: friendModel.nickname, userId: friendModel.followId)
                     .environmentObject(actionSheetManager)) {
                 HStack {
                     ZStack {

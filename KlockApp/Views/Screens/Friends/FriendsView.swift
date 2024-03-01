@@ -17,8 +17,9 @@ struct FriendsView: View {
     @State private var isShowingAddFriend = false
     @State private var proxy: ScrollViewProxy?
     
+    var nickname: String?
     var userId: Int64?
-    
+
     var body: some View {
         VStack(spacing: 0) {
             if viewModel.groupedUserTraces.isEmpty {
@@ -95,7 +96,7 @@ struct FriendsView: View {
             )
         }
         .background(FancyColor.chatBotBackground.color)
-        .navigationBarTitle("친구", displayMode: .inline)
+        .navigationBarTitle(nickname ?? "친구", displayMode: .inline)
         .navigationBarBackButtonHidden()
         .navigationBarItems(
             leading: friendListView,
