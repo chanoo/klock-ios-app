@@ -238,6 +238,7 @@
 		98E9386129EA5871009CBF32 /* TimeTimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E9386029EA5871009CBF32 /* TimeTimerViewModel.swift */; };
 		98E9386529EA5899009CBF32 /* AnalogClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E9386429EA5899009CBF32 /* AnalogClockView.swift */; };
 		98E9386B29EAD1C3009CBF32 /* StudySessionServiceDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E9386A29EAD1C3009CBF32 /* StudySessionServiceDTO.swift */; };
+		98EA61352B92DB5C0008E54D /* FlagOnIssueContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EA61342B92DB5C0008E54D /* FlagOnIssueContentView.swift */; };
 		98EBFBE329F78307004E95F3 /* ChatBotSyncProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EBFBE229F78307004E95F3 /* ChatBotSyncProtocol.swift */; };
 		98EBFBE629F783BA004E95F3 /* ChatBotSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EBFBE529F783BA004E95F3 /* ChatBotSync.swift */; };
 		98EBFBE829F968E8004E95F3 /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EBFBE729F968E8004E95F3 /* TaskModel.swift */; };
@@ -519,6 +520,7 @@
 		98E9386029EA5871009CBF32 /* TimeTimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTimerViewModel.swift; sourceTree = "<group>"; };
 		98E9386429EA5899009CBF32 /* AnalogClockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalogClockView.swift; sourceTree = "<group>"; };
 		98E9386A29EAD1C3009CBF32 /* StudySessionServiceDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudySessionServiceDTO.swift; sourceTree = "<group>"; };
+		98EA61342B92DB5C0008E54D /* FlagOnIssueContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlagOnIssueContentView.swift; sourceTree = "<group>"; };
 		98EBFBE229F78307004E95F3 /* ChatBotSyncProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotSyncProtocol.swift; sourceTree = "<group>"; };
 		98EBFBE529F783BA004E95F3 /* ChatBotSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotSync.swift; sourceTree = "<group>"; };
 		98EBFBE729F968E8004E95F3 /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
@@ -1029,6 +1031,7 @@
 				98B21B4329D60D25004EFE0E /* FancyButton.swift */,
 				98B21B4529D60EEB004EFE0E /* FancyTextField.swift */,
 				984D2C7F29DFB197008D3EA9 /* FlowLayout.swift */,
+				98EA61342B92DB5C0008E54D /* FlagOnIssueContentView.swift */,
 				984D2C8629DFDB5F008D3EA9 /* BackButtonView.swift */,
 				984D2C8A29DFDBAA008D3EA9 /* CommonViewModifier.swift */,
 				98E9384D29EA3935009CBF32 /* RoundedCorners.swift */,
@@ -1367,6 +1370,7 @@
 				98B21B5729D6F492004EFE0E /* SocialLoginModel.swift in Sources */,
 				98E6A5A42B88DEA0007FEDB4 /* MessageLeftBubbleView.swift in Sources */,
 				98EBFBF229F98A86004E95F3 /* CharacterViewModel.swift in Sources */,
+				98EA61352B92DB5C0008E54D /* FlagOnIssueContentView.swift in Sources */,
 				98B21B5B29D6F4BF004EFE0E /* TagModel.swift in Sources */,
 				9881FC0B2A1F455200497937 /* BeaconManager.swift in Sources */,
 				98976B0B2A07819E00F1CEAE /* ExamTimerRemoteService.swift in Sources */,

@@ -21,6 +21,7 @@ class FriendsViewModel: ObservableObject {
     @Published var dynamicHeight: CGFloat = 36 // 높이 초기값
     @Published var contents: String? = nil
     @Published var image: Data? = nil
+    @Published var flogOnIssue: String? = nil
 
     private let friendRelationService = Container.shared.resolve(FriendRelationServiceProtocol.self)
     private let userTraceService = Container.shared.resolve(UserTraceRemoteServiceProtocol.self)

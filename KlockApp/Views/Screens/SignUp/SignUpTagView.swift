@@ -44,7 +44,6 @@ struct SignUpTagView: View {
                             action: {
                                 viewModel.toggleTagSelectionSubject.send(tag.id!)
                             },
-                            bordered: true,
                             style: .constant(viewModel.selectedTagId == tag.id ? .black : .outline)
                         )
                     }

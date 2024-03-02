@@ -96,27 +96,31 @@ struct CalendarView: View {
                                                     title: studySession.timerName,
                                                     message: "\(TimeUtils.formattedDateString(from: studySession.startTime, format: "hh시 mm분")) ~ \(studySession.endTime != nil ? TimeUtils.formattedDateString(from: studySession.endTime!, format: "hh시 mm분") : "진행 중")",
                                                     content: AnyView(
-                                                        FancyTextField(
-                                                            placeholder: "공부 내용을 적어주세요",
-                                                            text: $viewModel.studySessionModel.timerName,
-                                                            firstResponder: $viewModel.becomeFirstResponder) {
-                                                                print("done")
-                                                            }
+                                                        VStack {
+                                                            FancyTextField(
+                                                                placeholder: "공부 내용을 적어주세요",
+                                                                text: $viewModel.studySessionModel.timerName,
+                                                                firstResponder: $viewModel.becomeFirstResponder)
+                                                            FancyButton(
+                                                                title: "완료",
+                                                                action: {
+                                                                    viewModel.updateStudySession()
+                                                                    viewModel.studySessionsOfDay[viewModel.studySessionsOfDay.firstIndex(where: { $0.id == studySession.id })!] = viewModel.studySessionModel
+                                                                    withAnimation(.spring()) {
+                                                                        actionSheetManager.isPresented = false
+                                                                        viewModel.hideKeyboard()
+                                                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                                                            actionSheetManager.actionSheet = nil
+                                                                        }
+                                                                    }
+                                                                },
+                                                                disabled: .constant(viewModel.studySessionModel.timerName.isEmpty),
+                                                                style: .constant(.black))
+                                                            .padding(.top, 20)
+                                                        }
                                                     ),
-                                                    actionButtons: [
-                                                        ActionButton(title: "완료", action: {
-                                                            viewModel.updateStudySession()
-                                                            viewModel.studySessionsOfDay[viewModel.studySessionsOfDay.firstIndex(where: { $0.id == studySession.id })!] = viewModel.studySessionModel
-                                                            withAnimation(.spring()) {
-                                                                actionSheetManager.isPresented = false
-                                                                viewModel.hideKeyboard()
-                                                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                                                    actionSheetManager.actionSheet = nil
-                                                                }
-                                                            }
-                                                        }),
-                                                    ],
-                                                    cancelButton: ActionButton(title: "취소", action: {
+                                                    actionButtons: nil,
+                                                    cancelButton: FancyButton(title: "취소", action: {
                                                         withAnimation(.spring()) {
                                                             actionSheetManager.isPresented = false
                                                             viewModel.hideKeyboard()
@@ -124,7 +128,7 @@ struct CalendarView: View {
                                                                 actionSheetManager.actionSheet = nil
                                                             }
                                                         }
-                                                    })
+                                                    }, style: .constant(.text))
                                                 )
                                                 withAnimation(.spring()) {
                                                     actionSheetManager.isPresented = true
