@@ -96,14 +96,14 @@ struct CameraPermissionView: View {
             title: "카메라를 사용할 수 없습니다.",
             message: "카메라 사용을 원하시면 휴대폰 설정에서 클라크의 카메라 접근 권한을 허용해 주세요.",
             actionButtons: [
-                ActionButton(title: "설정하러 가기", action: {
+                FancyButton(title: "설정하러 가기", action: {
                     viewModel.openAppSettings()
                     actionSheetManager.hide()
-                }),
+                }, style: .constant(.outline)),
             ],
-            cancelButton: ActionButton(title: "취소", action: {
+            cancelButton: FancyButton(title: "취소", action: {
                 actionSheetManager.hide()
-            })
+            }, style: .constant(.text))
         )
 
         withAnimation {

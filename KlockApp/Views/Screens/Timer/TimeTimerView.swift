@@ -121,14 +121,14 @@ struct AddTimerButton: View {
                 title: "공부시간 타이머 추가",
                 message: "원하는 타이머로 공부를 시작해보세요.",
                 actionButtons: [
-                    ActionButton(title: "집중시간 타이머", action: {
+                    FancyButton(title: "집중시간 타이머", action: {
                         viewModel.addTimer(type: TimerType.focus.rawValue)
                         actionSheetManager.isPresented = false
-                    }),
-                    ActionButton(title: "Ai자동 타이머", action: {
+                    }, style: .constant(.outline)),
+                    FancyButton(title: "Ai자동 타이머", action: {
                         viewModel.addTimer(type: TimerType.auto.rawValue)
                         actionSheetManager.isPresented = false
-                    }),
+                    }, style: .constant(.outline)),
 //                    ActionButton(title: "뽀모도로 타이머", action: {
 //                        withAnimation(.spring()) {
 //                            viewModel.addTimer(type: TimerType.pomodoro.rawValue)
@@ -142,9 +142,9 @@ struct AddTimerButton: View {
 //                        }
 //                    }),
                 ],
-                cancelButton: ActionButton(title: "취소", action: {
+                cancelButton: FancyButton(title: "취소", action: {
                     actionSheetManager.isPresented = false
-                })
+                }, style: .constant(.text))
             )
             withAnimation(.spring()) {
                 actionSheetManager.isPresented = true

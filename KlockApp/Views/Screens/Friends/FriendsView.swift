@@ -130,7 +130,6 @@ struct FriendsView: View {
             }
         }
     }
-
     
     private var addFriendButtonView: some View {
         Group {
@@ -141,18 +140,18 @@ struct FriendsView: View {
                         title: "친구 추가",
                         message: "나와 같이 성장해 나갈 친구와 같이 공부하세요.",
                         actionButtons: [
-                            ActionButton(title: "QR코드 스캔", action: {
+                            FancyButton(title: "QR코드 스캔", action: {
                                 withAnimation(.spring()) {
                                     actionSheetManager.isPresented = false
                                 }
                                 friendAddViewModel.activeSheet = .qrcode
-                            }),
-                            ActionButton(title: "닉네임 친구추가", action: {
+                            }, style: .constant(.outline)),
+                            FancyButton(title: "닉네임 친구추가", action: {
                                 withAnimation(.spring()) {
                                     actionSheetManager.isPresented = false
                                 }
                                 friendAddViewModel.activeSheet = .nickname
-                            }),
+                            }, style: .constant(.outline)),
         //                        ActionButton(title: "주변탐색 친구추가", action: {
         //                            withAnimation(.spring()) {
         //                                actionSheetManager.isPresented = false
@@ -160,11 +159,11 @@ struct FriendsView: View {
         //                            friendAddViewModel.activeSheet = .nearby
         //                        }),
                         ],
-                        cancelButton: ActionButton(title: "취소", action: {
+                        cancelButton: FancyButton(title: "취소", action: {
                             withAnimation(.spring()) {
                                 actionSheetManager.isPresented = false
                             }
-                        })
+                        }, style: .constant(.text))
                     )
                     withAnimation(.spring()) {
                         actionSheetManager.isPresented = true

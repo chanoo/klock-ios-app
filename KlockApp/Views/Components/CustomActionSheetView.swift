@@ -7,11 +7,6 @@
 
 import SwiftUI
 
-struct ActionButton {
-    var title: String
-    var action: () -> Void
-}
-
 struct CustomActionSheetView: View {
     @EnvironmentObject var tabBarManager: TabBarManager
     @State private var keyboardHeight: CGFloat = 0
@@ -19,8 +14,8 @@ struct CustomActionSheetView: View {
     let title: String
     var message: String? = nil
     var content: AnyView? = nil
-    let actionButtons: [ActionButton]
-    let cancelButton: ActionButton
+    let actionButtons: [FancyButton]?
+    let cancelButton: FancyButton
 
     var body: some View {
         GeometryReader { geometry in
@@ -47,31 +42,20 @@ struct CustomActionSheetView: View {
                         
                         if let content = content {
                             content
-                                .frame(width: geometry.size.width - 40, height: 60)
+                                .frame(width: geometry.size.width - 40, height: .infinity)
                         }
 
-                        ForEach(actionButtons.indices, id: \.self) { index in
-                            FancyButton(
-                                title: actionButtons[index].title,
-                                action: {
-                                    actionButtons[index].action()
-                                },
-                                bordered: true,
-                                style: .constant(.outline)
-                            )
+                        if let actionButtons = actionButtons {
+                            ForEach(actionButtons.indices, id: \.self) { index in
+                                actionButtons[index]
+                                    .frame(width: geometry.size.width - 40, height: 60)
+                                    .padding([.top, .bottom], 4)
+                            }
+                        }
+
+                        cancelButton
                             .frame(width: geometry.size.width - 40, height: 60)
-                            .padding([.top, .bottom], 4)
-                        }
-
-                        FancyButton(
-                            title: cancelButton.title,
-                            action: {
-                                cancelButton.action()
-                            },
-                            style: .constant(.black)
-                        )
-                        .frame(width: geometry.size.width - 40, height: 60)
-                        .padding([.top, .bottom], 12)
+                            .padding([.top, .bottom], 12)
                     }
                     .padding(.bottom, 36 + keyboardHeight) // Adjust padding based on keyboard height
                     .padding(.bottom, geometry.safeAreaInsets.bottom)

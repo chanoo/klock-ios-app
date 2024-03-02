@@ -8,6 +8,12 @@
 import SwiftUI
 import Foast
 
+enum FancyButtonTextAlign {
+    case leading
+    case center
+    case trailing
+}
+
 enum FancyButtonStyle {
     case primary
     case secondary
@@ -17,6 +23,7 @@ enum FancyButtonStyle {
     case kakao
     case button
     case black
+    case text
 
     var backgroundColor: Color {
         switch self {
@@ -36,6 +43,8 @@ enum FancyButtonStyle {
             return FancyColor.button.color
         case .black:
             return FancyColor.blackButtonBackground.color
+        case .text:
+            return FancyColor.clear.color
         }
     }
 
@@ -57,6 +66,8 @@ enum FancyButtonStyle {
             return FancyColor.buttonText.color
         case .black:
             return FancyColor.blackButtonText.color
+        case .text:
+            return FancyColor.buttonOutlineForground.color
         }
     }
     
@@ -78,6 +89,8 @@ enum FancyButtonStyle {
             return FancyColor.black.color
         case .black:
             return FancyColor.black.color
+        case .text:
+            return FancyColor.clear.color
         }
     }
     
@@ -88,7 +101,7 @@ enum FancyButtonStyle {
         case .secondary:
             return FancyColor.white.color
         case .outline:
-            return FancyColor.white.color
+            return FancyColor.buttonDisableOutlineBackground.color
         case .facebook:
             return FancyColor.facebook.color
         case .apple:
@@ -99,17 +112,19 @@ enum FancyButtonStyle {
             return FancyColor.blackDisabledButtonBackground.color
         case .black:
             return FancyColor.backButtonDisable.color
+        case .text:
+            return FancyColor.clear.color
         }
     }
     
-    var disableTextColor: Color {
+    var disableForgroundColor: Color {
         switch self {
         case .primary:
             return FancyColor.white.color
         case .secondary:
             return FancyColor.primary.color
         case .outline:
-            return FancyColor.buttonOutlineForground.color
+            return FancyColor.buttonDisableOutlineForgound.color
         case .facebook:
             return FancyColor.white.color
         case .apple:
@@ -120,16 +135,41 @@ enum FancyButtonStyle {
             return FancyColor.blackDisabledButtonText.color
         case .black:
             return FancyColor.blackButtonText.color
+        case .text:
+            return FancyColor.buttonDisableOutlineForgound.color
         }
     }
-
+    
+    var disableOutlineColor: Color {
+        switch self {
+        case .primary:
+            return FancyColor.primary.color
+        case .secondary:
+            return FancyColor.white.color
+        case .outline:
+            return FancyColor.buttonDisableOutlineLine.color
+        case .facebook:
+            return FancyColor.facebook.color
+        case .apple:
+            return FancyColor.appleBackground.color
+        case .kakao:
+            return FancyColor.kakao.color
+        case .button:
+            return FancyColor.black.color
+        case .black:
+            return FancyColor.black.color
+        case .text:
+            return FancyColor.clear.color
+        }
+    }
 }
 
 struct FancyButton: View {
     let title: String
     let action: (() -> Void)?
+    let disableAction: (() -> Void)?
+    var alignment: FancyButtonTextAlign? = .center
     let longPressAction: (() -> Void)?
-    let bordered: Bool
     let icon: Image?
     let isBlock: Bool
     @Binding var disabled: Bool?
@@ -138,16 +178,18 @@ struct FancyButton: View {
 
     init(title: String,
          action: (() -> Void)? = nil,
+         disableAction: (() -> Void)? = nil,
+         alignment: FancyButtonTextAlign? = .center,
          longPressAction: (() -> Void)? = nil,
-         bordered: Bool = false,
          icon: Image? = nil,
          isBlock: Bool = true,
          disabled: Binding<Bool?> = .constant(false),
          style: Binding<FancyButtonStyle>) {
         self.title = title
         self.action = action
+        self.disableAction = disableAction
+        self.alignment = alignment
         self.longPressAction = longPressAction
-        self.bordered = bordered
         self.icon = icon
         self.isBlock = isBlock
         self._disabled = disabled
@@ -156,8 +198,12 @@ struct FancyButton: View {
 
     var body: some View {
         Button(action: {
-            if isTapped, !(disabled ?? false) {
-                action?()
+            if isTapped {
+                if disabled ?? false {
+                    disableAction?()
+                } else {
+                    action?()
+                }
             }
         }) {
             buttonContent
@@ -172,14 +218,22 @@ struct FancyButton: View {
 
     var buttonContent: some View {
         HStack(spacing: 0) {
-            if let icon = icon {
-                icon
-                    .foregroundColor(style.foregroundColor)
-                    .padding(.trailing, 12)
+            if alignment == .trailing {
+                Spacer()
             }
-            Text(title)
-                .foregroundColor(disabled ?? false ? style.disableTextColor : style.foregroundColor)
-                .font(.system(size: 15, weight: .bold))
+            Group {
+                if let icon = icon {
+                    icon
+                        .foregroundColor(style.foregroundColor)
+                        .padding(.trailing, 12)
+                }
+                Text(title)
+                    .foregroundColor(disabled ?? false ? style.disableForgroundColor : style.foregroundColor)
+                    .font(.system(size: 15, weight: .bold))
+            }
+            if alignment == .leading {
+                Spacer()
+            }
         }
         .padding(.leading, 20)
         .padding(.trailing, 20)
@@ -188,7 +242,7 @@ struct FancyButton: View {
         .cornerRadius(4)
         .overlay(
             RoundedRectangle(cornerRadius: 4)
-                .stroke(style.outlineColor, lineWidth: bordered ? 1 : 0)
+                .stroke(disabled ?? false ? style.disableOutlineColor : style.outlineColor, lineWidth: 1)
         )
     }
 }

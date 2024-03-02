@@ -80,15 +80,15 @@ struct AccountSecurityView: View {
             title: "회원 탈퇴",
             message: "데이터는 즉시 영구삭제되며 복구할 수 없습니다.",
             actionButtons: [
-                ActionButton(title: "회원탈퇴", action: {
+                FancyButton(title: "회원탈퇴", action: {
                     viewModel.deleteAccountButtonTapped.send()
                     actionSheetManager.isPresented = false
                     activeDestination = .splash
-                }),
+                }, style: .constant(.outline)),
             ],
-            cancelButton: ActionButton(title: "취소", action: {
+            cancelButton: FancyButton(title: "취소", action: {
                 actionSheetManager.isPresented = false
-            })
+            }, style: .constant(.text))
         )
         withAnimation(.spring()) {
             actionSheetManager.isPresented = true
@@ -99,16 +99,17 @@ struct AccountSecurityView: View {
         actionSheetManager.actionSheet = CustomActionSheetView(
             title: "로그아웃",
             message: "정말로 로그아웃하시겠습니까?",
+            content: nil,
             actionButtons: [
-                ActionButton(title: "로그아웃", action: {
+                FancyButton(title: "로그아웃", action: {
                     viewModel.logoutButtonTapped.send()
                     actionSheetManager.isPresented = false
                     activeDestination = .splash
-                }),
+                }, style: .constant(.outline)),
             ],
-            cancelButton: ActionButton(title: "취소", action: {
+            cancelButton: FancyButton(title: "취소", action: {
                 actionSheetManager.isPresented = false
-            })
+            }, style: .constant(.text))
         )
         withAnimation(.spring()) {
             actionSheetManager.isPresented = true

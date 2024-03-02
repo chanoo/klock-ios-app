@@ -38,7 +38,6 @@ struct SignUpStartWeekView: View {
                         viewModel.setStartDay(day: .sunday)
                         selectedDay = .sunday
                     },
-                    bordered: true,
                     style: .constant(selectedDay == .sunday ? .black : .outline)
                 )
                 FancyButton(
@@ -47,7 +46,6 @@ struct SignUpStartWeekView: View {
                         viewModel.setStartDay(day: .monday)
                         selectedDay = .monday
                     },
-                    bordered: true,
                     style: .constant(selectedDay == .monday ? .black : .outline)
                 )
             }

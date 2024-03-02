@@ -61,13 +61,16 @@ struct FancyTextField: View {
                 .padding([.leading, .trailing], 4)
             } else {
                 HStack {
-                    TextField(placeholder, text: $text, onCommit: {
-                        onCommit?()
-                    })
-                    .foregroundColor(FancyColor.text.color)
-                    .keyboardType(keyboardType ?? .default)
-                    .focused($isFocused)
-                    
+                    TextField(
+                        placeholder,
+                        text: $text,
+                        onCommit: {
+                            onCommit?()
+                        })
+                        .foregroundColor(FancyColor.text.color)
+                        .keyboardType(keyboardType ?? .default)
+                        .focused($isFocused)
+
                     Image(imageName)
                         .foregroundColor(.black)
                         .opacity(text.count == 0 ? 0 : 1) // 이미지를 보이지 않게 하려면 opacity를 0으로 설정
