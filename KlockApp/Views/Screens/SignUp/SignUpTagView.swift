@@ -17,6 +17,12 @@ struct SignUpTagView: View {
         ScrollView {
             VStack {
                 HStack {
+                    BackButtonView()
+                    Spacer()
+                }
+                .padding(.bottom, 20)
+                
+                HStack {
                     Image("img_signup_step4")
                 }
                 .frame(maxWidth: .infinity, alignment: .topLeading)
@@ -83,8 +89,7 @@ struct SignUpTagView: View {
                 )
                 .hidden()
             }
-            .navigationBarItems(leading: BackButtonView())
-            .navigationBarBackButtonHidden()
+            .navigationBarHidden(true)
             .padding(.all, 30)
             .onChange(of: viewModel.signUpUserModel.tagId > 0) { newValue in
                 viewModel.isTagNextButtonEnabled = newValue

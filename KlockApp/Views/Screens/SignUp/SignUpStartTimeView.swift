@@ -17,6 +17,12 @@ struct SignUpStartTimeView: View {
     var body: some View {
         VStack {
             HStack {
+                BackButtonView()
+                Spacer()
+            }
+            .padding(.bottom, 20)
+
+            HStack {
                 Image("img_signup_step3")
             }
             .frame(maxWidth: .infinity, alignment: .topLeading)
@@ -86,8 +92,7 @@ struct SignUpStartTimeView: View {
         }
         // 왼쪽 정렬
         .frame(maxHeight: .infinity, alignment: .topLeading)
-        .navigationBarItems(leading: BackButtonView())
-        .navigationBarBackButtonHidden()
+        .navigationBarHidden(true)
         .padding(.all, 30)
     }
     

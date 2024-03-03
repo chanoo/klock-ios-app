@@ -14,6 +14,12 @@ struct SignUpStartWeekView: View {
 
     var body: some View {
         VStack {
+            HStack {
+                BackButtonView()
+                Spacer()
+            }
+            .padding(.bottom, 20)
+
             Image("img_signup_step2")
                 .frame(maxWidth: .infinity, alignment: .topLeading)
             
@@ -77,8 +83,7 @@ struct SignUpStartWeekView: View {
             .hidden()
         }
         .frame(maxHeight: .infinity, alignment: .topLeading)
-        .navigationBarItems(leading: BackButtonView())
-        .navigationBarBackButtonHidden()
+        .navigationBarHidden(true)
         .padding(.all, 30)
     }
     

@@ -14,6 +14,12 @@ struct SignUpNicknameView: View {
     var body: some View {
         VStack {
             HStack {
+                BackButtonView()
+                Spacer()
+            }
+            .padding(.bottom, 20)
+            
+            HStack {
                 Image("img_signup_step1")
             }
             .foregroundColor(FancyColor.text.color)
@@ -81,8 +87,7 @@ struct SignUpNicknameView: View {
         }
         // 왼쪽 정렬
         .frame(maxHeight: .infinity, alignment: .topLeading)
-        .navigationBarItems(leading: BackButtonView())
-        .navigationBarBackButtonHidden()
+        .navigationBarHidden(true)
         .padding(.all, 30)
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
