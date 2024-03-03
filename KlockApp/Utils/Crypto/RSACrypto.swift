@@ -31,7 +31,7 @@ class RSACrypto {
 
     static func encryptData(_ data: Data, using publicKey: SecKey) -> Data? {
         var error: Unmanaged<CFError>?
-        guard let encryptedData = SecKeyCreateEncryptedData(publicKey, .rsaEncryptionOAEPSHA256, data as CFData, &error) as Data? else {
+        guard let encryptedData = SecKeyCreateEncryptedData(publicKey, .rsaEncryptionPKCS1, data as CFData, &error) as Data? else {
             print("RSA Encryption Error: \(error!.takeRetainedValue() as Error)")
             return nil
         }

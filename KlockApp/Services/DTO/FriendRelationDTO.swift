@@ -38,6 +38,21 @@ struct FriendRelationFollowQRCodeReqDTO: Hashable, Codable {
          }
          return nil
      }
+    
+    static func decode(from jsonString: String) -> FriendRelationFollowQRCodeReqDTO? {
+        let decoder = JSONDecoder()
+        guard let data = jsonString.data(using: .utf8) else {
+            return nil
+        }
+        do {
+            let decodedObject = try decoder.decode(FriendRelationFollowQRCodeReqDTO.self, from: data)
+            return decodedObject
+        } catch DecodingError.dataCorrupted {
+            return nil
+        } catch {
+            return nil
+        }
+    }
 }
 
 struct FriendRelationFollowQRCodeResDTO: Codable, Hashable {

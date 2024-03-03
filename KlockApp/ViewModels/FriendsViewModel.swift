@@ -12,7 +12,6 @@ import Foast
 class FriendsViewModel: ObservableObject {
     @Published var newMessage: String = ""
     @Published var isActionSheetPresented = false
-    @Published var friendAddViewModel = FriendAddViewModel()
     @Published var isPreparingResponse: Bool = false
     @Published var isLoading: Bool = true
     @Published var isSending: Bool = false
@@ -31,29 +30,23 @@ class FriendsViewModel: ObservableObject {
 
     var cancellables: Set<AnyCancellable> = []
     var last = false
-    var page = -1
+    var page = 0
     
-    var nickname: String?
-    var userId: Int64?
+    var friendsViewModelData: FriendsViewModelData
     var userModel = UserModel.load()
     
     private let userTraceFetchQueue = DispatchQueue(label: "app.klockApp.userTraceFetchQueue")
 
-    init(nickname: String? = nil, userId: Int64?) {
-        self.nickname = nickname
-        self.userId = userId
+    init(data: FriendsViewModelData) {
+        friendsViewModelData = data
         setupSendButtonTapped()
         setupDeleteUserTrace()
-    }
-    
-    func set(userId: Int64?) {
-        self.userId = userId
     }
     
     private func setupSendButtonTapped() {
         sendTapped
             .sink { [weak self] _ in
-                guard let userId = self?.userId else { return }
+                guard let userId = self?.friendsViewModelData.userId else { return }
                 DispatchQueue.main.async {
                     self?.isSending = true
                     self?.dynamicHeight = 36
@@ -122,7 +115,6 @@ class FriendsViewModel: ObservableObject {
         userTraceFetchQueue.async { [weak self] in
             guard let self = self, !self.last else { return }
 
-            self.page += 1
             print("### page ", page)
             self.userTraceService.fetch(userId: userId, page: self.page, size: 10)
                 .sink { completion in
@@ -133,6 +125,7 @@ class FriendsViewModel: ObservableObject {
                         break
                     }
                     DispatchQueue.main.async {
+                        self.page += 1
                         self.isLoading = false
                     }
                 } receiveValue: { dto in
@@ -167,7 +160,7 @@ class FriendsViewModel: ObservableObject {
     func showAddFriendView(for item: SheetType) -> some View {
         switch item {
         case .qrcode:
-            return AnyView(FriendAddByQRCodeView().environmentObject(friendAddViewModel))
+            return AnyView(FriendAddByQRCodeView())
         case .nickname:
             return AnyView(FriendAddByNicknameView())
         case .nearby:
@@ -227,25 +220,6 @@ class FriendsViewModel: ObservableObject {
                 })
                 .store(in: &cancellables)
         }
-    }
-
-    func friendAddActionSheet() -> ActionSheet {
-        ActionSheet(
-            title: Text("친구 추가 방식을 선택하세요"),
-            message: Text("어떤 방식으로 친구를 추가하시겠습니까?"),
-            buttons: [
-                .default(Text("QR코드 스캔"), action: {
-                    self.friendAddViewModel.activeSheet = .qrcode
-                }),
-                .default(Text("닉네임 친구추가"), action: {
-                    self.friendAddViewModel.activeSheet = .nickname
-                }),
-//                .default(Text("주변탐색 친구추가"), action: {
-//                    self.friendAddViewModel.activeSheet = .nearby
-//                }),
-                .cancel()
-            ]
-        )
     }
     
     func hideKeyboard() {

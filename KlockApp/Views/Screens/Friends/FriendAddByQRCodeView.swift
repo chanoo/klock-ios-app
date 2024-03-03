@@ -9,7 +9,7 @@ import SwiftUI
 import Foast
 
 struct FriendAddByQRCodeView: View {
-    @EnvironmentObject var viewModel: FriendAddViewModel // 환경 객체로 타이머 뷰 모델을 가져옵니다.
+    @StateObject var viewModel: FriendAddViewModel = Container.shared.resolve(FriendAddViewModel.self)
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     var body: some View {
         NavigationView {

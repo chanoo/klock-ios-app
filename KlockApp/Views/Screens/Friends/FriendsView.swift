@@ -22,7 +22,7 @@ struct FriendsView: View {
             if friendsViewModel.isLoading {
                 ChatLoadingView()
                     .onAppear {
-                        if let userId = friendsViewModel.userId ?? UserModel.load()?.id {
+                        if let userId = friendsViewModel.friendsViewModelData.userId ?? UserModel.load()?.id {
                             friendsViewModel.fetchUserTrace(userId: userId)
                         }
                     }
@@ -52,7 +52,7 @@ struct FriendsView: View {
                                             self.proxy = proxy
                                             if let lastId = friendsViewModel.groupedUserTraces.last?.userTraces.last?.id,
                                                lastId == userTrace.id,
-                                               let userId = friendsViewModel.userId ?? UserModel.load()?.id {
+                                               let userId = friendsViewModel.friendsViewModelData.userId ?? UserModel.load()?.id {
                                                 friendsViewModel.fetchUserTrace(userId: userId)
                                             }
                                         }
@@ -67,7 +67,10 @@ struct FriendsView: View {
                     imageViewModel.checkCameraPermission()
                 }
                 .onDisappear {
+                    friendsViewModel.last = false
                     friendsViewModel.isLoading = true
+                    friendsViewModel.page = 0
+                    friendsViewModel.groupedUserTraces = []
                 }
                 .onTapGesture {
                     friendsViewModel.hideKeyboard()
@@ -97,7 +100,7 @@ struct FriendsView: View {
             )
         }
         .background(FancyColor.chatBotBackground.color)
-        .navigationBarTitle(friendsViewModel.nickname ?? "친구", displayMode: .inline)
+        .navigationBarTitle(friendsViewModel.friendsViewModelData.nickname ?? "친구", displayMode: .inline)
         .navigationBarBackButtonHidden()
         .navigationBarItems(
             leading: naviLeadingItemView,
@@ -110,7 +113,7 @@ struct FriendsView: View {
     
     private var naviLeadingItemView: some View {
         Group {
-            if friendsViewModel.userId == UserModel.load()?.id {
+            if friendsViewModel.friendsViewModelData.userId == UserModel.load()?.id {
                 NavigationLink(destination: FriendsListView()
                                 .environmentObject(friendsViewModel)
                                 .environmentObject(actionSheetManager)
@@ -130,7 +133,7 @@ struct FriendsView: View {
     
     private var addFriendButtonView: some View {
         Group {
-            if friendsViewModel.userId == UserModel.load()?.id {
+            if friendsViewModel.friendsViewModelData.userId == UserModel.load()?.id {
                 Button(action: {
                     friendsViewModel.hideKeyboard()
                     actionSheetManager.actionSheet = CustomActionSheetView(
