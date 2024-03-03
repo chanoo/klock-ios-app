@@ -31,7 +31,7 @@ class FriendRelationService: FriendRelationServiceProtocol, APIServiceProtocol {
     }
 
     func followQRCode(request: FriendRelationFollowQRCodeReqDTO) -> AnyPublisher<FriendRelationFollowQRCodeResDTO, Alamofire.AFError> {
-        let url = "\(baseURL)/follow/qr-code"
+        let url = "http://192.168.68.73:8080/api/v1/friend-relations/follow/qr-code"
 
         return session.request(url, method: .post, parameters: request, encoder: JSONParameterEncoder.default, headers: self.headers())
             .validate()

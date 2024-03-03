@@ -30,7 +30,7 @@ struct FollowCode: Hashable, Codable {
 // 날짜 포맷터 설정
 func formattedDate(from date: Date) -> String {
     let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss" // 원하는 날짜 형식으로 설정
+    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss" // 원하는 날짜 형식으로 설정
     return dateFormatter.string(from: date)
 }
 

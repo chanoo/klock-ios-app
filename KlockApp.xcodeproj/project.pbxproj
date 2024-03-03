@@ -107,6 +107,7 @@
 		987E545B29D552540007E156 /* KlockAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E545A29D552540007E156 /* KlockAppUITests.swift */; };
 		987E545D29D552540007E156 /* KlockAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E545C29D552540007E156 /* KlockAppUITestsLaunchTests.swift */; };
 		987F10872B944D6C001A3EF5 /* KeyboardResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987F10862B944D6C001A3EF5 /* KeyboardResponder.swift */; };
+		987F108B2B949EC2001A3EF5 /* FriendsViewModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987F108A2B949EC2001A3EF5 /* FriendsViewModelData.swift */; };
 		987F2E752B3B010800DC462D /* TensorFlowLiteTaskVision.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98CF07DC2B3AF4FB00BF33C2 /* TensorFlowLiteTaskVision.framework */; };
 		9881FC0B2A1F455200497937 /* BeaconManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9881FC0A2A1F455200497937 /* BeaconManager.swift */; };
 		988572472B3C1F6300E7256B /* UserProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988572462B3C1F6300E7256B /* UserProfileImageView.swift */; };
@@ -240,7 +241,6 @@
 		98E9386529EA5899009CBF32 /* AnalogClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E9386429EA5899009CBF32 /* AnalogClockView.swift */; };
 		98E9386B29EAD1C3009CBF32 /* StudySessionServiceDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E9386A29EAD1C3009CBF32 /* StudySessionServiceDTO.swift */; };
 		98EA61352B92DB5C0008E54D /* FlagOnIssueContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EA61342B92DB5C0008E54D /* FlagOnIssueContentView.swift */; };
-		98EA61382B9308C60008E54D /* SkeletonUI in Frameworks */ = {isa = PBXBuildFile; productRef = 98EA61372B9308C60008E54D /* SkeletonUI */; };
 		98EBFBE329F78307004E95F3 /* ChatBotSyncProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EBFBE229F78307004E95F3 /* ChatBotSyncProtocol.swift */; };
 		98EBFBE629F783BA004E95F3 /* ChatBotSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EBFBE529F783BA004E95F3 /* ChatBotSync.swift */; };
 		98EBFBE829F968E8004E95F3 /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EBFBE729F968E8004E95F3 /* TaskModel.swift */; };
@@ -393,6 +393,7 @@
 		987E545A29D552540007E156 /* KlockAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlockAppUITests.swift; sourceTree = "<group>"; };
 		987E545C29D552540007E156 /* KlockAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlockAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		987F10862B944D6C001A3EF5 /* KeyboardResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardResponder.swift; sourceTree = "<group>"; };
+		987F108A2B949EC2001A3EF5 /* FriendsViewModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewModelData.swift; sourceTree = "<group>"; };
 		9881FC0A2A1F455200497937 /* BeaconManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconManager.swift; sourceTree = "<group>"; };
 		988572462B3C1F6300E7256B /* UserProfileImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileImageView.swift; sourceTree = "<group>"; };
 		988572492B3C488200E7256B /* lottie-heart.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "lottie-heart.json"; sourceTree = "<group>"; };
@@ -555,7 +556,6 @@
 				98CE661629D55A370009916F /* Swinject in Frameworks */,
 				981881CD29F3847A002A4395 /* Lottie in Frameworks */,
 				9885724D2B3C560700E7256B /* YPImagePicker in Frameworks */,
-				98EA61382B9308C60008E54D /* SkeletonUI in Frameworks */,
 				987F2E752B3B010800DC462D /* TensorFlowLiteTaskVision.framework in Frameworks */,
 				98E64D9B2A72431400A7FF16 /* KakaoSDKAuth in Frameworks */,
 			);
@@ -696,13 +696,13 @@
 			isa = PBXGroup;
 			children = (
 				98AE104C2A8D95F700D99322 /* TFLite */,
+				980C623429ED32E000D0A7B5 /* README.md */,
 				9878FF0C2A0EA17100D38BB4 /* TimerManager.swift */,
 				9833FFCF29F683C800CC33F7 /* CoreDataHelper.swift */,
 				984D2C8129DFC2B3008D3EA9 /* AppState.swift */,
 				98D7C95229E460470075D201 /* AppFlowManager.swift */,
 				98D2826629E988100039E6E6 /* CoreDataManager.swift */,
 				9843B7DC29EEE0EB00F91DAD /* NotificationManager.swift */,
-				980C623429ED32E000D0A7B5 /* README.md */,
 				9881FC0A2A1F455200497937 /* BeaconManager.swift */,
 				98AC306C2A134D23006DC48D /* TabBarManager.swift */,
 				989D6F332A4C34BA00BC2F2B /* ActionSheetManager.swift */,
@@ -931,6 +931,7 @@
 				98B0651C2B427CBF009D0F69 /* FollowQRCode.swift */,
 				98A8CEDA2B7C9CB300B5A29C /* UserTraceType.swift */,
 				98CC9EBB2B7DE6F200BF044E /* UserTraceGroup.swift */,
+				987F108A2B949EC2001A3EF5 /* FriendsViewModelData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -938,6 +939,7 @@
 		98CE660D29D553880009916F /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				985BE88329E652CE008582A3 /* README.md */,
 				98D7C95629E510990075D201 /* ContentViewModel.swift */,
 				98EBFBF129F98A86004E95F3 /* CharacterViewModel.swift */,
 				98CE662029D55B730009916F /* SignInViewModel.swift */,
@@ -960,7 +962,6 @@
 				98CF07D82B34546E00BF33C2 /* UserProfileImageViewModel.swift */,
 				980FCBBF2B837945001A819D /* ImageViewModel.swift */,
 				987443D32A57D93F0019F847 /* UserViewModel.swift */,
-				985BE88329E652CE008582A3 /* README.md */,
 				9885F3172A5A9187000E2F7A /* MyModel.swift */,
 				9899A7E92AA37645001B4C72 /* CameraPermissionViewModel.swift */,
 			);
@@ -1191,7 +1192,6 @@
 				98E64D9E2A72431400A7FF16 /* KakaoSDKUser */,
 				9885724C2B3C560700E7256B /* YPImagePicker */,
 				984B101D2B46F48700186B6D /* CachedAsyncImage */,
-				98EA61372B9308C60008E54D /* SkeletonUI */,
 			);
 			productName = KlockApp;
 			productReference = 987E543629D552520007E156 /* KlockApp.app */;
@@ -1278,7 +1278,6 @@
 				98E64D992A72431400A7FF16 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 				9885724B2B3C560700E7256B /* XCRemoteSwiftPackageReference "YPImagePicker" */,
 				984B101C2B46F48700186B6D /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */,
-				98EA61362B9308C60008E54D /* XCRemoteSwiftPackageReference "SkeletonUI" */,
 			);
 			productRefGroup = 987E543729D552520007E156 /* Products */;
 			projectDirPath = "";
@@ -1530,6 +1529,7 @@
 				98EBFBF629FA54F6004E95F3 /* ClearListBackground+Extensions.swift in Sources */,
 				988D7CFA2A3851770018A85E /* QRCodeScannerView.swift in Sources */,
 				98192F442A542DD2007073FB /* PreferencesViewModel.swift in Sources */,
+				987F108B2B949EC2001A3EF5 /* FriendsViewModelData.swift in Sources */,
 				98976B032A077F7F00F1CEAE /* PomodoroTimerRemoteServiceProtocol.swift in Sources */,
 				98E9386529EA5899009CBF32 /* AnalogClockView.swift in Sources */,
 				98BDD22029DD0FA800B0440F /* EmailValidator.swift in Sources */,
@@ -2017,14 +2017,6 @@
 				minimumVersion = 5.6.4;
 			};
 		};
-		98EA61362B9308C60008E54D /* XCRemoteSwiftPackageReference "SkeletonUI" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/CSolanaM/SkeletonUI";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.1;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -2082,11 +2074,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 98E9385629EA4C45009CBF32 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
-		};
-		98EA61372B9308C60008E54D /* SkeletonUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 98EA61362B9308C60008E54D /* XCRemoteSwiftPackageReference "SkeletonUI" */;
-			productName = SkeletonUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 
