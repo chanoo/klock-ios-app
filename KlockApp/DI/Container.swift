@@ -80,7 +80,7 @@ class Container {
 
         // View Models
         container.register(ContentViewModel.self) { _ in ContentViewModel() }
-        container.register(FriendsViewModel.self) { _ in FriendsViewModel() }
+        container.register(FriendsViewModel.self) { _ in FriendsViewModel(userId: UserModel.load()?.id) }
         container.register(FriendAddViewModel.self) { _ in FriendAddViewModel() }
         container.register(QRCodeScannerViewModel.self) { _ in QRCodeScannerViewModel() }
         container.register(PreferencesViewModel.self) { _ in PreferencesViewModel() }

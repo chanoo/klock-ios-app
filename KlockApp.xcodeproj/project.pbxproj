@@ -106,6 +106,7 @@
 		987E545129D552540007E156 /* KlockAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E545029D552540007E156 /* KlockAppTests.swift */; };
 		987E545B29D552540007E156 /* KlockAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E545A29D552540007E156 /* KlockAppUITests.swift */; };
 		987E545D29D552540007E156 /* KlockAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E545C29D552540007E156 /* KlockAppUITestsLaunchTests.swift */; };
+		987F10872B944D6C001A3EF5 /* KeyboardResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987F10862B944D6C001A3EF5 /* KeyboardResponder.swift */; };
 		987F2E752B3B010800DC462D /* TensorFlowLiteTaskVision.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98CF07DC2B3AF4FB00BF33C2 /* TensorFlowLiteTaskVision.framework */; };
 		9881FC0B2A1F455200497937 /* BeaconManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9881FC0A2A1F455200497937 /* BeaconManager.swift */; };
 		988572472B3C1F6300E7256B /* UserProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988572462B3C1F6300E7256B /* UserProfileImageView.swift */; };
@@ -239,6 +240,7 @@
 		98E9386529EA5899009CBF32 /* AnalogClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E9386429EA5899009CBF32 /* AnalogClockView.swift */; };
 		98E9386B29EAD1C3009CBF32 /* StudySessionServiceDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E9386A29EAD1C3009CBF32 /* StudySessionServiceDTO.swift */; };
 		98EA61352B92DB5C0008E54D /* FlagOnIssueContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EA61342B92DB5C0008E54D /* FlagOnIssueContentView.swift */; };
+		98EA61382B9308C60008E54D /* SkeletonUI in Frameworks */ = {isa = PBXBuildFile; productRef = 98EA61372B9308C60008E54D /* SkeletonUI */; };
 		98EBFBE329F78307004E95F3 /* ChatBotSyncProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EBFBE229F78307004E95F3 /* ChatBotSyncProtocol.swift */; };
 		98EBFBE629F783BA004E95F3 /* ChatBotSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EBFBE529F783BA004E95F3 /* ChatBotSync.swift */; };
 		98EBFBE829F968E8004E95F3 /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EBFBE729F968E8004E95F3 /* TaskModel.swift */; };
@@ -390,6 +392,7 @@
 		987E545629D552540007E156 /* KlockAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KlockAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		987E545A29D552540007E156 /* KlockAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlockAppUITests.swift; sourceTree = "<group>"; };
 		987E545C29D552540007E156 /* KlockAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlockAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		987F10862B944D6C001A3EF5 /* KeyboardResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardResponder.swift; sourceTree = "<group>"; };
 		9881FC0A2A1F455200497937 /* BeaconManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconManager.swift; sourceTree = "<group>"; };
 		988572462B3C1F6300E7256B /* UserProfileImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileImageView.swift; sourceTree = "<group>"; };
 		988572492B3C488200E7256B /* lottie-heart.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "lottie-heart.json"; sourceTree = "<group>"; };
@@ -552,6 +555,7 @@
 				98CE661629D55A370009916F /* Swinject in Frameworks */,
 				981881CD29F3847A002A4395 /* Lottie in Frameworks */,
 				9885724D2B3C560700E7256B /* YPImagePicker in Frameworks */,
+				98EA61382B9308C60008E54D /* SkeletonUI in Frameworks */,
 				987F2E752B3B010800DC462D /* TensorFlowLiteTaskVision.framework in Frameworks */,
 				98E64D9B2A72431400A7FF16 /* KakaoSDKAuth in Frameworks */,
 			);
@@ -702,6 +706,7 @@
 				9881FC0A2A1F455200497937 /* BeaconManager.swift */,
 				98AC306C2A134D23006DC48D /* TabBarManager.swift */,
 				989D6F332A4C34BA00BC2F2B /* ActionSheetManager.swift */,
+				987F10862B944D6C001A3EF5 /* KeyboardResponder.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -1186,6 +1191,7 @@
 				98E64D9E2A72431400A7FF16 /* KakaoSDKUser */,
 				9885724C2B3C560700E7256B /* YPImagePicker */,
 				984B101D2B46F48700186B6D /* CachedAsyncImage */,
+				98EA61372B9308C60008E54D /* SkeletonUI */,
 			);
 			productName = KlockApp;
 			productReference = 987E543629D552520007E156 /* KlockApp.app */;
@@ -1272,6 +1278,7 @@
 				98E64D992A72431400A7FF16 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 				9885724B2B3C560700E7256B /* XCRemoteSwiftPackageReference "YPImagePicker" */,
 				984B101C2B46F48700186B6D /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */,
+				98EA61362B9308C60008E54D /* XCRemoteSwiftPackageReference "SkeletonUI" */,
 			);
 			productRefGroup = 987E543729D552520007E156 /* Products */;
 			projectDirPath = "";
@@ -1383,6 +1390,7 @@
 				9878FF0D2A0EA17100D38BB4 /* TimerManager.swift in Sources */,
 				9843B7E529EF086600F91DAD /* ProximityAndOrientationServiceProtocol.swift in Sources */,
 				98A8CED72B7B7DD800B5A29C /* UserTraceDTO.swift in Sources */,
+				987F10872B944D6C001A3EF5 /* KeyboardResponder.swift in Sources */,
 				988D7CD22A370BCD0018A85E /* FriendAddByQRCodeView.swift in Sources */,
 				981B389129F44A2700AB0EF8 /* AccountTimerModel.swift in Sources */,
 				984D2C8F29E067FE008D3EA9 /* SplashView.swift in Sources */,
@@ -2009,6 +2017,14 @@
 				minimumVersion = 5.6.4;
 			};
 		};
+		98EA61362B9308C60008E54D /* XCRemoteSwiftPackageReference "SkeletonUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/CSolanaM/SkeletonUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -2066,6 +2082,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 98E9385629EA4C45009CBF32 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		98EA61372B9308C60008E54D /* SkeletonUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 98EA61362B9308C60008E54D /* XCRemoteSwiftPackageReference "SkeletonUI" */;
+			productName = SkeletonUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 

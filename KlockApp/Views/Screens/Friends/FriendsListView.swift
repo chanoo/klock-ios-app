@@ -9,8 +9,8 @@ import SwiftUI
 
 struct FriendsListView: View {
     @EnvironmentObject var actionSheetManager: ActionSheetManager
-    @EnvironmentObject var viewModel: FriendsViewModel
-    
+    @StateObject private var viewModel = Container.shared.resolve(FriendsViewModel.self)
+
     var body: some View {
         VStack {
             // Check if the friends list is empty
@@ -61,12 +61,19 @@ struct FriendsListView: View {
 }
 
 struct FirstFriendsRowView: View {
-    @EnvironmentObject var actionSheetManager: ActionSheetManager
-
     var friendModel: FriendRelationFetchResDTO
+    @EnvironmentObject var actionSheetManager: ActionSheetManager
+    @ObservedObject var friendsViewModel: FriendsViewModel
+    
+    // `friendModel`을 매개변수로 받는 init 메소드 추가
+    init(friendModel: FriendRelationFetchResDTO) {
+        self.friendModel = friendModel
+        self._friendsViewModel = ObservedObject(initialValue: FriendsViewModel(nickname: friendModel.nickname, userId: friendModel.followId))
+    }
+
     var body: some View {
         NavigationLink(
-            destination: FriendsView(nickname: friendModel.nickname, userId: friendModel.followId)
+            destination: FriendsView(friendsViewModel: friendsViewModel)
                 .environmentObject(actionSheetManager)) {
             HStack {
                 ZStack {
@@ -109,13 +116,20 @@ struct FirstFriendsRowView: View {
 }
 
 struct FriendsRowView: View {
-    @EnvironmentObject var actionSheetManager: ActionSheetManager
-
     var friendModel: FriendRelationFetchResDTO
+    @EnvironmentObject var actionSheetManager: ActionSheetManager
+    @ObservedObject var friendsViewModel: FriendsViewModel
+    
+    // `friendModel`을 매개변수로 받는 init 메소드 추가
+    init(friendModel: FriendRelationFetchResDTO) {
+        self.friendModel = friendModel
+        self._friendsViewModel = ObservedObject(initialValue: FriendsViewModel(nickname: friendModel.nickname, userId: friendModel.followId))
+    }
+
     var body: some View {
         VStack(spacing: 0) {
             NavigationLink(
-                destination: FriendsView(nickname: friendModel.nickname, userId: friendModel.followId)
+                destination: FriendsView(friendsViewModel: friendsViewModel)
                     .environmentObject(actionSheetManager)) {
                 HStack {
                     ZStack {

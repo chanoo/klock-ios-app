@@ -64,6 +64,7 @@ struct TimeTimerView: View {
                     AutoTimerView()
                         .environmentObject(autoTimerViewModel)
                         .defaultTimerViewSettings(geometry: geometry, animation: viewModel.animation)
+                        .zIndex(100)
                 }
             }
         }

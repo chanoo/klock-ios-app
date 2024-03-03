@@ -5,70 +5,43 @@
 //
 
 import SwiftUI
-import UIKit // UIKit을 임포트해야 합니다
 
 struct FancyTabView: View {
     @Environment(\.colorScheme) var colorScheme
     @Binding var selection: Int
-    @State var isTabBarVisible: Bool = true
-    let items: [(selectedImageName: String?, deselectedImageName: String, content: AnyView)]
-
-    init(selection: Binding<Int>, items: [(selectedImageName: String?, deselectedImageName: String, content: AnyView)]) {
-        self._selection = selection
-        self.items = items
-    }
+    @StateObject private var keyboardResponder = KeyboardResponder() // 키보드 상태 관찰 객체
+    let items: [(selectedImageName: String?, deselectedImageName: String, content: () -> AnyView)]
 
     var body: some View {
         VStack(spacing: 0) {
-            items[selection].content
-                .frame(height: .infinity)
-            
             ZStack {
+                ForEach(0..<items.count, id: \.self) { index in
+                    if selection == index {
+                        items[index].content()
+                            .frame(maxHeight: .infinity)
+                    }
+                }
+            }
+            if !keyboardResponder.isKeyboardVisible {
                 HStack(spacing: 0) {
-                    HStack(spacing: 0) {
-                        ForEach(0..<items.count, id: \.self) { index in
-                            Button(action: {
-                                triggerHapticFeedback() // 햅틱 피드백을 트리거하는 함수 호출
+                    ForEach(0..<items.count, id: \.self) { index in
+                        Button(action: {
+                            withAnimation(.easeInOut(duration: 0.2)) {
+                                triggerHapticFeedback()
                                 selection = index
-                            }) {
-                                FancyTabItem(selectedImageName: items[index].selectedImageName,
-                                             deselectedImageName: items[index].deselectedImageName,
-                                             isSelected: selection == index)
                             }
+                        }) {
+                            FancyTabItem(selectedImageName: items[index].selectedImageName,
+                                         deselectedImageName: items[index].deselectedImageName,
+                                         isSelected: selection == index)
                         }
                     }
-                    .padding(.horizontal)
-                    .background(FancyColor.tabbarBackground.color)
-                    .frame(height: isTabBarVisible ? 60 : 0)
                 }
-                .offset(y: isTabBarVisible ? 0 : 100)
-                .opacity(isTabBarVisible ? 1.0 : 0)
-                .animation(.easeInOut(duration: 0.2), value: isTabBarVisible)
+                .padding(.horizontal)
+                .background(FancyColor.tabbarBackground.color)
+                .frame(height: 60)
+                .transition(.move(edge: .bottom))
             }
-        }
-        .onAppear {
-            NotificationCenter.default.addObserver(
-                forName: UIResponder.keyboardWillShowNotification,
-                object: nil,
-                queue: .main) { _ in
-                    isTabBarVisible = false
-                }
-            NotificationCenter.default.addObserver(
-                forName: UIResponder.keyboardWillHideNotification,
-                object: nil,
-                queue: .main) { _ in
-                    isTabBarVisible = true
-                }
-        }
-        .onDisappear {
-            NotificationCenter.default.removeObserver(
-                self,
-                name: UIResponder.keyboardWillShowNotification,
-                object: nil)
-            NotificationCenter.default.removeObserver(
-                self,
-                name: UIResponder.keyboardWillHideNotification,
-                object: nil)
         }
     }
     
