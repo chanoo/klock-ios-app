@@ -16,10 +16,14 @@ struct SignUpProfileImageView: View {
     @State private var cancellables = Set<AnyCancellable>()
 
     var body: some View {
-        VStack {
-            if viewModel.isLoading {
-                LoadingView()
-            } else {
+        ZStack {
+            VStack {
+                HStack {
+                    BackButtonView()
+                    Spacer()
+                }
+                .padding(.bottom, 20)
+                
                 Image("img_signup_step5")
                     .frame(maxWidth: .infinity, alignment: .topLeading)
                 
@@ -89,30 +93,34 @@ struct SignUpProfileImageView: View {
                     },
                     style: .constant(.black)
                 )
-            }
-            
-            NavigationLink(
-                destination: viewForDestination(activeDestination),
-                isActive: Binding<Bool>(
-                    get: { activeDestination != nil },
-                    set: { newValue in
-                        if !newValue {
-                            activeDestination = nil
+                
+                NavigationLink(
+                    destination: viewForDestination(activeDestination),
+                    isActive: Binding<Bool>(
+                        get: { activeDestination != nil },
+                        set: { newValue in
+                            if !newValue {
+                                activeDestination = nil
+                            }
                         }
+                    ),
+                    label: {
+                        EmptyView()
                     }
-                ),
-                label: {
-                    EmptyView()
-                }
-            )
-            .hidden()
+                )
+                .hidden()
+            }
+
+            
+            if viewModel.isLoading {
+                LoadingView(opacity: 0.7)
+            }
         }
         .sheet(isPresented: $userProfileImageViewModel.isShowCemeraPermissionView) {
             YPImagePickerView(showingImagePicker: $userProfileImageViewModel.showingImagePicker, selectedImage: $viewModel.selectedImage)
         }
         .frame(maxHeight: .infinity, alignment: .topLeading)
-        .navigationBarItems(leading: BackButtonView())
-        .navigationBarBackButtonHidden()
+        .navigationBarHidden(true)
         .padding(.all, 30)
         .onAppear {
             subscribeToUserProfileImageViewModelChanges()

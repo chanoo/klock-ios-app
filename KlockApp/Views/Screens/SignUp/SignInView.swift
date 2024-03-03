@@ -44,16 +44,7 @@ struct SignInView: View {
                     style: .constant(.kakao)
                 )
                 .padding(.bottom, 24)
-//
-//                FancyButton(
-//                    title: "페이스북으로 시작하기",
-//                    action: {
-//                        viewModel.signInWithFacebookTapped.send()
-//                    },
-//                    icon: Image("ic_facebook"),
-//                    style: .constant(.facebook)
-//                )
-                
+
                 NavigationLink(
                     destination: viewForDestination(activeDestination),
                     isActive: Binding<Bool>(
@@ -72,6 +63,10 @@ struct SignInView: View {
             }
             .padding(.bottom, 40)
             .padding(40)
+            
+            if viewModel.isSigning {
+                LoadingView(opacity: 0.7)
+            }
         }
         .onAppear {
             viewModel.onSignInWithFacebook = signInSuccessful

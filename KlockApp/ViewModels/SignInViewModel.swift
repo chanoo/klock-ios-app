@@ -18,6 +18,7 @@ import KakaoSDKAuth
 class SignInViewModel: NSObject, ObservableObject, ASAuthorizationControllerDelegate {
 
     @Published var signUpUserModel: SignUpUserModel
+    @Published var isSigning: Bool = false
 
     private var cancellableSet: Set<AnyCancellable> = []
     let authenticationService: AuthenticationServiceProtocol
@@ -51,6 +52,7 @@ class SignInViewModel: NSObject, ObservableObject, ASAuthorizationControllerDele
     private func setupSignInWithKakaoTapped() {
         signInWithKakaoTapped
             .sink { [weak self] _ in
+                self?.isSigning = true
                 self?.signInWithKakao()
             }
             .store(in: &cancellableSet)
@@ -59,6 +61,7 @@ class SignInViewModel: NSObject, ObservableObject, ASAuthorizationControllerDele
     private func setupSignInWithAppleTapped() {
         signInWithAppleTapped
             .sink { [weak self] _ in
+                self?.isSigning = true
                 self?.signInWithApple()
             }
             .store(in: &cancellableSet)
@@ -92,31 +95,31 @@ class SignInViewModel: NSObject, ObservableObject, ASAuthorizationControllerDele
             }
         } else {
             UserApi.shared.loginWithKakaoAccount {(oauthToken, error) in
-                    if let error = error {
-                        print(error)
-                    }
-                    else {
-                        print("loginWithKakaoAccount() success.")
+                if let error = error {
+                    print(error)
+                }
+                else {
+                    print("loginWithKakaoAccount() success.")
 
-                        //do something
-                        UserApi.shared.me() { (user, error) in
-                            if let error = error {
-                                print(error)
-                            }
-                            else {
-                                print("me() success.")
-                                
-                                //do something
-                                if let user = user, let userId = user.id {
-                                    let userIdString = String(userId)
-                                    self.signUpUserModel.provider = "KAKAO"
-                                    self.signUpUserModel.providerUserId = userIdString
-                                    self.handleSocialLogin("KAKAO", userIdString)
-                                }
+                    //do something
+                    UserApi.shared.me() { (user, error) in
+                        if let error = error {
+                            print(error)
+                        }
+                        else {
+                            print("me() success.")
+                            
+                            //do something
+                            if let user = user, let userId = user.id {
+                                let userIdString = String(userId)
+                                self.signUpUserModel.provider = "KAKAO"
+                                self.signUpUserModel.providerUserId = userIdString
+                                self.handleSocialLogin("KAKAO", userIdString)
                             }
                         }
                     }
                 }
+            }
         }
     }
 
@@ -176,6 +179,7 @@ class SignInViewModel: NSObject, ObservableObject, ASAuthorizationControllerDele
         case .finished:
             break
         }
+        self.isSigning = false
     }
 
     func handleReceivedUser(_ user: SocialLoginResDTO) {
@@ -207,6 +211,7 @@ class SignInViewModel: NSObject, ObservableObject, ASAuthorizationControllerDele
         case .finished:
             break
         }
+        self.isSigning = false
     }
 
     func handleReceivedData(_ dto: GetUserResDTO) {
