@@ -14,7 +14,8 @@ class FriendsViewModel: ObservableObject {
     @Published var isActionSheetPresented = false
     @Published var friendAddViewModel = FriendAddViewModel()
     @Published var isPreparingResponse: Bool = false
-    @Published var isLoading: Bool = false
+    @Published var isLoading: Bool = true
+    @Published var isSending: Bool = false
     @Published var isSendMessage: Bool = false
     @Published var friends: [FriendRelationFetchResDTO] = []
     @Published var groupedUserTraces: [UserTraceGroup] = []
@@ -22,7 +23,6 @@ class FriendsViewModel: ObservableObject {
     @Published var contents: String? = nil
     @Published var image: Data? = nil
     @Published var flogOnIssue: String? = nil
-
     private let friendRelationService = Container.shared.resolve(FriendRelationServiceProtocol.self)
     private let userTraceService = Container.shared.resolve(UserTraceRemoteServiceProtocol.self)
 
@@ -32,20 +32,21 @@ class FriendsViewModel: ObservableObject {
     var cancellables: Set<AnyCancellable> = []
     var last = false
     var page = -1
+    
+    var nickname: String?
     var userId: Int64?
     var userModel = UserModel.load()
     
     private let userTraceFetchQueue = DispatchQueue(label: "app.klockApp.userTraceFetchQueue")
 
-    init() {
+    init(nickname: String? = nil, userId: Int64?) {
+        self.nickname = nickname
+        self.userId = userId
         setupSendButtonTapped()
         setupDeleteUserTrace()
-        if let userId = UserModel.load()?.id {
-            self.userId = userId
-        }
     }
     
-    func set(userId: Int64) {
+    func set(userId: Int64?) {
         self.userId = userId
     }
     
@@ -54,7 +55,7 @@ class FriendsViewModel: ObservableObject {
             .sink { [weak self] _ in
                 guard let userId = self?.userId else { return }
                 DispatchQueue.main.async {
-                    self?.isLoading = true
+                    self?.isSending = true
                     self?.dynamicHeight = 36
                 }
                 self?.addUserTrace(userId: userId, contents: self?.contents, image: self?.image)
@@ -100,20 +101,13 @@ class FriendsViewModel: ObservableObject {
     }
 
     func fetchFriends() {
-        guard !isLoading else { return } // 이미 로딩 중이라면 중복 호출 방지
-        isLoading = true
-
         friendRelationService.fetch()
-            .sink { [weak self] completion in
-                guard let self = self else { return }
+            .sink { completion in
                 switch completion {
                 case .failure(let error):
                     print("Error fetching study sessions: \(error)")
                 case .finished:
                     break
-                }
-                DispatchQueue.main.async {
-                    self.isLoading = false
                 }
             } receiveValue: { [weak self] dto in
                 guard let self = self else { return }

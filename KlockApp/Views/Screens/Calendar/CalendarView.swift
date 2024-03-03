@@ -16,6 +16,10 @@ struct CalendarView: View {
     @State private var actionSheetView: CustomActionSheetView? = nil
     @State private var isActionSheetPresented = false
     let weeks = 13
+    
+    init() {
+        print("CalendarView init")
+    }
 
     private var startDate: Date {
         let today = Date()
@@ -114,7 +118,6 @@ struct CalendarView: View {
                                                                         }
                                                                     }
                                                                 },
-                                                                disabled: .constant(viewModel.studySessionModel.timerName.isEmpty),
                                                                 style: .constant(.black))
                                                             .padding(.top, 20)
                                                         }

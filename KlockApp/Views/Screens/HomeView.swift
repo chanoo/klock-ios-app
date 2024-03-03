@@ -15,71 +15,63 @@ struct HomeView: View {
     @StateObject private var timeTimerViewModel = Container.shared.resolve(TimeTimerViewModel.self)
     @StateObject private var calendarViewModel = Container.shared.resolve(CalendarViewModel.self)
     @StateObject private var chatBotViewModel = Container.shared.resolve(ChatBotViewModel.self)
+    @StateObject private var friendsViewModel = Container.shared.resolve(FriendsViewModel.self)
     @StateObject private var taskViewModel = Container.shared.resolve(TaskViewModel.self)
     @StateObject private var characterViewModel = Container.shared.resolve(CharacterViewModel.self)
-    @StateObject private var friendsViewModel = Container.shared.resolve(FriendsViewModel.self)
     @StateObject private var preferencesViewModel = Container.shared.resolve(PreferencesViewModel.self)
-
-//    private func updateTitle(_ selection: Int) {
-//        switch selection {
-//        case 0:
-//            title = "타이머"
-//        case 1:
-//            title = "Ai 선생님"
-//        case 2:
-//            title = "통계"
-//        case 3:
-//            title = "친구"
-//        case 4:
-//            title = "설정"
-//        default:
-//            title = ""
-//        }
-//    }
 
     var body: some View {
         FancyTabView(selection: $selection, items: [
             (
                 selectedImageName: "ic_timer",
                 deselectedImageName: "ic_timer",
-                content: AnyView(
-                    TimeTimerView()
-                        .environmentObject(timeTimerViewModel)
-                        .environmentObject(chatBotViewModel)
-                )
+                content: {
+                    AnyView(
+                        TimeTimerView()
+                            .environmentObject(timeTimerViewModel)
+                            .environmentObject(chatBotViewModel)
+                    )
+                }
             ),
             (
                 selectedImageName: "ic_balloon",
                 deselectedImageName: "ic_balloon",
-                content: AnyView(
-                    ChatBotListView()
-                        .environmentObject(chatBotViewModel)
-                )
+                content: {
+                    AnyView(
+                       ChatBotListView()
+                           .environmentObject(chatBotViewModel)
+                   )
+                }
             ),
             (
                 selectedImageName: "ic_graph_bar",
                 deselectedImageName: "ic_graph_bar",
-                content: AnyView(
-                    CalendarView()
-                        .environmentObject(calendarViewModel)
-                )
+                content: {
+                    AnyView(
+                        CalendarView()
+                            .environmentObject(calendarViewModel)
+                    )
+                }
             ),
             (
                 selectedImageName: "ic_peaple",
                 deselectedImageName: "ic_peaple_o",
-                content: AnyView(
-                    FriendsView()
-                        .environmentObject(friendsViewModel)
-                        .environmentObject(tabBarManager)
-                )
+                content: {
+                    AnyView(
+                        FriendsView(friendsViewModel: friendsViewModel)
+                            .environmentObject(tabBarManager)
+                    )
+                }
             ),
             (
                 selectedImageName: "ic_tame",
                 deselectedImageName: "ic_tame_o",
-                content: AnyView(
-                    PreferencesView()
-                        .environmentObject(preferencesViewModel)
-                )
+                content: {
+                    AnyView(
+                        PreferencesView()
+                            .environmentObject(preferencesViewModel)
+                    )
+                }
             ),
         ])
 //        .onChange(of: selection) { newSelection in
