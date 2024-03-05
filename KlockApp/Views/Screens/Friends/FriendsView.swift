@@ -171,6 +171,12 @@ struct FriendsView: View {
                 }) {
                     Image("ic_person_plus")
                 }
+            } else {
+                FancyButton(title: friendsViewModel.followTitle, action: {
+                    if let following = friendsViewModel.friendsViewModelData.following {
+                        friendsViewModel.unfollowButtonTapped.send(!following)
+                    }
+                }, size: .small, style: .constant(.outline))
             }
         }
     }

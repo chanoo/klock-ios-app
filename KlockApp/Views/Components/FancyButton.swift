@@ -8,6 +8,12 @@
 import SwiftUI
 import Foast
 
+enum FancyButtonSize {
+    case large
+    case medium
+    case small
+}
+
 enum FancyButtonTextAlign {
     case leading
     case center
@@ -173,6 +179,7 @@ struct FancyButton: View {
     let icon: Image?
     let isBlock: Bool
     @Binding var disabled: Bool?
+    let size: FancyButtonSize
     @Binding var style: FancyButtonStyle
     @State private var isTapped = false
 
@@ -184,6 +191,7 @@ struct FancyButton: View {
          icon: Image? = nil,
          isBlock: Bool = true,
          disabled: Binding<Bool?> = .constant(false),
+         size: FancyButtonSize = .medium,
          style: Binding<FancyButtonStyle>) {
         self.title = title
         self.action = action
@@ -193,6 +201,7 @@ struct FancyButton: View {
         self.icon = icon
         self.isBlock = isBlock
         self._disabled = disabled
+        self.size = size
         self._style = style
     }
 
@@ -235,9 +244,10 @@ struct FancyButton: View {
                 Spacer()
             }
         }
-        .padding(.leading, 20)
-        .padding(.trailing, 20)
-        .frame(maxWidth: isBlock ? .infinity : nil, minHeight: 52)
+        .padding(6)
+        .padding(.leading, size == .medium ? 20 : 6)
+        .padding(.trailing, size == .medium ? 20 : 6)
+        .frame(maxWidth: isBlock ? .infinity : nil, minHeight: size == .medium ? 52 : 0)
         .background(disabled ?? false ? style.disableBackgroundColor : style.backgroundColor)
         .cornerRadius(4)
         .overlay(

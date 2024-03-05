@@ -8,6 +8,7 @@
 import SwiftUI
 import Combine
 import Foast
+import Alamofire
 
 class FriendsViewModel: ObservableObject {
     @Published var newMessage: String = ""
@@ -22,17 +23,20 @@ class FriendsViewModel: ObservableObject {
     @Published var contents: String? = nil
     @Published var image: Data? = nil
     @Published var flogOnIssue: String? = nil
+    @Published var friendsViewModelData: FriendsViewModelData
+    @Published var followTitle: String = "팔로잉"
+    
     private let friendRelationService = Container.shared.resolve(FriendRelationServiceProtocol.self)
     private let userTraceService = Container.shared.resolve(UserTraceRemoteServiceProtocol.self)
 
     let sendTapped = PassthroughSubject<Void, Never>()
     let deleteUserTraceTapped = PassthroughSubject<Int64, Never>() // 삭제할 사용자 추적 데이터의 ID를 전달하는 Subject
+    let unfollowButtonTapped = PassthroughSubject<Bool, Never>()
 
     var cancellables: Set<AnyCancellable> = []
     var last = false
     var page = 0
     
-    var friendsViewModelData: FriendsViewModelData
     var userModel = UserModel.load()
     
     private let userTraceFetchQueue = DispatchQueue(label: "app.klockApp.userTraceFetchQueue")
@@ -41,6 +45,47 @@ class FriendsViewModel: ObservableObject {
         friendsViewModelData = data
         setupSendButtonTapped()
         setupDeleteUserTrace()
+        setupUnfollowButtonTapped()
+    }
+    
+    private func setupUnfollowButtonTapped() {
+        unfollowButtonTapped
+            .sink { [weak self] following in
+                guard let self = self, let userId = self.friendsViewModelData.userId else { return }
+                
+                // 팔로우 상태에 따라 서비스 호출 결정
+                let serviceCall: AnyPublisher<Void, AFError>
+                if following {
+                    serviceCall = self.friendRelationService.follow(followId: userId)
+                        .map { _ in Void() } // FriendRelationFollowResDTO를 Void로 변환
+                        .eraseToAnyPublisher()
+                } else {
+                    serviceCall = self.friendRelationService.unfollow(followId: userId)
+                        .eraseToAnyPublisher()
+                }
+                
+                serviceCall
+                    .sink(receiveCompletion: { result in
+                        switch result {
+                        case .failure(let error):
+                            print("Error processing user relation: \(error)")
+                        case .finished:
+                            break
+                        }
+                    }, receiveValue: { [weak self] _ in
+                        DispatchQueue.main.async {
+                            // 팔로우 상태 업데이트 및 UI 반영
+                            self?.updateFollowState(isFollowing: following)
+                        }
+                    })
+                    .store(in: &self.cancellables)
+            }
+            .store(in: &cancellables)
+    }
+
+    private func updateFollowState(isFollowing: Bool) {
+        followTitle = isFollowing ? "팔로잉" : "팔로우"
+        friendsViewModelData.following = isFollowing
     }
     
     private func setupSendButtonTapped() {

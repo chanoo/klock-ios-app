@@ -81,7 +81,7 @@ class Container {
         // View Models
         container.register(ContentViewModel.self) { _ in ContentViewModel() }
         container.register(FriendsViewModel.self) { _ in
-            let data = FriendsViewModelData(userId: UserModel.load()?.id)
+            let data = FriendsViewModelData(userId: UserModel.load()?.id, following: false)
             return FriendsViewModel(data: data)
         }
         container.register(FriendAddViewModel.self) { _ in FriendAddViewModel() }

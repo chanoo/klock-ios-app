@@ -26,11 +26,11 @@ struct MessageBubbleView: View {
                 Spacer()
                 if userTraceType == .studyStart {
                     if let date = date {
-                        AlarmRightBubbleView(nickname: nickname, content: content, date: date, showIcon: true)
+                        AlarmRightBubbleView(nickname: nickname, content: content, heartCount: .constant(10), date: date, showIcon: true)
                     }
                 } else if userTraceType == .studyEnd {
                     if let date = date {
-                        AlarmRightBubbleView(nickname: nickname, content: content, date: date, showIcon: false)
+                        AlarmRightBubbleView(nickname: nickname, content: content, heartCount: .constant(23), date: date, showIcon: false)
                     }
                 } else {
                     VStack(alignment: .trailing, spacing: 0) {
@@ -53,6 +53,7 @@ struct MessageBubbleView: View {
                                         print("삭제")
                                         onDelete()
                                     } label: {
+                                        
                                         Label("삭제", image: "ic_trash")
                                     }
                                 }
@@ -64,13 +65,13 @@ struct MessageBubbleView: View {
                     ProfileImageWrapperView(profileImageURL: profileImageURL)
                         .padding(.trailing, 8)
                     if let date = date {
-                        AlarmLeftBubbleView(nickname: nickname, content: content, date: date, showIcon: true)
+                        AlarmLeftBubbleView(nickname: nickname, content: content, heartCount: .constant(10), date: date, showIcon: true)
                     }
                 } else if userTraceType == .studyEnd {
                     ProfileImageWrapperView(profileImageURL: profileImageURL)
                         .padding(.trailing, 8)
                     if let date = date {
-                        AlarmLeftBubbleView(nickname: nickname, content: content, date: date, showIcon: false)
+                        AlarmLeftBubbleView(nickname: nickname, content: content, heartCount: .constant(10), date: date, showIcon: false)
                     }
                 } else {
                     ProfileImageWrapperView(profileImageURL: profileImageURL)
