@@ -81,7 +81,6 @@
 		985BE89829E6E559008582A3 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE89729E6E559008582A3 /* HomeViewModel.swift */; };
 		985BE89A29E6E579008582A3 /* FriendsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE89929E6E579008582A3 /* FriendsViewModel.swift */; };
 		985BE89C29E6E595008582A3 /* FriendModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE89B29E6E595008582A3 /* FriendModel.swift */; };
-		985BE89E29E6E5D0008582A3 /* FriendDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE89D29E6E5D0008582A3 /* FriendDetailView.swift */; };
 		985BE8A029E6E836008582A3 /* ChatBotViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE89F29E6E836008582A3 /* ChatBotViewModel.swift */; };
 		985BE8A229E6E906008582A3 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE8A129E6E906008582A3 /* MessageModel.swift */; };
 		985BE8A429E6EA3E008582A3 /* ChatGPTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE8A329E6EA3E008582A3 /* ChatGPTService.swift */; };
@@ -363,7 +362,6 @@
 		985BE89729E6E559008582A3 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		985BE89929E6E579008582A3 /* FriendsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewModel.swift; sourceTree = "<group>"; };
 		985BE89B29E6E595008582A3 /* FriendModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendModel.swift; sourceTree = "<group>"; };
-		985BE89D29E6E5D0008582A3 /* FriendDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendDetailView.swift; sourceTree = "<group>"; };
 		985BE89F29E6E836008582A3 /* ChatBotViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotViewModel.swift; sourceTree = "<group>"; };
 		985BE8A129E6E906008582A3 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
 		985BE8A329E6EA3E008582A3 /* ChatGPTService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGPTService.swift; sourceTree = "<group>"; };
@@ -1116,7 +1114,6 @@
 				988D7CD52A370C4A0018A85E /* FriendAddByNicknameView.swift */,
 				988D7CD92A37126C0018A85E /* FriendAddByNearView.swift */,
 				988D7D0A2A3ADACC0018A85E /* FriendAddDoneView.swift */,
-				985BE89D29E6E5D0008582A3 /* FriendDetailView.swift */,
 				9837CCA42A418C5F002F1A3A /* FriendsListView.swift */,
 			);
 			path = Friends;
@@ -1356,7 +1353,6 @@
 				98192F422A542DB5007073FB /* PreferencesView.swift in Sources */,
 				98E9386129EA5871009CBF32 /* TimeTimerViewModel.swift in Sources */,
 				98B065122B41B229009D0F69 /* ProfileImageEditView.swift in Sources */,
-				985BE89E29E6E5D0008582A3 /* FriendDetailView.swift in Sources */,
 				981D73182A1A49E0000C8F3D /* ClockViewModel.swift in Sources */,
 				98EBFBF429F98AA2004E95F3 /* AchievementModel.swift in Sources */,
 				98B21B5929D6F4AE004EFE0E /* StudySessionModel.swift in Sources */,

@@ -63,11 +63,13 @@ struct FriendsListView: View {
 struct FirstFriendsRowView: View {
     var friendModel: FriendRelationFetchResDTO
     @EnvironmentObject var actionSheetManager: ActionSheetManager
-    @StateObject private var friendsViewModel = Container.shared.resolve(FriendsViewModel.self)
+    @ObservedObject var friendsViewModel: FriendsViewModel
 
     // `friendModel`을 매개변수로 받는 init 메소드 추가
     init(friendModel: FriendRelationFetchResDTO) {
         self.friendModel = friendModel
+        let data = FriendsViewModelData(nickname: friendModel.nickname, userId: friendModel.followId, following: true)
+        self._friendsViewModel = ObservedObject(initialValue: FriendsViewModel(data: data))
     }
 
     var body: some View {
@@ -122,7 +124,7 @@ struct FriendsRowView: View {
     // `friendModel`을 매개변수로 받는 init 메소드 추가
     init(friendModel: FriendRelationFetchResDTO) {
         self.friendModel = friendModel
-        let data = FriendsViewModelData(nickname: friendModel.nickname, userId: friendModel.followId)
+        let data = FriendsViewModelData(nickname: friendModel.nickname, userId: friendModel.followId, following: true)
         self._friendsViewModel = ObservedObject(initialValue: FriendsViewModel(data: data))
     }
 

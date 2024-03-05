@@ -15,7 +15,7 @@ struct UserTraceResDTO: Codable, Hashable {
     let type: UserTraceType
     let contents: String
     let contentsImage: String?
-    let heart: Bool
+    let heartCount: Int
     var createdAt: String
 
     enum CodingKeys: String, CodingKey {
@@ -26,7 +26,7 @@ struct UserTraceResDTO: Codable, Hashable {
         case type
         case contents
         case contentsImage
-        case heart
+        case heartCount
         case createdAt
     }
 }
