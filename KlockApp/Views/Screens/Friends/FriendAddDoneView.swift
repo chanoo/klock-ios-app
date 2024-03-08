@@ -17,17 +17,32 @@ struct FriendAddDoneView: View {
         ZStack(alignment: .top) {
             VStack(alignment: .center, spacing: 0) {
                 VStack(alignment: .leading, spacing: 0) {
-                    HStack {
-                        Text("함께 성장할\n새 친구가 생겼어요!")
-                            .lineSpacing(6)
-                            .font(.system(size: 24, weight: .semibold))
-                        Spacer()
-                    }
-                    HStack {
-                        Text("친구의 프로필에 들러 응원해보세요")
-                            .foregroundColor(FancyColor.gray4.color)
-                            .padding(.top, 18)
-                        Spacer()
+                    if viewModel.followingFriendUser?.followed ?? false {
+                        HStack {
+                            Text("함께 성장할\n새 친구가 생겼어요!")
+                                .lineSpacing(6)
+                                .font(.system(size: 24, weight: .semibold))
+                            Spacer()
+                        }
+                        HStack {
+                            Text("친구의 담벼락에 들러 응원해보세요")
+                                .foregroundColor(FancyColor.gray4.color)
+                                .padding(.top, 18)
+                            Spacer()
+                        }
+                    } else {
+                        HStack {
+                            Text("함께 성장할\n새 친구를 기다려요!")
+                                .lineSpacing(6)
+                                .font(.system(size: 24, weight: .semibold))
+                            Spacer()
+                        }
+                        HStack {
+                            Text("친구도 나를 추가하면 함께 성장할 수 있어요")
+                                .foregroundColor(FancyColor.gray4.color)
+                                .padding(.top, 18)
+                            Spacer()
+                        }
                     }
                 }
                 .frame(maxWidth: .infinity)
@@ -55,7 +70,7 @@ struct FriendAddDoneView: View {
                 
                 Spacer()
 
-                if let _ = viewModel.followingFriendUser?.followed {
+                if viewModel.followingFriendUser?.followed ?? false {
                     FancyButton(title: "담벼락 보러가기", action: {
                         viewModel.closeSheet()
                         guard let nickname = viewModel.followingFriendUser?.nickname, let userId = viewModel.followingFriendUser?.followId else { return }

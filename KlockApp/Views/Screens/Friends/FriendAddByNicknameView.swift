@@ -31,7 +31,7 @@ struct FriendAddByNicknameView: View {
                     FancyTextField(
                         placeholder: "친구의 닉네임을 입력해주세요",
                         text: $viewModel.nickname,
-                        isValid: viewModel.isStartOfWeekNextButtonDisabled,
+                        isValid: viewModel.isNextButtonDisabled,
                         error: $viewModel.error,
                         firstResponder: $viewModel.becomeFirstResponder
                     )
@@ -47,7 +47,7 @@ struct FriendAddByNicknameView: View {
                                 action: {
                                     viewModel.addFriendButtonTapped.send()
                                 },
-                                disabled: $viewModel.isStartOfWeekNextButtonDisabled,
+                                disabled: $viewModel.isNextButtonDisabled,
                                 style: .constant(.button)
                             )
                     }
@@ -68,7 +68,7 @@ struct FriendAddByNicknameView: View {
             .frame(width: .infinity, height: .infinity)
             .navigationBarHidden(true)
             .onAppear {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                     viewModel.becomeFirstResponder = true
                 }
             }

@@ -26,7 +26,7 @@ class FriendAddViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     @Published var nickname: String
     @Published var error: String?
     @Published var becomeFirstResponder: Bool = false
-    @Published var isStartOfWeekNextButtonDisabled: Bool? = true
+    @Published var isNextButtonDisabled: Bool? = true
     @Published var isNavigatingToNextView = false
     @Published var friendUser: SearchByNicknameResDTO?
     @Published var followingFriendUser: FriendRelationFollowResDTO?
@@ -51,10 +51,12 @@ class FriendAddViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     private var searchCancellable: AnyCancellable?
 
     override init() {
+        print("init FriendAddViewModel")
         locationManager = CLLocationManager()
         beaconIdentityConstraint = CLBeaconIdentityConstraint(uuid: UUID(),
                                                               major: 1, minor: 456)
         nickname = ""
+        isNextButtonDisabled = true
         super.init()
         locationManager.delegate = self
         setupNicknameSearch()
@@ -70,7 +72,7 @@ class FriendAddViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
             .sink { [weak self] nickname in
                 guard let self = self else { return }
                 self.error = nil
-                self.isStartOfWeekNextButtonDisabled = true
+                self.isNextButtonDisabled = true
                 self.searchNickname(nickname)
             }
             .store(in: &cancellables)
@@ -96,9 +98,8 @@ class FriendAddViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
                     break
                 }
             }, receiveValue: { [weak self] response in
-                // 검색 결과에 따른 처리, 예시로 검색 결과가 있을 때만 isNavigatingToNextView 활성화
                 self?.friendUser = response
-                self?.isStartOfWeekNextButtonDisabled = response?.nickname.isEmpty
+                self?.isNextButtonDisabled = response?.nickname.isEmpty
             })
     }
     
@@ -124,6 +125,7 @@ class FriendAddViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
                     }, receiveValue: { user in
                         self.followingFriendUser = user
                         DispatchQueue.main.async {
+                            self.isNextButtonDisabled = true
                             self.isNavigatingToNextView = true
                         }
                     })
