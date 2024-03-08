@@ -57,7 +57,7 @@ struct CustomActionSheetView: View {
                             .frame(width: geometry.size.width - 40, height: 60)
                             .padding([.top, .bottom], 12)
                     }
-                    .padding(.bottom, 36 + keyboardHeight) // Adjust padding based on keyboard height
+                    .padding(.bottom, keyboardHeight > 0 ? keyboardHeight : 36) // Adjust padding based on keyboard height
                     .padding(.bottom, geometry.safeAreaInsets.bottom)
                     .frame(width: geometry.size.width)
                     .background(RoundedCorner(radius: 20, corners: [.topLeft, .topRight]).fill(FancyColor.actionsheetBackground.color))
@@ -65,7 +65,7 @@ struct CustomActionSheetView: View {
                 .frame(width: geometry.size.width, height: geometry.size.height)
             }
         }
-        .edgesIgnoringSafeArea(.bottom)
+        .ignoresSafeArea(edges: .bottom)
         .onAppear {
             self.addKeyboardObservers()
         }

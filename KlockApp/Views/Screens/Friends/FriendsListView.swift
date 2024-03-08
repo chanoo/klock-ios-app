@@ -11,28 +11,20 @@ struct FriendsListView: View {
     @EnvironmentObject var actionSheetManager: ActionSheetManager
     @StateObject private var viewModel = Container.shared.resolve(FriendsListViewModel.self)
 
+    init() {
+        print("FriendsListView init")
+    }
+    
     var body: some View {
         VStack {
             // Check if the friends list is empty
-            if viewModel.friends.isEmpty {
-                Spacer() // Pushes content to the center vertically
-
-                VStack {
-                    Image("img_three_characters")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 100, height: 79)
-                    Text("아직 함께 공부할 친구가 없네요!\n친구와 함께 더 즐겁게 성장해볼까요?")
-                        .multilineTextAlignment(.center)
-                        .lineSpacing(6)
-                        .foregroundColor(FancyColor.gray4.color)
-                        .font(.system(size: 13, weight: .semibold))
-                        .padding()
-                    
-                }
-                .frame(maxWidth: .infinity) // Ensure it takes up the full width
-
-                Spacer() // Pushes content to the center vertically
+            if viewModel.isLoading {
+                LoadingView()
+                    .onAppear{
+                        viewModel.fetchFriends()
+                    }
+            } else if viewModel.friends.isEmpty {
+                FriendsListEmptyView()
             } else {
                 // ScrollView to show the friends list
                 ScrollView {
@@ -60,9 +52,6 @@ struct FriendsListView: View {
         .navigationTitle("친구")
         .navigationBarBackButtonHidden()
         .navigationBarItems(leading: BackButtonView())
-        .onAppear(perform: {
-            viewModel.fetchFriends()
-        })
     }
 }
 
@@ -156,6 +145,29 @@ struct FriendsRowView: View {
                 .frame(height: 0.5)
                 .foregroundColor(.clear)
                 .background(FancyColor.listCellUnderline.color)
+        }
+    }
+}
+
+struct FriendsListEmptyView: View {
+    var body: some View {
+        Group {
+            Spacer()
+            VStack {
+                Image("img_three_characters")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 100, height: 79)
+                Text("아직 함께 공부할 친구가 없네요!\n친구와 함께 더 즐겁게 성장해볼까요?")
+                    .multilineTextAlignment(.center)
+                    .lineSpacing(6)
+                    .foregroundColor(FancyColor.gray4.color)
+                    .font(.system(size: 13, weight: .semibold))
+                    .padding()
+                
+            }
+            .frame(maxWidth: .infinity)
+            Spacer()
         }
     }
 }

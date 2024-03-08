@@ -15,7 +15,7 @@ struct CustomActionSheetModifier: ViewModifier {
         ZStack {
             content
             Color.black.opacity(isPresented ? 0.5 : 0.0)
-                .edgesIgnoringSafeArea(.all)
+                .ignoresSafeArea()
             self.content()
                 .modifier(SlideUpTransition(isPresented: isPresented))
         }

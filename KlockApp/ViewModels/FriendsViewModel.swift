@@ -22,10 +22,10 @@ class FriendsViewModel: ObservableObject {
     @Published var groupedUserTraces: [UserTraceGroup] = []
     @Published var flogOnIssue: String? = nil
     @Published var followTitle: String = "팔로잉"
-    @Published var following: Bool
 
-    var nickname: String
-    var userId: Int64
+    @Published var userId: Int64
+    @Published var nickname: String
+    @Published var following: Bool
 
     private let friendRelationService = Container.shared.resolve(FriendRelationServiceProtocol.self)
     private let userTraceService = Container.shared.resolve(UserTraceRemoteServiceProtocol.self)

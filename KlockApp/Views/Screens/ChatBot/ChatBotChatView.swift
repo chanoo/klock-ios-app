@@ -25,17 +25,7 @@ struct ChatBotChatView: View {
                 ScrollViewReader { _ in
                     LazyVStack {
                         if viewModel.isPreparingResponse && viewModel.tempMessage == nil {
-                            HStack(spacing: 0) {
-                                Spacer()
-                                ProgressView()
-                                    .padding()
-                                    .background(FancyColor.chatBotBubble.color)
-                                    .clipShape(RoundedCorners(tl: 10, tr: 0, bl: 10, br: 10))
-                                    .foregroundColor(FancyColor.primary.color)
-                            }
-                            .padding(.leading, 10)
-                            .padding(.trailing, 24)
-                            .padding(.top, 10)
+                            ChatGPTLoadingView()
                         }
                         if let tempMessage = viewModel.tempMessage {
                             MessageBubbleView(
@@ -140,6 +130,22 @@ struct ChatBotChatView: View {
                 viewModel.loadStoredMessages(chatBotID: chatBot.id)
                 viewModel.initializeAssistant(chatBotID: chatBot.id, persona: chatBot.persona)
             }
+    }
+}
+
+struct ChatGPTLoadingView: View {
+    var body: some View {
+        HStack(spacing: 0) {
+            ProgressView()
+                .padding()
+                .background(FancyColor.chatBotBubble.color)
+                .clipShape(RoundedCorners(tl: 10, tr: 10, bl: 0, br: 10))
+                .foregroundColor(FancyColor.primary.color)
+            Spacer()
+        }
+        .padding(.leading, 10)
+        .padding(.trailing, 24)
+        .padding(.top, 10)
     }
 }
 

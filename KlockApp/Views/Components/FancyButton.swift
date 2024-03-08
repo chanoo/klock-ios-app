@@ -94,7 +94,7 @@ enum FancyButtonStyle {
         case .button:
             return FancyColor.black.color
         case .black:
-            return FancyColor.black.color
+            return FancyColor.buttonOutlineLine.color
         case .text:
             return FancyColor.clear.color
         }

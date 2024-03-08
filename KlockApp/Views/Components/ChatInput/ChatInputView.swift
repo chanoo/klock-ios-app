@@ -16,7 +16,7 @@ struct ChatInputView: View {
     @Binding var isPreparingResponse: Bool
     @Binding var selectedImage: UIImage?
     @Binding var cameraPermissionGranted: Bool
-    @Binding var showingImagePicker: Bool
+    @State var showingImagePicker: Bool = false
     @Binding var isSendMessage: Bool
     let onSend: (String) -> Void // 클로저 추가
     let maxHeight: CGFloat = 70 // 최대 높이 (1줄당 대략 20~25 정도를 예상하고 세팅)
@@ -42,6 +42,7 @@ struct ChatInputView: View {
             HStack(alignment: .bottom, spacing: 0) {
                 if cameraPermissionGranted {
                     Button(action: {
+                        print("카메라 실행")
                         DispatchQueue.main.async {
                             self.showingImagePicker = true
                         }
@@ -62,7 +63,9 @@ struct ChatInputView: View {
                         isActive: $isShowCemeraPermissionView)
                     {
                         Button {
-                            isShowCemeraPermissionView = true
+                            DispatchQueue.main.async {
+                                isShowCemeraPermissionView = true
+                            }
                         } label: {
                             Image("ic_picture")
                                 .foregroundColor(FancyColor.chatBotUploadButton.color)
@@ -160,7 +163,6 @@ struct ChatInputView_Previews: PreviewProvider {
                 isPreparingResponse: .constant(false),
                 selectedImage: .constant(UIImage(named: "ic_picture")),
                 cameraPermissionGranted: .constant(false),
-                showingImagePicker: .constant(false),
                 isSendMessage: .constant(false),
                 onSend: { _ in })
                 .padding(.bottom, 0)

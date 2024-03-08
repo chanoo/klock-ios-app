@@ -12,59 +12,51 @@ import FamilyControls
 
 // 주 타이머 화면 뷰
 struct TimeTimerView: View {
-    @EnvironmentObject var viewModel: TimeTimerViewModel // 환경 객체로 타이머 뷰 모델을 가져옵니다.
-    @EnvironmentObject var chatBotViewModel: ChatBotViewModel
+    @EnvironmentObject var tabBarManager: TabBarManager
+    @StateObject var viewModel = Container.shared.resolve(TimeTimerViewModel.self)
+    @StateObject var chatBotViewModel = Container.shared.resolve(ChatBotViewModel.self)
     @State private var isShowingSelectTimer = false // 타이머 선택 화면의 표시 여부를 결정하는 상태 변수입니다.
     
     // body에서 조건 분기를 통해 로딩 화면과 메인 화면을 나눕니다.
     var body: some View {
-        if viewModel.isLoading {
-            loadingView
-        } else {
-            mainView
-        }
-    }
-
-    // 로딩 화면을 나타내는 뷰입니다.
-    private var loadingView: some View {
-        LoadingView()
-            .onAppear {
-                viewModel.loadTimer()
-            }
+        mainView
     }
 
     // 메인 화면을 나타내는 뷰입니다.
     private var mainView: some View {
         GeometryReader { geometry in
             ZStack {
-                TimerTabView(geometry: geometry, isShowingSelectTimer: $isShowingSelectTimer)
-                
+                TimerTabView(viewModel: viewModel, geometry: geometry, isShowingSelectTimer: $isShowingSelectTimer)
+                    .environmentObject(tabBarManager)
+
                 // FocusTimerView, PomodoroTimerView, ExamTimerView에 대한 조건문입니다.
                 // 해당 타이머 모델이 nil이 아니라면 해당 타이머 뷰를 표시합니다.
                 if let focusTimerViewModel = viewModel.focusTimerViewModel {
-                    FocusTimerView()
+                    FocusTimerView(timeTimerViewModel: viewModel)
                         .environmentObject(focusTimerViewModel)
-                        .environmentObject(chatBotViewModel)
+                        .environmentObject(tabBarManager)
                         .defaultTimerViewSettings(geometry: geometry, animation: viewModel.animation)
                 }
                 
                 if let pomodoroTimerViewModel = viewModel.pomodoroTimerViewModel {
                     PomodoroTimerView()
                         .environmentObject(pomodoroTimerViewModel)
+                        .environmentObject(tabBarManager)
                         .defaultTimerViewSettings(geometry: geometry, animation: viewModel.animation)
                 }
                 
                 if let examTimerViewModel = viewModel.examTimerViewModel {
                     ExamTimerView()
                         .environmentObject(examTimerViewModel)
+                        .environmentObject(tabBarManager)
                         .defaultTimerViewSettings(geometry: geometry, animation: viewModel.animation)
                 }
                 
                 if let autoTimerViewModel = viewModel.autoTimerViewModel {
-                    AutoTimerView()
+                    AutoTimerView(timeTimerViewModel: viewModel)
                         .environmentObject(autoTimerViewModel)
+                        .environmentObject(tabBarManager)
                         .defaultTimerViewSettings(geometry: geometry, animation: viewModel.animation)
-                        .zIndex(100)
                 }
             }
         }
@@ -73,25 +65,48 @@ struct TimeTimerView: View {
 
 // TabView 내의 타이머 카드들을 표시하는 뷰입니다.
 struct TimerTabView: View {
+    @ObservedObject var viewModel: TimeTimerViewModel
     var geometry: GeometryProxy
     @Binding var isShowingSelectTimer: Bool
-    @EnvironmentObject var viewModel: TimeTimerViewModel
+    @EnvironmentObject var tabBarManager: TabBarManager
+
+    // 로딩 화면을 나타내는 뷰입니다.
+    private var loadingView: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 10)
+                .fill(FancyColor.timerFocusBackground.color)
+                .frame(width: geometry.size.width - 30, height: geometry.size.height - 30)
+                .shadow(color: Color(.systemGray).opacity(0.2), radius: 5, x: 0, y: 0)
+
+            TimerLoadingView()
+                .onAppear {
+                    viewModel.loadTimer()
+                }
+        }
+    }
 
     var body: some View {
         VStack {
             TabView {
-                ForEach(viewModel.timerCardViews.indices, id: \.self) { index in
+                if viewModel.isLoading {
                     VStack {
-                        viewModel.timerCardViews[index]
-                            .environmentObject(self.viewModel)
-                            .frame(width: geometry.size.width - 30, height: geometry.size.height - 30)
-//                            .onDrag {
-//                                NSItemProvider(object: String(index) as NSString)
-//                            }
-//                            .onDrop(of: [UTType.text], delegate: viewModel.dropDelegate(for: index))
+                        loadingView
                     }
+                } else {
+                    ForEach(viewModel.timerCardViews.indices, id: \.self) { index in
+                        VStack {
+                            viewModel.timerCardViews[index]
+                                .environmentObject(viewModel)
+                                .environmentObject(tabBarManager)
+                                .frame(width: geometry.size.width - 30, height: geometry.size.height - 30)
+    //                            .onDrag {
+    //                                NSItemProvider(object: String(index) as NSString)
+    //                            }
+    //                            .onDrop(of: [UTType.text], delegate: viewModel.dropDelegate(for: index))
+                        }
+                    }
+                    AddTimerButton(geometry: geometry, isShowingSelectTimer: $isShowingSelectTimer)
                 }
-                AddTimerButton(geometry: geometry, isShowingSelectTimer: $isShowingSelectTimer)
             }
             .tabViewStyle(.page(indexDisplayMode: .automatic))
 
@@ -126,7 +141,7 @@ struct AddTimerButton: View {
                         viewModel.addTimer(type: TimerType.focus.rawValue)
                         actionSheetManager.isPresented = false
                     }, style: .constant(.outline)),
-                    FancyButton(title: "Ai자동 타이머", action: {
+                    FancyButton(title: "Ai 자동 타이머", action: {
                         viewModel.addTimer(type: TimerType.auto.rawValue)
                         actionSheetManager.isPresented = false
                     }, style: .constant(.outline)),
@@ -174,10 +189,10 @@ struct AddTimerButton: View {
 extension View {
     func defaultTimerViewSettings(geometry: GeometryProxy, animation: Namespace.ID) -> some View {
         self
+            .ignoresSafeArea()
             .frame(width: .infinity, height: .infinity)
             .navigationBarHidden(true)
-            .edgesIgnoringSafeArea(.all)
-            .zIndex(2)
+            .zIndex(10)
     }
 }
 

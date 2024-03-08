@@ -10,7 +10,6 @@ struct SignInView: View {
             Image("img_characters")
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .edgesIgnoringSafeArea(.all)
 
             VStack(alignment: .leading) { // Add alignment here
                 Text("평생 지켜질 공부습관\n평생 친구와 함께")

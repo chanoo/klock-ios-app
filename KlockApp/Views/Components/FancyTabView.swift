@@ -7,6 +7,7 @@
 import SwiftUI
 
 struct FancyTabView: View {
+    @EnvironmentObject var tabBarManager: TabBarManager
     @Environment(\.colorScheme) var colorScheme
     @Binding var selection: Int
     @StateObject private var keyboardResponder = KeyboardResponder() // 키보드 상태 관찰 객체
@@ -22,25 +23,28 @@ struct FancyTabView: View {
                     }
                 }
             }
+            
             if !keyboardResponder.isKeyboardVisible {
-                HStack(spacing: 0) {
-                    ForEach(0..<items.count, id: \.self) { index in
-                        Button(action: {
-                            withAnimation(.easeInOut(duration: 0.2)) {
-                                triggerHapticFeedback()
-                                selection = index
+                if tabBarManager.isTabBarVisible {
+                    HStack(spacing: 0) {
+                        ForEach(0..<items.count, id: \.self) { index in
+                            Button(action: {
+                                withAnimation(.easeInOut(duration: 0.2)) {
+                                    triggerHapticFeedback()
+                                    selection = index
+                                }
+                            }) {
+                                FancyTabItem(selectedImageName: items[index].selectedImageName,
+                                             deselectedImageName: items[index].deselectedImageName,
+                                             isSelected: selection == index)
                             }
-                        }) {
-                            FancyTabItem(selectedImageName: items[index].selectedImageName,
-                                         deselectedImageName: items[index].deselectedImageName,
-                                         isSelected: selection == index)
                         }
                     }
+                    .padding(.horizontal)
+                    .background(tabBarManager.isTabBarVisible ? FancyColor.tabbarBackground.color : FancyColor.background.color)
+                    .frame(height: tabBarManager.isTabBarVisible ? 60 : 0)
+                    .transition(.move(edge: .bottom))
                 }
-                .padding(.horizontal)
-                .background(FancyColor.tabbarBackground.color)
-                .frame(height: 60)
-                .transition(.move(edge: .bottom))
             }
         }
     }

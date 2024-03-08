@@ -60,8 +60,11 @@ class TimeTimerViewModel: ObservableObject {
         setupSensor()
         timerManager.fetchTimers { [weak self] timerModels in
             guard let self = self else { return }
-            self.timerModels = timerModels
-            self.timerCardViews = self.timerModels.map { self.viewFor(timer: $0) }
+            DispatchQueue.main.async {
+                self.timerModels = timerModels
+                self.timerCardViews = self.timerModels.map { self.viewFor(timer: $0) }
+                self.isLoading = false
+            }
         }
         calculateElapsedTime()
         
@@ -82,10 +85,6 @@ class TimeTimerViewModel: ObservableObject {
             Task{
                 try await AuthorizationCenter.shared.requestAuthorization(for: .individual)
             }
-        }
-        
-        DispatchQueue.main.async {
-            self.isLoading = false
         }
     }
 

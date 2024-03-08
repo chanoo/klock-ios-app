@@ -41,7 +41,6 @@ struct ExamTimerView: View {
         ZStack {
             Image("img_watch_background3")
                 .aspectRatio(contentMode: .fill)
-                .edgesIgnoringSafeArea(.all)
             
             VStack {
                 

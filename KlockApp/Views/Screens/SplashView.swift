@@ -19,7 +19,7 @@ struct SplashView: View {
 
     var body: some View {
         ZStack {
-            FancyColor.background.color.edgesIgnoringSafeArea(.all)
+            FancyColor.background.color.ignoresSafeArea()
 
             VStack {
                 ZStack(alignment: .center) {

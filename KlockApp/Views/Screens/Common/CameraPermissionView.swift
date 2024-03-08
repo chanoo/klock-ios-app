@@ -67,7 +67,7 @@ struct CameraPermissionView: View {
     private var permissionButton: some View {
         switch viewModel.cameraPermissionStatus {
         case .authorized:
-            return FancyButton(title: "Ai자동 타이머로 가기", action: {
+            return FancyButton(title: "Ai 자동 타이머로 가기", action: {
                 self.presentationMode.wrappedValue.dismiss()
             }, style: .constant(.black))
                 .padding(.top, 30)

@@ -11,12 +11,12 @@ import SwiftUI
 struct FriendsView: View {
     @EnvironmentObject var actionSheetManager: ActionSheetManager
     @ObservedObject var viewModel: FriendsViewModel
-    @StateObject private var imageViewModel = Container.shared.resolve(ImageViewModel.self)
-    @StateObject private var friendAddViewModel = Container.shared.resolve(FriendAddViewModel.self)
+    @StateObject var imageViewModel = Container.shared.resolve(ImageViewModel.self)
 
     @State private var proxy: ScrollViewProxy?
     
     init(userId: Int64, nickname: String, following: Bool) {
+        print("FriendsView init")
         self.viewModel = FriendsViewModel(nickname: nickname, userId: userId, following: following)
     }
 
@@ -79,7 +79,6 @@ struct FriendsView: View {
                 isPreparingResponse: $viewModel.isPreparingResponse,
                 selectedImage: $imageViewModel.selectedImage,
                 cameraPermissionGranted: $imageViewModel.cameraPermissionGranted,
-                showingImagePicker: $imageViewModel.showingImagePicker,
                 isSendMessage: $viewModel.isSendMessage,
                 onSend: { message in
                     let _selectedImage = imageViewModel.selectedImage?.resize(to: CGSize(width: 600, height: 600))
@@ -98,35 +97,16 @@ struct FriendsView: View {
         .navigationBarTitle(viewModel.nickname, displayMode: .inline)
         .navigationBarBackButtonHidden()
         .navigationBarItems(
-            leading: naviLeadingItemView,
-            trailing: addFriendButtonView
+            leading: leadingItemView,
+            trailing: trailingItemView
         )
-        .sheet(item: $friendAddViewModel.activeSheet) { item in
-            viewModel.showAddFriendView(for: item, viewModel: friendAddViewModel)
-        }
     }
     
-    private var naviLeadingItemView: some View {
-        Group {
-            if viewModel.userId == UserModel.load()?.id {
-                NavigationLink(destination: FriendsListView()
-                                .environmentObject(viewModel)
-                                .environmentObject(actionSheetManager)
-                                .onAppear(perform: {
-                                    // 필요한 작업 수행
-                                })) {
-                    Image("ic_sweats")
-                        .resizable()
-                        .frame(width: 25, height: 25)
-                        .padding(.leading, 8)
-                }
-            } else {
-                BackButtonView() // 여기서 BackButtonView는 사용자 정의 뷰입니다.
-            }
-        }
+    private var leadingItemView: some View {
+        BackButtonView()
     }
     
-    private var addFriendButtonView: some View {
+    private var trailingItemView: some View {
         FancyButton(
             title: viewModel.followTitle,
             action: {

@@ -11,16 +11,16 @@ import Foast
 import Alamofire
 
 class MyWallViewModel: ObservableObject {
-    @Published var newMessage: String = ""
     @Published var isPreparingResponse: Bool = false
     @Published var isLoading: Bool = true
     @Published var isSendMessage: Bool = false
     @Published var groupedUserTraces: [UserTraceGroup] = []
     @Published var dynamicHeight: CGFloat = 36 // 높이 초기값
-    @Published var contents: String? = nil
+    @Published var contents: String = ""
     @Published var image: Data? = nil
     @Published var flogOnIssue: String? = nil
     @Published var isNavigatingToFriendView: Bool = false
+    @Published var isNavigatingToFriendListView: Bool = false
 
     var nickname: String?
     var userId: Int64?
@@ -225,6 +225,7 @@ class MyWallViewModel: ObservableObject {
     
     func viewDidAppear() {
         isNavigatingToFriendView = false
+        isNavigatingToFriendListView = false
     }
     
     func hideKeyboard() {

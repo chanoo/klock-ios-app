@@ -11,7 +11,7 @@ import Foast
 struct AutoTimerView: View {
     @EnvironmentObject var tabBarManager: TabBarManager
     @EnvironmentObject var autoTimerViewModel: AutoTimerViewModel
-    @EnvironmentObject var timeTimerViewModel: TimeTimerViewModel
+    @ObservedObject var timeTimerViewModel: TimeTimerViewModel
     @EnvironmentObject var userViewModel: UserViewModel
     @EnvironmentObject var chatBotViewModel: ChatBotViewModel
     @State private var showChatBot = false
@@ -95,15 +95,17 @@ extension AutoTimerView {
                     .aspectRatio(contentMode: .fill)
                     .frame(width: geometry.size.width, height: geometry.size.height)
                     .clipped()
-//                    .overlay(
-//                        (autoTimerViewModel.resultImage != nil) ?
-//                            Image(uiImage: autoTimerViewModel.resultImage!)
-//                                .resizable()
-//                                .aspectRatio(contentMode: .fill)
-//                                .frame(width: geometry.size.width, height: geometry.size.height)
-//                                .opacity(0.2)
-//                            : nil
-//                    )
+#if DEBUG
+                    .overlay(
+                        (autoTimerViewModel.resultImage != nil) ?
+                            Image(uiImage: autoTimerViewModel.resultImage!)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: geometry.size.width, height: geometry.size.height)
+                                .opacity(0.2)
+                            : nil
+                    )
+#endif
             }
         }
     }
@@ -202,7 +204,6 @@ extension AutoTimerView {
             .sheet(isPresented: $showChatBot) {
                 NavigationView {
                     ChatBotListView()
-                        .environmentObject(chatBotViewModel)
                 }
             }
         }
@@ -252,12 +253,11 @@ struct AutoTimerView_Previews: PreviewProvider {
     static var previews: some View {
         let model = AutoTimerModel(id: 1, userId: 1, seq: 1, type: TimerType.auto.rawValue, name: "자동 집중시간 타이머")
         let autoTimerViewModel = AutoTimerViewModel(model: model)
-        let TimeTimerViewModel = Container.shared.resolve(TimeTimerViewModel.self)
-        let TabBarManager = Container.shared.resolve(TabBarManager.self)
+        let timeTimerViewModel = Container.shared.resolve(TimeTimerViewModel.self)
+        let tabBarManager = Container.shared.resolve(TabBarManager.self)
 
-        AutoTimerView()
+        AutoTimerView(timeTimerViewModel: timeTimerViewModel)
             .environmentObject(autoTimerViewModel)
-            .environmentObject(TimeTimerViewModel)
-            .environmentObject(TabBarManager)
+            .environmentObject(tabBarManager)
     }
 }

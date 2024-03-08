@@ -9,12 +9,15 @@ import SwiftUI
 
 struct MyWallView: View {
     @EnvironmentObject var actionSheetManager: ActionSheetManager
-    @ObservedObject var viewModel: MyWallViewModel
-    @StateObject private var imageViewModel = Container.shared.resolve(ImageViewModel.self)
-    @StateObject private var friendAddViewModel = Container.shared.resolve(FriendAddViewModel.self)
+    @StateObject var viewModel = Container.shared.resolve(MyWallViewModel.self)
+    @StateObject var imageViewModel = Container.shared.resolve(ImageViewModel.self)
+    @StateObject var friendAddViewModel = Container.shared.resolve(FriendAddViewModel.self)
 
-    @State private var isShowingAddFriend = false
     @State private var proxy: ScrollViewProxy?
+    
+    init() {
+        print("MyWallView init")
+    }
 
     var body: some View {
         VStack(spacing: 0) {
@@ -73,12 +76,11 @@ struct MyWallView: View {
             Divider()
             
             ChatInputView(
-                text: $viewModel.newMessage,
+                text: $viewModel.contents,
                 dynamicHeight: $viewModel.dynamicHeight,
                 isPreparingResponse: $viewModel.isPreparingResponse,
                 selectedImage: $imageViewModel.selectedImage,
                 cameraPermissionGranted: $imageViewModel.cameraPermissionGranted,
-                showingImagePicker: $imageViewModel.showingImagePicker,
                 isSendMessage: $viewModel.isSendMessage,
                 onSend: { message in
                     let _selectedImage = imageViewModel.selectedImage?.resize(to: CGSize(width: 600, height: 600))
@@ -91,6 +93,20 @@ struct MyWallView: View {
                     }
                 }
             )
+            
+//            NavigationStack {
+//                List {
+//                    NavigationLink("Mint", value: Color.mint)
+//                    NavigationLink("Pink", value: Color.pink)
+//                    NavigationLink("Teal", value: Color.teal)
+//                }
+//                .navigationDestination(for: Color.self) { color in
+//                    ColorDetail(color: color)
+//                }
+//                .navigationTitle("Colors")
+//            }
+//
+//            
             
             NavigationLink(
                 destination: LazyView(FriendsView(userId: viewModel.userId ?? 0, nickname: viewModel.nickname ?? "친구", following: true)
@@ -107,34 +123,36 @@ struct MyWallView: View {
         .navigationBarTitle("담벼락", displayMode: .inline)
         .navigationBarBackButtonHidden()
         .navigationBarItems(
-            leading: naviLeadingItemView,
-            trailing: addFriendButtonView
+            leading: leadingItemView,
+            trailing: trailingItemView
         )
         .sheet(item: $friendAddViewModel.activeSheet) { item in
             viewModel.showAddFriendView(for: item, viewModel: friendAddViewModel)
         }
-        .onAppear {
-            print("MyWallView appear")
-        }
-        .onDisappear {
-            print("MyWallView disappear")
-        }
     }
     
-    private var naviLeadingItemView: some View {
-        NavigationLink(destination: FriendsListView()
-                        .environmentObject(actionSheetManager)
-                        .onAppear(perform: {
-                            // 필요한 작업 수행
-                        })) {
-            Image("ic_sweats")
-                .resizable()
-                .frame(width: 25, height: 25)
-                .padding(.leading, 8)
-        }
+    private var leadingItemView: some View {
+        // 친구 목록
+        NavigationLink(
+            destination: LazyView(FriendsListView()
+                .environmentObject(actionSheetManager)
+                .onAppear {
+                    viewModel.viewDidAppear() // FriendsView가 화면에 나타날 때 호출
+                }
+            ),
+            isActive: $viewModel.isNavigatingToFriendListView) {
+                Button {
+                    viewModel.isNavigatingToFriendListView = true
+                } label: {
+                    Image("ic_sweats")
+                        .resizable()
+                        .frame(width: 25, height: 25)
+                        .padding(.leading, 8)
+                }
+            }
     }
     
-    private var addFriendButtonView: some View {
+    private var trailingItemView: some View {
         Button(action: {
             viewModel.hideKeyboard()
             actionSheetManager.actionSheet = CustomActionSheetView(
@@ -172,7 +190,6 @@ struct MyWallView: View {
         }) {
             Image("ic_person_plus")
         }
-
     }
     
     private func scrollToLastMessage(with proxy: ScrollViewProxy) {

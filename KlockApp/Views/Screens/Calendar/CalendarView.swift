@@ -12,9 +12,6 @@ struct CalendarView: View {
     @EnvironmentObject var actionSheetManager: ActionSheetManager
     @StateObject var viewModel = Container.shared.resolve(CalendarViewModel.self)
     @State private var spacing: CGFloat = 5
-    @State private var isShowingSelectTimer = false
-    @State private var actionSheetView: CustomActionSheetView? = nil
-    @State private var isActionSheetPresented = false
     let weeks = 13
     
     init() {
@@ -41,6 +38,9 @@ struct CalendarView: View {
         ZStack {
             if viewModel.isLoading {
                 LoadingView()
+                    .onAppear {
+                        viewModel.fetchStudySession()
+                    }
             } else {
                 ScrollView {
                     VStack(spacing: 0) {
@@ -166,9 +166,6 @@ struct CalendarView: View {
             }
         }
         .navigationBarTitle("공부 기록", displayMode: .inline)
-        
-        // 수정 함수 action
-        
     }
 
     private var calendarBody: some View {

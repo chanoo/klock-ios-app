@@ -86,7 +86,7 @@ struct AutoTimerCardView: View {
                     .padding(.bottom, 60)
                 } else {
                     NavigationLink(
-                        destination: CameraPermissionView().environmentObject(actionSheetManager),
+                        destination: LazyView(CameraPermissionView().environmentObject(actionSheetManager)),
                         isActive: $autoTimerViewModel.isShowCemeraPermissionView)
                     {
                         FancyButton(

@@ -36,6 +36,8 @@
 		9821409D2A07AC3100C68EB9 /* PomodoroTimerRemoteServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9821409C2A07AC3100C68EB9 /* PomodoroTimerRemoteServiceTests.swift */; };
 		9821409F2A07AFB800C68EB9 /* ExamTimerRemoteServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9821409E2A07AFB800C68EB9 /* ExamTimerRemoteServiceTests.swift */; };
 		982140A32A07EFBE00C68EB9 /* APIServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982140A22A07EFBE00C68EB9 /* APIServiceProtocol.swift */; };
+		983157412B9CD24A00DCC952 /* TimerLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983157402B9CD24A00DCC952 /* TimerLoadingView.swift */; };
+		983157432B9CD28F00DCC952 /* LinearGradientBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983157422B9CD28F00DCC952 /* LinearGradientBackgroundView.swift */; };
 		98327DFA2A0CF87100CFEB3A /* TimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98327DF92A0CF87100CFEB3A /* TimerModel.swift */; };
 		9833FFC229F5759E00CC33F7 /* AccountTimerLocalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9833FFC129F5759E00CC33F7 /* AccountTimerLocalService.swift */; };
 		9833FFC429F5769700CC33F7 /* AccountTimerServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9833FFC329F5769700CC33F7 /* AccountTimerServiceProtocol.swift */; };
@@ -320,6 +322,8 @@
 		9821409C2A07AC3100C68EB9 /* PomodoroTimerRemoteServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroTimerRemoteServiceTests.swift; sourceTree = "<group>"; };
 		9821409E2A07AFB800C68EB9 /* ExamTimerRemoteServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamTimerRemoteServiceTests.swift; sourceTree = "<group>"; };
 		982140A22A07EFBE00C68EB9 /* APIServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServiceProtocol.swift; sourceTree = "<group>"; };
+		983157402B9CD24A00DCC952 /* TimerLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerLoadingView.swift; sourceTree = "<group>"; };
+		983157422B9CD28F00DCC952 /* LinearGradientBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearGradientBackgroundView.swift; sourceTree = "<group>"; };
 		98327DF92A0CF87100CFEB3A /* TimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerModel.swift; sourceTree = "<group>"; };
 		9833FFC129F5759E00CC33F7 /* AccountTimerLocalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTimerLocalService.swift; sourceTree = "<group>"; };
 		9833FFC329F5769700CC33F7 /* AccountTimerServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTimerServiceProtocol.swift; sourceTree = "<group>"; };
@@ -900,6 +904,8 @@
 			isa = PBXGroup;
 			children = (
 				98B5F7A22B86E06E00CD8A42 /* ChatLoadingView.swift */,
+				983157402B9CD24A00DCC952 /* TimerLoadingView.swift */,
+				983157422B9CD28F00DCC952 /* LinearGradientBackgroundView.swift */,
 			);
 			path = Loading;
 			sourceTree = "<group>";
@@ -1361,6 +1367,7 @@
 				98E6A5A62B88DEAD007FEDB4 /* MessageRightBubbleView.swift in Sources */,
 				98A8CEDB2B7C9CB300B5A29C /* UserTraceType.swift in Sources */,
 				98A8CED52B7B7D8C00B5A29C /* UserTraceRemoteService.swift in Sources */,
+				983157412B9CD24A00DCC952 /* TimerLoadingView.swift in Sources */,
 				984D2C9129E0728C008D3EA9 /* SplashViewModel.swift in Sources */,
 				980FCBC02B837945001A819D /* ImageViewModel.swift in Sources */,
 				983BC0252A8EF64400DC108B /* AutoTimerModel.swift in Sources */,
@@ -1523,6 +1530,7 @@
 				98E67FE12A5714750090AE23 /* UserRemoteServiceProtocol.swift in Sources */,
 				98D7C95129E45C550075D201 /* ContentView.swift in Sources */,
 				98FD8F742A174A7900CEE0B1 /* StudySessionRemoteServiceProtocol.swift in Sources */,
+				983157432B9CD28F00DCC952 /* LinearGradientBackgroundView.swift in Sources */,
 				984B101B2B46209A00186B6D /* AlarmBubbleView.swift in Sources */,
 				986E5DB229EAEF5600FF7047 /* CalendarViewModel.swift in Sources */,
 				98AC30832A15CB77006DC48D /* PomodoroTimerViewModel.swift in Sources */,

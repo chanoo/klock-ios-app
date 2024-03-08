@@ -20,7 +20,6 @@ struct FriendAddByQRCodeView: View {
                         QRCodeScannerOverlay()
                             .environmentObject(viewModel)
                             .frame(width: geometry.size.width, height: .infinity)
-                            .edgesIgnoringSafeArea(.all)
                     case .myQRCode:
                         NicknameView()
                             .frame(width: geometry.size.width, height: .infinity)
@@ -33,7 +32,6 @@ struct FriendAddByQRCodeView: View {
                             .resizable()
                             .scaledToFill()
                             .frame(width: .infinity, height: .infinity)
-                            .edgesIgnoringSafeArea(.all)
                         ZStack {
                             VStack {
                                 Text("QR코드를 스캔해주세요")

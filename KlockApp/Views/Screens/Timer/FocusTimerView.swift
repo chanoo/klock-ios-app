@@ -11,7 +11,7 @@ import Foast
 struct FocusTimerView: View {
     @EnvironmentObject var tabBarManager: TabBarManager
     @EnvironmentObject var focusTimerViewModel: FocusTimerViewModel
-    @EnvironmentObject var timeTimerViewModel: TimeTimerViewModel
+    @ObservedObject var timeTimerViewModel: TimeTimerViewModel
     @EnvironmentObject var userViewModel: UserViewModel
     @EnvironmentObject var chatBotViewModel: ChatBotViewModel
     @State private var showChatBot = false
@@ -41,9 +41,7 @@ struct FocusTimerView: View {
     
     private func frontView(geometry: GeometryProxy) -> some View {
         ZStack(alignment: .center) {
-//            Image("img_watch_background3")
-//                .aspectRatio(contentMode: .fill)
-//                .edgesIgnoringSafeArea(.all)
+            chatBotButton(with: geometry)
             
             VStack(spacing: 0) {
                 Spacer()
@@ -92,35 +90,37 @@ struct FocusTimerView: View {
                     isBlock: false,
                     style: .constant(.black)
                 )
-                .padding(.top, 30)
-                .padding(.bottom, 60)
+                .padding(.top, Constants.topMediumPadding)
+                .padding(.bottom, Constants.bottomPadding)
             }
             .frame(width: geometry.size.width, height: geometry.size.height)
-            
-            VStack {
-                Spacer()
-                HStack {
-                    Spacer()
-                    Button {
-                        showChatBot = true
-                    } label: {
-                        Image("ic_star_balloon")
-                    }
-                    .padding(.bottom, 60)
-                    .padding(.trailing, 30)
-                }
-                .shadow(color: Color(.systemGray).opacity(0.2), radius: 5, x: 0, y: 0)
-                .sheet(isPresented: $showChatBot) {
-                    NavigationView {
-                        ChatBotListView()
-                            .environmentObject(chatBotViewModel)
-                    }
-                }
-            }
         }
         .background(FancyColor.timerFocusBackground.color)
         .onReceive(timer, perform: updateCurrentTime)
         .onAppear(perform: onAppearActions)
+    }
+    
+    private func chatBotButton(with geometry: GeometryProxy) -> some View {
+        VStack {
+            Spacer()
+            HStack {
+                Spacer()
+                Button {
+                    showChatBot = true
+                } label: {
+                    Image("ic_star_balloon")
+                }
+                .padding(.bottom, Constants.chatbotBottomPadding)
+                .padding(.trailing, Constants.chatbotTrailingPadding)
+            }
+            .padding(.bottom, 19)
+            .shadow(color: Color(.systemGray).opacity(0.2), radius: 5, x: 0, y: 0)
+            .sheet(isPresented: $showChatBot) {
+                NavigationView {
+                    ChatBotListView()
+                }
+            }
+        }
     }
     
     private func onAppearActions() {
@@ -149,16 +149,26 @@ struct FocusTimerView: View {
     }
 }
 
+private struct Constants {
+    static let topPadding: CGFloat = 80
+    static let topSmallPadding: CGFloat = 2
+    static let topMediumPadding: CGFloat = 40
+    static let mediumPadding: CGFloat = 40
+    static let bottomPadding: CGFloat = 80
+    static let bottomLargePadding: CGFloat = 160
+    static let chatbotBottomPadding: CGFloat = 60
+    static let chatbotTrailingPadding: CGFloat = 30
+}
+
 struct FocusTimerView_Previews: PreviewProvider {
     static var previews: some View {
         let model = FocusTimerModel(id: 1, userId: 1, seq: 1, type: TimerType.focus.rawValue, name: "집중시간 타이머")
         let focusTimerViewModel = FocusTimerViewModel(model: model)
-        let TimeTimerViewModel = Container.shared.resolve(TimeTimerViewModel.self)
-        let TabBarManager = Container.shared.resolve(TabBarManager.self)
+        let timeTimerViewModel = Container.shared.resolve(TimeTimerViewModel.self)
+        let tabBarManager = Container.shared.resolve(TabBarManager.self)
 
-        FocusTimerView()
+        FocusTimerView(timeTimerViewModel: timeTimerViewModel)
             .environmentObject(focusTimerViewModel)
-            .environmentObject(TimeTimerViewModel)
-            .environmentObject(TabBarManager)
+            .environmentObject(tabBarManager)
     }
 }

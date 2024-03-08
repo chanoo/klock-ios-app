@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ChatBotListView: View {
-    @EnvironmentObject var viewModel: ChatBotViewModel
+    @StateObject var viewModel = Container.shared.resolve(ChatBotViewModel.self)
 
     var body: some View {
         VStack(spacing: 0) {
@@ -69,8 +69,6 @@ struct ChatBotRow: View {
 
 struct ChatBotListView_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = Container.shared.resolve(ChatBotViewModel.self)
         ChatBotListView()
-            .environmentObject(viewModel)
     }
 }

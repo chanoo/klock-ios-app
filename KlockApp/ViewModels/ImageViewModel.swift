@@ -18,7 +18,6 @@ class ImageViewModel: ObservableObject {
     @Published var userModel = UserModel.load()
     @Published var isNickNameButtonEnabled = false
     @Published var nicknameTextFieldShouldBecomeFirstResponder: Bool = false
-    @Published var showingImagePicker = false
     @Published var error: String?
     @Published var isLoading: Bool = false
 
@@ -122,12 +121,6 @@ class ImageViewModel: ObservableObject {
 
     func isCameraPermissionGranted() -> Bool {
         return cameraPermissionGranted
-    }
-    
-    func showImagePickerView() {
-        DispatchQueue.main.async {
-            self.showingImagePicker = true
-        }
     }
 
     func checkCameraPermission() {

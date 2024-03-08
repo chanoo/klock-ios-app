@@ -56,7 +56,6 @@ class FriendAddViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
         beaconIdentityConstraint = CLBeaconIdentityConstraint(uuid: UUID(),
                                                               major: 1, minor: 456)
         nickname = ""
-        isNextButtonDisabled = true
         super.init()
         locationManager.delegate = self
         setupNicknameSearch()

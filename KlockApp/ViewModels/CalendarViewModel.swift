@@ -13,9 +13,9 @@ import UIKit
 class CalendarViewModel: ObservableObject {
     @Published var studySessions: [String: [StudySessionModel]] = [:]
     @Published var studySessionsOfDay: [StudySessionModel] = []
-    @Published var isLoading: Bool = false
-    @Published var selectedDate: String
-    @Published var totalStudyTime: String
+    @Published var isLoading: Bool = true
+    @Published var selectedDate: String = TimeUtils.formattedDateString(from: Date(), format: "yyyy년 M월 d일 (E)")
+    @Published var totalStudyTime: String = ""
     @Published var becomeFirstResponder: Bool = false
     @Published var studySessionModel: StudySessionModel = StudySessionModel(id: nil, userId: 0, startTime: Date(), endTime: Date(), timerName: "", timerType: "")
     private let studySessionRemoteService = Container.shared.resolve(StudySessionRemoteServiceProtocol.self)
@@ -30,12 +30,6 @@ class CalendarViewModel: ObservableObject {
     }()
     private let userModel = UserModel.load()
     private let apiQueue = DispatchQueue(label: "app.klockApp.api.queue")
-
-    init() {
-        self.selectedDate = TimeUtils.formattedDateString(from: Date(), format: "yyyy년 M월 d일 (E)")
-        self.totalStudyTime = ""
-        self.fetchStudySession()
-    }
     
     func updateStudySession() {
         apiQueue.async { [weak self] in
@@ -71,8 +65,6 @@ class CalendarViewModel: ObservableObject {
                 Foast.show(message: "회원 정보가 없습니다.")
                 return
             }
-
-            self.isLoading = true
             
             let endDate = Date()
             let endDateStr = TimeUtils.formattedDateString(from: endDate, format: "yyyy-MM-dd")

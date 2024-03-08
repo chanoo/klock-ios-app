@@ -231,11 +231,15 @@ class SignInViewModel: NSObject, ObservableObject, ASAuthorizationControllerDele
         if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
             handleAppleIDCredential(appleIDCredential)
         } else {
+            self.isSigning = false
+            Foast.show(message: "애플 로그인을 실패하였습니다.")
             print("Error during Apple login")
         }
     }
 
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        self.isSigning = false
+        Foast.show(message: "애플 로그인을 실패하였습니다.")
         print("Error during Apple login: \(error.localizedDescription)")
     }
     

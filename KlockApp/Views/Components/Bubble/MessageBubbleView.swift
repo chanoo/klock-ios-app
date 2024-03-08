@@ -27,10 +27,40 @@ struct MessageBubbleView: View {
                 if userTraceType == .studyStart {
                     if let date = date {
                         AlarmRightBubbleView(nickname: nickname, content: content, heartCount: .constant(10), date: date, showIcon: true)
+                            .contextMenu { // Use contextMenu instead of onLongPressGesture
+                                Button(action: {
+                                    UIPasteboard.general.string = content // `content`의 값을 클립보드에 복사
+                                    print("복사됨: \(content)")
+                                }) {
+                                    Label("복사", image: "ic_documents")
+                                }
+                                Button(role: .destructive) { // 👈 This argument
+                                    // delete something
+                                    print("삭제")
+                                    onDelete()
+                                } label: {
+                                    Label("삭제", image: "ic_trash")
+                                }
+                            }
                     }
                 } else if userTraceType == .studyEnd {
                     if let date = date {
                         AlarmRightBubbleView(nickname: nickname, content: content, heartCount: .constant(23), date: date, showIcon: false)
+                            .contextMenu { // Use contextMenu instead of onLongPressGesture
+                                Button(action: {
+                                    UIPasteboard.general.string = content // `content`의 값을 클립보드에 복사
+                                    print("복사됨: \(content)")
+                                }) {
+                                    Label("복사", image: "ic_documents")
+                                }
+                                Button(role: .destructive) { // 👈 This argument
+                                    // delete something
+                                    print("삭제")
+                                    onDelete()
+                                } label: {
+                                    Label("삭제", image: "ic_trash")
+                                }
+                            }
                     }
                 } else {
                     VStack(alignment: .trailing, spacing: 0) {
@@ -53,7 +83,6 @@ struct MessageBubbleView: View {
                                         print("삭제")
                                         onDelete()
                                     } label: {
-                                        
                                         Label("삭제", image: "ic_trash")
                                     }
                                 }
@@ -66,13 +95,96 @@ struct MessageBubbleView: View {
                         .padding(.trailing, 8)
                     if let date = date {
                         AlarmLeftBubbleView(nickname: nickname, content: content, heartCount: .constant(10), date: date, showIcon: true)
-                    }
+                            .contextMenu { // Use contextMenu instead of onLongPressGesture
+                                Button(action: {
+                                    UIPasteboard.general.string = content // `content`의 값을 클립보드에 복사
+                                    print("복사됨: \(content)")
+                                }) {
+                                    Label("복사", image: "ic_documents")
+                                }
+                                Button(role: .destructive) { // 👈 This argument
+                                    @State var disableButton: Bool?
+                                    var selectedIssue: String?
+                                    let flagOnIssueContentView = FlagOnIssueContentView(onIssueSelected: { issue in
+                                        print("issue \(issue)")
+                                        disableButton = true
+                                        selectedIssue = issue
+                                    })
+                                    actionSheetManager.actionSheet = CustomActionSheetView(
+                                        title: "사용자 신고하기",
+                                        message: "사용자를 신고하는 이유를 선택해주세요.",
+                                        content: AnyView(
+                                            flagOnIssueContentView
+                                                .environmentObject(actionSheetManager)
+                                        ),
+                                        actionButtons: nil,
+                                        cancelButton: FancyButton(title: "취소", action: {
+                                            print("selectedIssue \(selectedIssue ?? "-")")
+                                            withAnimation(.spring()) {
+                                                actionSheetManager.isPresented = false
+                                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                                    actionSheetManager.actionSheet = nil
+                                                }
+                                            }
+                                        }, style: .constant(.text))
+                                    )
+                                    withAnimation(.spring()) {
+                                        actionSheetManager.isPresented = true
+                                    }
+
+                                } label: {
+                                    Label("신고", image: "ic_emergency")
+                                }
+                            }
+                        }
                 } else if userTraceType == .studyEnd {
                     ProfileImageWrapperView(profileImageURL: profileImageURL)
                         .padding(.trailing, 8)
                     if let date = date {
                         AlarmLeftBubbleView(nickname: nickname, content: content, heartCount: .constant(10), date: date, showIcon: false)
-                    }
+                            .contextMenu { // Use contextMenu instead of onLongPressGesture
+                                Button(action: {
+                                    UIPasteboard.general.string = content // `content`의 값을 클립보드에 복사
+                                    print("복사됨: \(content)")
+                                }) {
+                                    Label("복사", image: "ic_documents")
+                                }
+                                Button(role: .destructive) { // 👈 This argument
+                                    @State var disableButton: Bool?
+                                    var selectedIssue: String?
+                                    let flagOnIssueContentView = FlagOnIssueContentView(onIssueSelected: { issue in
+                                        print("issue \(issue)")
+                                        disableButton = true
+                                        selectedIssue = issue
+                                    })
+                                    actionSheetManager.actionSheet = CustomActionSheetView(
+                                        title: "사용자 신고하기",
+                                        message: "사용자를 신고하는 이유를 선택해주세요.",
+                                        content: AnyView(
+                                            flagOnIssueContentView
+                                                .environmentObject(actionSheetManager)
+                                        ),
+                                        actionButtons: nil,
+                                        cancelButton: FancyButton(title: "취소", action: {
+                                            print("selectedIssue \(selectedIssue ?? "-")")
+                                            withAnimation(.spring()) {
+                                                actionSheetManager.isPresented = false
+                                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                                    actionSheetManager.actionSheet = nil
+                                                }
+                                            }
+                                        }, style: .constant(.text))
+                                    )
+                                    withAnimation(.spring()) {
+                                        actionSheetManager.isPresented = true
+                                    }
+
+                                } label: {
+                                    Label("신고", image: "ic_emergency")
+                                }
+                            }
+
+                        }
                 } else {
                     ProfileImageWrapperView(profileImageURL: profileImageURL)
                         .padding(.trailing, 8)
@@ -162,3 +274,4 @@ struct MessageBubbleView_Previews: PreviewProvider {
         }
     }
 }
+

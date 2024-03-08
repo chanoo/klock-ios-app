@@ -12,12 +12,6 @@ struct HomeView: View {
     @State private var title: String = "홈"
     
     @StateObject private var tabBarManager = Container.shared.resolve(TabBarManager.self)
-    @StateObject private var timeTimerViewModel = Container.shared.resolve(TimeTimerViewModel.self)
-    @StateObject private var calendarViewModel = Container.shared.resolve(CalendarViewModel.self)
-    @StateObject private var chatBotViewModel = Container.shared.resolve(ChatBotViewModel.self)
-    @StateObject private var myWallViewModel = Container.shared.resolve(MyWallViewModel.self)
-    @StateObject private var taskViewModel = Container.shared.resolve(TaskViewModel.self)
-    @StateObject private var characterViewModel = Container.shared.resolve(CharacterViewModel.self)
     @StateObject private var preferencesViewModel = Container.shared.resolve(PreferencesViewModel.self)
 
     var body: some View {
@@ -28,8 +22,7 @@ struct HomeView: View {
                 content: {
                     AnyView(
                         TimeTimerView()
-                            .environmentObject(timeTimerViewModel)
-                            .environmentObject(chatBotViewModel)
+                            .environmentObject(tabBarManager)
                     )
                 }
             ),
@@ -39,7 +32,6 @@ struct HomeView: View {
                 content: {
                     AnyView(
                        ChatBotListView()
-                           .environmentObject(chatBotViewModel)
                    )
                 }
             ),
@@ -49,7 +41,6 @@ struct HomeView: View {
                 content: {
                     AnyView(
                         CalendarView()
-                            .environmentObject(calendarViewModel)
                     )
                 }
             ),
@@ -58,7 +49,7 @@ struct HomeView: View {
                 deselectedImageName: "ic_peaple_o",
                 content: {
                     AnyView(
-                        MyWallView(viewModel: myWallViewModel)
+                        MyWallView()
                             .environmentObject(tabBarManager)
                     )
                 }
@@ -73,20 +64,7 @@ struct HomeView: View {
                 }
             ),
         ])
-//        .onChange(of: selection) { newSelection in
-//            updateTitle(newSelection)
-//        }
-//        .onAppear {
-//            updateTitle(selection)
-//        }
+        .environmentObject(tabBarManager)
         .background(FancyColor.background.color)
     }
 }
-
-//
-//struct HomeView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        HomeView()
-//            .environmentObject(Container.shared.resolve(TimeTimerViewModel.self))
-//    }
-//}

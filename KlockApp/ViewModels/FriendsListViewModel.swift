@@ -7,11 +7,11 @@
 
 import SwiftUI
 import Combine
-import Foast
 import Alamofire
 
 class FriendsListViewModel: ObservableObject {
     @Published var friends: [FriendRelationFetchResDTO] = []
+    @Published var isLoading: Bool = true
 
     private let friendRelationService = Container.shared.resolve(FriendRelationServiceProtocol.self)
     private let queue = DispatchQueue(label: "app.klockApp.friendsListViewModelQueue")
@@ -37,6 +37,7 @@ class FriendsListViewModel: ObservableObject {
                 } receiveValue: { [weak self] dto in
                     guard let self = self else { return }
                     DispatchQueue.main.async {
+                        self.isLoading = false
                         self.friends = dto
                     }
                 }
