@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PreferencesView: View {
-    @EnvironmentObject var viewModel: PreferencesViewModel
+    @ObservedObject var viewModel: PreferencesViewModel
     @EnvironmentObject var actionSheetManager: ActionSheetManager
     @EnvironmentObject var appUsageController: AppUsageController
     @State private var isUserProfileImageViewPresented = false
@@ -164,8 +164,7 @@ struct PreferencesView_Previews: PreviewProvider {
         let actionSheetManager = ActionSheetManager()
         let appUsageController = AppUsageController.shared
 
-        PreferencesView()
-            .environmentObject(viewModel)
+        PreferencesView(viewModel: viewModel)
             .environmentObject(actionSheetManager)
             .environmentObject(appUsageController)
     }

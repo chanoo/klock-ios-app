@@ -1,31 +1,29 @@
 //
-//  FriendsView.swift
+//  MyWallView.swift
 //  KlockApp
 //
-//  Created by 성찬우 on 2023/04/12.
+//  Created by 성찬우 on 3/7/24.
 //
 
 import SwiftUI
 
-// 친구 목록 화
-struct FriendsView: View {
+struct MyWallView: View {
     @EnvironmentObject var actionSheetManager: ActionSheetManager
-    @ObservedObject var viewModel: FriendsViewModel
+    @ObservedObject var viewModel: MyWallViewModel
     @StateObject private var imageViewModel = Container.shared.resolve(ImageViewModel.self)
     @StateObject private var friendAddViewModel = Container.shared.resolve(FriendAddViewModel.self)
 
+    @State private var isShowingAddFriend = false
     @State private var proxy: ScrollViewProxy?
-    
-    init(userId: Int64, nickname: String, following: Bool) {
-        self.viewModel = FriendsViewModel(nickname: nickname, userId: userId, following: following)
-    }
 
     var body: some View {
         VStack(spacing: 0) {
             if viewModel.isLoading {
                 ChatLoadingView()
                     .onAppear {
-                        viewModel.fetchUserTrace(userId: viewModel.userId)
+                        if let userId = UserModel.load()?.id {
+                            viewModel.fetchUserTrace(userId: userId)
+                        }
                     }
             } else if viewModel.groupedUserTraces.isEmpty {
                 MyWallNoDataView()
@@ -52,8 +50,9 @@ struct FriendsView: View {
                                         .onAppear{
                                             self.proxy = proxy
                                             if let lastId = viewModel.groupedUserTraces.last?.userTraces.last?.id,
-                                               lastId == userTrace.id {
-                                                viewModel.fetchUserTrace(userId: viewModel.userId)
+                                               lastId == userTrace.id,
+                                               let userId = UserModel.load()?.id {
+                                                viewModel.fetchUserTrace(userId: userId)
                                             }
                                         }
                                     }
@@ -93,9 +92,19 @@ struct FriendsView: View {
                 }
             )
             
+            NavigationLink(
+                destination: LazyView(FriendsView(userId: viewModel.userId ?? 0, nickname: viewModel.nickname ?? "친구", following: true)
+                    .environmentObject(actionSheetManager)
+                    .onAppear {
+                        viewModel.viewDidAppear() // FriendsView가 화면에 나타날 때 호출
+                    }
+                ),
+                isActive: $viewModel.isNavigatingToFriendView) {
+                    EmptyView()
+                }
         }
         .background(FancyColor.chatBotBackground.color)
-        .navigationBarTitle(viewModel.nickname, displayMode: .inline)
+        .navigationBarTitle("담벼락", displayMode: .inline)
         .navigationBarBackButtonHidden()
         .navigationBarItems(
             leading: naviLeadingItemView,
@@ -104,36 +113,66 @@ struct FriendsView: View {
         .sheet(item: $friendAddViewModel.activeSheet) { item in
             viewModel.showAddFriendView(for: item, viewModel: friendAddViewModel)
         }
+        .onAppear {
+            print("MyWallView appear")
+        }
+        .onDisappear {
+            print("MyWallView disappear")
+        }
     }
     
     private var naviLeadingItemView: some View {
-        Group {
-            if viewModel.userId == UserModel.load()?.id {
-                NavigationLink(destination: FriendsListView()
-                                .environmentObject(viewModel)
-                                .environmentObject(actionSheetManager)
-                                .onAppear(perform: {
-                                    // 필요한 작업 수행
-                                })) {
-                    Image("ic_sweats")
-                        .resizable()
-                        .frame(width: 25, height: 25)
-                        .padding(.leading, 8)
-                }
-            } else {
-                BackButtonView() // 여기서 BackButtonView는 사용자 정의 뷰입니다.
-            }
+        NavigationLink(destination: FriendsListView()
+                        .environmentObject(actionSheetManager)
+                        .onAppear(perform: {
+                            // 필요한 작업 수행
+                        })) {
+            Image("ic_sweats")
+                .resizable()
+                .frame(width: 25, height: 25)
+                .padding(.leading, 8)
         }
     }
     
     private var addFriendButtonView: some View {
-        FancyButton(
-            title: viewModel.followTitle,
-            action: {
-                viewModel.unfollowButtonTapped.send(!viewModel.following)
-            },
-            size: .small,
-            style: .constant(.outline))
+        Button(action: {
+            viewModel.hideKeyboard()
+            actionSheetManager.actionSheet = CustomActionSheetView(
+                title: "친구 추가",
+                message: "나와 같이 성장해 나갈 친구와 같이 공부하세요.",
+                actionButtons: [
+                    FancyButton(title: "QR코드 스캔", action: {
+                        withAnimation(.spring()) {
+                            actionSheetManager.isPresented = false
+                        }
+                        friendAddViewModel.activeSheet = .qrcode
+                    }, style: .constant(.outline)),
+                    FancyButton(title: "닉네임 친구추가", action: {
+                        withAnimation(.spring()) {
+                            actionSheetManager.isPresented = false
+                        }
+                        friendAddViewModel.activeSheet = .nickname
+                    }, style: .constant(.outline)),
+//                        ActionButton(title: "주변탐색 친구추가", action: {
+//                            withAnimation(.spring()) {
+//                                actionSheetManager.isPresented = false
+//                            }
+//                            friendAddViewModel.activeSheet = .nearby
+//                        }),
+                ],
+                cancelButton: FancyButton(title: "취소", action: {
+                    withAnimation(.spring()) {
+                        actionSheetManager.isPresented = false
+                    }
+                }, style: .constant(.text))
+            )
+            withAnimation(.spring()) {
+                actionSheetManager.isPresented = true
+            }
+        }) {
+            Image("ic_person_plus")
+        }
+
     }
     
     private func scrollToLastMessage(with proxy: ScrollViewProxy) {
@@ -146,14 +185,5 @@ struct FriendsView: View {
             }
         }
     }
-}
 
-//struct FriendsView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        let viewModel = FriendsViewModel(nickname: "친구", userId: 151)
-//        let friendAddViewModel = FriendAddViewModel()
-//        FriendsView(friendsViewModel: friendsViewModel)
-//            .environmentObject(viewModel)
-//            .environmentObject(friendAddViewModel)
-//    }
-//}
+}

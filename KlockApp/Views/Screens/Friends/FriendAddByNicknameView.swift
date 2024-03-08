@@ -11,7 +11,7 @@ struct FriendAddByNicknameView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @Environment(\.dismiss) var dismiss
 
-    @StateObject private var viewModel = Container.shared.resolve(FriendAddViewModel.self)
+    @ObservedObject var viewModel: FriendAddViewModel
 
     var body: some View {
         NavigationView {
@@ -40,7 +40,7 @@ struct FriendAddByNicknameView: View {
                     Spacer()
                     
                     NavigationLink(
-                        destination: FriendAddDoneView().environmentObject(viewModel),
+                        destination: FriendAddDoneView(viewModel: viewModel),
                         isActive: $viewModel.isNavigatingToNextView) {
                             FancyButton(
                                 title: "다음",
@@ -79,7 +79,6 @@ struct FriendAddByNicknameView: View {
 struct FriendAddByNicknameView_Previews: PreviewProvider {
     static var previews: some View {
         let viewModel = Container.shared.resolve(FriendAddViewModel.self)
-        FriendAddByNicknameView()
-            .environmentObject(viewModel)
+        FriendAddByNicknameView(viewModel: viewModel)
     }
 }

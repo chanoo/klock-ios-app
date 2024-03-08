@@ -9,7 +9,7 @@ import SwiftUI
 
 struct FriendAddDoneView: View {
     @EnvironmentObject var actionSheetManager: ActionSheetManager
-    @EnvironmentObject var viewModel: FriendAddViewModel // 환경 객체로 타이머 뷰 모델을 가져옵니다.
+    @ObservedObject var viewModel: FriendAddViewModel // 환경 객체로 타이머 뷰 모델을 가져옵니다.
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @Environment(\.dismiss) var dismiss
 
@@ -54,11 +54,17 @@ struct FriendAddDoneView: View {
                 .padding(20)
                 
                 Spacer()
-                
-                FancyButton(title: "친구 프로필 보러가기", action: {
-                    viewModel.activeSheet = nil
-                }, style: .constant(.button))
-                    .padding(.top, 30)
+
+                if let _ = viewModel.followingFriendUser?.followed {
+                    FancyButton(title: "담벼락 보러가기", action: {
+                        viewModel.closeSheet()
+                        guard let nickname = viewModel.followingFriendUser?.nickname, let userId = viewModel.followingFriendUser?.followId else { return }
+                        let userInfo = ["nickname": nickname, "userId": userId] as [String : Any]
+                        NotificationCenter.default.post(name: .nextToFriendViewNotification, object: nil, userInfo: userInfo)
+                        viewModel.nickname = ""
+                    }, style: .constant(.button))
+                        .padding(.top, 30)
+                }
                 FancyButton(title: "계속 친구 추가", action: {
                     self.viewModel.nickname = ""
                     self.presentationMode.wrappedValue.dismiss()
@@ -83,11 +89,5 @@ struct FriendAddDoneView: View {
         .onDisappear {
             viewModel.isNavigatingToNextView = false
         }
-    }
-}
-
-struct FriendAddDoneView_Previews: PreviewProvider {
-    static var previews: some View {
-        FriendAddDoneView()
     }
 }

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct FriendsListView: View {
     @EnvironmentObject var actionSheetManager: ActionSheetManager
-    @StateObject private var viewModel = Container.shared.resolve(FriendsViewModel.self)
+    @StateObject private var viewModel = Container.shared.resolve(FriendsListViewModel.self)
 
     var body: some View {
         VStack {
@@ -39,11 +39,17 @@ struct FriendsListView: View {
                     VStack(alignment: .leading, spacing: 12) {
                         ForEach(Array(viewModel.friends.enumerated()), id: \.element) { index, friendModel in
                             if index == 0 {
-                                FirstFriendsRowView(friendModel: friendModel)
-                                    .environmentObject(actionSheetManager)
+                                FirstFriendsRowView(
+                                    userId: friendModel.followId,
+                                    nickname: friendModel.nickname,
+                                    totalStudyTime: friendModel.totalStudyTime)
+                                .environmentObject(actionSheetManager)
                             } else {
-                                FriendsRowView(friendModel: friendModel)
-                                    .environmentObject(actionSheetManager)
+                                FriendsRowView(
+                                    userId: friendModel.followId,
+                                    nickname: friendModel.nickname,
+                                    totalStudyTime: friendModel.totalStudyTime)
+                                .environmentObject(actionSheetManager)
                             }
                         }
                     }
@@ -61,20 +67,13 @@ struct FriendsListView: View {
 }
 
 struct FirstFriendsRowView: View {
-    var friendModel: FriendRelationFetchResDTO
     @EnvironmentObject var actionSheetManager: ActionSheetManager
-    @ObservedObject var friendsViewModel: FriendsViewModel
-
-    // `friendModel`을 매개변수로 받는 init 메소드 추가
-    init(friendModel: FriendRelationFetchResDTO) {
-        self.friendModel = friendModel
-        let data = FriendsViewModelData(nickname: friendModel.nickname, userId: friendModel.followId, following: true)
-        self._friendsViewModel = ObservedObject(initialValue: FriendsViewModel(data: data))
-    }
-
+    var userId: Int64
+    var nickname: String
+    var totalStudyTime: Int64
     var body: some View {
         NavigationLink(
-            destination: FriendsView(friendsViewModel: friendsViewModel)
+            destination: FriendsView(userId: userId, nickname: nickname, following: true)
                 .environmentObject(actionSheetManager)) {
             HStack {
                 ZStack {
@@ -94,12 +93,12 @@ struct FirstFriendsRowView: View {
                             .foregroundColor(FancyColor.primary.color)
                     }
                 }
-                Text(friendModel.nickname)
+                Text(nickname)
                     .font(.system(size: 17, weight: .semibold))
                     .foregroundColor(FancyColor.text.color)
                     .padding(.leading, 10)
                 Spacer()
-                Text("\(TimeUtils.secondsToHMS(seconds: friendModel.totalStudyTime))")
+                Text("\(TimeUtils.secondsToHMS(seconds: totalStudyTime))")
                     .font(.system(size: 17, weight: .heavy))
                     .foregroundColor(FancyColor.gray4.color)
                     .padding(.top, 2)
@@ -117,21 +116,14 @@ struct FirstFriendsRowView: View {
 }
 
 struct FriendsRowView: View {
-    var friendModel: FriendRelationFetchResDTO
     @EnvironmentObject var actionSheetManager: ActionSheetManager
-    @ObservedObject var friendsViewModel: FriendsViewModel
-
-    // `friendModel`을 매개변수로 받는 init 메소드 추가
-    init(friendModel: FriendRelationFetchResDTO) {
-        self.friendModel = friendModel
-        let data = FriendsViewModelData(nickname: friendModel.nickname, userId: friendModel.followId, following: true)
-        self._friendsViewModel = ObservedObject(initialValue: FriendsViewModel(data: data))
-    }
-
+    var userId: Int64
+    var nickname: String
+    var totalStudyTime: Int64
     var body: some View {
         VStack(spacing: 0) {
             NavigationLink(
-                destination: FriendsView(friendsViewModel: friendsViewModel)
+                destination: FriendsView(userId: userId, nickname: nickname, following: true)
                     .environmentObject(actionSheetManager)) {
                 HStack {
                     ZStack {
@@ -147,12 +139,12 @@ struct FriendsRowView: View {
                                 .foregroundColor(FancyColor.primary.color)
                         }
                     }
-                    Text(friendModel.nickname)
+                    Text(nickname)
                         .font(.system(size: 15, weight: .semibold))
                         .foregroundColor(FancyColor.text.color)
                         .padding(.leading, 10)
                     Spacer()
-                    Text("\(TimeUtils.secondsToHMS(seconds: friendModel.totalStudyTime))")
+                    Text("\(TimeUtils.secondsToHMS(seconds: totalStudyTime))")
                         .font(.system(size: 15, weight: .heavy))
                         .foregroundColor(FancyColor.gray4.color)
                         .padding(.top, 2)

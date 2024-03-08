@@ -20,11 +20,6 @@ class FriendAddViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     private let locationManager: CLLocationManager
     private var beaconIdentityConstraint: CLBeaconIdentityConstraint
     @Published var nearbyBeacons: [CLBeacon] = []
-    @Published var friends = [
-        FriendModel(name: "Alice", isOnline: true),
-        FriendModel(name: "Bob", isOnline: false),
-        FriendModel(name: "Charlie", isOnline: true)
-    ]
     @Published var scanResult: ScanResult?
     @Published var activeView: ActiveView = .scanQRCode
     @Published var activeSheet: SheetType?
@@ -34,6 +29,7 @@ class FriendAddViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     @Published var isStartOfWeekNextButtonDisabled: Bool? = true
     @Published var isNavigatingToNextView = false
     @Published var friendUser: SearchByNicknameResDTO?
+    @Published var followingFriendUser: FriendRelationFollowResDTO?
 
 //    let beaconManager = BeaconManager()
 
@@ -125,7 +121,8 @@ class FriendAddViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
                         case .finished:
                             break
                         }
-                    }, receiveValue: { _ in
+                    }, receiveValue: { user in
+                        self.followingFriendUser = user
                         DispatchQueue.main.async {
                             self.isNavigatingToNextView = true
                         }
@@ -228,5 +225,9 @@ class FriendAddViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
         UIGraphicsEndImageContext()
 
         return resultImage
+    }
+    
+    func closeSheet() {
+        activeSheet = nil
     }
 }

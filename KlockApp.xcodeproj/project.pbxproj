@@ -106,7 +106,6 @@
 		987E545B29D552540007E156 /* KlockAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E545A29D552540007E156 /* KlockAppUITests.swift */; };
 		987E545D29D552540007E156 /* KlockAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E545C29D552540007E156 /* KlockAppUITestsLaunchTests.swift */; };
 		987F10872B944D6C001A3EF5 /* KeyboardResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987F10862B944D6C001A3EF5 /* KeyboardResponder.swift */; };
-		987F108B2B949EC2001A3EF5 /* FriendsViewModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987F108A2B949EC2001A3EF5 /* FriendsViewModelData.swift */; };
 		987F2E752B3B010800DC462D /* TensorFlowLiteTaskVision.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98CF07DC2B3AF4FB00BF33C2 /* TensorFlowLiteTaskVision.framework */; };
 		9881FC0B2A1F455200497937 /* BeaconManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9881FC0A2A1F455200497937 /* BeaconManager.swift */; };
 		988572472B3C1F6300E7256B /* UserProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988572462B3C1F6300E7256B /* UserProfileImageView.swift */; };
@@ -146,6 +145,12 @@
 		98A8CED72B7B7DD800B5A29C /* UserTraceDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A8CED62B7B7DD800B5A29C /* UserTraceDTO.swift */; };
 		98A8CED92B7B82E900B5A29C /* UserTraceRemoteServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A8CED82B7B82E900B5A29C /* UserTraceRemoteServiceTests.swift */; };
 		98A8CEDB2B7C9CB300B5A29C /* UserTraceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A8CEDA2B7C9CB300B5A29C /* UserTraceType.swift */; };
+		98AA43B52B98C1C200457912 /* MyWallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AA43B42B98C1C200457912 /* MyWallView.swift */; };
+		98AA43B72B98C1DD00457912 /* MyWallViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AA43B62B98C1DD00457912 /* MyWallViewModel.swift */; };
+		98AA43B92B98C22600457912 /* MyWallNoDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AA43B82B98C22600457912 /* MyWallNoDataView.swift */; };
+		98AA43BB2B98C27700457912 /* MyWallListHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AA43BA2B98C27700457912 /* MyWallListHeader.swift */; };
+		98AA43BD2B98D1DA00457912 /* FriendsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AA43BC2B98D1DA00457912 /* FriendsListViewModel.swift */; };
+		98AA43BF2B9A16CD00457912 /* LazyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AA43BE2B9A16CD00457912 /* LazyView.swift */; };
 		98AC306D2A134D23006DC48D /* TabBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AC306C2A134D23006DC48D /* TabBarManager.swift */; };
 		98AC30712A136198006DC48D /* FocusTimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AC30702A136198006DC48D /* FocusTimerViewModel.swift */; };
 		98AC30732A13637C006DC48D /* FocusTimerCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AC30722A13637C006DC48D /* FocusTimerCardView.swift */; };
@@ -391,7 +396,6 @@
 		987E545A29D552540007E156 /* KlockAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlockAppUITests.swift; sourceTree = "<group>"; };
 		987E545C29D552540007E156 /* KlockAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlockAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		987F10862B944D6C001A3EF5 /* KeyboardResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardResponder.swift; sourceTree = "<group>"; };
-		987F108A2B949EC2001A3EF5 /* FriendsViewModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewModelData.swift; sourceTree = "<group>"; };
 		9881FC0A2A1F455200497937 /* BeaconManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconManager.swift; sourceTree = "<group>"; };
 		988572462B3C1F6300E7256B /* UserProfileImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileImageView.swift; sourceTree = "<group>"; };
 		988572492B3C488200E7256B /* lottie-heart.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "lottie-heart.json"; sourceTree = "<group>"; };
@@ -430,6 +434,12 @@
 		98A8CED62B7B7DD800B5A29C /* UserTraceDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTraceDTO.swift; sourceTree = "<group>"; };
 		98A8CED82B7B82E900B5A29C /* UserTraceRemoteServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTraceRemoteServiceTests.swift; sourceTree = "<group>"; };
 		98A8CEDA2B7C9CB300B5A29C /* UserTraceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTraceType.swift; sourceTree = "<group>"; };
+		98AA43B42B98C1C200457912 /* MyWallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyWallView.swift; sourceTree = "<group>"; };
+		98AA43B62B98C1DD00457912 /* MyWallViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyWallViewModel.swift; sourceTree = "<group>"; };
+		98AA43B82B98C22600457912 /* MyWallNoDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyWallNoDataView.swift; sourceTree = "<group>"; };
+		98AA43BA2B98C27700457912 /* MyWallListHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyWallListHeader.swift; sourceTree = "<group>"; };
+		98AA43BC2B98D1DA00457912 /* FriendsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsListViewModel.swift; sourceTree = "<group>"; };
+		98AA43BE2B9A16CD00457912 /* LazyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyView.swift; sourceTree = "<group>"; };
 		98AC306C2A134D23006DC48D /* TabBarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarManager.swift; sourceTree = "<group>"; };
 		98AC30702A136198006DC48D /* FocusTimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTimerViewModel.swift; sourceTree = "<group>"; };
 		98AC30722A13637C006DC48D /* FocusTimerCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTimerCardView.swift; sourceTree = "<group>"; };
@@ -929,7 +939,6 @@
 				98B0651C2B427CBF009D0F69 /* FollowQRCode.swift */,
 				98A8CEDA2B7C9CB300B5A29C /* UserTraceType.swift */,
 				98CC9EBB2B7DE6F200BF044E /* UserTraceGroup.swift */,
-				987F108A2B949EC2001A3EF5 /* FriendsViewModelData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -962,6 +971,8 @@
 				987443D32A57D93F0019F847 /* UserViewModel.swift */,
 				9885F3172A5A9187000E2F7A /* MyModel.swift */,
 				9899A7E92AA37645001B4C72 /* CameraPermissionViewModel.swift */,
+				98AA43B62B98C1DD00457912 /* MyWallViewModel.swift */,
+				98AA43BC2B98D1DA00457912 /* FriendsListViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1051,6 +1062,7 @@
 				987DC3B72AFE4A37000DCBAD /* LoadingView.swift */,
 				98CF07DA2B3454AB00BF33C2 /* CustomImagePicker.swift */,
 				9885724E2B3C5A4D00E7256B /* YPImagePickerView.swift */,
+				98AA43BE2B9A16CD00457912 /* LazyView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1107,6 +1119,7 @@
 		98E9385B29EA54B1009CBF32 /* Friends */ = {
 			isa = PBXGroup;
 			children = (
+				98AA43B42B98C1C200457912 /* MyWallView.swift */,
 				988D7CF82A3851770018A85E /* QRCodeScannerView.swift */,
 				988D7CF72A3851770018A85E /* QRCodeScannerViewController.swift */,
 				985BE89329E6E0DB008582A3 /* FriendsView.swift */,
@@ -1115,6 +1128,8 @@
 				988D7CD92A37126C0018A85E /* FriendAddByNearView.swift */,
 				988D7D0A2A3ADACC0018A85E /* FriendAddDoneView.swift */,
 				9837CCA42A418C5F002F1A3A /* FriendsListView.swift */,
+				98AA43B82B98C22600457912 /* MyWallNoDataView.swift */,
+				98AA43BA2B98C27700457912 /* MyWallListHeader.swift */,
 			);
 			path = Friends;
 			sourceTree = "<group>";
@@ -1342,6 +1357,7 @@
 				984D2C8729DFDB5F008D3EA9 /* BackButtonView.swift in Sources */,
 				98C6A80C2B8A68F5002A9FBD /* MessageBubbleImageView.swift in Sources */,
 				981B389329F44B0600AB0EF8 /* PomodoroTimerModel.swift in Sources */,
+				98AA43B52B98C1C200457912 /* MyWallView.swift in Sources */,
 				98E6A5A62B88DEAD007FEDB4 /* MessageRightBubbleView.swift in Sources */,
 				98A8CEDB2B7C9CB300B5A29C /* UserTraceType.swift in Sources */,
 				98A8CED52B7B7D8C00B5A29C /* UserTraceRemoteService.swift in Sources */,
@@ -1360,9 +1376,11 @@
 				98E67FE52A5715310090AE23 /* UserRemoteServiceDTO.swift in Sources */,
 				98E314B529DEE67B00EA1617 /* TagRemoteServiceProtocol.swift in Sources */,
 				981881C629F26F00002A4395 /* PomodoroTimerView.swift in Sources */,
+				98AA43B92B98C22600457912 /* MyWallNoDataView.swift in Sources */,
 				9837CCAA2A42F255002F1A3A /* ActivityModel.swift in Sources */,
 				98C378242AFBC86400F537BA /* FriendRelationServiceProtocol.swift in Sources */,
 				98B0650D2B40864A009D0F69 /* String+Extensions.swift in Sources */,
+				98AA43BD2B98D1DA00457912 /* FriendsListViewModel.swift in Sources */,
 				98976B052A077F8F00F1CEAE /* ExamTimerRemoteServiceProtocol.swift in Sources */,
 				983BC0302A8F0DAF00DC108B /* AutoTimerView.swift in Sources */,
 				98B21B1B29D55F6C004EFE0E /* AuthenticationRemoteServiceProtocol.swift in Sources */,
@@ -1427,6 +1445,7 @@
 				98AC30752A1363A3006DC48D /* FocusTimerView.swift in Sources */,
 				989EA1882B8072F7003A25F3 /* ChatInputView.swift in Sources */,
 				98B21B5229D6F404004EFE0E /* FriendRelationModel.swift in Sources */,
+				98AA43B72B98C1DD00457912 /* MyWallViewModel.swift in Sources */,
 				9885724F2B3C5A4D00E7256B /* YPImagePickerView.swift in Sources */,
 				985BE89C29E6E595008582A3 /* FriendModel.swift in Sources */,
 				98EBFBEC29F9694E004E95F3 /* TaskListView.swift in Sources */,
@@ -1464,6 +1483,7 @@
 				9833FFC229F5759E00CC33F7 /* AccountTimerLocalService.swift in Sources */,
 				98B0650F2B41B057009D0F69 /* SymmetricKey+Extensions.swift in Sources */,
 				9833FFCD29F6652800CC33F7 /* ChatBotLocalService.swift in Sources */,
+				98AA43BB2B98C27700457912 /* MyWallListHeader.swift in Sources */,
 				988D7CFC2A3851BD0018A85E /* QRCodeScannerViewModel.swift in Sources */,
 				987E544629D552530007E156 /* KlockApp.xcdatamodeld in Sources */,
 				989D6F322A4C2E0800BC2F2B /* CustomActionSheetView.swift in Sources */,
@@ -1471,6 +1491,7 @@
 				983BC0232A8EF62E00DC108B /* AutoTimerRemoteService.swift in Sources */,
 				98EBFBE329F78307004E95F3 /* ChatBotSyncProtocol.swift in Sources */,
 				98E9385229EA3AC4009CBF32 /* MessageServiceDTO.swift in Sources */,
+				98AA43BF2B9A16CD00457912 /* LazyView.swift in Sources */,
 				988D7D0B2A3ADACC0018A85E /* FriendAddDoneView.swift in Sources */,
 				9833FFD029F683C800CC33F7 /* CoreDataHelper.swift in Sources */,
 				98B24A9D2A34F1BE0083444D /* SpeechService.swift in Sources */,
@@ -1525,7 +1546,6 @@
 				98EBFBF629FA54F6004E95F3 /* ClearListBackground+Extensions.swift in Sources */,
 				988D7CFA2A3851770018A85E /* QRCodeScannerView.swift in Sources */,
 				98192F442A542DD2007073FB /* PreferencesViewModel.swift in Sources */,
-				987F108B2B949EC2001A3EF5 /* FriendsViewModelData.swift in Sources */,
 				98976B032A077F7F00F1CEAE /* PomodoroTimerRemoteServiceProtocol.swift in Sources */,
 				98E9386529EA5899009CBF32 /* AnalogClockView.swift in Sources */,
 				98BDD22029DD0FA800B0440F /* EmailValidator.swift in Sources */,
