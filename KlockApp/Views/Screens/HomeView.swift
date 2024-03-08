@@ -15,7 +15,7 @@ struct HomeView: View {
     @StateObject private var timeTimerViewModel = Container.shared.resolve(TimeTimerViewModel.self)
     @StateObject private var calendarViewModel = Container.shared.resolve(CalendarViewModel.self)
     @StateObject private var chatBotViewModel = Container.shared.resolve(ChatBotViewModel.self)
-    @StateObject private var friendsViewModel = Container.shared.resolve(FriendsViewModel.self)
+    @StateObject private var myWallViewModel = Container.shared.resolve(MyWallViewModel.self)
     @StateObject private var taskViewModel = Container.shared.resolve(TaskViewModel.self)
     @StateObject private var characterViewModel = Container.shared.resolve(CharacterViewModel.self)
     @StateObject private var preferencesViewModel = Container.shared.resolve(PreferencesViewModel.self)
@@ -58,7 +58,7 @@ struct HomeView: View {
                 deselectedImageName: "ic_peaple_o",
                 content: {
                     AnyView(
-                        FriendsView(friendsViewModel: friendsViewModel)
+                        MyWallView(viewModel: myWallViewModel)
                             .environmentObject(tabBarManager)
                     )
                 }
@@ -68,8 +68,7 @@ struct HomeView: View {
                 deselectedImageName: "ic_tame_o",
                 content: {
                     AnyView(
-                        PreferencesView()
-                            .environmentObject(preferencesViewModel)
+                        PreferencesView(viewModel: preferencesViewModel)
                     )
                 }
             ),

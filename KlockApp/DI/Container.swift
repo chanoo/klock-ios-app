@@ -80,11 +80,9 @@ class Container {
 
         // View Models
         container.register(ContentViewModel.self) { _ in ContentViewModel() }
-        container.register(FriendsViewModel.self) { _ in
-            let data = FriendsViewModelData(userId: UserModel.load()?.id, following: false)
-            return FriendsViewModel(data: data)
-        }
+        container.register(FriendsListViewModel.self) { _ in FriendsListViewModel() }
         container.register(FriendAddViewModel.self) { _ in FriendAddViewModel() }
+        container.register(MyWallViewModel.self) { _ in MyWallViewModel() }
         container.register(QRCodeScannerViewModel.self) { _ in QRCodeScannerViewModel() }
         container.register(PreferencesViewModel.self) { _ in PreferencesViewModel() }
         container.register(SignInViewModel.self) { _ in SignInViewModel() }

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct FriendAddByNearView: View {
     @ObservedObject var beaconManager = BeaconManager()
+    @ObservedObject var viewModel: FriendAddViewModel
 
     let uuid = UUID(uuidString: "E621E1F8-C36C-495A-93FC-0C247A3E6E5F")!
     let major: UInt16 = 1
@@ -32,6 +33,7 @@ struct FriendAddByNearView: View {
 
 struct FriendAddByNearView_Previews: PreviewProvider {
     static var previews: some View {
-        FriendAddByNearView()
+        @StateObject var viewModel = Container.shared.resolve(FriendAddViewModel.self)
+        FriendAddByNearView(viewModel: viewModel)
     }
 }

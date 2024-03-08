@@ -1,8 +1,8 @@
 //
-//  FriendsViewModel.swift
+//  MyWallViewModel.swift
 //  KlockApp
 //
-//  Created by 성찬우 on 2023/04/12.
+//  Created by 성찬우 on 3/7/24.
 //
 
 import SwiftUI
@@ -10,22 +10,21 @@ import Combine
 import Foast
 import Alamofire
 
-class FriendsViewModel: ObservableObject {
+class MyWallViewModel: ObservableObject {
+    @Published var newMessage: String = ""
+    @Published var isPreparingResponse: Bool = false
+    @Published var isLoading: Bool = true
+    @Published var isSendMessage: Bool = false
+    @Published var groupedUserTraces: [UserTraceGroup] = []
     @Published var dynamicHeight: CGFloat = 36 // 높이 초기값
     @Published var contents: String? = nil
     @Published var image: Data? = nil
-    @Published var newMessage: String = ""
-    @Published var isSendMessage: Bool = false
-    @Published var isPreparingResponse: Bool = false
-
-    @Published var isLoading: Bool = true
-    @Published var groupedUserTraces: [UserTraceGroup] = []
     @Published var flogOnIssue: String? = nil
-    @Published var followTitle: String = "팔로잉"
-    @Published var following: Bool
+    @Published var isNavigatingToFriendView: Bool = false
 
-    var nickname: String
-    var userId: Int64
+    var nickname: String?
+    var userId: Int64?
+    var following: Bool = false
 
     private let friendRelationService = Container.shared.resolve(FriendRelationServiceProtocol.self)
     private let userTraceService = Container.shared.resolve(UserTraceRemoteServiceProtocol.self)
@@ -42,60 +41,34 @@ class FriendsViewModel: ObservableObject {
     
     private let userTraceFetchQueue = DispatchQueue(label: "app.klockApp.userTraceFetchQueue")
 
-    init(nickname: String, userId: Int64, following: Bool) {
-        print("init FriendsViewModel")
-        self.nickname = nickname
-        self.userId = userId
-        self.following = following
+    init() {
+        print("init MyWallViewModel")
         setupSendButtonTapped()
         setupDeleteUserTrace()
-        setupUnfollowButtonTapped()
+        setupNotification()
     }
     
     deinit {
-        print("deinit FriendsViewModel")
+        print("deinit MyWallViewModel")
     }
     
-    private func setupUnfollowButtonTapped() {
-        unfollowButtonTapped
-            .sink { [weak self] following in
-                guard let self = self else { return }
-                
-                // 팔로우 상태에 따라 서비스 호출 결정
-                let serviceCall: AnyPublisher<Void, AFError>
-                if following {
-                    serviceCall = self.friendRelationService.follow(followId: userId)
-                        .map { _ in Void() } // FriendRelationFollowResDTO를 Void로 변환
-                        .eraseToAnyPublisher()
-                } else {
-                    serviceCall = self.friendRelationService.unfollow(followId: userId)
-                        .eraseToAnyPublisher()
+    private func setupNotification() {
+        NotificationCenter.default.publisher(for: .nextToFriendViewNotification)
+            .receive(on: RunLoop.main)
+            .sink { [weak self] notification in
+                print("call nextToFriendViewNotification")
+                if let userInfo = notification.userInfo,
+                   let nickname = userInfo["nickname"] as? String,
+                   let userId = userInfo["userId"] as? Int64 {
+                    print("nickname: \(nickname), userId: \(userId)")
+                    self?.nickname = nickname
+                    self?.userId = userId
+                    self?.isNavigatingToFriendView = true
                 }
-                
-                serviceCall
-                    .sink(receiveCompletion: { result in
-                        switch result {
-                        case .failure(let error):
-                            print("Error processing user relation: \(error)")
-                        case .finished:
-                            break
-                        }
-                    }, receiveValue: { [weak self] _ in
-                        DispatchQueue.main.async {
-                            // 팔로우 상태 업데이트 및 UI 반영
-                            self?.updateFollowState(isFollowing: following)
-                        }
-                    })
-                    .store(in: &self.cancellables)
             }
             .store(in: &cancellables)
     }
-
-    private func updateFollowState(isFollowing: Bool) {
-        followTitle = isFollowing ? "팔로잉" : "팔로우"
-        following = isFollowing
-    }
-    
+        
     private func setupSendButtonTapped() {
         sendTapped
             .sink { [weak self] _ in
@@ -145,6 +118,7 @@ class FriendsViewModel: ObservableObject {
             }
             .store(in: &cancellables)
     }
+
     
     func fetchUserTrace(userId: Int64) {
         userTraceFetchQueue.async { [weak self] in
@@ -249,7 +223,15 @@ class FriendsViewModel: ObservableObject {
         }
     }
     
+    func viewDidAppear() {
+        isNavigatingToFriendView = false
+    }
+    
     func hideKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
+}
+
+extension Notification.Name {
+    static let nextToFriendViewNotification = Notification.Name("nextToFriendViewNotification")
 }

@@ -9,7 +9,7 @@ import SwiftUI
 import Foast
 
 struct FriendAddByQRCodeView: View {
-    @StateObject var viewModel: FriendAddViewModel = Container.shared.resolve(FriendAddViewModel.self)
+    @ObservedObject var viewModel: FriendAddViewModel
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     var body: some View {
         NavigationView {
@@ -155,8 +155,7 @@ struct NicknameView: View {
 struct FriendAddView_Previews: PreviewProvider {
     static var previews: some View {
         let viewModel = Container.shared.resolve(FriendAddViewModel.self)
-        FriendAddByQRCodeView()
-            .environmentObject(viewModel)
+        FriendAddByQRCodeView(viewModel: viewModel)
     }
 }
 

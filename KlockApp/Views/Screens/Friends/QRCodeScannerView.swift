@@ -54,7 +54,7 @@ struct QRCodeScannerOverlay: View {
                 .onAppear {
                     viewModel.restartScanning()
                 }
-            NavigationLink(destination: FriendAddDoneView().environmentObject(friendAddViewModel),
+            NavigationLink(destination: FriendAddDoneView(viewModel: friendAddViewModel),
                            isActive: $viewModel.isNavigatingToNextView) {
                 EmptyView()
             }

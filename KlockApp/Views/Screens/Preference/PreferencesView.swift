@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PreferencesView: View {
-    @EnvironmentObject var viewModel: PreferencesViewModel
+    @ObservedObject var viewModel: PreferencesViewModel
     @EnvironmentObject var actionSheetManager: ActionSheetManager
     @EnvironmentObject var appUsageController: AppUsageController
     @State private var isUserProfileImageViewPresented = false
@@ -38,7 +38,7 @@ extension PreferencesView {
             ProfileImageView(imageURL: viewModel.profileImage, size: 66)
             Text(viewModel.nickname)
             Spacer()
-            EditProfileLink()
+            EditProfileLink(viewModel: viewModel)
         }
         .padding()
     }
@@ -46,7 +46,7 @@ extension PreferencesView {
     private func SettingsSection() -> some View {
         LazyVStack(spacing: 0) {
             ForEach(viewModel.preferencesSections, id: \.self.id) { section in
-                SectionItems(section: section)
+                SectionItems(viewModel: viewModel, section: section)
                 Spacer().frame(height: 30)
             }
         }
@@ -56,7 +56,7 @@ extension PreferencesView {
 // MARK: - Helper Views
 
 struct EditProfileLink: View {
-    @EnvironmentObject var viewModel: PreferencesViewModel
+    @ObservedObject var viewModel: PreferencesViewModel
     @EnvironmentObject var actionSheetManager: ActionSheetManager
     @State private var isUserProfileImageViewPresented = false
 
@@ -90,7 +90,7 @@ struct EditButtonContent: View {
 }
 
 struct SectionItems: View {
-    @EnvironmentObject var viewModel: PreferencesViewModel
+    @ObservedObject var viewModel: PreferencesViewModel
     @EnvironmentObject var actionSheetManager: ActionSheetManager
     var section: SectionModel
 
@@ -164,8 +164,7 @@ struct PreferencesView_Previews: PreviewProvider {
         let actionSheetManager = ActionSheetManager()
         let appUsageController = AppUsageController.shared
 
-        PreferencesView()
-            .environmentObject(viewModel)
+        PreferencesView(viewModel: viewModel)
             .environmentObject(actionSheetManager)
             .environmentObject(appUsageController)
     }
