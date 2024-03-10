@@ -15,7 +15,7 @@ struct UserTraceResDTO: Codable, Hashable {
     let type: UserTraceType
     let contents: String
     let contentsImage: String?
-    let heartCount: Int
+    var heartCount: Int
     var createdAt: String
 
     enum CodingKeys: String, CodingKey {

@@ -44,6 +44,7 @@ struct FriendsView: View {
                                             content: userTrace.contents,
                                             imageURL: userTrace.contentsImage,
                                             date: userTrace.createdAt.toTimeFormat(),
+                                            heartCount: .constant(userTrace.heartCount),
                                             onDelete: {
                                                 viewModel.deleteUserTraceTapped.send(userTrace.id)
                                             }

@@ -34,6 +34,7 @@ struct ChatBotChatView: View {
                                 userTraceType: .activity,
                                 profileImageURL: chatBot.chatBotImageUrl,
                                 content: tempMessage.content,
+                                heartCount: .constant(0),
                                 onDelete: {})
                             .upsideDown()
                         }
@@ -44,6 +45,7 @@ struct ChatBotChatView: View {
                                 userTraceType: .activity,
                                 profileImageURL: messageModel.isUser ? viewModel.userModel?.profileImage : chatBot.chatBotImageUrl,
                                 content: messageModel.content,
+                                heartCount: .constant(0),
                                 onDelete: {})
                             .upsideDown()
                         }

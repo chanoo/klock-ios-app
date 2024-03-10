@@ -45,6 +45,7 @@ struct MyWallView: View {
                                             content: userTrace.contents,
                                             imageURL: userTrace.contentsImage,
                                             date: userTrace.createdAt.toTimeFormat(),
+                                            heartCount: .constant(userTrace.heartCount),
                                             onDelete: {
                                                 viewModel.deleteUserTraceTapped.send(userTrace.id)
                                             }
@@ -93,20 +94,6 @@ struct MyWallView: View {
                     }
                 }
             )
-            
-//            NavigationStack {
-//                List {
-//                    NavigationLink("Mint", value: Color.mint)
-//                    NavigationLink("Pink", value: Color.pink)
-//                    NavigationLink("Teal", value: Color.teal)
-//                }
-//                .navigationDestination(for: Color.self) { color in
-//                    ColorDetail(color: color)
-//                }
-//                .navigationTitle("Colors")
-//            }
-//
-//            
             
             NavigationLink(
                 destination: LazyView(FriendsView(userId: viewModel.userId ?? 0, nickname: viewModel.nickname ?? "친구", following: true)

@@ -45,7 +45,7 @@ class MyWallViewModel: ObservableObject {
         print("init MyWallViewModel")
         setupSendButtonTapped()
         setupDeleteUserTrace()
-        setupNotification()
+        setupNotification() 
     }
     
     deinit {
@@ -72,7 +72,7 @@ class MyWallViewModel: ObservableObject {
     private func setupSendButtonTapped() {
         sendTapped
             .sink { [weak self] _ in
-                guard let userId = self?.userId else { return }
+                guard let userId = self?.userModel?.id else { return }
                 DispatchQueue.main.async {
                     self?.isSendMessage = true
                     self?.dynamicHeight = 36

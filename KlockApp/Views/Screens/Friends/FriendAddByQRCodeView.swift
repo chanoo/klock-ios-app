@@ -86,9 +86,10 @@ struct QRCodeView: View {
 }
 
 struct NicknameView: View {
-    
     @StateObject private var viewModel = Container.shared.resolve(FriendAddViewModel.self)
     @State var centerImage = UIImage(named: "ic_img_logo")
+    @State private var remainingTime = 3 * 60 // 3분을 초 단위로 계산
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
     var body: some View {
         VStack {
@@ -101,31 +102,47 @@ struct NicknameView: View {
                     .padding(.top, 70)
             }
             
+            // 카운트다운 텍스트
+            Text("\(String(format: "%02d", remainingTime / 60)):\(String(format: "%02d", remainingTime % 60))")
+                .font(.system(size: 17))
+                .foregroundColor(.black)
+                .padding(.top, 20)
+                .onReceive(timer) { _ in
+                    if remainingTime > 0 {
+                        remainingTime -= 1
+                    } else {
+                        // 카운트다운이 0에 도달했을 때의 로직
+                        viewModel.generateQRCode()
+                        remainingTime = 3 * 60 // 카운트다운을 다시 3분으로 재설정
+                    }
+                }
+                        
             HStack(alignment: .center) {
                 Button {
-                    Foast.show(message: "새로고침")
+                    viewModel.generateQRCode()
+                    remainingTime = 3 * 60 // 카운트다운을 다시 3분으로 재설정
                 } label: {
                     Image("ic_refresh")
                         .foregroundColor(.black)
                 }
                 
-                Spacer()
-
-                Button {
-                    Foast.show(message: "QR코드 저장")
-                } label: {
-                    Image("ic_download")
-                        .foregroundColor(.black)
-                }
-
-                Spacer()
-
-                Button {
-                    Foast.show(message: "QR코드 공유")
-                } label: {
-                    Image("ic_share")
-                        .foregroundColor(.black)
-                }
+//                Spacer()
+//
+//                Button {
+//                    Foast.show(message: "QR코드 저장")
+//                } label: {
+//                    Image("ic_download")
+//                        .foregroundColor(.black)
+//                }
+//
+//                Spacer()
+//
+//                Button {
+//                    Foast.show(message: "QR코드 공유")
+//                } label: {
+//                    Image("ic_share")
+//                        .foregroundColor(.black)
+//                }
 
             }
             .frame(maxWidth: 180)
