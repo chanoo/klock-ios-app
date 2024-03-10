@@ -8,8 +8,8 @@
 import Foundation
 
 class AutoTimerModel: TimerModel {
-    override init(id: Int64?, userId: Int64?, seq: Int, type: String?, name: String) {
-        super.init(id: id, userId: userId, seq: seq, type: type, name: name)
+    override init(id: Int64, userId: Int64?, seq: Int, type: String?, name: String, isFlipped: Bool? = false) {
+        super.init(id: id, userId: userId, seq: seq, type: type, name: name, isFlipped: isFlipped)
     }
     
     static func toDTO(model: AutoTimerModel) -> AutoTimerDTO {

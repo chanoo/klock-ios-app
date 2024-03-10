@@ -12,7 +12,7 @@ class PomodoroTimerModel: TimerModel {
     @Published var breakTime: Int
     @Published var cycleCount: Int
 
-    init(id: Int64?, userId: Int64?, seq: Int, type: String?, name: String, focusTime: Int, breakTime: Int, cycleCount: Int) {
+    init(id: Int64, userId: Int64?, seq: Int, type: String?, name: String, focusTime: Int, breakTime: Int, cycleCount: Int) {
         self.focusTime = focusTime
         self.breakTime = breakTime
         self.cycleCount = cycleCount

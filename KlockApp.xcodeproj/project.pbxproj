@@ -229,6 +229,7 @@
 		98E314B329DEE65E00EA1617 /* TagRemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E314B229DEE65E00EA1617 /* TagRemoteService.swift */; };
 		98E314B529DEE67B00EA1617 /* TagRemoteServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E314B429DEE67B00EA1617 /* TagRemoteServiceProtocol.swift */; };
 		98E314B729DEE6BB00EA1617 /* TagServiceDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E314B629DEE6BB00EA1617 /* TagServiceDTO.swift */; };
+		98E4B3F42B9DC50B00B4B0B9 /* AddTimerButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4B3F32B9DC50B00B4B0B9 /* AddTimerButtonView.swift */; };
 		98E64D8E2A6E2CF300A7FF16 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		98E64D9B2A72431400A7FF16 /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 98E64D9A2A72431400A7FF16 /* KakaoSDKAuth */; };
 		98E64D9D2A72431400A7FF16 /* KakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = 98E64D9C2A72431400A7FF16 /* KakaoSDKCommon */; };
@@ -523,6 +524,7 @@
 		98E314B229DEE65E00EA1617 /* TagRemoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagRemoteService.swift; sourceTree = "<group>"; };
 		98E314B429DEE67B00EA1617 /* TagRemoteServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagRemoteServiceProtocol.swift; sourceTree = "<group>"; };
 		98E314B629DEE6BB00EA1617 /* TagServiceDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagServiceDTO.swift; sourceTree = "<group>"; };
+		98E4B3F32B9DC50B00B4B0B9 /* AddTimerButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTimerButtonView.swift; sourceTree = "<group>"; };
 		98E67FE02A5714750090AE23 /* UserRemoteServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRemoteServiceProtocol.swift; sourceTree = "<group>"; };
 		98E67FE22A5714920090AE23 /* UserRemoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRemoteService.swift; sourceTree = "<group>"; };
 		98E67FE42A5715310090AE23 /* UserRemoteServiceDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRemoteServiceDTO.swift; sourceTree = "<group>"; };
@@ -1152,6 +1154,7 @@
 				981881C529F26F00002A4395 /* PomodoroTimerView.swift */,
 				98AC30862A15CCA9006DC48D /* ExamTimerCardView.swift */,
 				981881C729F26F07002A4395 /* ExamTimerView.swift */,
+				98E4B3F32B9DC50B00B4B0B9 /* AddTimerButtonView.swift */,
 			);
 			path = Timer;
 			sourceTree = "<group>";
@@ -1420,6 +1423,7 @@
 				9899A7EA2AA37645001B4C72 /* CameraPermissionViewModel.swift in Sources */,
 				98F80EE92A44A3440084E44B /* Color+Extentions.swift in Sources */,
 				98D7C95329E460470075D201 /* AppFlowManager.swift in Sources */,
+				98E4B3F42B9DC50B00B4B0B9 /* AddTimerButtonView.swift in Sources */,
 				980CD5492A09485F00B203AC /* AlamofireLogger.swift in Sources */,
 				982140A32A07EFBE00C68EB9 /* APIServiceProtocol.swift in Sources */,
 				98B387B02A2DDFB500F18AD2 /* SignUpProfileImageView.swift in Sources */,

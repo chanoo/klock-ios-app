@@ -57,7 +57,7 @@ class TimerManager {
         if let timerTypeStr = model.type, let timerType = TimerType(rawValue: timerTypeStr) {
             switch timerType {
             case .focus:
-                self.focusTimerRemoteService.delete(id: model.id!)
+                self.focusTimerRemoteService.delete(id: model.id)
                     .sink(receiveCompletion: { completion in
                         switch completion {
                         case .failure(let error):
@@ -71,7 +71,7 @@ class TimerManager {
                     .store(in: &self.cancellables)
                 break
             case .pomodoro:
-                self.pomodoroTimerRemoteService.delete(id: model.id!)
+                self.pomodoroTimerRemoteService.delete(id: model.id)
                     .sink(receiveCompletion: { completion in
                         switch completion {
                         case .failure(let error):
@@ -85,7 +85,7 @@ class TimerManager {
                     .store(in: &self.cancellables)
                 break
             case .exam:
-                self.examTimerRemoteService.delete(id: model.id!)
+                self.examTimerRemoteService.delete(id: model.id)
                     .sink(receiveCompletion: { completion in
                         switch completion {
                         case .failure(let error):
@@ -99,7 +99,7 @@ class TimerManager {
                     .store(in: &self.cancellables)
                 break
             case .auto:
-                self.autoTimerRemoteService.delete(id: model.id!)
+                self.autoTimerRemoteService.delete(id: model.id)
                     .sink(receiveCompletion: { completion in
                         switch completion {
                         case .failure(let error):

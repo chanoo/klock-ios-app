@@ -20,7 +20,7 @@ struct ReqExamTimer: Codable {
 }
 
 struct ExamTimerDTO: Codable, TimerDTO {
-    var id: Int64? = nil
+    var id: Int64
     var userId: Int64? = nil
     let seq: Int
     var type: String? = TimerType.exam.rawValue
@@ -41,7 +41,7 @@ struct ReqPomodoroTimer: Codable {
 }
 
 struct PomodoroTimerDTO: Codable, TimerDTO {
-    let id: Int64?
+    let id: Int64
     let userId: Int64?
     let seq: Int
     let type: String?
@@ -58,7 +58,7 @@ struct ReqFocusTimer: Codable {
 }
 
 struct FocusTimerDTO: Codable, TimerDTO {
-    let id: Int64?
+    let id: Int64
     let userId: Int64?
     let seq: Int
     let type: String?
@@ -71,7 +71,7 @@ struct ReqAutoTimer: Codable {
 }
 
 struct AutoTimerDTO: Codable, TimerDTO {
-    let id: Int64?
+    let id: Int64
     let userId: Int64?
     let seq: Int
     let type: String?

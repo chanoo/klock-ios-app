@@ -12,7 +12,7 @@ class ExamTimerModel: TimerModel {
     @Published var questionCount: Int
     @Published var markingTime: Int
 
-    init(id: Int64?, userId: Int64?, seq: Int, type: String?, name: String, startTime: Date, duration: Int, questionCount: Int, markingTime: Int) {
+    init(id: Int64, userId: Int64?, seq: Int, type: String?, name: String, startTime: Date, duration: Int, questionCount: Int, markingTime: Int) {
         self.startTime = startTime
         self.duration = duration
         self.questionCount = questionCount

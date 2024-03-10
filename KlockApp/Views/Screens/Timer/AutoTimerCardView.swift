@@ -13,23 +13,22 @@ struct AutoTimerCardView: View {
     @StateObject var timerModel: TimerModel
     @StateObject var autoTimerViewModel: AutoTimerViewModel
     @StateObject var timeTimerViewModel: TimeTimerViewModel
-    @State private var isFlipped: Bool = false
 
     private func flipAnimation() {
         withAnimation(.spring()) {
-            isFlipped.toggle()
+            timerModel.isFlipped?.toggle()
         }
     }
 
     var body: some View {
         GeometryReader { geometry in
             frontView(geometry: geometry)
-                .rotation3DEffect(.degrees(isFlipped ? 180 : 0), axis: (x: 0.0, y: 1.0, z: 0.0))
-                .opacity(isFlipped ? 0 : 1)
+                .rotation3DEffect(.degrees(timerModel.isFlipped ?? false ? 180 : 0), axis: (x: 0.0, y: 1.0, z: 0.0))
+                .opacity(timerModel.isFlipped ?? false ? 0 : 1)
             
             backView(geometry: geometry)
-                .rotation3DEffect(.degrees(isFlipped ? 0 : 180), axis: (x: 0.0, y: 1.0, z: 0.0))
-                .opacity(isFlipped ? 1 : 0)
+                .rotation3DEffect(.degrees(timerModel.isFlipped ?? false ? 0 : 180), axis: (x: 0.0, y: 1.0, z: 0.0))
+                .opacity(timerModel.isFlipped ?? false ? 1 : 0)
         }
         .cornerRadius(10)
         .shadow(color: Color(.systemGray).opacity(0.2), radius: 5, x: 0, y: 0)

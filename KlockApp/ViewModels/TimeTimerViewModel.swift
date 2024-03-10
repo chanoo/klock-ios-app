@@ -29,7 +29,6 @@ class TimeTimerViewModel: ObservableObject {
     @Published var elapsedTime: TimeInterval = 0
     @Published var isDark: Bool = false
     @Published var isLoading: Bool = true
-    @Published var timerCardViews: [AnyView] = []
     @Published var isShowingClockModal = false
     @Published var focusTimerModel: FocusTimerModel? = nil
     @Published var pomodoroTimerModel: PomodoroTimerModel? = nil
@@ -41,6 +40,10 @@ class TimeTimerViewModel: ObservableObject {
     @Published var examTimerViewModel: ExamTimerViewModel?
     @Published var autoTimerViewModel: AutoTimerViewModel?
 
+    @Published var selectedTab: Int64 = 0 // 첫 번째 탭을 기본값으로 설정
+    @Published var timerCardViews: [AnyView] = []
+    @Published var timerModels: [TimerModel] = []
+
     // Service objects
     private let timerRemoteService = Container.shared.resolve(TimerRemoteServiceProtocol.self)
     private let focusTimerRemoteService = Container.shared.resolve(FocusTimerRemoteServiceProtocol.self)
@@ -51,7 +54,6 @@ class TimeTimerViewModel: ObservableObject {
     private let userTraceRemoteService = Container.shared.resolve(UserTraceRemoteServiceProtocol.self)
 
     // Other properties
-    var timerModels: [TimerModel] = []
     private var cancellables: Set<AnyCancellable> = []
 
     func loadTimer() {
@@ -62,6 +64,9 @@ class TimeTimerViewModel: ObservableObject {
             guard let self = self else { return }
             DispatchQueue.main.async {
                 self.timerModels = timerModels
+                if timerModels.count > 0 {
+                    self.selectedTab = timerModels[0].id
+                }
                 self.timerCardViews = self.timerModels.map { self.viewFor(timer: $0) }
                 self.isLoading = false
             }
@@ -101,7 +106,11 @@ class TimeTimerViewModel: ObservableObject {
         case let focusTimer as FocusTimerModel:
             let focusTimerViewModel = FocusTimerViewModel(model: focusTimer)
             return AnyView(
-                FocusTimerCardView(timerModel: timer, focusTimerViewModel: focusTimerViewModel, timeTimerViewModel: self)
+                FocusTimerCardView(
+                    timerModel: timer,
+                    focusTimerViewModel: focusTimerViewModel,
+                    timeTimerViewModel: self
+                )
             )
         case let pomodoroTimer as PomodoroTimerModel:
             let viewModel = PomodoroTimerViewModel(model: pomodoroTimer)
@@ -118,7 +127,11 @@ class TimeTimerViewModel: ObservableObject {
         case let autoTimer as AutoTimerModel:
             let autoTimerViewModel = AutoTimerViewModel(model: autoTimer)
             return AnyView(
-                AutoTimerCardView(timerModel: timer, autoTimerViewModel: autoTimerViewModel, timeTimerViewModel: self)
+                AutoTimerCardView(
+                    timerModel: timer,
+                    autoTimerViewModel: autoTimerViewModel,
+                    timeTimerViewModel: self
+                )
             )
         default:
             return AnyView(EmptyView())
@@ -246,12 +259,7 @@ class TimeTimerViewModel: ObservableObject {
     }
     
     func update(type: String, model: TimerModel) {
-        guard let id = model.id else {
-             print("Error: model.id is nil")
-             return
-         }
-
-        timerManager.updateTimer(type: type, id: id, model: model) { success in
+        timerManager.updateTimer(type: type, id: model.id, model: model) { success in
             Foast.show(message: "수정 되었습니다.")
         }
     }
@@ -273,9 +281,11 @@ class TimeTimerViewModel: ObservableObject {
                     print("Error: Timer model is nil.")
                     return
                 }
+                model.isFlipped = true
                 let view = self.viewFor(timer: model)
                 self.timerModels.insert(model, at: 0)
                 self.timerCardViews.insert(view, at: 0)
+                self.selectedTab = model.id
             }
         }
     }
