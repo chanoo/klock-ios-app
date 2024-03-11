@@ -25,28 +25,50 @@ struct ChatBotChatView: View {
                 ScrollViewReader { _ in
                     LazyVStack {
                         if viewModel.isPreparingResponse && viewModel.tempMessage == nil {
-                            ChatGPTLoadingView()
+                            HStack(alignment: .top, spacing: 0) {
+                                ProfileImageWrapperView(profileImageURL: chatBot.chatBotImageUrl)
+                                    .padding(.trailing, 8)
+                                VStack(alignment: .leading, spacing: 0) {
+                                    Text(chatBot.name)
+                                        .fontWeight(.semibold)
+                                        .font(.system(size: 13))
+                                        .foregroundColor(FancyColor.chatBotBubbleNickname.color)
+                                        .padding(.bottom, 4)
+                                    HStack(alignment: .bottom, spacing: 0) {
+                                        ZStack(alignment: .bottomTrailing) {
+                                            ProgressView()
+                                                .padding(12)
+                                                .background(FancyColor.chatBotBubble.color)
+                                                .clipShape(RoundedCorners(tl: 0, tr: 10, bl: 10, br: 10))
+                                                .foregroundColor(FancyColor.primary.color)
+                                                .contentShape(.contextMenuPreview, RoundedRectangle(cornerRadius: 10))
+                                        }
+                                    }
+                                }
+                                Spacer()
+                            }
+                            .padding(.top, 4)
+                            .padding(.bottom, 4)
+                            .padding(.leading, 16)
+                            .padding(.trailing, 8)
+                            .upsideDown()
                         }
                         if let tempMessage = viewModel.tempMessage {
-                            MessageBubbleView(
+                            ChatBotMessageView(
                                 me: tempMessage.isUser,
                                 nickname: chatBot.name,
-                                userTraceType: .activity,
                                 profileImageURL: chatBot.chatBotImageUrl,
-                                content: tempMessage.content,
-                                heartCount: 0,
-                                onDelete: {})
+                                content: tempMessage.content
+                            )
                             .upsideDown()
                         }
                         ForEach(viewModel.messages[chatBot.id, default: []].reversed()) { messageModel in
-                            MessageBubbleView(
+                            ChatBotMessageView(
                                 me: messageModel.isUser,
                                 nickname: messageModel.isUser ? viewModel.userModel?.nickname ?? "" : chatBot.name,
-                                userTraceType: .activity,
                                 profileImageURL: messageModel.isUser ? viewModel.userModel?.profileImage : chatBot.chatBotImageUrl,
-                                content: messageModel.content,
-                                heartCount: 0,
-                                onDelete: {})
+                                content: messageModel.content
+                            )
                             .upsideDown()
                         }
                     }
@@ -132,22 +154,6 @@ struct ChatBotChatView: View {
                 viewModel.loadStoredMessages(chatBotID: chatBot.id)
                 viewModel.initializeAssistant(chatBotID: chatBot.id, persona: chatBot.persona)
             }
-    }
-}
-
-struct ChatGPTLoadingView: View {
-    var body: some View {
-        HStack(spacing: 0) {
-            ProgressView()
-                .padding()
-                .background(FancyColor.chatBotBubble.color)
-                .clipShape(RoundedCorners(tl: 10, tr: 10, bl: 0, br: 10))
-                .foregroundColor(FancyColor.primary.color)
-            Spacer()
-        }
-        .padding(.leading, 10)
-        .padding(.trailing, 24)
-        .padding(.top, 10)
     }
 }
 

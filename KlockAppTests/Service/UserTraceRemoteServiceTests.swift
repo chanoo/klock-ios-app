@@ -26,7 +26,7 @@ class UserTraceRemoteServiceTests: XCTestCase {
     func testFetchUserTraces() {
         let expectation = XCTestExpectation(description: "Fetch User Traces")
 
-        sut.fetch(page: 0)
+        sut.fetch(userId: 151, page: 0)
             .sink(receiveCompletion: { result in
                 switch result {
                 case .failure(let error):
@@ -47,8 +47,12 @@ class UserTraceRemoteServiceTests: XCTestCase {
     func testCreateUserTraceWithImage() {
         let expectation = XCTestExpectation(description: "Create User Trace")
         
+        guard let userId = UserModel.load()?.id else { return }
+        
+        XCTAssertNotNil(userId)
+        
         let createReqDTO = UserTraceCreateReqDTO(
-            contentTrace: UserTraceCreateReqContentTraceDTO(writeUserId: 128, type: .activity, contents: "Sample content 오직 텍스트 뿐인 글입니다."),
+            contentTrace: UserTraceCreateReqContentTraceDTO(userId: userId, writeUserId: 128, type: .activity, contents: "Sample content 오직 텍스트 뿐인 글입니다."),
             image: nil)
 
         sut.create(data: createReqDTO)
@@ -75,7 +79,8 @@ class UserTraceRemoteServiceTests: XCTestCase {
         
         let dummyImageData = UIImage(systemName: "photo")!.jpegData(compressionQuality: 0.5)!
 
-        let createReqDTO = UserTraceCreateReqDTO(contentTrace: UserTraceCreateReqContentTraceDTO(writeUserId: 128, type: .activity, contents: "Sample content ??"), image: dummyImageData)
+        let userId = Int64(151)
+        let createReqDTO = UserTraceCreateReqDTO(contentTrace: UserTraceCreateReqContentTraceDTO(userId: userId, writeUserId: 128, type: .activity, contents: "Sample content ??"), image: dummyImageData)
 
         sut.create(data: createReqDTO)
             .sink(receiveCompletion: { result in
@@ -95,6 +100,28 @@ class UserTraceRemoteServiceTests: XCTestCase {
 
         wait(for: [expectation], timeout: 10.0)
     }
+    
+    func testAddUserTraceHeart() {
+        let expectation = XCTestExpectation(description: "Create User Trace")
+        let id = Int64(736)
+        sut.addHeart(id: id, heartCount: 7)
+            .sink(receiveCompletion: { result in
+                switch result {
+                case .failure(let error):
+                    XCTFail("Creation failed with error: \(error)")
+                case .finished:
+                    break
+                }
+                expectation.fulfill()
+            }, receiveValue: { response in
+                XCTAssertEqual(response.id, id, "Response id should match request id")
+                // Add more assertions as needed
+            })
+            .store(in: &subscriptions)
+
+        wait(for: [expectation], timeout: 10.0)
+    }
+
 
 //    func testDeleteUserTrace() {
 //        let expectation = XCTestExpectation(description: "Delete User Trace")

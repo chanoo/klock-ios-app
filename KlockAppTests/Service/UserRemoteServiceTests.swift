@@ -94,7 +94,7 @@ class UserRemoteServiceTests: XCTestCase {
                 // 응답이 닉네임과 일치하는 사용자의 배열이나 단일 사용자를 포함한다고 가정합니다.
                 // 예상되는 `SearchByNicknameResDTO`의 구조에 따라 여기에 더 많은 단언을 추가할 수 있습니다.
                 // 예를 들어, 배열의 사용자인 경우:
-                XCTAssertFalse(response.nickname.isEmpty, "주어진 닉네임으로 적어도 한 명의 사용자를 찾아야 함")
+                XCTAssertFalse(response!.nickname.isEmpty, "주어진 닉네임으로 적어도 한 명의 사용자를 찾아야 함")
                 // 또는 단일 사용자 응답인 경우:
                 // XCTAssertEqual(response.nickname, nickname, "반환된 닉네임은 요청된 닉네임과 일치해야 함")
             })

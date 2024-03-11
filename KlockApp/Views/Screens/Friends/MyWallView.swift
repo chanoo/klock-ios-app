@@ -31,6 +31,9 @@ struct MyWallView: View {
                         imageURL: userTrace.contentsImage,
                         date: userTrace.createdAt.toTimeFormat(),
                         heartCount: userTrace.heartCount,
+                        onHeart: {
+                            
+                        },
                         onDelete: {
                             viewModel.deleteUserTraceTapped.send(userTrace.id)
                         }

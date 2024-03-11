@@ -29,6 +29,7 @@ struct MessageLeftBubbleView: View {
                 }
                 if !content.isEmpty {
                     Text(content)
+                        .multilineTextAlignment(.leading)
                 }
             }
         }

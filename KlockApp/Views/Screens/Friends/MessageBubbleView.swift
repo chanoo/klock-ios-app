@@ -14,13 +14,27 @@ struct MessageBubbleView: View {
     var nickname: String
     var userTraceType: UserTraceType
     var profileImageURL: String?
-    var profileImageSize: CGFloat = 44
     var content: String
     var imageURL: String?
     var date: String?
     @State var heartCount: Int = 0
+    let onHeart: () -> Void
     let onDelete: () -> Void
-    @State private var scale: CGFloat = 1
+    @State private var scale: CGFloat
+    
+    init(me: Bool, nickname: String, userTraceType: UserTraceType, profileImageURL: String? = nil, content: String, imageURL: String? = nil, date: String? = nil, heartCount: Int, onHeart: @escaping () -> Void, onDelete: @escaping () -> Void) {
+        self.me = me
+        self.nickname = nickname
+        self.userTraceType = userTraceType
+        self.profileImageURL = profileImageURL
+        self.content = content
+        self.imageURL = imageURL
+        self.date = date
+        self.heartCount = heartCount
+        self.onHeart = onHeart
+        self.onDelete = onDelete
+        self.scale = heartCount >= 10 ? 1.5 : 1
+    }
     
     var heartRightView: some View {
         Group {

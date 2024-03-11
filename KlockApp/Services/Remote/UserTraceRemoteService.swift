@@ -88,7 +88,7 @@ class UserTraceRemoteService: UserTraceRemoteServiceProtocol, APIServiceProtocol
         
         let request = UserTraceAddHeartReqDTO(heartCount: heartCount)
 
-        return AF.request(url, method: .put, parameters: request, headers: self.headers())
+        return AF.request(url, method: .put, parameters: request, encoder: JSONParameterEncoder.default, headers: self.headers())
             .validate()
             .publishDecodable(type: UserTraceAddHeartResDTO.self)
             .tryMap { result -> UserTraceAddHeartResDTO in
