@@ -117,7 +117,7 @@ struct FriendsView: View {
                 viewModel.unfollowButtonTapped.send(!viewModel.following)
             },
             size: .small,
-            style: .constant(.outline))
+            style: viewModel.following ? .constant(.outline) : .constant(.black))
     }
     
     private func scrollToLastMessage(with proxy: ScrollViewProxy) {
