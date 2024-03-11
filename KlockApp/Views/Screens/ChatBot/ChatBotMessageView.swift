@@ -28,7 +28,7 @@ struct ChatBotMessageView: View {
                 HStack(alignment: .bottom, spacing: 0) {
                     Spacer()
                     ZStack(alignment: .bottomLeading) {
-                        MessageRightBubbleView(content: content, imageURL: nil, heartCount: .constant(0), scale: .constant(0))
+                        MessageRightBubbleView(content: content, imageURL: nil, heartCount: .constant(0), onHeart: {}, scale: .constant(0))
                     }
                 }
             } else {
@@ -43,7 +43,7 @@ struct ChatBotMessageView: View {
                             .padding(.bottom, 4)
                         HStack(alignment: .bottom, spacing: 0) {
                             ZStack(alignment: .bottomTrailing) {
-                                MessageLeftBubbleView(content: content, imageURL: nil, heartCount: .constant(0), scale: .constant(0))
+                                MessageLeftBubbleView(content: content, imageURL: nil, heartCount: .constant(0), onHeart: {}, scale: .constant(0))
                             }
                         }
                     }

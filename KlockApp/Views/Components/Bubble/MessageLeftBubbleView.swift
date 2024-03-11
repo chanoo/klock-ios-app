@@ -11,10 +11,13 @@ struct MessageLeftBubbleView: View {
     var content: String
     var imageURL: String?
     @Binding var heartCount: Int
+    let onHeart: () -> Void
     @Binding var scale: CGFloat
 
     var body: some View {
         Button {
+            heartCount += 1
+            onHeart()
             withAnimation(.easeInOut(duration: 0.5)) {
                 self.scale = 3
             }

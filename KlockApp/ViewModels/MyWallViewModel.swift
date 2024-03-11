@@ -30,12 +30,16 @@ class MyWallViewModel: ObservableObject {
     private let userTraceService = Container.shared.resolve(UserTraceRemoteServiceProtocol.self)
 
     let sendTapped = PassthroughSubject<Void, Never>()
+    let addHeartTraceTapped = PassthroughSubject<Int64, Never>()
+    private let heartTapPublisher = PassthroughSubject<Int64, Never>()
+    let removeHeartTraceTapped = PassthroughSubject<Int64, Never>()
     let deleteUserTraceTapped = PassthroughSubject<Int64, Never>() // 삭제할 사용자 추적 데이터의 ID를 전달하는 Subject
     let unfollowButtonTapped = PassthroughSubject<Bool, Never>()
 
-    var cancellables: Set<AnyCancellable> = []
-    var last = false
-    var page = 0
+    private var heartTapCounter: Int = 0
+    private var cancellables: Set<AnyCancellable> = []
+    private var last = false
+    private var page = 0
     
     var userModel = UserModel.load()
     
@@ -44,8 +48,9 @@ class MyWallViewModel: ObservableObject {
     init() {
         print("init MyWallViewModel")
         setupSendButtonTapped()
+        setupAddHeartUserTrace()
         setupDeleteUserTrace()
-        setupNotification() 
+        setupNotification()
     }
     
     deinit {
@@ -78,6 +83,46 @@ class MyWallViewModel: ObservableObject {
                     self?.dynamicHeight = 36
                 }
                 self?.addUserTrace(userId: userId, contents: self?.contents, image: self?.image)
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func setupAddHeartUserTrace() {
+        heartTapPublisher
+            .debounce(for: .seconds(1), scheduler: RunLoop.main)
+            .sink { [weak self] id in
+                guard let self = self else { return }
+                
+                // 탭된 갯수만큼 heartCount를 업데이트하여 서버에 전송
+                let heartCountToSend = self.heartTapCounter
+
+                self.userTraceService.addHeart(id: id, heartCount: heartCountToSend)
+                    .sink(receiveCompletion: { result in
+                        switch result {
+                        case .failure(let error):
+                            print("Error adding heart: \(error)")
+                        case .finished:
+                            break
+                        }
+                    }, receiveValue: { [weak self] response in
+                        // 성공적으로 heartCount를 업데이트한 후에 카운터를 초기화
+                        self?.groupedUserTraces.forEach { group in
+                            if let index = group.userTraces.firstIndex(where: { $0.id == id }) {
+                                group.userTraces[index].heartCount = response.heartCount
+                            }
+                        }
+                        self?.heartTapCounter = 0
+                    })
+                    .store(in: &self.cancellables)
+            }
+            .store(in: &cancellables)
+        
+        // 탭 이벤트를 수신하여 카운터를 증가시킵니다.
+        addHeartTraceTapped
+            .sink { [weak self] id in
+                self?.heartTapCounter += 1
+                // heartTapPublisher에 이벤트를 발행하여 debounce 처리를 시작하거나 진행 중인 debounce 대기 시간을 재설정합니다.
+                self?.heartTapPublisher.send(id)
             }
             .store(in: &cancellables)
     }

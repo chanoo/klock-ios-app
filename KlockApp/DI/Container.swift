@@ -83,6 +83,7 @@ class Container {
         container.register(FriendsListViewModel.self) { _ in FriendsListViewModel() }
         container.register(FriendAddViewModel.self) { _ in FriendAddViewModel() }
         container.register(MyWallViewModel.self) { _ in MyWallViewModel() }
+        container.register(MessageBubbleViewModel.self) { _ in MessageBubbleViewModel() }
         container.register(QRCodeScannerViewModel.self) { _ in QRCodeScannerViewModel() }
         container.register(PreferencesViewModel.self) { _ in PreferencesViewModel() }
         container.register(SignInViewModel.self) { _ in SignInViewModel() }

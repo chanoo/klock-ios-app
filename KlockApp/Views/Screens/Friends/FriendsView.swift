@@ -46,7 +46,7 @@ struct FriendsView: View {
                                             date: userTrace.createdAt.toTimeFormat(),
                                             heartCount: userTrace.heartCount,
                                             onHeart: {
-                                                
+                                                viewModel.addHeartTraceTapped.send(userTrace.id)
                                             },
                                             onDelete: {
                                                 viewModel.deleteUserTraceTapped.send(userTrace.id)
