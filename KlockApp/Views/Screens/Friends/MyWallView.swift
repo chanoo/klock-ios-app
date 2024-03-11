@@ -18,6 +18,36 @@ struct MyWallView: View {
     init() {
         print("MyWallView init")
     }
+    var groupedUserTracesView: some View {
+        ForEach(viewModel.groupedUserTraces, id: \.id) { group in
+            Section(footer: MyWallListHeader(title: group.date)) {
+                ForEach(group.userTraces, id: \.id) { userTrace in
+                    MessageBubbleView(
+                        me: userTrace.writeUserId == viewModel.userModel?.id,
+                        nickname: userTrace.writeNickname,
+                        userTraceType: userTrace.type,
+                        profileImageURL: userTrace.writeUserImage,
+                        content: userTrace.contents,
+                        imageURL: userTrace.contentsImage,
+                        date: userTrace.createdAt.toTimeFormat(),
+                        heartCount: userTrace.heartCount,
+                        onDelete: {
+                            viewModel.deleteUserTraceTapped.send(userTrace.id)
+                        }
+                    )
+                    .upsideDown()
+                    .onAppear{
+                        self.proxy = proxy
+                        if let lastId = viewModel.groupedUserTraces.last?.userTraces.last?.id,
+                           lastId == userTrace.id,
+                           let userId = UserModel.load()?.id {
+                            viewModel.fetchUserTrace(userId: userId)
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     var body: some View {
         VStack(spacing: 0) {
@@ -34,34 +64,7 @@ struct MyWallView: View {
                 ScrollView {
                     ScrollViewReader { proxy in
                         LazyVStack(pinnedViews: [.sectionFooters]) {
-                            ForEach(viewModel.groupedUserTraces, id: \.id) { group in
-                                Section(footer: MyWallListHeader(title: group.date)) {
-                                    ForEach(group.userTraces, id: \.id) { userTrace in
-                                        MessageBubbleView(
-                                            me: userTrace.writeUserId == viewModel.userModel?.id,
-                                            nickname: userTrace.writeNickname,
-                                            userTraceType: userTrace.type,
-                                            profileImageURL: userTrace.writeUserImage,
-                                            content: userTrace.contents,
-                                            imageURL: userTrace.contentsImage,
-                                            date: userTrace.createdAt.toTimeFormat(),
-                                            heartCount: .constant(userTrace.heartCount),
-                                            onDelete: {
-                                                viewModel.deleteUserTraceTapped.send(userTrace.id)
-                                            }
-                                        )
-                                        .upsideDown()
-                                        .onAppear{
-                                            self.proxy = proxy
-                                            if let lastId = viewModel.groupedUserTraces.last?.userTraces.last?.id,
-                                               lastId == userTrace.id,
-                                               let userId = UserModel.load()?.id {
-                                                viewModel.fetchUserTrace(userId: userId)
-                                            }
-                                        }
-                                    }
-                                }
-                            }
+                            groupedUserTracesView
                         }
                     }
                 }

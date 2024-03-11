@@ -82,4 +82,36 @@ class UserTraceRemoteService: UserTraceRemoteServiceProtocol, APIServiceProtocol
             }
             .eraseToAnyPublisher()
     }
+    
+    func addHeart(id: Int64, heartCount: Int) -> AnyPublisher<UserTraceAddHeartResDTO, Alamofire.AFError> {
+        let url = "\(baseURL)/api/v1/user-trace/\(id)/heart"
+        
+        let request = UserTraceAddHeartReqDTO(heartCount: heartCount)
+
+        return AF.request(url, method: .put, parameters: request, headers: self.headers())
+            .validate()
+            .publishDecodable(type: UserTraceAddHeartResDTO.self)
+            .tryMap { result -> UserTraceAddHeartResDTO in
+                switch result.result {
+                case .success(let response):
+                    return response
+                case .failure(let error):
+                    if let data = result.data {
+                        let decoder = JSONDecoder()
+                        if let errorResponse = try? decoder.decode(APIErrorModel.self, from: data) {
+                            print("Server error message: \(errorResponse.error)")
+                        }
+                    }
+                    throw error
+                }
+            }
+            .mapError { error -> AFError in
+                if let afError = error as? AFError {
+                    return afError
+                } else {
+                    return AFError.sessionTaskFailed(error: error)
+                }
+            }
+            .eraseToAnyPublisher()
+    }
 }

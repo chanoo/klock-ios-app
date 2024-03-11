@@ -158,11 +158,15 @@ class FriendsViewModel: ObservableObject {
                         self.page += 1
                         break
                     }
-                } receiveValue: { dto in
-                    if dto.isEmpty {
+                } receiveValue: { userTraceDtos in
+                    if userTraceDtos.isEmpty {
                         self.last = true
                     }
-                    let newGrouped = Dictionary(grouping: dto) { (element: UserTraceResDTO) -> String in
+                    let userTraces = userTraceDtos.map { dto in
+                        UserTraceModel.from(dto: dto)
+                    }
+                                        
+                    let newGrouped = Dictionary(grouping: userTraces) { (element: UserTraceModel) -> String in
                         return element.createdAt.toDateFormat() ?? ""
                     }
                     
@@ -223,22 +227,22 @@ class FriendsViewModel: ObservableObject {
                     }
                 }, receiveValue: { [weak self] response in
                     guard let self = self else { return }
-                    var dto = response
-                    let endIndex = dto.createdAt.index(dto.createdAt.startIndex, offsetBy: 19)
-                    let dateString = String(dto.createdAt[..<endIndex])
-                    dto.createdAt = dateString
+                    let model = UserTraceModel.from(dto: response)
+                    let endIndex = model.createdAt.index(model.createdAt.startIndex, offsetBy: 19)
+                    let dateString = String(model.createdAt[..<endIndex])
+                    model.createdAt = dateString
                     
-                    let newDate = dto.createdAt.toDateFormat()
+                    let newDate = model.createdAt.toDateFormat()
                     guard let newDate = newDate else { return }
 
                     DispatchQueue.main.async {
                         if let index = self.groupedUserTraces.firstIndex(where: { $0.date == newDate }) {
                             // 기존 그룹에 결과 추가
-                            self.groupedUserTraces[index].userTraces.insert(dto, at: 0)
+                            self.groupedUserTraces[index].userTraces.insert(model, at: 0)
 //                            self.groupedUserTraces[index].userTraces.sort { $0.id < $1.id }
                         } else {
                             // 새로운 그룹 생성 및 추가
-                            let newGroup = UserTraceGroup(date: newDate, userTraces: [dto])
+                            let newGroup = UserTraceGroup(date: newDate, userTraces: [model])
                             self.groupedUserTraces.append(newGroup)
                             // 날짜별로 정렬
                             self.groupedUserTraces.sort { $0.id > $1.id }

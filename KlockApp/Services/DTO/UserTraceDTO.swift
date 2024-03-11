@@ -42,3 +42,19 @@ struct UserTraceCreateReqContentTraceDTO: Codable {
     let type: UserTraceType
     let contents: String?
 }
+
+struct UserTraceAddHeartReqDTO: Codable {
+    var heartCount: Int
+}
+
+struct UserTraceAddHeartResDTO: Codable {
+    let id: Int64
+    let writeUserId: Int64
+    let writeNickname: String
+    let writeUserImage: String?
+    let type: UserTraceType
+    let contents: String
+    let contentsImage: String?
+    var heartCount: Int
+    var createdAt: String
+}

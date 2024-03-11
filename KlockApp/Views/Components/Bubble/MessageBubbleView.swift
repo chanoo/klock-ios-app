@@ -18,7 +18,7 @@ struct MessageBubbleView: View {
     var content: String
     var imageURL: String?
     var date: String?
-    @Binding var heartCount: Int
+    @State var heartCount: Int = 0
     let onDelete: () -> Void
     @State private var scale: CGFloat = 1
     
@@ -75,6 +75,7 @@ struct MessageBubbleView: View {
             if me {
                 Spacer()
                 if userTraceType == .studyStart {
+                    dateRightView
                     ZStack(alignment: .bottomLeading) {
                         heartRightView
                         AlarmRightBubbleView(nickname: nickname, content: content, showIcon: true, heartCount: $heartCount, scale: $scale)

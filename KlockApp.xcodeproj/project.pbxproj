@@ -75,6 +75,7 @@
 		984D2C8B29DFDBAA008D3EA9 /* CommonViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984D2C8A29DFDBAA008D3EA9 /* CommonViewModifier.swift */; };
 		984D2C8F29E067FE008D3EA9 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984D2C8E29E067FE008D3EA9 /* SplashView.swift */; };
 		984D2C9129E0728C008D3EA9 /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984D2C9029E0728C008D3EA9 /* SplashViewModel.swift */; };
+		985091FB2B9E039A0035A07C /* UserTraceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985091FA2B9E039A0035A07C /* UserTraceModel.swift */; };
 		985823C22B8511AC003E88B4 /* URLCache+imageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985823C12B8511AC003E88B4 /* URLCache+imageCache.swift */; };
 		985BE88A29E6DC2C008582A3 /* ChatBotChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE88929E6DC2C008582A3 /* ChatBotChatView.swift */; };
 		985BE88C29E6DC35008582A3 /* TimeTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BE88B29E6DC35008582A3 /* TimeTimerView.swift */; };
@@ -363,6 +364,7 @@
 		984D2C8D29E056A6008D3EA9 /* KlockApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KlockApp.entitlements; sourceTree = "<group>"; };
 		984D2C8E29E067FE008D3EA9 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		984D2C9029E0728C008D3EA9 /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
+		985091FA2B9E039A0035A07C /* UserTraceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTraceModel.swift; sourceTree = "<group>"; };
 		985823C12B8511AC003E88B4 /* URLCache+imageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLCache+imageCache.swift"; sourceTree = "<group>"; };
 		985BE88329E652CE008582A3 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		985BE88929E6DC2C008582A3 /* ChatBotChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotChatView.swift; sourceTree = "<group>"; };
@@ -947,6 +949,7 @@
 				98B0651C2B427CBF009D0F69 /* FollowQRCode.swift */,
 				98A8CEDA2B7C9CB300B5A29C /* UserTraceType.swift */,
 				98CC9EBB2B7DE6F200BF044E /* UserTraceGroup.swift */,
+				985091FA2B9E039A0035A07C /* UserTraceModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1439,6 +1442,7 @@
 				985BE89229E6E0CD008582A3 /* CharacterView.swift in Sources */,
 				985BE88C29E6DC35008582A3 /* TimeTimerView.swift in Sources */,
 				980FC4572B8E23DE0096A609 /* APIError.swift in Sources */,
+				985091FB2B9E039A0035A07C /* UserTraceModel.swift in Sources */,
 				98D2826B29E988E70039E6E6 /* MessageServiceProtocol.swift in Sources */,
 				98CE661929D55A650009916F /* Container.swift in Sources */,
 				986E5DB629EAF06D00FF7047 /* DayView.swift in Sources */,
