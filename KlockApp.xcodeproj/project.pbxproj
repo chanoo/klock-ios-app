@@ -15,6 +15,7 @@
 		980CD5492A09485F00B203AC /* AlamofireLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980CD5482A09485F00B203AC /* AlamofireLogger.swift */; };
 		980FC4572B8E23DE0096A609 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980FC4562B8E23DE0096A609 /* APIError.swift */; };
 		980FCBC02B837945001A819D /* ImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980FCBBF2B837945001A819D /* ImageViewModel.swift */; };
+		98176B7B2B9ED42E00D51020 /* MessageBubbleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98176B7A2B9ED42E00D51020 /* MessageBubbleViewModel.swift */; };
 		981881C629F26F00002A4395 /* PomodoroTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981881C529F26F00002A4395 /* PomodoroTimerView.swift */; };
 		981881C829F26F07002A4395 /* ExamTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981881C729F26F07002A4395 /* ExamTimerView.swift */; };
 		981881CA29F27316002A4395 /* PageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981881C929F27316002A4395 /* PageControl.swift */; };
@@ -306,6 +307,7 @@
 		980CD5482A09485F00B203AC /* AlamofireLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireLogger.swift; sourceTree = "<group>"; };
 		980FC4562B8E23DE0096A609 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		980FCBBF2B837945001A819D /* ImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewModel.swift; sourceTree = "<group>"; };
+		98176B7A2B9ED42E00D51020 /* MessageBubbleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageBubbleViewModel.swift; sourceTree = "<group>"; };
 		981881C529F26F00002A4395 /* PomodoroTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroTimerView.swift; sourceTree = "<group>"; };
 		981881C729F26F07002A4395 /* ExamTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamTimerView.swift; sourceTree = "<group>"; };
 		981881C929F27316002A4395 /* PageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageControl.swift; sourceTree = "<group>"; };
@@ -985,6 +987,7 @@
 				9899A7E92AA37645001B4C72 /* CameraPermissionViewModel.swift */,
 				98AA43B62B98C1DD00457912 /* MyWallViewModel.swift */,
 				98AA43BC2B98D1DA00457912 /* FriendsListViewModel.swift */,
+				98176B7A2B9ED42E00D51020 /* MessageBubbleViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1132,10 +1135,10 @@
 		98E9385B29EA54B1009CBF32 /* Friends */ = {
 			isa = PBXGroup;
 			children = (
+				984B10172B46200900186B6D /* MessageBubbleView.swift */,
 				98AA43B42B98C1C200457912 /* MyWallView.swift */,
 				988D7CF82A3851770018A85E /* QRCodeScannerView.swift */,
 				988D7CF72A3851770018A85E /* QRCodeScannerViewController.swift */,
-				984B10172B46200900186B6D /* MessageBubbleView.swift */,
 				985BE89329E6E0DB008582A3 /* FriendsView.swift */,
 				988D7CD12A370BCD0018A85E /* FriendAddByQRCodeView.swift */,
 				988D7CD52A370C4A0018A85E /* FriendAddByNicknameView.swift */,
@@ -1574,6 +1577,7 @@
 				983BC0272A8F010500DC108B /* TFLiteExtension.swift in Sources */,
 				98E314B729DEE6BB00EA1617 /* TagServiceDTO.swift in Sources */,
 				981A54A92ADEB87A00115652 /* View+Extensions.swift in Sources */,
+				98176B7B2B9ED42E00D51020 /* MessageBubbleViewModel.swift in Sources */,
 				983BC01F2A8EF5AB00DC108B /* AutoTimerViewModel.swift in Sources */,
 				98B21B4929D617A4004EFE0E /* AuthenticationServiceDTO.swift in Sources */,
 				98DC292F29E9383900882E36 /* ChatBotRemoteServiceProtocol.swift in Sources */,

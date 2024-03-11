@@ -14,6 +14,7 @@ struct AlarmLeftBubbleView: View {
     var content: String
     var showIcon: Bool?
     @Binding var heartCount: Int
+    let onHeart: () -> Void
     @Binding var scale: CGFloat
 
     var body: some View {
@@ -23,6 +24,8 @@ struct AlarmLeftBubbleView: View {
     private var contentStack: some View {
         ZStack(alignment: .bottomLeading) {
             Button {
+                heartCount += 1
+                onHeart()
                 withAnimation(.easeInOut(duration: 0.5)) {
                     self.scale = 2
                 }
@@ -69,6 +72,7 @@ struct AlarmRightBubbleView: View {
     var content: String
     var showIcon: Bool?
     @Binding var heartCount: Int
+    let onHeart: () -> Void
     @Binding var scale: CGFloat
 
     var body: some View {
@@ -78,6 +82,8 @@ struct AlarmRightBubbleView: View {
     private var contentStack: some View {
         ZStack(alignment: .bottomLeading) {
             Button {
+                heartCount += 1
+                onHeart()
                 withAnimation(.easeInOut(duration: 0.5)) {
                     self.scale = 3
                 }
