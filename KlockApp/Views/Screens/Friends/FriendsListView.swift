@@ -34,12 +34,14 @@ struct FriendsListView: View {
                                 FirstFriendsRowView(
                                     userId: friendModel.followId,
                                     nickname: friendModel.nickname,
+                                    profileImageUrl: friendModel.profileImage,
                                     totalStudyTime: friendModel.totalStudyTime)
                                 .environmentObject(actionSheetManager)
                             } else {
                                 FriendsRowView(
                                     userId: friendModel.followId,
                                     nickname: friendModel.nickname,
+                                    profileImageUrl: friendModel.profileImage,
                                     totalStudyTime: friendModel.totalStudyTime)
                                 .environmentObject(actionSheetManager)
                             }
@@ -57,29 +59,25 @@ struct FriendsListView: View {
 
 struct FirstFriendsRowView: View {
     @EnvironmentObject var actionSheetManager: ActionSheetManager
+    let myUserId = UserModel.load()?.id
     var userId: Int64
     var nickname: String
+    var profileImageUrl: String?
     var totalStudyTime: Int64
     var body: some View {
         NavigationLink(
             destination: FriendsView(userId: userId, nickname: nickname, following: true)
-                .environmentObject(actionSheetManager)) {
+                .environmentObject(actionSheetManager),
+            isActive: .constant(myUserId != userId)
+        ) {
             HStack {
                 ZStack {
                     ZStack(alignment: .center) {
-                        Image("img_profile2")
-                            .resizable()
-                            .frame(width: 46, height: 46)
+                        ProfileImageWrapperView(profileImageURL: profileImageUrl, profileImageSize: 46)
                         Image("ic_ribbon_one")
                             .resizable()
                             .frame(width: 37, height: 21)
                             .padding(.top, -33)
-                        Circle()
-                            .frame(width: 10, height: 10)
-                            .overlay(Circle().stroke(FancyColor.black.color, lineWidth: 1))
-                            .padding(.top, 33)
-                            .padding(.leading, 33)
-                            .foregroundColor(FancyColor.primary.color)
                     }
                 }
                 Text(nickname)
@@ -87,7 +85,7 @@ struct FirstFriendsRowView: View {
                     .foregroundColor(FancyColor.text.color)
                     .padding(.leading, 10)
                 Spacer()
-                Text("\(TimeUtils.secondsToHMS(seconds: totalStudyTime))")
+                Text(totalStudyTime > 0 ? TimeUtils.secondsToHMS(seconds: totalStudyTime) : "")
                     .font(.system(size: 17, weight: .heavy))
                     .foregroundColor(FancyColor.gray4.color)
                     .padding(.top, 2)
@@ -108,6 +106,7 @@ struct FriendsRowView: View {
     @EnvironmentObject var actionSheetManager: ActionSheetManager
     var userId: Int64
     var nickname: String
+    var profileImageUrl: String?
     var totalStudyTime: Int64
     var body: some View {
         VStack(spacing: 0) {
@@ -117,15 +116,7 @@ struct FriendsRowView: View {
                 HStack {
                     ZStack {
                         ZStack(alignment: .center) {
-                            Image("img_profile2")
-                                .resizable()
-                                .frame(width: 46, height: 46)
-                            Circle()
-                                .frame(width: 10, height: 10)
-                                .overlay(Circle().stroke(FancyColor.black.color, lineWidth: 1))
-                                .padding(.top, 33)
-                                .padding(.leading, 33)
-                                .foregroundColor(FancyColor.primary.color)
+                            ProfileImageWrapperView(profileImageURL: profileImageUrl, profileImageSize: 46)
                         }
                     }
                     Text(nickname)
@@ -133,7 +124,7 @@ struct FriendsRowView: View {
                         .foregroundColor(FancyColor.text.color)
                         .padding(.leading, 10)
                     Spacer()
-                    Text("\(TimeUtils.secondsToHMS(seconds: totalStudyTime))")
+                    Text(totalStudyTime > 0 ? TimeUtils.secondsToHMS(seconds: totalStudyTime) : "")
                         .font(.system(size: 15, weight: .heavy))
                         .foregroundColor(FancyColor.gray4.color)
                         .padding(.top, 2)

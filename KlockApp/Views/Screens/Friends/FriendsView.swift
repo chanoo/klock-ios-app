@@ -28,7 +28,7 @@ struct FriendsView: View {
                         viewModel.fetchUserTrace(userId: viewModel.userId)
                     }
             } else if viewModel.groupedUserTraces.isEmpty {
-                MyWallNoDataView()
+                MyWallNoDataView(message: "친구의 담벼락이 아직 비어 있네요.\n첫 메시지를 남겨보며 친구와의 소통을 시작해보세요!")
             } else {
                 ScrollView {
                     ScrollViewReader { proxy in
