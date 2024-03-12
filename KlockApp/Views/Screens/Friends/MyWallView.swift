@@ -62,7 +62,7 @@ struct MyWallView: View {
                         }
                     }
             } else if viewModel.groupedUserTraces.isEmpty {
-                MyWallNoDataView()
+                MyWallNoDataView(message: "여기는 아직 조용하네요.\n당신의 생각이나 공부에 대한 소식을 첫 게시물로 공유해보세요!")
             } else {
                 ScrollView {
                     ScrollViewReader { proxy in

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct MyWallNoDataView: View {
+    let message: String
     var body: some View {
         Spacer() // Pushes content to the center vertically
 
@@ -16,7 +17,7 @@ struct MyWallNoDataView: View {
                 .resizable()
                 .scaledToFit()
                 .frame(width: 100, height: 79)
-            Text("친구와 함께 소통하며 공부할 수 있어요!\n지금 친구를 추가해볼까요?")
+            Text(message)
                 .multilineTextAlignment(.center)
                 .lineSpacing(6)
                 .foregroundColor(FancyColor.gray4.color)
@@ -31,5 +32,5 @@ struct MyWallNoDataView: View {
 }
 
 #Preview {
-    MyWallNoDataView()
+    MyWallNoDataView(message: "친구의 담벼락이 아직 비어 있네요.\n첫 메시지를 남겨보며 친구와의 소통을 시작해보세요!")
 }

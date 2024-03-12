@@ -44,7 +44,7 @@ struct ProfileImageWrapperView: View {
     var body: some View {
         if let url = profileImageURL, url.starts(with: "http") {
             ProfileImageView(imageURL: url, size: profileImageSize)
-        } else if let imageName = profileImageURL {
+        } else if let imageName = profileImageURL, !imageName.isEmpty {
             Image(imageName)
                 .cornerRadius(22.0)
         } else {
