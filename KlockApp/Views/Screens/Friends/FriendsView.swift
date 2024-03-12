@@ -20,6 +20,39 @@ struct FriendsView: View {
         self.viewModel = FriendsViewModel(nickname: nickname, userId: userId, following: following)
     }
 
+    var groupedUserTracesView: some View {
+        ForEach(viewModel.groupedUserTraces, id: \.id) { group in
+            Section(footer: MyWallListHeader(title: group.date)) {
+                ForEach(group.userTraces, id: \.id) { userTrace in
+                    MessageBubbleView(
+                        me: userTrace.writeUserId == viewModel.userModel?.id,
+                        nickname: userTrace.writeNickname,
+                        userTraceType: userTrace.type,
+                        profileImageURL: userTrace.writeUserImage,
+                        content: userTrace.contents,
+                        imageURL: userTrace.contentsImage,
+                        date: userTrace.createdAt.toTimeFormat(),
+                        heartCount: userTrace.heartCount,
+                        onHeart: {
+                            viewModel.addHeartTraceTapped.send(userTrace.id)
+                        },
+                        onDelete: {
+                            viewModel.deleteUserTraceTapped.send(userTrace.id)
+                        }
+                    )
+                    .upsideDown()
+                    .onAppear{
+                        self.proxy = proxy
+                        if let lastId = viewModel.groupedUserTraces.last?.userTraces.last?.id,
+                           lastId == userTrace.id {
+                            viewModel.fetchUserTrace(userId: viewModel.userId)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     var body: some View {
         VStack(spacing: 0) {
             if viewModel.isLoading {
@@ -33,69 +66,44 @@ struct FriendsView: View {
                 ScrollView {
                     ScrollViewReader { proxy in
                         LazyVStack(pinnedViews: [.sectionFooters]) {
-                            ForEach(viewModel.groupedUserTraces, id: \.id) { group in
-                                Section(footer: MyWallListHeader(title: group.date)) {
-                                    ForEach(group.userTraces, id: \.id) { userTrace in
-                                        MessageBubbleView(
-                                            me: userTrace.writeUserId == viewModel.userModel?.id,
-                                            nickname: userTrace.writeNickname,
-                                            userTraceType: userTrace.type,
-                                            profileImageURL: userTrace.writeUserImage,
-                                            content: userTrace.contents,
-                                            imageURL: userTrace.contentsImage,
-                                            date: userTrace.createdAt.toTimeFormat(),
-                                            heartCount: userTrace.heartCount,
-                                            onHeart: {
-                                                viewModel.addHeartTraceTapped.send(userTrace.id)
-                                            },
-                                            onDelete: {
-                                                viewModel.deleteUserTraceTapped.send(userTrace.id)
-                                            }
-                                        )
-                                        .upsideDown()
-                                        .onAppear{
-                                            self.proxy = proxy
-                                            if let lastId = viewModel.groupedUserTraces.last?.userTraces.last?.id,
-                                               lastId == userTrace.id {
-                                                viewModel.fetchUserTrace(userId: viewModel.userId)
-                                            }
-                                        }
-                                    }
-                                }
-                            }
+                            groupedUserTracesView
                         }
                     }
                 }
                 .upsideDown()
+                .background(Image("img_wall")
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .opacity(0.1))
                 .onAppear {
                     imageViewModel.checkCameraPermission()
                 }
                 .onTapGesture {
                     viewModel.hideKeyboard()
                 }
-            }
-            
-            Divider()
-            
-            ChatInputView(
-                text: $viewModel.newMessage,
-                dynamicHeight: $viewModel.dynamicHeight,
-                isPreparingResponse: $viewModel.isPreparingResponse,
-                selectedImage: $imageViewModel.selectedImage,
-                cameraPermissionGranted: $imageViewModel.cameraPermissionGranted,
-                isSendMessage: $viewModel.isSendMessage,
-                onSend: { message in
-                    let _selectedImage = imageViewModel.selectedImage?.resize(to: CGSize(width: 600, height: 600))
-                    viewModel.image = _selectedImage?.pngData()
-                    viewModel.contents = message
-                    viewModel.sendTapped.send()
-                    imageViewModel.selectedImage = nil
-                    if let proxy = self.proxy {
-                        scrollToLastMessage(with: proxy)
+                
+                Divider()
+                
+                ChatInputView(
+                    text: $viewModel.newMessage,
+                    dynamicHeight: $viewModel.dynamicHeight,
+                    isPreparingResponse: $viewModel.isPreparingResponse,
+                    selectedImage: $imageViewModel.selectedImage,
+                    cameraPermissionGranted: $imageViewModel.cameraPermissionGranted,
+                    isSendMessage: $viewModel.isSendMessage,
+                    onSend: { message in
+                        let _selectedImage = imageViewModel.selectedImage?.resize(to: CGSize(width: 600, height: 600))
+                        viewModel.image = _selectedImage?.pngData()
+                        viewModel.contents = message
+                        viewModel.sendTapped.send()
+                        imageViewModel.selectedImage = nil
+                        if let proxy = self.proxy {
+                            scrollToLastMessage(with: proxy)
+                        }
                     }
-                }
-            )
-            
+                )
+
+            }
         }
         .background(FancyColor.chatBotBackground.color)
         .navigationBarTitle(viewModel.nickname, displayMode: .inline)

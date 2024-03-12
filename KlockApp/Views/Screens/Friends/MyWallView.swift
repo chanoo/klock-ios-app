@@ -72,34 +72,39 @@ struct MyWallView: View {
                     }
                 }
                 .upsideDown()
+                .background(Image("img_wall")
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .opacity(0.1))
                 .onAppear {
                     imageViewModel.checkCameraPermission()
                 }
                 .onTapGesture {
                     viewModel.hideKeyboard()
                 }
-            }
-            
-            Divider()
-            
-            ChatInputView(
-                text: $viewModel.contents,
-                dynamicHeight: $viewModel.dynamicHeight,
-                isPreparingResponse: $viewModel.isPreparingResponse,
-                selectedImage: $imageViewModel.selectedImage,
-                cameraPermissionGranted: $imageViewModel.cameraPermissionGranted,
-                isSendMessage: $viewModel.isSendMessage,
-                onSend: { message in
-                    let _selectedImage = imageViewModel.selectedImage?.resize(to: CGSize(width: 600, height: 600))
-                    viewModel.image = _selectedImage?.pngData()
-                    viewModel.contents = message
-                    viewModel.sendTapped.send()
-                    imageViewModel.selectedImage = nil
-                    if let proxy = self.proxy {
-                        scrollToLastMessage(with: proxy)
+                
+                Divider()
+                
+                ChatInputView(
+                    text: $viewModel.contents,
+                    dynamicHeight: $viewModel.dynamicHeight,
+                    isPreparingResponse: $viewModel.isPreparingResponse,
+                    selectedImage: $imageViewModel.selectedImage,
+                    cameraPermissionGranted: $imageViewModel.cameraPermissionGranted,
+                    isSendMessage: $viewModel.isSendMessage,
+                    onSend: { message in
+                        let _selectedImage = imageViewModel.selectedImage?.resize(to: CGSize(width: 600, height: 600))
+                        viewModel.image = _selectedImage?.pngData()
+                        viewModel.contents = message
+                        viewModel.sendTapped.send()
+                        imageViewModel.selectedImage = nil
+                        if let proxy = self.proxy {
+                            scrollToLastMessage(with: proxy)
+                        }
                     }
-                }
-            )
+                )
+
+            }
             
             NavigationLink(
                 destination: LazyView(FriendsView(userId: viewModel.userId ?? 0, nickname: viewModel.nickname ?? "친구", following: true)
