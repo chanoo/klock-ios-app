@@ -22,7 +22,7 @@ struct AddTimerButtonView: View {
                         viewModel.addTimer(type: TimerType.focus.rawValue)
                         actionSheetManager.isPresented = false
                     }, style: .constant(.outline)),
-                    FancyButton(title: "Ai 자동 타이머", action: {
+                    FancyButton(title: "Ai자동 타이머", action: {
                         viewModel.addTimer(type: TimerType.auto.rawValue)
                         actionSheetManager.isPresented = false
                     }, style: .constant(.outline)),

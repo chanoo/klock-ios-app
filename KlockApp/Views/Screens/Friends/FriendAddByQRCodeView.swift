@@ -113,6 +113,9 @@ struct NicknameView: View {
                     } else {
                         // 카운트다운이 0에 도달했을 때의 로직
                         viewModel.generateQRCode()
+                        if let qrCodeImage = viewModel.generateQRCodeWithCenterImage() {
+                            viewModel.qrCodeImage = qrCodeImage
+                        }
                         remainingTime = 3 * 60 // 카운트다운을 다시 3분으로 재설정
                     }
                 }
@@ -120,6 +123,9 @@ struct NicknameView: View {
             HStack(alignment: .center) {
                 Button {
                     viewModel.generateQRCode()
+                    if let qrCodeImage = viewModel.generateQRCodeWithCenterImage() {
+                        viewModel.qrCodeImage = qrCodeImage
+                    }
                     remainingTime = 3 * 60 // 카운트다운을 다시 3분으로 재설정
                 } label: {
                     Image("ic_refresh")
