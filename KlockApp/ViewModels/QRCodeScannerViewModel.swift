@@ -15,6 +15,8 @@ class QRCodeScannerViewModel: ObservableObject {
     private var cancellables: Set<AnyCancellable> = []
 
     private let friendRelationService = Container.shared.resolve(FriendRelationServiceProtocol.self)
+    
+    var friendRelationFollowQRCodeResDTO: FriendRelationFollowQRCodeResDTO?
 
     init() {
         $scannedCode.sink { code in
@@ -29,8 +31,9 @@ class QRCodeScannerViewModel: ObservableObject {
                         case .finished:
                             break
                         }
-                    }, receiveValue: { _ in
+                    }, receiveValue: { response in
                         // 로컬에서 사용자 추적 데이터 삭제
+                        self.friendRelationFollowQRCodeResDTO = response
                     })
                     .store(in: &self.cancellables)
             }

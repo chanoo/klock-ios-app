@@ -112,7 +112,7 @@ struct AutoTimerCardView: View {
     private func backView(geometry: GeometryProxy) -> some View {
         VStack {
             List {
-                Section(header: Text("집중시간 타이머 설정")) {
+                Section(header: Text("Ai자동 타이머 설정")) {
                     VStack(alignment: .leading) {
                         Text("과목명")
                             .font(.headline)

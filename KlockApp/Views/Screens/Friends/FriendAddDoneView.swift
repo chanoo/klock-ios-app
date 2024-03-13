@@ -17,7 +17,7 @@ struct FriendAddDoneView: View {
         ZStack(alignment: .top) {
             VStack(alignment: .center, spacing: 0) {
                 VStack(alignment: .leading, spacing: 0) {
-                    if viewModel.followingFriendUser?.followed ?? false {
+                    if viewModel.followingFriendUser?.followed ?? true {
                         HStack {
                             Text("함께 성장할\n새 친구가 생겼어요!")
                                 .lineSpacing(6)

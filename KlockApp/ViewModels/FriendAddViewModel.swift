@@ -214,11 +214,13 @@ class FriendAddViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
         qrCodeImage.draw(in: CGRect(origin: .zero, size: size))
 
         let centerImageSize = centerImage.size
+        let width = centerImageSize.width * 4
+        let height = centerImageSize.height * 4
         let rect = CGRect(
-            x: (size.width - centerImageSize.width) / 2,
-            y: (size.height - centerImageSize.height) / 2,
-            width: centerImageSize.width,
-            height: centerImageSize.height
+            x: (size.width - width) / 2,
+            y: (size.height - height) / 2,
+            width: width,
+            height: height
         )
         centerImage.draw(in: rect)
 
