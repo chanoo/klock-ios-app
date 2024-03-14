@@ -13,6 +13,7 @@ import UIKit
 class CalendarViewModel: ObservableObject {
     @Published var studySessions: [String: [StudySessionModel]] = [:]
     @Published var studySessionsOfDay: [StudySessionModel] = []
+    @Published var studySessionsBySubjectOfDay: [(subject: String, duration: TimeInterval)] = []
     @Published var isLoading: Bool = true
     @Published var selectedDate: String = TimeUtils.formattedDateString(from: Date(), format: "yyyy년 M월 d일 (E)")
     @Published var totalStudyTime: String = ""
@@ -110,10 +111,20 @@ class CalendarViewModel: ObservableObject {
         }
     }
     
-    func setStudySessionsOfDay(_ studySessionModel: [StudySessionModel]) {
-        studySessionsOfDay = studySessionModel
+    func setStudySessionsOfDay(_ studySessionModels: [StudySessionModel]) {
+        studySessionsOfDay = studySessionModels
+        
+        // Group by subject and calculate total time for each.
+        let groupedBySubject = Dictionary(grouping: studySessionModels) { $0.timerName }
+        let totalTimeBySubject = groupedBySubject.mapValues { sessions in
+            sessions.reduce(0) { $0 + $1.duration }
+        }
+        
+        // Convert to an array of tuples and sort by subject name.
+        studySessionsBySubjectOfDay = totalTimeBySubject.map { (subject: $0.key, duration: $0.value) }
+            .sorted { $0.subject < $1.subject }
     }
-    
+
     func setSelectedDate(_ dateStr: String) {
         let date  = TimeUtils.dateFromString(dateString: dateStr, format: "yyyy-MM-dd")
         selectedDate = TimeUtils.formattedDateString(from: date ?? Date(), format: "yyyy년 M월 d일 (E)")
