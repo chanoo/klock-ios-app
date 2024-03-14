@@ -12,6 +12,7 @@ struct CalendarView: View {
     @EnvironmentObject var actionSheetManager: ActionSheetManager
     @StateObject var viewModel = Container.shared.resolve(CalendarViewModel.self)
     @State private var spacing: CGFloat = 5
+    @State private var selectedSubject: String? = nil // 선택된 과목 이름을 저장할 상태 변수
     let weeks = 13
     
     init() {
@@ -70,79 +71,117 @@ struct CalendarView: View {
 //                    }
 //                    .padding(12)
 //                    .padding([.leading, .trailing], 24)
-
-                    if viewModel.studySessionsOfDay.count > 0 {
+                    
+                    if !viewModel.studySessionsBySubjectOfDay.isEmpty {
                         VStack(spacing: 0) {
                             LazyVStack(spacing: 0) {
-                                ForEach(viewModel.studySessionsOfDay, id: \.self.id) { studySession in
+                                ForEach(viewModel.studySessionsBySubjectOfDay, id: \.subject) { session in
                                     Group {
                                         HStack(spacing: 0) {
-                                            Text(studySession.timerName)
+                                            Text(session.subject)
                                                 .foregroundColor(FancyColor.text.color)
                                                 .font(.system(size: 16, weight: .heavy))
                                             Spacer()
-                                            VStack(alignment: .trailing, spacing: 0) {
-                                                Text("\(TimeUtils.elapsedTimeToString(elapsedTime: studySession.duration))")
-                                                    .foregroundColor(FancyColor.text.color)
-                                                    .font(.system(size: 16, weight: .heavy))
-                                                Text("\(TimeUtils.formattedDateString(from: studySession.startTime, format: "hh시 mm분")) ~ \(studySession.endTime != nil ? TimeUtils.formattedDateString(from: studySession.endTime!, format: "hh시 mm분") : "진행 중")")
-                                                    .foregroundColor(FancyColor.gray6.color)
-                                                    .font(.system(size: 13, weight: .regular))
-                                                    .padding(.top, 4)
+                                            Text("\(TimeUtils.elapsedTimeToString(elapsedTime: session.duration))")
+                                                .foregroundColor(FancyColor.text.color)
+                                                .font(.system(size: 16, weight: .heavy))
+                                        }
+                                        .onTapGesture {
+                                            // 과목 탭 시 선택된 과목을 토글
+                                            if selectedSubject == session.subject {
+                                                selectedSubject = nil // 이미 선택된 경우 선택 해제
+                                            } else {
+                                                selectedSubject = session.subject
                                             }
                                         }
-                                        .background(FancyColor.clear.color)
-                                        .padding(8)
-                                        .contextMenu {
-                                            Button(action: {
-                                                viewModel.studySessionModel = studySession
-                                                actionSheetManager.actionSheet = CustomActionSheetView(
-                                                    title: studySession.timerName,
-                                                    message: "\(TimeUtils.formattedDateString(from: studySession.startTime, format: "hh시 mm분")) ~ \(studySession.endTime != nil ? TimeUtils.formattedDateString(from: studySession.endTime!, format: "hh시 mm분") : "진행 중")",
-                                                    content: AnyView(
-                                                        VStack {
-                                                            FancyTextField(
-                                                                placeholder: "공부 내용을 적어주세요",
-                                                                text: $viewModel.studySessionModel.timerName,
-                                                                firstResponder: $viewModel.becomeFirstResponder)
-                                                            FancyButton(
-                                                                title: "완료",
-                                                                action: {
-                                                                    viewModel.updateStudySession()
-                                                                    viewModel.studySessionsOfDay[viewModel.studySessionsOfDay.firstIndex(where: { $0.id == studySession.id })!] = viewModel.studySessionModel
-                                                                    withAnimation(.spring()) {
-                                                                        actionSheetManager.isPresented = false
-                                                                        viewModel.hideKeyboard()
-                                                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                                                            actionSheetManager.actionSheet = nil
-                                                                        }
-                                                                    }
-                                                                },
-                                                                style: .constant(.black))
-                                                            .padding(.top, 20)
-                                                        }
-                                                    ),
-                                                    actionButtons: nil,
-                                                    cancelButton: FancyButton(title: "취소", action: {
-                                                        withAnimation(.spring()) {
-                                                            actionSheetManager.isPresented = false
-                                                            viewModel.hideKeyboard()
-                                                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                                                actionSheetManager.actionSheet = nil
-                                                            }
-                                                        }
-                                                    }, style: .constant(.text))
-                                                )
-                                                withAnimation(.spring()) {
-                                                    actionSheetManager.isPresented = true
-                                                    viewModel.becomeFirstResponder = true
-                                                }
-                                            }) {
-                                                Label("수정", image: "ic_pencil_line2")
-                                            }
-                                        }
+                                        .padding([.leading, .trailing], 8)
+                                        .padding([.top, .bottom], 12)
+                                        .background(selectedSubject == session.subject ? FancyColor.gray1.color : FancyColor.clear.color)
+                                        .cornerRadius(4)
                                         Divider()
                                             .padding([.leading, .trailing], 8)
+                                    }
+                                }
+                                
+                                if let selectedSubject = selectedSubject, !viewModel.studySessionsOfDay.isEmpty {
+                                    HStack {
+                                        Text(selectedSubject)
+                                            .foregroundColor(FancyColor.text.color)
+                                            .font(.system(size: 16, weight: .heavy))
+                                        Spacer()
+                                    }
+                                    .padding([.top], 32)
+                                    .padding([.bottom], 18)
+                                    .padding([.leading, .trailing], 8)
+                                    LazyVStack(spacing: 0) {
+                                        ForEach(viewModel.studySessionsOfDay.filter { $0.timerName == selectedSubject }, id: \.self.id) { studySession in
+                                            Group {
+                                                HStack(spacing: 0) {
+                                                    Text("\(TimeUtils.formattedDateString(from: studySession.startTime, format: "hh:mm")) ~ \(studySession.endTime != nil ? TimeUtils.formattedDateString(from: studySession.endTime!, format: "hh:mm") : "진행 중")")
+                                                        .monospacedDigit()
+                                                        .foregroundColor(FancyColor.gray6.color)
+                                                        .font(.system(size: 16, weight: .regular))
+                                                        .padding(.top, 4)
+                                                    Spacer()
+                                                    Text("\(TimeUtils.elapsedTimeToString(elapsedTime: studySession.duration))")
+                                                        .monospacedDigit()
+                                                        .foregroundColor(FancyColor.text.color)
+                                                        .font(.system(size: 16, weight: .heavy))
+                                                }
+                                                .padding([.leading, .trailing], 8)
+                                                .padding([.top, .bottom], 12)
+                                                .contextMenu {
+                                                    Button(action: {
+                                                        viewModel.studySessionModel = studySession
+                                                        actionSheetManager.actionSheet = CustomActionSheetView(
+                                                            title: studySession.timerName,
+                                                            message: "\(TimeUtils.formattedDateString(from: studySession.startTime, format: "hh: mm")) ~ \(studySession.endTime != nil ? TimeUtils.formattedDateString(from: studySession.endTime!, format: "hh:mm") : "진행 중")",
+                                                            content: AnyView(
+                                                                VStack {
+                                                                    FancyTextField(
+                                                                        placeholder: "공부 내용을 적어주세요",
+                                                                        text: $viewModel.studySessionModel.timerName,
+                                                                        firstResponder: $viewModel.becomeFirstResponder)
+                                                                    FancyButton(
+                                                                        title: "완료",
+                                                                        action: {
+                                                                            viewModel.updateStudySession()
+                                                                            viewModel.studySessionsOfDay[viewModel.studySessionsOfDay.firstIndex(where: { $0.id == studySession.id })!] = viewModel.studySessionModel
+                                                                            withAnimation(.spring()) {
+                                                                                actionSheetManager.isPresented = false
+                                                                                viewModel.hideKeyboard()
+                                                                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                                                                    actionSheetManager.actionSheet = nil
+                                                                                }
+                                                                            }
+                                                                        },
+                                                                        style: .constant(.black))
+                                                                    .padding(.top, 20)
+                                                                }
+                                                            ),
+                                                            actionButtons: nil,
+                                                            cancelButton: FancyButton(title: "취소", action: {
+                                                                withAnimation(.spring()) {
+                                                                    actionSheetManager.isPresented = false
+                                                                    viewModel.hideKeyboard()
+                                                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                                                        actionSheetManager.actionSheet = nil
+                                                                    }
+                                                                }
+                                                            }, style: .constant(.text))
+                                                        )
+                                                        withAnimation(.spring()) {
+                                                            actionSheetManager.isPresented = true
+                                                            viewModel.becomeFirstResponder = true
+                                                        }
+                                                    }) {
+                                                        Label("수정", image: "ic_pencil_line2")
+                                                    }
+                                                }
+                                                Divider()
+                                                    .padding([.leading, .trailing], 8)
+                                            }
+                                        }
                                     }
                                 }
                             }
